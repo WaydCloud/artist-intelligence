@@ -87,10 +87,19 @@ export function LineChart({ data }: { data: LineData }) {
 
         {series.map((s, si) => {
           const vals = valsOf(s);
+          const pts = vals.map((v, i) => `${x(i)},${y(v)}`).join(" ");
+          const baseY = padT + innerH;
           return (
             <g key={s.name}>
+              {series.length === 1 && vals.length > 1 && (
+                <polygon
+                  points={`${x(0)},${baseY} ${pts} ${x(vals.length - 1)},${baseY}`}
+                  fill={color(si)}
+                  fillOpacity={0.07}
+                />
+              )}
               <polyline
-                points={vals.map((v, i) => `${x(i)},${y(v)}`).join(" ")}
+                points={pts}
                 fill="none"
                 stroke={color(si)}
                 strokeWidth={2}
@@ -102,10 +111,10 @@ export function LineChart({ data }: { data: LineData }) {
                   key={i}
                   cx={x(i)}
                   cy={y(v)}
-                  r={4}
+                  r={3}
                   fill="var(--surface)"
                   stroke={color(si)}
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                 >
                   <title>{`${s.name} · ${xs[i]}: ${fmtTick(v)}`}</title>
                 </circle>

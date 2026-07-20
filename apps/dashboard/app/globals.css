@@ -2,70 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* dataviz tokens (validated reference palette). Light default; dark is *selected*
-   (its own steps), covered by both the OS media query and the theme toggle. */
+/* dataviz 토큰 v2 (2026-07-20, 시네마틱 바이올렛) — dataviz 6종 검증 통과(라이트/다크).
+   Light default; dark is *selected* (its own steps), covered by both the OS media
+   query and the theme toggle. */
 :root {
   color-scheme: light;
-  --surface: #fcfcfb;
-  --plane: #f9f9f7;
-  --ink: #0b0b0b;
-  --ink-secondary: #52514e;
-  --muted: #898781;
-  --hairline: #e1e0d9;
-  --baseline: #c3c2b7;
-  --series: #2a78d6;
-  --series2: #c2610c;
-  --series3: #7c3aed;
-  --good: #006300;
-  --bad: #d03b3b;
-  --border: rgba(11, 11, 11, 0.1);
+  --surface: #ffffff;
+  --plane: #f4f4f6;
+  --ink: #101014;
+  --ink-secondary: #4b4b55;
+  --muted: #7e7e8a;
+  --hairline: #e6e6ec;
+  --baseline: #c8c8d2;
+  --series: #6d28d9;
+  --series2: #b45309;
+  --series3: #0891b2;
+  --good: #15803d;
+  --bad: #dc2626;
+  --border: rgba(16, 16, 20, 0.08);
 }
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     color-scheme: dark;
-    --surface: #1a1a19;
-    --plane: #0d0d0d;
-    --ink: #ffffff;
-    --ink-secondary: #c3c2b7;
-    --muted: #898781;
-    --hairline: #2c2c2a;
-    --baseline: #383835;
-    --series: #3987e5;
-    --series2: #f0a55a;
-    --series3: #b794f6;
-    --good: #0ca30c;
-    --bad: #d03b3b;
-    --border: rgba(255, 255, 255, 0.1);
+    --surface: #141419;
+    --plane: #0a0a0d;
+    --ink: #f5f5f8;
+    --ink-secondary: #b9b9c4;
+    --muted: #85858f;
+    --hairline: #26262e;
+    --baseline: #3c3c46;
+    --series: #8b5cf6;
+    --series2: #d97706;
+    --series3: #0891b2;
+    --good: #34d399;
+    --bad: #f87171;
+    --border: rgba(255, 255, 255, 0.08);
   }
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
-  --surface: #1a1a19;
-  --plane: #0d0d0d;
-  --ink: #ffffff;
-  --ink-secondary: #c3c2b7;
-  --muted: #898781;
-  --hairline: #2c2c2a;
-  --baseline: #383835;
-  --series: #3987e5;
-  --series2: #f0a55a;
-  --series3: #b794f6;
-  --good: #0ca30c;
-  --bad: #d03b3b;
-  --border: rgba(255, 255, 255, 0.1);
+  --surface: #141419;
+  --plane: #0a0a0d;
+  --ink: #f5f5f8;
+  --ink-secondary: #b9b9c4;
+  --muted: #85858f;
+  --hairline: #26262e;
+  --baseline: #3c3c46;
+  --series: #8b5cf6;
+  --series2: #d97706;
+  --series3: #0891b2;
+  --good: #34d399;
+  --bad: #f87171;
+  --border: rgba(255, 255, 255, 0.08);
 }
 
-/* 브랜드 토큰 (DESIGN.md §3) — 브랜드 표면(랜딩·네비) 전용. 데이터 표면(차트·리포트)에 사용 금지. */
+/* 브랜드 토큰 (DESIGN.md §3) — 배경·크롬 레이어 전용. 증거 레이어(차트 플롯·표 셀) 사용 금지. */
 :root {
   --font-display: Futura, var(--font-jost, "Jost"), "Pretendard Variable", Pretendard, system-ui, sans-serif;
   --font-body: "Pretendard Variable", Pretendard, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --glass-bg: rgba(252, 252, 251, 0.55);
-  --glass-border: rgba(11, 11, 11, 0.12);
+  --glass-bg: rgba(255, 255, 255, 0.6);
+  --glass-border: rgba(16, 16, 20, 0.1);
+  --glass-sheen: rgba(255, 255, 255, 0.65);
+  --shadow: rgba(16, 16, 20, 0.06);
   --metal: linear-gradient(115deg, #3f4247 0%, #82888f 30%, #43464b 52%, #9aa0a7 74%, #4c4f54 100%);
-  --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(42, 120, 214, 0.1), transparent 70%);
-  --vignette: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(11, 11, 11, 0.06) 100%);
+  --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(109, 40, 217, 0.09), transparent 70%);
+  --vignette: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(16, 16, 20, 0.06) 100%);
   /* 필름 그레인: 흑백 fractal noise SVG 타일. 불투명도는 --grain-opacity로만 조절(≤ 0.08). */
   --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   --grain-opacity: 0.04;
@@ -73,20 +76,24 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --glass-bg: rgba(26, 26, 25, 0.5);
-    --glass-border: rgba(255, 255, 255, 0.14);
+    --glass-bg: rgba(20, 20, 25, 0.55);
+    --glass-border: rgba(255, 255, 255, 0.12);
+    --glass-sheen: rgba(255, 255, 255, 0.07);
+    --shadow: rgba(0, 0, 0, 0.5);
     --metal: linear-gradient(115deg, #8e939a 0%, #eef0f3 30%, #74787e 52%, #f6f7f9 74%, #9ea3aa 100%);
-    --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(57, 135, 229, 0.16), transparent 70%);
+    --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(139, 92, 246, 0.15), transparent 70%);
     --vignette: radial-gradient(120% 90% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
     --grain-opacity: 0.06;
   }
 }
 
 :root[data-theme="dark"] {
-  --glass-bg: rgba(26, 26, 25, 0.5);
-  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-bg: rgba(20, 20, 25, 0.55);
+  --glass-border: rgba(255, 255, 255, 0.12);
+  --glass-sheen: rgba(255, 255, 255, 0.07);
+  --shadow: rgba(0, 0, 0, 0.5);
   --metal: linear-gradient(115deg, #8e939a 0%, #eef0f3 30%, #74787e 52%, #f6f7f9 74%, #9ea3aa 100%);
-  --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(57, 135, 229, 0.16), transparent 70%);
+  --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(139, 92, 246, 0.15), transparent 70%);
   --vignette: radial-gradient(120% 90% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
   --grain-opacity: 0.06;
 }
@@ -107,6 +114,9 @@ body {
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(16px);
     backdrop-filter: blur(16px);
+    box-shadow:
+      inset 0 1px 0 var(--glass-sheen),
+      0 8px 24px var(--shadow);
   }
   .metal-text {
     background-image: var(--metal);

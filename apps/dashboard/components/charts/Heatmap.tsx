@@ -12,7 +12,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
 
   return (
     <div className="overflow-x-auto">
-      <table className="border-separate" style={{ borderSpacing: 2 }}>
+      <table className="border-separate" style={{ borderSpacing: 3 }}>
         <thead>
           <tr>
             <th />
@@ -35,7 +35,10 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
                 if (cell == null) {
                   return (
                     <td key={ci} style={{ width: 46, height: 28 }}>
-                      <div className="h-7 rounded" style={{ background: "var(--hairline)" }} />
+                      <div
+                        className="h-7 rounded-md"
+                        style={{ background: "color-mix(in srgb, var(--hairline) 45%, transparent)" }}
+                      />
                     </td>
                   );
                 }
@@ -43,7 +46,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
                 return (
                   <td key={ci} style={{ width: 46, height: 28 }} title={`${row} · ${data.cols[ci]}: ${cell}위`}>
                     <div
-                      className="flex h-7 items-center justify-center rounded text-xs tabular-nums"
+                      className="flex h-7 items-center justify-center rounded-md text-xs tabular-nums"
                       style={{ background: bg, color: textOn(bg) }}
                     >
                       {cell}
@@ -61,7 +64,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
         {legend.map((r, i) => {
           const bg = rankColor(r, maxRank, dark);
           return (
-            <span key={i} className="rounded px-1.5 py-0.5 tabular-nums" style={{ background: bg, color: textOn(bg) }}>
+            <span key={i} className="rounded-md px-1.5 py-0.5 tabular-nums" style={{ background: bg, color: textOn(bg) }}>
               {r}
             </span>
           );

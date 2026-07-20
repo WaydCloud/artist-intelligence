@@ -15,9 +15,12 @@ export function BarChart({ data }: { data: BarData }) {
               {d.value.toLocaleString("en-US")}
             </span>
           </div>
-          <div className="h-2 rounded-full" style={{ background: "var(--hairline)" }}>
+          <div
+            className="h-1.5 rounded-full"
+            style={{ background: "color-mix(in srgb, var(--hairline) 55%, transparent)" }}
+          >
             <div
-              className="h-2 rounded-full"
+              className="h-1.5 rounded-full transition-[width] duration-300 ease-out"
               style={{ width: `${Math.max(1, (d.value / max) * 100)}%`, background: "var(--series)" }}
             />
           </div>

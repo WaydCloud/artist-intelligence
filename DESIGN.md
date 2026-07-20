@@ -28,7 +28,7 @@
 ## 3. 토큰 (단일 정본)
 
 - **정본: [`apps/dashboard/app/globals.css`](apps/dashboard/app/globals.css) CSS 변수.** 컴포넌트에는 `var(--…)` 참조만 — hex·rgb 하드코딩 금지.
-- 기존 **dataviz 토큰**(`--surface`·`--ink`·`--series`… )은 검증된 팔레트다. 브랜드 작업이 이 값을 임의 변경하지 않는다(변경은 대비 검증 후 별도 승인).
+- **dataviz 토큰**(`--surface`·`--ink`·`--series`… )은 검증된 팔레트다. 현행: **팔레트 v2**(2026-07-20, 시네마틱 바이올렛 주조 — 라이트 `#6d28d9/#b45309/#0891b2`, 다크 `#8b5cf6/#d97706/#0891b2`). 변경 절차: dataviz 스킬 검증기 6종(명도 밴드·채도 플로어·CVD 분리·정상시 플로어·표면 대비) **라이트/다크 모두 통과** + 히트맵 시퀀셜 램프는 단조 명도 유지. 통과 기록 없이 값 변경 금지.
 - **브랜드 토큰**(추가분): `--font-display` `--font-body` `--glass-bg` `--glass-border` `--metal` `--glow` `--vignette` `--grain` `--grain-opacity`. 라이트/다크 각각 정의.
 - 브랜드 표면의 배경 레이어(글로우·비네트·그레인)는 `components/BrandBackdrop.tsx` 하나로만 렌더 — 페이지마다 재구현 금지.
 

@@ -1,0 +1,40 @@
+# --- 시크릿 / 자격증명 (절대 커밋 금지) ---
+.env
+.env.*
+!.env.example
+*.key
+.mcp.local.json
+
+# --- 개인 자료 (공개 포트폴리오 repo에 안 올라가게) ---
+# 로컬에만 보관. 비공개 버전관리를 원하면 이 줄을 제거.
+personal/
+
+# --- 대용량 미디어 (파생 결과만 커밋) ---
+modules/*/data/
+# 스냅샷 store(collect 랜딩존, RULES chart-history §4.3) — 재현 소스는 tests/fixtures/
+data/snapshots/
+# 라이브 수집 store(signal-bridge 실증 랜딩존) — 커밋 소스는 tests/fixtures/chart_live_kr/
+data/live/
+*.mp4
+*.mov
+*.wav
+*.m4a
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+.uv/
+
+# --- Node / Next.js ---
+node_modules/
+.next/
+dist/
+out/
+.vercel/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- OS ---
+.DS_Store
+Thumbs.db

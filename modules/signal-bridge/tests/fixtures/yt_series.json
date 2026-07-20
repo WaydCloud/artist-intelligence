@@ -1,0 +1,122 @@
+{
+  "moduleId": "yt-pulse",
+  "signal": "yt-velocity",
+  "unit": "avg views/day",
+  "higherIsStronger": true,
+  "dates": [
+    "2026-07-19"
+  ],
+  "series": {
+    "BABYMONSTER": [
+      403780
+    ],
+    "CORTIS": [
+      545962
+    ],
+    "Hearts2Hearts": [
+      403310
+    ],
+    "ILLIT": [
+      584993
+    ],
+    "KATSEYE": [
+      1312303
+    ],
+    "KiiiKiii": [
+      25224
+    ],
+    "MEOVV": [
+      87468
+    ],
+    "RESCENE": [
+      427264
+    ],
+    "izna": [
+      21319
+    ]
+  },
+  "roster": {
+    "BABYMONSTER": true,
+    "CORTIS": true,
+    "Hearts2Hearts": true,
+    "ILLIT": true,
+    "KATSEYE": true,
+    "KiiiKiii": true,
+    "MEOVV": true,
+    "RESCENE": true,
+    "izna": true
+  },
+  "subscribers": {
+    "BABYMONSTER": 12700000,
+    "CORTIS": 5830000,
+    "Hearts2Hearts": 3250000,
+    "ILLIT": 5630000,
+    "KATSEYE": 11900000,
+    "KiiiKiii": 507000,
+    "MEOVV": 1380000,
+    "RESCENE": 788000,
+    "izna": 2030000
+  },
+  "videos": {
+    "BABYMONSTER": {
+      "title": "놀이동산에서도 I LIKE IT🎢❤️",
+      "views": 807561,
+      "avg_daily": 403780,
+      "published_at": "2026-07-17"
+    },
+    "CORTIS": {
+      "title": "terima kasih allo bank",
+      "views": 1091923,
+      "avg_daily": 545962,
+      "published_at": "2026-07-17"
+    },
+    "Hearts2Hearts": {
+      "title": "저도 찍어봤어요! #whatsinmydrafts",
+      "views": 806619,
+      "avg_daily": 403310,
+      "published_at": "2026-07-17"
+    },
+    "ILLIT": {
+      "title": "It's @CharlesEnter  ❤️ #찰스엔터 #Its_Me #ILLIT #아일릿",
+      "views": 584993,
+      "avg_daily": 584993,
+      "published_at": "2026-07-18"
+    },
+    "KATSEYE": {
+      "title": "are you with me? 🤍 #KATSEYE",
+      "views": 6561513,
+      "avg_daily": 1312303,
+      "published_at": "2026-07-14"
+    },
+    "KiiiKiii": {
+      "title": "Staycation 🏠🏖️ #KiiiKiii #키키",
+      "views": 50447,
+      "avg_daily": 25224,
+      "published_at": "2026-07-17"
+    },
+    "MEOVV": {
+      "title": "˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 심장이 되기 위한 미야오 납량특집👻 | CATCH MEOVV SEASON 3 EP.3",
+      "views": 174936,
+      "avg_daily": 87468,
+      "published_at": "2026-07-17"
+    },
+    "RESCENE": {
+      "title": "뽀로로 따라 프리티걸 챌린지",
+      "views": 427264,
+      "avg_daily": 427264,
+      "published_at": "2026-07-18"
+    },
+    "izna": {
+      "title": "𝑦𝑜𝑢 𝑔𝑜𝑡 𝑚𝑦 ℎ𝑒𝑎𝑟𝑡🤎 #izna #이즈나 #MAI",
+      "views": 63957,
+      "avg_daily": 21319,
+      "published_at": "2026-07-16"
+    }
+  },
+  "provenance": {
+    "source": "YouTube Data API v3 · official channels (yt-pulse)",
+    "generatedAt": "2026-07-19T05:03:56Z",
+    "window": "2026-07-19..2026-07-19",
+    "note": "act별 대표 평균 일 조회(수명 평균 근사) · 공식 채널 한정 · 참고 신호(§0)"
+  }
+}

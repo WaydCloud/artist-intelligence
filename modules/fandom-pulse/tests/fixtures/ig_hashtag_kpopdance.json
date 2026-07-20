@@ -1,0 +1,464 @@
+{
+  "provenance": {
+    "source": "Instagram / Apify apify~instagram-hashtag-scraper",
+    "tool": "fandom-pulse.fetch",
+    "tool_version": "0.1.0",
+    "fetched_at": "2026-07-18T11:36:59Z",
+    "license": "public-metrics",
+    "tos_class": "managed-scraper",
+    "params": {
+      "hashtag": "kpopdance",
+      "resultsType": "reels",
+      "maxItems": 30
+    },
+    "pii_policy": "facts-only: PII·원문 fetch 단계 폐기(§4)"
+  },
+  "quality": {
+    "records": 30,
+    "raw": 30,
+    "dropped": 0,
+    "notes": []
+  },
+  "records": [
+    {
+      "likes": 701,
+      "comments": 3,
+      "plays": 13244,
+      "type": "reel",
+      "timestamp": "2026-07-16T12:29:50.000Z",
+      "hashtags": [
+        "guitarcover",
+        "kpopdance",
+        "mashup",
+        "slipknot",
+        "twice"
+      ],
+      "music": "megatdream - Original audio"
+    },
+    {
+      "likes": -1,
+      "comments": 28,
+      "plays": 5925,
+      "type": "reel",
+      "timestamp": "2026-07-16T21:22:39.000Z",
+      "hashtags": [
+        "argentina🇦🇷",
+        "iconicbymistake",
+        "kpopdance",
+        "mundial2026",
+        "vamosargentina"
+      ],
+      "music": "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE"
+    },
+    {
+      "likes": 523,
+      "comments": 4,
+      "plays": 5025,
+      "type": "reel",
+      "timestamp": "2026-07-14T10:10:57.000Z",
+      "hashtags": [
+        "09",
+        "drip",
+        "fyp",
+        "izna",
+        "kpopdance"
+      ],
+      "music": "izna - DRIP"
+    },
+    {
+      "likes": 658,
+      "comments": 2,
+      "plays": 6511,
+      "type": "reel",
+      "timestamp": "2026-07-14T12:10:17.000Z",
+      "hashtags": [
+        "challenge",
+        "dance",
+        "idle",
+        "거울모드",
+        "아이들"
+      ],
+      "music": "i-dle - Gimme Dat Love"
+    },
+    {
+      "likes": 2719,
+      "comments": 23,
+      "plays": 33825,
+      "type": "reel",
+      "timestamp": "2026-07-13T17:15:27.000Z",
+      "hashtags": [
+        "ateez",
+        "dance",
+        "fyp",
+        "kpop",
+        "kpopdance"
+      ],
+      "music": "qianyihere - Original audio"
+    },
+    {
+      "likes": -1,
+      "comments": 7,
+      "plays": 22409,
+      "type": "reel",
+      "timestamp": "2026-07-17T11:37:57.000Z",
+      "hashtags": [
+        "13yearsold",
+        "bad",
+        "dance",
+        "fyp",
+        "kpopdance"
+      ],
+      "music": "oakids_maggie - Original audio"
+    },
+    {
+      "likes": 1879,
+      "comments": 25,
+      "plays": 10995,
+      "type": "reel",
+      "timestamp": "2026-07-16T12:54:56.000Z",
+      "hashtags": [
+        "35weeks",
+        "ateez",
+        "bad",
+        "kpopdance",
+        "kpopdanceportugal"
+      ],
+      "music": "ATEEZ - BAD"
+    },
+    {
+      "likes": 592,
+      "comments": 33,
+      "plays": 7455,
+      "type": "reel",
+      "timestamp": "2026-07-09T03:15:36.000Z",
+      "hashtags": [
+        "kpopboygroupdebut",
+        "kpopdance",
+        "kpopfypシ",
+        "obsessed"
+      ],
+      "music": "glxefanaccount - Original audio"
+    },
+    {
+      "likes": 861,
+      "comments": 9,
+      "plays": 9099,
+      "type": "reel",
+      "timestamp": "2026-07-14T22:40:04.000Z",
+      "hashtags": [
+        "dancecover",
+        "enhypen",
+        "kpopbrcovers",
+        "kpopdance",
+        "kpopdancecover"
+      ],
+      "music": "ENHYPEN - Bad Desire (With or Without You) (English Ver.)"
+    },
+    {
+      "likes": 635,
+      "comments": 2,
+      "plays": 12631,
+      "type": "reel",
+      "timestamp": "2026-07-14T15:27:08.000Z",
+      "hashtags": [
+        "ateez",
+        "dancereels",
+        "kpop",
+        "kpopdance",
+        "kpopstan"
+      ],
+      "music": "ATEEZ - BAD"
+    },
+    {
+      "likes": 4342,
+      "comments": 92,
+      "plays": 22504,
+      "type": "reel",
+      "timestamp": "2026-07-16T13:12:52.000Z",
+      "hashtags": [
+        "35weekspregnant",
+        "ateez",
+        "bad",
+        "kpopdance"
+      ],
+      "music": "ATEEZ - BAD"
+    },
+    {
+      "likes": 506,
+      "comments": 4,
+      "plays": 5022,
+      "type": "reel",
+      "timestamp": "2026-07-11T21:33:28.000Z",
+      "hashtags": [
+        "bailaconnosotros",
+        "dancelife",
+        "dancestudio",
+        "kpopdance",
+        "kpoplovers"
+      ],
+      "music": "cb.dance.studio - Original audio"
+    },
+    {
+      "likes": 2999,
+      "comments": 57,
+      "plays": 32549,
+      "type": "reel",
+      "timestamp": "2026-07-17T01:52:52.000Z",
+      "hashtags": [
+        "choreography",
+        "dance",
+        "dancecover",
+        "kpopdance"
+      ],
+      "music": "ATEEZ - BAD"
+    },
+    {
+      "likes": 4445,
+      "comments": 79,
+      "plays": 24663,
+      "type": "reel",
+      "timestamp": "2026-07-08T16:07:24.000Z",
+      "hashtags": [
+        "dancechallenge",
+        "dancer",
+        "famous",
+        "fyp",
+        "kpopdance"
+      ],
+      "music": "itsjoymoves_ - Original audio"
+    },
+    {
+      "likes": 1052,
+      "comments": 8,
+      "plays": 50555,
+      "type": "reel",
+      "timestamp": "2026-07-14T14:13:23.000Z",
+      "hashtags": [
+        "fyp",
+        "itzy",
+        "kpopcoverdance",
+        "kpopdance",
+        "thatsnono"
+      ],
+      "music": "ITZY - THAT'S A NO NO"
+    },
+    {
+      "likes": 591,
+      "comments": 2,
+      "plays": 11091,
+      "type": "reel",
+      "timestamp": "2026-07-17T15:15:02.000Z",
+      "hashtags": [
+        "adios",
+        "boynextdoor",
+        "classof2026",
+        "graduation",
+        "kpopdance"
+      ],
+      "music": "BOYNEXTDOOR - ADIOS!"
+    },
+    {
+      "likes": 4125,
+      "comments": 68,
+      "plays": 30800,
+      "type": "reel",
+      "timestamp": "2026-07-15T04:54:42.000Z",
+      "hashtags": [
+        "bonvoyage",
+        "kpopdance",
+        "ohmygirl",
+        "ohmygirlyooa",
+        "yooa"
+      ],
+      "music": "YooA - Bon voyage"
+    },
+    {
+      "likes": 2871,
+      "comments": 4,
+      "plays": 26884,
+      "type": "reel",
+      "timestamp": "2026-07-16T09:16:03.000Z",
+      "hashtags": [
+        "challenge",
+        "dance",
+        "fyp",
+        "베이비몬스터",
+        "아현"
+      ],
+      "music": "BABYMONSTER - I LIKE IT"
+    },
+    {
+      "likes": 6092,
+      "comments": 40,
+      "plays": 63983,
+      "type": "reel",
+      "timestamp": "2026-07-16T20:38:21.000Z",
+      "hashtags": [
+        "animeexpo",
+        "cosplay",
+        "cosplaydance",
+        "kpopdance",
+        "sailormoon"
+      ],
+      "music": "duckie.cos - Original audio"
+    },
+    {
+      "likes": 938,
+      "comments": 0,
+      "plays": 6678,
+      "type": "reel",
+      "timestamp": "2026-07-17T14:39:11.000Z",
+      "hashtags": [
+        "ikon",
+        "kpopcover",
+        "kpopdance",
+        "kpopfancam",
+        "kpopinpublic"
+      ],
+      "music": "iKON - LOVE SCENARIO"
+    },
+    {
+      "likes": -1,
+      "comments": 91,
+      "plays": 15419,
+      "type": "reel",
+      "timestamp": "2026-07-10T00:41:29.000Z",
+      "hashtags": [
+        "blackhole",
+        "dancecover",
+        "ive",
+        "kpopdance",
+        "웃는아이"
+      ],
+      "music": "IVE - BLACKHOLE"
+    },
+    {
+      "likes": 5852,
+      "comments": 26,
+      "plays": 33120,
+      "type": "reel",
+      "timestamp": "2026-06-29T01:28:13.000Z",
+      "hashtags": [
+        "jjam",
+        "kpopdance",
+        "nainagoteti",
+        "skz",
+        "straykids"
+      ],
+      "music": "naina.talent - Original audio"
+    },
+    {
+      "likes": 992,
+      "comments": 24,
+      "plays": 11495,
+      "type": "reel",
+      "timestamp": "2026-07-14T07:07:57.000Z",
+      "hashtags": [
+        "kpopdance",
+        "kpopdancecover"
+      ],
+      "music": "babymonster_ygofficial - Original audio"
+    },
+    {
+      "likes": 2660,
+      "comments": 23,
+      "plays": 20881,
+      "type": "reel",
+      "timestamp": "2026-07-12T18:13:06.000Z",
+      "hashtags": [
+        "dance",
+        "kpop",
+        "kpopdance",
+        "kpopinpublic"
+      ],
+      "music": "m.a_n.v - Original audio"
+    },
+    {
+      "likes": 3112,
+      "comments": 18,
+      "plays": 22046,
+      "type": "reel",
+      "timestamp": "2026-07-09T04:45:49.000Z",
+      "hashtags": [
+        "dance",
+        "kpopdance"
+      ],
+      "music": "studio_inspire.kr - Original audio"
+    },
+    {
+      "likes": 957,
+      "comments": 18,
+      "plays": 40846,
+      "type": "reel",
+      "timestamp": "2026-07-17T11:48:32.000Z",
+      "hashtags": [
+        "danceinpublic",
+        "hongdae",
+        "kpopdance",
+        "lesserafım",
+        "홍대버스킹"
+      ],
+      "music": "LE SSERAFIM - Smart"
+    },
+    {
+      "likes": 480,
+      "comments": 74,
+      "plays": 4987,
+      "type": "reel",
+      "timestamp": "2026-07-13T04:06:21.000Z",
+      "hashtags": [
+        "dancechallenge",
+        "fastforward",
+        "fastforwardchallenge",
+        "kpopdance",
+        "wonho"
+      ],
+      "music": "wonho_sss - Original audio"
+    },
+    {
+      "likes": 585,
+      "comments": 26,
+      "plays": 18793,
+      "type": "reel",
+      "timestamp": "2026-07-09T19:47:08.000Z",
+      "hashtags": [
+        "arirang",
+        "bts",
+        "btsarmy",
+        "jungkook",
+        "kpopdancecover"
+      ],
+      "music": "denizkosarz - Original audio"
+    },
+    {
+      "likes": 1893,
+      "comments": 128,
+      "plays": 12075,
+      "type": "reel",
+      "timestamp": "2026-07-14T03:51:22.000Z",
+      "hashtags": [
+        "tomorrow_x_together",
+        "txt",
+        "txtmoa",
+        "yeonjun",
+        "yeonjun_icecream"
+      ],
+      "music": "YEONJUN - Ice Cream (Mango Chili Ver.)"
+    },
+    {
+      "likes": 982,
+      "comments": 11,
+      "plays": 6382,
+      "type": "reel",
+      "timestamp": "2026-07-13T16:32:14.000Z",
+      "hashtags": [
+        "ateez",
+        "goldenhour_pt5",
+        "kpop",
+        "kpopdance",
+        "에이티즈"
+      ],
+      "music": "indigodetry - Original audio"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "firecrawl": {
+      "command": "npx",
+      "args": ["-y", "firecrawl-mcp"],
+      "env": {
+        "FIRECRAWL_API_KEY": "${FIRECRAWL_API_KEY}"
+      }
+    },
+    "apify": {
+      "type": "http",
+      "url": "https://mcp.apify.com?tools=actors,docs",
+      "headers": {
+        "Authorization": "Bearer ${APIFY_TOKEN}"
+      }
+    },
+    "melon": {
+      "type": "http",
+      "url": "https://mcp.melon.com/mcp"
+    }
+  }
+}

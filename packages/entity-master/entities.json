@@ -1,0 +1,742 @@
+{
+  "sources": [
+    "MusicBrainz",
+    "Wikidata"
+  ],
+  "license": "CC0",
+  "artists": {
+    "CORTIS": {
+      "source": "MusicBrainz",
+      "id": "d27808c8-d3a6-4bbe-acc2-22d5e19f3bca",
+      "name": "CORTIS",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "COLOR OUTSIDE THE LINES",
+        "선 밖에 색칠하다",
+        "코르티스"
+      ],
+      "debut": "2025",
+      "agency": "Big Hit Music",
+      "wd_id": "Q135668928"
+    },
+    "RESCENE": {
+      "source": "MusicBrainz",
+      "id": "a54fd8e2-d319-44a6-aa60-21adf17751bf",
+      "name": "RESCENE",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "RESCENE",
+        "리센느"
+      ],
+      "debut": "2024",
+      "agency": "The Muze Entertainment",
+      "wd_id": "Q124856415"
+    },
+    "aespa": {
+      "source": "MusicBrainz",
+      "id": "b51c672b-85e0-48fe-8648-470a2422229f",
+      "name": "aespa",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "aespa",
+        "æspa",
+        "에스파"
+      ],
+      "debut": "2020",
+      "agency": "SM Entertainment",
+      "wd_id": "Q100877982"
+    },
+    "ILLIT": {
+      "source": "MusicBrainz",
+      "id": "6b128dd7-e998-4edb-a4f5-400fef190445",
+      "name": "ILLIT",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        ":ll:+",
+        "I'LL-IT",
+        "ILLIT",
+        "아일릿"
+      ],
+      "debut": "2024",
+      "agency": "Belift Lab",
+      "wd_id": "Q122179261"
+    },
+    "Jimin": {
+      "source": "MusicBrainz",
+      "id": "d2582c77-6b0f-4b2f-802f-8f3cad1a5fec",
+      "name": "Jimin",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "JIMIN",
+        "Park Ji-min",
+        "박지민",
+        "지민"
+      ],
+      "agency": "Big Hit Music",
+      "wd_id": "Q20947093"
+    },
+    "Hearts2Hearts": {
+      "source": "MusicBrainz",
+      "id": "066080a4-84c7-46c6-91d3-dc10d572749b",
+      "name": "Hearts2Hearts",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "H2H",
+        "하츠투하츠"
+      ],
+      "debut": "2025",
+      "agency": "SM Entertainment",
+      "wd_id": "Q131746784"
+    },
+    "HANRORO": {
+      "source": "Wikidata",
+      "id": "Q134958723",
+      "name": "Hanroro",
+      "country": "KR",
+      "type": "Person"
+    },
+    "I.O.I": {
+      "source": "MusicBrainz",
+      "id": "9df2184b-1e49-4717-a5f5-54ca1c38bcb4",
+      "name": "I.O.I",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "IOI",
+        "Ideal of Idol",
+        "아이오아이"
+      ],
+      "debut": "2016",
+      "wd_id": "Q23688122"
+    },
+    "ATEEZ": {
+      "source": "MusicBrainz",
+      "id": "cf0dbc16-4e24-4957-b5b4-955c8978f690",
+      "name": "ATEEZ",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "ATEEZ",
+        "에이티즈"
+      ],
+      "debut": "2018",
+      "agency": "KQ Entertainment",
+      "wd_id": "Q59793088"
+    },
+    "TAEYEON": {
+      "source": "MusicBrainz",
+      "id": "2b786fb3-a116-4163-9b65-cf56f03c8a7f",
+      "name": "TAEYEON",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Kim Tae-yeon",
+        "TAEYEON",
+        "Tae-yeon",
+        "Tae-yeon Kim",
+        "テヨン",
+        "泰耎",
+        "김태연",
+        "태연"
+      ],
+      "agency": "SM Entertainment",
+      "wd_id": "Q233371"
+    },
+    "KiiiKiii": {
+      "source": "MusicBrainz",
+      "id": "bdbc7927-6ff5-4a64-a2dd-9756323008e1",
+      "name": "KiiiKiii",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "KiiKii",
+        "키키"
+      ],
+      "debut": "2025",
+      "agency": "Starship Entertainment",
+      "wd_id": "Q132526762"
+    },
+    "Jin": {
+      "source": "MusicBrainz",
+      "id": "7314b02b-4264-4c81-b79d-9e5a702e6270",
+      "name": "MC Jin",
+      "country": "US",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Jin",
+        "Jin Au‐Yeung",
+        "MC Jin",
+        "欧阳靖"
+      ],
+      "agency": "Ruff Ryders Entertainment",
+      "wd_id": "Q1154813"
+    },
+    "Nerd Connection": {
+      "source": "MusicBrainz",
+      "id": "c1304bf7-1002-493c-af8f-47a950813f6a",
+      "name": "Nerd Connection",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "너드",
+        "너드 커넥션",
+        "너드커넥션"
+      ],
+      "wd_id": "Q110114541"
+    },
+    "WOODZ": {
+      "source": "MusicBrainz",
+      "id": "25c73c37-9517-4144-8ef6-32541e82ff42",
+      "name": "WOODZ",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Luizy",
+        "WOODZ",
+        "Woodz",
+        "woodz",
+        "우즈",
+        "조승연"
+      ],
+      "agency": "EDAM Entertainment",
+      "wd_id": "Q27953522"
+    },
+    "NMIXX": {
+      "source": "MusicBrainz",
+      "id": "2d623e82-73e2-4179-9c44-e963980f2d58",
+      "name": "NMIXX",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "엔믹스"
+      ],
+      "debut": "2022",
+      "agency": "JYP Entertainment",
+      "wd_id": "Q109307762"
+    },
+    "OFFICIAL HIGE DANDISM": {
+      "source": "Wikidata",
+      "id": "Q48748934",
+      "name": "Official Hige Dandism",
+      "country": "JP",
+      "type": "Group"
+    },
+    "YENA": {
+      "source": "MusicBrainz",
+      "id": "745c5b92-325f-451d-bd52-e6b95229c776",
+      "name": "YENA",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Choi Ye-na",
+        "Choi Yena",
+        "YENA",
+        "최예나"
+      ],
+      "agency": "Yuehua Entertainment",
+      "wd_id": "Q56402658"
+    },
+    "Jung Kook": {
+      "source": "MusicBrainz",
+      "id": "23c8056b-ee13-4cfc-a772-2f5292e35bb5",
+      "name": "Jung Kook",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Jeon Jung-kook",
+        "Jung Kook",
+        "Jungkook",
+        "전정국",
+        "정국"
+      ],
+      "agency": "Big Hit Music",
+      "wd_id": "Q22338877"
+    },
+    "BTS": {
+      "source": "MusicBrainz",
+      "id": "0d79fe8e-ba27-4859-bb8c-2f255f346853",
+      "name": "BTS",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "BTS",
+        "BTS",
+        "BTS",
+        "Bangtan Boys",
+        "Bangtan Sonyeondan",
+        "Beyond the Scene",
+        "Bulletproof Boy Scouts",
+        "Bōdan Shōnendan",
+        "The Bangtan Boys",
+        "防弾少年団",
+        "방탄",
+        "방탄소년단"
+      ],
+      "debut": "2013",
+      "agency": "Avex Trax",
+      "wd_id": "Q13580495"
+    },
+    "Redoor": {
+      "source": "MusicBrainz",
+      "id": "8f3555a1-d928-434b-9f16-49b07866430d",
+      "name": "Redoor",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "Reddoor"
+      ]
+    },
+    "AKMU": {
+      "source": "MusicBrainz",
+      "id": "a1eba844-8c3e-4c61-8f54-f5e086b58c01",
+      "name": "AKMU",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "AG DONG MYU JI SYEON",
+        "AKMU",
+        "Akdong Musician",
+        "악동뮤지션",
+        "악뮤"
+      ],
+      "debut": "2014",
+      "agency": "YG Entertainment",
+      "wd_id": "Q10728972"
+    },
+    "Woo": {
+      "resolved": false
+    },
+    "Epik High": {
+      "source": "MusicBrainz",
+      "id": "57f1cdd6-cf32-4004-a095-3ef043c91b61",
+      "name": "Epik High",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "Epic High",
+        "Epik Hai",
+        "Epikhai",
+        "에픽 하이",
+        "에픽하이"
+      ]
+    },
+    "Ariana Grande": {
+      "source": "MusicBrainz",
+      "id": "f4fdbb4c-e4b7-47a0-b83b-d91bbfcfa387",
+      "name": "Ariana Grande",
+      "country": "US",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Ariana Grande-Butera",
+        "אריאנא גראנדע",
+        "آریانا گرانده",
+        "آریانا گراندِی-بوترا",
+        "أريانا غراندي",
+        "أريانا غراندي-بوتيرا",
+        "ئاریانا گراندێی",
+        "ئاریانا گراندێی-بوتێرا",
+        "アリアナ・グランデ",
+        "爱莉安娜·格兰德",
+        "艾尼安娜格兰德",
+        "아리아나 그란데"
+      ],
+      "agency": "Republic Records",
+      "wd_id": "Q151892"
+    },
+    "JANNABI": {
+      "source": "Wikidata",
+      "id": "Q27953445",
+      "name": "Jannabi",
+      "country": "KR",
+      "type": "Group"
+    },
+    "NOWIMYOUNG": {
+      "resolved": false
+    },
+    "VINXEN": {
+      "source": "MusicBrainz",
+      "id": "b3ff789f-6e2b-4fef-807e-a10e36bbdc28",
+      "name": "VINXEN",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Lee Byeong-jae",
+        "Lee Byung-jae",
+        "빈첸",
+        "이병재"
+      ],
+      "wd_id": "Q55730561"
+    },
+    "LE SSERAFIM": {
+      "source": "MusicBrainz",
+      "id": "1ee37742-1e3d-4e61-84d2-bc85f4c1459a",
+      "name": "LE SSERAFIM",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "LE SSERAFIM",
+        "LESSERAFIM",
+        "U-SSERAFIM",
+        "לה סרפים",
+        "لسرافیم",
+        "لي سيرافيم",
+        "เลเซราฟิม",
+        "ル・セラピム",
+        "ル・セラフィム",
+        "르세라핌"
+      ],
+      "debut": "2022",
+      "agency": "Source Music",
+      "wd_id": "Q111381707"
+    },
+    "Justin Bieber": {
+      "source": "MusicBrainz",
+      "id": "e0140a67-e4d1-4f13-8a01-364355bee46e",
+      "name": "Justin Bieber",
+      "country": "CA",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Justin Beiber",
+        "Justin Bieber",
+        "Justin Drew Bieber",
+        "ジャスティン・ビーバー"
+      ],
+      "agency": "RBMG",
+      "wd_id": "Q34086"
+    },
+    "hamo": {
+      "source": "MusicBrainz",
+      "id": "d19133fb-4d37-4f04-b1eb-835b57a29903",
+      "name": "HAMO",
+      "country": "JP",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Yamato Kasai",
+        "葛西大和"
+      ]
+    },
+    "LEE CHANHYUK": {
+      "resolved": false
+    },
+    "Lim Young Woong": {
+      "source": "Wikidata",
+      "id": "Q90872620",
+      "name": "Lim Young-woong",
+      "country": "KR",
+      "type": "Person"
+    },
+    "CHOIJUNSEONG (Jun S)": {
+      "resolved": false
+    },
+    "tuki.": {
+      "source": "MusicBrainz",
+      "id": "1359dfb8-8220-4ebe-aeb9-b759ed737c41",
+      "name": "tuki.",
+      "country": "JP",
+      "type": "Person",
+      "score": 100,
+      "aliases": [],
+      "wd_id": "Q124479935"
+    },
+    "HAON": {
+      "source": "MusicBrainz",
+      "id": "8cb31f1b-645a-4c9e-ab9e-06aa8cb08949",
+      "name": "HAON",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "김하온"
+      ],
+      "wd_id": "Q55736449"
+    },
+    "Sung Si Kyung": {
+      "source": "Wikidata",
+      "id": "Q391397",
+      "name": "Sung Si-kyung",
+      "country": "KR",
+      "type": "Person"
+    },
+    "Kim Na Young": {
+      "source": "Wikidata",
+      "id": "Q28819523",
+      "name": "Kim Na-young",
+      "country": "KR",
+      "type": "Person"
+    },
+    "NewJeans": {
+      "source": "MusicBrainz",
+      "id": "49204a7a-ed85-407a-828f-6fd46f1d8126",
+      "name": "NewJeans",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "NJZ",
+        "NWJNS",
+        "New Jeans",
+        "ニュージーンズ",
+        "뉴진스",
+        "엔제이지"
+      ],
+      "debut": "2022",
+      "agency": "ADOR",
+      "wd_id": "Q113189277"
+    },
+    "PSY": {
+      "source": "MusicBrainz",
+      "id": "f99b7d67-4e63-4678-aa66-4c6ac0f7d24a",
+      "name": "PSY",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "PSY",
+        "Park Jae-sang",
+        "Psy",
+        "박재상",
+        "싸이",
+        "싸이(Psy)"
+      ],
+      "agency": "YG Entertainment",
+      "wd_id": "Q20150"
+    },
+    "The Black Skirts": {
+      "source": "Wikidata",
+      "id": "Q7718443",
+      "name": "The Black Skirts",
+      "country": "KR",
+      "type": "Person"
+    },
+    "NELL": {
+      "source": "MusicBrainz",
+      "id": "e156615d-3ddd-4491-9584-4b9d971472c4",
+      "name": "NELL",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "넬"
+      ],
+      "debut": "1999",
+      "wd_id": "Q482948"
+    },
+    "Kenshi Yonezu": {
+      "source": "Wikidata",
+      "id": "Q11604296",
+      "name": "Kenshi Yonezu",
+      "country": "JP",
+      "type": "Person"
+    },
+    "Heize": {
+      "source": "MusicBrainz",
+      "id": "8cea34d9-e1a5-4a92-87da-de947f741fe6",
+      "name": "Heize",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Heize",
+        "장다혜",
+        "헤이즈"
+      ],
+      "agency": "CJ ENM Entertainment Division",
+      "wd_id": "Q24855768"
+    },
+    "Post Malone": {
+      "source": "MusicBrainz",
+      "id": "b1e26560-60e5-4236-bbdb-9aa5a8d5ee19",
+      "name": "Post Malone",
+      "country": "US",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Austin Post",
+        "Austin Richard Post",
+        "Austin Richard Post",
+        "포스트 말론"
+      ],
+      "agency": "Republic Records",
+      "wd_id": "Q21621919"
+    },
+    "Izi": {
+      "source": "MusicBrainz",
+      "id": "5f0e26b5-775d-42c6-aae3-b6d5789a10b6",
+      "name": "IZI",
+      "country": "IT",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Diego Germini",
+        "EazyRyhmes",
+        "Izi Erre"
+      ],
+      "wd_id": "Q29857017"
+    },
+    "Brown Eyes": {
+      "source": "MusicBrainz",
+      "id": "f7e4534b-0c72-4acc-9d97-7059f0d06643",
+      "name": "Brown Eyes",
+      "country": "KR",
+      "type": "Group",
+      "score": 100,
+      "aliases": [
+        "브라운 아이즈",
+        "브라운 아이즈 (Brown Eyes)"
+      ],
+      "wd_id": "Q3645423"
+    },
+    "Lady Gaga": {
+      "source": "MusicBrainz",
+      "id": "650e7db6-b795-4eb5-a702-5ea2fc46c848",
+      "name": "Lady Gaga",
+      "country": "US",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "Jo Calderone",
+        "Lady Ga Ga",
+        "Ledi Qaqa",
+        "Lejdi Gaga",
+        "Lēdija Gāga",
+        "S. Germanotta",
+        "Stefani Germanotta",
+        "Stefani Joanne Angelina Germanotta",
+        "Stefanija Džoana Andželina Germanota",
+        "Λέιντι Γκάγκα",
+        "Στέφανι Τζοάν Αντζελίνα Τζερμανότα",
+        "Џо Калдероне",
+        "Джо Кальдероне",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леди Гага",
+        "Леді Гага",
+        "Леді Гага",
+        "Лейди Гага",
+        "Лейди Гага",
+        "Лејди Гага",
+        "Лејди Гага",
+        "Лејди Гага",
+        "Лэдзі Гага",
+        "Лэди Гага",
+        "Сте́фани Джоа́нн Анджели́на Джермано́тта",
+        "Сте́фані Джоа́н Анджеліна Джермано́тта",
+        "Стефани Џоан Анџелина Џерманота",
+        "Стефани Жоанн Анжелина Жерманотта",
+        "Стэфані Джаан Анджэліна Джэрманота",
+        "Լեդի Գագա",
+        "Լէյտի Կակա",
+        "ליידי גאגא",
+        "ליידי גאגא",
+        "סטפני ג'ואן אנג'לינה ג'רמנוטה",
+        "جوآن استفانی جرمانوتا",
+        "ستيفاني جيرمانوتا",
+        "ليدى جاجا",
+        "ليدي غاغا",
+        "ليدي ڭاڭا",
+        "لیدی قاقا",
+        "لیدی گاگا",
+        "لیڈی گاگا",
+        "لیڈی گاگا",
+        "لیڈی گاگا",
+        "لېيدى گاگا",
+        "لەیدی گاگا",
+        "लेडी गागा",
+        "लेडी गागा",
+        "लेडी गागा",
+        "लेडी गागा",
+        "लेडी गागा",
+        "स्टेफनी जोआन अँजेलिना जर्मानोटा",
+        "स्टेफनी जोएन एन्जेलिना जर्मनोट्टा",
+        "লেডি গাগা",
+        "লেডী গাগা",
+        "ਲੇਡੀ ਗਾਗਾ",
+        "ਸਟੇਫ਼ਨੀ ਜੋਐਨ ਏਂਜੇਲੀਨਾ ਜਰਮਨੋਟਾ",
+        "લેડી ગાગા",
+        "ଲେଡି ଗାଗା",
+        "லேடி காகா",
+        "లేడీ గాగా",
+        "ಲೇಡಿ ಗಾಗಾ",
+        "ലേഡി ഗാഗ",
+        "ලේඩි ගාගා",
+        "สเตฟานี โจแอนน์ แอนเจลินา เจอร์มาน็อตตา",
+        "เลดีกากา",
+        "ເລດີ້ ກາກ້າ",
+        "လေဒီဂါဂါ",
+        "ლედი გაგა",
+        "ስቲፋኒ ጆአኒ አንጀሊና ጀርማኖታ",
+        "በሌዲ ጋጋ",
+        "ឡេឌី ហ្គាហ្គា",
+        "ᱞᱮᱰᱤ ᱜᱟᱜᱟ",
+        "ステファニー・ジョアン・アンジェリーナ・ジャーマノッタ",
+        "レディー・ガガ",
+        "史蒂芬妮·乔安妮·安吉丽娜·杰尔马诺塔",
+        "嘎嘎小姐",
+        "女神卡卡",
+        "레이디 가가",
+        "스테퍼니 조앤 앤젤리나 제르마노타"
+      ],
+      "agency": "Cherrytree Records",
+      "wd_id": "Q19848"
+    },
+    "YEONJUN": {
+      "source": "MusicBrainz",
+      "id": "806b5074-fa30-40dc-84dd-73e0e353e6d5",
+      "name": "YEONJUN",
+      "country": "KR",
+      "type": "Person",
+      "score": 100,
+      "aliases": [
+        "YEONJUN",
+        "연준"
+      ]
+    },
+    "Dominic Fike": {
+      "source": "Wikidata",
+      "id": "Q61906153",
+      "name": "Dominic Fike",
+      "country": "US",
+      "type": "Person",
+      "agency": "Columbia Records"
+    },
+    "데이먼스 이어 Damons year": {
+      "resolved": false
+    }
+  }
+}

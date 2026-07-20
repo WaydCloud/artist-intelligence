@@ -1,0 +1,123 @@
+{
+  "$comment": "사용자 소유 워치리스트 + 오버라이드 (D-013). artists = 팔로우할 acts: 캐노니컬 key(entities.json에 있으면 동일 key) + aliases(조인 별칭) + hashtags(IG 타겟 수집·직접 귀속용, # 제외). entities.json은 enrich가 재생성하는 캐시지만 이 파일은 사람이 소유·편집한다 — 모든 모듈 로더가 entities.json 위에 이 파일을 병합하고, overrides는 enrich 오귀속을 정정한다(마지막 승리). 편집 후 daily_collect가 다음 실행에서 반영. (D-015) pin: true = 유료 소셜 태그를 매일 무조건 수집(상시 슬롯, 태그 할당기가 못 미룸) · hashtags: [] = 무료 레일만(차트+YT)로 팔로우 — 유료 태그 0, 추가 비용 없음. yt 채널은 resolve 1회 재실행으로 신규만 검색. tag_aliases = 귀속 전용 해시태그(은어·밈·팬덤명, # 제외) — 수집 타겟 아님·과금 없음, 수집된 게시물의 태그 매칭에만 사용. aliases에는 사운드/차트 조인용 표기(공식 한글명·통용 줄임말), 일반어와 겹치는 모호한 라틴 은어는 오귀속 위험으로 태그·별칭 모두 배제(한글형만).",
+  "version": 1,
+  "artists": [
+    {
+      "key": "izna",
+      "aliases": ["izna", "이즈나", "IZNA"],
+      "hashtags": ["izna"],
+      "tag_aliases": ["이즈나"],
+      "country": "KR",
+      "debut": "2024",
+      "note": "I-LAND2 데뷔 · 회고 실증 social-only 코호트"
+    },
+    {
+      "key": "KATSEYE",
+      "aliases": ["KATSEYE", "캣츠아이"],
+      "hashtags": ["katseye"],
+      "tag_aliases": ["캣츠아이", "eyekons", "katseye_daniela", "katseye_sophia", "katseye_lara", "katseye_manon", "katseye_megan", "katseye_yoonchae"],
+      "country": "US",
+      "debut": "2024",
+      "note": "HYBE x Geffen 글로벌 그룹 · social-only 코호트"
+    },
+    {
+      "key": "BABYMONSTER",
+      "aliases": ["BABYMONSTER", "베이비몬스터", "베몬", "BAEMON"],
+      "hashtags": ["babymonster"],
+      "tag_aliases": ["베이비몬스터", "베몬", "baemon", "monstiez", "몬스티즈"],
+      "country": "KR",
+      "debut": "2023",
+      "note": "YG"
+    },
+    {
+      "key": "MEOVV",
+      "aliases": ["MEOVV", "미야오"],
+      "hashtags": ["meovv"],
+      "tag_aliases": ["미야오", "pawmpawm"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2024",
+      "note": "THEBLACKLABEL · 팬덤 PAWMPAWM(한글 '폼폼'은 폼폼푸린 충돌로 배제)"
+    },
+    {
+      "key": "Hearts2Hearts",
+      "aliases": ["Hearts2Hearts", "하츠투하츠", "하투하"],
+      "hashtags": ["hearts2hearts"],
+      "tag_aliases": ["하츠투하츠", "하투하", "s2u"],
+      "country": "KR",
+      "debut": "2025",
+      "note": "SM"
+    },
+    {
+      "key": "KiiiKiii",
+      "aliases": ["KiiiKiii", "키키"],
+      "hashtags": ["kiiikiii"],
+      "tag_aliases": ["키키", "티키", "tiiikiii"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2025",
+      "note": "Starship"
+    },
+    {
+      "key": "ILLIT",
+      "aliases": ["ILLIT", "아일릿"],
+      "hashtags": ["illit"],
+      "tag_aliases": ["아일릿", "글릿", "gllit"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2024",
+      "note": "Belift"
+    },
+    {
+      "key": "RESCENE",
+      "aliases": ["RESCENE", "리센느"],
+      "hashtags": ["rescene"],
+      "tag_aliases": ["리센느", "리마인", "remine", "안원잘부", "러브어택"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2024",
+      "note": "The Muze · 중소돌 역주행(러브어택) · 원이 채널 밈 안원잘부"
+    },
+    {
+      "key": "CORTIS",
+      "aliases": ["CORTIS", "코르티스"],
+      "hashtags": ["cortis"],
+      "tag_aliases": ["코르티스", "coer", "영크크", "redred"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2025",
+      "note": "Big Hit · 신인 최광역(D-009)"
+    },
+    {
+      "key": "KISS OF LIFE",
+      "aliases": ["KISS OF LIFE", "키스오브라이프", "KIOF", "키오프", "키오라"],
+      "hashtags": ["kissoflife"],
+      "tag_aliases": ["키스오브라이프", "키오프", "키오라", "kiof"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2023",
+      "note": "S2 · 팬덤 KISSY(태그는 일반어 충돌로 배제)"
+    },
+    {
+      "key": "KEYVEATZ",
+      "aliases": ["KEYVEATZ", "Keyveatz", "키비츠"],
+      "hashtags": ["keyveatz"],
+      "tag_aliases": ["키비츠", "keybeats"],
+      "pin": true,
+      "country": "KR",
+      "debut": "2026",
+      "note": "AOMG 첫 걸 크루 · 2026-06-30 데뷔 · 팬덤명 '키퍼'는 단일 소스라 미등록(확인 시 추가)"
+    }
+  ],
+  "overrides": {
+    "Jin": {
+      "country": "KR",
+      "agency": "Big Hit Music",
+      "note": "manual-fix: MB 이름검색이 MC Jin(US 래퍼)으로 오귀속 — BTS 진으로 정정"
+    },
+    "BTS": {
+      "agency": "Big Hit Music",
+      "note": "manual-fix: P264 다값 중 Avex Trax(일본 유통)가 잡힘 — 소속사로 정정"
+    }
+  }
+}

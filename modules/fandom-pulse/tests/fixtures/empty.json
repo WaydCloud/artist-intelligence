@@ -1,0 +1,14 @@
+{
+  "provenance": {
+    "source": "synthetic",
+    "tool": "fandom-pulse.fetch",
+    "tool_version": "0.1.0",
+    "fetched_at": "2026-07-18T00:00:00Z",
+    "license": "synthetic",
+    "tos_class": "synthetic",
+    "params": { "hashtag": "none", "resultsType": "posts", "maxItems": 0 },
+    "pii_policy": "facts-only: PII·원문 fetch 단계 폐기(§4)"
+  },
+  "quality": { "records": 0, "raw": 0, "dropped": 0, "notes": ["graceful(0건) 테스트용"] },
+  "records": []
+}

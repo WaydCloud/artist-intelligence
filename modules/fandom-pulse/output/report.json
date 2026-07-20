@@ -1,0 +1,239 @@
+{
+  "moduleId": "fandom-pulse",
+  "title": "팬덤 펄스 — #kpopdance",
+  "subtitle": "Instagram / Apify apify~instagram-hashtag-scraper · 2026-07-18T11:36:59Z · 30건",
+  "generatedAt": "2026-07-19T12:56:07Z",
+  "metrics": [
+    {
+      "label": "게시물 수",
+      "value": 30,
+      "unit": "건"
+    },
+    {
+      "label": "총 참여",
+      "value": 54968,
+      "unit": "likes+comments"
+    },
+    {
+      "label": "중앙값 좋아요",
+      "value": 969,
+      "unit": "likes"
+    },
+    {
+      "label": "중앙값 댓글",
+      "value": 23,
+      "unit": "comments"
+    },
+    {
+      "label": "고참여 게시물",
+      "value": 3,
+      "unit": "건",
+      "hint": "상위 90분위(≥4443) 초과"
+    },
+    {
+      "label": "릴스 비중",
+      "value": 100,
+      "unit": "%"
+    },
+    {
+      "label": "게시 가속",
+      "value": 2.4,
+      "unit": "건/일",
+      "hint": "2026-06-29~2026-07-17 최근−이전"
+    },
+    {
+      "label": "사운드 확산 아티스트",
+      "value": 14,
+      "unit": "팀"
+    },
+    {
+      "label": "로스터 밖 확산",
+      "value": 10,
+      "unit": "팀",
+      "hint": "차트 로스터 미포함 소셜 활성"
+    }
+  ],
+  "charts": [
+    {
+      "type": "bar",
+      "title": "Top 공동 해시태그",
+      "data": [
+        {
+          "name": "#dance",
+          "value": 7
+        },
+        {
+          "name": "#fyp",
+          "value": 6
+        },
+        {
+          "name": "#ateez",
+          "value": 5
+        },
+        {
+          "name": "#kpop",
+          "value": 4
+        },
+        {
+          "name": "#bad",
+          "value": 3
+        },
+        {
+          "name": "#dancecover",
+          "value": 3
+        },
+        {
+          "name": "#kpopdancecover",
+          "value": 3
+        },
+        {
+          "name": "#challenge",
+          "value": 2
+        },
+        {
+          "name": "#dancechallenge",
+          "value": 2
+        },
+        {
+          "name": "#kpopinpublic",
+          "value": 2
+        }
+      ]
+    },
+    {
+      "type": "line",
+      "title": "일별 게시량",
+      "data": {
+        "x": [
+          "2026-06-29",
+          "2026-07-08",
+          "2026-07-09",
+          "2026-07-10",
+          "2026-07-11",
+          "2026-07-12",
+          "2026-07-13",
+          "2026-07-14",
+          "2026-07-15",
+          "2026-07-16",
+          "2026-07-17"
+        ],
+        "series": [
+          {
+            "name": "#kpopdance 게시물",
+            "values": [
+              1,
+              1,
+              3,
+              1,
+              1,
+              1,
+              3,
+              7,
+              1,
+              6,
+              5
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "bar",
+      "title": "Top 사운드",
+      "data": [
+        {
+          "name": "ATEEZ - BAD",
+          "value": 4
+        },
+        {
+          "name": "megatdream - Original audio",
+          "value": 1
+        },
+        {
+          "name": "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE",
+          "value": 1
+        },
+        {
+          "name": "izna - DRIP",
+          "value": 1
+        },
+        {
+          "name": "i-dle - Gimme Dat Love",
+          "value": 1
+        },
+        {
+          "name": "qianyihere - Original audio",
+          "value": 1
+        },
+        {
+          "name": "oakids_maggie - Original audio",
+          "value": 1
+        },
+        {
+          "name": "glxefanaccount - Original audio",
+          "value": 1
+        }
+      ]
+    },
+    {
+      "type": "bar",
+      "title": "Top 아티스트 · 사운드 확산",
+      "data": [
+        {
+          "name": "ATEEZ",
+          "value": 4
+        },
+        {
+          "name": "LE SSERAFIM",
+          "value": 2
+        },
+        {
+          "name": "ILLIT",
+          "value": 1
+        },
+        {
+          "name": "KATSEYE",
+          "value": 1
+        },
+        {
+          "name": "izna",
+          "value": 1
+        },
+        {
+          "name": "i-dle",
+          "value": 1
+        },
+        {
+          "name": "ENHYPEN",
+          "value": 1
+        },
+        {
+          "name": "ITZY",
+          "value": 1
+        },
+        {
+          "name": "BOYNEXTDOOR",
+          "value": 1
+        },
+        {
+          "name": "YooA",
+          "value": 1
+        }
+      ]
+    }
+  ],
+  "media": [],
+  "insights": [
+    "차트 로스터 밖 소셜 확산: KATSEYE, izna, i-dle, ENHYPEN, ITZY 등 10팀 — 차트(top-200)로 안 잡히는 소셜 활성(신인·pre-mainstream 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님(§0).",
+    "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락) — 참고 신호.",
+    "#kpopdance 공개 게시물 30건 기준 · 총 참여 54,968(좋아요+댓글).",
+    "중앙값 좋아요 969 · 댓글 23 — 평균 대신 중앙값(바이럴 1건 왜곡 견고).",
+    "공동 해시태그 상위: #dance, #fyp, #ateez — 확산·맥락 도달 신호(참고).",
+    "공개 IG 스크랩 표본(첫 페이지 등)으로 편향 가능 — 공식 지표 아님, 인기·품질 단정 아님(참고 신호)."
+  ],
+  "recommendations": [
+    "특정 그룹/컴백 해시태그로 fetch하면 그 캠페인의 화력·참여 신호를 집중 관측할 수 있습니다.",
+    "다일 축적(collect)하면 게시 가속(모멘텀)을 실데이터 라인으로 볼 수 있습니다(v2).",
+    "고참여 임계값(--high-pct)은 도메인 판단으로 조정하세요 — 기준은 가설입니다(기준 원장)."
+  ]
+}

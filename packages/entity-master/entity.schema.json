@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://artist-intelligence/entity.schema.json",
+  "title": "EntityMaster",
+  "description": "공유 캐노니컬 아티스트 엔티티 맵 — 모듈 공통 차원(dimension). CC0 사실만(MusicBrainz 1차 + Wikidata 폴백). 추측 금지: 국가 미상은 resolved:false로 남긴다(원산지 집계에서 제외). country/type은 커뮤니티 편집 기반 → 불완전 가능(참고).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["sources", "license", "artists"],
+  "properties": {
+    "sources": { "type": "array", "items": { "type": "string" }, "description": "출처 목록 (예: MusicBrainz, Wikidata)" },
+    "license": { "type": "string", "description": "예: CC0" },
+    "artists": {
+      "type": "object",
+      "description": "대표 아티스트명 → 엔티티. 키는 normalize.primary_artist 기준.",
+      "additionalProperties": { "$ref": "#/$defs/entity" }
+    }
+  },
+  "$defs": {
+    "entity": {
+      "type": "object",
+      "anyOf": [
+        {
+          "additionalProperties": false,
+          "required": ["source", "name", "country"],
+          "properties": {
+            "source": { "type": "string", "description": "MusicBrainz | Wikidata" },
+            "id": { "type": "string", "description": "MBID 또는 Wikidata QID" },
+            "name": { "type": "string" },
+            "country": { "type": "string", "description": "ISO 3166-1 alpha-2 (예: KR)" },
+            "type": { "type": "string", "description": "Group | Person 등" },
+            "score": { "type": "number" },
+            "aliases": { "type": "array", "items": { "type": "string" }, "description": "다국어·로마자 별칭(크로스언어 매칭용)" }
+          }
+        },
+        {
+          "additionalProperties": false,
+          "required": ["resolved"],
+          "properties": { "resolved": { "const": false } }
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "moduleId": "chart-history",
+  "signal": "chart-rank",
+  "unit": "rank (lower=stronger)",
+  "higherIsStronger": false,
+  "dates": [
+    "2026-07-14",
+    "2026-07-16",
+    "2026-07-18",
+    "2026-07-20",
+    "2026-07-22",
+    "2026-07-24"
+  ],
+  "series": {
+    "ATEEZ": [
+      null,
+      null,
+      40,
+      22,
+      15,
+      12
+    ],
+    "ILLIT": [
+      null,
+      null,
+      null,
+      null,
+      45,
+      38
+    ],
+    "LE SSERAFIM": [
+      null,
+      null,
+      null,
+      38,
+      30,
+      25
+    ],
+    "The Weeknd": [
+      7,
+      8,
+      9,
+      10,
+      12,
+      14
+    ],
+    "YooA": [
+      12,
+      15,
+      20,
+      28,
+      null,
+      null
+    ],
+    "aespa": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ]
+  },
+  "roster": {
+    "ATEEZ": true,
+    "ILLIT": true,
+    "LE SSERAFIM": true,
+    "The Weeknd": false,
+    "YooA": false,
+    "aespa": true
+  },
+  "markets": {
+    "ATEEZ": [
+      "DEMO"
+    ],
+    "ILLIT": [
+      "DEMO"
+    ],
+    "LE SSERAFIM": [
+      "DEMO"
+    ],
+    "The Weeknd": [
+      "DEMO"
+    ],
+    "YooA": [
+      "DEMO"
+    ],
+    "aespa": [
+      "DEMO"
+    ]
+  },
+  "provenance": {
+    "source": "Kworb chart snapshots (chart-history)",
+    "generatedAt": "2026-07-19T04:45:39Z",
+    "window": "2026-07-14..2026-07-24",
+    "marketCount": 1,
+    "synthetic": true,
+    "note": "⚠ 합성 fixture(실 데이터 아님) — 브리지 메커니즘 시연용, 실증은 라이브 다일 collect(§0). 일자별 최고순위(전 시장 최저 rank) · 결측=차트 밖 · 사실 신호(단정 아님, §0)"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://artist-intelligence/snapshot.schema.json",
+  "title": "FactsOnlySnapshot",
+  "description": "수집물(입력측) 공유 규격 — report-schema의 짝. 모든 JSON 수집 산출(fetch/collect)이 준수한다. 거버넌스 메타데이터(provenance·quality)를 표준화하고, records는 모듈 형태이되 PII/원문 필드는 금지(scripts/validate_snapshot.py 게이트가 강제, §4). 원본 저작물·개인식별정보는 저장하지 않는다.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["provenance", "records"],
+  "properties": {
+    "provenance": { "$ref": "#/$defs/provenance" },
+    "quality": { "$ref": "#/$defs/quality" },
+    "records": {
+      "type": "array",
+      "description": "facts-only 레코드(모듈 형태). PII/원문 필드 금지 — 게이트가 검증(§4).",
+      "items": { "type": "object" }
+    }
+  },
+  "$defs": {
+    "provenance": {
+      "type": "object",
+      "description": "출처·도구·라이선스·ToS·수집 파라미터. 추궁 가능성의 전제(책임소재 불변식·DOMAIN §0).",
+      "additionalProperties": false,
+      "required": ["source", "tool", "fetched_at", "tos_class", "pii_policy"],
+      "properties": {
+        "source": { "type": "string", "minLength": 1, "description": "원천 + 도구 (예: 'Instagram / Apify apify~instagram-hashtag-scraper')" },
+        "tool": { "type": "string", "minLength": 1, "description": "수집기 (예: 'fandom-pulse.fetch')" },
+        "tool_version": { "type": "string" },
+        "fetched_at": { "type": "string", "format": "date-time" },
+        "license": { "type": "string", "description": "저장 데이터의 성격 (예: 'public-metrics', 'CC0')" },
+        "tos_class": {
+          "enum": ["official-api", "licensed-aggregator", "open-aggregator", "managed-scraper", "first-party", "synthetic"],
+          "description": "DATA_SOURCES §4 접근 우선순위 등급"
+        },
+        "params": { "type": "object", "description": "수집 파라미터(재현용): 해시태그·차트·캡 등" },
+        "pii_policy": { "type": "string", "description": "PII/원문 처리 서술 (예: 'facts-only: PII·원문 fetch 단계 폐기(§4)')" }
+      }
+    },
+    "quality": {
+      "type": "object",
+      "description": "정제 품질 지표(기준 원장 정신 — 각 단계의 품질을 측정·명시).",
+      "additionalProperties": false,
+      "properties": {
+        "records": { "type": "integer", "minimum": 0, "description": "저장된 facts-only 레코드 수" },
+        "raw": { "type": "integer", "minimum": 0, "description": "정제 전 원본 아이템 수" },
+        "dropped": { "type": "integer", "minimum": 0, "description": "정제/중복/무효로 제외된 수" },
+        "coverage_pct": { "type": "number", "minimum": 0, "maximum": 100, "description": "모듈 정의 커버리지(예: 엔티티 해석률)" },
+        "notes": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

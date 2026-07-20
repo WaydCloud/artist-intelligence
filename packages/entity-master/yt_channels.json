@@ -1,0 +1,50 @@
+{
+  "$comment": "yt-pulse resolve 캐시 (search.list 1회성) — 오매칭은 channel_id를 직접 정정하세요(사용자 소유).",
+  "resolved_at": "2026-07-19T12:43:02Z",
+  "channels": {
+    "izna": {
+      "channel_id": "UCfbYNlxgLuKJXQZEhkMmaCQ",
+      "channel_title": "izna (이즈나)"
+    },
+    "BABYMONSTER": {
+      "channel_id": "UCqwUnggBBct-AY2lAdI88jQ",
+      "channel_title": "BABYMONSTER"
+    },
+    "MEOVV": {
+      "channel_id": "UCowiwt93gqGlNG4k5VDxO-w",
+      "channel_title": "MEOVV"
+    },
+    "Hearts2Hearts": {
+      "channel_id": "UC7Q3HUnJA3nvjZR2JeMn2Cw",
+      "channel_title": "Hearts2Hearts"
+    },
+    "KiiiKiii": {
+      "channel_id": "UCaHwGJXFb28TekZMf7iFg5Q",
+      "channel_title": "KiiiKiii"
+    },
+    "ILLIT": {
+      "channel_id": "UCEpFoWeCMCo5z3EvWaz6hQQ",
+      "channel_title": "ILLIT"
+    },
+    "RESCENE": {
+      "channel_id": "UCtKtCiaWRz-d3EZn2xd1mdA",
+      "channel_title": "RESCENE"
+    },
+    "CORTIS": {
+      "channel_id": "UCZMYvSPulDSUdx7bdtTFdrg",
+      "channel_title": "CORTIS"
+    },
+    "KATSEYE": {
+      "channel_id": "UCA61H4fWOMHikLcUFKyQUog",
+      "channel_title": "KATSEYE"
+    },
+    "KISS OF LIFE": {
+      "channel_id": "UCvEEeBssb4XxIfWWIB8IjMw",
+      "channel_title": "KISS OF LIFE"
+    },
+    "KEYVEATZ": {
+      "channel_id": "UCuGezLt65lqs_-aMpRmcu5g",
+      "channel_title": "Keyveatz"
+    }
+  }
+}

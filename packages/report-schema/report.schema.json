@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://artist-intelligence/report.schema.json",
+  "title": "Report",
+  "description": "모든 분석 모듈이 배출하는 표준 결과 규격. 대시보드는 이 형태만 렌더한다. 핵심 흐름 계약 — 위반 시 빌드 실패.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["moduleId", "title", "generatedAt", "metrics", "charts", "media", "insights", "recommendations"],
+  "properties": {
+    "moduleId": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "title": { "type": "string", "minLength": 1 },
+    "subtitle": { "type": "string" },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "metrics": { "type": "array", "items": { "$ref": "#/$defs/metric" } },
+    "charts": { "type": "array", "items": { "$ref": "#/$defs/chart" } },
+    "media": { "type": "array", "items": { "$ref": "#/$defs/media" } },
+    "insights": { "type": "array", "items": { "type": "string" } },
+    "recommendations": { "type": "array", "items": { "type": "string" } }
+  },
+  "$defs": {
+    "metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["label", "value"],
+      "properties": {
+        "label": { "type": "string" },
+        "value": { "type": ["number", "string"] },
+        "unit": { "type": "string" },
+        "delta": { "type": "number" },
+        "benchmark": { "type": "number" },
+        "hint": { "type": "string" }
+      }
+    },
+    "chart": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "data"],
+      "properties": {
+        "type": { "enum": ["line", "bar", "heatmap", "radar", "tunable"] },
+        "title": { "type": "string" },
+        "data": {}
+      }
+    },
+    "media": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "src"],
+      "properties": {
+        "type": { "enum": ["image", "video"] },
+        "src": { "type": "string" },
+        "caption": { "type": "string" }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* dataviz tokens (validated reference palette). Light default; dark is *selected*
+   (its own steps), covered by both the OS media query and the theme toggle. */
+:root {
+  color-scheme: light;
+  --surface: #fcfcfb;
+  --plane: #f9f9f7;
+  --ink: #0b0b0b;
+  --ink-secondary: #52514e;
+  --muted: #898781;
+  --hairline: #e1e0d9;
+  --baseline: #c3c2b7;
+  --series: #2a78d6;
+  --series2: #c2610c;
+  --series3: #7c3aed;
+  --good: #006300;
+  --bad: #d03b3b;
+  --border: rgba(11, 11, 11, 0.1);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --surface: #1a1a19;
+    --plane: #0d0d0d;
+    --ink: #ffffff;
+    --ink-secondary: #c3c2b7;
+    --muted: #898781;
+    --hairline: #2c2c2a;
+    --baseline: #383835;
+    --series: #3987e5;
+    --series2: #f0a55a;
+    --series3: #b794f6;
+    --good: #0ca30c;
+    --bad: #d03b3b;
+    --border: rgba(255, 255, 255, 0.1);
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --surface: #1a1a19;
+  --plane: #0d0d0d;
+  --ink: #ffffff;
+  --ink-secondary: #c3c2b7;
+  --muted: #898781;
+  --hairline: #2c2c2a;
+  --baseline: #383835;
+  --series: #3987e5;
+  --series2: #f0a55a;
+  --series3: #b794f6;
+  --good: #0ca30c;
+  --bad: #d03b3b;
+  --border: rgba(255, 255, 255, 0.1);
+}
+
+html,
+body {
+  background: var(--plane);
+  color: var(--ink);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}

@@ -1,0 +1,148 @@
+name: ci
+
+# 하네스 게이트: 핵심 흐름(모듈 CLI → 스키마 유효 report.json → 대시보드 렌더)을
+# 깨는 변경은 여기서 막는다. 코드가 채워질수록 이 파이프라인이 함께 자란다.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  python:
+    name: modules (lint · typecheck · smoke)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      - name: Lint (ruff)
+        run: uvx ruff check modules
+      - name: Typecheck (pyright)
+        run: uvx pyright modules
+      # 핵심 흐름 스모크: 각 모듈 CLI를 픽스처로 돌려 report.json을 생성한다.
+      # 구현된 모듈은 강제 통과, 아직 구현 안 된 모듈은 건너뛴다(파이프라인은 코드가 채워질수록 자란다).
+      - name: Smoke — chart-history (v3 국가 교차 + 엔티티)
+        run: >
+          uv run --project modules/chart-history python -m chart_history analyze
+          modules/chart-history/tests/fixtures/kworb_spotify_kr_daily.html
+          modules/chart-history/tests/fixtures/kworb_spotify_global_daily.html
+          modules/chart-history/tests/fixtures/kworb_spotify_us_daily.html
+          modules/chart-history/tests/fixtures/kworb_spotify_jp_daily.html
+          --entities packages/entity-master/entities.json
+          -o modules/chart-history/output/
+      - name: Smoke — chart-history (v3.2 크로스뷰 모멘텀)
+        run: >
+          uv run --project modules/chart-history python -m chart_history analyze
+          modules/chart-history/tests/fixtures/kworb_spotify_kr_daily.html
+          modules/chart-history/tests/fixtures/kworb_spotify_kr_weekly.html
+          -o "${RUNNER_TEMP}/ch-view/"
+      - name: Smoke — chart-history (v3.3/3.4 크로스소스 + 엔티티 별칭)
+        run: >
+          uv run --project modules/chart-history python -m chart_history analyze
+          modules/chart-history/tests/fixtures/kworb_spotify_kr_daily.html
+          modules/chart-history/tests/fixtures/kworb_apple_kr.html
+          --entities packages/entity-master/entities.json
+          -o "${RUNNER_TEMP}/ch-xsrc/"
+      - name: Smoke — fandom-pulse (IG 해시태그 화력·참여·모멘텀·사운드)
+        run: >
+          uv run --project modules/fandom-pulse python -m fandom_pulse analyze
+          modules/fandom-pulse/tests/fixtures/ig_hashtag_kpopdance.json
+          -o modules/fandom-pulse/output/
+      - name: Smoke — dance-dynamics
+        run: |
+          if [ -f modules/dance-dynamics/src/dance_dynamics/__main__.py ]; then
+            uv run --project modules/dance-dynamics python -m dance_dynamics analyze modules/dance-dynamics/tests/fixtures/sample.mp4 -o modules/dance-dynamics/output/
+          else
+            echo "dance-dynamics not built yet — skipping smoke"
+          fi
+
+  schema-validate:
+    name: report contract (schema-validate)
+    runs-on: ubuntu-latest
+    needs: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      # 생성·커밋된 모든 report.json이 규격을 지키는지 검증. 어기면 실패 = 빌드 중단.
+      - name: Validate all report.json against report-schema
+        run: |
+          uv run python - <<'PY'
+          import glob, json, sys
+          from jsonschema import Draft202012Validator
+          schema = json.load(open("packages/report-schema/report.schema.json"))
+          validator = Draft202012Validator(schema)
+          files = glob.glob("modules/**/output/report.json", recursive=True)
+          if not files:
+              print("no report.json yet — skipping (modules not built)"); sys.exit(0)
+          failed = False
+          for f in files:
+              errs = sorted(validator.iter_errors(json.load(open(f))), key=lambda e: e.path)
+              if errs:
+                  failed = True
+                  print(f"::error file={f}::{len(errs)} schema error(s)")
+                  for e in errs: print(f"  - {list(e.path)}: {e.message}")
+          sys.exit(1 if failed else 0)
+          PY
+
+  data-contracts:
+    name: data contracts (snapshot gate · entity schema)
+    runs-on: ubuntu-latest
+    needs: python
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v3
+      # facts-only 스냅샷: provenance/quality 스키마 + PII 게이트(§4). PII/원문 필드가 있으면 실패.
+      - name: facts-only snapshot gate (§4)
+        run: |
+          uv run --project modules/fandom-pulse python - <<'PY'
+          import glob, json, subprocess, sys
+          failed = False
+          for f in glob.glob("modules/**/tests/fixtures/*.json", recursive=True):
+              try:
+                  d = json.load(open(f, encoding="utf-8"))
+              except Exception:
+                  continue
+              if not (isinstance(d, dict) and "provenance" in d):
+                  continue
+              if subprocess.run([sys.executable, "scripts/validate_snapshot.py", f]).returncode != 0:
+                  failed = True
+          sys.exit(1 if failed else 0)
+          PY
+      # 공유 엔티티 마스터가 계약을 지키는지.
+      - name: entity master schema
+        run: |
+          uv run --project modules/fandom-pulse python - <<'PY'
+          import json, sys
+          from jsonschema import Draft202012Validator
+          schema = json.load(open("packages/entity-master/entity.schema.json"))
+          data = json.load(open("packages/entity-master/entities.json"))
+          errs = list(Draft202012Validator(schema).iter_errors(data))
+          for e in errs:
+              print(f"::error::{list(e.path)}: {e.message}")
+          sys.exit(1 if errs else 0)
+          PY
+
+  dashboard:
+    name: dashboard (lint · typecheck · build)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      # 대시보드가 생기면 활성화:
+      - run: test -d apps/dashboard || { echo "dashboard not built yet — skipping"; exit 0; }
+      - run: npm ci --prefix apps/dashboard
+      - run: npm run lint --prefix apps/dashboard
+      - run: npm run typecheck --prefix apps/dashboard
+      - run: npm run build --prefix apps/dashboard
+
+  security:
+    name: security scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Secret scan (gitleaks)
+        uses: gitleaks/gitleaks-action@v2
+      - uses: astral-sh/setup-uv@v3
+      - name: Python deps audit
+        run: uvx pip-audit || true   # 초기엔 경고만, 안정화 후 hard-fail 전환

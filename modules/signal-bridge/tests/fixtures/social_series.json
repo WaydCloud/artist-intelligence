@@ -1,0 +1,244 @@
+{
+  "moduleId": "fandom-pulse",
+  "signal": "social-buzz",
+  "unit": "posts/day",
+  "higherIsStronger": true,
+  "dates": [
+    "2026-07-10",
+    "2026-07-14",
+    "2026-07-15",
+    "2026-07-16",
+    "2026-07-17"
+  ],
+  "series": {
+    "ATEEZ": [
+      0,
+      1,
+      0,
+      2,
+      1
+    ],
+    "BABYMONSTER": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "BOYNEXTDOOR": [
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "ENHYPEN": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "ILLIT": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "ITZY": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "IVE": [
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "KATSEYE": [
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "LE SSERAFIM": [
+      0,
+      0,
+      0,
+      1,
+      1
+    ],
+    "YEONJUN": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "YooA": [
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "i-dle": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    "iKON": [
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    "izna": [
+      0,
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  "roster": {
+    "ATEEZ": true,
+    "BABYMONSTER": true,
+    "BOYNEXTDOOR": false,
+    "ENHYPEN": false,
+    "ILLIT": true,
+    "ITZY": false,
+    "IVE": false,
+    "KATSEYE": true,
+    "LE SSERAFIM": true,
+    "YEONJUN": true,
+    "YooA": false,
+    "i-dle": false,
+    "iKON": false,
+    "izna": true
+  },
+  "engagement": {
+    "ATEEZ": 10031,
+    "BABYMONSTER": 2875,
+    "BOYNEXTDOOR": 593,
+    "ENHYPEN": 870,
+    "ILLIT": 27,
+    "ITZY": 1060,
+    "IVE": 90,
+    "KATSEYE": 27,
+    "LE SSERAFIM": 1002,
+    "YEONJUN": 2021,
+    "YooA": 4193,
+    "i-dle": 660,
+    "iKON": 938,
+    "izna": 527
+  },
+  "drivers": {
+    "ATEEZ": {
+      "sounds": [
+        "ATEEZ - BAD"
+      ],
+      "tags": []
+    },
+    "BABYMONSTER": {
+      "sounds": [
+        "BABYMONSTER - I LIKE IT"
+      ],
+      "tags": [
+        "#베이비몬스터"
+      ]
+    },
+    "BOYNEXTDOOR": {
+      "sounds": [
+        "BOYNEXTDOOR - ADIOS!"
+      ],
+      "tags": []
+    },
+    "ENHYPEN": {
+      "sounds": [
+        "ENHYPEN - Bad Desire (With or Without You) (English Ver.)"
+      ],
+      "tags": []
+    },
+    "ILLIT": {
+      "sounds": [
+        "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE"
+      ],
+      "tags": []
+    },
+    "ITZY": {
+      "sounds": [
+        "ITZY - THAT'S A NO NO"
+      ],
+      "tags": []
+    },
+    "IVE": {
+      "sounds": [
+        "IVE - BLACKHOLE"
+      ],
+      "tags": []
+    },
+    "KATSEYE": {
+      "sounds": [
+        "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE"
+      ],
+      "tags": []
+    },
+    "LE SSERAFIM": {
+      "sounds": [
+        "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE",
+        "LE SSERAFIM - Smart"
+      ],
+      "tags": []
+    },
+    "YEONJUN": {
+      "sounds": [
+        "YEONJUN - Ice Cream (Mango Chili Ver.)"
+      ],
+      "tags": []
+    },
+    "YooA": {
+      "sounds": [
+        "YooA - Bon voyage"
+      ],
+      "tags": []
+    },
+    "i-dle": {
+      "sounds": [
+        "i-dle - Gimme Dat Love"
+      ],
+      "tags": []
+    },
+    "iKON": {
+      "sounds": [
+        "iKON - LOVE SCENARIO"
+      ],
+      "tags": []
+    },
+    "izna": {
+      "sounds": [
+        "izna - DRIP"
+      ],
+      "tags": [
+        "#izna"
+      ]
+    }
+  },
+  "provenance": {
+    "source": "IG hashtag sound+tag→artist (fandom-pulse)",
+    "hashtag": "kpopdance",
+    "generatedAt": "2026-07-19T12:56:00Z",
+    "window": "2026-07-10..2026-07-17",
+    "attribution": "sound-label + watchlist-hashtag (D-013)",
+    "note": "일자별 게시수 · 사운드 라벨 + 워치리스트 해시태그 귀속 · 참고 신호(단정 아님, §0)"
+  }
+}

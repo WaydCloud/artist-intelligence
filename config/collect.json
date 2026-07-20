@@ -1,0 +1,42 @@
+{
+  "$comment": "일일 수집 설정 (D-013·D-016). daily_collect.ps1이 읽는다. chart_markets = Kworb Spotify 일간 차트 시장 · apple_markets = Apple 공식 RSS storefront · youtube_markets = Kworb YouTube 일간 차트 시장 — 전부 무료, 시장별 실패 시 스킵·로그. genre_hashtags = 장르 배경 태그. use_watchlist_hashtags = watchlist.json artists[].hashtags를 타겟 태그로 자동 추가(단일 소스). 예산: 태그당 캡(per_tag_max_usd) x 태그 수 <= daily_budget_usd 를 스크립트가 누적 강제. experiment_end 이후 유료 fetch 자동 중단(무료 차트는 계속).",
+  "home_market": "kr",
+  "chart_markets": [
+    "kr", "global", "jp", "us", "tw", "hk", "sg", "my", "th", "vn",
+    "id", "ph", "in", "br", "mx", "cl", "ar", "pe", "co", "ec",
+    "sa", "ae", "tr", "eg", "il", "ma", "fr", "de", "gb", "es",
+    "it", "pl", "nl", "se", "no", "dk", "fi", "pt", "gr", "cz",
+    "ro", "at", "ch", "be", "ie", "hu", "au", "ca", "nz", "za"
+  ],
+  "apple_markets": [
+    "kr", "jp", "us", "tw", "hk", "sg", "my", "th", "vn",
+    "id", "ph", "in", "br", "mx", "cl", "ar", "pe", "co", "ec",
+    "sa", "ae", "tr", "eg", "il", "ma", "fr", "de", "gb", "es",
+    "it", "pl", "nl", "se", "no", "dk", "fi", "pt", "gr", "cz",
+    "ro", "at", "ch", "be", "ie", "hu", "au", "ca", "nz", "za"
+  ],
+  "youtube_markets": [
+    "kr", "jp", "us", "tw", "hk", "sg", "my", "th", "vn",
+    "id", "ph", "in", "br", "mx", "cl", "ar", "pe", "co", "ec",
+    "sa", "ae", "tr", "eg", "il", "ma", "fr", "de", "uk", "es",
+    "it", "pl", "nl", "se", "no", "dk", "fi", "pt", "gr", "cz",
+    "ro", "at", "ch", "be", "ie", "hu", "au", "ca", "nz", "za"
+  ],
+  "genre_hashtags": ["kpopdance"],
+  "use_watchlist_hashtags": true,
+  "per_tag_max_items": 100,
+  "per_tag_max_usd": 0.25,
+  "daily_budget_usd": 3.0,
+  "experiment_end": "2026-08-19",
+  "allocator": {
+    "$comment": "스마트 태그 할당(D-015, scripts/tag_allocator.py). 태그 수가 일 슬롯(daily_budget/per_tag)을 넘으면 상시(genre+pin) → 강제(K일 경과) → 점수순으로 오늘 걷을 태그를 고른다. enabled=false면 기존 전량-순서 수집(예산 가드가 뒤를 자름). 가중치·K 값 = 사용자 소유(기준 원장: docs/EXPERIMENT-forward-leading.md).",
+    "enabled": true,
+    "max_staleness_days": 5,
+    "chart_entry_window_days": 2,
+    "w_stale": 1.0,
+    "w_chart_entry": 3.0,
+    "w_yt_velocity": 1.0,
+    "w_yield": 1.0,
+    "w_new": 2.0
+  }
+}

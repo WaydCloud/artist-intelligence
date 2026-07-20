@@ -47,7 +47,7 @@ export function Dashboard({ reports }: { reports: Report[] }) {
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-4">
           <div>
             <div className="text-sm font-medium tracking-tight">Artist Intelligence</div>
-            <div className="text-xs text-[var(--muted)]">리포트 대시보드 · 모듈 CLI → report.json → 렌더</div>
+            <div className="text-xs text-[var(--muted)]">리포트 대시보드</div>
           </div>
           <ThemeToggle theme={theme} onToggle={() => setTheme(dark ? "light" : "dark")} />
         </div>
@@ -85,12 +85,11 @@ export function Dashboard({ reports }: { reports: Report[] }) {
           }}
         />
       ) : (
-        <div className="mx-auto max-w-5xl px-5 py-16 text-[var(--muted)]">리포트가 없습니다.</div>
+        <div className="mx-auto max-w-5xl px-5 py-16 text-[var(--muted)]">표시할 리포트 없음</div>
       )}
 
       <footer className="mx-auto max-w-5xl px-5 py-10 text-xs leading-relaxed text-[var(--muted)]">
-        정적 렌더 · 이 대시보드는 <strong className="font-medium">스키마 유효 report.json</strong>만 읽습니다(핵심 흐름 계약).
-        지표는 <strong className="font-medium">근거 있는 신호</strong>이며 예측·단정이 아닙니다.
+        모든 지표는 <strong className="font-medium">참고용 신호</strong>. 예측이나 단정이 아니며, 판단은 사람의 몫.
       </footer>
     </div>
   );

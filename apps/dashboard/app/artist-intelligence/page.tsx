@@ -4,7 +4,7 @@ import { Dashboard } from "@/components/Dashboard";
 import type { Report } from "@/lib/report";
 
 export const metadata: Metadata = {
-  title: "Artist Intelligence — 리포트 대시보드",
+  title: "Artist Intelligence",
 };
 
 export default function ArtistIntelligencePage() {

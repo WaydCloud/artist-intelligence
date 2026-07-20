@@ -1,11 +1,11 @@
 {
   "moduleId": "yt-pulse",
-  "title": "YT 펄스 — 워치리스트 공식 채널",
+  "title": "YT 펄스 · 워치리스트 공식 채널",
   "subtitle": "YouTube Data API v3 (official) · 2026-07-20T00:16:53Z",
-  "generatedAt": "2026-07-20T00:16:54Z",
+  "generatedAt": "2026-07-20T02:48:31Z",
   "metrics": [
     {
-      "label": "추적 acts",
+      "label": "추적 팀",
       "value": 11,
       "unit": "팀",
       "hint": "채널 해석·영상 보유"
@@ -22,10 +22,10 @@
       "unit": "views"
     },
     {
-      "label": "최고 velocity",
+      "label": "최고 평균 일 조회(velocity)",
       "value": 1165870,
       "unit": "views/일",
-      "hint": "KATSEYE — 평균 일 조회(수명 평균 근사)"
+      "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)"
     },
     {
       "label": "신작",
@@ -37,7 +37,7 @@
   "charts": [
     {
       "type": "bar",
-      "title": "act별 최근작 조회 합 (공식 채널)",
+      "title": "팀별 최근작 조회 합 (공식 채널)",
       "data": [
         {
           "name": "KATSEYE",
@@ -87,7 +87,7 @@
     },
     {
       "type": "bar",
-      "title": "act별 대표 velocity (평균 일 조회 최대작)",
+      "title": "팀별 대표 평균 일 조회 (최대작 기준)",
       "data": [
         {
           "name": "KATSEYE",
@@ -138,18 +138,18 @@
   ],
   "media": [],
   "insights": [
-    "신작: KATSEYE — 'must have been the wind #KATSEYE' (1일 전, 조회 783,100, +783,100/일) — 캠페인 활성 신호(참고).",
-    "신작: KISS OF LIFE — 'Preview : SWEAT EQUITY' (1일 전, 조회 25,997, +25,997/일) — 캠페인 활성 신호(참고).",
-    "신작: KEYVEATZ — 'いなせだね夏を連れて来た #Keyveatz' (1일 전, 조회 1,630, +1,630/일) — 캠페인 활성 신호(참고).",
-    "신작: CORTIS — 'martin pov 📹 #CORTIS #코르티스 #CORTIS_TOUR #PUTYOURPHONEDOWN #PYPD_IN_INCHEON' (1일 전, 조회 108,626, +108,626/일) — 캠페인 활성 신호(참고).",
-    "신작: Hearts2Hearts — 'yet my move wont bug you #Hearts2Hearts #하츠투하츠 #H2H #JUUN #주은' (1일 전, 조회 175,148, +175,148/일) — 캠페인 활성 신호(참고).",
-    "공식 채널 업로드 한정 — 레이블 채널(HYBE LABELS 등) 게재 MV는 미포착(v2 레지스트리 예정).",
-    "velocity는 수명 평균 근사(초동 과소평가 가능) — 다일 축적 시 실측 일별 증분으로 대체(v2).",
-    "조회·구독은 공개 집계 지표이며 인기·실력 단정이 아님(§0) — '얼마나' 축의 참고 신호."
+    "신작: KATSEYE · 'must have been the wind #KATSEYE' (1일 전, 조회 783,100, +783,100/일) · 캠페인 활성 신호(참고)",
+    "신작: KISS OF LIFE · 'Preview : SWEAT EQUITY' (1일 전, 조회 25,997, +25,997/일) · 캠페인 활성 신호(참고)",
+    "신작: KEYVEATZ · 'いなせだね夏を連れて来た #Keyveatz' (1일 전, 조회 1,630, +1,630/일) · 캠페인 활성 신호(참고)",
+    "신작: CORTIS · 'martin pov 📹 #CORTIS #코르티스 #CORTIS_TOUR #PUTYOURPHONEDOWN #PYPD_IN_INCHEON' (1일 전, 조회 108,626, +108,626/일) · 캠페인 활성 신호(참고)",
+    "신작: Hearts2Hearts · 'yet my move wont bug you #Hearts2Hearts #하츠투하츠 #H2H #JUUN #주은' (1일 전, 조회 175,148, +175,148/일) · 캠페인 활성 신호(참고)",
+    "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
+    "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
+    "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"
   ],
   "recommendations": [
     "다일 축적(daily_collect)이 쌓이면 조회 증분 라인·실측 velocity가 열립니다(v2).",
-    "채널 오매칭은 packages/entity-master/yt_channels.json에서 channel_id를 직접 정정하세요(사용자 소유).",
-    "신작 창(--recent-days)은 캠페인 주기에 맞춰 조정하세요 — 기준은 가설입니다(기준 원장)."
+    "채널 오매칭은 채널 목록(yt_channels.json)에서 직접 정정 가능",
+    "신작 판정 기간은 캠페인 주기에 맞춰 조정 가능. 기준은 조정 가능한 가설"
   ]
 }

@@ -112,7 +112,7 @@ export function ProfileCards({ lines }: { lines: string[] }) {
       <div className="mb-2 flex items-baseline gap-2">
         <h2 className="text-sm font-medium">워치리스트 프로필</h2>
         <span className="text-xs text-[var(--muted)]">
-          {lines.length}팀 · 판단-지원 증거+옵션 — 평결 아님(§0)
+          {lines.length}팀 · 참고용 신호 요약, 판단은 사람의 몫
         </span>
       </div>
       {cards.length > 0 && (

@@ -51,7 +51,7 @@ function Whitespace({ data }: { data: WhitespaceTunableData }) {
     <div>
       <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
         <label htmlFor="tunable-knob" className="text-[var(--ink-secondary)]">
-          {knob?.label ?? "임계"}
+          {knob?.label ?? "기준"}
         </label>
         <input
           id="tunable-knob"
@@ -62,7 +62,7 @@ function Whitespace({ data }: { data: WhitespaceTunableData }) {
           value={threshold}
           onChange={(e) => setThreshold(Number(e.target.value))}
           className="accent-[var(--series)]"
-          aria-label={knob?.label ?? "임계"}
+          aria-label={knob?.label ?? "기준"}
         />
         <span className="tabular-nums font-medium">{threshold}팀+</span>
         <span className="text-[var(--muted)]">
@@ -72,7 +72,7 @@ function Whitespace({ data }: { data: WhitespaceTunableData }) {
       </div>
 
       {provenIdx.length === 0 ? (
-        <p className="text-sm text-[var(--muted)]">이 임계에선 개척 시장이 없습니다 — 기준을 낮춰보세요.</p>
+        <p className="text-sm text-[var(--muted)]">이 기준에서는 개척 시장 없음. 슬라이더를 낮추면 후보 표시</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="border-separate" style={{ borderSpacing: 2 }}>
@@ -127,7 +127,7 @@ function Whitespace({ data }: { data: WhitespaceTunableData }) {
 
       <div className="mt-3 flex items-center gap-1.5 text-xs text-[var(--muted)]">
         <span className="inline-block h-3 w-3 rounded" style={gapBox} />
-        <span>미개척(greenfield)</span>
+        <span>미개척</span>
         <span
           className="ml-2 inline-block h-3 w-3 rounded"
           style={{ background: "var(--hairline)" }}
@@ -199,7 +199,7 @@ function LeadLag({ data }: { data: LeadLagTunableData }) {
   }) {
     return (
       <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
-        <span>{knob?.label ?? "임계"}</span>
+        <span>{knob?.label ?? "기준"}</span>
         <input
           type="range"
           min={knob?.min ?? 1}
@@ -208,7 +208,7 @@ function LeadLag({ data }: { data: LeadLagTunableData }) {
           value={value}
           onChange={(e) => onChange(Number(e.target.value))}
           className="accent-[var(--series)]"
-          aria-label={knob?.label ?? "임계"}
+          aria-label={knob?.label ?? "기준"}
         />
         <b className="w-8 tabular-nums text-[var(--ink)]">{value}</b>
       </label>
@@ -230,7 +230,7 @@ function LeadLag({ data }: { data: LeadLagTunableData }) {
       </div>
 
       {joined.length === 0 ? (
-        <p className="text-sm text-[var(--muted)]">이 임계에선 양측 온셋을 가진 팀이 없습니다.</p>
+        <p className="text-sm text-[var(--muted)]">이 기준에서는 소셜·차트 상승 시작이 모두 잡힌 팀 없음</p>
       ) : (
         <div className="space-y-1">
           {joined.map((r) => {

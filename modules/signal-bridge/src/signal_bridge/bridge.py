@@ -162,7 +162,7 @@ def _line_overlay(
     ]
     return {
         "type": "line",
-        "title": f"선행신호 예시 · {key} — 소셜 버즈 vs 차트 강도 (정규화 0~1)",
+        "title": f"선행신호 예시 · {key} · 소셜 버즈 vs 차트 강도 (0~1로 정규화)",
         "data": {
             "x": union,
             "series": [
@@ -194,7 +194,7 @@ def _tunable_leadlag(
             series[k] = entry
     return {
         "type": "tunable",
-        "title": "θ 튜너 — 온셋 임계를 돌려 분류 변화를 본다 (값=A&R 소유, 기준 원장 §2.1)",
+        "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
         "data": {
             "view": "leadlag",
             "socialDates": social["dates"],
@@ -203,7 +203,7 @@ def _tunable_leadlag(
             "knobs": [
                 {
                     "key": "theta_social",
-                    "label": "θ_social · 소셜 온셋(일 게시수 ≥)",
+                    "label": "소셜 온셋 기준 (일 게시수 ≥)",
                     "default": theta_social,
                     "min": 1,
                     "max": max(10, theta_social),
@@ -211,26 +211,26 @@ def _tunable_leadlag(
                 },
                 {
                     "key": "theta_rank",
-                    "label": "θ_rank · 차트 온셋(순위 ≤)",
+                    "label": "차트 온셋 기준 (순위 ≤)",
                     "default": theta_rank,
                     "min": 10,
                     "max": 200,
                     "step": 10,
                 },
             ],
-            "note": "임계값은 버전 매겨진 가설(진리 아님) — 슬라이더는 탐색 뷰이고 리포트 정본 수치는 CLI θ로 고정. lead=시간 순서(인과 아님·§0).",
+            "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. 선행=시간 순서일 뿐 인과 아님",
         },
     }
 
 
 # 활용방안 프레이밍 — 분류별 §0-안전 옵션(증거→검토 대상, 평결 아님)
 _ACTION = {
-    "social-only": "조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중",
-    "social-led": "선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상",
-    "chart-led": "후행 팬 반응 — 콘텐츠 증폭 참고",
-    "chart-only": "소셜 사운드/태그 확산 무관측 — 소셜 액티베이션 여지 검토 대상",
-    "coincident": "동시 발생 — 캠페인 동기화 사례 참고",
-    "no-signal": "이 창에서 소셜·차트 무신호 — 수집 창/태그 점검 or 휴지기(무신호도 정보)",
+    "social-only": "조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+    "social-led": "선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "chart-led": "후행 팬 반응 · 콘텐츠 증폭 참고",
+    "chart-only": "소셜 확산 무관측 · 소셜 활성화 여지 검토 대상",
+    "coincident": "동시 발생 · 캠페인 동기화 사례 참고",
+    "no-signal": "이 창에서 소셜·차트 무신호 · 수집 창/태그 점검 또는 휴지기(무신호도 정보)",
 }
 
 
@@ -290,7 +290,7 @@ def _profile_lines(
             yt_txt = f" · YT 구독 {_fmt_eng(yt_subs.get(key, 0))}{v_part}"
         lines.append(
             f"[프로필] {_seg(key)} — {r['class']}{lead_txt} · 소셜 {r['posts']}건·참여 {_fmt_eng(engagement.get(key, 0))} "
-            f"· 드라이버: {why} · {chart_txt}{yt_txt} → {_ACTION.get(r['class'], '참고')}(§0)"
+            f"· 드라이버: {why} · {chart_txt}{yt_txt} → {_ACTION.get(r['class'], '참고')}"
         )
     return lines
 
@@ -325,14 +325,14 @@ def _lens_onset_insight(chart: dict[str, Any]) -> str | None:
             examples.append(f"{key}({seq})")
     if not counts:
         return (
-            f"렌즈 온셋 시차: 유효 표본 0 — 다렌즈 온셋 {censored}팀 전부 렌즈별 수집 첫날과 겹쳐 "
-            "좌측 절단(수집 전부터 차트인했을 수 있음) 제외. 다일 축적 후 열립니다(§0 정직)."
+            f"플랫폼 온셋 시차: 유효 표본 0. 복수 플랫폼 온셋 {censored}팀 전부 수집 첫날과 겹쳐 "
+            "제외(수집 전부터 차트인했을 수 있음). 여러 날 쌓이면 산출"
         )
     summary = " · ".join(f"{k} 선행 {v}팀" for k, v in sorted(counts.items()))
-    ex = f" — 예: {', '.join(examples)}" if examples else ""
+    ex = f" · 예: {', '.join(examples)}" if examples else ""
     return (
-        f"렌즈 온셋 순서(수집 개시 이후 온셋만·좌측 절단 {censored}팀 제외): {summary}{ex}. "
-        "시차는 시간 순서일 뿐 인과 아님(§0)."
+        f"플랫폼 온셋 순서(수집 개시 이후 온셋만·집계 제외 {censored}팀 제외): {summary}{ex}. "
+        "시차는 시간 순서일 뿐 인과 아님."
     )
 
 
@@ -346,8 +346,8 @@ def _new_entry_alerts(rows: list[dict[str, Any]], chart: dict[str, Any]) -> list
     hits = [r for r in rows if r["chart_onset"] in recent and r["posts"] > 0]
     hits.sort(key=lambda r: (r["best_rank"] or 999, r["key"]))
     return [
-        f"⚡ 신규 차트 진입(창 최근 2일): {r['key']} — 온셋 {r['chart_onset']}, 최고 #{r['best_rank']}"
-        f"{'·' + ','.join((c_markets.get(r['key']) or [])[:4]) if c_markets.get(r['key']) else ''} — 소셜 신호 보유 팀 (검증 대상, §0)"
+        f"⚡ 신규 차트 진입(창 최근 2일): {r['key']} · 온셋 {r['chart_onset']}, 최고 #{r['best_rank']}"
+        f"{'·' + ','.join((c_markets.get(r['key']) or [])[:4]) if c_markets.get(r['key']) else ''} · 소셜 신호 보유 팀(검증 대상)"
         for r in hits[:6]
     ]
 
@@ -390,13 +390,13 @@ def build_report(
             "label": "중앙값 선행",
             "value": int(median(lead_vals)) if lead_vals else 0,
             "unit": "일",
-            "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님(§0)",
+            "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님",
         },
         {
             "label": "소셜-온리 관측대상",
             "value": len(social_only),
             "unit": "팀",
-            "hint": "차트 밖 소셜 활성 (pre-mainstream, D-010)",
+            "hint": "차트 진입 전 소셜 활성",
         },
         {"label": "차트-온리", "value": len(chart_only), "unit": "팀", "hint": "소셜 사운드 확산 없음"},
     ]
@@ -414,7 +414,7 @@ def build_report(
                 "label": "워치리스트 커버리지",
                 "value": f"{w_s}/{len(watch)}",
                 "unit": "소셜",
-                "hint": f"차트 {w_c}/{len(watch)}{yt_txt} · 양측 {w_b} — 팔로우 acts 중 신호 관측 수",
+                "hint": f"차트 {w_c}/{len(watch)}{yt_txt} · 양측 {w_b} · 팔로우 팀 중 신호 관측 수",
             }
         )
     mkt_count = (chart.get("provenance") or {}).get("marketCount")
@@ -441,7 +441,7 @@ def build_report(
         charts.append(
             {
                 "type": "bar",
-                "title": "소셜-온리 · 차트 밖 관측대상 (pre-mainstream, 최고 일간 게시수)",
+                "title": "소셜-온리 · 차트 밖 관측대상 (차트 진입 전, 최고 일간 게시수)",
                 "data": [{"name": r["key"], "value": r["peak_social"]} for r in only_rows],
             }
         )
@@ -460,8 +460,8 @@ def build_report(
         insights.extend(_profile_lines(rows, social, chart, watch, youtube))
     if chart_only_excluded:
         insights.append(
-            f"차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 {chart_only_excluded}곡은 제외(--focus-social) — "
-            "선행 질문의 대상은 **버즈가 있는 아티스트**입니다."
+            f"차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 {chart_only_excluded}곡은 제외. "
+            "선행 분석의 대상은 **버즈가 있는 아티스트**"
         )
     recos = _recos()
     s_win = str((social.get("provenance") or {}).get("window") or "")
@@ -474,7 +474,7 @@ def build_report(
     )
     return {
         "moduleId": MODULE_ID,
-        "title": "시그널 브리지 — 소셜 → 차트 선행신호",
+        "title": "시그널 브리지 · 소셜 → 차트 선행신호",
         "subtitle": subtitle,
         "generatedAt": generated_at,
         "metrics": metrics,
@@ -506,45 +506,45 @@ def _insights(
     reconstructed = bool(prov.get("reconstructed"))
     if synthetic:
         out.append(
-            "⚠ 메커니즘 시연 — 차트측 입력이 **합성 축적 fixture**입니다(실제 다일 collect 미확보). "
-            "'소셜이 차트를 선행한다'는 **실증이 아니라** 브리지 배선·판정 로직 시연입니다. "
-            "실증은 라이브 다일 collect(fandom-pulse fetch + chart-history collect, N일)가 본선(§0)."
+            "⚠ 메커니즘 시연 · 차트측 입력이 **합성 샘플**(실제 다일 수집 미확보). "
+            "'소셜이 차트를 선행한다'는 **실증이 아니라** 판정 로직 시연. "
+            "실증은 여러 날의 라이브 수집이 기준"
         )
     elif reconstructed:
         eb = prov.get("entered_before_window")
         eb_txt = f" (창 이전 진입 {eb}팀)" if isinstance(eb, int) and eb else ""
         out.append(
-            "실 데이터(회고) — 차트 진입일을 **라이브 Kworb 스냅샷의 Days(차트인 일수)로 역산**했습니다"
+            "실 데이터(회고) · 차트 진입일을 **라이브 Kworb 스냅샷의 Days(차트인 일수)로 역산**했습니다"
             f"{eb_txt}. 진입일(온셋)은 실제, 중간 순위는 현재값 근사. **소셜 버즈보다 차트 진입이 앞서면(음수 lead) "
-            "= 이미 뜬 곡의 후행 반응**(예: 댄스 커버). 단정 아님(§0)."
+            "= 이미 뜬 곡의 후행 반응**(예: 댄스 커버). 단정 아님."
         )
     out.append(
-        "lead(선행)는 **시간 순서**일 뿐 인과가 아닙니다. 표본 극소 · 참고 신호(§0). "
-        "조인 키 = 공유 entity-master 캐노니컬(소셜 사운드→아티스트 ↔ 차트 아티스트, D-007/D-010 데이터 공유)."
+        "선행(lead)은 **시간 순서**일 뿐 인과 아님. 표본 극소 · 참고 신호. "
+        "이름 매칭은 공용 아티스트 사전 기준(소셜 사운드와 차트 아티스트를 같은 이름으로 연결)."
     )
     s_win = str((social.get("provenance") or {}).get("window") or "")
     c_win = str((chart.get("provenance") or {}).get("window") or "")
     if s_win[:10] and c_win[:10] and abs((_d(s_win[:10]) - _d(c_win[:10])).days) > 14:
         out.append(
-            f"⚠ 창 비대칭 — 소셜 창({s_win})과 차트 창({c_win})의 시작이 크게 다릅니다. "
-            "태그 수집이 과거 게시물을 소급하므로 회고 lead 절대값은 창 산물일 수 있음 — 방향 판단은 전향 축적으로(§0)."
+            f"⚠ 창 비대칭 · 소셜 창({s_win})과 차트 창({c_win})의 시작이 크게 다름. "
+            "태그 수집이 과거 게시물을 소급해 회고 선행 일수는 창 산물일 수 있음. 방향 판단은 앞으로의 축적으로"
         )
     if led:
         detail = ", ".join(f"{r['key']}(+{r['lead_days']}d)" for r in sorted(led, key=lambda r: (-r["lead_days"], r["key"]))[:5])
-        out.append(f"소셜 선행 관측 {len(led)}팀: {detail} — 소셜 버즈가 차트 진입보다 앞선 사례. 검증 대상이지 예측 아님.")
+        out.append(f"소셜 선행 관측 {len(led)}팀: {detail}. 소셜 버즈가 차트 진입보다 앞선 사례, 검증 대상이지 예측 아님")
     if chart_led:
         detail = ", ".join(f"{r['key']}({r['lead_days']}d)" for r in chart_led[:5])
-        out.append(f"차트 선행(소셜 지연) {len(chart_led)}팀: {detail} — 소셜이 차트를 뒤따른 반례. 선행은 자동이 아님(정직).")
+        out.append(f"차트 선행(소셜 지연) {len(chart_led)}팀: {detail}. 소셜이 차트를 뒤따른 반례, 선행이 항상 성립하지는 않음")
     if social_only:
         out.append(
-            f"소셜-온리 {len(social_only)}팀({_names(sorted(social_only, key=lambda r: (-r['peak_social'], r['key'])))} 등) — "
-            "차트 밖 소셜 활성. pre-mainstream 조사 우선순위 후보(D-010) · 진출 지시 아님(§0)."
+            f"소셜-온리 {len(social_only)}팀({_names(sorted(social_only, key=lambda r: (-r['peak_social'], r['key'])))} 등) · "
+            "차트 진입 전 소셜 활성. 조사 우선순위 후보이며 진출 지시 아님"
         )
     if chart_only:
-        out.append(f"차트-온리 {len(chart_only)}팀({_names(chart_only)} 등) — 이 해시태그 소셜 사운드 확산 없이 차트 존재.")
+        out.append(f"차트-온리 {len(chart_only)}팀({_names(chart_only)} 등) · 이 해시태그의 소셜 확산 없이 차트에 존재")
     out.append(
-        f"온셋 기준(기준 원장 §3): 소셜 온셋 = 일간 게시수 ≥ θ_social({theta_social}), "
-        f"차트 온셋 = 순위 ≤ θ_rank({theta_rank}). 임계값=A&R 소유(파라미터 노출)."
+        f"온셋(상승 시작) 기준: 소셜 = 일간 게시수 ≥ {theta_social}, "
+        f"차트 = 순위 ≤ {theta_rank}. 기준값은 담당자가 조정 가능"
     )
     return out
 
@@ -552,8 +552,8 @@ def _insights(
 def _recos() -> list[str]:
     return [
         "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 "
-        "합성 fixture를 실데이터로 대체해 선행 여부를 실증할 수 있습니다 — 이것이 본선입니다.",
-        "θ_social(버즈 온셋)·θ_rank(차트 온셋)은 A&R 판단으로 조정하세요(--theta-social·--theta-rank) — "
-        "기준은 버전 매겨진 가설입니다(기준 원장).",
-        "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정이 아닙니다 — 개별 검증 필요(§0).",
+        "합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",
+        "온셋 기준값은 담당자 판단으로 조정 가능. "
+        "기준은 조정 가능한 가설",
+        "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정 아님. 개별 검증 필요",
     ]

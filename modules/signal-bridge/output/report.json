@@ -1,8 +1,8 @@
 {
   "moduleId": "signal-bridge",
-  "title": "시그널 브리지 — 소셜 → 차트 선행신호",
+  "title": "시그널 브리지 · 소셜 → 차트 선행신호",
   "subtitle": "소셜(fandom-pulse) × 차트(chart-history) × YT(yt-pulse) 선행/지연 · 조인 45팀 · θ_social=1, θ_rank=200 · 차트 51시장 · 소셜 2026-03-10..2026-07-19 / 차트 2026-07-17..2026-07-20",
-  "generatedAt": "2026-07-20T00:16:56Z",
+  "generatedAt": "2026-07-20T02:48:31Z",
   "metrics": [
     {
       "label": "추적 아티스트",
@@ -26,13 +26,13 @@
       "label": "중앙값 선행",
       "value": 10,
       "unit": "일",
-      "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님(§0)"
+      "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님"
     },
     {
       "label": "소셜-온리 관측대상",
       "value": 123,
       "unit": "팀",
-      "hint": "차트 밖 소셜 활성 (pre-mainstream, D-010)"
+      "hint": "차트 진입 전 소셜 활성"
     },
     {
       "label": "차트-온리",
@@ -44,13 +44,13 @@
       "label": "워치리스트 커버리지",
       "value": "11/11",
       "unit": "소셜",
-      "hint": "차트 8/11 · YT 11/11 · 양측 8 — 팔로우 acts 중 신호 관측 수"
+      "hint": "차트 8/11 · YT 11/11 · 양측 8 · 팔로우 팀 중 신호 관측 수"
     }
   ],
   "charts": [
     {
       "type": "line",
-      "title": "선행신호 예시 · KiiiKiii — 소셜 버즈 vs 차트 강도 (정규화 0~1)",
+      "title": "선행신호 예시 · KiiiKiii · 소셜 버즈 vs 차트 강도 (0~1로 정규화)",
       "data": {
         "x": [
           "2026-03-10",
@@ -535,7 +535,7 @@
     },
     {
       "type": "bar",
-      "title": "소셜-온리 · 차트 밖 관측대상 (pre-mainstream, 최고 일간 게시수)",
+      "title": "소셜-온리 · 차트 밖 관측대상 (차트 진입 전, 최고 일간 게시수)",
       "data": [
         {
           "name": "KISS OF LIFE",
@@ -1033,7 +1033,7 @@
     },
     {
       "type": "tunable",
-      "title": "θ 튜너 — 온셋 임계를 돌려 분류 변화를 본다 (값=A&R 소유, 기준 원장 §2.1)",
+      "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
       "data": {
         "view": "leadlag",
         "socialDates": [
@@ -17539,7 +17539,7 @@
         "knobs": [
           {
             "key": "theta_social",
-            "label": "θ_social · 소셜 온셋(일 게시수 ≥)",
+            "label": "소셜 온셋 기준 (일 게시수 ≥)",
             "default": 1,
             "min": 1,
             "max": 10,
@@ -17547,42 +17547,42 @@
           },
           {
             "key": "theta_rank",
-            "label": "θ_rank · 차트 온셋(순위 ≤)",
+            "label": "차트 온셋 기준 (순위 ≤)",
             "default": 200,
             "min": 10,
             "max": 200,
             "step": 10
           }
         ],
-        "note": "임계값은 버전 매겨진 가설(진리 아님) — 슬라이더는 탐색 뷰이고 리포트 정본 수치는 CLI θ로 고정. lead=시간 순서(인과 아님·§0)."
+        "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. 선행=시간 순서일 뿐 인과 아님"
       }
     }
   ],
   "media": [],
   "insights": [
-    "lead(선행)는 **시간 순서**일 뿐 인과가 아닙니다. 표본 극소 · 참고 신호(§0). 조인 키 = 공유 entity-master 캐노니컬(소셜 사운드→아티스트 ↔ 차트 아티스트, D-007/D-010 데이터 공유).",
-    "⚠ 창 비대칭 — 소셜 창(2026-03-10..2026-07-19)과 차트 창(2026-07-17..2026-07-20)의 시작이 크게 다릅니다. 태그 수집이 과거 게시물을 소급하므로 회고 lead 절대값은 창 산물일 수 있음 — 방향 판단은 전향 축적으로(§0).",
-    "소셜 선행 관측 29팀: KiiiKiii(+127d), CORTIS(+68d), ILLIT(+59d), Hearts2Hearts(+57d), BOYNEXTDOOR(+28d) — 소셜 버즈가 차트 진입보다 앞선 사례. 검증 대상이지 예측 아님.",
-    "차트 선행(소셜 지연) 11팀: Fat Papi(-1d), Fujii Kaze(-2d), GIRLSET(-1d), Hikaru Utada(-1d), Kenshi Yonezu(-1d) — 소셜이 차트를 뒤따른 반례. 선행은 자동이 아님(정직).",
-    "소셜-온리 123팀(KISS OF LIFE, izna, KEYVEATZ, Destiny Rogers, GOT7 등) — 차트 밖 소셜 활성. pre-mainstream 조사 우선순위 후보(D-010) · 진출 지시 아님(§0).",
-    "온셋 기준(기준 원장 §3): 소셜 온셋 = 일간 게시수 ≥ θ_social(1), 차트 온셋 = 순위 ≤ θ_rank(200). 임계값=A&R 소유(파라미터 노출).",
-    "렌즈 온셋 시차: 유효 표본 0 — 다렌즈 온셋 1026팀 전부 렌즈별 수집 첫날과 겹쳐 좌측 절단(수집 전부터 차트인했을 수 있음) 제외. 다일 축적 후 열립니다(§0 정직).",
-    "[프로필] CORTIS — social-led(+68d) · 소셜 149건·참여 387.4k · 드라이버: CORTIS - REDRED, CORTIS - JoyRide, #코르티스, #cortis · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+spotify+youtube · YT 구독 5850.0k·'terima kasih allo bank' +546.5k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] KATSEYE — social-led(+11d) · 소셜 127건·참여 356.2k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE (Clean Edit), #katseye, #katseye_daniela · 차트 최고 #66·4시장(AE,GLOBAL,MY,SG) · YT 구독 11900.0k·'are you with me? 🤍 #KATS' +1312.5k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] ILLIT — social-led(+59d) · 소셜 123건·참여 510.6k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #3·8시장(FI,HK,JP,KR,MY…)·apple+spotify+youtube · YT 구독 5650.0k·'It's @CharlesEnter  ❤️ #' +586.0k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] RESCENE — social-led(+17d) · 소셜 120건·참여 304.0k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #2·1시장(KR)·apple+spotify+youtube · YT 구독 794.0k·'뽀로로 따라 프리티걸 챌린지' +428.0k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] MEOVV — social-led(+28d) · 소셜 105건·참여 338.2k · 드라이버: MEOVV - Hit 'Em, MEOVV - In my hands, #meovv, #미야오 · 차트 최고 #41·2시장(KR,TW)·apple+spotify · YT 구독 1380.0k·'˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 ' +87.6k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] KISS OF LIFE — social-only · 소셜 95건·참여 577.1k · 드라이버: KISS OF LIFE - Who is she, KISS OF LIFE - Sticky, #kissoflife, #키스오브라이프 · 차트 미진입 · YT 구독 2110.0k·'pov : you thought your A' +42.6k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-    "[프로필] KiiiKiii — social-led(+127d) · 소셜 95건·참여 533.8k · 드라이버: KiiiKiii - 404 (New Era), Catshi - Cuteness, #키키, #kiiikiii · 차트 최고 #15·1시장(KR)·apple+spotify · YT 구독 507.0k·'Staycation 🏠🏖️ #KiiiKiii' +25.2k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] izna — social-only · 소셜 84건·참여 2248.5k · 드라이버: izna - METRONOME, izna - DRIP, #이즈나, #izna · 차트 미진입 · YT 구독 2030.0k·'𝓐𝓵𝓬𝓱𝓸𝓵 𝓕𝓻𝓮𝓮 근데 취해｡⋆༶⋆˙⊹❀' +30.2k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-    "[프로필] KEYVEATZ — social-only · 소셜 82건·참여 1445.8k · 드라이버: Keyveatz - OXY, Keyveatz - OXY (Preview), #keyveatz, #키비츠 · 차트 미진입 · YT 구독 271.0k·'Turn the #OXY up with #U' +5.0k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-    "[프로필] Hearts2Hearts — social-led(+57d) · 소셜 72건·참여 221.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #하츠투하츠, #hearts2hearts · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+spotify+youtube · YT 구독 3260.0k·'so dj turn it loud #Hear' +484.6k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "[프로필] BABYMONSTER — social-led(+18d) · 소셜 50건·참여 88.9k · 드라이버: BABYMONSTER - SUGAR HONEY ICE TEA, BABYMONSTER - I LIKE IT, #babymonster, #베이비몬스터 · 차트 최고 #5·8시장(EC,HK,ID,KR,PE…)·apple+spotify+youtube · YT 구독 12700.0k·'🎀 𝘗𝘩𝘢𝘳𝘪𝘵𝘢'𝘴 𝕀 𝕃𝕀𝕂𝔼 𝕀𝕋 𝘥𝘢' +432.2k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-    "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 3307곡은 제외(--focus-social) — 선행 질문의 대상은 **버즈가 있는 아티스트**입니다."
+    "선행(lead)은 **시간 순서**일 뿐 인과 아님. 표본 극소 · 참고 신호. 이름 매칭은 공용 아티스트 사전 기준(소셜 사운드와 차트 아티스트를 같은 이름으로 연결).",
+    "⚠ 창 비대칭 · 소셜 창(2026-03-10..2026-07-19)과 차트 창(2026-07-17..2026-07-20)의 시작이 크게 다름. 태그 수집이 과거 게시물을 소급해 회고 선행 일수는 창 산물일 수 있음. 방향 판단은 앞으로의 축적으로",
+    "소셜 선행 관측 29팀: KiiiKiii(+127d), CORTIS(+68d), ILLIT(+59d), Hearts2Hearts(+57d), BOYNEXTDOOR(+28d). 소셜 버즈가 차트 진입보다 앞선 사례, 검증 대상이지 예측 아님",
+    "차트 선행(소셜 지연) 11팀: Fat Papi(-1d), Fujii Kaze(-2d), GIRLSET(-1d), Hikaru Utada(-1d), Kenshi Yonezu(-1d). 소셜이 차트를 뒤따른 반례, 선행이 항상 성립하지는 않음",
+    "소셜-온리 123팀(KISS OF LIFE, izna, KEYVEATZ, Destiny Rogers, GOT7 등) · 차트 진입 전 소셜 활성. 조사 우선순위 후보이며 진출 지시 아님",
+    "온셋(상승 시작) 기준: 소셜 = 일간 게시수 ≥ 1, 차트 = 순위 ≤ 200. 기준값은 담당자가 조정 가능",
+    "플랫폼 온셋 시차: 유효 표본 0. 복수 플랫폼 온셋 1026팀 전부 수집 첫날과 겹쳐 제외(수집 전부터 차트인했을 수 있음). 여러 날 쌓이면 산출",
+    "[프로필] CORTIS — social-led(+68d) · 소셜 149건·참여 387.4k · 드라이버: CORTIS - REDRED, CORTIS - JoyRide, #코르티스, #cortis · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+spotify+youtube · YT 구독 5850.0k·'terima kasih allo bank' +546.5k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] KATSEYE — social-led(+11d) · 소셜 127건·참여 356.2k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE (Clean Edit), #katseye, #katseye_daniela · 차트 최고 #66·4시장(AE,GLOBAL,MY,SG) · YT 구독 11900.0k·'are you with me? 🤍 #KATS' +1312.5k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] ILLIT — social-led(+59d) · 소셜 123건·참여 510.6k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #3·8시장(FI,HK,JP,KR,MY…)·apple+spotify+youtube · YT 구독 5650.0k·'It's @CharlesEnter  ❤️ #' +586.0k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] RESCENE — social-led(+17d) · 소셜 120건·참여 304.0k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #2·1시장(KR)·apple+spotify+youtube · YT 구독 794.0k·'뽀로로 따라 프리티걸 챌린지' +428.0k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] MEOVV — social-led(+28d) · 소셜 105건·참여 338.2k · 드라이버: MEOVV - Hit 'Em, MEOVV - In my hands, #meovv, #미야오 · 차트 최고 #41·2시장(KR,TW)·apple+spotify · YT 구독 1380.0k·'˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 ' +87.6k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] KISS OF LIFE — social-only · 소셜 95건·참여 577.1k · 드라이버: KISS OF LIFE - Who is she, KISS OF LIFE - Sticky, #kissoflife, #키스오브라이프 · 차트 미진입 · YT 구독 2110.0k·'pov : you thought your A' +42.6k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+    "[프로필] KiiiKiii — social-led(+127d) · 소셜 95건·참여 533.8k · 드라이버: KiiiKiii - 404 (New Era), Catshi - Cuteness, #키키, #kiiikiii · 차트 최고 #15·1시장(KR)·apple+spotify · YT 구독 507.0k·'Staycation 🏠🏖️ #KiiiKiii' +25.2k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] izna — social-only · 소셜 84건·참여 2248.5k · 드라이버: izna - METRONOME, izna - DRIP, #이즈나, #izna · 차트 미진입 · YT 구독 2030.0k·'𝓐𝓵𝓬𝓱𝓸𝓵 𝓕𝓻𝓮𝓮 근데 취해｡⋆༶⋆˙⊹❀' +30.2k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+    "[프로필] KEYVEATZ — social-only · 소셜 82건·참여 1445.8k · 드라이버: Keyveatz - OXY, Keyveatz - OXY (Preview), #keyveatz, #키비츠 · 차트 미진입 · YT 구독 271.0k·'Turn the #OXY up with #U' +5.0k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+    "[프로필] Hearts2Hearts — social-led(+57d) · 소셜 72건·참여 221.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #하츠투하츠, #hearts2hearts · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+spotify+youtube · YT 구독 3260.0k·'so dj turn it loud #Hear' +484.6k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] BABYMONSTER — social-led(+18d) · 소셜 50건·참여 88.9k · 드라이버: BABYMONSTER - SUGAR HONEY ICE TEA, BABYMONSTER - I LIKE IT, #babymonster, #베이비몬스터 · 차트 최고 #5·8시장(EC,HK,ID,KR,PE…)·apple+spotify+youtube · YT 구독 12700.0k·'🎀 𝘗𝘩𝘢𝘳𝘪𝘵𝘢'𝘴 𝕀 𝕃𝕀𝕂𝔼 𝕀𝕋 𝘥𝘢' +432.2k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 3307곡은 제외. 선행 분석의 대상은 **버즈가 있는 아티스트**"
   ],
   "recommendations": [
-    "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 fixture를 실데이터로 대체해 선행 여부를 실증할 수 있습니다 — 이것이 본선입니다.",
-    "θ_social(버즈 온셋)·θ_rank(차트 온셋)은 A&R 판단으로 조정하세요(--theta-social·--theta-rank) — 기준은 버전 매겨진 가설입니다(기준 원장).",
-    "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정이 아닙니다 — 개별 검증 필요(§0)."
+    "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",
+    "온셋 기준값은 담당자 판단으로 조정 가능. 기준은 조정 가능한 가설",
+    "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정 아님. 개별 검증 필요"
   ]
 }

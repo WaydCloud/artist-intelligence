@@ -77,7 +77,7 @@ def build_report(
     insights: list[str] = []
 
     if n == 0:
-        insights.append("게시물이 없습니다 — 입력 스냅샷/해시태그를 확인하세요.")
+        insights.append("게시물 없음. 입력 스냅샷과 해시태그 확인 필요")
         return _wrap(tag, source, fetched, n, generated_at, metrics, charts, insights, _recos())
 
     eng = [_engagement(r) for r in records]
@@ -176,26 +176,26 @@ def build_report(
             if outside:
                 names = ", ".join(sorted(outside, key=lambda a: -artist_posts[a])[:5])
                 insights.append(
-                    f"차트 로스터 밖 소셜 확산: {names} 등 {len(outside)}팀 — 차트(top-200)로 안 잡히는 "
-                    "소셜 활성(신인·pre-mainstream 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님(§0)."
+                    f"차트 로스터 밖 소셜 확산: {names} 등 {len(outside)}팀 · 차트(top-200)로 안 잡히는 "
+                    "소셜 활성(차트 진입 전 신인 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님"
                 )
         insights.append(
-            "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락) — 참고 신호."
+            "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락). 참고 신호"
         )
 
     # Insights — signals with explicit limits (증폭 원칙: 신호 제시, 단정 금지 — §0/§5)
     insights.append(f"#{tag} 공개 게시물 {n}건 기준 · 총 참여 {sum(eng):,}(좋아요+댓글).")
     insights.append(
         f"중앙값 좋아요 {int(median(likes)):,} · 댓글 {int(median(comments)):,} "
-        "— 평균 대신 중앙값(바이럴 1건 왜곡 견고)."
+        "· 평균 대신 중앙값 사용(바이럴 1건에 덜 흔들림)"
     )
     if top_co:
         names = ", ".join(f"#{h}" for h, _c in top_co[:3])
-        insights.append(f"공동 해시태그 상위: {names} — 확산·맥락 도달 신호(참고).")
+        insights.append(f"공동 해시태그 상위: {names} · 확산과 도달 맥락 참고용")
     if len(days) < max(2, momentum_min_days):
-        insights.append("단일 창(하루) 스냅샷이라 게시 가속(모멘텀)은 다일 축적 시 산출됩니다.")
+        insights.append("하루 스냅샷 기준. 게시 가속은 여러 날 쌓인 뒤 산출")
     insights.append(
-        "공개 IG 스크랩 표본(첫 페이지 등)으로 편향 가능 — 공식 지표 아님, 인기·품질 단정 아님(참고 신호)."
+        "공개 인스타그램 표본이라 편향 가능. 공식 지표가 아니며 인기·품질의 단정 아님"
     )
 
     return _wrap(tag, source, fetched, n, generated_at, metrics, charts, insights, _recos())
@@ -282,7 +282,7 @@ def build_signal_series(
             "generatedAt": generated_at,
             "window": window,
             "attribution": "sound-label + watchlist-hashtag (D-013)" if tag_idx else "sound-label",
-            "note": "일자별 게시수 · 사운드 라벨 + 워치리스트 해시태그 귀속 · 참고 신호(단정 아님, §0)",
+            "note": "일자별 게시수 · 사운드 라벨 + 워치리스트 해시태그 귀속 · 참고 신호(단정 아님)",
         },
     }
 
@@ -291,7 +291,7 @@ def _recos() -> list[str]:
     return [
         "특정 그룹/컴백 해시태그로 fetch하면 그 캠페인의 화력·참여 신호를 집중 관측할 수 있습니다.",
         "다일 축적(collect)하면 게시 가속(모멘텀)을 실데이터 라인으로 볼 수 있습니다(v2).",
-        "고참여 임계값(--high-pct)은 도메인 판단으로 조정하세요 — 기준은 가설입니다(기준 원장).",
+        "고참여 기준값은 도메인 판단으로 조정 가능. 기준은 조정 가능한 가설",
     ]
 
 
@@ -308,7 +308,7 @@ def _wrap(
 ) -> dict[str, object]:
     return {
         "moduleId": MODULE_ID,
-        "title": f"팬덤 펄스 — #{tag}",
+        "title": f"팬덤 펄스 · #{tag}",
         "subtitle": f"{source} · {fetched} · {n}건",
         "generatedAt": generated_at,
         "metrics": metrics,

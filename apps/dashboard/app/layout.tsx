@@ -7,7 +7,7 @@ import "./globals.css";
 const jost = Jost({ subsets: ["latin"], variable: "--font-jost", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "WaydCloud", template: "%s — WaydCloud" },
+  title: { default: "WaydCloud", template: "%s · WaydCloud" },
   description: "차트·팬덤·소셜 신호를 모아 참고용 리포트로 렌더하는 정적 대시보드.",
 };
 

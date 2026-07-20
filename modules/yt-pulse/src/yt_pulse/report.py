@@ -69,7 +69,7 @@ def build_report(
 
     if not recs:
         metrics.append({"label": "추적 영상", "value": 0, "unit": "개"})
-        insights.append("영상이 없습니다 — 채널 캐시(resolve)와 fetch를 확인하세요.")
+        insights.append("영상 없음. 채널 캐시와 수집 상태 확인 필요")
         return _wrap(source, fetched, generated_at, metrics, charts, insights)
 
     acts = sorted({_s(r, "artist") for r in recs if _s(r, "artist")})
@@ -90,15 +90,15 @@ def build_report(
             fresh.append(r)
 
     top_velo_act = max(best_velo, key=lambda a: (best_velo[a][0], a))
-    metrics.append({"label": "추적 acts", "value": len(acts), "unit": "팀", "hint": "채널 해석·영상 보유"})
+    metrics.append({"label": "추적 팀", "value": len(acts), "unit": "팀", "hint": "채널 해석·영상 보유"})
     metrics.append({"label": "최근작 영상", "value": len(recs), "unit": "개", "hint": "채널당 최근 업로드 창"})
     metrics.append({"label": "최근작 조회 합", "value": sum(views_by_act.values()), "unit": "views"})
     metrics.append(
         {
-            "label": "최고 velocity",
+            "label": "최고 평균 일 조회(velocity)",
             "value": best_velo[top_velo_act][0],
             "unit": "views/일",
-            "hint": f"{top_velo_act} — 평균 일 조회(수명 평균 근사)",
+            "hint": f"{top_velo_act} · 평균 일 조회(수명 평균 근사)",
         }
     )
     metrics.append(
@@ -108,7 +108,7 @@ def build_report(
     charts.append(
         {
             "type": "bar",
-            "title": "act별 최근작 조회 합 (공식 채널)",
+            "title": "팀별 최근작 조회 합 (공식 채널)",
             "data": [
                 {"name": a, "value": views_by_act[a]}
                 for a in sorted(acts, key=lambda a: (-views_by_act[a], a))
@@ -118,7 +118,7 @@ def build_report(
     charts.append(
         {
             "type": "bar",
-            "title": "act별 대표 velocity (평균 일 조회 최대작)",
+            "title": "팀별 대표 평균 일 조회 (최대작 기준)",
             "data": [
                 {"name": a, "value": best_velo[a][0]}
                 for a in sorted(acts, key=lambda a: (-best_velo[a][0], a))
@@ -131,12 +131,12 @@ def build_report(
         pub = _date(_s(r, "published_at"))
         days_ago = (ref - pub).days if (pub and ref) else 0
         insights.append(
-            f"신작: {act} — '{_s(r, 'title')}' ({days_ago}일 전, 조회 {_i(r, 'views'):,}, "
-            f"+{avg_daily(_i(r, 'views'), _s(r, 'published_at'), asof):,}/일) — 캠페인 활성 신호(참고)."
+            f"신작: {act} · '{_s(r, 'title')}' ({days_ago}일 전, 조회 {_i(r, 'views'):,}, "
+            f"+{avg_daily(_i(r, 'views'), _s(r, 'published_at'), asof):,}/일) · 캠페인 활성 신호(참고)"
         )
-    insights.append("공식 채널 업로드 한정 — 레이블 채널(HYBE LABELS 등) 게재 MV는 미포착(v2 레지스트리 예정).")
-    insights.append("velocity는 수명 평균 근사(초동 과소평가 가능) — 다일 축적 시 실측 일별 증분으로 대체(v2).")
-    insights.append("조회·구독은 공개 집계 지표이며 인기·실력 단정이 아님(§0) — '얼마나' 축의 참고 신호.")
+    insights.append("공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착")
+    insights.append("평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정")
+    insights.append("조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호")
     return _wrap(source, fetched, generated_at, metrics, charts, insights)
 
 
@@ -150,7 +150,7 @@ def _wrap(
 ) -> dict[str, object]:
     return {
         "moduleId": MODULE_ID,
-        "title": "YT 펄스 — 워치리스트 공식 채널",
+        "title": "YT 펄스 · 워치리스트 공식 채널",
         "subtitle": f"{source} · {fetched}",
         "generatedAt": generated_at,
         "metrics": metrics,
@@ -159,8 +159,8 @@ def _wrap(
         "insights": insights,
         "recommendations": [
             "다일 축적(daily_collect)이 쌓이면 조회 증분 라인·실측 velocity가 열립니다(v2).",
-            "채널 오매칭은 packages/entity-master/yt_channels.json에서 channel_id를 직접 정정하세요(사용자 소유).",
-            "신작 창(--recent-days)은 캠페인 주기에 맞춰 조정하세요 — 기준은 가설입니다(기준 원장).",
+            "채널 오매칭은 채널 목록(yt_channels.json)에서 직접 정정 가능",
+            "신작 판정 기간은 캠페인 주기에 맞춰 조정 가능. 기준은 조정 가능한 가설",
         ],
     }
 
@@ -215,6 +215,6 @@ def build_signal_series(
             "source": "YouTube Data API v3 · official channels (yt-pulse)",
             "generatedAt": generated_at,
             "window": window,
-            "note": "act별 대표 평균 일 조회(수명 평균 근사) · 공식 채널 한정 · 참고 신호(§0)",
+            "note": "팀별 대표 평균 일 조회(수명 평균 근사) · 공식 채널 한정 · 참고 신호",
         },
     }

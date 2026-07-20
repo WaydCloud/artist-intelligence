@@ -134,11 +134,11 @@ def build_chart_signal_series(
     }
     window = f"{dates[0]}..{dates[-1]}" if dates else ""
     synthetic = "synthetic-fixture" in tos_classes
-    note = "일자별 최고순위(전 시장·전 플랫폼 최저 rank) · 결측=차트 밖 · 사실 신호(단정 아님, §0)"
+    note = "일자별 최고순위(전 시장·전 플랫폼 최저 rank) · 결측=차트 밖 · 참고 신호(단정 아님)"
     if len(all_platforms) > 1:
-        note += " · ⚠ 플랫폼 혼합 최고순위 — 진입 온셋용, rank 절대값 플랫폼 간 비교 금지(top-N 천장·규모 상이, D-016)"
+        note += " · ⚠ 플랫폼 혼합 최고순위. 진입 시점 파악용, 순위 절대값은 집계 범위가 달라 플랫폼 간 비교 금지"
     if synthetic:
-        note = "⚠ 합성 fixture(실 데이터 아님) — 브리지 메커니즘 시연용, 실증은 라이브 다일 collect(§0). " + note
+        note = "⚠ 합성 샘플(실 데이터 아님). 메커니즘 시연용, 실증은 라이브 수집 축적 후. " + note
     return {
         "moduleId": MODULE_ID,
         "signal": "chart-rank",
@@ -239,8 +239,8 @@ def build_chart_signal_series_from_days(
         series[key] = [best_rank[key] if date.fromisoformat(d) >= onset else None for d in dates]
 
     note = (
-        "⚠ 재구성(reconstructed) — 라이브 스냅샷의 Days(차트인 일수)로 진입일 역산. "
-        "진입일(온셋)은 실제, 중간 순위는 현재값으로 근사. 재진입 시 Days 리셋(최근 진입 기준). 사실 파생·단정 아님(§0)."
+        "⚠ 재구성(reconstructed) · 라이브 스냅샷의 Days(차트인 일수)로 진입일 역산. "
+        "진입일(온셋)은 실제, 중간 순위는 현재값으로 근사. 재진입 시 Days 리셋(최근 진입 기준). 사실 파생이며 단정 아님"
     )
     return {
         "moduleId": MODULE_ID,
@@ -290,7 +290,7 @@ def build_report(
     charts: list[dict[str, object]] = []
 
     if n == 0:
-        insights.append("차트 엔트리를 찾지 못했습니다 — 입력 스냅샷 형식을 확인하세요.")
+        insights.append("차트 진입 곡 없음. 입력 스냅샷 형식 확인 필요")
         return _wrap(name, source, snapshot_date, n, generated_at, metrics, charts, insights, _recos())
 
     unique_artists = len({_s(e, "artist") for e in entries})
@@ -343,7 +343,7 @@ def build_report(
 
     # Insights — facts with explicit limits (증폭 원칙: 신호 제시, 단정 금지)
     insights.append(f"{snapshot_date} 스냅샷 기준 {n}곡 · 고유 아티스트 {unique_artists}팀.")
-    insights.append(f"1위: {_name(top)} — 일간 {_i(top, 'streams'):,} 스트림, 누적 {_i(top, 'total'):,}.")
+    insights.append(f"1위: {_name(top)} · 일간 {_i(top, 'streams'):,} 스트림, 누적 {_i(top, 'total'):,}.")
     if biggest_climber is not None:
         insights.append(
             f"최고 상승: {_name(biggest_climber)} (+{_i(biggest_climber, 'pos_change')}계단)."
@@ -353,9 +353,9 @@ def build_report(
     )
     if multi:
         top_a, top_h = multi[0]
-        insights.append(f"복수 진입 최다: {top_a} — 차트에 {top_h}곡 동시 진입.")
-    insights.append("단일 일자 스냅샷이라 순위 변동 시계열은 다일 축적 시 산출됩니다(현재 v1).")
-    insights.append("스트림 수치는 Kworb 집계값으로 Spotify 공식 지표와 다를 수 있습니다 — 참고용.")
+        insights.append(f"복수 진입 최다: {top_a} · 차트에 {top_h}곡 동시 진입")
+    insights.append("단일 일자 스냅샷 기준. 순위 변동 추이는 여러 날 쌓인 뒤 산출")
+    insights.append("스트림 수치는 Kworb 집계값. Spotify 공식 지표와 다를 수 있어 참고용")
 
     if entity_map:
         _augment_entities(metrics, charts, insights, entries, entity_map)
@@ -384,7 +384,7 @@ def _wrap(
 ) -> dict[str, object]:
     return {
         "moduleId": MODULE_ID,
-        "title": f"차트 히스토리 — {name}",
+        "title": f"차트 히스토리 · {name}",
         "subtitle": f"{source} · {snapshot_date} · {n}곡",
         "generatedAt": generated_at,
         "metrics": metrics,
@@ -465,7 +465,7 @@ def build_multi(
     elif len({c for c in charts_labels if c}) >= 2:
         _augment_cross_view(metrics, charts, insights, parsed_list, charts_labels)
     else:
-        insights.append("복수 스냅샷의 교차 차원(플랫폼/국가/소스/날짜/뷰)을 식별하지 못해 기준 스냅샷만 사용했습니다.")
+        insights.append("교차 비교 축(플랫폼/국가/소스/날짜/뷰)을 찾지 못해 기준 스냅샷만 사용")
     return report
 
 
@@ -588,7 +588,7 @@ def _build_platform_parallel(
         charts.append(
             {
                 "type": "heatmap",
-                "title": f"홈({scope or '전체'}) Top 10 × 렌즈 — 3플랫폼 합의/발산 (숫자=그 렌즈 순위 · 열 간 비교 금지)",
+                "title": f"홈({scope or '전체'}) Top 10 × 플랫폼 · 세 플랫폼의 일치와 차이 (숫자=해당 플랫폼 순위, 열 간 비교 금지)",
                 "data": {
                     "rows": [lens_disp[k] for k in ordered_rows],
                     "cols": [p for p in plat_names if p in lens_ranks],
@@ -628,8 +628,8 @@ def _build_platform_parallel(
     rank_only = [p for p in plat_names if p in ("apple", "melon")]
     if rank_only:
         insights.append(
-            f"{'·'.join(rank_only)} 렌즈는 소스가 **수치를 제공하지 않아 순위만** 있습니다 — Top10 × 렌즈 히트맵으로 보세요. "
-            "렌즈들은 수평(위계 없음)이며 순위·수치의 **열 간 비교는 금지**(top-N 천장·집계 규모 상이, §0)."
+            f"{'·'.join(rank_only)} 플랫폼은 소스가 수치 없이 **순위만** 제공. Top10 × 플랫폼 히트맵 참조. "
+            "플랫폼 간 위계는 없으며 집계 범위가 달라 순위·수치의 **열 간 비교 금지**."
         )
 
     _augment_cross_platform(metrics, charts, insights, parsed_list, platforms, entity_map, watch)
@@ -662,7 +662,7 @@ def _build_platform_parallel(
         charts.append(
             {
                 "type": "tunable",
-                "title": f"[{(geo_scope or '전체').upper()} 로스터] 3렌즈 통합 진입 지도 · 화이트스페이스 (빈칸=전 렌즈 미진입)",
+                "title": f"[{(geo_scope or '전체').upper()} 로스터] 3플랫폼 통합 진입 지도 · 미개척 시장 (빈칸=모든 플랫폼 미진입)",
                 "data": {
                     "view": "whitespace",
                     "matrix": {
@@ -681,7 +681,7 @@ def _build_platform_parallel(
                         }
                     ],
                     "topRows": 12,
-                    "note": "3플랫폼 통합 진입(D-016) — 빈칸은 spotify·apple·youtube 어디에도 미진입인 진짜 화이트스페이스. 숫자=혼합 최고순위(렌즈 간 비교 금지)·임계 값=A&R(§2.1).",
+                    "note": "3플랫폼 통합 진입. 빈칸은 spotify·apple·youtube 어디에도 미진입. 숫자=혼합 최고순위(플랫폼 간 비교 금지), 기준값은 조정 가능",
                 },
             }
         )
@@ -695,14 +695,14 @@ def _build_platform_parallel(
             metrics, charts, insights, sp_group, sp_countries, entity_map, geo_scope, market_min
         )
         insights.append(
-            "지리 뷰(리프레임·화이트스페이스)의 기준 레일 = spotify — 위계가 아니라 **깊이 문제**"
-            "(top-200·최다 시장이라 진입 지도가 가장 촘촘). 타 렌즈 시장이 넓어지면 확장 대상."
+            "지리 뷰(최광역·미개척)의 기준 데이터 = spotify. 위계가 아니라 **커버리지 차이**"
+            "(top-200과 최다 시장으로 진입 지도가 가장 촘촘). 다른 플랫폼 시장이 넓어지면 확장 대상"
         )
 
     plat_txt = " · ".join(f"{p} {len(markets_by_plat.get(p, set()))}시장" for p in plat_names)
     return _wrap(
         f"멀티플랫폼 수평 뷰 ({'·'.join(plat_names)})",
-        f"{len(plat_names)}렌즈 수평(위계 없음) · {plat_txt}",
+        f"{len(plat_names)}개 플랫폼 병렬(위계 없음) · {plat_txt}",
         latest_date or "?",
         sum(len(_entries(p)) for p in parsed_list),
         generated_at,
@@ -756,7 +756,7 @@ def _augment_cross_platform(
         {
             "label": "차트 플랫폼",
             "value": len(plat_names),
-            "unit": "렌즈",
+            "unit": "플랫폼",
             "hint": " · ".join(
                 f"{p} {len(markets_by_plat.get(p, set()))}시장" for p in plat_names
             ),
@@ -764,10 +764,10 @@ def _augment_cross_platform(
     )
     metrics.append(
         {
-            "label": "Spotify 렌즈 밖",
+            "label": "Spotify 밖",
             "value": len(non_sp_unique),
             "unit": "팀",
-            "hint": "apple/youtube에서만 차트인 — 단일 렌즈 사각(D-016)",
+            "hint": "apple/youtube에서만 차트인 · 단일 플랫폼만 보면 놓치는 팀",
         }
     )
 
@@ -780,7 +780,7 @@ def _augment_cross_platform(
     charts.append(
         {
             "type": "heatmap",
-            "title": "아티스트 × 플랫폼 — 어느 렌즈에 잡히는가 (숫자=최고순위 · 플랫폼 간 순위 비교 금지)",
+            "title": "아티스트 × 플랫폼 · 어디에 잡히는가 (숫자=최고순위, 플랫폼 간 비교 금지)",
             "data": {
                 "rows": rows,
                 "cols": plat_names,
@@ -796,7 +796,7 @@ def _augment_cross_platform(
         charts.append(
             {
                 "type": "bar",
-                "title": "Spotify 렌즈 밖 표면화 — apple/youtube에서만 차트인 (값=그 플랫폼 최고순위)",
+                "title": "Spotify 밖에서만 보이는 팀 · apple/youtube에서만 차트인 (값=해당 플랫폼 최고순위)",
                 "data": [
                     {"name": f"{k} ({next(iter(v))})", "value": min(v.values())}
                     for k, v in uniq_sorted
@@ -810,13 +810,13 @@ def _augment_cross_platform(
             f"{k}(#{min(by_act[k].values())} {next(iter(by_act[k]))})" for k in watch_blind[:5]
         )
         insights.append(
-            f"워치리스트 중 **Spotify 렌즈 밖**에서만 차트인: {len(watch_blind)}팀 — {ex}. "
-            "단일 플랫폼 수집이었다면 '미진입'으로 오분류됐을 사각(D-016)."
+            f"워치리스트 중 **Spotify 밖**에서만 차트인: {len(watch_blind)}팀 · {ex}. "
+            "단일 플랫폼만 수집했다면 '미진입'으로 놓쳤을 팀"
         )
     insights.append(
         f"플랫폼 교차: {' · '.join(f'{p} {sum(1 for v in by_act.values() if p in v)}팀' for p in plat_names)} · "
         f"spotify-온리 {sp_unique_n}팀 · 비-spotify-온리 {len(non_sp_unique)}팀. "
-        "순위는 플랫폼별 top-N 천장·집계 규모가 달라 **절대값 비교 금지** — 이 뷰의 질문은 존재 여부(온셋)다(§0)."
+        "순위는 플랫폼별 집계 범위가 달라 **절대값 비교 금지**. 이 뷰의 질문은 존재 여부"
     )
 
 
@@ -981,7 +981,7 @@ def _augment_cross_country(
         names = ", ".join(_name(e) for e in everywhere[:3])
         tail = " 등" if len(everywhere) > 3 else ""
         insights.append(f"전 시장({', '.join(countries)}) 동시 진입: {names}{tail}.")
-    insights.append("시장 간 매칭은 '아티스트-제목' 문자열 기준 — 표기 차이 시 일부 누락 가능(한계).")
+    insights.append("시장 간 매칭은 '아티스트-제목' 문자열 기준. 표기가 다르면 일부 누락 가능")
 
 
 def _augment_geography(
@@ -1078,12 +1078,12 @@ def _augment_geography(
     # ── insights (지문 shape 사실 + 한계 필수, RULES §4.5) ──
     if roster is not None:
         insights.append(
-            f"지리 뷰를 '{geo_scope.upper() if geo_scope else ''} 원산지 로스터'로 스코프 — "
+            f"지리 뷰를 '{geo_scope.upper() if geo_scope else ''} 원산지 로스터'로 한정. "
             "원(raw) 전 시장 union은 서구 팝이 지배하므로 K-pop 기획엔 로스터 스코프가 유효"
-            "(해석된 로스터에 한함, 미해석 아티스트는 제외 — 한계)."
+            "(확인된 로스터에 한함, 미확인 아티스트 제외)."
         )
     else:
-        insights.append("스코프 미지정(전 시장 union) — 최광역 상위는 글로벌 팝 지형(참고). K-pop 관점은 --geo-scope KR 권장.")
+        insights.append("조사 범위 미지정(전 시장 합집합). 최광역 상위는 글로벌 팝 지형 참고용")
     if union:
         names = ", ".join(track_name[k] for k in union[:3])
         insights.append(f"최광역(앵커 무관): {names} 등이 조사 {len(geo_idx)}개국 중 최다 시장 진입.")
@@ -1093,10 +1093,10 @@ def _augment_geography(
             dom, _, _ = _dominant_region(art_cc[a], art_best[a], countries)
             fingerprints.append(f"{a}={dom}({len(art_cc[a])}개국)")
     if fingerprints:
-        insights.append("지리 지문 상위: " + " · ".join(fingerprints) + " — 팀별 최다 권역을 비교하라(대시보드 지문 heatmap).")
-    insights.append("reach는 조사한 국가 집합에 상대적입니다 — 세계 절대 도달이 아니라 '조사 N개국 중'.")
-    insights.append("Spotify 단일 플랫폼 — 국내 코어(Melon/Circle) 미반영, 국내축은 Spotify-KR 근사(한계).")
-    insights.append("지리 신호는 기획 참고이며 타겟 결정(평결)이 아닙니다 — 결정은 책임질 담당자에게(§5).")
+        insights.append("지리 지문 상위: " + " · ".join(fingerprints) + " · 팀별 최다 권역 비교용(지문 히트맵 참조)")
+    insights.append("도달 국가 수는 조사한 국가 집합 기준. 세계 절대 도달 아님")
+    insights.append("Spotify 단일 플랫폼 기준. 국내 차트(Melon/Circle) 미반영, 국내는 Spotify-KR로 근사")
+    insights.append("지리 신호는 기획 참고용. 타겟 결정은 담당자의 몫")
 
     # ── 뷰 3·4: 화이트스페이스(기획) + 신인 코호트 (로스터 스코프 전용) ──
     if roster is not None:
@@ -1134,14 +1134,14 @@ def _whitespace_view(
     geo_cols = [i for i in col_order if i in geo_set]  # 권역순 non-global 시장
     roster_rows = sorted(art_best, key=lambda a: (-len(art_cc[a]), a))  # 전체 로스터, reach 순
     if not roster_rows or not geo_cols:
-        insights.append("로스터 진입 데이터가 없어 화이트스페이스 뷰를 생략했습니다(스코프/커버리지 확인).")
+        insights.append("로스터 진입 데이터가 없어 미개척 시장 뷰 생략(조사 범위와 커버리지 확인 필요)")
         return
 
     # tunable 차트: 전체 행렬 + knob 탑재 → client가 임의 임계로 개척시장·갭 재계산 (RULES §4.5)
     charts.append(
         {
             "type": "tunable",
-            "title": f"{scope_tag}화이트스페이스 · 개척 시장 × 팀 (빈칸=미개척) — 임계 직접 조정",
+            "title": f"{scope_tag}미개척 지도 · 개척 시장 × 팀 (빈칸=미개척) · 기준 직접 조정",
             "data": {
                 "view": "whitespace",
                 "matrix": {
@@ -1162,7 +1162,7 @@ def _whitespace_view(
                 "topRows": 10,
                 "note": (
                     "개척 시장 = 로스터가 이 수 이상 진입한 검증된 시장. 빈칸 = 그 팀의 미개척(greenfield) "
-                    "후보. 임계는 A&R 소유 — 슬라이더로 직접 조정(§2.1). 후보 신호이지 진출 지시 아님(§0)."
+                    "후보. 기준은 슬라이더로 직접 조정 가능. 후보 신호이지 진출 지시 아님"
                 ),
             },
         }
@@ -1181,17 +1181,17 @@ def _whitespace_view(
         wa = artists[0]
         gaps0 = [i for i in proven_order if i not in art_cc[wa]]
         metrics.append(
-            {"label": f"{wa} 화이트스페이스", "value": len(gaps0), "unit": "개국", "hint": f"개척 시장(≥{market_min}팀) 中 미진입"}
+            {"label": f"{wa} 미개척", "value": len(gaps0), "unit": "개국", "hint": f"개척 시장(≥{market_min}팀) 중 미진입"}
         )
     for a in artists[:3]:
         gaps = [i for i in proven_order if i not in art_cc[a]]
         if gaps:
             names = ", ".join(countries[i].upper() for i in gaps[:6])
             tail = " 등" if len(gaps) > 6 else ""
-            insights.append(f"{a} 미개척(로스터 강세 시장, 기본 ≥{market_min}팀): {names}{tail} — greenfield 후보.")
+            insights.append(f"{a} 미개척(로스터 강세 시장, 기본 ≥{market_min}팀): {names}{tail} · 진입 후보 시장")
     insights.append(
-        "화이트스페이스 임계(market_min)는 대시보드 슬라이더로 직접 조정 — 값은 A&R 소유(§2.1). "
-        "후보 신호이지 진출 지시 아님(§0)."
+        "미개척 기준은 대시보드 슬라이더로 직접 조정 가능. "
+        "후보 신호이지 진출 지시 아님."
     )
 
 
@@ -1219,7 +1219,7 @@ def _cohort_view(
     rookies = [a for a in art_best if (y := debut(a)) is not None and y >= cutoff]
     rookies.sort(key=lambda a: (-len(art_cc[a]), a))
     if not rookies:
-        insights.append(f"신인 코호트(데뷔 ≥{cutoff}) 해석분이 없어 신인 지리 뷰를 생략했습니다(§4.2 커버리지).")
+        insights.append(f"신인(데뷔 ≥{cutoff}) 데이터가 없어 신인 지리 뷰 생략")
         return
     rookies = rookies[:12]
     rookie_cols = [i for i in geo_cols if any(i in art_cc[a] for a in rookies)]
@@ -1227,7 +1227,7 @@ def _cohort_view(
         charts.append(
             {
                 "type": "heatmap",
-                "title": f"{scope_tag}신인 지리 지문 · 데뷔 ≥{cutoff} ({len(rookies)}팀) × 시장 — 무베이스도 어디에 닿나",
+                "title": f"{scope_tag}신인 지리 지문 · 데뷔 ≥{cutoff} ({len(rookies)}팀) × 시장 · 팬베이스 없이 어디에 닿는지",
                 "data": {
                     "rows": [f"{a} ({debut(a)})" for a in rookies],
                     "cols": [countries[i].upper() for i in rookie_cols],
@@ -1246,10 +1246,10 @@ def _cohort_view(
         parts.append(f"{a}({debut(a)}{tag}) {len(art_cc[a])}개국")
     insights.append(
         f"신인 코호트(데뷔 ≥{cutoff}, {len(rookies)}팀): " + " · ".join(parts)
-        + " — 무베이스 신인도 특정 시장엔 닿는다(대기업 전용 아님)."
+        + ". 팬베이스 없는 신인도 특정 시장에는 닿음"
     )
     insights.append(
-        f"신인 판정 ROOKIE_YEARS={ROOKIE_YEARS}(데뷔연도 해석분 한정, 미해석 제외) — 값은 A&R 소유(§2.1)."
+        f"신인 판정 기준: 데뷔 {ROOKIE_YEARS}년 이내(데뷔연도 확인분 한정). 기준값 조정 가능"
     )
 
 
@@ -1320,7 +1320,7 @@ def _augment_cross_view(
     best_entry, best_mom = risers[0]
     metrics.append({"label": "최고 모멘텀", "value": best_mom, "unit": "계단", "hint": _name(best_entry)})
     insights.append(
-        f"{base_label}이 {cmp_label}보다 앞선(상승세) 곡 {len(rising)}/{len(moved)} — {base_label} 순위 가속 신호(참고)."
+        f"{base_label}이 {cmp_label}보다 앞선(상승세) 곡 {len(rising)}/{len(moved)} · {base_label} 순위 가속 신호(참고)"
     )
     insights.append(f"최고 모멘텀: {_name(best_entry)} ({cmp_label} 대비 +{best_mom}계단).")
 
@@ -1386,10 +1386,10 @@ def _augment_cross_source(
             {"label": f"{base_svc} 편중", "value": skew[2] - skew[1], "unit": "계단", "hint": _name(skew[0])}
         )
     conf = f" · 엔티티 확인 {confirmed}곡(코르티스↔CORTIS 등 크로스언어)" if confirmed else ""
-    insights.append(f"{base_svc} Top20 중 {len(matched)}곡이 {comp_svc}에도 진입 — 제목 매칭{conf}.")
+    insights.append(f"{base_svc} Top20 중 {len(matched)}곡이 {comp_svc}에도 진입 · 제목 매칭{conf}")
     insights.append(
         "아티스트는 엔티티 별칭으로 크로스언어 인식·콜리전 방지. 제목이 언어로 갈리는 곡(만찬가↔Bansanka)은 "
-        "미매칭 — MB 레코딩 커버리지 부재(실측)로 레코딩ID/ISRC 매칭은 유료 소스 과제(한계)."
+        "미매칭. 소스 커버리지 한계로 정밀 매칭은 유료 소스 확보 후 과제"
     )
 
 
@@ -1448,5 +1448,5 @@ def _augment_entities(
     insights.append(f"상위 아티스트 원산지({resolved}/{total}팀 해석 · {prov}): {top_origins}.")
     if unresolved:
         insights.append(
-            f"엔티티 미해석 {len(unresolved)}팀(표기 변형 등, 예: {unresolved[0]}) — 수기/추가 소스 보강 대상."
+            f"엔티티 미해석 {len(unresolved)}팀(표기 변형 등, 예: {unresolved[0]}) · 수기/추가 소스 보강 대상"
         )

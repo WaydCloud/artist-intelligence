@@ -12,7 +12,7 @@ export function ChartCard({ chart, dark }: { chart: Chart; dark: boolean }) {
       {chart.type === "line" && <LineChart data={chart.data as LineData} />}
       {chart.type === "heatmap" && <Heatmap data={chart.data as HeatmapData} dark={dark} />}
       {chart.type === "tunable" && <Tunable data={chart.data as TunableData} />}
-      {chart.type === "radar" && <p className="text-sm text-[var(--muted)]">radar 렌더는 아직 미지원</p>}
+      {chart.type === "radar" && <p className="text-sm text-[var(--muted)]">radar 차트는 아직 미지원</p>}
     </section>
   );
 }

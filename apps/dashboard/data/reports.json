@@ -1,9 +1,9 @@
 [
   {
     "moduleId": "chart-history",
-    "title": "차트 히스토리 — 멀티플랫폼 수평 뷰 (youtube·spotify·apple)",
-    "subtitle": "3렌즈 수평(위계 없음) · youtube 49시장 · spotify 50시장 · apple 49시장 · 2026-07-20 · 15880곡",
-    "generatedAt": "2026-07-20T00:07:05Z",
+    "title": "차트 히스토리 · 멀티플랫폼 수평 뷰 (youtube·spotify·apple)",
+    "subtitle": "3개 플랫폼 병렬(위계 없음) · youtube 49시장 · spotify 50시장 · apple 49시장 · 2026-07-20 · 15880곡",
+    "generatedAt": "2026-07-20T02:48:31Z",
     "metrics": [
       {
         "label": "youtube 1위",
@@ -26,14 +26,14 @@
       {
         "label": "차트 플랫폼",
         "value": 3,
-        "unit": "렌즈",
+        "unit": "플랫폼",
         "hint": "youtube 49시장 · spotify 50시장 · apple 49시장"
       },
       {
-        "label": "Spotify 렌즈 밖",
+        "label": "Spotify 밖",
         "value": 342,
         "unit": "팀",
-        "hint": "apple/youtube에서만 차트인 — 단일 렌즈 사각(D-016)"
+        "hint": "apple/youtube에서만 차트인 · 단일 플랫폼만 보면 놓치는 팀"
       },
       {
         "label": "조사 국가",
@@ -64,10 +64,10 @@
         "hint": "기본 ≥2팀(조정가능)"
       },
       {
-        "label": "LE SSERAFIM 화이트스페이스",
+        "label": "LE SSERAFIM 미개척",
         "value": 2,
         "unit": "개국",
-        "hint": "개척 시장(≥2팀) 中 미진입"
+        "hint": "개척 시장(≥2팀) 중 미진입"
       },
       {
         "label": "신인 최광역",
@@ -79,7 +79,7 @@
     "charts": [
       {
         "type": "heatmap",
-        "title": "홈(KR) Top 10 × 렌즈 — 3플랫폼 합의/발산 (숫자=그 렌즈 순위 · 열 간 비교 금지)",
+        "title": "홈(KR) Top 10 × 플랫폼 · 세 플랫폼의 일치와 차이 (숫자=해당 플랫폼 순위, 열 간 비교 금지)",
         "data": {
           "rows": [
             "CORTIS - REDRED",
@@ -288,7 +288,7 @@
       },
       {
         "type": "heatmap",
-        "title": "아티스트 × 플랫폼 — 어느 렌즈에 잡히는가 (숫자=최고순위 · 플랫폼 간 순위 비교 금지)",
+        "title": "아티스트 × 플랫폼 · 어디에 잡히는가 (숫자=최고순위, 플랫폼 간 비교 금지)",
         "data": {
           "rows": [
             "CORTIS",
@@ -393,7 +393,7 @@
       },
       {
         "type": "bar",
-        "title": "Spotify 렌즈 밖 표면화 — apple/youtube에서만 차트인 (값=그 플랫폼 최고순위)",
+        "title": "Spotify 밖에서만 보이는 팀 · apple/youtube에서만 차트인 (값=해당 플랫폼 최고순위)",
         "data": [
           {
             "name": "A-Lin+ (youtube)",
@@ -447,7 +447,7 @@
       },
       {
         "type": "tunable",
-        "title": "[KR 로스터] 3렌즈 통합 진입 지도 · 화이트스페이스 (빈칸=전 렌즈 미진입)",
+        "title": "[KR 로스터] 3플랫폼 통합 진입 지도 · 미개척 시장 (빈칸=모든 플랫폼 미진입)",
         "data": {
           "view": "whitespace",
           "matrix": {
@@ -2062,7 +2062,7 @@
             }
           ],
           "topRows": 12,
-          "note": "3플랫폼 통합 진입(D-016) — 빈칸은 spotify·apple·youtube 어디에도 미진입인 진짜 화이트스페이스. 숫자=혼합 최고순위(렌즈 간 비교 금지)·임계 값=A&R(§2.1)."
+          "note": "3플랫폼 통합 진입. 빈칸은 spotify·apple·youtube 어디에도 미진입. 숫자=혼합 최고순위(플랫폼 간 비교 금지), 기준값은 조정 가능"
         }
       },
       {
@@ -3003,7 +3003,7 @@
       },
       {
         "type": "tunable",
-        "title": "[KR 로스터] 화이트스페이스 · 개척 시장 × 팀 (빈칸=미개척) — 임계 직접 조정",
+        "title": "[KR 로스터] 미개척 지도 · 개척 시장 × 팀 (빈칸=미개척) · 기준 직접 조정",
         "data": {
           "view": "whitespace",
           "matrix": {
@@ -4998,12 +4998,12 @@
             }
           ],
           "topRows": 10,
-          "note": "개척 시장 = 로스터가 이 수 이상 진입한 검증된 시장. 빈칸 = 그 팀의 미개척(greenfield) 후보. 임계는 A&R 소유 — 슬라이더로 직접 조정(§2.1). 후보 신호이지 진출 지시 아님(§0)."
+          "note": "개척 시장 = 로스터가 이 수 이상 진입한 검증된 시장. 빈칸 = 그 팀의 미개척(greenfield) 후보. 기준은 슬라이더로 직접 조정 가능. 후보 신호이지 진출 지시 아님"
         }
       },
       {
         "type": "heatmap",
-        "title": "[KR 로스터] 신인 지리 지문 · 데뷔 ≥2023 (7팀) × 시장 — 무베이스도 어디에 닿나",
+        "title": "[KR 로스터] 신인 지리 지문 · 데뷔 ≥2023 (7팀) × 시장 · 팬베이스 없이 어디에 닿는지",
         "data": {
           "rows": [
             "CORTIS (2025)",
@@ -5125,21 +5125,21 @@
     ],
     "media": [],
     "insights": [
-      "apple 렌즈는 소스가 **수치를 제공하지 않아 순위만** 있습니다 — Top10 × 렌즈 히트맵으로 보세요. 렌즈들은 수평(위계 없음)이며 순위·수치의 **열 간 비교는 금지**(top-N 천장·집계 규모 상이, §0).",
-      "플랫폼 교차: youtube 515팀 · spotify 2853팀 · apple 1092팀 · spotify-온리 1862팀 · 비-spotify-온리 342팀. 순위는 플랫폼별 top-N 천장·집계 규모가 달라 **절대값 비교 금지** — 이 뷰의 질문은 존재 여부(온셋)다(§0).",
-      "지리 뷰를 'KR 원산지 로스터'로 스코프 — 원(raw) 전 시장 union은 서구 팝이 지배하므로 K-pop 기획엔 로스터 스코프가 유효(해석된 로스터에 한함, 미해석 아티스트는 제외 — 한계).",
+      "apple 플랫폼은 소스가 수치 없이 **순위만** 제공. Top10 × 플랫폼 히트맵 참조. 플랫폼 간 위계는 없으며 집계 범위가 달라 순위·수치의 **열 간 비교 금지**.",
+      "플랫폼 교차: youtube 515팀 · spotify 2853팀 · apple 1092팀 · spotify-온리 1862팀 · 비-spotify-온리 342팀. 순위는 플랫폼별 집계 범위가 달라 **절대값 비교 금지**. 이 뷰의 질문은 존재 여부",
+      "지리 뷰를 'KR 원산지 로스터'로 한정. 원(raw) 전 시장 union은 서구 팝이 지배하므로 K-pop 기획엔 로스터 스코프가 유효(확인된 로스터에 한함, 미확인 아티스트 제외).",
       "최광역(앵커 무관): LE SSERAFIM - ICONIC BY MISTAKE (w/ ILLIT, KATSEYE), BTS - SWIM, BTS - NORMAL 등이 조사 49개국 중 최다 시장 진입.",
-      "지리 지문 상위: LE SSERAFIM=유럽(20개국) · BTS=중남미(19개국) · CORTIS=동아시아(10개국) · Jung Kook=동아시아(8개국) — 팀별 최다 권역을 비교하라(대시보드 지문 heatmap).",
-      "reach는 조사한 국가 집합에 상대적입니다 — 세계 절대 도달이 아니라 '조사 N개국 중'.",
-      "Spotify 단일 플랫폼 — 국내 코어(Melon/Circle) 미반영, 국내축은 Spotify-KR 근사(한계).",
-      "지리 신호는 기획 참고이며 타겟 결정(평결)이 아닙니다 — 결정은 책임질 담당자에게(§5).",
-      "LE SSERAFIM 미개척(로스터 강세 시장, 기본 ≥2팀): TH, VN — greenfield 후보.",
-      "BTS 미개척(로스터 강세 시장, 기본 ≥2팀): SA — greenfield 후보.",
-      "CORTIS 미개척(로스터 강세 시장, 기본 ≥2팀): PT, RO, CL, PE — greenfield 후보.",
-      "화이트스페이스 임계(market_min)는 대시보드 슬라이더로 직접 조정 — 값은 A&R 소유(§2.1). 후보 신호이지 진출 지시 아님(§0).",
-      "신인 코호트(데뷔 ≥2023, 7팀): CORTIS(2025·Big Hit Music) 10개국 · ILLIT(2024·Belift Lab) 7개국 · Hearts2Hearts(2025·SM Entertainment) 4개국 · BABYMONSTER(2023) 3개국 · KiiiKiii(2025·Starship Entertainment) 1개국 — 무베이스 신인도 특정 시장엔 닿는다(대기업 전용 아님).",
-      "신인 판정 ROOKIE_YEARS=3(데뷔연도 해석분 한정, 미해석 제외) — 값은 A&R 소유(§2.1).",
-      "지리 뷰(리프레임·화이트스페이스)의 기준 레일 = spotify — 위계가 아니라 **깊이 문제**(top-200·최다 시장이라 진입 지도가 가장 촘촘). 타 렌즈 시장이 넓어지면 확장 대상."
+      "지리 지문 상위: LE SSERAFIM=유럽(20개국) · BTS=중남미(19개국) · CORTIS=동아시아(10개국) · Jung Kook=동아시아(8개국) · 팀별 최다 권역 비교용(지문 히트맵 참조)",
+      "도달 국가 수는 조사한 국가 집합 기준. 세계 절대 도달 아님",
+      "Spotify 단일 플랫폼 기준. 국내 차트(Melon/Circle) 미반영, 국내는 Spotify-KR로 근사",
+      "지리 신호는 기획 참고용. 타겟 결정은 담당자의 몫",
+      "LE SSERAFIM 미개척(로스터 강세 시장, 기본 ≥2팀): TH, VN · 진입 후보 시장",
+      "BTS 미개척(로스터 강세 시장, 기본 ≥2팀): SA · 진입 후보 시장",
+      "CORTIS 미개척(로스터 강세 시장, 기본 ≥2팀): PT, RO, CL, PE · 진입 후보 시장",
+      "미개척 기준은 대시보드 슬라이더로 직접 조정 가능. 후보 신호이지 진출 지시 아님.",
+      "신인 코호트(데뷔 ≥2023, 7팀): CORTIS(2025·Big Hit Music) 10개국 · ILLIT(2024·Belift Lab) 7개국 · Hearts2Hearts(2025·SM Entertainment) 4개국 · BABYMONSTER(2023) 3개국 · KiiiKiii(2025·Starship Entertainment) 1개국. 팬베이스 없는 신인도 특정 시장에는 닿음",
+      "신인 판정 기준: 데뷔 3년 이내(데뷔연도 확인분 한정). 기준값 조정 가능",
+      "지리 뷰(최광역·미개척)의 기준 데이터 = spotify. 위계가 아니라 **커버리지 차이**(top-200과 최다 시장으로 진입 지도가 가장 촘촘). 다른 플랫폼 시장이 넓어지면 확장 대상"
     ],
     "recommendations": [
       "다일 스냅샷을 축적하면 순위 모멘텀·진입/이탈을 라인 차트로 볼 수 있습니다(v2).",
@@ -5149,9 +5149,9 @@
   },
   {
     "moduleId": "fandom-pulse",
-    "title": "팬덤 펄스 — #kpopdance",
-    "subtitle": "Instagram / Apify apify~instagram-hashtag-scraper · 2026-07-18T11:36:59Z · 30건",
-    "generatedAt": "2026-07-19T12:56:07Z",
+    "title": "팬덤 펄스 · #kpopdance",
+    "subtitle": "Instagram / Apify apify~instagram-hashtag-scraper · 2026-07-19T03:08:23Z · 30건",
+    "generatedAt": "2026-07-20T02:48:32Z",
     "metrics": [
       {
         "label": "게시물 수",
@@ -5160,24 +5160,24 @@
       },
       {
         "label": "총 참여",
-        "value": 54968,
+        "value": 54632,
         "unit": "likes+comments"
       },
       {
         "label": "중앙값 좋아요",
-        "value": 969,
+        "value": 890,
         "unit": "likes"
       },
       {
         "label": "중앙값 댓글",
-        "value": 23,
+        "value": 16,
         "unit": "comments"
       },
       {
         "label": "고참여 게시물",
         "value": 3,
         "unit": "건",
-        "hint": "상위 90분위(≥4443) 초과"
+        "hint": "상위 90분위(≥4558) 초과"
       },
       {
         "label": "릴스 비중",
@@ -5186,9 +5186,9 @@
       },
       {
         "label": "게시 가속",
-        "value": 2.4,
+        "value": 2,
         "unit": "건/일",
-        "hint": "2026-06-29~2026-07-17 최근−이전"
+        "hint": "2026-07-05~2026-07-18 최근−이전"
       },
       {
         "label": "사운드 확산 아티스트",
@@ -5197,7 +5197,7 @@
       },
       {
         "label": "로스터 밖 확산",
-        "value": 10,
+        "value": 7,
         "unit": "팀",
         "hint": "차트 로스터 미포함 소셜 활성"
       }
@@ -5209,7 +5209,7 @@
         "data": [
           {
             "name": "#dance",
-            "value": 7
+            "value": 6
           },
           {
             "name": "#fyp",
@@ -5224,27 +5224,27 @@
             "value": 4
           },
           {
+            "name": "#kpopdancecover",
+            "value": 4
+          },
+          {
             "name": "#bad",
-            "value": 3
+            "value": 4
+          },
+          {
+            "name": "#iconicbymistake",
+            "value": 2
           },
           {
             "name": "#dancecover",
-            "value": 3
-          },
-          {
-            "name": "#kpopdancecover",
-            "value": 3
+            "value": 2
           },
           {
             "name": "#challenge",
             "value": 2
           },
           {
-            "name": "#dancechallenge",
-            "value": 2
-          },
-          {
-            "name": "#kpopinpublic",
+            "name": "#kpopcover",
             "value": 2
           }
         ]
@@ -5254,7 +5254,7 @@
         "title": "일별 게시량",
         "data": {
           "x": [
-            "2026-06-29",
+            "2026-07-05",
             "2026-07-08",
             "2026-07-09",
             "2026-07-10",
@@ -5264,7 +5264,8 @@
             "2026-07-14",
             "2026-07-15",
             "2026-07-16",
-            "2026-07-17"
+            "2026-07-17",
+            "2026-07-18"
           ],
           "series": [
             {
@@ -5272,15 +5273,16 @@
               "values": [
                 1,
                 1,
-                3,
+                2,
+                2,
                 1,
-                1,
-                1,
-                3,
-                7,
+                2,
+                2,
+                6,
                 1,
                 6,
-                5
+                3,
+                3
               ]
             }
           ]
@@ -5291,19 +5293,23 @@
         "title": "Top 사운드",
         "data": [
           {
-            "name": "ATEEZ - BAD",
-            "value": 4
+            "name": "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE",
+            "value": 2
+          },
+          {
+            "name": "ITZY - THAT'S A NO NO",
+            "value": 2
+          },
+          {
+            "name": "YENA - Catch Catch",
+            "value": 1
           },
           {
             "name": "megatdream - Original audio",
             "value": 1
           },
           {
-            "name": "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE",
-            "value": 1
-          },
-          {
-            "name": "izna - DRIP",
+            "name": "ENHYPEN - Bad Desire (With or Without You) (English Ver.)",
             "value": 1
           },
           {
@@ -5311,15 +5317,11 @@
             "value": 1
           },
           {
-            "name": "qianyihere - Original audio",
+            "name": "izna - DRIP",
             "value": 1
           },
           {
-            "name": "oakids_maggie - Original audio",
-            "value": 1
-          },
-          {
-            "name": "glxefanaccount - Original audio",
+            "name": "itsjoymoves_ - Original audio",
             "value": 1
           }
         ]
@@ -5329,27 +5331,23 @@
         "title": "Top 아티스트 · 사운드 확산",
         "data": [
           {
-            "name": "ATEEZ",
-            "value": 4
+            "name": "ILLIT",
+            "value": 2
           },
           {
             "name": "LE SSERAFIM",
             "value": 2
           },
           {
-            "name": "ILLIT",
-            "value": 1
-          },
-          {
             "name": "KATSEYE",
-            "value": 1
+            "value": 2
           },
           {
-            "name": "izna",
-            "value": 1
+            "name": "ITZY",
+            "value": 2
           },
           {
-            "name": "i-dle",
+            "name": "YENA",
             "value": 1
           },
           {
@@ -5357,15 +5355,19 @@
             "value": 1
           },
           {
-            "name": "ITZY",
+            "name": "i-dle",
             "value": 1
           },
           {
-            "name": "BOYNEXTDOOR",
+            "name": "izna",
             "value": 1
           },
           {
-            "name": "YooA",
+            "name": "BABYMONSTER",
+            "value": 1
+          },
+          {
+            "name": "YEONJUN",
             "value": 1
           }
         ]
@@ -5373,24 +5375,24 @@
     ],
     "media": [],
     "insights": [
-      "차트 로스터 밖 소셜 확산: KATSEYE, izna, i-dle, ENHYPEN, ITZY 등 10팀 — 차트(top-200)로 안 잡히는 소셜 활성(신인·pre-mainstream 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님(§0).",
-      "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락) — 참고 신호.",
-      "#kpopdance 공개 게시물 30건 기준 · 총 참여 54,968(좋아요+댓글).",
-      "중앙값 좋아요 969 · 댓글 23 — 평균 대신 중앙값(바이럴 1건 왜곡 견고).",
-      "공동 해시태그 상위: #dance, #fyp, #ateez — 확산·맥락 도달 신호(참고).",
-      "공개 IG 스크랩 표본(첫 페이지 등)으로 편향 가능 — 공식 지표 아님, 인기·품질 단정 아님(참고 신호)."
+      "차트 로스터 밖 소셜 확산: ITZY, ENHYPEN, i-dle, iKON, YooA 등 7팀 · 차트(top-200)로 안 잡히는 소셜 활성(차트 진입 전 신인 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님",
+      "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락). 참고 신호",
+      "#kpopdance 공개 게시물 30건 기준 · 총 참여 54,632(좋아요+댓글).",
+      "중앙값 좋아요 890 · 댓글 16 · 평균 대신 중앙값 사용(바이럴 1건에 덜 흔들림)",
+      "공동 해시태그 상위: #dance, #fyp, #ateez · 확산과 도달 맥락 참고용",
+      "공개 인스타그램 표본이라 편향 가능. 공식 지표가 아니며 인기·품질의 단정 아님"
     ],
     "recommendations": [
       "특정 그룹/컴백 해시태그로 fetch하면 그 캠페인의 화력·참여 신호를 집중 관측할 수 있습니다.",
       "다일 축적(collect)하면 게시 가속(모멘텀)을 실데이터 라인으로 볼 수 있습니다(v2).",
-      "고참여 임계값(--high-pct)은 도메인 판단으로 조정하세요 — 기준은 가설입니다(기준 원장)."
+      "고참여 기준값은 도메인 판단으로 조정 가능. 기준은 조정 가능한 가설"
     ]
   },
   {
     "moduleId": "signal-bridge",
-    "title": "시그널 브리지 — 소셜 → 차트 선행신호",
+    "title": "시그널 브리지 · 소셜 → 차트 선행신호",
     "subtitle": "소셜(fandom-pulse) × 차트(chart-history) × YT(yt-pulse) 선행/지연 · 조인 45팀 · θ_social=1, θ_rank=200 · 차트 51시장 · 소셜 2026-03-10..2026-07-19 / 차트 2026-07-17..2026-07-20",
-    "generatedAt": "2026-07-20T00:16:56Z",
+    "generatedAt": "2026-07-20T02:48:31Z",
     "metrics": [
       {
         "label": "추적 아티스트",
@@ -5414,13 +5416,13 @@
         "label": "중앙값 선행",
         "value": 10,
         "unit": "일",
-        "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님(§0)"
+        "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님"
       },
       {
         "label": "소셜-온리 관측대상",
         "value": 123,
         "unit": "팀",
-        "hint": "차트 밖 소셜 활성 (pre-mainstream, D-010)"
+        "hint": "차트 진입 전 소셜 활성"
       },
       {
         "label": "차트-온리",
@@ -5432,13 +5434,13 @@
         "label": "워치리스트 커버리지",
         "value": "11/11",
         "unit": "소셜",
-        "hint": "차트 8/11 · YT 11/11 · 양측 8 — 팔로우 acts 중 신호 관측 수"
+        "hint": "차트 8/11 · YT 11/11 · 양측 8 · 팔로우 팀 중 신호 관측 수"
       }
     ],
     "charts": [
       {
         "type": "line",
-        "title": "선행신호 예시 · KiiiKiii — 소셜 버즈 vs 차트 강도 (정규화 0~1)",
+        "title": "선행신호 예시 · KiiiKiii · 소셜 버즈 vs 차트 강도 (0~1로 정규화)",
         "data": {
           "x": [
             "2026-03-10",
@@ -5923,7 +5925,7 @@
       },
       {
         "type": "bar",
-        "title": "소셜-온리 · 차트 밖 관측대상 (pre-mainstream, 최고 일간 게시수)",
+        "title": "소셜-온리 · 차트 밖 관측대상 (차트 진입 전, 최고 일간 게시수)",
         "data": [
           {
             "name": "KISS OF LIFE",
@@ -6421,7 +6423,7 @@
       },
       {
         "type": "tunable",
-        "title": "θ 튜너 — 온셋 임계를 돌려 분류 변화를 본다 (값=A&R 소유, 기준 원장 §2.1)",
+        "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
         "data": {
           "view": "leadlag",
           "socialDates": [
@@ -22927,7 +22929,7 @@
           "knobs": [
             {
               "key": "theta_social",
-              "label": "θ_social · 소셜 온셋(일 게시수 ≥)",
+              "label": "소셜 온셋 기준 (일 게시수 ≥)",
               "default": 1,
               "min": 1,
               "max": 10,
@@ -22935,53 +22937,53 @@
             },
             {
               "key": "theta_rank",
-              "label": "θ_rank · 차트 온셋(순위 ≤)",
+              "label": "차트 온셋 기준 (순위 ≤)",
               "default": 200,
               "min": 10,
               "max": 200,
               "step": 10
             }
           ],
-          "note": "임계값은 버전 매겨진 가설(진리 아님) — 슬라이더는 탐색 뷰이고 리포트 정본 수치는 CLI θ로 고정. lead=시간 순서(인과 아님·§0)."
+          "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. 선행=시간 순서일 뿐 인과 아님"
         }
       }
     ],
     "media": [],
     "insights": [
-      "lead(선행)는 **시간 순서**일 뿐 인과가 아닙니다. 표본 극소 · 참고 신호(§0). 조인 키 = 공유 entity-master 캐노니컬(소셜 사운드→아티스트 ↔ 차트 아티스트, D-007/D-010 데이터 공유).",
-      "⚠ 창 비대칭 — 소셜 창(2026-03-10..2026-07-19)과 차트 창(2026-07-17..2026-07-20)의 시작이 크게 다릅니다. 태그 수집이 과거 게시물을 소급하므로 회고 lead 절대값은 창 산물일 수 있음 — 방향 판단은 전향 축적으로(§0).",
-      "소셜 선행 관측 29팀: KiiiKiii(+127d), CORTIS(+68d), ILLIT(+59d), Hearts2Hearts(+57d), BOYNEXTDOOR(+28d) — 소셜 버즈가 차트 진입보다 앞선 사례. 검증 대상이지 예측 아님.",
-      "차트 선행(소셜 지연) 11팀: Fat Papi(-1d), Fujii Kaze(-2d), GIRLSET(-1d), Hikaru Utada(-1d), Kenshi Yonezu(-1d) — 소셜이 차트를 뒤따른 반례. 선행은 자동이 아님(정직).",
-      "소셜-온리 123팀(KISS OF LIFE, izna, KEYVEATZ, Destiny Rogers, GOT7 등) — 차트 밖 소셜 활성. pre-mainstream 조사 우선순위 후보(D-010) · 진출 지시 아님(§0).",
-      "온셋 기준(기준 원장 §3): 소셜 온셋 = 일간 게시수 ≥ θ_social(1), 차트 온셋 = 순위 ≤ θ_rank(200). 임계값=A&R 소유(파라미터 노출).",
-      "렌즈 온셋 시차: 유효 표본 0 — 다렌즈 온셋 1026팀 전부 렌즈별 수집 첫날과 겹쳐 좌측 절단(수집 전부터 차트인했을 수 있음) 제외. 다일 축적 후 열립니다(§0 정직).",
-      "[프로필] CORTIS — social-led(+68d) · 소셜 149건·참여 387.4k · 드라이버: CORTIS - REDRED, CORTIS - JoyRide, #코르티스, #cortis · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+spotify+youtube · YT 구독 5850.0k·'terima kasih allo bank' +546.5k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] KATSEYE — social-led(+11d) · 소셜 127건·참여 356.2k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE (Clean Edit), #katseye, #katseye_daniela · 차트 최고 #66·4시장(AE,GLOBAL,MY,SG) · YT 구독 11900.0k·'are you with me? 🤍 #KATS' +1312.5k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] ILLIT — social-led(+59d) · 소셜 123건·참여 510.6k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #3·8시장(FI,HK,JP,KR,MY…)·apple+spotify+youtube · YT 구독 5650.0k·'It's @CharlesEnter  ❤️ #' +586.0k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] RESCENE — social-led(+17d) · 소셜 120건·참여 304.0k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #2·1시장(KR)·apple+spotify+youtube · YT 구독 794.0k·'뽀로로 따라 프리티걸 챌린지' +428.0k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] MEOVV — social-led(+28d) · 소셜 105건·참여 338.2k · 드라이버: MEOVV - Hit 'Em, MEOVV - In my hands, #meovv, #미야오 · 차트 최고 #41·2시장(KR,TW)·apple+spotify · YT 구독 1380.0k·'˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 ' +87.6k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] KISS OF LIFE — social-only · 소셜 95건·참여 577.1k · 드라이버: KISS OF LIFE - Who is she, KISS OF LIFE - Sticky, #kissoflife, #키스오브라이프 · 차트 미진입 · YT 구독 2110.0k·'pov : you thought your A' +42.6k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-      "[프로필] KiiiKiii — social-led(+127d) · 소셜 95건·참여 533.8k · 드라이버: KiiiKiii - 404 (New Era), Catshi - Cuteness, #키키, #kiiikiii · 차트 최고 #15·1시장(KR)·apple+spotify · YT 구독 507.0k·'Staycation 🏠🏖️ #KiiiKiii' +25.2k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] izna — social-only · 소셜 84건·참여 2248.5k · 드라이버: izna - METRONOME, izna - DRIP, #이즈나, #izna · 차트 미진입 · YT 구독 2030.0k·'𝓐𝓵𝓬𝓱𝓸𝓵 𝓕𝓻𝓮𝓮 근데 취해｡⋆༶⋆˙⊹❀' +30.2k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-      "[프로필] KEYVEATZ — social-only · 소셜 82건·참여 1445.8k · 드라이버: Keyveatz - OXY, Keyveatz - OXY (Preview), #keyveatz, #키비츠 · 차트 미진입 · YT 구독 271.0k·'Turn the #OXY up with #U' +5.0k/일 → 조사·모니터 우선순위 후보 — 차트 진입 여부 전향 관측 중(§0)",
-      "[프로필] Hearts2Hearts — social-led(+57d) · 소셜 72건·참여 221.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #하츠투하츠, #hearts2hearts · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+spotify+youtube · YT 구독 3260.0k·'so dj turn it loud #Hear' +484.6k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "[프로필] BABYMONSTER — social-led(+18d) · 소셜 50건·참여 88.9k · 드라이버: BABYMONSTER - SUGAR HONEY ICE TEA, BABYMONSTER - I LIKE IT, #babymonster, #베이비몬스터 · 차트 최고 #5·8시장(EC,HK,ID,KR,PE…)·apple+spotify+youtube · YT 구독 12700.0k·'🎀 𝘗𝘩𝘢𝘳𝘪𝘵𝘢'𝘴 𝕀 𝕃𝕀𝕂𝔼 𝕀𝕋 𝘥𝘢' +432.2k/일 → 선행 후보 — 재현성·드라이버(사운드/챌린지) 확인 대상(§0)",
-      "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 3307곡은 제외(--focus-social) — 선행 질문의 대상은 **버즈가 있는 아티스트**입니다."
+      "선행(lead)은 **시간 순서**일 뿐 인과 아님. 표본 극소 · 참고 신호. 이름 매칭은 공용 아티스트 사전 기준(소셜 사운드와 차트 아티스트를 같은 이름으로 연결).",
+      "⚠ 창 비대칭 · 소셜 창(2026-03-10..2026-07-19)과 차트 창(2026-07-17..2026-07-20)의 시작이 크게 다름. 태그 수집이 과거 게시물을 소급해 회고 선행 일수는 창 산물일 수 있음. 방향 판단은 앞으로의 축적으로",
+      "소셜 선행 관측 29팀: KiiiKiii(+127d), CORTIS(+68d), ILLIT(+59d), Hearts2Hearts(+57d), BOYNEXTDOOR(+28d). 소셜 버즈가 차트 진입보다 앞선 사례, 검증 대상이지 예측 아님",
+      "차트 선행(소셜 지연) 11팀: Fat Papi(-1d), Fujii Kaze(-2d), GIRLSET(-1d), Hikaru Utada(-1d), Kenshi Yonezu(-1d). 소셜이 차트를 뒤따른 반례, 선행이 항상 성립하지는 않음",
+      "소셜-온리 123팀(KISS OF LIFE, izna, KEYVEATZ, Destiny Rogers, GOT7 등) · 차트 진입 전 소셜 활성. 조사 우선순위 후보이며 진출 지시 아님",
+      "온셋(상승 시작) 기준: 소셜 = 일간 게시수 ≥ 1, 차트 = 순위 ≤ 200. 기준값은 담당자가 조정 가능",
+      "플랫폼 온셋 시차: 유효 표본 0. 복수 플랫폼 온셋 1026팀 전부 수집 첫날과 겹쳐 제외(수집 전부터 차트인했을 수 있음). 여러 날 쌓이면 산출",
+      "[프로필] CORTIS — social-led(+68d) · 소셜 149건·참여 387.4k · 드라이버: CORTIS - REDRED, CORTIS - JoyRide, #코르티스, #cortis · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+spotify+youtube · YT 구독 5850.0k·'terima kasih allo bank' +546.5k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] KATSEYE — social-led(+11d) · 소셜 127건·참여 356.2k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE (Clean Edit), #katseye, #katseye_daniela · 차트 최고 #66·4시장(AE,GLOBAL,MY,SG) · YT 구독 11900.0k·'are you with me? 🤍 #KATS' +1312.5k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] ILLIT — social-led(+59d) · 소셜 123건·참여 510.6k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #3·8시장(FI,HK,JP,KR,MY…)·apple+spotify+youtube · YT 구독 5650.0k·'It's @CharlesEnter  ❤️ #' +586.0k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] RESCENE — social-led(+17d) · 소셜 120건·참여 304.0k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #2·1시장(KR)·apple+spotify+youtube · YT 구독 794.0k·'뽀로로 따라 프리티걸 챌린지' +428.0k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] MEOVV — social-led(+28d) · 소셜 105건·참여 338.2k · 드라이버: MEOVV - Hit 'Em, MEOVV - In my hands, #meovv, #미야오 · 차트 최고 #41·2시장(KR,TW)·apple+spotify · YT 구독 1380.0k·'˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 ' +87.6k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] KISS OF LIFE — social-only · 소셜 95건·참여 577.1k · 드라이버: KISS OF LIFE - Who is she, KISS OF LIFE - Sticky, #kissoflife, #키스오브라이프 · 차트 미진입 · YT 구독 2110.0k·'pov : you thought your A' +42.6k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+      "[프로필] KiiiKiii — social-led(+127d) · 소셜 95건·참여 533.8k · 드라이버: KiiiKiii - 404 (New Era), Catshi - Cuteness, #키키, #kiiikiii · 차트 최고 #15·1시장(KR)·apple+spotify · YT 구독 507.0k·'Staycation 🏠🏖️ #KiiiKiii' +25.2k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] izna — social-only · 소셜 84건·참여 2248.5k · 드라이버: izna - METRONOME, izna - DRIP, #이즈나, #izna · 차트 미진입 · YT 구독 2030.0k·'𝓐𝓵𝓬𝓱𝓸𝓵 𝓕𝓻𝓮𝓮 근데 취해｡⋆༶⋆˙⊹❀' +30.2k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+      "[프로필] KEYVEATZ — social-only · 소셜 82건·참여 1445.8k · 드라이버: Keyveatz - OXY, Keyveatz - OXY (Preview), #keyveatz, #키비츠 · 차트 미진입 · YT 구독 271.0k·'Turn the #OXY up with #U' +5.0k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
+      "[프로필] Hearts2Hearts — social-led(+57d) · 소셜 72건·참여 221.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #하츠투하츠, #hearts2hearts · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+spotify+youtube · YT 구독 3260.0k·'so dj turn it loud #Hear' +484.6k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "[프로필] BABYMONSTER — social-led(+18d) · 소셜 50건·참여 88.9k · 드라이버: BABYMONSTER - SUGAR HONEY ICE TEA, BABYMONSTER - I LIKE IT, #babymonster, #베이비몬스터 · 차트 최고 #5·8시장(EC,HK,ID,KR,PE…)·apple+spotify+youtube · YT 구독 12700.0k·'🎀 𝘗𝘩𝘢𝘳𝘪𝘵𝘢'𝘴 𝕀 𝕃𝕀𝕂𝔼 𝕀𝕋 𝘥𝘢' +432.2k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+      "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 3307곡은 제외. 선행 분석의 대상은 **버즈가 있는 아티스트**"
     ],
     "recommendations": [
-      "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 fixture를 실데이터로 대체해 선행 여부를 실증할 수 있습니다 — 이것이 본선입니다.",
-      "θ_social(버즈 온셋)·θ_rank(차트 온셋)은 A&R 판단으로 조정하세요(--theta-social·--theta-rank) — 기준은 버전 매겨진 가설입니다(기준 원장).",
-      "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정이 아닙니다 — 개별 검증 필요(§0)."
+      "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",
+      "온셋 기준값은 담당자 판단으로 조정 가능. 기준은 조정 가능한 가설",
+      "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정 아님. 개별 검증 필요"
     ]
   },
   {
     "moduleId": "yt-pulse",
-    "title": "YT 펄스 — 워치리스트 공식 채널",
+    "title": "YT 펄스 · 워치리스트 공식 채널",
     "subtitle": "YouTube Data API v3 (official) · 2026-07-20T00:16:53Z",
-    "generatedAt": "2026-07-20T00:16:54Z",
+    "generatedAt": "2026-07-20T02:48:31Z",
     "metrics": [
       {
-        "label": "추적 acts",
+        "label": "추적 팀",
         "value": 11,
         "unit": "팀",
         "hint": "채널 해석·영상 보유"
@@ -22998,10 +23000,10 @@
         "unit": "views"
       },
       {
-        "label": "최고 velocity",
+        "label": "최고 평균 일 조회(velocity)",
         "value": 1165870,
         "unit": "views/일",
-        "hint": "KATSEYE — 평균 일 조회(수명 평균 근사)"
+        "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)"
       },
       {
         "label": "신작",
@@ -23013,7 +23015,7 @@
     "charts": [
       {
         "type": "bar",
-        "title": "act별 최근작 조회 합 (공식 채널)",
+        "title": "팀별 최근작 조회 합 (공식 채널)",
         "data": [
           {
             "name": "KATSEYE",
@@ -23063,7 +23065,7 @@
       },
       {
         "type": "bar",
-        "title": "act별 대표 velocity (평균 일 조회 최대작)",
+        "title": "팀별 대표 평균 일 조회 (최대작 기준)",
         "data": [
           {
             "name": "KATSEYE",
@@ -23114,19 +23116,19 @@
     ],
     "media": [],
     "insights": [
-      "신작: KATSEYE — 'must have been the wind #KATSEYE' (1일 전, 조회 783,100, +783,100/일) — 캠페인 활성 신호(참고).",
-      "신작: KISS OF LIFE — 'Preview : SWEAT EQUITY' (1일 전, 조회 25,997, +25,997/일) — 캠페인 활성 신호(참고).",
-      "신작: KEYVEATZ — 'いなせだね夏を連れて来た #Keyveatz' (1일 전, 조회 1,630, +1,630/일) — 캠페인 활성 신호(참고).",
-      "신작: CORTIS — 'martin pov 📹 #CORTIS #코르티스 #CORTIS_TOUR #PUTYOURPHONEDOWN #PYPD_IN_INCHEON' (1일 전, 조회 108,626, +108,626/일) — 캠페인 활성 신호(참고).",
-      "신작: Hearts2Hearts — 'yet my move wont bug you #Hearts2Hearts #하츠투하츠 #H2H #JUUN #주은' (1일 전, 조회 175,148, +175,148/일) — 캠페인 활성 신호(참고).",
-      "공식 채널 업로드 한정 — 레이블 채널(HYBE LABELS 등) 게재 MV는 미포착(v2 레지스트리 예정).",
-      "velocity는 수명 평균 근사(초동 과소평가 가능) — 다일 축적 시 실측 일별 증분으로 대체(v2).",
-      "조회·구독은 공개 집계 지표이며 인기·실력 단정이 아님(§0) — '얼마나' 축의 참고 신호."
+      "신작: KATSEYE · 'must have been the wind #KATSEYE' (1일 전, 조회 783,100, +783,100/일) · 캠페인 활성 신호(참고)",
+      "신작: KISS OF LIFE · 'Preview : SWEAT EQUITY' (1일 전, 조회 25,997, +25,997/일) · 캠페인 활성 신호(참고)",
+      "신작: KEYVEATZ · 'いなせだね夏を連れて来た #Keyveatz' (1일 전, 조회 1,630, +1,630/일) · 캠페인 활성 신호(참고)",
+      "신작: CORTIS · 'martin pov 📹 #CORTIS #코르티스 #CORTIS_TOUR #PUTYOURPHONEDOWN #PYPD_IN_INCHEON' (1일 전, 조회 108,626, +108,626/일) · 캠페인 활성 신호(참고)",
+      "신작: Hearts2Hearts · 'yet my move wont bug you #Hearts2Hearts #하츠투하츠 #H2H #JUUN #주은' (1일 전, 조회 175,148, +175,148/일) · 캠페인 활성 신호(참고)",
+      "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
+      "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
+      "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"
     ],
     "recommendations": [
       "다일 축적(daily_collect)이 쌓이면 조회 증분 라인·실측 velocity가 열립니다(v2).",
-      "채널 오매칭은 packages/entity-master/yt_channels.json에서 channel_id를 직접 정정하세요(사용자 소유).",
-      "신작 창(--recent-days)은 캠페인 주기에 맞춰 조정하세요 — 기준은 가설입니다(기준 원장)."
+      "채널 오매칭은 채널 목록(yt_channels.json)에서 직접 정정 가능",
+      "신작 판정 기간은 캠페인 주기에 맞춰 조정 가능. 기준은 조정 가능한 가설"
     ]
   }
 ]

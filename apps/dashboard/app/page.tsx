@@ -28,7 +28,7 @@ export default function LandingPage() {
             WaydCloud
           </h1>
           <p className="mt-5 text-sm tracking-wide text-[var(--muted)]">
-            데이터로 읽는 아티스트 신호 — 판단은 사람의 몫
+            데이터로 읽는 아티스트 신호. 판단은 사람의 몫
           </p>
         </div>
         <div className="grid w-full gap-4 sm:grid-cols-2">

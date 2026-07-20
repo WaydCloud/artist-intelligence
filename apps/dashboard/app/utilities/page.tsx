@@ -13,7 +13,7 @@ export default function UtilitiesPage() {
       <BrandBackdrop vignette={false} />
       <div className="relative flex flex-col items-center gap-4 rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] px-10 py-8 backdrop-blur-xl">
         <h1 className="font-display text-xl font-medium uppercase tracking-[0.12em] text-[var(--ink)]">Utilities</h1>
-        <p className="text-sm text-[var(--muted)]">준비 중입니다.</p>
+        <p className="text-sm text-[var(--muted)]">준비 중</p>
         <Link
           href="/"
           className="mt-2 text-sm text-[var(--ink-secondary)] transition-colors duration-200 ease-out hover:text-[var(--ink)]"

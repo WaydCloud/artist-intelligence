@@ -36,7 +36,7 @@ export default function LandingPage() {
             <Link
               key={s.href}
               href={s.href}
-              className="group rounded-2xl border border-[var(--glass-border)] bg-[var(--glass-bg)] p-6 backdrop-blur-xl transition-colors duration-200 ease-out hover:border-[var(--baseline)]"
+              className="glass-card group p-6 transition-colors duration-200 ease-out hover:border-[var(--baseline)]"
             >
               <div className="font-display text-base font-medium uppercase tracking-[0.12em] text-[var(--ink)]">
                 {s.title}

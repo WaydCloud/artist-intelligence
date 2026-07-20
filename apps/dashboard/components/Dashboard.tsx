@@ -1,7 +1,9 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Report } from "@/lib/report";
+import { BrandBackdrop } from "@/components/BrandBackdrop";
 import { ReportView } from "@/components/ReportView";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -42,19 +44,28 @@ export function Dashboard({ reports }: { reports: Report[] }) {
   const dark = theme === "dark";
 
   return (
-    <div className="min-h-screen">
-      <header className="border-b border-[var(--hairline)]">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-4">
+    <div className="relative min-h-screen">
+      <BrandBackdrop vignette={false} />
+      <header className="sticky top-0 z-20 border-b border-[var(--glass-border)] bg-[var(--glass-bg)] backdrop-blur-xl">
+        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-5 py-3">
           <div>
-            <div className="text-sm font-medium tracking-tight">Artist Intelligence</div>
-            <div className="text-xs text-[var(--muted)]">리포트 대시보드</div>
+            <Link
+              href="/"
+              className="metal-text font-display text-[10px] font-medium uppercase tracking-[0.3em]"
+            >
+              WaydCloud
+            </Link>
+            <div className="font-display text-sm font-medium tracking-wide text-[var(--ink)]">
+              Artist Intelligence
+              <span className="ml-2 text-xs font-normal tracking-normal text-[var(--muted)]">리포트 대시보드</span>
+            </div>
           </div>
           <ThemeToggle theme={theme} onToggle={() => setTheme(dark ? "light" : "dark")} />
         </div>
       </header>
 
-      <div className="mx-auto max-w-5xl px-5">
-        <nav className="flex gap-1 pt-4" role="tablist" aria-label="모듈">
+      <div className="relative mx-auto max-w-5xl px-5">
+        <nav className="flex flex-wrap gap-1.5 pt-4" role="tablist" aria-label="모듈">
           {reports.map((r, i) => (
             <button
               key={r.moduleId}
@@ -64,8 +75,8 @@ export function Dashboard({ reports }: { reports: Report[] }) {
               onClick={() => select(i)}
               className={
                 i === active
-                  ? "rounded-md border border-[var(--border)] bg-[var(--surface)] px-3 py-1.5 text-sm text-[var(--ink)]"
-                  : "rounded-md px-3 py-1.5 text-sm text-[var(--muted)] transition-colors hover:text-[var(--ink-secondary)]"
+                  ? "glass-card px-3 py-1.5 text-sm text-[var(--ink)]"
+                  : "rounded-2xl px-3 py-1.5 text-sm text-[var(--muted)] transition-colors duration-200 ease-out hover:text-[var(--ink-secondary)]"
               }
             >
               {r.moduleId}
@@ -75,20 +86,22 @@ export function Dashboard({ reports }: { reports: Report[] }) {
       </div>
 
       {report ? (
-        <ReportView
-          report={report}
-          dark={dark}
-          moduleIds={reports.map((r) => r.moduleId)}
-          onSelectModule={(id) => {
-            const idx = reports.findIndex((r) => r.moduleId === id);
-            if (idx >= 0) select(idx);
-          }}
-        />
+        <div className="relative">
+          <ReportView
+            report={report}
+            dark={dark}
+            moduleIds={reports.map((r) => r.moduleId)}
+            onSelectModule={(id) => {
+              const idx = reports.findIndex((r) => r.moduleId === id);
+              if (idx >= 0) select(idx);
+            }}
+          />
+        </div>
       ) : (
-        <div className="mx-auto max-w-5xl px-5 py-16 text-[var(--muted)]">표시할 리포트 없음</div>
+        <div className="relative mx-auto max-w-5xl px-5 py-16 text-[var(--muted)]">표시할 리포트 없음</div>
       )}
 
-      <footer className="mx-auto max-w-5xl px-5 py-10 text-xs leading-relaxed text-[var(--muted)]">
+      <footer className="relative mx-auto max-w-5xl border-t border-[var(--hairline)] px-5 py-10 text-xs leading-relaxed text-[var(--muted)]">
         모든 지표는 <strong className="font-medium">참고용 신호</strong>. 예측이나 단정이 아니며, 판단은 사람의 몫.
       </footer>
     </div>

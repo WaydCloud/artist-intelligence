@@ -73,7 +73,7 @@ function Card({ p }: { p: Profile }) {
   const lead =
     p.leadDays != null ? ` ${p.leadDays > 0 ? "+" : ""}${p.leadDays}d` : "";
   return (
-    <div className="flex flex-col gap-2 rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+    <div className="glass-card flex flex-col gap-2 p-4 transition-colors duration-200 ease-out hover:border-[var(--baseline)]">
       <div className="flex items-baseline justify-between gap-2">
         <span className="truncate text-sm font-semibold tracking-tight text-[var(--ink)]" title={p.key}>
           {p.key}
@@ -110,7 +110,7 @@ export function ProfileCards({ lines }: { lines: string[] }) {
   return (
     <section>
       <div className="mb-2 flex items-baseline gap-2">
-        <h2 className="text-sm font-medium">워치리스트 프로필</h2>
+        <h2 className="font-display text-sm font-medium tracking-wide">워치리스트 프로필</h2>
         <span className="text-xs text-[var(--muted)]">
           {lines.length}팀 · 참고용 신호 요약, 판단은 사람의 몫
         </span>

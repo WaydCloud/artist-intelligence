@@ -6,7 +6,7 @@ import { ProfileCards, isProfileLine } from "@/components/ProfileCards";
 function List({ title, items, marker }: { title: string; items: string[]; marker: string }) {
   return (
     <div>
-      <h2 className="mb-2 text-sm font-medium">{title}</h2>
+      <h2 className="mb-2 font-display text-sm font-medium tracking-wide">{title}</h2>
       <ul className="space-y-2">
         {items.map((t, i) => (
           <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--ink-secondary)]">
@@ -39,7 +39,7 @@ export function ReportView({
   return (
     <main className="mx-auto max-w-5xl space-y-8 px-5 py-6">
       <section>
-        <h1 className="text-xl font-semibold tracking-tight">{report.title}</h1>
+        <h1 className="font-display text-xl font-semibold tracking-wide">{report.title}</h1>
         {report.subtitle && <p className="mt-1 break-words text-sm text-[var(--ink-secondary)]">{report.subtitle}</p>}
         <p className="mt-0.5 text-xs tabular-nums text-[var(--muted)]">생성 {report.generatedAt}</p>
         {related.length > 0 && onSelectModule && (

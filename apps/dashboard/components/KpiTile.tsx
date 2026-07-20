@@ -8,7 +8,7 @@ export function KpiTile({ m }: { m: Metric }) {
   const up = typeof m.delta === "number" && m.delta > 0;
   const down = typeof m.delta === "number" && m.delta < 0;
   return (
-    <div className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-4">
+    <div className="glass-card p-4 transition-colors duration-200 ease-out hover:border-[var(--baseline)]">
       <div className="text-xs text-[var(--muted)]">{m.label}</div>
       <div className="mt-1 flex items-baseline gap-1.5">
         <span className="truncate text-2xl font-semibold tracking-tight text-[var(--ink)]">{fmt(m.value)}</span>

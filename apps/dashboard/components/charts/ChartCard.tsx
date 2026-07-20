@@ -6,8 +6,8 @@ import { Tunable } from "./Tunable";
 
 export function ChartCard({ chart, dark }: { chart: Chart; dark: boolean }) {
   return (
-    <section className="rounded-lg border border-[var(--border)] bg-[var(--surface)] p-5">
-      {chart.title && <h2 className="mb-4 text-sm font-medium">{chart.title}</h2>}
+    <section className="glass-card p-5">
+      {chart.title && <h2 className="mb-4 font-display text-sm font-medium tracking-wide">{chart.title}</h2>}
       {chart.type === "bar" && <BarChart data={chart.data as BarData} />}
       {chart.type === "line" && <LineChart data={chart.data as LineData} />}
       {chart.type === "heatmap" && <Heatmap data={chart.data as HeatmapData} dark={dark} />}

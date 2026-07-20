@@ -66,6 +66,9 @@
   --metal: linear-gradient(115deg, #3f4247 0%, #82888f 30%, #43464b 52%, #9aa0a7 74%, #4c4f54 100%);
   --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(42, 120, 214, 0.1), transparent 70%);
   --vignette: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(11, 11, 11, 0.06) 100%);
+  /* 필름 그레인: 흑백 fractal noise SVG 타일. 불투명도는 --grain-opacity로만 조절(≤ 0.08). */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --grain-opacity: 0.04;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -75,6 +78,7 @@
     --metal: linear-gradient(115deg, #8e939a 0%, #eef0f3 30%, #74787e 52%, #f6f7f9 74%, #9ea3aa 100%);
     --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(57, 135, 229, 0.16), transparent 70%);
     --vignette: radial-gradient(120% 90% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
+    --grain-opacity: 0.06;
   }
 }
 
@@ -84,6 +88,7 @@
   --metal: linear-gradient(115deg, #8e939a 0%, #eef0f3 30%, #74787e 52%, #f6f7f9 74%, #9ea3aa 100%);
   --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(57, 135, 229, 0.16), transparent 70%);
   --vignette: radial-gradient(120% 90% at 50% 50%, transparent 50%, rgba(0, 0, 0, 0.45) 100%);
+  --grain-opacity: 0.06;
 }
 
 html,

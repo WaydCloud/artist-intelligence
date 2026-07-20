@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandBackdrop } from "@/components/BrandBackdrop";
 
 const sections = [
   {
@@ -17,8 +18,7 @@ const sections = [
 export default function LandingPage() {
   return (
     <main className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden p-6">
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "var(--glow)" }} />
-      <div aria-hidden className="pointer-events-none absolute inset-0" style={{ background: "var(--vignette)" }} />
+      <BrandBackdrop />
       <div className="relative flex w-full max-w-2xl flex-col items-center gap-14">
         <div className="text-center">
           <h1

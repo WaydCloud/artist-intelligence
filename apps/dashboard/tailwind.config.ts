@@ -16,7 +16,8 @@ const config: Config = {
         series: "var(--series)",
       },
       fontFamily: {
-        sans: ["system-ui", "-apple-system", "Segoe UI", "sans-serif"],
+        sans: ["var(--font-body)"],
+        display: ["var(--font-display)"],
       },
     },
   },

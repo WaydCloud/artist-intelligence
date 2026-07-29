@@ -1,6 +1,7 @@
 # CASEBOOK — 장르 임펄스 (Phase A 조사 원장)
 
-> **상태: 1차 조사 완료** (2026-07-29 착수·당일 10케이스 1차 완료 — 교차 검증 전). 기획 정본: [`PLAN-genre-impulse.md`](PLAN-genre-impulse.md) · 프레임: [`DECISIONS.md`](DECISIONS.md) D-033.
+> **상태: 1차 조사 + 교차 검증 1차 반영 완료** (2026-07-29 착수·당일 10케이스 1차 → 하중받는 약출처 주장 18건 교차 검증 반영: 반증 3건(AtHeart 귀속·이지리스닝 명명 시점·트로피컬 첫 수용 하한), 격상 5건, 확정 5건, 추정 유지 3건). 본문의 🔄/✅/⚠ 표기가 검증 반영 흔적. 기획 정본: [`PLAN-genre-impulse.md`](PLAN-genre-impulse.md) · 프레임: [`DECISIONS.md`](DECISIONS.md) D-033.
+> ⚠ **A2(사운드 서명)는 환경 차단으로 보류**: Windows Smart App Control이 `av`(FFmpeg DLL)를 차단(2026-07-29 21시~23시 사이 발생, HANDOFF 참조). 조사 코호트·집계 스크립트는 준비 완료(`data/research/genre-impulse/`) — 차단 해소 시 즉시 실행 가능.
 > 이 문서는 케이스별 회고 조사 결과의 **사람이 읽는 원장**이다. 기계가 읽는 임펄스 레코드(JSON)는 Phase B에서 이 문서를 정형화해 만든다.
 > **규율**: 모든 시점 주장에 출처 병기 · 출처 없는 것은 `추정` 표기 · 웹 조사 결과는 1차 검증(교차 출처) 전까지 `미검증` — 하중받는 기준의 근거로 쓰지 않는다.
 
@@ -45,7 +46,7 @@
 |---|---|---|---|---|
 | (1) 발원 씬 형성 | 1999~2002 (연 단위) | 뉴어크에서 DJ Tameil이 볼티모어 클럽+시카고 하우스+힙합 결합, 2001 *Dat Butt* EP, Brick Bandits 결성, 2002 "Brick City club" 명명. 2005년경 2세대(Nadus, DJ Sliink, R3LL 등), 2008 지역 라디오 진입 | [Wikipedia](https://en.wikipedia.org/wiki/Jersey_club) · [FADER 오럴 히스토리](https://www.thefader.com/2014/06/12/the-skys-the-limit-an-oral-history-of-jersey-club) | 검증 |
 | (1') 발원 씬 온라인 재부상 | 2010~2014 | 사운드클라우드 중심 재부상, Cashmere Cat·Lido 등의 저지클럽 리듬 차용, UNIIQU3 등 부상 | [Wikipedia](https://en.wikipedia.org/wiki/Jersey_club) · [나무위키](https://namu.wiki/w/%EC%A0%80%EC%A7%80%20%ED%81%B4%EB%9F%BD) | 검증 |
-| (2) 발원지 바이럴 1차 | 2020-02 | Cookiee Kawaii "Vibe (If I Back It Up)" 틱톡 바이럴(5,000만+ 재생, 팬데믹 댄스 챌린지) | [Rolling Stone](https://www.rollingstone.com/music/music-features/cookiee-kawaii-vibe-tiktok-1043766/) | 검증 |
+| (2) 발원지 바이럴 1차 | 2020-02 | Cookiee Kawaii "Vibe (If I Back It Up)"(원 발매 **2019-03-29** ✅ 교차 검증 확정, [Audiomack](https://audiomack.com/cookieekawaii/song/vibe-if-i-back-it-up)) 틱톡 바이럴(5,000만+ 재생) — 발매→바이럴 11개월 잠복 | [Rolling Stone](https://www.rollingstone.com/music/music-features/cookiee-kawaii-vibe-tiktok-1043766/) | 검증 |
 | (2') 발원지 바이럴 2차(대파도) | 2022-09~11 | "Just Wanna Rock" 안무(2022-09-14 원본 → 10~11월 틱톡 대유행), DJ Smallz 732의 저지클럽 리믹스 양산(Coi Leray "Players" 등) | [Know Your Meme](https://knowyourmeme.com/memes/lil-uzi-vert-just-wanna-rock-dance) · [Hot97](https://www.hot97.com/news/jersey-club-music-is-taking-over-the-world-first-stop-jersey/) | 검증 |
 | (3) 발원지 주류 (빌보드) | 2022-06 (앨범) / 2022-10 (싱글) | Drake *Honestly, Nevermind*(2022-06-17) 빌보드 200 1위, "Sticky"(볼티모어 클럽) Hot 100 톱20. Lil Uzi Vert "Just Wanna Rock"(2022-10-17) Hot 100 10위·Hot Rap Songs 1위. PinkPantheress·Ice Spice "Boy's a Liar Pt. 2"(2023-02) Hot 100 3위 | [Honestly, Nevermind](https://en.wikipedia.org/wiki/Honestly,_Nevermind) · [Just Wanna Rock](https://en.wikipedia.org/wiki/Just_Wanna_Rock) · [Billboard](https://www.billboard.com/music/chart-beat/lil-uzi-vert-just-wanna-rock-top-10-five-burinig-questions-1235244361/) | 검증 |
 | (7) 한국 언더/B-side 첫 수용 | 2020-09 (고립) / 2022 하반기 (연속) | **XUM "DDALALA"(2020-09-24)** — '저지클럽 기반' 명시 최초급 K-pop 곡(무명·무실적·해체로 고립 사례). 연속 흐름은 2022 하반기 EK·수퍼비 등 래퍼 저지클럽 곡 + 전문 아티스트 iiso부터 | [XUM Fandom](https://xum.fandom.com/wiki/DDALALA) · [나무위키](https://namu.wiki/w/%EC%A0%80%EC%A7%80%20%ED%81%B4%EB%9F%BD) | 검증(XUM) / 추정(EK·수퍼비 월) |
@@ -60,8 +61,8 @@
 
 | 곡 | 발매 | 차트 성적 | 요소 |
 |---|---|---|---|
-| XUM "DDALALA" | 2020-09 | 무실적(2021 해체) | '저지클럽 기반' 공식 명시 — 고립 선행 사례 |
-| EK·수퍼비 등 래퍼 저지클럽 곡 | 2022 하반기 | 언더/힙합 씬 | 미국 2022 파도의 즉시 반응 (월 추정) |
+| XUM "DDALALA" | 2020-09-24 | 무실적(2021 해체) | '저지클럽 기반' 공식 명시 — **교차 검증 확인** ([KSTATION TV 2020-09-30](https://kstationtv.com/2020/09/30/xum-attention-is-on-girls/?lang=en); 원래 8-25 예정 → 코로나로 연기) |
+| EK·수퍼비 등 래퍼 저지클럽 곡 | 2022 하반기 | 언더/힙합 씬 | ⚠ **교차 검증 실패 — 하중 낮춤**: 국내 저지클럽 피처 4건(visla·지니 매거진 등) 전수 확인에서 세 이름 모두 미등장, 나무위키 단독 표기. 곡명·발매월 특정 불가 — **근거로 사용 금지**. 단 [visla 저지클럽 피처(2022-08)](https://visla.kr/feature/180242/)의 존재 자체는 국내 매체의 씬 인지 시점 증거 후보(내용 미확인) |
 | **NewJeans "Ditto"** | 2022-12 | 멜론 주간 14주 1위·써클 13주 1위·2023 써클 연간 1위, Hot 100 82위 | 볼티모어 클럽 명시(250 프로듀스) — 킥에 발라드적 정서 결합 |
 | NewJeans "OMG" | 2023-01 | 써클 디지털 2위, 글로벌 200 10위 | FRNK 프로듀싱, 저지클럽+R&B |
 | SEVENTEEN "손오공" | 2023-04 | 초동 대기록 앨범 타이틀 | 곡 전반 저지클럽 킥 |
@@ -69,7 +70,7 @@
 | ODD EYE CIRCLE "Air Force One" | 2023-07 | 중위권 | 저지클럽 타이틀 |
 | NewJeans "Super Shy" | 2023-07 | 멜론 TOP100 1위·써클 1위, 글로벌 200 2위 | 저지클럽+리퀴드 DnB |
 | NewJeans "ETA" | 2023-07 | Hot 100 81위·국내 상위 | 볼티모어 클럽(에어혼·드럼 브레이크) |
-| 다이나믹듀오·이영지 "Smoke" | 2023-09 | 국내 상위·챌린지 대유행 | 저지클럽풍 드럼(장르 명시 출처 없음 — 추정) |
+| 다이나믹듀오·이영지 "Smoke" | 2023-09 | 국내 상위·챌린지 대유행 | 저지클럽풍 드럼 — **교차 검증에서도 장르 명시 출처 없음 확정**([벅스 공식 표기](https://music.bugs.co.kr/track/6214823)는 랩/힙합) → 추정 유지 |
 | BABYMONSTER "BATTER UP" | 2023-11 | 데뷔곡 | 저지클럽 비트 |
 | izna 데뷔반·"BEEP"·"Psycho" | 2024-11~2025 | 신인 | UKG+저지클럽 — 유행 말기의 관성 사용 |
 
@@ -137,15 +138,15 @@
 | 글로벌 씬(대륙→허브) | 2021-02 | Focalistic × Davido "Ke Star Remix" 나이지리아 iTunes 1위 — 아프로비츠 파이프라인 합류. 2022 Uncle Waffles 런던 매진, Beatport 장르 등재 | [Wikipedia: Ke Star](https://en.wikipedia.org/wiki/Ke_Star), [News24](https://www.news24.com/truelove/celebrity/uncle-waffles-rise-to-international-stardom-from-going-viral-in-soweto-to-sold-out-shows-in-europe-20221011) | 상 |
 | 글로벌 바이럴 | 2020-07 (보도) → 2021-10 (결정적) | 2020-07 "Amapiano blows up on TikTok" 보도. 2021-10 Uncle Waffles "Adiwele" 클립 48시간 3백만 뷰, Drake 리포스트 | [The Star](https://www.pressreader.com/south-africa/the-star-south-africa-early-edition/20200716/282033329500482), [Kaya959](https://www.kaya959.co.za/watch-drake-follows-uncle-waffles-as-the-people-are-burning-adiwele-video-hits-over-3-million-views/) | 상 |
 | 글로벌 주류 | 2023-10 | Tyla "Water"(2023-07-28) 틱톡 챌린지 → Hot 100 #67 데뷔(2023-10) → 피크 #7(2024-01) → 초대 그래미 Best African Music Performance(2024-02) | [Billboard](https://www.billboard.com/music/rb-hip-hop/tyla-water-song-hit-global-billboard-cover-1235642263/), [Grammy](https://www.grammy.com/news/tyla-wins-first-best-african-music-performance-award-2024-grammys) | 상 |
-| 한국 언더/비아이돌 | 2023-09~10 | GEMINI 《Love Sick》(2023-09-22), Kohway × Niaeh "Run Away"(2023). 서울 클럽(이태원) 아마피아노 셋 관측 | [EnVi](https://envimedia.co/8-artists-in-the-korean-music-scene-who-tapped-into-afrobeats-in-2023/) | 중 |
+| 한국 언더/비아이돌 | **2023-08~10** (교차 검증으로 앞당김) | 이태원 케이크샵 DJ CO.KR "요즘은 남아공에서 시작한 아마피아노 장르를 자주 튼다" 인터뷰(**2023-08-30**, 얼루어) → GEMINI 《Love Sick》(2023-09-22), Kohway × Niaeh "Run Away"(2023) | [얼루어 코리아](https://www.allurekorea.com/2023/08/30/behind/), [EnVi](https://envimedia.co/8-artists-in-the-korean-music-scene-who-tapped-into-afrobeats-in-2023/) | 중→**상**(씬 증거 매체 보강) |
 | 한국 아이돌 | 2024-04 | SEVENTEEN 퍼포먼스팀 "Spell"(2024-04-29 수록, 명시적 아마피아노) | [Soompi](https://www.soompi.com/article/1661938wpp/watch-seventeens-performance-team-casts-an-alluring-spell-in-new-mv) | 상 |
-| 한국 주류 | **미도달** (2026-07 기준) | 명시적 아마피아노 곡의 국내 상위권 확인 불가. 경계 사례: KISS OF LIFE "Sticky"(2024-07, 아프로비츠 골격+아마피아노 환기) Circle 주간 #3·멜론 #9. Tyla "Water" 국내 스포티파이 미진입 | [Wikipedia: Sticky](https://en.wikipedia.org/wiki/Sticky_(Kiss_of_Life_song)), [kworb](https://kworb.net/spotify/track/5aIVCx5tnk0ntmdiinnYvw.html) | 상(부재 확인은 불완전) |
+| 한국 주류 | **미도달** (2026-07 기준) | 명시적 아마피아노 곡의 국내 상위권 확인 불가. 경계 사례: KISS OF LIFE "Sticky"(2024-07, 아프로비츠 골격+아마피아노 환기) Circle 주간 #3(✅ 확인) · 멜론 TOP100 최고 #9(✅ [kchartsmaster](https://x.com/kchartsmaster/status/1811038735686938701) — 단 차트 구분(일간/실시간) 미상이라 '주간' 단정 금지). Tyla "Water" 국내 스포티파이 미진입 | [Wikipedia: Sticky](https://en.wikipedia.org/wiki/Sticky_(Kiss_of_Life_song)), [kworb](https://kworb.net/spotify/track/5aIVCx5tnk0ntmdiinnYvw.html) | 상(부재 확인은 불완전) |
 
 ## 대표곡
 
 **발원 원형**: Scorpion Kings EP(2019, 주류화 분수령) · Kabza De Small *I Am the King of Amapiano*(2020) · Focalistic "Ke Star Remix"(2021-02, 대륙 확산 기점) · Young Stunna "Adiwele"(2021) · Kabza & Maphorisa × Ami Faku "Abalele"(2021, 보컬 아마피아노) · Uncle Waffles "Tanzania"(2022~23) · Tyla "Water"(2023-07, '팝피아노' 절정)
 
-**한국 수용**: Kohway × Niaeh "Run Away"(2023, 언더) · GEMINI 《Love Sick》(2023-09, R&B 씬) · SEVENTEEN 퍼포먼스팀 "Spell"(2024-04, 유닛 B-side) · KISS OF LIFE "Sticky"(2024-07, Circle #3 — 단 주골격은 아프로비츠) · KAI "Off And Away"(2025-04, B-side) · ENHYPEN "Push Back"(2025 추정 — 수록 앨범 미확인, **확실성 낮음**)
+**한국 수용**: Kohway × Niaeh "Run Away"(2023, 언더) · GEMINI 《Love Sick》(2023-09, R&B 씬) · SEVENTEEN 퍼포먼스팀 "Spell"(앨범 2024-04-29·MV 2024-05-17 — **아마피아노 명시 격상**: 보도자료 기반 국내 매체 일제 명시, [한국경제](https://plus.hankyung.com/apps/newsinside.view?aid=2024051751214)·[디스패치](https://www.dispatch.co.kr/2291727)) · KISS OF LIFE "Sticky"(2024-07, Circle #3 — 단 주골격은 아프로비츠) · KAI "Off And Away"(2025-04, B-side) · ~~ENHYPEN "Push Back"~~ → 🔴 **교차 검증에서 반증(아티스트 귀속 오류)**: "Push Back"은 신인 걸그룹 **AtHeart** 데뷔 EP *Plot Twist*(2025-08-13) 수록곡이며 아마피아노·아프로비트 귀속은 유효 ([Stardust Magazine](https://thestardustmag.com/music/the-25-best-k-pop-songs-of-2025), [Kpop Wiki](https://kpop.fandom.com/wiki/Plot_Twist)). ENHYPEN 디스코그래피에 해당 곡 없음
 
 ## 리드타임
 
@@ -223,7 +224,7 @@
 | NewJeans "Super Shy" | 2023-07 | Circle·멜론 1위(7주) | 리퀴드 DnB+2-step+저지클럽 ([Mixmag Asia](https://mixmag.asia/feature/new-jeans-k-pop-evolution-aesthetic-dance-music-genres-breaks-bass)) |
 | NewJeans "Cool with You" | 2023-07 | Circle 14위 | NME "확고히 UKG에 뿌리", 워블 베이스 |
 | NewJeans "ASAP" | 2023-07 | EP 초동 165만 | 퓨처 개러지 표기 — **확실성 낮음** |
-| Jung Kook "Seven" | 2023-07 | **Hot 100 1위 데뷔·멜론 1위**, 2023 글로벌 여름송 1위 | 어쿠스틱 팝 + UKG 2-step 리듬 |
+| Jung Kook "Seven" | 2023-07 | **Hot 100 1위 데뷔·멜론 1위**, 2023 글로벌 여름송 1위 | 어쿠스틱 팝 + UKG 2-step 리듬 — **격상**: [Forbes 프로듀서(Andrew Watt·Cirkut) 인터뷰](https://www.forbes.com/sites/hughmcintyre/2023/07/28/the-producers-behind-jung-kooks-seven-share-the-behind-the-scenes-story-of-the-no-1-smash/) |
 | OnlyOneOf "dOpamine" | 2024 | — | DnB 요소(리뷰 언급 수준) |
 
 **배제 판정(잘못된 귀속 경계)**: aespa "Spicy"(dance-pop — UKG 근거 없음) · aespa "Supernova"(공식 dance/hyperpop, 일부 리뷰만 DnB 언급 — 귀속 불확실) · 전소미 "Fast Forward"(공식 딥하우스) · 태연 "To. X"(R&B) · KISS OF LIFE "Igloo"(근거 없음)
@@ -292,7 +293,7 @@
 | 글로벌 바이럴 (트로피컬하우스) | 2013-12 | Kygo의 Ed Sheeran "I See Fire" 리믹스가 사운드클라우드에서 국제적 주목 | [Kygo Wikipedia](https://en.wikipedia.org/wiki/Kygo) | 상 |
 | 글로벌 주류 차트 진입 | 2014-12 ~ 2015-08 | Kygo "Firestone"(2014-12) → Major Lazer "Lean On"(2015-03 발매, 2015-08-29 Hot 100 4위, 20여 개국 1위) | [Firestone Wikipedia](https://en.wikipedia.org/wiki/Firestone_(song)), [Lean On Wikipedia](https://en.wikipedia.org/wiki/Lean_On) | 상 |
 | 글로벌 주류 정점 | 2015-09 ~ 2016-08 | Bieber "What Do You Mean?"(2015-09 Hot 100 1위), "Sorry"(2015-10 발매, Hot 100 1위), "Cold Water"(2016-07-22 발매, 2016-08-13자 Hot 100 2위 데뷔) | [WDYM Wikipedia](https://en.wikipedia.org/wiki/What_Do_You_Mean%3F), [Sorry Wikipedia](https://en.wikipedia.org/wiki/Sorry_(Justin_Bieber_song)), [Billboard](https://www.billboard.com/pro/major-lazer-justin-bieber-mo-cold-water-hot-100-sia/) | 상 |
-| 한국 씬/첫 수용 | 2016-05 ~ 2016-09 | BTS "Save Me"(2016-05, 트로피컬하우스 영향 후속곡), 태연 "Why"(2016-06, LDN Noise 프로듀싱 트로피컬하우스), EXO "Dancing King"(2016-09, SM Station 비정규 채널의 트로피컬하우스/뭄바톤) | [Save Me Wikipedia](https://en.wikipedia.org/wiki/Save_Me_(BTS_song)), [Why Wikipedia](https://en.wikipedia.org/wiki/Why_(Taeyeon_song)), [Dancing King Wikipedia](https://en.wikipedia.org/wiki/Dancing_King) | 중 (장르 표기는 2차 문헌 의존) |
+| 한국 씬/첫 수용 | **2015-10** (교차 검증으로 7개월 앞당김) | **f(x) "4 Walls"(2015-10-27, 트로피컬하우스+UK개러지+딥하우스 — Billboard·Spin 서술)** → BTS "Save Me"(2016-05), 태연 "Why"(2016-06, LDN Noise), EXO "Dancing King"(2016-09, SM Station) | [4 Walls Wikipedia](https://en.wikipedia.org/wiki/4_Walls_(song)), [Why Wikipedia](https://en.wikipedia.org/wiki/Why_(Taeyeon_song)) | 중→상 |
 | 한국 주류 차트 진입 | 2016-10 | BTS "피 땀 눈물"(2016-10-10, 뭄바톤·트랩·트로피컬하우스) 가온 디지털 1위 — BTS 첫 디지털 1위 | [Wikipedia](https://en.wikipedia.org/wiki/Blood_Sweat_%26_Tears_(song)) | 상 |
 | 한국 주류 정점 | 2017-04 ~ 2017-08 | Winner "Really Really"(2017-04) 남자 아이돌 최초 가온 1억 스트리밍, EXO "Ko Ko Bop"(2017-07-18) 가온 1위 4주, Red Velvet "빨간 맛"(2017-07) 등 여름 시장 석권 | [Gulf News](https://gulfnews.com/entertainment/music/k-pop-corner-winners-really-really-crosses-100-million-mark-1.60822975), [Ko Ko Bop Wikipedia](https://en.wikipedia.org/wiki/Ko_Ko_Bop), [Red Flavor Wikipedia](https://en.wikipedia.org/wiki/Red_Flavor) | 상 |
 | 한국 쇠퇴 | 2018 | 2018-03 시점 평론이 "2017은 트로피컬하우스·EDM 지배, 2018은 아직 지배 트렌드 없음"으로 전환기 진단. 글로벌 씬도 2017~19 과포화·피로로 하락 | [The Bias List](https://thebiaslist.com/2018/03/25/tracking-k-pops-trends-from-2011-2017/), [We Rave You](https://weraveyou.com/2023/09/tropical-house-decline/) | 중 |
@@ -368,7 +369,7 @@
 ## 한계·불확실성
 
 1. **장르 판정의 2차 문헌 의존**: 곡별 "뭄바톤/트로피컬하우스" 표기는 위키피디아·평론 등 2차 출처 기반. 원 리듬(뎀보우 그리드 유무)의 음향 분석 검증 없음 — **A2에서 sonic-profile로 교차 검증할 지점**.
-2. **첫 수용 하한 미확정**: 2016-05 이전(2015년) K-pop B-side의 뭄바톤 사례를 배제하지 못했다. 회고 자료가 히트곡 중심이라 비히트 초기 수용은 관측 누락 가능성(생존 편향).
+2. ~~첫 수용 하한 미확정~~ → ✅ **교차 검증으로 해소(부분)**: f(x) "4 Walls"(2015-10)가 트로피컬 계열 선행 사례로 확정 — 글로벌 주류 진입기(2015)와 **거의 동시에** SM이 채용했다. 단 '뭄바톤' 사례는 별도 미발견(트로피컬/딥하우스 계열만). **함의: "첫 수용"은 2015년에도 이미 빨랐고(글로벌 진입 대비 수개월), 압축된 것은 "주류 1위 도달"까지의 시차다.**
 3. **쇠퇴 시점 해상도 낮음**: "2018년 쇠퇴"는 평론 진단 기반이며 차트 점유율 시계열로 정량화하지 않음.
 4. **당시 멜론 주간 차트 원자료 미접근**: 정점기 성적 일부는 2차 집계 인용.
 5. **소급 재구성 고유 한계**: "당시 관측 가능했던 신호"는 사후 지식으로 선별된 것 — 조기 신호의 예측력 주장은 이 케이스 하나로 일반화 불가.
@@ -409,7 +410,7 @@
 |---|---|---|---|
 | KARD "Oh NaNa" | 2016-12 | 국내 부진·해외 반응 | 레게톤/뭄바톤 수출형 프리데뷔 |
 | KARD "Hola Hola" | 2017-07 | 빌보드 World Albums #3 | 데뷔 전 미주 11개 도시 투어 — 해외 수요 견인 |
-| 선미 "가시나" | 2017-08 | **가온 1위** | 댄스홀(뎀보우 인접 — 참고 사례) |
+| 선미 "가시나" | 2017-08 | **가온 1위**(✅ 복수 출처 확인 — 데뷔주 #2 → 발매 2주차 #1, 2017-08-27~09-02 주간, [SBS PopAsia](https://www.sbs.com.au/popasia/blog/2017/09/07/wanna-one-and-sunmi-rule-gaon-chart)) | 댄스홀(뎀보우 인접 — 참고 사례) |
 | 슈퍼주니어 "Lo Siento" | 2018-04 | Latin Digital #13 — **K-pop 최초 라틴 차트 진입**. 가온 미진입 | 라틴팝+댄스홀, Play-N-Skillz 프로듀스 |
 | (여자)아이들 "LATATA" | 2018-05 | 가온 12위 | 뭄바톤/레게/트랩팝 |
 | 슈퍼주니어 "One More Time" | 2018-10 | World Digital #4 | 멕시코 밴드 Reik 합작 |
@@ -474,7 +475,7 @@
 | 셀 | 첫 도달 | 근거 | 출처 | 확실성 |
 |---|---|---|---|---|
 | 일본 원 씬(카탈로그) | 1984 녹음 / 1985-03 싱글 | "Plastic Love" 오리콘 86위·약 1만 장 — 당대엔 비히트 | [Wikipedia](https://en.wikipedia.org/wiki/Plastic_Love) | 높음 |
-| 글로벌 니치 씬(샘플링 계보) | 2013 / 2013-11 | Saint Pepsi 『Hit Vibes』 퓨처펑크 분기, Macross 82-99 『ネオ東京』 시티팝 샘플링 관습화(SoundCloud/Bandcamp) | [Future Funk Wiki](https://future-funk.fandom.com/wiki/History) | 높음 |
+| 글로벌 니치 씬(샘플링 계보) | **2013-05** (✅ 교차 검증 확정) / 2013-11 | Saint Pepsi 『Hit Vibes』(2013-05-31, KEATS//COLLECTIVE — [Bandcamp](https://saintpepsi.bandcamp.com/album/hit-vibes)) 퓨처펑크 분기, Macross 82-99 『ネオ東京』 시티팝 샘플링 관습화 | [Future Funk Wiki](https://future-funk.fandom.com/wiki/History) | 높음 |
 | 글로벌 바이럴 트리거(업로드) | 2017-07 | 'Plastic Lover' 계정의 8분 리믹스판 업로드(2017-07-05) | [Musical Urbanism](https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/) | 높음 |
 | 글로벌 알고리즘 바이럴(임계) | 2018-03~04 | 조회 급증 구간 2018-03-17~04-05로 추적 — "알고리즘이 작동한 시기" | [Musical Urbanism](https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/) | 높음 |
 | 글로벌 상업 주류화(리이슈) | 2019-05 | Light in the Attic 『Pacific Breeze』(2019-05-03) + 워너 공식 쇼트 MV(2019-05-18) | [Wikipedia](https://en.wikipedia.org/wiki/Pacific_Breeze:_Japanese_City_Pop,_AOR_and_Boogie_1976%E2%80%931986) | 높음 |
@@ -493,7 +494,7 @@
 
 **리바이벌 트리거**: Saint Pepsi 『Hit Vibes』(2013) · Macross 82-99 『ネオ東京』(2013-11) · "Plastic Love" 8분 리믹스 업로드(2017-07, 삭제 전 5,500만+ 뷰)
 
-**한국 수용**: 죠지 "Boat"(2017-11, 인디 R&B 씬 히트) · 유빈 "숙녀"(2018-06, 아이돌 최초급 명시 콘셉트) · 죠지 "오랜만에"(2018-08, 디깅클럽서울 리메이크) · 유키카 "네온"(2019-02, 신인 데뷔 '기획 상품'화 — 제작진이 여자친구 작업팀 Oreo) · 김현철 복귀(2019 하반기 — 원조 세대 13년 만 복귀, 리바이벌의 역방향 완결) · 백예린 "Square (2017)"(2019-12, 멜론 1위 — '인접') · 선미 "보라빛 밤"(2020-06, 시티팝 표방 상위권)
+**한국 수용**: 죠지 "Boat"(2017-11, 인디 R&B 씬 히트) · 유빈 "숙녀"(2018-06, 아이돌 최초급 명시 콘셉트 — ✅ 교차 검증: **가온 주간 디지털 톱100 미진입**(Domestic Digital 96위 피크, [Wikipedia](https://en.wikipedia.org/wiki/Kim_Yu-bin)) → 콘셉트 선행 신호로는 유효하나 상업 성과 사례로는 사용 금지) · 죠지 "오랜만에"(2018-08, 디깅클럽서울 리메이크) · 유키카 "네온"(2019-02, 신인 데뷔 '기획 상품'화 — 제작진이 여자친구 작업팀 Oreo) · 김현철 복귀(2019 하반기 — 원조 세대 13년 만 복귀, 리바이벌의 역방향 완결) · 백예린 "Square (2017)"(2019-12, 멜론 1위 — '인접') · 선미 "보라빛 밤"(2020-06, 시티팝 표방 상위권)
 
 ## 리드타임
 
@@ -561,7 +562,7 @@
 | 한국 씬(트리거 후 재점화) | 2018-04 | EXID "Lady" — 명시적 90s NJS 콘셉트, Finesse 리믹스 3개월 후 | [Wikipedia](https://en.wikipedia.org/wiki/Lady_(EXID_song)) | 높음 |
 | 한국 바이럴 | 2019-09 | '온라인 탑골공원' — 90s 가요 스트리밍 동접 2만+, 뉴트로 열풍(**한국화된 90s 가요**의 바이럴) | [아주경제](https://www.ajunews.com/view/20190919090636722) | 높음 |
 | 한국 주류(부분) | 2016-10 | SHINee 『1 of 1』 Gaon 앨범 1위(팬덤 구매 기반 — 대중 청취 지표 아님) | [Wikipedia](https://en.wikipedia.org/wiki/1_of_1_(Shinee_album)) | 높음 |
-| 한국 주류(완전) | 2022-07 | NewJeans "Attention"(장르 분류 NJS) 데뷔곡 서클 디지털 1위 | [Wikipedia](https://en.wikipedia.org/wiki/Attention_(NewJeans_song)) | 중간~높음 |
+| 한국 주류(완전) | 2022-07 | NewJeans "Attention"(장르 분류 NJS) 데뷔곡 서클 디지털 1위 — **격상**: IZM 원출처 확보("1990년대 뉴 잭 스윙과 하우스 리듬을 현대적으로 믹싱", 정수민 2022-12) | [IZM](http://archive.izm.co.kr/contentRead.asp?idx=31618&bigcateidx=19&subcateidx=20&view_tp=1) | **높음** |
 
 ## 대표곡
 
@@ -569,7 +570,7 @@
 
 **리바이벌 트리거(미국)**: Bruno Mars "Finesse"(2016-11 원곡 / 2018-01 리믹스 Hot 100 3위)
 
-**한국 수용(리바이벌 본편)**: EXO "Call Me Baby"(2015-03, 팬 비평 분류 — 확실성 낮음) · SHINee "1 of 1"(2016-10, NJS 명시 타이틀·Gaon 앨범 1위) · S.E.S. "Paradise"(2017-01, 원조 걸그룹 자기 인용) · EXID "Lady"(2018-04, 90s 의상·캠코더 MV) · NCT U "90's Love"(2020-11, "Bell Biv DeVoe풍 클래식 NJS 훅" — [Rolling Stone](https://www.rollingstone.com/music/music-features/nct-90s-love-song-review-1094506/)) · Rain & 박진영 "나로 바꾸자"(2020-12) · SHINee 『Don't Call Me』(2021-02, Gaon 앨범 1위) · **NewJeans "Attention"(2022-07, 서클 디지털 1위 — NJS 리듬의 이지리스닝화)** · NewJeans "Supernatural"(2024-06, Pharrell 프로듀스 "1991년경 댄스팝/NJS 스로백", 오리콘 데일리 1위)
+**한국 수용(리바이벌 본편)**: EXO "Call Me Baby"(2015-03 — 🔄 교차 검증 표기 수정: "NJS 곡" 단정 대신 **"NJS 창시자 Teddy Riley 작곡·프로듀싱 크레딧([Wikipedia](https://en.wikipedia.org/wiki/Call_Me_Baby)), 당대 비평([Singles Jukebox](https://thesinglesjukebox.com/exo-call-me-baby/))이 NJS 편곡으로 서술"** — 연속 계보(전사 ③)의 직접 연장임이 오히려 강화됨) · SHINee "1 of 1"(2016-10, NJS 명시 타이틀·Gaon 앨범 1위) · S.E.S. "Paradise"(2017-01, 원조 걸그룹 자기 인용) · EXID "Lady"(2018-04, 90s 의상·캠코더 MV) · NCT U "90's Love"(2020-11, "Bell Biv DeVoe풍 클래식 NJS 훅" — [Rolling Stone](https://www.rollingstone.com/music/music-features/nct-90s-love-song-review-1094506/)) · Rain & 박진영 "나로 바꾸자"(2020-12) · SHINee 『Don't Call Me』(2021-02, Gaon 앨범 1위) · **NewJeans "Attention"(2022-07, 서클 디지털 1위 — NJS 리듬의 이지리스닝화)** · NewJeans "Supernatural"(2024-06, Pharrell 프로듀스 "1991년경 댄스팝/NJS 스로백", 오리콘 데일리 1위)
 
 ## 리드타임
 
@@ -627,7 +628,7 @@
 | 한국 주류 진입(원형) | 2022-04 | 아이브 "LOVE DIVE" 멜론 1위, MAMA·MMA 올해의 노래 | [Wikipedia](https://en.wikipedia.org/wiki/Love_Dive_(song)) | 높음 |
 | 한국 주류 확립 | 2022-07 | 뉴진스 데뷔 "Attention" 즉시 차트 석권 | [헤럴드경제](https://biz.heraldcorp.com/article/3289333) | 높음 |
 | 한국 차트 지배 | 2022-12 | "Ditto" PAK(2022-12-26), 멜론 주간 1위 14주(사상 최장) | [Soompi](https://www.soompi.com/article/1569746wpp/newjeans-ditto-becomes-1st-song-in-melon-history-to-chart-at-no-1-for-10-consecutive-weeks) | 높음 |
-| 담론 프레임화(명명) | 2023 상반기 (추정) | Cupid 성공 후 명명 확산, 2023-10 일반지 기사화 확인 | [매일신문](https://www.imaeil.com/page/view/2023100909594244883) | 낮음(최초 사용 미상) |
+| 담론 프레임화(명명) | **2022-07 (교차 검증으로 반증·앞당김)** | **어도어의 뉴진스 데뷔(2022-07-22) 공식 소개문("세련된 이지리스닝 팝")이 기점** — 디스패치가 2022-08-08 이미 "2022년 유행 음악인 이지리스닝 팝" 지칭. 일반 언론 확산은 2023 ([매일신문 2023-10](https://www.imaeil.com/page/view/2023100909594244883)) | [디스패치 2022-08-08](https://www.dispatch.co.kr/2212299), [BNT 2022-09-16](https://www.bntnews.co.kr/article/view/bnt202209160060) | **높음** |
 | 글로벌(빌보드) | 2023-02 | "OMG" Hot 100 #74; FIFTY FIFTY "Cupid"(2023-02-24) 최고 #17 | [Billboard](https://www.billboard.com/music/chart-beat/fifty-fifty-cupid-hot-100-debut-1235293747/) | 높음 |
 | 산업 표준화(추종) | 2023-05~09 | 보이넥스트도어 데뷔(2023-05), RIIZE "Get A Guitar"(2023-09) — 보이그룹까지 공식화 | [매일신문](https://www.imaeil.com/page/view/2023100909594244883) | 높음 |
 | 문법 복제 논쟁(포화) | 2024-03 | 아일릿 "Magnetic" — 뉴진스 유사성 논란 | [allkpop](https://www.allkpop.com/article/2024/05/music-industry-experts-discuss-whether-illit-is-a-copy-of-newjeans) | 높음 |
@@ -645,7 +646,7 @@
 
 - 재료 수입→주류 원형: 해외 언더(2021-10) → LOVE DIVE/뉴진스(2022-04~07): **약 6~9개월**
 - 원형→차트 지배: 2022-07 → Ditto PAK(2022-12): **약 5개월**
-- 지배→담론 명명: 2022-12 → '이지리스닝' 일반화(2023 중반 추정): **약 6개월** — **현상이 명명보다 6개월 선행: 담론 모니터링만으로는 늦고, 음향 특질 추적이 먼저 잡을 수 있었던 케이스**
+- 지배→담론 명명: 🔄 교차 검증으로 수정 — **공급자 명명은 데뷔와 동시**(2022-07 어도어 소개문), 언론 일반화가 2023(지배 후 ~6개월). 음향 특질 추적의 가치는 유지되나 근거가 바뀜: 특질은 **공급자 선언 이전의 데모·언더 층**을 잡는 데 쓰인다
 - 지배→산업 전면 추종: 6~9개월, 문법 복제 포화(2024-03)까지 약 15개월
 - 지배→역수출: Hot 100 상위권(2023-05 Cupid) 약 5개월, 일본 정면 공략(2024-06) 약 18개월
 - 지배→반전 신호: 에스파 맥시멀 3연타(2024-05~10) **약 22개월** — 전체 지배 기간 약 2년(임펄스로서 긴 편)
@@ -656,7 +657,7 @@
 - **맥시멀리즘 피로 담론**: 4세대 '센 콘셉트'·세계관 과부하에 대한 청취자 피로가 업계에서 감지 — "대중은 시끄럽고 강력한 사운드보다 이해 가능한 리듬을 원한다" ([매일신문](https://www.imaeil.com/page/view/2023100909594244883)). **직전 지배 문법과의 단절 자체가 임펄스**
 - **해외 언더의 선(先)증명**: PinkPantheress 틱톡 성공(2021)이 상업성 검증
 - **비(非)뉴진스 원형**: LOVE DIVE(2022-04)가 뉴진스 데뷔 3개월 전 이미 미니멀 팝으로 올해의 노래급 성공 — 단독 발원설 약화
-- **명명 지체**: 현상(2022 하반기)이 명명(2023)보다 약 6개월 선행
+- ~~명명 지체~~ → 🔄 **교차 검증으로 수정**: '이지리스닝'은 **공급자(어도어)가 데뷔 마케팅과 동시에 명명**했다(2022-07 소개문). 지체된 것은 명명이 아니라 **언론 일반화**(2023). 함의가 바뀐다 — "담론 모니터링은 늦다"가 아니라, **공급자의 프레임 선언(보도자료·데뷔 소개문)은 동시적 신호**이고 언론 일반화만 후행한다. 보도자료 텍스트가 관측 대상이 된다
 
 ## 사운드 특징 (측정 가능 특질 번역 — A2 연결 지점)
 
@@ -676,7 +677,7 @@
 ## 한계·불확실성
 
 1. **'이지리스닝'은 장르가 아니라 사후 명명된 마케팅/평론 프레임** — 실체는 이질적(UKG·저지클럽·디스코팝·어쿠스틱 힙합·발라드). 임펄스 정의는 "맥시멀리즘 대비 저부하"라는 **상대 위치**로 해야 함
-2. 명명 최초 시점 특정 실패 — 뉴스 아카이브 전수 검색 필요
+2. ~~명명 최초 시점 특정 실패~~ → ✅ 교차 검증으로 해소: 기점 = 어도어 데뷔 소개문(2022-07), 언론 최초 확인 = 디스패치 2022-08-08
 3. 원형을 아이브로 잡으면 내생성 강화, 뉴진스로 잡으면 해외 재료 의존 커짐 — "혼성 내생" 판정은 이 민감도 반영
 4. "차트 상위 이지리스닝 비중" 정량은 곡 단위 분류 기준 선행 필요(분류 기준 자체가 원장 등재 대상)
 5. TWS·아일릿 일본 성과 등 일부 미검증(추정 표기)
@@ -732,7 +733,7 @@
 
 ### 한국 수용 시도와 결과
 
-- **힙합 씬 실질 수용(2020~22, 확인)**: 창모 "Swoosh Flow"(2020, UK 드릴 문법 완성도 높은 소화)·"Beretta", 릴러말즈 "Selfish", Silkybois "Bomaye"(유튜브 ~200만), Blase SMTM10 부상 ([brunch](https://brunch.co.kr/@bbeans/34), [KTVZ](https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/))
+- **힙합 씬 실질 수용(2020~22, 확인)**: 창모 "Swoosh Flow"(🔄 교차 검증 정정: 정규 2집이 아니라 **창모×Paul Blanco 합작 믹스테이프 『BIPOLAR』(2020-06-03) 수록**, 드릴 귀속은 확인. 차트는 "멜론 80위권"이 아니라 **실시간 TOP100 최고 관측 66위**([톱스타뉴스 2020-06-09](https://www.topstarnews.net/news/articleView.html?idxno=801622)), 공식 주간 피크는 미확정)·"Beretta", 릴러말즈 "Selfish", Silkybois "Bomaye"(유튜브 ~200만), Blase SMTM10 부상 ([brunch](https://brunch.co.kr/@bbeans/34), [KTVZ](https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/))
 - **SMTM11(2022)이 드릴 유행 정면 흡수** — 블라세·노윤하·칸·플리키뱅 등의 발판 ([나무위키](https://namu.wiki/w/SHOW%20ME%20THE%20MONEY%2011))
 - 🔺 **차트 층위 단절(핵심 디테일)**: 같은 SMTM11 안에서도 멜론 최상위(4위)는 이영지 "NOT SORRY" 등 **비드릴 멜로딕 곡** — **노출(드릴 래퍼)과 차트 히트(비드릴 곡)가 분리**. 창모 정규 2집은 한국힙합어워즈 4관왕이나 수록곡 최고 멜론 80위권(커뮤니티 집계 — 확실성 낮음)
 - 아이돌/주류: 명시적 "드릴 타이틀곡" 미발견. BABYMONSTER "Batter Up"(2023)은 드릴풍 회자되나 공식 힙합/트랩·국내 서클 최고 123위 — 드릴 인접 사운드조차 국내 차트에서 힘을 못 받은 정황(표본 1, 가설)
@@ -806,7 +807,7 @@
 | 4 | **비정규·저위험 슬롯 배치** (B-side·유닛·프로젝트 싱글) | 4~7개월 | 트로피컬(SM Station·후속곡)·아마피아노(유닛 B-side 진행 중)·하이퍼팝(수록곡 실험) | △ 부분(sonic-profile 코호트가 타이틀 편중) |
 | 5 | **해외 차트 확정** (빌보드·UK·발원지 차트) | 2~12개월 (확증 신호) | 전 성공 사례 | ❌ 이력 없음(PLAN §4) |
 | 6 | **플랫폼 인프라 신호** (Beatport/Spotify 장르 신설·리이슈) | 12개월+ | 아마피아노(Beatport 2022)·하이퍼팝(Spotify 2019)·시티팝(리이슈 2019) | ❌ 없음 |
-| 7 | **산업지/평론 트렌드 명명** | 명명이 현상보다 **~6개월 지체**(이지리스닝) ~ 10개월 선행(트로피컬) | 이지리스닝·트로피컬 | ❌ 없음 — 담론만 보면 늦음 |
+| 7 | **트렌드 명명 담론** — 🔄 교차 검증으로 이층 분리: **공급자 프레임 선언(보도자료·데뷔 소개문)은 현상과 동시**(이지리스닝: 어도어 2022-07 소개문이 기점), **언론 일반화만 ~6개월 지체**. 산업지 연말 결산은 10개월 선행 사례 있음(트로피컬 2015-12) | 보도자료 텍스트는 관측 대상, 언론 일반화는 후행 확증 | 이지리스닝·트로피컬 | ❌ 없음 |
 
 **함의**: 담론(7위)보다 음향 특질 추적이 먼저 잡는다(이지리스닝의 명명 지체가 직접 증거) — 결정 ②(특질 벡터 우선)를 사후적으로 지지한다.
 

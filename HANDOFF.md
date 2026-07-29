@@ -17,6 +17,14 @@
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
 - 최근 작업 이력: [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
+## 🔴 신규 차단 (2026-07-29 밤): Smart App Control이 `av`(FFmpeg DLL)를 차단 — sonic 디코드 불가
+
+- **증상**: `import av` → `ImportError: DLL load failed ... An Application Control policy has blocked this file`. **오늘 21:01까지는 정상**(당일 sonic 스냅샷 해석 확인), 23:29 시점 차단 확인 — 그 사이 정책 상태 변화로 추정. `HKLM:\SYSTEM\...\CI\Policy\VerifiedAndReputablePolicyState = 1`(강제 모드). Defender 위협 탐지는 **없음**(악성 판정 아님, 비서명 DLL 평판 정책).
+- **범위 격리 완료**: onnxruntime·torch·soundfile·librosa는 정상. **av만** 차단. 샌드박스/PowerShell/Task Scheduler(데일리와 같은 경로) 전부에서 재현 — 시스템 전역이다.
+- **영향**: ① genre-impulse **A2 사운드 서명 분석 보류**(코호트 85곡 준비 완료, `data/research/genre-impulse/`) ② **내일 09:00 데일리 sonic 레그** — 캐시 적중 트랙은 통과하나 **신곡 디코드 실패**(unresolved로 기록됨, 레그 자체는 죽지 않음) ③ retag는 무관(오디오 불필요).
+- **에이전트가 하지 않은 것(의도)**: Smart App Control 해제(⚠ **한 번 끄면 Windows 재설치 없이 재활성 불가** — 도메인 소유자만 결정 가능) · ffmpeg 등 우회 도구 설치(신규 의존, AGENTS §1) · av 버전 교체(디코드 경로 변경이 캐시/지표에 미검증 영향).
+- **해소 선택지(도메인 소유자 결정)**: ① Windows 설정 → 앱 및 브라우저 제어에서 Smart App Control 상태 확인·정책 예외(가능하다면) ② 서명된 ffmpeg CLI 설치 승인 → audioread 폴백 경로 검증(av 불필요화, 단 디코드 경로 차이의 지표 영향 검증 필요) ③ SAC 해제(비가역 — 권고하지 않음, 정보만).
+
 ## 🔴 가동 중: 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 
 - **Task Scheduler `AI-daily-collect`** → `scripts/daily_collect.ps1`. 설정 정본은 [`scripts/register_task.ps1`](scripts/register_task.ps1)(멱등).
@@ -62,7 +70,8 @@
 - **프레임(D-033)**: 시장 = 이중 축 매트릭스(지리×확산) · 임펄스 = 특질 벡터+장르명 라벨 · 기준선 = 과거 사례에서 도출 · 소급 = 미국 외 경로 포함.
 - **핵심 발견**(CASEBOOK §종합): ① 글로벌 주류 확정→한국 주류 시차가 12개월(2016)→2~6개월(2023)로 **압축, 최근은 사실상 병렬**(빌보드는 확증 신호지 조기 신호가 아님) ② 조기 신호 1순위 = **발원지 숏폼 바이럴 파도**(12~34개월 선행, 현 수집망 없음), 3순위 = **프로듀서 크레딧 이동**(250·FRNK·LDN Noise 패턴) ③ **한국 선행 사례 3건**(레게톤·NJS·이지리스닝) — 양방향 관측 필요 ④ 음성 사례에서 "임펄스가 죽는 조건" 5개 추출(상품 핵심 충돌 시 요소만 수입 등) ⑤ 수용 창은 첫 수용→포화 13~15개월로 짧다.
 - 🔴 **증언 검증**: "저지클럽 빌보드 먼저" **검증됨**(2022-06/10 → 한국 2022-12). "2021 국내 강세"는 **확인 실패**(실질 확산 2022 하반기~2023) — **도메인 소유자에게 2021년 관측의 실체 확인 필요**(차트 밖 씬 관측이었을 가능성).
-- **다음 액션**: ① 케이스북 교차 검증(나무위키/팬위키 단독 근거 항목 우선) ② **A2 사운드 서명** — 대표곡 목록 확보됨, 기존 sonic-profile 프리뷰 파이프라인으로 원형↔한국 수용형 분석(신규 구현 아님. 저지클럽 스네어 축은 스템 분리 승인 뒤) ③ 기준선 3안 중 도메인 소유자 선택(CASEBOOK §A3) ④ 스템 분리·격자 32칸·신규 데이터 레그(틱톡·해외 차트 이력) 승인 대기 지속.
+- **✅ 교차 검증 1차 완료(2026-07-29 밤)**: 약출처 주장 18건 재확인 → **반증 3**("Push Back"은 ENHYPEN 아닌 신인 AtHeart 곡 · '이지리스닝' 명명 기점은 2023이 아니라 **어도어 데뷔 소개문 2022-07**(공급자 명명은 현상과 동시, 언론만 후행 — A4 신호 순위 수정됨) · 트로피컬 한국 첫 수용은 **f(x) "4 Walls" 2015-10**로 7개월 앞당김) · 격상 5(Attention=IZM 원출처·Seven=Forbes 프로듀서 인터뷰·Spell=보도자료 명시·Ditto·아마피아노 씬 증거는 얼루어 2023-08-30 DJ 인터뷰로 앞당김) · 확정 5(Vibe 2019-03-29·Hit Vibes 2013-05-31·가시나 2주차 1위·Sticky·보라빛밤 주간 #5) · 추정 유지 3(EK/수퍼비는 **근거 사용 금지**로 강등·Smoke·유빈 숙녀는 주간 톱100 미진입 판명).
+- **다음 액션**: ① **A2 사운드 서명 — av 차단 해소 대기**(위 🔴 참조. 코호트·집계 스크립트 준비 완료, 해소 시 fetch 1회면 됨) ② 기준선 3안 중 도메인 소유자 선택(CASEBOOK §A3) ③ 스템 분리·격자 32칸·신규 데이터 레그(틱톡·해외 차트 이력) 승인 대기 지속 ④ "2021년 저지클럽 관측" 실체 도메인 소유자 인터뷰.
 
 ## ⚠ 재개 첫 액션
 

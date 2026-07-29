@@ -17,12 +17,13 @@ import re
 import sys
 import time
 import urllib.request
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
 from chart_history import entities
 from chart_history.normalize import primary_artist
-from chart_history.parse import parse_chart
+from chart_history.parse import parse_chart, parse_metadata
 from chart_history.report import (
     build_chart_signal_series,
     build_chart_signal_series_from_days,
@@ -151,6 +152,20 @@ def _download_snapshot(url: str) -> tuple[str | None, str]:
     return _extract_first_table(html), (_extract_date(html) or "unknown")
 
 
+def _resolve_date(date: str) -> tuple[str, str]:
+    """Fall back to the collection date when the page carries no date (D-020).
+
+    Some Kworb boards (shazam/tiktok/deezer) print no date at all, which used to
+    land every day in the same ``unknown.html`` — silently overwriting instead of
+    accumulating. The collection date is a *different fact* from the chart date
+    (Kworb's Spotify boards lag ~2 days), so which one we used is recorded in the
+    snapshot metadata and must be carried into any claim built on it.
+    """
+    if date and date != "unknown":
+        return date, "page"
+    return datetime.now(UTC).strftime("%Y-%m-%d"), "collected"
+
+
 def _snapshot_doc(
     url: str,
     chart: str,
@@ -159,13 +174,15 @@ def _snapshot_doc(
     table: str,
     *,
     platform: str = "spotify",
+    date_source: str = "page",
     tos_class: str = "open-aggregator",
     note: str = "facts-only chart snapshot (Kworb aggregator), site chrome stripped",
 ) -> str:
     country_part = f" | country: {country}" if country else ""
     meta = (
         f"<!-- source: {url} | chart: {chart}{country_part} | platform: {platform} "
-        f"| snapshot_date: {date} | tos_class: {tos_class} | license: chart-facts "
+        f"| snapshot_date: {date} | date_source: {date_source} "
+        f"| tos_class: {tos_class} | license: chart-facts "
         f"| note: {note} -->"
     )
     return meta + "\n" + table + "\n"
@@ -176,10 +193,16 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     if table is None:
         print("no <table> found at URL", file=sys.stderr)
         return 1
+    date, date_source = _resolve_date(date)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(_snapshot_doc(args.url, args.chart_name or "Chart", args.country, date, table), encoding="utf-8")
-    print(f"wrote {out} · snapshot_date={date}")
+    out.write_text(
+        _snapshot_doc(
+            args.url, args.chart_name or "Chart", args.country, date, table, date_source=date_source
+        ),
+        encoding="utf-8",
+    )
+    print(f"wrote {out} · snapshot_date={date} ({date_source})")
     return 0
 
 
@@ -189,12 +212,19 @@ def cmd_collect(args: argparse.Namespace) -> int:
     if table is None:
         print("no <table> found at URL", file=sys.stderr)
         return 1
+    date, date_source = _resolve_date(date)
     store = Path(args.store)
     store.mkdir(parents=True, exist_ok=True)
     out = store / f"{date}.html"
     out.write_text(
         _snapshot_doc(
-            args.url, args.chart_name or "Chart", args.country, date, table, platform=args.platform
+            args.url,
+            args.chart_name or "Chart",
+            args.country,
+            date,
+            table,
+            platform=args.platform,
+            date_source=date_source,
         ),
         encoding="utf-8",
     )
@@ -368,6 +398,50 @@ def cmd_enrich(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_tracks(args: argparse.Namespace) -> int:
+    """스토어 리프의 최신 스냅샷 → 상위 N곡 트랙 목록(JSON).
+
+    소비자(sonic-profile 등)가 차트 파싱 코드를 복제하지 않도록 **데이터로** 넘긴다
+    (D-007 data-only sharing — 모듈 간 코드 import 금지). 차트 파싱의 소유자는 여기다.
+    """
+    leaf = Path(args.store)
+    snaps = sorted(leaf.glob("*.html"))
+    if not snaps:
+        print(f"no snapshots in {leaf}", file=sys.stderr)
+        return 1
+    latest = snaps[-1]
+    parsed = parse_chart(latest.read_text(encoding="utf-8"))
+    meta = parse_metadata(latest.read_text(encoding="utf-8"))
+    entries = cast(list[dict[str, Any]], parsed.get("entries") or [])[: args.top]
+    tracks = [
+        {
+            "rank": e.get("rank"),
+            "artist": e.get("artist"),
+            "title": e.get("title"),
+            "market": meta.get("country"),
+            "platform": meta.get("platform") or "spotify",
+        }
+        for e in entries
+        if e.get("artist") and e.get("title")
+    ]
+    payload = {
+        "tracks": tracks,
+        "provenance": {
+            "source_snapshot": str(latest),
+            "snapshot_date": meta.get("snapshot_date"),
+            "date_source": meta.get("date_source") or "page",
+            "platform": meta.get("platform") or "spotify",
+            "market": meta.get("country"),
+            "note": "chart facts (rank/artist/title) only — chart-history owns chart parsing",
+        },
+    }
+    out = Path(args.output)
+    out.parent.mkdir(parents=True, exist_ok=True)
+    out.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"wrote {out} · {len(tracks)} track(s) from {latest.name}")
+    return 0
+
+
 def cmd_signals(args: argparse.Namespace) -> int:
     """Emit a per-(date × artist) chart-rank signal-series for signal-bridge (data-only join)."""
     store = Path(args.store)
@@ -501,6 +575,14 @@ def main(argv: list[str] | None = None) -> int:
     p_enrich.add_argument("--delay", type=float, default=1.1, help="seconds between requests (rate limit)")
     p_enrich.add_argument("--no-wiki", dest="wiki", action="store_false", help="disable Wikidata fallback")
     p_enrich.set_defaults(func=cmd_enrich, wiki=True)
+
+    p_tracks = sub.add_parser(
+        "tracks", help="스토어 리프 최신 스냅샷 → 상위 N곡 트랙 목록 JSON (소비자에 데이터로 전달)"
+    )
+    p_tracks.add_argument("--store", required=True, help="스토어 리프 (예: data/live/chart/apple/kr)")
+    p_tracks.add_argument("--top", type=int, default=100, help="상위 N곡 (기본 100)")
+    p_tracks.add_argument("-o", "--output", required=True)
+    p_tracks.set_defaults(func=cmd_tracks)
 
     p_signals = sub.add_parser(
         "signals", help="dated snapshot store → chart-rank signal-series (signal-bridge 조인용)"

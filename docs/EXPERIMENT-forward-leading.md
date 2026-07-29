@@ -12,6 +12,7 @@ D-012 회고 실증은 established·차트인 아티스트에 대해 "소셜이 
 - **작업**: Windows Task Scheduler `AI-daily-collect` — 매일 **09:00**(golde 로그온 시) `scripts/daily_collect.ps1` 실행. 설정은 [`../config/collect.json`](../config/collect.json), 팔로우 대상은 [`../packages/entity-master/watchlist.json`](../packages/entity-master/watchlist.json)(**사용자 편집** — acts·별칭·해시태그·overrides).
 - **매일 하는 일**: ① 무료 차트 collect **3플랫폼 × ~50시장**(D-016 광역: Kworb Spotify 50 + Apple 공식 RSS 49 + Kworb YouTube 49 — config `chart_markets`·`apple_markets`·`youtube_markets`, 홈 핀 `home_market: kr`) → `data/live/chart/<platform>/<cc>/` + **chart-history 라이브 리포트**(`analyze --latest` — 수평 병렬: 렌즈별 1위·Top10×렌즈·네이티브 수치·Spotify 렌즈 밖, 탭 매일 갱신). ② 유료 소셜 fetch **10태그**(장르 + 워치리스트 act 태그 자동 파생, 태그당 100건·$0.25 캡, **일 예산 $3 누적 강제**) → `data/live/social/<date>_<tag>.json` + **PII 게이트 즉시 실행**(REJECT→`quarantine/`). ②′ **무료 YT fetch**(공식 API ~12 units, D-014): 워치리스트 채널 최근작 조회·velocity → `data/live/yt/<date>.json` + 게이트 + yt-pulse report(4번째 탭). ③ forward signal-series 재생성 — 소셜 merge+dedup+**이중 귀속**(사운드+워치리스트 태그), 차트는 날짜 ≥2면 실 forward·1일이면 Days 역산 폴백(둘 다 다시장·markets 맵), YT velocity 시리즈. ④ signal-bridge(θ_rank=200, --focus-social, **--watchlist**, **--youtube**) → 커버리지(소셜/차트/YT)·팀별 프로필(YT 구독·velocity 병기)·**⚡ 신규 진입 알림** 포함 report.json. ⑤ 대시보드 갱신. ⑥ 요약 로그.
 - **로그**: `data/live/logs/daily.log`. `SUMMARY joined=.. social-led=.. social-only=.. watch-cov=..`로 진행 추적.
+- **재개 가능**(D-018): 실행 상태는 `data/live/state/run_<date>.json`. 같은 날 재시도는 완료 레그를 건너뛰고 **실패 타겟만** 다시 걷으며, **유료 태그는 이미 파일이 있으면 재fetch하지 않는다**(재시도 비용 0). 완주한 날 재실행 = 즉시 no-op.
 - **산출물**: `data/live/`는 gitignore(재현 소스는 `tests/fixtures/`). 대시보드는 매 실행 후 **라이브 forward 결과**를 렌더.
 - **워치리스트 편집**: `watchlist.json`에 act 추가/삭제(`key`·`aliases`·`hashtags`) → 다음 실행부터 수집 타겟·귀속·프로필에 자동 반영. 오귀속 발견 시 `overrides`에 정정.
 
@@ -34,6 +35,30 @@ D-012 회고 실증은 established·차트인 아티스트에 대해 "소셜이 
 | w_new / w_stale | 미수집 태그 탐험 보너스 / 경과 비례(0~1) | 관습 | 2.0 / 1.0 | 신규 추가 팀 초기 관측 · 순환 압력 | — |
 
 - **한계 정직(§0)**: 순환 수집에서 **안 걷은 날 ≠ 게시물 0인 날**. 수집일 증거 = `social/` 파일명 + `plans/` 기록. 비-pin 태그의 **소셜 온셋 해상도는 ±수집 간격**(K=5 보장, 시뮬레이션 실측 최대 4일)만큼 거칠어진다 — 정밀 온셋이 필요한 팀은 `pin`으로. 시리즈-레벨 결측 마스크 전파는 v2 과제.
+
+## 수집 신뢰성 (D-018) — 결측일은 나중에 못 메운다
+
+> 차트·IG 모두 "오늘"만 제공한다. 실행을 놓친 날은 **영구 결측**이고, 그만큼 전향 실증의 표본이 줄어든다. 그래서 신뢰성은 편의가 아니라 증거 문제다.
+
+- **태스크 설정은 레포가 정본**: [`../scripts/register_task.ps1`](../scripts/register_task.ps1)이 `AI-daily-collect`를 하드닝 설정으로 등록/갱신한다(멱등 — 여러 번 실행해도 안전).
+
+  ```powershell
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts\register_task.ps1          # 등록/갱신
+  powershell -NoProfile -ExecutionPolicy Bypass -File scripts\register_task.ps1 -WhatIf  # 적용될 설정만 출력
+  ```
+
+| 설정 | 값 | 막는 실패 |
+|---|---|---|
+| `StartWhenAvailable` | true | PC가 꺼져 09:00 트리거를 놓친 날 — 복귀 직후 따라잡기 |
+| `WakeToRun` | true | 09:00에 절전 중 — 깨워서 실행(웨이크 타이머 활성 필요) |
+| 반복 트리거 | 2시간 간격 × 12시간 | 중도 사망 — 같은 날 재시도(멱등이라 비용 0) |
+| 실행 중 절전 차단 | `ES_SYSTEM_REQUIRED` | **AC 대기 15분**이라 무입력 수집 중 잠드는 것(07-23·07-24 실제 원인) |
+| 실패 재시작 | 3회 / 20분 | 일시적 오류 |
+| `ExecutionTimeLimit` | 3시간 | 멈춘 실행이 다음 날을 막는 것 |
+
+- **한계 정직**: `WakeToRun`은 **절전에서만** 깨운다 — PC가 완전히 꺼진 날은 여전히 결측이고, 복귀 후 실행은 *그 시점의 최신 스냅샷*이라 **놓친 날짜의 복원이 아니다**. 결측일 증거는 `data/live/state/`·`data/live/plans/` 파일 존재 여부(결측 ≠ 무신호).
+- **점검**: `Get-ChildItem data\live\state` — 날짜별 `done` 여부. 갭이 생기면 로그에 `!! GAP` 라인이 남는다.
+- **멜론 스토어 보호**(D-018 ⑦): 구 레이아웃 마이그레이션이 `chart/melon/`을 레거시 폴더로 오인해 삭제하던 버그를 수정했다(2026-07-20 멜론 데이터 소실의 원인). 이제 `chart/<platform>/<cc>/` 모양이면 건드리지 않으므로, **세션-보조 멜론 수집을 다시 넣어도 다음 날 수집이 지우지 않는다.**
 
 ## 결과 읽는 법 (무엇을 볼까)
 

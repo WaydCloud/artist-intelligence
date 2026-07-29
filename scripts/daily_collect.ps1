@@ -14,6 +14,11 @@
 #         (3) AI_DRYRUN=1 env -> skip paid fetch (for testing).
 #         (4) per-tag maxTotalChargeUsd cap + cumulative daily_budget_usd stop.
 # Stop: disable/delete Task Scheduler task "AI-daily-collect", or create data/live/PAUSE.
+#
+# Resumable (D-018): run state lives in data/live/state/run_<date>.json. The task retries
+# through the day, so every attempt must be idempotent -- a completed day is a no-op, a
+# finished leg is skipped, a partly-failed leg retries only its failed targets, and a paid
+# tag already collected today is never bought again. Task settings: scripts/register_task.ps1.
 
 $ErrorActionPreference = "Continue"
 if ($PSScriptRoot) { $scriptDir = $PSScriptRoot } elseif ($PSCommandPath) { $scriptDir = Split-Path -Parent $PSCommandPath } else { $scriptDir = (Get-Location).Path }
@@ -27,6 +32,85 @@ New-Item -ItemType Directory -Force -Path $logDir, (Join-Path $live "social"), (
 $today = Get-Date -Format "yyyy-MM-dd"
 $log = Join-Path $logDir "daily.log"
 function Log($msg) { $line = "$(Get-Date -Format s) | $msg"; Add-Content -Path $log -Value $line -Encoding utf8; Write-Output $line }
+
+# --- run state (D-018): resume a killed run, never pay twice ---
+# A missed day is a permanent gap (charts and IG only ever serve "today"), so the task
+# retries through the day. That is only safe if retries are idempotent: finished legs are
+# skipped, partly-failed legs retry only their failed targets, and a paid tag that already
+# has a file for today is never fetched again.
+$stateDir = Join-Path $live "state"
+New-Item -ItemType Directory -Force -Path $stateDir | Out-Null
+$statePath = Join-Path $stateDir "run_$today.json"
+$legs = @{}
+$pending = @{}
+$attempt = 1
+$startedAt = (Get-Date -Format s)
+if (Test-Path $statePath) {
+  try {
+    $prev = Get-Content $statePath -Raw -Encoding utf8 | ConvertFrom-Json
+    if ($prev.legs) { foreach ($p in $prev.legs.PSObject.Properties) { $legs[$p.Name] = [string]$p.Value } }
+    if ($prev.pending) { foreach ($p in $prev.pending.PSObject.Properties) { $pending[$p.Name] = @($p.Value) } }
+    if ($prev.attempts) { $attempt = [int]$prev.attempts + 1 }
+    if ($prev.startedAt) { $startedAt = [string]$prev.startedAt }
+    if ($prev.done) {
+      Log "=== daily_collect skip ($today) -- already completed at $($prev.completedAt), no-op ==="
+      exit 0
+    }
+    Log "resume: run $today was interrupted after attempt $($attempt - 1) -- continuing"
+  } catch { Log "!! run state unreadable ($statePath) -- starting fresh" }
+}
+
+function Save-State([bool]$done) {
+  $obj = [ordered]@{
+    date        = $today
+    startedAt   = $startedAt
+    attempts    = $attempt
+    legs        = $legs
+    pending     = $pending
+    done        = $done
+    completedAt = $(if ($done) { Get-Date -Format s } else { "" })
+  }
+  ($obj | ConvertTo-Json -Depth 5) | Set-Content -Path $statePath -Encoding utf8
+}
+# Targets for a collect leg: none if it finished, only the failures if it partly failed.
+# NOTE: Log writes to the success stream, so inside a function its line would be folded
+# into the return value (a log string then gets collected as if it were a market code).
+# Every Log call in here must be discarded with $null = .
+function Get-Targets([string]$leg, $all) {
+  if ($legs[$leg] -eq "ok") { $null = Log "resume: $leg leg already complete -- skipped"; return @() }
+  if ($pending.ContainsKey($leg) -and @($pending[$leg]).Count -gt 0) {
+    $t = @($pending[$leg]); $null = Log "resume: $leg retrying $($t.Count) failed target(s) only"; return $t
+  }
+  return @($all)
+}
+function Set-LegResult([string]$leg, $failed) {
+  $f = @($failed)
+  if ($f.Count -eq 0) { $legs[$leg] = "ok"; if ($pending.ContainsKey($leg)) { $pending.Remove($leg) } }
+  else { $legs[$leg] = "partial"; $pending[$leg] = $f }
+  Save-State $false
+}
+
+# gap alarm -- a scheduler that quietly stops is the one failure this experiment cannot afford
+$gapMsg = ""
+$doneDates = @(Get-ChildItem $stateDir -Filter "run_*.json" -ErrorAction SilentlyContinue |
+  Where-Object { $_.BaseName -ne "run_$today" } |
+  ForEach-Object { try { $s = Get-Content $_.FullName -Raw -Encoding utf8 | ConvertFrom-Json; if ($s.done) { [string]$s.date } } catch { } } |
+  Sort-Object)
+if ($doneDates.Count -gt 0) {
+  $missed = ([datetime]$today - [datetime]$doneDates[-1]).Days - 1
+  if ($missed -gt 0) { $gapMsg = "!! GAP: $missed day(s) with no completed run since $($doneDates[-1]) -- those dates are permanently missing" }
+}
+
+# keep the machine awake for the run. This PC sleeps after 15 min idle on AC, which is what
+# killed the 2026-07-23 and 2026-07-24 runs part-way through the (slow) Apple leg.
+$awake = $false
+try {
+  if (-not ("Ai.Power" -as [type])) {
+    Add-Type -Namespace Ai -Name Power -MemberDefinition '[DllImport("kernel32.dll", SetLastError=true)] public static extern uint SetThreadExecutionState(uint esFlags);'
+  }
+  [Ai.Power]::SetThreadExecutionState([uint32]2147483649) | Out-Null   # ES_CONTINUOUS | ES_SYSTEM_REQUIRED
+  $awake = $true
+} catch { Log "!! keep-awake unavailable ($($_.Exception.Message)) -- run may be cut short by idle sleep" }
 
 # --- config ---
 $cfgPath = Join-Path $repo "config\collect.json"
@@ -43,7 +127,8 @@ $perTagUsd = [double]$cfg.per_tag_max_usd
 $dailyBudget = [double]$cfg.daily_budget_usd
 $experimentEnd = [datetime]$cfg.experiment_end
 
-Log "=== daily_collect v2 start ($today) | repo=$repo | markets=$($markets.Count) tags=$($tagList.Count) budget=`$$dailyBudget ==="
+Log "=== daily_collect v2 start ($today) | repo=$repo | markets=$($markets.Count) tags=$($tagList.Count) budget=`$$dailyBudget | attempt=$attempt keepAwake=$awake ==="
+if ($gapMsg) { Log $gapMsg }
 
 # --- one-time migrations: old flat stores -> chart/<cc>/ -> chart/<platform>/<cc>/ (D-016) ---
 foreach ($pair in @(@("chart_kr", "kr"), @("chart_global", "global"))) {
@@ -59,42 +144,79 @@ foreach ($pair in @(@("chart_kr", "kr"), @("chart_global", "global"))) {
 # chart/<cc>/ (platform-less spotify era) -> chart/spotify/<cc>/
 $chartRoot = Join-Path $live "chart"
 if (Test-Path $chartRoot) {
-  $known = @("spotify", "apple", "youtube")
+  # A platform store is chart/<platform>/<cc>/ -- it holds market subdirectories, never .html
+  # directly. The old flat layout was chart/<cc>/*.html. Only the latter shape is migratable,
+  # and checking the shape (not a hard-coded name list) is what keeps this safe: on 2026-07-20
+  # this block deleted the whole melon store because "melon" was not in the known list, so
+  # chart/melon/kr/ was treated as a stray market dir and removed. Never trust the name alone.
+  $known = @("spotify", "apple", "youtube", "melon", "shazam")
   foreach ($dir in @(Get-ChildItem $chartRoot -Directory -ErrorAction SilentlyContinue)) {
-    if ($known -notcontains $dir.Name) {
-      $dest = Join-Path (Join-Path $chartRoot "spotify") $dir.Name
-      New-Item -ItemType Directory -Force -Path $dest | Out-Null
-      Get-ChildItem "$($dir.FullName)\*.html" -ErrorAction SilentlyContinue | Move-Item -Destination $dest -Force
-      Remove-Item $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
-      Log "migrated chart/$($dir.Name) -> chart/spotify/$($dir.Name)"
+    if ($known -contains $dir.Name) { continue }
+    $hasSubDirs = @(Get-ChildItem $dir.FullName -Directory -ErrorAction SilentlyContinue).Count -gt 0
+    $htmls = @(Get-ChildItem "$($dir.FullName)\*.html" -ErrorAction SilentlyContinue)
+    if ($hasSubDirs -or $htmls.Count -eq 0) {
+      Log "!! chart/$($dir.Name) looks like a platform store, not a legacy market dir -- left untouched"
+      continue
     }
+    $dest = Join-Path (Join-Path $chartRoot "spotify") $dir.Name
+    New-Item -ItemType Directory -Force -Path $dest | Out-Null
+    $htmls | Move-Item -Destination $dest -Force
+    Remove-Item $dir.FullName -Recurse -Force -ErrorAction SilentlyContinue
+    Log "migrated chart/$($dir.Name) -> chart/spotify/$($dir.Name)"
   }
 }
 
 # 1) free chart collect -- 3 platform rails (D-016): Kworb Spotify + Apple official RSS + Kworb YouTube
 $env:PYTHONPATH = "modules/chart-history/src"
-$okM = 0; $failM = 0
-foreach ($cc in $markets) {
-  $ccU = $cc.ToUpper()
-  python -m chart_history collect --url "https://kworb.net/spotify/country/${cc}_daily.html" --store "data/live/chart/spotify/$cc" --country $ccU --platform spotify --chart-name "Spotify $ccU Daily" 2>$null | Out-Null
-  if ($?) { $okM++ } else { $failM++; Log "!! chart spotify/$cc collect FAILED (skipped)" }
+$targetsM = @(Get-Targets "spotify" $markets)
+if ($targetsM.Count -gt 0) {
+  $okM = 0; $failedM = @()
+  foreach ($cc in $targetsM) {
+    $ccU = $cc.ToUpper()
+    python -m chart_history collect --url "https://kworb.net/spotify/country/${cc}_daily.html" --store "data/live/chart/spotify/$cc" --country $ccU --platform spotify --chart-name "Spotify $ccU Daily" 2>$null | Out-Null
+    if ($?) { $okM++ } else { $failedM += $cc; Log "!! chart spotify/$cc collect FAILED (skipped)" }
+  }
+  Set-LegResult "spotify" $failedM
+  Log "spotify charts: $okM ok, $($failedM.Count) failed of $($targetsM.Count) markets"
 }
-Log "spotify charts: $okM ok, $failM failed of $($markets.Count) markets"
 $appleMarkets = @($cfg.apple_markets)
-$okA = 0; $failA = 0
-foreach ($cc in $appleMarkets) {
-  python -m chart_history collect-apple --storefront $cc --store "data/live/chart/apple/$cc" 2>$null | Out-Null
-  if ($?) { $okA++ } else { $failA++; Log "!! chart apple/$cc collect FAILED (skipped)" }
+$targetsA = @(Get-Targets "apple" $appleMarkets)
+if ($targetsA.Count -gt 0) {
+  $okA = 0; $failedA = @()
+  foreach ($cc in $targetsA) {
+    python -m chart_history collect-apple --storefront $cc --store "data/live/chart/apple/$cc" 2>$null | Out-Null
+    if ($?) { $okA++ } else { $failedA += $cc; Log "!! chart apple/$cc collect FAILED (skipped)" }
+  }
+  Set-LegResult "apple" $failedA
+  Log "apple charts: $okA ok, $($failedA.Count) failed of $($targetsA.Count) storefronts (official RSS)"
 }
-Log "apple charts: $okA ok, $failA failed of $($appleMarkets.Count) storefronts (official RSS)"
 $ytMarkets = @($cfg.youtube_markets)
-$okY = 0; $failY = 0
-foreach ($cc in $ytMarkets) {
-  $ccU = $cc.ToUpper()
-  python -m chart_history collect --url "https://kworb.net/youtube/insights/${cc}_daily.html" --store "data/live/chart/youtube/$cc" --country $ccU --platform youtube --chart-name "YouTube $ccU Daily" 2>$null | Out-Null
-  if ($?) { $okY++ } else { $failY++; Log "!! chart youtube/$cc collect FAILED (skipped)" }
+$targetsY = @(Get-Targets "youtube" $ytMarkets)
+if ($targetsY.Count -gt 0) {
+  $okY = 0; $failedY = @()
+  foreach ($cc in $targetsY) {
+    $ccU = $cc.ToUpper()
+    python -m chart_history collect --url "https://kworb.net/youtube/insights/${cc}_daily.html" --store "data/live/chart/youtube/$cc" --country $ccU --platform youtube --chart-name "YouTube $ccU Daily" 2>$null | Out-Null
+    if ($?) { $okY++ } else { $failedY += $cc; Log "!! chart youtube/$cc collect FAILED (skipped)" }
+  }
+  Set-LegResult "youtube" $failedY
+  Log "youtube charts: $okY ok, $($failedY.Count) failed of $($targetsY.Count) markets"
 }
-Log "youtube charts: $okY ok, $failY failed of $($ytMarkets.Count) markets"
+# shazam (D-020): a discovery lens -- what people reach for their phone to identify.
+# Kworb's shazam boards print no date, so collect falls back to the collection date
+# and stamps date_source=collected in the snapshot metadata.
+$shazamMarkets = @($cfg.shazam_markets)
+$targetsS = @(Get-Targets "shazam" $shazamMarkets)
+if ($targetsS.Count -gt 0) {
+  $okS = 0; $failedS = @()
+  foreach ($cc in $targetsS) {
+    $ccU = $cc.ToUpper()
+    python -m chart_history collect --url "https://kworb.net/charts/shazam/${cc}.html" --store "data/live/chart/shazam/$cc" --country $ccU --platform shazam --chart-name "Shazam $ccU Daily" 2>$null | Out-Null
+    if ($?) { $okS++ } else { $failedS += $cc; Log "!! chart shazam/$cc collect FAILED (skipped)" }
+  }
+  Set-LegResult "shazam" $failedS
+  Log "shazam charts: $okS ok, $($failedS.Count) failed of $($targetsS.Count) markets (discovery lens)"
+}
 
 # 1.5) live chart-history report -- latest snapshot per platform/market, 3-platform cross view (D-016)
 $homeMarket = "KR"; if ($cfg.home_market) { $homeMarket = ([string]$cfg.home_market).ToUpper() }
@@ -125,10 +247,15 @@ else {
     } else { Log "!! allocator FAILED -- fallback to full tag list (budget guard caps)" }
   }
   $env:PYTHONPATH = "modules/fandom-pulse/src"
-  $spent = 0.0; $okT = 0; $failT = 0
+  $spent = 0.0; $okT = 0; $failT = 0; $skipT = 0
   foreach ($tag in $fetchTags) {
-    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent cap `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped"; break }
     $out = "data/live/social/${today}_${tag}.json"
+    # Already fetched today by an earlier attempt (kept or quarantined): the money is spent,
+    # so count it against the budget but never buy the same tag twice (D-018).
+    if ((Test-Path $out) -or (Test-Path (Join-Path $live "quarantine\${today}_${tag}.json"))) {
+      $spent += $perTagUsd; $skipT++; continue
+    }
+    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent cap `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped"; break }
     python -m fandom_pulse fetch --hashtag $tag --results-type reels --max-items $perTagItems --max-usd $perTagUsd -o $out
     if ($?) {
       $spent += $perTagUsd; $okT++
@@ -137,7 +264,8 @@ else {
       if (-not $?) { Move-Item $out (Join-Path $live "quarantine") -Force; Log "!! PII gate REJECT: $out -> quarantine" }
     } else { $failT++; Log "!! social fetch FAILED: #$tag" }
   }
-  Log "social fetched: $okT tags ok, $failT failed | est spend cap <= `$$spent (per-run Apify cap enforced)"
+  Log "social fetched: $okT tags ok, $failT failed, $skipT already collected today (not re-paid) | est spend cap <= `$$spent (per-run Apify cap enforced)"
+  if ($failT -eq 0) { $legs["social"] = "ok"; Save-State $false }
 }
 
 # 3) rebuild forward signal-series (watchlist attribution, D-013)
@@ -153,18 +281,71 @@ $ytSeries = ""
 if (Test-Path $ytCache) {
   New-Item -ItemType Directory -Force -Path (Join-Path $live "yt") | Out-Null
   $env:PYTHONPATH = "modules/yt-pulse/src"
-  python -m yt_pulse fetch --channels $ytCache -o "data/live/yt/$today.json"
-  if ($?) {
-    python scripts/validate_snapshot.py "data/live/yt/$today.json" | Out-Null
-    if (-not $?) { Move-Item "data/live/yt/$today.json" (Join-Path $live "quarantine") -Force; Log "!! PII gate REJECT: yt/$today.json -> quarantine" }
-    else {
-      python -m yt_pulse signals data/live/yt -o data/live/yt_series.json
-      if ($?) { $ytSeries = "data/live/yt_series.json"; Log "yt fetched + series rebuilt (official channels)" } else { Log "!! yt series FAILED" }
-      python -m yt_pulse analyze data/live/yt -o modules/yt-pulse/output/
-      if ($?) { Log "yt report written" } else { Log "!! yt report FAILED" }
-    }
-  } else { Log "!! yt fetch FAILED (skipped)" }
+  $ytFile = "data/live/yt/$today.json"
+  $ytOk = $false
+  if (Test-Path $ytFile) { Log "resume: yt snapshot $today already fetched -- skipped (API quota saved)"; $ytOk = $true }
+  else {
+    python -m yt_pulse fetch --channels $ytCache -o $ytFile
+    if ($?) {
+      python scripts/validate_snapshot.py $ytFile | Out-Null
+      if (-not $?) { Move-Item $ytFile (Join-Path $live "quarantine") -Force; Log "!! PII gate REJECT: yt/$today.json -> quarantine" }
+      else { $ytOk = $true }
+    } else { Log "!! yt fetch FAILED (skipped)" }
+  }
+  if ($ytOk) {
+    $legs["yt"] = "ok"; Save-State $false
+    python -m yt_pulse signals data/live/yt -o data/live/yt_series.json
+    if ($?) { $ytSeries = "data/live/yt_series.json"; Log "yt fetched + series rebuilt (official channels)" } else { Log "!! yt series FAILED" }
+    python -m yt_pulse analyze data/live/yt -o modules/yt-pulse/output/
+    if ($?) { Log "yt report written" } else { Log "!! yt report FAILED" }
+  }
 } else { Log "yt SKIPPED (no channel cache -- run yt_pulse resolve once)" }
+
+# 3.6) sonic-profile (D-019/D-022): 30s previews -> numbers only, audio never stored.
+# Cohort = Apple chart top-N + the watchlist. A distribution needs a population: the module's
+# whole claim is "position within the distribution", which 11 tracks cannot support. The Apple
+# chart is the cohort source because its naming matches the Apple Search API exactly, so track
+# verification is near-perfect (measured 25/25 vs 72% when matching Kworb's romanized strings).
+# Cost stays bounded because features are a property of the recording -- the track cache means
+# only chart newcomers are ever downloaded again (measured: 3m20s cold, 8s warm).
+# NOTE: these calls check $LASTEXITCODE, not $?. librosa writes warnings to stderr, and in
+# PowerShell 5.1 redirecting a native command's stderr sets $? to false even when the exe
+# exited 0 -- the leg would log FAILED while actually having succeeded. Exit code is the
+# only reliable signal for a native process. Other legs get away with $? only because their
+# commands stay silent on stderr.
+$sonicToday = "data/live/sonic/$today.json"
+$cohortPath = "data/live/sonic/cohort.json"
+$cohortArg = @()
+$cohortMarket = "kr"; if ($cfg.sonic_cohort_market) { $cohortMarket = [string]$cfg.sonic_cohort_market }
+$cohortTop = 100; if ($cfg.sonic_cohort_top) { $cohortTop = [int]$cfg.sonic_cohort_top }
+$env:PYTHONIOENCODING = "utf-8"   # track titles are Korean; console codepage must not decide
+# 위 줄과 **짝**이어야 한다. PYTHONIOENCODING은 파이썬이 UTF-8로 '쓰게' 만들 뿐이고,
+# 파이썬 stdout을 텍스트로 '읽는' 쪽은 PowerShell이라 [Console]::OutputEncoding을 따른다.
+# 스케줄러는 콘솔 없이 돌아 이 값이 시스템 ANSI(한국어 Windows=cp949)로 떨어지므로,
+# 짝을 맞추지 않으면 UTF-8 바이트를 cp949로 읽어 로그의 한글이 깨진다
+# (실측 2026-07-29: SUMMARY 줄 '소셜' → '?뚯뀥', 바이트 ec 86 8c → 3f eb 9a af. 복구 불가).
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+if ($legs["sonic"] -eq "ok") { Log "resume: sonic leg already complete -- skipped" }
+elseif (Test-Path $sonicToday) { Log "resume: sonic snapshot $today already fetched -- skipped" }
+else {
+  New-Item -ItemType Directory -Force -Path (Join-Path $live "sonic") | Out-Null
+  $env:PYTHONPATH = "modules/sonic-profile/src"
+  $env:PYTHONPATH = "modules/chart-history/src"
+  python -m chart_history tracks --store "data/live/chart/apple/$cohortMarket" --top $cohortTop -o $cohortPath 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { $cohortArg = @("--cohort", $cohortPath); Log "sonic cohort: apple/$cohortMarket top $cohortTop" }
+  else { $cohortArg = @(); Log "!! sonic cohort build FAILED -- watchlist only" }
+  $env:PYTHONPATH = "modules/sonic-profile/src"
+  python -m sonic_profile fetch --watchlist $wlPath @cohortArg -o $sonicToday 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { $legs["sonic"] = "ok"; Save-State $false; Log "sonic previews fetched (features only, audio discarded)" }
+  else { Log "!! sonic fetch FAILED (exit $LASTEXITCODE, skipped)" }
+}
+if (Test-Path $sonicToday) {
+  $env:PYTHONPATH = "modules/sonic-profile/src"
+  python -m sonic_profile signals data/live/sonic -o data/live/sonic_series.json 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { Log "sonic series rebuilt" } else { Log "!! sonic series FAILED (exit $LASTEXITCODE)" }
+  python -m sonic_profile analyze data/live/sonic --watchlist $wlPath -o modules/sonic-profile/output/ 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { Log "sonic report written" } else { Log "!! sonic report FAILED (exit $LASTEXITCODE)" }
+}
 
 # chart: >=2 distinct dates -> real forward series; else Days-reconstruction fallback
 $env:PYTHONPATH = "modules/chart-history/src"
@@ -187,4 +368,8 @@ if ($?) { Log "dashboard reports.json refreshed" } else { Log "!! dashboard coll
 
 # 5) summary line: coverage + social-led / social-only counts to watch over time
 python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$null | ForEach-Object { Log $_ }
-Log "=== daily_collect v2 done ($today) ==="
+
+# mark the day complete: later attempts today become no-ops, and the gap alarm anchors here
+Save-State $true
+if ($awake) { [Ai.Power]::SetThreadExecutionState([uint32]2147483648) | Out-Null }   # ES_CONTINUOUS -- release
+Log "=== daily_collect v2 done ($today) | attempt=$attempt ==="

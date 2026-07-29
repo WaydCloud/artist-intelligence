@@ -38,6 +38,13 @@ PYTHONPATH=modules/signal-bridge/src python -m signal_bridge analyze \
 - [ ] **G. 게이트**: `ruff check` · `pyright` 통과 + **기존 두 모듈 스모크 무회귀**.
 - [ ] **H. 기준 원장(튜닝)**: θ_social·θ_rank가 CLI 노출(`--theta-social`·`--theta-rank`), 값 변경 시 분류 변화. RULES §3 원장과 일치.
 - [ ] **I. 모듈 독립**: 브리지가 fandom-pulse·chart-history 코드 import 없음(데이터=signal-series만 공유).
+- [ ] **K. 원인분석 레이어(D-021 · RULES §3.1)**:
+  - 모든 행이 `posts`·`social_days`·`censored`를 갖는가.
+  - `censored` 정의 검증: 차트 온셋 == `min(platformFirstDates[p] for p in 그 act의 렌즈)` 일 때만 참. 렌즈가 늦게 켜진 act(예: shazam-only)는 참, 온셋이 수집 개시 이후면 거짓.
+  - **행 삭제 금지**: 소표본·검열 행이 출력에서 사라지지 않는가(분류 카운트는 그대로, 표시만 보류).
+  - **전파**: ⚡ 알림·워치리스트 프로필·교차표 insight·튜너 `evidence`에 근거가 실제로 들어가는가(문자열/키 존재 검사).
+  - `--min-posts` 변경 시 `판정 가능 선행` KPI가 따라 움직이는가(원장 §3.1 튜닝 노출).
+  - 튜너 패리티: 클라이언트 재계산(`min_posts`·`exclude_censored`)이 서버 산출과 같은 기준을 쓰는가.
 
 ## 검증 로그 (2026-07-19, v1 · D-011)
 

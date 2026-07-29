@@ -5,7 +5,16 @@
 
 ## 1. 소스 · 수집 규칙
 
-- 소스 3레일(v4·D-016, 전부 무료·저ToS): ① **Kworb Spotify** 정적 차트 테이블(예 `spotify/country/kr_daily.html`, D-005) ② **Apple 공식 RSS**(`rss.marketingtools.apple.com` most-played — 공식 공개 피드, `collect-apple`이 동일 스토어 계약(facts-only 테이블+메타)으로 변환 저장) ③ **Kworb YouTube**(`youtube/insights/<cc>_daily.html`).
+- 소스 4레일(v5·D-016/D-020, 전부 무료·저ToS): ① **Kworb Spotify** 정적 차트 테이블(예 `spotify/country/kr_daily.html`, D-005) ② **Apple 공식 RSS**(`rss.marketingtools.apple.com` most-played — 공식 공개 피드, `collect-apple`이 동일 스토어 계약(facts-only 테이블+메타)으로 변환 저장) ③ **Kworb YouTube**(`youtube/insights/<cc>_daily.html`) ④ **Kworb Shazam**(`charts/shazam/<cc>.html`, D-020 — 42시장). 멜론은 공식 MCP(D-017, 세션-보조).
+- **빌보드 배제**(D-020): 공식 API는 2013년 종료, 데이터 원천 Luminate는 B2B 유료, Kworb 미보유(사이트맵 2,515 URL 전수 확인), billboard.com 직접 스크랩은 **D-005(써클차트 배제)와 같은 판단** — robots.txt가 AI 에이전트를 전면 차단해 자동화 수집 의사가 명확하다. 라이선스 경로만 열려 있다.
+- **날짜 폴백**(D-020, `_resolve_date`): 페이지에 날짜 표기가 없으면(Kworb shazam/tiktok/deezer 보드) **수집일**로 대체하고 메타에 `date_source: page|collected`를 남긴다. *왜 필요한가*: 폴백이 없으면 매일 같은 `unknown.html`에 덮어써서 축적 자체가 안 된다. *한계*: **수집일 ≠ 차트일** — Kworb Spotify 보드는 차트일이 수집일보다 ~2일 앞선다. `date_source: collected` 스냅샷으로 만든 시차 주장에는 이 차이를 병기해야 한다(온셋 해상도가 그만큼 거칠다).
+
+### 1.1 Shazam 렌즈 (D-020) — 발견 신호
+
+- **왜 다른가**: Spotify·Apple·YouTube·Melon은 **소비**(듣기·보기) 신호다. Shazam은 **"이 노래 뭐지?"** 하고 식별을 요청하는 행위 — **발견(discovery)** 신호이며, 소비 이전 단계일 것이라는 **가설**이다. 검증은 브리지의 온셋 시차가 한다(가설이지 확정 아님, §0).
+- **도입 근거(실측 2026-07-28)**: 42시장 8,400엔트리에서 워치리스트 **11팀 중 8팀** 포착(KATSEYE 8·RESCENE 6·BABYMONSTER 6·ILLIT 4·CORTIS 4·Hearts2Hearts 3·KiiiKiii 1·KISS OF LIFE 1). **ILLIT은 대만 Shazam 1위.** 파서 무수정으로 흡수됨(헤더 `Pos | P+ | Artist - Title`은 §4.3 헤더 매핑이 이미 인식).
+- **동시 배제 실측**: **TikTok — 46시장 4,590엔트리에서 워치리스트 히트 0.** KR 상위가 오래된 바이럴 사운드(2022년 곡 등)라 신인 추적에 부적합. **Deezer — 42시장 4,200엔트리에서 3팀뿐**이고 그중 KATSEYE가 24/33건(73%)으로 편중, 기존 렌즈가 이미 커버하는 글로벌 지향 팀에 쏠려 정보 증분이 낮다. 둘 다 **파서 무수정으로 켤 수 있으므로 판단이 바뀌면 즉시 복귀 가능**(값=도메인 소유자).
+- **한계**: Shazam은 순위만 제공(수치 없음) · Kworb 집계값 · 페이지 날짜 없음(위 폴백 적용) · **§1의 "플랫폼 간 rank 절대값 비교 금지"가 그대로 적용**된다(Shazam 200위와 Spotify 200위는 다른 모집단).
 - **수집과 분석 분리**: `fetch`/`collect`(라이브·네트워크) ↔ `analyze`/`signals`(오프라인·결정적, 스모크 경로). 스모크는 네트워크를 타지 않는다.
 - **사실 필드만 저장**: 순위·아티스트/곡·차트수명·스트림 수치. **사이트 크롬·광고·저작 콘텐츠 미저장**(픽스처는 `<table>`만 + 메타 주석). 메타에 `platform:`(spotify|apple|youtube, 없으면 spotify=구 스냅샷 호환).
 - 차트 순위·수치는 **사실**이며 저작물이 아니다. 그러나 Kworb는 **집계값**(플랫폼 공식 지표와 다를 수 있음) → 리포트에 명시(§4).

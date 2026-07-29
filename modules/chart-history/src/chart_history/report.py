@@ -476,7 +476,8 @@ N_UNIQUE_BARS = 12  # 단일-플랫폼 유니크 bar 상위 수 (관습)
 # v4.1 수평 병렬: 위계가 아니라 **표시 순서**일 뿐. 순서 값 = 도메인 소유자 판단
 # (사용자 2026-07-19: "YouTube는 범접할 수 없는 영향력 — 단, 수평으로 보여줄 것";
 #  멜론 = 국내 정본이라 youtube 다음, D-017). §2.1.
-PLATFORM_ORDER = ["youtube", "melon", "spotify", "apple"]
+# shazam(D-020)은 소비가 아니라 **발견** 신호라 성격이 달라 끝에 둔다 — 위치는 도메인 소유자가 조정.
+PLATFORM_ORDER = ["youtube", "melon", "spotify", "apple", "shazam"]
 
 
 def _plat_sort(names: set[str]) -> list[str]:

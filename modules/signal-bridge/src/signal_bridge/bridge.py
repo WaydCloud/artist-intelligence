@@ -81,6 +81,22 @@ def _align(dates: list[str], values: list[Any], union: list[str], fill: Any) -> 
     return [values[idx[d]] if d in idx else fill for d in union]
 
 
+def _earliest_observable(chart: dict[str, Any]) -> dict[str, str]:
+    """act → 그 act가 관측될 수 있었던 최초일 (RULES §3.1 `censored` 판정용).
+
+    act가 잡힌 렌즈들의 수집 첫날 중 가장 이른 날. 차트 온셋이 이 날과 같으면
+    "그날 진입"과 "이미 진입해 있었음"을 구분할 수 없다(좌측 절단).
+    """
+    first: dict[str, str] = (chart.get("provenance") or {}).get("platformFirstDates") or {}
+    onsets: dict[str, dict[str, str]] = chart.get("platformOnsets") or {}
+    out: dict[str, str] = {}
+    for key, per_platform in onsets.items():
+        dates = [first[p] for p in per_platform if p in first]
+        if dates:
+            out[key] = min(dates)
+    return out
+
+
 def analyze(
     social: dict[str, Any],
     chart: dict[str, Any],
@@ -88,13 +104,18 @@ def analyze(
     theta_social: int,
     theta_rank: int,
 ) -> list[dict[str, Any]]:
-    """Per-artist join → onset/lead/class. lead>0 ⇒ 소셜이 차트보다 먼저(선행)."""
+    """Per-artist join → onset/lead/class. lead>0 ⇒ 소셜이 차트보다 먼저(선행).
+
+    각 행은 분류만이 아니라 **판정 근거**(누적 게시수·게시일수·좌측 절단 여부)를
+    함께 싣는다 — 분류 단독으로는 그것을 믿을지 판단할 재료가 없다(RULES §3.1).
+    """
     s_dates: list[str] = social["dates"]
     c_dates: list[str] = chart["dates"]
     s_series: dict[str, list[Any]] = social["series"]
     c_series: dict[str, list[Any]] = chart["series"]
     s_roster: dict[str, bool] = social.get("roster", {}) or {}
     c_roster: dict[str, bool] = chart.get("roster", {}) or {}
+    earliest = _earliest_observable(chart)
 
     rows: list[dict[str, Any]] = []
     for key in sorted(set(s_series) | set(c_series)):
@@ -123,9 +144,20 @@ def analyze(
                 "peak_social": _peak_social(s_vals),
                 "posts": sum(int(v) for v in s_vals if isinstance(v, (int, float))),
                 "best_rank": _best_rank(c_vals),
+                # 원인분석 레이어 (RULES §3.1) — 분류를 믿을지 판단할 재료
+                "social_days": sum(1 for v in s_vals if isinstance(v, (int, float)) and v > 0),
+                "censored": bool(c_onset and earliest.get(key) and c_onset == earliest[key]),
             }
         )
     return rows
+
+
+def _evidence(r: dict[str, Any]) -> str:
+    """행의 판정 근거를 한 조각 문자열로 (RULES §3.1 전파 규약)."""
+    parts = [f"소셜 {r['posts']}건/{r['social_days']}일"]
+    if r.get("censored"):
+        parts.append("차트온셋 좌측절단(수집 개시일과 동일 — 이전 진입 배제 못함)")
+    return " · ".join(parts)
 
 
 def _exemplar(rows: list[dict[str, Any]], social: dict[str, Any], chart: dict[str, Any]) -> str | None:
@@ -179,10 +211,12 @@ def _tunable_leadlag(
     chart: dict[str, Any],
     theta_social: int,
     theta_rank: int,
+    min_posts: int,
 ) -> dict[str, Any]:
     """θ 튜너(view=leadlag, RULES §2) — 원자료 시계열+knobs를 실어 대시보드가
     클라이언트에서 온셋·분류를 재계산한다(§2.1: 값=A&R 소유, static-first)."""
     series: dict[str, Any] = {}
+    evidence: dict[str, Any] = {}
     for r in sorted(rows, key=lambda r: str(r["key"])):
         k = r["key"]
         entry: dict[str, Any] = {}
@@ -192,6 +226,12 @@ def _tunable_leadlag(
             entry["chart"] = chart["series"][k]
         if entry:
             series[k] = entry
+            # 판정 근거를 함께 실어야 클라이언트가 거를 수 있다 (RULES §3.1)
+            evidence[k] = {
+                "posts": r["posts"],
+                "days": r["social_days"],
+                "censored": bool(r.get("censored")),
+            }
     return {
         "type": "tunable",
         "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
@@ -217,8 +257,27 @@ def _tunable_leadlag(
                     "max": 200,
                     "step": 10,
                 },
+                {
+                    "key": "min_posts",
+                    "label": "최소 누적 게시수 (표본 하한)",
+                    "default": min_posts,
+                    "min": 1,
+                    "max": 100,
+                    "step": 1,
+                },
+                {
+                    "key": "exclude_censored",
+                    "label": "좌측 절단 온셋 제외",
+                    "default": 0,
+                    "min": 0,
+                    "max": 1,
+                    "step": 1,
+                },
             ],
-            "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. 선행=시간 순서일 뿐 인과 아님",
+            "evidence": evidence,
+            "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. "
+            "'좌측 절단' = 차트 온셋이 수집 개시일과 같아 이전 진입을 배제 못하는 상태(축적되면 풀림). "
+            "선행 = 시간 순서일 뿐 인과 아님",
         },
     }
 
@@ -288,9 +347,11 @@ def _profile_lines(
             vid = yt_videos.get(key) or {}
             v_part = f"·'{_seg(str(vid.get('title') or '')[:24])}' +{_fmt_eng(int(vid.get('avg_daily') or 0))}/일" if vid else ""
             yt_txt = f" · YT 구독 {_fmt_eng(yt_subs.get(key, 0))}{v_part}"
+        # 좌측 절단이면 선행 일수를 그대로 읽으면 안 된다 — 카드에서 바로 보이게 (RULES §3.1)
+        cens_txt = " · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음)" if r.get("censored") else ""
         lines.append(
             f"[프로필] {_seg(key)} — {r['class']}{lead_txt} · 소셜 {r['posts']}건·참여 {_fmt_eng(engagement.get(key, 0))} "
-            f"· 드라이버: {why} · {chart_txt}{yt_txt} → {_ACTION.get(r['class'], '참고')}"
+            f"· 드라이버: {why} · {chart_txt}{yt_txt}{cens_txt} → {_ACTION.get(r['class'], '참고')}"
         )
     return lines
 
@@ -347,9 +408,35 @@ def _new_entry_alerts(rows: list[dict[str, Any]], chart: dict[str, Any]) -> list
     hits.sort(key=lambda r: (r["best_rank"] or 999, r["key"]))
     return [
         f"⚡ 신규 차트 진입(창 최근 2일): {r['key']} · 온셋 {r['chart_onset']}, 최고 #{r['best_rank']}"
-        f"{'·' + ','.join((c_markets.get(r['key']) or [])[:4]) if c_markets.get(r['key']) else ''} · 소셜 신호 보유 팀(검증 대상)"
+        f"{'·' + ','.join((c_markets.get(r['key']) or [])[:4]) if c_markets.get(r['key']) else ''}"
+        f" · {_evidence(r)} · 소셜 신호 보유 팀(검증 대상)"
         for r in hits[:6]
     ]
+
+
+def _evidence_crosstab(joined: list[dict[str, Any]], min_posts: int) -> str | None:
+    """표본 × 검열 교차표 (RULES §3.1) — 헤드라인 숫자 하나로 뭉개지 않는다."""
+    led = [r for r in joined if r["class"] == "social-led"]
+    if not led:
+        return None
+    cell = {(s, c): 0 for s in (False, True) for c in (False, True)}
+    for r in led:
+        cell[(r["posts"] >= min_posts, bool(r.get("censored")))] += 1
+    clean = [r for r in led if r["posts"] >= min_posts and not r.get("censored")]
+    clean.sort(key=lambda r: (-r["lead_days"], r["key"]))
+    ex = (
+        " · 양쪽 통과: "
+        + ", ".join(f"{r['key']}(+{r['lead_days']}d·{r['posts']}건)" for r in clean[:5])
+        if clean
+        else " · 양쪽 통과 0팀"
+    )
+    return (
+        f"판정 근거 교차(소셜 선행 {len(led)}팀): "
+        f"소표본(<{min_posts}건)·검열 {cell[(False, True)]}팀 · 소표본·비검열 {cell[(False, False)]}팀 · "
+        f"충분표본·검열 {cell[(True, True)]}팀 · 충분표본·비검열 {cell[(True, False)]}팀{ex}. "
+        "검열 = 차트 온셋이 수집 개시일과 같아 '그날 진입'과 '이미 있었음'을 구분 못함(축적되면 풀림). "
+        "소표본은 시간이 풀지 않는 기준값 문제 — 두 축은 성격이 다르다"
+    )
 
 
 def build_report(
@@ -362,6 +449,7 @@ def build_report(
     focus_social: bool = False,
     watchlist: list[str] | None = None,
     youtube: dict[str, Any] | None = None,
+    min_posts: int = 20,
 ) -> dict[str, Any]:
     rows = analyze(social, chart, theta_social=theta_social, theta_rank=theta_rank)
     # focus: the leading-signal question is about artists WITH social buzz; drop pure
@@ -386,6 +474,12 @@ def build_report(
         {"label": "추적 아티스트", "value": len(rows), "unit": "팀", "hint": "두 신호 합집합"},
         {"label": "조인(양측 신호)", "value": len(joined), "unit": "팀", "hint": "소셜·차트 온셋 모두 존재"},
         {"label": "소셜 선행", "value": len(led), "unit": "팀", "hint": "소셜 버즈가 차트 진입보다 먼저"},
+        {
+            "label": "판정 가능 선행",
+            "value": sum(1 for r in led if r["posts"] >= min_posts and not r.get("censored")),
+            "unit": "팀",
+            "hint": f"소셜 선행 중 표본 ≥{min_posts}건 · 차트 온셋 비검열 (RULES §3.1 · 나머지는 판단 보류)",
+        },
         {
             "label": "중앙값 선행",
             "value": int(median(lead_vals)) if lead_vals else 0,
@@ -447,12 +541,16 @@ def build_report(
         )
 
     if rows:  # θ 튜너 — 임계 탐색 뷰(RULES §2 view=leadlag)
-        charts.append(_tunable_leadlag(rows, social, chart, theta_social, theta_rank))
+        charts.append(_tunable_leadlag(rows, social, chart, theta_social, theta_rank, min_posts))
 
     insights = _insights(social, chart, led, chart_led, social_only, chart_only, theta_social, theta_rank)
     alerts = _new_entry_alerts(rows, chart)
     if alerts:  # '누구보다 빠르게' — 신규 진입은 최상단(정직 경고 다음)
         insights[1:1] = alerts
+    # 원인분석 교차표(RULES §3.1)는 선행 목록 바로 뒤 — 숫자를 보는 순간 근거도 같이 본다
+    crosstab = _evidence_crosstab(joined, min_posts)
+    if crosstab:
+        insights.append(crosstab)
     lens_onset = _lens_onset_insight(chart)  # 렌즈 시차(D-016 ②) — 어느 플랫폼이 먼저 반응하나
     if lens_onset:
         insights.append(lens_onset)

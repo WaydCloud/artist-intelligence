@@ -74,6 +74,7 @@ def cmd_analyze(args: argparse.Namespace) -> int:
         focus_social=args.focus_social,
         watchlist=load_watchlist(args.watchlist),
         youtube=youtube,
+        min_posts=args.min_posts,
     )
 
     checked, errors = validate_report(report)
@@ -123,6 +124,13 @@ def main(argv: list[str] | None = None) -> int:
     )
     p_analyze.add_argument(
         "--theta-rank", type=int, default=50, help="차트 온셋 임계 — 이 순위 이하 진입 (기준 원장 §3, 기본 50)"
+    )
+    p_analyze.add_argument(
+        "--min-posts",
+        type=int,
+        default=20,
+        help="판정 가능 선행의 표본 하한 — 누적 게시수 (원인분석 레이어 §3.1, 기본 20). "
+        "행을 지우지 않고 '판정 가능/보류'만 가른다",
     )
     p_analyze.add_argument(
         "--focus-social",

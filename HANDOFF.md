@@ -32,13 +32,15 @@
 - **교훈 — 배포 대상 계정은 로컬 설정에서 추론할 값이 아니다.** `.vercel/project.json`이 있다는 건 "여기로 배포해도 된다"는 뜻이 아니다. 배포는 되돌리기 어렵고 외부에 노출되므로, **어느 계정·어느 프로젝트인지 먼저 확인받고** 실행한다.
 - ⚠ `apps/dashboard/.vercel/`(gitignore)에 죽은 링크와 `.env.production.local`이 아직 남아 있다. 배포를 재개할 때 **이 링크를 재사용하지 말고** 올바른 계정으로 새로 `vercel link` 할 것.
 
-## ❌ CI 적색 (2026-07-29)
+## ✅ CI 적색 해소 — 작업 완료, **아직 푸시 안 됨** (2026-07-29, D-030)
 
-- **main = `bcbb3fb`** (fast-forward, `audio-analysis-v2`에서). 로컬 게이트 전부 통과: ruff · pyright 0 · selftest 26/26 · 5모듈 schema valid · dashboard lint·tsc·build.
-- **CI는 2026-07-20부터 5연속 적색이며, 이번 머지 이전부터 그랬다.** 두 원인 모두 우리 코드 결함이 아니라 **CI 설정 결함**이다:
-  1. **secret scan — 실패지만 유출은 없다. 더 나쁜 건 스캔을 안 하고 있었다는 것.** 로그: `no leaks found in partial scan` · `scanned ~0 bytes (0)`. `actions/checkout@v4`가 shallow clone(depth 1)이라 gitleaks가 잡은 커밋 범위(`<base>^..<head>`)의 베이스가 로컬에 없어 `fatal: ambiguous argument`로 죽는다. **즉 이 보안 게이트는 통과해도 아무것도 검증하지 않는다** — 적색이 오히려 사실을 말해주고 있었다. 고침: security 잡의 checkout에 `with: { fetch-depth: 0 }`.
-  2. **ruff — 버전 드리프트.** CI는 `uvx ruff`(=항상 최신), 로컬은 **0.15.22**. 최신 쪽에서 31건(RUF046·RUF100 등)이 새로 뜬다. **레포에 루트 ruff 설정이 없어** 규칙 세트가 디렉터리마다 갈린다(`pyproject.toml`은 chart-history·fandom-pulse에만 있고 sonic-profile·signal-bridge·yt-pulse는 ruff 기본값). 고침: CI에서 ruff 버전 핀 + 루트 `ruff.toml` 신설 → 그 다음에 31건 처리. **핀 없이 31건만 고치면 다음 릴리스에 또 깨진다.**
-  - ⚠ 위 두 개는 **로컬에서 재현되지 않는다** — 로컬 게이트를 다 통과해도 CI는 빨갛다. 이 비대칭 자체가 고쳐야 할 대상이다.
+- **미커밋 상태로 워킹트리에 있다.** 푸시해야 CI에서 실증된다. 로컬 재현은 전부 통과.
+- 원인은 우리 코드가 아니라 **CI 설정 결함 2종**이었고, 고치자 **숨어 있던 결함 2종이 더 나왔다**:
+  1. **ruff 버전 드리프트** — CI는 `uvx ruff`(핀 없음=항상 최신), 로컬 0.15.22. 그 사이 ruff가 **기본 규칙 세트를 118규칙(E+F)→413규칙으로 확장**(0.16.0)해서, 커밋을 안 해도 빨개지는 구조였다. → CI에 `RUFF_VERSION=0.16.0`·`PYRIGHT_VERSION=1.1.411` 핀 + 루트 [`ruff.toml`](ruff.toml)(target-version py311 통일 + 설정 탐색을 레포에서 멈춤) + 지적 **42건 전부 처리**. 로컬 ruff도 0.16.0으로 올려 **로컬=CI**를 맞췄다.
+  2. **secret scan이 0바이트를 스캔하고 초록이었다** — shallow clone(depth 1)이라 gitleaks가 죽고도 통과. → `fetch-depth: 0`. 같은 이유로 snapshot gate·schema-validate에 **대상 0건이면 실패** 방어 추가.
+  3. **`data-contracts`·`schema-validate`가 8일간 skipped였다**(`needs: python`). 되살리니 둘 다 실패 → **둘 다 진짜 결함**: `entity.schema.json`이 `debut`·`agency`·`wd_id`를 모르고 있었고(갱신함), snapshot gate가 `provenance`만 보고 걸러 **signal-series를 snapshot 스키마로 검증**하고 있었다(대상 선별을 `provenance`+`records`로 정정).
+- **유출 없음은 이번에 실제로 확인했다** — 17개 커밋 트리를 직접 패턴 스캔(클린). 이전 기록의 "유출 없음"은 0바이트 스캔에 근거한 것이라 무효였다. 단 gitleaks 전체 룰셋은 **푸시 후 CI에서 처음으로 진짜 돌아간다**.
+- ⚠ **남은 구멍**: `signal-series`는 JSON 스키마 패키지가 없어(문서 관례로만 존재) series 픽스처 4종이 **어떤 계약으로도 검증되지 않는다**. `packages/signal-series/` 신설은 별도 건.
 
 ## ⚠ 재개 첫 액션 후보
 

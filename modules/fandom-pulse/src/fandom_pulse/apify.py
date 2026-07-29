@@ -58,7 +58,7 @@ def fetch_hashtag(
         url, data=json.dumps(body).encode("utf-8"), headers=headers, method="POST"
     )
     try:
-        with urllib.request.urlopen(req, timeout=timeout + 30) as resp:  # noqa: S310 (trusted host)
+        with urllib.request.urlopen(req, timeout=timeout + 30) as resp:  # trusted host
             items = json.loads(resp.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")

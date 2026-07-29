@@ -103,7 +103,7 @@ def extract_tags(y: np.ndarray, sr: int, *, directory: Path | None = None) -> di
         "styles": _top(_LABELS["effnet"], styles.mean(0)),
         "instruments": _top(_LABELS["instrument"], inst.mean(0), k=TOP_K_INSTRUMENT),
         "genres": _top(_LABELS["genre"], genre.mean(0)),
-        "tag_patches": int(len(patches)),
+        "tag_patches": len(patches),
         # RULES §3.1.7 — 정확도를 아직 사람 라벨로 재지 않았다. 표면에 그대로 전파된다.
         "tag_status": "unvalidated",
     }

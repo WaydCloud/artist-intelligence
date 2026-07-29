@@ -39,8 +39,8 @@ def _pulse_clarity(onset_env: np.ndarray, sr: int, hop: int) -> float:
         return 0.0
     ac = ac / ac[0]
     # 30~300 BPM에 해당하는 lag만 본다(그 밖의 주기는 박이 아님)
-    lo = max(1, int(round(60.0 / 300.0 * sr / hop)))
-    hi = min(ac.size - 1, int(round(60.0 / 30.0 * sr / hop)))
+    lo = max(1, round(60.0 / 300.0 * sr / hop))
+    hi = min(ac.size - 1, round(60.0 / 30.0 * sr / hop))
     if hi <= lo:
         return 0.0
     return float(np.clip(np.max(ac[lo : hi + 1]), 0.0, 1.0))

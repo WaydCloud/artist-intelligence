@@ -89,7 +89,9 @@ def candidates(term: str, aliases: list[str], *, country: str = "KR", limit: int
     for fn in (lambda: _apple(term, aliases, country, limit), lambda: _deezer(term, aliases, limit)):
         try:
             found.extend(fn())
-        except Exception:  # noqa: BLE001 — 소스 장애는 폴백으로, 원인은 미해석으로 기록
+        # S112(로깅하라)는 붙이지 않는다 — 여기서 삼키는 건 폴백 사슬의 제어 흐름이고,
+        # 실패 자체는 후보 0건 → 상위에서 `미해석`으로 리포트에 남는다(삼켜서 사라지지 않는다).
+        except Exception:  # noqa: BLE001, S112 — 소스 장애는 폴백으로, 원인은 미해석으로 기록
             continue
     return found
 
@@ -153,7 +155,8 @@ def _decode(path: str) -> np.ndarray:
         y, _ = librosa.load(path, sr=SR, mono=True)
         if y.size:
             return np.asarray(y, dtype=np.float32)
-    except Exception:  # noqa: BLE001 — 다음 백엔드로
+    # 최종 실패는 아래에서 Unresolved로 올라간다 — 여기서 삼키는 건 백엔드 전환뿐이다.
+    except Exception:  # noqa: BLE001, S110 — 다음 백엔드로
         pass
     try:
         import av  # type: ignore[import-not-found]  # PyAV: FFmpeg 번들 — AAC/m4a 해독용
@@ -172,7 +175,7 @@ def _decode(path: str) -> np.ndarray:
         return np.concatenate(chunks).astype(np.float32)
     except Unresolved:
         raise
-    except Exception as exc:  # noqa: BLE001
+    except Exception as exc:
         raise Unresolved(f"decode failed: {type(exc).__name__}") from exc
 
 

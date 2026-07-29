@@ -8,7 +8,7 @@ live in RULES.md §3 (기준 원장) and arrive as tunable params — never hidd
 from __future__ import annotations
 
 from collections import Counter
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from statistics import median
 
 from fandom_pulse.entities import match
@@ -31,7 +31,7 @@ def _music_artists(music: object) -> list[str]:
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _engagement(rec: dict[str, object]) -> int:

@@ -8,12 +8,12 @@ ASCII-only (Windows PowerShell 5.1 misreads non-ASCII scripts).
 
 from __future__ import annotations
 
-import io
 import json
 import sys
+from pathlib import Path
 
 path = sys.argv[1] if len(sys.argv) > 1 else "modules/signal-bridge/output/report.json"
-report = json.load(io.open(path, encoding="utf-8"))
+report = json.loads(Path(path).read_text(encoding="utf-8"))
 m = {x["label"]: x["value"] for x in report.get("metrics", [])}
 joined = m.get("조인(양측 신호)")
 led = m.get("소셜 선행")

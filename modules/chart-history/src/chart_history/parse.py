@@ -76,7 +76,7 @@ class _FirstTableParser(HTMLParser):
 def parse_metadata(html: str) -> dict[str, str]:
     """Read the leading `<!-- key: value | key: value -->` fixture header."""
     meta: dict[str, str] = {}
-    m = re.search(r"<!--(.*?)-->", html, re.S)
+    m = re.search(r"<!--(.*?)-->", html, re.DOTALL)
     if not m:
         return meta
     for part in m.group(1).split("|"):

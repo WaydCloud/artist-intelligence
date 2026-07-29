@@ -14,6 +14,7 @@
 
 from __future__ import annotations
 
+from itertools import pairwise
 from typing import Any
 
 import numpy as np
@@ -86,7 +87,7 @@ def bar_profile(env: np.ndarray, sr: int, downbeats: np.ndarray, bins: int = BIN
         raise RhythmUnavailable(f"too few downbeats ({d.size})")
     times = np.arange(len(env)) * HOP / sr
     prof = np.zeros(bins, dtype=np.float64)
-    for a, b in zip(d[:-1], d[1:]):
+    for a, b in pairwise(d):
         if not (b > a):
             continue
         m = (times >= a) & (times < b)
@@ -167,7 +168,7 @@ def _beat_tracker() -> Any:
             raise RhythmUnavailable("beat_this not installed") from exc
         try:
             _A2B = Audio2Beats(checkpoint_path="final0", device="cpu", dbn=False)
-        except Exception as exc:  # noqa: BLE001 — 체크포인트 미다운로드 등
+        except Exception as exc:  # 체크포인트 미다운로드 등
             raise RhythmUnavailable(f"beat_this load failed: {type(exc).__name__}") from exc
     return _A2B
 
@@ -184,8 +185,8 @@ def extract_rhythm(y: np.ndarray, sr: int) -> dict[str, Any]:
     return {
         "tempo_bpm_fit": round(tempo, 2),
         "beats_per_bar": round(float(len(beats)) / len(downbeats), 2) if len(downbeats) else None,
-        "n_beats": int(len(beats)),
-        "n_downbeats": int(len(downbeats)),
+        "n_beats": len(beats),
+        "n_downbeats": len(downbeats),
         # 리포트는 이 프로파일에서 유형을 **재계산**한다 — 템플릿·θ를 고쳐도 오디오를
         # 다시 받지 않아도 되게 하는 것이 무보관 불변식(§1)과 기준 재조정(§2.1)의 접점이다.
         "kick_bar_profile": [round(float(v), 4) for v in profile],

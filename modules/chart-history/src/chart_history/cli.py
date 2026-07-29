@@ -147,7 +147,7 @@ def _extract_date(html: str) -> str | None:
 
 def _download_snapshot(url: str) -> tuple[str | None, str]:
     req = urllib.request.Request(url, headers={"User-Agent": _UA})
-    with urllib.request.urlopen(req, timeout=30) as resp:  # noqa: S310 (trusted static host)
+    with urllib.request.urlopen(req, timeout=30) as resp:  # trusted static host
         html = resp.read().decode("utf-8", "replace")
     return _extract_first_table(html), (_extract_date(html) or "unknown")
 
@@ -254,7 +254,7 @@ def cmd_collect_apple(args: argparse.Namespace) -> int:
     sf = args.storefront.lower()
     url = _APPLE_RSS.format(sf=sf, limit=args.limit)
     req = urllib.request.Request(url, headers={"User-Agent": _UA})
-    with urllib.request.urlopen(req, timeout=30) as resp:  # noqa: S310 (official Apple feed)
+    with urllib.request.urlopen(req, timeout=30) as resp:  # official Apple feed
         feed = json.loads(resp.read().decode("utf-8"))["feed"]
     results = feed.get("results") or []
     if not results:
@@ -290,8 +290,8 @@ _MELON_PAREN_RE = re.compile(r"^(.*?)\s*[(（][^)）]*[)）]\s*$")
 # 멜론 MCP 응답은 파이썬 repr 유사 문자열 — 곡/앨범명 내부 작은따옴표('선녀외전' 등)로
 # literal_eval이 깨질 수 있어 **다음 고정 키를 앵커로 한 정규식**으로 사실 필드만 뽑는다.
 _MELON_SONG_SPLIT = re.compile(r"\{'song_id':")
-_MELON_TITLE_RE = re.compile(r"'song_name':'(.*?)','issue_date'", re.S)
-_MELON_ARTIST_RE = re.compile(r"'artist_name':'(.*?)'\}", re.S)
+_MELON_TITLE_RE = re.compile(r"'song_name':'(.*?)','issue_date'", re.DOTALL)
+_MELON_ARTIST_RE = re.compile(r"'artist_name':'(.*?)'\}", re.DOTALL)
 _MELON_RANK_RE = re.compile(r"'current_rank':'(\d+)'")
 
 

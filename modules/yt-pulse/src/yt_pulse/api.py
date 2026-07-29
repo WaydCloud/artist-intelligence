@@ -30,7 +30,7 @@ def _get(endpoint: str, params: dict[str, object], timeout: int = 30) -> dict[st
     query = urllib.parse.urlencode({**params, "key": _key()})
     req = urllib.request.Request(f"{_API}/{endpoint}?{query}", headers={"User-Agent": _UA})
     try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 (official API host)
+        with urllib.request.urlopen(req, timeout=timeout) as resp:  # official API host
             data = json.load(resp)
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")[:300]

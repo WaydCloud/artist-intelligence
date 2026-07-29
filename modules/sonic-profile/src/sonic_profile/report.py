@@ -7,7 +7,7 @@ insights에 **반드시** 병기한다 — 병기는 선택이 아니라 §5 준
 from __future__ import annotations
 
 from collections.abc import Callable
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from statistics import median
 from typing import Any
 
@@ -46,7 +46,7 @@ _SURFACED = [
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _vals(records: list[dict[str, Any]], field: str) -> list[float]:

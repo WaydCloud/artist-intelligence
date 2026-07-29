@@ -33,7 +33,7 @@ _GROUP_TYPES = {"Q215380", "Q9212979", "Q2088357", "Q105756498", "Q281643", "Q57
 
 def _get_json(url: str, timeout: int) -> dict[str, object]:
     req = urllib.request.Request(url, headers={"User-Agent": _UA})
-    with urllib.request.urlopen(req, timeout=timeout) as resp:  # noqa: S310 (trusted hosts)
+    with urllib.request.urlopen(req, timeout=timeout) as resp:  # trusted hosts
         data = json.load(resp)
     return data if isinstance(data, dict) else {}
 

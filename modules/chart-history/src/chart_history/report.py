@@ -7,16 +7,21 @@ artists by "quality" — see RULES.md §ethics and AGENTS.md §5.
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import date, datetime, timedelta, timezone
+from datetime import UTC, date, datetime, timedelta
 
 from chart_history.entities import alias_index
-from chart_history.normalize import canonical_artist, canonical_key, canonical_title, primary_artist
+from chart_history.normalize import (
+    canonical_artist,
+    canonical_key,
+    canonical_title,
+    primary_artist,
+)
 
 MODULE_ID = "chart-history"
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _i(entry: dict[str, object], key: str) -> int:

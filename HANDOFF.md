@@ -25,6 +25,18 @@
 - **가드**: PAUSE 파일 · `experiment_end=2026-08-19` · `AI_DRYRUN=1`. 중단: `schtasks /Delete /TN "AI-daily-collect" /F`.
 - ⚠ **다음 실행은 sonic 레그가 콜드 실행**이다 — 엔진 키에 `tagger_top_k_instrument`가 추가돼 캐시가 무효화됐다(D-028). 프리뷰 ~200건 재취득(무료). 정상 동작이니 놀라지 말 것.
 
+## ✅ 배포 완료 · ❌ CI 적색 (2026-07-29)
+
+- **main = `01f0837`** (fast-forward, `audio-analysis-v2`에서). 로컬 게이트 전부 통과: ruff · pyright 0 · selftest 26/26 · 5모듈 schema valid · dashboard lint·tsc·build.
+- **Vercel 프로덕션 배포됨** — https://artist-intelligence-l292c9ehz-redslippers-projects.vercel.app (`/artist-intelligence` HTTP 200 확인).
+  ⚠ **깃 연동이 아니다.** main 푸시로 자동 배포되지 않는다(직전 프로덕션이 9일 전이었던 이유). 배포는 수동 2단계다:
+  `vercel build --prod --yes` → `vercel deploy --prebuilt --prod --yes` (in `apps/dashboard`, `.vercel/`는 gitignore).
+  **자동 배포를 원하면 Vercel 프로젝트에 깃 연동을 붙이는 것이 별도 과제다.**
+- **❌ CI는 2026-07-20부터 5연속 적색이며, 이번 머지 이전부터 그랬다.** 두 원인 모두 우리 코드 결함이 아니라 **CI 설정 결함**이다:
+  1. **secret scan — 실패지만 유출은 없다. 더 나쁜 건 스캔을 안 하고 있었다는 것.** 로그: `no leaks found in partial scan` · `scanned ~0 bytes (0)`. `actions/checkout@v4`가 shallow clone(depth 1)이라 gitleaks가 잡은 커밋 범위(`<base>^..<head>`)의 베이스가 로컬에 없어 `fatal: ambiguous argument`로 죽는다. **즉 이 보안 게이트는 통과해도 아무것도 검증하지 않는다** — 적색이 오히려 사실을 말해주고 있었다. 고침: security 잡의 checkout에 `with: { fetch-depth: 0 }`.
+  2. **ruff — 버전 드리프트.** CI는 `uvx ruff`(=항상 최신), 로컬은 **0.15.22**. 최신 쪽에서 31건(RUF046·RUF100 등)이 새로 뜬다. **레포에 루트 ruff 설정이 없어** 규칙 세트가 디렉터리마다 갈린다(`pyproject.toml`은 chart-history·fandom-pulse에만 있고 sonic-profile·signal-bridge·yt-pulse는 ruff 기본값). 고침: CI에서 ruff 버전 핀 + 루트 `ruff.toml` 신설 → 그 다음에 31건 처리. **핀 없이 31건만 고치면 다음 릴리스에 또 깨진다.**
+  - ⚠ 위 두 개는 **로컬에서 재현되지 않는다** — 로컬 게이트를 다 통과해도 CI는 빨갛다. 이 비대칭 자체가 고쳐야 할 대상이다.
+
 ## ⚠ 재개 첫 액션 후보
 
 1. **🔺 갚아야 할 빚 — 라이트/다크 육안 확인 미실시** — D-027~D-029의 UI(리듬 드릴다운·악기 구성)가 **AGENTS §7("라이트/다크 양쪽 확인 없이 UI 변경을 머지하지 않는다")을 채우지 못한 채 main에 머지·배포됐다.** 도메인 소유자가 다른 개발 건으로 이동하며 진행을 지시(2026-07-29). 코드 수준 대체 점검은 통과했으나(하드코딩 색 0건 · 신규 토큰 6종이 라이트/다크 3블록 모두에 정의) **실제 렌더는 아무도 안 봤다.** 재개 시 첫 액션으로 `/artist-intelligence`를 양쪽 테마로 열 것 — 요주의는 `<details>` 펼침 행, 동점 겹침 막대(`--series2`), `해당 없음` muted 막대(`--baseline` opacity 0.6)가 다크에서 배경과 붙는지.

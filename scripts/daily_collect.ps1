@@ -347,6 +347,13 @@ if (Test-Path $sonicToday) {
   if ($LASTEXITCODE -eq 0) { Log "sonic report written" } else { Log "!! sonic report FAILED (exit $LASTEXITCODE)" }
 }
 
+# 3.7) genre-impulse (D-035): impulse ledger x daily sonic cohort -> monitor report (offline, no cost)
+if (Test-Path $sonicToday) {
+  $env:PYTHONPATH = "modules/genre-impulse/src;modules/sonic-profile/src"
+  python -m genre_impulse analyze --sonic data/live/sonic --watchlist $wlPath -o modules/genre-impulse/output/ 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { Log "genre-impulse report written" } else { Log "!! genre-impulse FAILED (exit $LASTEXITCODE)" }
+}
+
 # chart: >=2 distinct dates -> real forward series; else Days-reconstruction fallback
 $env:PYTHONPATH = "modules/chart-history/src"
 $dates = @(Get-ChildItem "data\live\chart" -Recurse -Filter *.html -ErrorAction SilentlyContinue | ForEach-Object { $_.BaseName } | Sort-Object -Unique)

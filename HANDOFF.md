@@ -81,7 +81,9 @@
 - **✅ D-034 4승인(2026-07-30 ASK)**: Phase C 착수+PR · 이중 기준선 · 스템 분리 · 수집망 3종(해외 이력·크레딧 무료 + 틱톡 유료 검토). **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** 생성(베이스=sonic-metrics-d031 스택 — #3 머지 시 리베이스 필요 가능).
 - **✅ Phase C v1 구현 완료(2026-07-30)**: `modules/genre-impulse/` — SPEC·RULES·TESTS 먼저, CLI(`analyze`·`selftest`) 구현. **selftest 13/13 · ruff·pyright 0 · report-schema 유효.** 검출 규칙 1건(`hyperpop-texture` = organic_ratio≤P20 AND (flatness≥P80 OR over_unity≥P80), A2.1 실측 근거·임계 CLI 노출). **실데이터 첫 실행: 라이브 코호트에서 11곡 매치 — 1위가 최예나 '캐치 캐치'(케이스북이 독립 확인한 하이퍼팝 귀속 곡, sanity 확인) + 워치리스트 3팀(코르티스·키키·Keyveatz).** ⚠ sonic_profile.derived import는 D-007의 문서화된 한시 예외(RULES §3 — packages/ 승격은 별도 승인). daily_collect 편입은 미실시(별도 결정).
 - **🆕 틱톡 레그 검토 완료**: [`docs/REVIEW-tiktok-leg.md`](docs/REVIEW-tiktok-leg.md) — 핵심: Billboard TikTok Top 50 **2025-03 중단**(라이브 소스 소멸), Research API 부적격(상업+지역). 권고 1안 = Apify 3액터 월 $8~12(현 소셜 레그의 1/9). **건별 확인 5항목(비용 상한·ToS 수용·계정·워치리스트 소유·소액 스모크) 도메인 소유자 대기.**
-- **다음 액션**: ① 해외 차트 이력 소스 실사 결과 수신·반영(에이전트 가동 중) ② 틱톡 레그 건별 확인 ASK ③ 스템 분리 구현(sonic-profile RULES에 드럼/보컬 스템 지표 정의 먼저 — D-034 ③) ④ A2 본편·동시대 코호트 소급 ⑤ genre-impulse의 daily_collect 편입 여부 ⑥ "2021 저지클럽 관측" 인터뷰 ⑦ 오늘 sonic 레그 av 재발 확인.
+- **✅ D-035 4확정(2026-07-30 ASK)**: 틱톡 1안(월 상한 $15·ToS 수용·스모크 승인) · 빌보드 GitHub 데이터셋 채택(사실 필드만·3자 대조 후) · genre-impulse **데일리 편입 완료**(daily_collect 3.7 단계, 파스 검증) · 틱톡 워치 소유=초안 엔지니어·확정 A&R.
+- **✅ 틱톡 스모크 통과(~$0.01)**: `khadinakbar/tiktok-sound-scraper`의 `userCount` 실증 — "luther" 1,427,352 반환. apidojo는 포스트 단위뿐이라 **부적합 확정**. 워치리스트는 music URL/clipId 기반으로 — 상세 [`docs/REVIEW-tiktok-leg.md`](docs/REVIEW-tiktok-leg.md) §스모크.
+- **다음 액션**: ① **틱톡 워치리스트 초안**(사운드 50·태그 20, music URL 기반 — 임펄스 원장·팬덤 은어 기반 초안 → A&R 확정) + 수집 스크립트(액터 교체 가능 구조) ② **빌보드 이력 파이프라인**(GitHub 데이터셋 → 케이스 궤적·US 코호트 소급, 위키·acharts 3자 대조 스모크 먼저) ③ 스템 분리 구현(sonic-profile RULES 정의 먼저 — D-034 ③) ④ A2 본편·동시대 KR 코호트(Wayback 멜론) ⑤ "2021 저지클럽 관측" 인터뷰 ⑥ 다음 sonic 레그 av 재발 확인.
 
 ## ⚠ 재개 첫 액션
 

@@ -36,7 +36,8 @@
 
 - **브랜치 `ci-pin-gates` · [PR #1](https://github.com/WaydCloud/artist-intelligence/pull/1) · 커밋 3개. CI 5잡 전부 success, skipped 0.** 2026-07-20 이후 처음이다. **머지는 안 했다 — 도메인 소유자 결정 대기.**
 - 게이트가 **실제로 무언가를 검사했는지**까지 로그로 확인했다(이게 이 작업의 요점이었다): secret scan `3 commits scanned · ~19,564 bytes · no leaks` · snapshot gate `3 fixture(s) checked` · report contract `validating 5 report(s)` · ruff `All checks passed` · pyright `0 errors`.
-  - ⚠ `3 commits`는 **PR 이벤트라 이 브랜치분만** 본 것이다. **전체 이력 스캔은 main 머지(push 이벤트) 때 처음 일어난다.**
+  - ⚠ **gitleaks는 이벤트의 커밋 범위만 본다 — 전체 이력은 아직 한 번도 스캔되지 않았다.** 실측: PR(3커밋)에서 `3 commits scanned`, squash 머지 후 main push(1커밋)에서 `1 commits scanned · ~23.6KB`. 즉 **머지하면 전체를 훑을 것이라는 예상은 틀렸다.** `fetch-depth: 0`은 여전히 필수다(없으면 이 증분 스캔조차 죽는다). 과거 이력을 한 번 훑으려면 **다른 트리거가 필요하다**(schedule/workflow_dispatch에서 전체 `detect`를 도는 것이 통상 방식 — 이 레포에 아직 없고, 실제 동작은 검증 안 했다).
+  - 대신 **17개 커밋 트리 전체는 로컬에서 패턴 스캔해 클린을 확인해 뒀다**(아래). 이건 gitleaks 룰셋을 대신하지 못하므로 **미해소 항목으로 남긴다**.
 - 원인은 우리 코드가 아니라 **CI 설정 결함**이었고, 고치자 **숨어 있던 결함이 층층이 나왔다**:
   1. **ruff 버전 드리프트** — CI는 `uvx ruff`(핀 없음=항상 최신), 로컬 0.15.22. 그 사이 ruff가 **기본 규칙 세트를 118규칙(E+F)→413규칙으로 확장**(0.16.0)해서, 커밋을 안 해도 빨개지는 구조였다. → CI에 `RUFF_VERSION=0.16.0`·`PYRIGHT_VERSION=1.1.411` 핀 + 루트 [`ruff.toml`](ruff.toml)(target-version py311 통일 + 설정 탐색을 레포에서 멈춤) + 지적 **42건 전부 처리**. 로컬 ruff도 0.16.0으로 올려 **로컬=CI**를 맞췄다.
   2. **secret scan이 0바이트를 스캔하고 초록이었다** — shallow clone(depth 1)이라 gitleaks가 죽고도 통과. → `fetch-depth: 0`. 같은 이유로 snapshot gate·schema-validate에 **대상 0건이면 실패** 방어 추가.
@@ -49,7 +50,8 @@
 
 ## ⚠ 재개 첫 액션
 
-0. **PR #1 머지 여부 결정** — CI 초록. 머지하면 push 이벤트로 **gitleaks가 전체 이력을 처음 스캔**한다. 머지 전까지 main은 여전히 적색 상태의 `122230a`다.
+0. **✅ 완료 — PR #1 머지됨**(2026-07-29, squash → main `2ad0319`). main CI 5잡 전부 success. 브랜치 삭제됨.
+   - ⚠ **후속 미해소**: gitleaks가 **과거 이력을 한 번도 스캔하지 않았다**(위 참조). 전체 스캔용 트리거(schedule 등) 추가 여부는 **미결정**.
 1. **🔺 갚아야 할 빚 — 라이트/다크 육안 확인 미실시** — D-027~D-029의 UI(리듬 드릴다운·악기 구성)가 **AGENTS §7("라이트/다크 양쪽 확인 없이 UI 변경을 머지하지 않는다")을 채우지 못한 채 main에 머지·배포됐다.** 도메인 소유자가 다른 개발 건으로 이동하며 진행을 지시(2026-07-29). 코드 수준 대체 점검은 통과했으나(하드코딩 색 0건 · 신규 토큰 6종이 라이트/다크 3블록 모두에 정의) **실제 렌더는 아무도 안 봤다.**
    - **어디를 볼지는 확정됐다**(2026-07-29 dev 서버로 확인): `npm run dev -- --port 3100` → `http://localhost:3100/artist-intelligence` → **`sonic-profile` 탭(4번째)**. 대시보드는 탭으로 모듈을 하나씩 보여주고 `useState(0)`이라 첫 화면은 chart-history다 — 리듬·악기는 초기 DOM에 아예 없다(결함 아님).
    - **테마는 `prefers-color-scheme`이 아니라 앱 안의 토글**(우측 상단 `☾ Dark`, 기본 light)이다.

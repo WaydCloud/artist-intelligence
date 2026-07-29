@@ -36,8 +36,9 @@
 
 - **브랜치 `ci-pin-gates` · [PR #1](https://github.com/WaydCloud/artist-intelligence/pull/1) · 커밋 3개. CI 5잡 전부 success, skipped 0.** 2026-07-20 이후 처음이다. **머지는 안 했다 — 도메인 소유자 결정 대기.**
 - 게이트가 **실제로 무언가를 검사했는지**까지 로그로 확인했다(이게 이 작업의 요점이었다): secret scan `3 commits scanned · ~19,564 bytes · no leaks` · snapshot gate `3 fixture(s) checked` · report contract `validating 5 report(s)` · ruff `All checks passed` · pyright `0 errors`.
-  - ⚠ **gitleaks는 이벤트의 커밋 범위만 본다 — 전체 이력은 아직 한 번도 스캔되지 않았다.** 실측: PR(3커밋)에서 `3 commits scanned`, squash 머지 후 main push(1커밋)에서 `1 commits scanned · ~23.6KB`. 즉 **머지하면 전체를 훑을 것이라는 예상은 틀렸다.** `fetch-depth: 0`은 여전히 필수다(없으면 이 증분 스캔조차 죽는다). 과거 이력을 한 번 훑으려면 **다른 트리거가 필요하다**(schedule/workflow_dispatch에서 전체 `detect`를 도는 것이 통상 방식 — 이 레포에 아직 없고, 실제 동작은 검증 안 했다).
-  - 대신 **17개 커밋 트리 전체는 로컬에서 패턴 스캔해 클린을 확인해 뒀다**(아래). 이건 gitleaks 룰셋을 대신하지 못하므로 **미해소 항목으로 남긴다**.
+  - ⚠ **gitleaks는 이벤트의 커밋 범위만 본다.** 실측: PR(3커밋)→`3 commits scanned`, squash 머지 후 main push(1커밋)→`1 commits scanned · ~23.6KB`. **머지하면 전체를 훑을 것이라는 예상은 틀렸다.** `fetch-depth: 0`은 여전히 필수지만(없으면 이 증분 스캔조차 죽는다) **필요조건이지 충분조건이 아니다.**
+  - ✅ **그래서 과거 이력은 별도로 훑었고, 깨끗하다.** CI와 같은 gitleaks 8.24.3을 로컬에서 전체 이력에 돌렸다: **23커밋 · 10.64MB · `no leaks found`(exit 0)** — 증분 스캔이 읽은 23.6KB의 **450배**다. 이게 기준선이다.
+  - ✅ 재발 방지로 [`secret-scan-full.yml`](.github/workflows/secret-scan-full.yml) 신설 — schedule(주 1회)·workflow_dispatch에서 **전체 이력**을 훑는다. `ci.yml`에 얹지 않은 이유는 주기 실행마다 5개 잡이 다 도는 낭비라서다.
 - 원인은 우리 코드가 아니라 **CI 설정 결함**이었고, 고치자 **숨어 있던 결함이 층층이 나왔다**:
   1. **ruff 버전 드리프트** — CI는 `uvx ruff`(핀 없음=항상 최신), 로컬 0.15.22. 그 사이 ruff가 **기본 규칙 세트를 118규칙(E+F)→413규칙으로 확장**(0.16.0)해서, 커밋을 안 해도 빨개지는 구조였다. → CI에 `RUFF_VERSION=0.16.0`·`PYRIGHT_VERSION=1.1.411` 핀 + 루트 [`ruff.toml`](ruff.toml)(target-version py311 통일 + 설정 탐색을 레포에서 멈춤) + 지적 **42건 전부 처리**. 로컬 ruff도 0.16.0으로 올려 **로컬=CI**를 맞췄다.
   2. **secret scan이 0바이트를 스캔하고 초록이었다** — shallow clone(depth 1)이라 gitleaks가 죽고도 통과. → `fetch-depth: 0`. 같은 이유로 snapshot gate·schema-validate에 **대상 0건이면 실패** 방어 추가.

@@ -19,7 +19,13 @@ import time
 from pathlib import Path
 from typing import Any, cast
 
-from sonic_profile.features import LOW_HZ_DEFAULT, SR, Unresolved, engine_provenance, extract
+from sonic_profile.features import (
+    LOW_HZ_DEFAULT,
+    SR,
+    Unresolved,
+    engine_provenance,
+    extract,
+)
 from sonic_profile.report import (
     MIN_PROB_DEFAULT,
     NEW_RELEASE_DAYS,
@@ -104,14 +110,13 @@ def _cache_save(path: Path, engine_key: str, features: dict[str, Any]) -> None:
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
+    from sonic_profile.models import ensure_models, model_dir, tagger_provenance
     from sonic_profile.preview import (
         candidates,
         decoder_provenance,
         features_from_preview,
         track_candidates,
     )
-
-    from sonic_profile.models import ensure_models, model_dir, tagger_provenance
     from sonic_profile.rhythm import rhythm_provenance
 
     today = time.strftime("%Y-%m-%d")
@@ -289,10 +294,9 @@ def cmd_retag(args: argparse.Namespace) -> int:
     - 무보관 유지: 오디오는 `tags_from_preview` 안에서 폐기된다.
     - 감사 가능: 바뀌는 필드가 `features.instruments` 하나뿐이라 diff로 확인된다.
     """
+    from sonic_profile.models import ensure_models, model_dir
     from sonic_profile.preview import lookup_preview, tags_from_preview
     from sonic_profile.tagging import TOP_K_INSTRUMENT
-
-    from sonic_profile.models import ensure_models, model_dir
 
     paths = _snapshot_paths(args.inputs)
     # (source, track_id) → 그 녹음을 담고 있는 (파일, 레코드) 전부. 같은 트랙이 여러 날짜에
@@ -468,7 +472,7 @@ def cmd_selftest(args: argparse.Namespace) -> int:
         for q in (0, 4, 8, 12):                          # 16분 격자의 정박 위치
             # 프레임 인덱스는 **반올림**해야 한다 — 잘라 넣으면 0.5초가 0.4993초가 되어
             # 칸 경계에서 앞 칸으로 밀린다(4번 → 3번). 격자 정렬 픽스처의 함정.
-            env[int(round((b + 2.0 * q / BINS) * SR / R_HOP))] = 1.0
+            env[round((b + 2.0 * q / BINS) * SR / R_HOP)] = 1.0
     prof = bar_profile(env, SR, bars)
     m = match_templates(prof)
     top = max(m, key=lambda k: m[k])

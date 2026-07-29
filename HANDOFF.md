@@ -32,17 +32,29 @@
 - **교훈 — 배포 대상 계정은 로컬 설정에서 추론할 값이 아니다.** `.vercel/project.json`이 있다는 건 "여기로 배포해도 된다"는 뜻이 아니다. 배포는 되돌리기 어렵고 외부에 노출되므로, **어느 계정·어느 프로젝트인지 먼저 확인받고** 실행한다.
 - ⚠ `apps/dashboard/.vercel/`(gitignore)에 죽은 링크와 `.env.production.local`이 아직 남아 있다. 배포를 재개할 때 **이 링크를 재사용하지 말고** 올바른 계정으로 새로 `vercel link` 할 것.
 
-## ❌ CI 적색 (2026-07-29)
+## ✅ CI 전 잡 초록 — **PR #1 머지 대기** (2026-07-29, D-030)
 
-- **main = `bcbb3fb`** (fast-forward, `audio-analysis-v2`에서). 로컬 게이트 전부 통과: ruff · pyright 0 · selftest 26/26 · 5모듈 schema valid · dashboard lint·tsc·build.
-- **CI는 2026-07-20부터 5연속 적색이며, 이번 머지 이전부터 그랬다.** 두 원인 모두 우리 코드 결함이 아니라 **CI 설정 결함**이다:
-  1. **secret scan — 실패지만 유출은 없다. 더 나쁜 건 스캔을 안 하고 있었다는 것.** 로그: `no leaks found in partial scan` · `scanned ~0 bytes (0)`. `actions/checkout@v4`가 shallow clone(depth 1)이라 gitleaks가 잡은 커밋 범위(`<base>^..<head>`)의 베이스가 로컬에 없어 `fatal: ambiguous argument`로 죽는다. **즉 이 보안 게이트는 통과해도 아무것도 검증하지 않는다** — 적색이 오히려 사실을 말해주고 있었다. 고침: security 잡의 checkout에 `with: { fetch-depth: 0 }`.
-  2. **ruff — 버전 드리프트.** CI는 `uvx ruff`(=항상 최신), 로컬은 **0.15.22**. 최신 쪽에서 31건(RUF046·RUF100 등)이 새로 뜬다. **레포에 루트 ruff 설정이 없어** 규칙 세트가 디렉터리마다 갈린다(`pyproject.toml`은 chart-history·fandom-pulse에만 있고 sonic-profile·signal-bridge·yt-pulse는 ruff 기본값). 고침: CI에서 ruff 버전 핀 + 루트 `ruff.toml` 신설 → 그 다음에 31건 처리. **핀 없이 31건만 고치면 다음 릴리스에 또 깨진다.**
-  - ⚠ 위 두 개는 **로컬에서 재현되지 않는다** — 로컬 게이트를 다 통과해도 CI는 빨갛다. 이 비대칭 자체가 고쳐야 할 대상이다.
+- **브랜치 `ci-pin-gates` · [PR #1](https://github.com/WaydCloud/artist-intelligence/pull/1) · 커밋 3개. CI 5잡 전부 success, skipped 0.** 2026-07-20 이후 처음이다. **머지는 안 했다 — 도메인 소유자 결정 대기.**
+- 게이트가 **실제로 무언가를 검사했는지**까지 로그로 확인했다(이게 이 작업의 요점이었다): secret scan `3 commits scanned · ~19,564 bytes · no leaks` · snapshot gate `3 fixture(s) checked` · report contract `validating 5 report(s)` · ruff `All checks passed` · pyright `0 errors`.
+  - ⚠ `3 commits`는 **PR 이벤트라 이 브랜치분만** 본 것이다. **전체 이력 스캔은 main 머지(push 이벤트) 때 처음 일어난다.**
+- 원인은 우리 코드가 아니라 **CI 설정 결함**이었고, 고치자 **숨어 있던 결함이 층층이 나왔다**:
+  1. **ruff 버전 드리프트** — CI는 `uvx ruff`(핀 없음=항상 최신), 로컬 0.15.22. 그 사이 ruff가 **기본 규칙 세트를 118규칙(E+F)→413규칙으로 확장**(0.16.0)해서, 커밋을 안 해도 빨개지는 구조였다. → CI에 `RUFF_VERSION=0.16.0`·`PYRIGHT_VERSION=1.1.411` 핀 + 루트 [`ruff.toml`](ruff.toml)(target-version py311 통일 + 설정 탐색을 레포에서 멈춤) + 지적 **42건 전부 처리**. 로컬 ruff도 0.16.0으로 올려 **로컬=CI**를 맞췄다.
+  2. **secret scan이 0바이트를 스캔하고 초록이었다** — shallow clone(depth 1)이라 gitleaks가 죽고도 통과. → `fetch-depth: 0`. 같은 이유로 snapshot gate·schema-validate에 **대상 0건이면 실패** 방어 추가.
+  3. **`data-contracts`·`schema-validate`가 8일간 skipped였다**(`needs: python`). 되살리니 둘 다 실패 → **둘 다 진짜 결함**: `entity.schema.json`이 `debut`·`agency`·`wd_id`를 모르고 있었고(갱신함), snapshot gate가 `provenance`만 보고 걸러 **signal-series를 snapshot 스키마로 검증**하고 있었다(대상 선별을 `provenance`+`records`로 정정).
+  4. **pyright는 여태 한 번도 실행된 적이 없었다** — ruff가 같은 잡의 앞 단계라 늘 먼저 죽었다. 되살리니 15건 실패: 맨몸 `uvx pyright`는 numpy를 못 푸는데 개발자 PC엔 깔려 있어 로컬만 0건이었다. **버전을 핀해도 환경이 다르면 같은 비대칭이 남는다.** → CI 타입체크에 `--with numpy --with jsonschema`.
+  5. **librosa를 CI에 끌어오려던 시도는 실패했고 접었다** — uv가 `numba 0.53.1 → llvmlite 0.36.0`을 골라 Python 3.12에서 빌드가 깨졌다. 버전 핀으로 쫓으려면 다른 OS·파이썬의 해석 결과를 추측해야 하고 확인은 CI 왕복 1회씩 든다. 대신 **코드가 이미 선언한 설계를 따랐다**: `numpy`만 모듈 최상단(진짜 필수), `librosa`·`onnxruntime`·`beat_this`는 전부 함수 안 지연 임포트(선택적 중량)라 호출부에 `# type: ignore`로 표시(`av`가 쓰던 방식).
+- **유출 없음은 이번에 실제로 확인했다** — 17개 커밋 트리를 직접 패턴 스캔(클린, `.env.example`만 존재하고 전부 자리표시자). 이전 기록의 "유출 없음"은 0바이트 스캔에 근거한 것이라 무효였다.
+- ⚠ **남은 구멍**: `signal-series`는 JSON 스키마 패키지가 없어(문서 관례로만 존재) series 픽스처 4종이 **어떤 계약으로도 검증되지 않는다**. `packages/signal-series/` 신설은 별도 건.
+- **재현 방법**(다음에 툴 버전을 올릴 때 쓸 것): CI와 같은 패키지만 담은 격리 venv를 만들어 거기서 pyright를 돌린다. 개발자 PC의 전역 환경에서 확인한 "0건"은 CI를 예측하지 못한다 — 이번에 그걸로 한 번 틀렸다.
 
-## ⚠ 재개 첫 액션 후보
+## ⚠ 재개 첫 액션
 
-1. **🔺 갚아야 할 빚 — 라이트/다크 육안 확인 미실시** — D-027~D-029의 UI(리듬 드릴다운·악기 구성)가 **AGENTS §7("라이트/다크 양쪽 확인 없이 UI 변경을 머지하지 않는다")을 채우지 못한 채 main에 머지·배포됐다.** 도메인 소유자가 다른 개발 건으로 이동하며 진행을 지시(2026-07-29). 코드 수준 대체 점검은 통과했으나(하드코딩 색 0건 · 신규 토큰 6종이 라이트/다크 3블록 모두에 정의) **실제 렌더는 아무도 안 봤다.** 재개 시 첫 액션으로 `/artist-intelligence`를 양쪽 테마로 열 것 — 요주의는 `<details>` 펼침 행, 동점 겹침 막대(`--series2`), `해당 없음` muted 막대(`--baseline` opacity 0.6)가 다크에서 배경과 붙는지.
+0. **PR #1 머지 여부 결정** — CI 초록. 머지하면 push 이벤트로 **gitleaks가 전체 이력을 처음 스캔**한다. 머지 전까지 main은 여전히 적색 상태의 `122230a`다.
+1. **🔺 갚아야 할 빚 — 라이트/다크 육안 확인 미실시** — D-027~D-029의 UI(리듬 드릴다운·악기 구성)가 **AGENTS §7("라이트/다크 양쪽 확인 없이 UI 변경을 머지하지 않는다")을 채우지 못한 채 main에 머지·배포됐다.** 도메인 소유자가 다른 개발 건으로 이동하며 진행을 지시(2026-07-29). 코드 수준 대체 점검은 통과했으나(하드코딩 색 0건 · 신규 토큰 6종이 라이트/다크 3블록 모두에 정의) **실제 렌더는 아무도 안 봤다.**
+   - **어디를 볼지는 확정됐다**(2026-07-29 dev 서버로 확인): `npm run dev -- --port 3100` → `http://localhost:3100/artist-intelligence` → **`sonic-profile` 탭(4번째)**. 대시보드는 탭으로 모듈을 하나씩 보여주고 `useState(0)`이라 첫 화면은 chart-history다 — 리듬·악기는 초기 DOM에 아예 없다(결함 아님).
+   - **테마는 `prefers-color-scheme`이 아니라 앱 안의 토글**(우측 상단 `☾ Dark`, 기본 light)이다.
+   - 요주의: `<details>` 펼침 행 · 동점 겹침 막대(`--series2`) · `해당 없음` muted 막대(`--baseline` opacity 0.6)가 **다크에서 배경과 붙는지**.
+   - 데이터는 정상 확인: 리듬 101곡·템플릿 6종, 악기 101곡·14버킷. 노브 2종(리듬 최소 정합도 0.30 · 악기 최소 확률 0.30) 슬라이더가 같은 화면에 있다.
 2. **`data/live/`는 gitignore** — 복구한 101곡 악기 라벨이 **이 PC에만** 있다. 유실 시 `retag`로 재복구는 되지만(멱등), 관측 이력이 git 밖이라는 점은 아래 서버 논의의 실질 쟁점이다.
 3. **`check-dev-off` 가드의 실제 걸림돌은 3000이었다** — 3100(우리 dev)을 내려도 `C:\Projects\Redslippers 2`의 dev가 3000을 물고 있어 막힌다. 가드 주석이 예외로 적어둔 경우이므로 전면 우회(`AI_ALLOW_BUILD=1`)가 아니라 **`$env:AI_DEV_PORTS='3100'`으로 검사 범위만 좁힐 것** — 우리 dev 보호는 살아 있다.
 

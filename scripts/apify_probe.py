@@ -61,7 +61,7 @@ def _request(method: str, url: str, token: str, body: dict[str, Any] | None = No
         headers["Content-Type"] = "application/json"
     req = urllib.request.Request(url, data=data, headers=headers, method=method)
     try:
-        with urllib.request.urlopen(req, timeout=310) as resp:  # noqa: S310 (trusted host)
+        with urllib.request.urlopen(req, timeout=310) as resp:  # trusted host
             return json.loads(resp.read().decode("utf-8", "replace"))
     except urllib.error.HTTPError as exc:
         detail = exc.read().decode("utf-8", "replace")
@@ -110,7 +110,7 @@ def summarize(items: list[Any]) -> None:
         note = ""
         if k.lower() in _PII_KEYS:
             note = "[PII - value redacted]"
-        elif k in numeric and numeric[k]:
+        elif numeric.get(k):
             note = _num_stats(numeric[k])
         print(f"  - {k}  |  {keys[k]}/{len(items)}  {note}")
 

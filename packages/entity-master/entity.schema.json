@@ -29,7 +29,10 @@
             "country": { "type": "string", "description": "ISO 3166-1 alpha-2 (예: KR)" },
             "type": { "type": "string", "description": "Group | Person 등" },
             "score": { "type": "number" },
-            "aliases": { "type": "array", "items": { "type": "string" }, "description": "다국어·로마자 별칭(크로스언어 매칭용)" }
+            "aliases": { "type": "array", "items": { "type": "string" }, "description": "다국어·로마자 별칭(크로스언어 매칭용)" },
+            "wd_id": { "type": "string", "description": "MB로 검증된 Wikidata QID. debut/agency의 출처 근거이며, 이름 검색이 아니라 MB 링크를 타야 동명이인 오매칭을 피한다(entities.py)." },
+            "debut": { "type": "string", "description": "데뷔/결성 연도(Wikidata P571). MusicBrainz에 없는 값이라 Wikidata에서만 온다 — chart-history의 신인 집계 근거." },
+            "agency": { "type": "string", "description": "소속사·레이블 영문 라벨(Wikidata). MB에 없어 Wikidata에서만 온다 — chart-history의 소속사 집계 근거." }
           }
         },
         {

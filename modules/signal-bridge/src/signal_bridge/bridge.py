@@ -12,7 +12,7 @@ key — no cross-module code import (D-007/D-010, data-only sharing).
 from __future__ import annotations
 
 import json
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 from pathlib import Path
 from statistics import median
 from typing import Any
@@ -21,19 +21,22 @@ MODULE_ID = "signal-bridge"
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def load_series(path: str) -> dict[str, Any]:
     """Load + minimally validate a signal-series doc (fail loudly on wrong shape — §4)."""
     doc = json.loads(Path(path).read_text(encoding="utf-8"))
+    # TRY004(TypeError를 쓰라)는 여기서 맞지 않는다 — 검사 대상은 호출자가 넘긴 인자가
+    # 아니라 **디스크에서 읽은 파일의 내용**이다. 잘못된 규격의 데이터는 타입 오류가
+    # 아니라 값 오류이고, 호출자에게 "파일이 틀렸다"로 읽혀야 한다.
     if not isinstance(doc, dict):
-        raise ValueError(f"{path}: signal-series must be an object")
+        raise ValueError(f"{path}: signal-series must be an object")  # noqa: TRY004
     for key in ("signal", "dates", "series"):
         if key not in doc:
             raise ValueError(f"{path}: signal-series missing required key '{key}'")
     if not isinstance(doc["dates"], list) or not isinstance(doc["series"], dict):
-        raise ValueError(f"{path}: 'dates' must be a list and 'series' an object")
+        raise ValueError(f"{path}: 'dates' must be a list and 'series' an object")  # noqa: TRY004
     return doc
 
 
@@ -649,9 +652,11 @@ def _insights(
 
 def _recos() -> list[str]:
     return [
-        "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 "
-        "합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",
-        "온셋 기준값은 담당자 판단으로 조정 가능. "
-        "기준은 조정 가능한 가설",
+        # 컬렉션 안의 암묵 문자열 연결은 쉼표 누락과 구분되지 않는다 — 괄호로 묶는다(ISC004).
+        (
+            "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 "
+            "합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선"
+        ),
+        "온셋 기준값은 담당자 판단으로 조정 가능. 기준은 조정 가능한 가설",
         "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정 아님. 개별 검증 필요",
     ]

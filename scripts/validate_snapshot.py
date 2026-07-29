@@ -21,7 +21,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
@@ -91,10 +91,10 @@ def _schema_errors(snapshot: dict[str, object]) -> tuple[bool, list[str]]:
 
 def _freshness_days(fetched_at: str) -> float | None:
     try:
-        when = datetime.fromisoformat(fetched_at.replace("Z", "+00:00"))
+        when = datetime.fromisoformat(fetched_at)  # py3.11+ 는 'Z' 접미사를 직접 읽는다
     except ValueError:
         return None
-    return (datetime.now(timezone.utc) - when).total_seconds() / 86400.0
+    return (datetime.now(UTC) - when).total_seconds() / 86400.0
 
 
 def main(argv: list[str] | None = None) -> int:

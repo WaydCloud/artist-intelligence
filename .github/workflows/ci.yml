@@ -8,6 +8,14 @@ on:
     branches: [main]
   pull_request:
 
+# 린터·타입체커 버전은 반드시 핀한다. `uvx ruff`(핀 없음)는 항상 최신을 받아오므로
+# 툴이 기본 규칙 세트를 넓히면 우리 커밋과 무관하게 CI가 빨개진다(실제로 0.15→0.16에서 발생).
+# 로컬 게이트와 같은 버전을 박아 "로컬은 초록, CI는 적색"인 비대칭을 없앤다.
+# 올릴 때는 로컬도 같이 올리고 새 지적을 처리하는 별도 커밋으로 한다.
+env:
+  RUFF_VERSION: "0.16.0"
+  PYRIGHT_VERSION: "1.1.411"
+
 jobs:
   python:
     name: modules (lint · typecheck · smoke)
@@ -15,10 +23,21 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
+      # 로컬 게이트가 `modules/ scripts/`를 검사하므로 CI도 같은 범위를 본다.
       - name: Lint (ruff)
-        run: uvx ruff check modules
+        run: uvx "ruff@${RUFF_VERSION}" check modules scripts
+      # 타입체커는 **버전만 핀해서는 부족하다 — 환경도 맞춰야 한다.**
+      # 맨몸 `uvx pyright`는 numpy를 못 풀어 오류를 낸다. 개발자 PC에는 깔려 있으니
+      # 로컬은 0건 — 정확히 우리가 없애려던 "로컬 초록·CI 적색" 비대칭이다.
+      # (이 단계는 여태 ruff가 먼저 죽어서 **실행된 적이 없었다.** 그래서 안 보였다.)
+      #
+      # 여기 넣는 것은 **모듈 최상단에서 임포트하는 진짜 필수 의존성뿐**이다.
+      # librosa·onnxruntime·beat_this는 코드가 전부 함수 안에서 지연 임포트하는
+      # 선택적 중량 의존성이고(미설치는 Unresolved/RhythmUnavailable로 처리되는 정상 경로),
+      # 호출부에 그렇게 표시해 뒀다. CI에 끌어오면 numba/llvmlite 해석이 파이썬 버전에
+      # 물려 깨진다 — 실제로 llvmlite 0.36이 3.12에서 빌드 실패했다.
       - name: Typecheck (pyright)
-        run: uvx pyright modules
+        run: uvx --with numpy --with jsonschema "pyright@${PYRIGHT_VERSION}" modules
       # 핵심 흐름 스모크: 각 모듈 CLI를 픽스처로 돌려 report.json을 생성한다.
       # 구현된 모듈은 강제 통과, 아직 구현 안 된 모듈은 건너뛴다(파이프라인은 코드가 채워질수록 자란다).
       - name: Smoke — chart-history (v3 국가 교차 + 엔티티)
@@ -72,8 +91,12 @@ jobs:
           schema = json.load(open("packages/report-schema/report.schema.json"))
           validator = Draft202012Validator(schema)
           files = glob.glob("modules/**/output/report.json", recursive=True)
+          # 5개 모듈이 모두 report.json을 커밋한다. 0건은 "아직 안 만들었다"가 아니라
+          # 경로가 바뀌었다는 뜻이고, 조용히 통과시키면 계약 검증이 사라진다.
           if not files:
-              print("no report.json yet — skipping (modules not built)"); sys.exit(0)
+              print("::error::no report.json found — the report contract is not being verified")
+              sys.exit(1)
+          print(f"validating {len(files)} report(s)")
           failed = False
           for f in files:
               errs = sorted(validator.iter_errors(json.load(open(f))), key=lambda e: e.path)
@@ -92,20 +115,31 @@ jobs:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v3
       # facts-only 스냅샷: provenance/quality 스키마 + PII 게이트(§4). PII/원문 필드가 있으면 실패.
+      #
+      # 대상 선별은 snapshot-schema의 required(`provenance` + `records`)와 정확히 맞춘다.
+      # `provenance`만 보고 거르면 signal-series 문서(dates/series/roster)까지 걸려들어
+      # **엉뚱한 스키마로 검증하다 실패**한다. signal-series는 아직 JSON 스키마 패키지가
+      # 없어(문서 관례로만 존재) 이 게이트의 대상이 아니다.
       - name: facts-only snapshot gate (§4)
         run: |
           uv run --project modules/fandom-pulse python - <<'PY'
           import glob, json, subprocess, sys
-          failed = False
+          failed, checked = False, 0
           for f in glob.glob("modules/**/tests/fixtures/*.json", recursive=True):
               try:
                   d = json.load(open(f, encoding="utf-8"))
               except Exception:
                   continue
-              if not (isinstance(d, dict) and "provenance" in d):
+              if not (isinstance(d, dict) and "provenance" in d and "records" in d):
                   continue
+              checked += 1
               if subprocess.run([sys.executable, "scripts/validate_snapshot.py", f]).returncode != 0:
                   failed = True
+          # 0건이면 게이트가 통과해도 아무것도 검증하지 않은 것이다 — 조용한 통과를 막는다.
+          print(f"snapshot gate: {checked} fixture(s) checked")
+          if checked == 0:
+              print("::error::snapshot gate matched 0 fixtures — filter is wrong or fixtures moved")
+              failed = True
           sys.exit(1 if failed else 0)
           PY
       # 공유 엔티티 마스터가 계약을 지키는지.
@@ -140,9 +174,18 @@ jobs:
     name: security scan
     runs-on: ubuntu-latest
     steps:
+      # fetch-depth: 0 은 필수다. checkout 기본값(depth 1)에서는 gitleaks가 스캔할
+      # 커밋 범위(`<base>^..<head>`)의 베이스가 로컬에 없어 `fatal: ambiguous argument`로 죽고,
+      # 로그에는 `scanned ~0 bytes`만 남는다 — 즉 게이트가 통과해도 아무것도 검증하지 않는다.
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      # PR 이벤트를 스캔하려면 GITHUB_TOKEN이 필요하다(gitleaks-action v2). 없으면
+      # 스캔 자체가 시작되지 못한다 — 자동 발급 토큰이라 별도 시크릿 설정은 없다.
       - name: Secret scan (gitleaks)
         uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: astral-sh/setup-uv@v3
       - name: Python deps audit
         run: uvx pip-audit || true   # 초기엔 경고만, 안정화 후 hard-fail 전환

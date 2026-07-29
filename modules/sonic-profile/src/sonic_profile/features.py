@@ -39,8 +39,8 @@ def _pulse_clarity(onset_env: np.ndarray, sr: int, hop: int) -> float:
         return 0.0
     ac = ac / ac[0]
     # 30~300 BPM에 해당하는 lag만 본다(그 밖의 주기는 박이 아님)
-    lo = max(1, int(round(60.0 / 300.0 * sr / hop)))
-    hi = min(ac.size - 1, int(round(60.0 / 30.0 * sr / hop)))
+    lo = max(1, round(60.0 / 300.0 * sr / hop))
+    hi = min(ac.size - 1, round(60.0 / 30.0 * sr / hop))
     if hi <= lo:
         return 0.0
     return float(np.clip(np.max(ac[lo : hi + 1]), 0.0, 1.0))
@@ -48,7 +48,7 @@ def _pulse_clarity(onset_env: np.ndarray, sr: int, hop: int) -> float:
 
 def _key_mode(y: np.ndarray, sr: int) -> tuple[str, str, float]:
     """chroma → (key, mode, 상관계수). 정확도가 낮아 집계 전용(RULES §3)."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     chroma = librosa.feature.chroma_cqt(y=y, sr=sr)
     profile = np.mean(chroma, axis=1)
@@ -66,7 +66,7 @@ def _key_mode(y: np.ndarray, sr: int) -> tuple[str, str, float]:
 
 def extract(y: np.ndarray, sr: int = SR, *, low_hz: float = LOW_HZ_DEFAULT) -> dict[str, Any]:
     """오디오 배열 → RULES §3 지표 dict. 미해석 입력은 Unresolved를 던진다."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     if y.ndim > 1:
         y = librosa.to_mono(y)
@@ -123,7 +123,7 @@ def extract(y: np.ndarray, sr: int = SR, *, low_hz: float = LOW_HZ_DEFAULT) -> d
 
 def engine_provenance(low_hz: float = LOW_HZ_DEFAULT) -> dict[str, Any]:
     """값의 일부인 엔진 설정 — 바뀌면 시리즈를 버전 분리해야 한다(RULES §2)."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     return {
         "engine": "librosa",

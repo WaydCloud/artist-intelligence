@@ -15,25 +15,25 @@ from typing import Any
 
 UA = "artist-intelligence/1.0 (research; sonic-profile)"
 BASE = "https://essentia.upf.edu/models"
+# URL을 한 줄에 담아 암묵 문자열 연결을 없앤다 — 컬렉션 안의 암묵 연결은
+# 쉼표 누락과 눈으로 구분되지 않는다(ISC004).
+_FEAT = f"{BASE}/feature-extractors"
+_HEADS = f"{BASE}/classification-heads"
 
 # (파일명, URL, 기대 크기) — 크기는 부분 다운로드를 잡는 최소 무결성 검사
 MODELS: dict[str, tuple[str, int]] = {
     "discogs-effnet-bsdynamic-1.onnx": (
-        f"{BASE}/feature-extractors/discogs-effnet/discogs-effnet-bsdynamic-1.onnx", 18027718),
+        f"{_FEAT}/discogs-effnet/discogs-effnet-bsdynamic-1.onnx", 18027718),
     "discogs-effnet-bsdynamic-1.json": (
-        f"{BASE}/feature-extractors/discogs-effnet/discogs-effnet-bsdynamic-1.json", 14986),
+        f"{_FEAT}/discogs-effnet/discogs-effnet-bsdynamic-1.json", 14986),
     "mtg_jamendo_instrument-discogs-effnet-1.onnx": (
-        f"{BASE}/classification-heads/mtg_jamendo_instrument/"
-        "mtg_jamendo_instrument-discogs-effnet-1.onnx", 2706492),
+        f"{_HEADS}/mtg_jamendo_instrument/mtg_jamendo_instrument-discogs-effnet-1.onnx", 2706492),
     "mtg_jamendo_instrument-discogs-effnet-1.json": (
-        f"{BASE}/classification-heads/mtg_jamendo_instrument/"
-        "mtg_jamendo_instrument-discogs-effnet-1.json", 3382),
+        f"{_HEADS}/mtg_jamendo_instrument/mtg_jamendo_instrument-discogs-effnet-1.json", 3382),
     "mtg_jamendo_genre-discogs-effnet-1.onnx": (
-        f"{BASE}/classification-heads/mtg_jamendo_genre/"
-        "mtg_jamendo_genre-discogs-effnet-1.onnx", 2802925),
+        f"{_HEADS}/mtg_jamendo_genre/mtg_jamendo_genre-discogs-effnet-1.onnx", 2802925),
     "mtg_jamendo_genre-discogs-effnet-1.json": (
-        f"{BASE}/classification-heads/mtg_jamendo_genre/"
-        "mtg_jamendo_genre-discogs-effnet-1.json", 4267),
+        f"{_HEADS}/mtg_jamendo_genre/mtg_jamendo_genre-discogs-effnet-1.json", 4267),
 }
 
 DEFAULT_DIR = Path("data") / "models"

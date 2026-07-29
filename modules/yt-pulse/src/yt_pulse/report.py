@@ -6,13 +6,13 @@ verdict (RULES §5, §0). Thresholds live in RULES §3 (기준 원장) as tunabl
 
 from __future__ import annotations
 
-from datetime import date, datetime, timezone
+from datetime import UTC, date, datetime
 
 MODULE_ID = "yt-pulse"
 
 
 def now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 def _i(rec: dict[str, object], key: str) -> int:

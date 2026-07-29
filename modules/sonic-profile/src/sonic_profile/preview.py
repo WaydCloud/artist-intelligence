@@ -150,7 +150,7 @@ def track_candidates(
 def _decode(path: str) -> np.ndarray:
     """오디오 파일 → 모노 float32 @ SR. libsndfile(MP3/WAV/FLAC) → PyAV(m4a/AAC) 순."""
     try:
-        import librosa
+        import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
         y, _ = librosa.load(path, sr=SR, mono=True)
         if y.size:

@@ -46,7 +46,7 @@ def musicnn_mel(y16: np.ndarray) -> np.ndarray:
 
     `type=power`가 핵심이다 — Essentia MelBands의 기본값이며 소스에 명시되지 않는다.
     """
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     S = np.abs(librosa.stft(y16, n_fft=N_FFT, hop_length=HOP, window="hann", center=False)) ** 2
     fb = librosa.filters.mel(sr=TAG_SR, n_fft=N_FFT, n_mels=N_MELS, fmin=0.0, fmax=TAG_SR / 2,
@@ -62,7 +62,7 @@ def _load(directory: Path) -> None:
     if _SESSIONS:
         return
     try:
-        import onnxruntime as ort
+        import onnxruntime as ort  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
     except ImportError as exc:
         raise TaggerUnavailable("onnxruntime not installed") from exc
     spec = {
@@ -87,7 +87,7 @@ def _top(labels: list[str], probs: np.ndarray, k: int = TOP_K) -> list[dict[str,
 
 def extract_tags(y: np.ndarray, sr: int, *, directory: Path | None = None) -> dict[str, Any]:
     """오디오 배열 → 스타일·악기·장르 상위 k. 실패는 TaggerUnavailable로 올린다."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     _load(directory or DEFAULT_DIR)
     y16 = librosa.resample(np.asarray(y, dtype=np.float32), orig_sr=sr, target_sr=TAG_SR) \
@@ -111,7 +111,7 @@ def extract_tags(y: np.ndarray, sr: int, *, directory: Path | None = None) -> di
 
 def style_probability(y: np.ndarray, sr: int, label: str, *, directory: Path | None = None) -> tuple[int, float]:
     """특정 스타일의 (순위, 확률) — 전처리 회귀 검증용(TESTS §4)."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     _load(directory or DEFAULT_DIR)
     y16 = librosa.resample(np.asarray(y, dtype=np.float32), orig_sr=sr, target_sr=TAG_SR) \

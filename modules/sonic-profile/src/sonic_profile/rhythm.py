@@ -68,7 +68,7 @@ def tempo_from_beats(beats: np.ndarray) -> float:
 
 def kick_envelope(y: np.ndarray, sr: int) -> np.ndarray:
     """저역(20~120Hz) 온셋 포락 — 킥/808."""
-    import librosa
+    import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     S = np.abs(librosa.stft(y, hop_length=HOP, n_fft=2048)) ** 2
     freqs = librosa.fft_frequencies(sr=sr, n_fft=2048)

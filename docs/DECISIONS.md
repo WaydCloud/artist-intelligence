@@ -16,6 +16,9 @@
 - **근거**: `S310`은 `urlopen`뿐 아니라 **`Request(...)` 생성자까지** 지적하는데(12곳 중 6곳), 생성만으로는 아무것도 열리지 않아 절반이 현학적이다. ruff의 선별 기본값이 이 규칙을 뺀 이유도 같을 것이다. 다만 코드가 이미 `# noqa: S310 (trusted static host)`처럼 **근거까지 달아두고 있었다** — 그 판단은 값어치가 있으므로 억제 지시자만 제거하고 문구는 남겼다.
 - **드러난 것 — 두 게이트가 8일간 실행조차 안 되고 있었다**: `data-contracts`·`schema-validate`는 `needs: python`이라 ruff가 깨지는 동안 **skipped**였다. 되살리자 둘 다 실패했고 **둘 다 진짜 결함이었다**: (a) `entity.schema.json`이 `additionalProperties:false`인데 `entities.json`은 `debut`·`agency`·`wd_id`를 담고 있었다(스키마가 데이터를 못 따라감 — 세 필드 모두 `entities.py`가 생산하고 `report.py` 신인·소속사 집계가 소비하는 1급 필드라 스키마를 갱신했다). (b) snapshot gate가 `provenance` 유무만 보고 걸러 **signal-series 문서를 snapshot 스키마로 검증**하고 있었다 — 대상 선별을 snapshot-schema의 required(`provenance`+`records`)와 정확히 맞췄다.
 - **남은 구멍**: `signal-series`는 **JSON 스키마 패키지가 없다**(문서 관례로만 존재). 그래서 4개 series 픽스처는 지금 어떤 계약으로도 검증되지 않는다. `packages/signal-series/` 신설은 별도 건.
+- **추가 — 버전만 핀해서는 부족했다. 환경도 핀해야 한다.** 첫 CI 실행에서 pyright가 15건으로 깨졌다. 맨몸 `uvx pyright`는 `numpy`를 못 푸는데 개발자 PC에는 깔려 있어 **로컬만 0건**이었다 — 이 결정이 없애려던 바로 그 비대칭이, 한 층 아래에 그대로 있었다. (이 단계는 여태 ruff가 같은 잡의 앞에서 죽어 **한 번도 실행된 적이 없었다.** 그래서 안 보였다.) → 타입체크 단계에 `--with numpy --with jsonschema`.
+- **추가 — 무엇을 설치할지는 코드가 이미 말하고 있었다.** `librosa`까지 넣었더니 uv가 `numba 0.53.1 → llvmlite 0.36.0`을 골라 Python 3.12에서 빌드가 깨졌다. 버전 핀으로 쫓는 길은 **다른 OS·파이썬의 해석 결과를 추측**해야 하고 확인은 CI 왕복 1회씩 든다. 그래서 코드의 선언을 따랐다: `numpy`는 모듈 최상단(진짜 필수), `librosa`·`onnxruntime`·`beat_this`는 전부 **함수 안 지연 임포트**(무겁고 선택적이며, 미설치는 `Unresolved`/`RhythmUnavailable`로 처리되는 정상 경로)라 호출부에 표시만 한다 — `av`가 이미 쓰던 방식이다.
+- **검증 규율**: 툴 버전을 올릴 때는 **CI와 같은 패키지만 담은 격리 venv**에서 확인한다. 전역 개발 환경의 "0건"은 CI를 예측하지 못한다.
 
 ## D-029 · 2026-07-29 · 트렌드 축을 관측일에서 **발매일**로 갈아 끼운다 (D-022·D-023 한계 해소)
 

@@ -12,6 +12,11 @@
 - **부수**: 모듈마다 `target-version`이 갈려 있었다 — `pyproject.toml`이 chart-history·fandom-pulse에만 있어 그 둘만 py311로 추론되고 나머지 셋은 기본값이었다. 같은 레포인데 판정 기준이 달랐다. 루트 설정으로 py311 통일(`UP017`·`FURB162` 7건이 그제서야 드러났다). CI 린트 범위도 로컬과 같은 `modules scripts`로 맞췄다.
 - **결정 ②  0건을 검사하고 통과하는 게이트를 금지한다.** secret scan은 `actions/checkout@v4`가 shallow clone(depth 1)이라 gitleaks가 커밋 범위의 베이스를 못 찾아 죽고 있었다 — 로그는 `scanned ~0 bytes`, **결론은 초록.** `fetch-depth: 0`으로 고쳤다. 같은 이유로 snapshot gate와 schema-validate에 **검사 대상 0건이면 실패**하는 방어를 넣었다.
 - **근거**: 적색보다 나쁜 것은 **아무것도 검증하지 않으면서 초록인 게이트**다. 전자는 사실을 말하지만 후자는 거짓 보증을 준다. 실제로 "secret scan 통과"를 근거로 유출이 없다고 적었던 기록이 있는데, 그 스캔은 0바이트를 읽은 것이었다(이번에 17개 커밋 트리를 직접 패턴 스캔해 확인 — 클린).
+- **정정 — `fetch-depth: 0`은 필요조건이지 충분조건이 아니었다.** 머지 후 실측하니 gitleaks는 **이벤트의 커밋 범위만** 본다: PR(3커밋)→`3 commits scanned`, squash 머지 후 push(1커밋)→`1 commits scanned · ~23.6KB`. "머지하면 전체 이력을 훑는다"는 예상은 **틀렸다.** depth 0이 없으면 이 증분 스캔조차 죽으므로 고침 자체는 유효하지만, 그것만으로 과거 이력이 검증되지는 않는다.
+- **그래서 이 결정의 ②를 완결시켰다 — 전체 이력을 실제로 훑었고, 훑는 경로를 상설화했다.**
+  - **기준선 확보**: CI와 같은 gitleaks 8.24.3으로 전체 이력을 스캔 → **23커밋 · 10.64MB · `no leaks found`**(2026-07-29). 증분 스캔이 읽은 23.6KB의 450배다. 앞서 자체 패턴 스캔으로 낸 "클린"이 **진짜 룰셋으로도 확인**된 셈이다.
+  - **상설화**: `.github/workflows/secret-scan-full.yml`(schedule 주 1회 + workflow_dispatch)에서 전체 이력을 훑는다. `ci.yml`에 얹지 않은 것은 주기 실행마다 5개 잡이 전부 도는 낭비를 피하기 위해서다.
+  - **교훈**: "게이트가 초록"과 "게이트가 무엇을 봤는가"는 다른 질문이다. 이 결정에서 두 번 걸렸다 — 처음엔 0바이트, 두 번째는 증분. **매번 스캔 범위를 숫자로 확인**하는 것이 유일한 방어였다.
 - **결정 ③  `S310`(urlopen 스킴 감사)은 켜지 않는다.** 무효가 된 `# noqa: S310`은 걷어내되 신뢰 근거는 일반 주석으로 보존한다.
 - **근거**: `S310`은 `urlopen`뿐 아니라 **`Request(...)` 생성자까지** 지적하는데(12곳 중 6곳), 생성만으로는 아무것도 열리지 않아 절반이 현학적이다. ruff의 선별 기본값이 이 규칙을 뺀 이유도 같을 것이다. 다만 코드가 이미 `# noqa: S310 (trusted static host)`처럼 **근거까지 달아두고 있었다** — 그 판단은 값어치가 있으므로 억제 지시자만 제거하고 문구는 남겼다.
 - **드러난 것 — 두 게이트가 8일간 실행조차 안 되고 있었다**: `data-contracts`·`schema-validate`는 `needs: python`이라 ruff가 깨지는 동안 **skipped**였다. 되살리자 둘 다 실패했고 **둘 다 진짜 결함이었다**: (a) `entity.schema.json`이 `additionalProperties:false`인데 `entities.json`은 `debut`·`agency`·`wd_id`를 담고 있었다(스키마가 데이터를 못 따라감 — 세 필드 모두 `entities.py`가 생산하고 `report.py` 신인·소속사 집계가 소비하는 1급 필드라 스키마를 갱신했다). (b) snapshot gate가 `provenance` 유무만 보고 걸러 **signal-series 문서를 snapshot 스키마로 검증**하고 있었다 — 대상 선별을 snapshot-schema의 required(`provenance`+`records`)와 정확히 맞췄다.

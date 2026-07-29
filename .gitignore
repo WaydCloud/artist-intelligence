@@ -38,3 +38,6 @@ next-env.d.ts
 # --- OS ---
 .DS_Store
 Thumbs.db
+
+# 사전학습 모델 (런타임 페치, CC BY-NC-SA — 재배포 금지)
+data/models/

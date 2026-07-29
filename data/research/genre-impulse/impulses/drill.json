@@ -1,0 +1,69 @@
+{
+  "id": "drill",
+  "name_ko": "드릴",
+  "name_en": "Drill",
+  "version": "1.0.0",
+  "updated": "2026-07-30",
+  "case_type": "import",
+  "origin": { "region": "US/UK", "scene": "시카고 드릴(2012~, Chief Keef) → UK 드릴(2012~15 브릭스턴 발원, 2015~ 본격화) → 뉴욕(브루클린) 드릴(2019~20, Pop Smoke가 UK 프로듀서 808Melo 수입)" },
+  "adoption_mode": {
+    "mode": "element",
+    "notes": "요소 차용 모드(D-033 보완⑤ 재분류) — 씬 정착·주류 차단형: 언더→SMTM(주류 미디어)까지 두 층은 뚫었고, 음원차트 대중·정체성화 층에서 멈춤. 하이퍼팝과 달리 미국·영국 싱글차트 정상급까지 실제로 갔다('임펄스 강도 부족'으로 설명 불가한 더 순도 높은 사례 — 임펄스 강도는 도달의 필요조건도 충분조건도 아니다). '주류 차단' 판정은 Future Perfect 확인 후 '디지털 차트·정체성화 층 차단'으로 정밀화. 차단 요인(가설): ① 서사 진정성의 번역 불가(드릴의 상품은 비트가 아니라 갱 폭력의 실화성 — 빼면 이미 트랩으로 공급되던 '어두운 808 비트'로 환원) ② 주류 차트의 장르 필터(SMTM11에서 노출[드릴 래퍼]과 차트 히트[비드릴 곡]가 분리) ③ 아이돌 시스템 리스크 부적합 ④ 선점 장르(싱잉랩·이모힙합)의 대체 효과",
+    "mode_transitions": []
+  },
+  "trajectory": [
+    { "cell": "origin-scene-chicago", "date": "2012", "date_precision": "year", "evidence": "시카고 드릴(Chief Keef)", "sources": ["https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"], "certainty": "중간" },
+    { "cell": "origin-scene-uk", "date": "2012~2015", "date_precision": "range", "evidence": "UK 드릴 — 브릭스턴 발원(2012~15), 2015~ 본격화", "sources": ["https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"], "certainty": "중간" },
+    { "cell": "origin-mainstream-us", "date": "2019~2020", "date_precision": "range", "evidence": "브루클린 드릴 — Pop Smoke 'Dior' Hot 100 22위·'For the Night' 6위, 유작 앨범 빌보드 200 1위, 2020년 Hot 100 진입곡 수 전체 4위", "sources": ["https://www.billboard.com/pro/pop-smoke-new-lp-chart-billboard-hot-100/"], "certainty": "높음" },
+    { "cell": "origin-mainstream-uk", "date": "2020~", "date_precision": "range", "evidence": "UK 주류 정상 — Headie One 『Edna』 UK 앨범 1위, Central Cee UK 2위", "sources": ["https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"], "certainty": "중간" },
+    { "cell": "global-diffusion", "date": "2020년대", "date_precision": "range", "evidence": "프랑스·호주 확산 — 통설 인용, 출처 미확보", "certainty": "매우 낮음" },
+    { "cell": "kr-hiphop-scene", "date": "2020~2022", "date_precision": "range", "evidence": "힙합 씬 실질 수용 — 창모 'Swoosh Flow'(🔄 교차 검증 정정: 창모×Paul Blanco 합작 믹스테이프 『BIPOLAR』(2020-06-03) 수록, 드릴 귀속 확인. 차트는 실시간 TOP100 최고 관측 66위, 공식 주간 피크 미확정)·'Beretta', 릴러말즈 'Selfish', Silkybois 'Bomaye'(유튜브 ~200만), Blase SMTM10 부상", "sources": ["https://www.topstarnews.net/news/articleView.html?idxno=801622", "https://brunch.co.kr/@bbeans/34", "https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"], "certainty": "중간" },
+    { "cell": "kr-media-mainstream", "date": "2022", "date_precision": "year", "evidence": "SMTM11(2022)이 드릴 유행 정면 흡수 — 블라세·노윤하·칸·플리키뱅 등의 발판. 단 차트 층위 단절: 같은 SMTM11 안에서도 멜론 최상위(4위)는 이영지 'NOT SORRY' 등 비드릴 멜로딕 곡", "sources": ["https://namu.wiki/w/SHOW%20ME%20THE%20MONEY%2011"], "certainty": "낮음" },
+    { "cell": "kr-idol-title", "date": "2022-07", "date_precision": "month", "evidence": "🔴 2차 조사에서 뒤집힘 — 명시적 드릴 타이틀곡 실존: ENHYPEN 'Future Perfect (Pass the MIC)'(2022-07, 시카고 드릴 명시·음악방송 3회 1위·앨범 빌보드 200 6위). 제작진 증언 확보: '드릴은 잘 알려지지 않은 장르라 기획 단계부터 고민'(BELIFT). 단 국내 디지털 차트 유의미 진입은 미확인이고 1회 실험 후 시그니처화하지 않음", "sources": ["https://magazine.weverse.io/article/view/612?lang=en", "https://en.wikipedia.org/wiki/Manifesto:_Day_1"], "certainty": "매우 높음", "certainty_note": "제작진 1차 증언(Weverse Magazine) — 아이돌 드릴 타이틀 첫 명시 사례" },
+    { "cell": "kr-mainstream", "date": "미도달", "date_precision": "unreached", "evidence": "디지털 차트 대중 층 차단 — 창모 정규 2집은 한국힙합어워즈 4관왕이나 수록곡 최고 멜론 80위권(커뮤니티 집계 — 확실성 낮음). BABYMONSTER 'Batter Up'(2023)의 드릴 귀속은 2차 조사에서 기각 쪽(위키·NME·Bias List 전부 힙합/트랩 기술)", "certainty": "매우 낮음", "certainty_note": "부정 명제('차트인 부재')는 전수 검증 불가 — 반례 발견 시 즉시 갱신(실제로 아이돌 타이틀 층은 Future Perfect 발견으로 한 번 뒤집혔음)" }
+  ],
+  "leadtimes": [
+    { "from_cell": "origin-mainstream", "to_cell": "kr-idol-borrowing", "months": 12, "months_range": "0~24", "note": "글로벌 정점(NY 드릴 2019~22·UK 주류화 ~2021)과 아이돌 차용(2022-02~10)이 거의 동시(0~2년) — H3 시차 단축 추세" },
+    { "from_cell": "kr-hiphop-scene", "to_cell": "kr-idol-borrowing", "months": 24, "note": "한국 힙합 수용(2020 창모) 대비 약 2년 후" },
+    { "from_cell": "kr-idol-title", "to_cell": "kr-mainstream", "months": null, "note": "디지털 차트 대중 층 미도달" },
+    { "from_cell": "kr-idol-title", "to_cell": "kr-identity-formation", "months": null, "note": "정체성화 미발생 — 1회 실험 후 시그니처화하지 않음(H2 4단계 경로에서 중단)" }
+  ],
+  "early_signals": [
+    { "source_type": "overseas-chart", "date": "2019~2020", "lead_months_vs_kr_mainstream": null, "evidence": "Pop Smoke Hot 100 6위·빌보드 200 1위 — 미국 싱글차트 정상급 도달(차트 실체가 있었는데도 한국 대중 층은 못 넘음)", "certainty": "높음" },
+    { "source_type": "kr-underground-adoption", "date": "2020-06", "lead_months_vs_kr_mainstream": null, "evidence": "창모 'Swoosh Flow'(『BIPOLAR』) 등 국내 힙합 씬 수용 — 실시간 TOP100 최고 관측 66위", "sources": ["https://www.topstarnews.net/news/articleView.html?idxno=801622"], "certainty": "높음" },
+    { "source_type": "kr-media-adoption", "date": "2022", "lead_months_vs_kr_mainstream": null, "evidence": "SMTM11의 드릴 유행 정면 흡수 — 주류 미디어 노출 층 도달", "certainty": "낮음" },
+    { "source_type": "practitioner-forecast", "date": "2023-01", "lead_months_vs_kr_mainstream": null, "evidence": "데드보이즈 프로듀서의 예측 '케이팝에 넘어간다면 UK 드릴/전자음악 쪽일 것' — 2026-07 현재 대량 발생 미확인", "sources": ["https://hypebeast.kr/2023/1/korea-drill-blase-nsw-yoon-deadbois"], "certainty": "중간" }
+  ],
+  "element_borrowing": {
+    "elements": ["드릴 비트(어두운 808 텍스처 — 서사·하위문화는 미이식, H1)", "슬라이딩 808 계열(스템 단위 판정 불가 — 비평 텍스트 의존)"],
+    "anchor_tracks": [
+      { "artist": "STAYC", "title": "I WANT U BABY", "date": "2022-02", "chart": "수록곡", "certainty": "높음" },
+      { "artist": "ENHYPEN", "title": "Future Perfect (Pass the MIC)", "date": "2022-07", "chart": "음악방송 3회 1위·앨범 빌보드 200 6위(국내 디지털 유의미 진입 미확인)", "certainty": "매우 높음" },
+      { "artist": "Stray Kids", "title": "3RACHA", "date": "2022-10", "chart": "유닛 수록곡", "certainty": "중간" },
+      { "artist": "KISS OF LIFE", "title": "Igloo", "date": "2024-10", "chart": "수록곡", "certainty": "낮음" }
+    ],
+    "stage_reached": "title"
+  },
+  "identity_formation": {
+    "occurred": false,
+    "worldview_coupling": "부재 — 부재 자체가 발견. 결합할 서사가 없었고 보컬 관습과 충돌(당대 비평도 '하이퍼 프로세싱 보컬이 드릴의 raw함과 상충'). 드릴 요소는 수록곡·유닛곡 레벨의 1회성 텍스처에 머묾"
+  },
+  "signature": {
+    "status": "pending-a2",
+    "predicted_axes": ["슬라이딩 808 베이스", "어두운 808 비트 텍스처 — 트랩과의 경계 판별 규율 필요(검증 후 기각 후보 다수: Shut Down·Bouncy·Batter Up 등)"]
+  },
+  "peak_decline": {
+    "kr_peak": "2022 — 힙합 씬 수용(2020~22)·SMTM11 흡수·아이돌 차용(2022-02~10)이 집중된 해",
+    "kr_decline": "2022 이후 아이돌 차용 확산 미발생 — ENHYPEN 1회 실험 후 시그니처화하지 않음, 데드보이즈 예측(UK 드릴 쪽 전이)도 2026-07 현재 대량 발생 미확인",
+    "decline_certainty": "중간",
+    "residue": "수록곡·유닛곡 레벨의 1회성 텍스처"
+  },
+  "limits": [
+    "부정 명제('타이틀/차트인 부재')는 전수 검증 불가 — 반례 발견 시 즉시 갱신(Future Perfect 발견으로 실제 한 번 뒤집힘)",
+    "드릴 귀속 다수가 출처 1개(Hypebeast KR 또는 팬위키) 의존",
+    "국내 차트 원자료 미접근(멜론 MCP 미인증) — 2차 출처·커뮤니티 집계 포함(창모 공식 주간 피크 미확정)",
+    "프랑스·호주 드릴 확산, UK 드릴 검열 논란은 통설 인용(URL 미확보 — 매우 낮음)",
+    "슬라이딩 808 등 스템 단위 판정 불가 — A2 오디오 분석·스템 분리와 직결되는 공백"
+  ],
+  "casebook_ref": "CASE 10"
+}

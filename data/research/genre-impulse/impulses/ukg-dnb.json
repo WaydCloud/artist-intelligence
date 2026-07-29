@@ -1,0 +1,62 @@
+{
+  "id": "ukg-dnb",
+  "name_ko": "UK개러지·드럼앤베이스 리바이벌",
+  "name_en": "UK garage / Drum and bass revival",
+  "version": "1.0.0",
+  "updated": "2026-07-30",
+  "case_type": "import",
+  "origin": { "region": "UK", "scene": "UKG/2-step — 1990s 후반 런던 · DnB/정글 — 1990s 초 UK 레이브 씬의 2020년대 리바이벌. 미국은 발원지가 아니라 글로벌 검증 허브로 기능" },
+  "adoption_mode": {
+    "mode": "full",
+    "notes": "성공 사례(미국 외 발원 경로). 한국 수용이 미국 검증 후행이 아니라 거의 병렬 — 뉴진스 프로듀서진(250·FRNK)이 2022년부터 인접 클럽 장르를 선제 도입",
+    "mode_transitions": []
+  },
+  "trajectory": [
+    { "cell": "origin-mainstream-reentry", "date": "2019-06", "date_precision": "month", "evidence": "AJ Tracey 'Ladbroke Grove'(Conducta 프로듀스, UKG) → 2019-10 UK 3위 피크 — 리바이벌 신호탄", "sources": ["https://en.wikipedia.org/wiki/Ladbroke_Grove_(song)"], "certainty": "높음" },
+    { "cell": "origin-viral", "date": "2021-03", "date_precision": "month", "evidence": "PinkPantheress 'Break It Off'(DnB) 틱톡 스니펫(2021-03-17) 바이럴", "sources": ["https://en.wikipedia.org/wiki/Break_It_Off_(PinkPantheress_song)"], "certainty": "높음" },
+    { "cell": "origin-mainstream-newgen", "date": "2021-08~2022-11", "date_precision": "range", "evidence": "'Just for Me'(2-step) 틱톡 UK 여름 브레이크아웃(2021-08); venbee×goddard. 'messy in heaven'(DnB) 2022-11 UK 3위", "sources": ["https://en.wikipedia.org/wiki/Just_for_Me", "https://en.wikipedia.org/wiki/Messy_in_Heaven"], "certainty": "높음" },
+    { "cell": "global-viral", "date": "2021-10", "date_precision": "month", "evidence": "미국 바이럴 1차 — 'Just for Me' 미국 틱톡·NPR 조명. 2차는 2023-01~02 'Boy's a liar Pt. 2' 틱톡 확산", "sources": ["https://www.npr.org/2021/10/15/1046460096/pinkpantheress-reimagines-garage-music-for-a-new-generation"], "certainty": "중간" },
+    { "cell": "global-mainstream", "date": "2023-02", "date_precision": "month", "evidence": "'Boy's a liar Pt. 2'(w/ Ice Spice) Hot 100 14위 데뷔(2023-02) → 3위 피크(2023-03)", "sources": ["https://en.wikipedia.org/wiki/Boy%27s_a_Liar_Pt._2"], "certainty": "높음" },
+    { "cell": "kr-adjacent-adoption", "date": "2022-07~2022-12", "date_precision": "range", "evidence": "NewJeans 데뷔(250·FRNK) → 'Ditto'(2022-12, 볼티모어 클럽 — UKG '인접') Circle 1위", "sources": ["https://www.koreatimes.co.kr/entertainment/k-pop/20260725/how-newjeans-stole-londons-underground"], "certainty": "높음" },
+    { "cell": "kr-explicit-release", "date": "2023-07", "date_precision": "month", "evidence": "NewJeans 'New Jeans'(UKG/정글)·'Super Shy'(리퀴드 DnB+2-step), Jung Kook 'Seven'(2023-07-14, UKG 팝 — Forbes 프로듀서 인터뷰로 귀속 격상)", "sources": ["https://en.wikipedia.org/wiki/Super_Shy", "https://en.wikipedia.org/wiki/Seven_(Jung_Kook_song)", "https://www.forbes.com/sites/hughmcintyre/2023/07/28/the-producers-behind-jung-kooks-seven-share-the-behind-the-scenes-story-of-the-no-1-smash/"], "certainty": "높음" },
+    { "cell": "kr-mainstream", "date": "2023-07", "date_precision": "month", "evidence": "'Super Shy' Circle·멜론 1위(7주 연속); 'Seven' 멜론 1위·Hot 100 1위 데뷔", "sources": ["https://www.billboard.com/music/chart-beat/jung-kook-latto-seven-number-one-debut-hot-100-jason-aldean-1235377400/"], "certainty": "높음" },
+    { "cell": "kr-media-recognition", "date": "2023-08", "date_precision": "month", "evidence": "SBS '별 게 다 있는 2023년 케이팝: UK 개러지, 저지 클럽, 파벨라 펑크…'(2023-08-13)", "sources": ["https://premium.sbs.co.kr/article/2YLj6YfACUy"], "certainty": "높음" }
+  ],
+  "leadtimes": [
+    { "from_cell": "origin-mainstream-reentry", "to_cell": "kr-mainstream", "months": 45, "note": "UK 리바이벌 주류 재진입(2019-10 피크) → 한국 주류 1위(2023-07)" },
+    { "from_cell": "origin-viral", "to_cell": "global-mainstream", "months": 24, "note": "UK 틱톡 바이럴(2021-03) → 미국 주류 피크(2023-03)" },
+    { "from_cell": "global-mainstream", "to_cell": "kr-mainstream", "months": 4, "note": "미국 주류 피크(2023-03) → 한국 주류 1위(2023-07). 한국 수용은 미국 검증 대기 후행이 아니라 거의 병렬" },
+    { "from_cell": "kr-adjacent-adoption", "to_cell": "kr-mainstream", "months": 7, "note": "한국 인접 장르 1위(Ditto, 2022-12) → 명시적 UKG/DnB 1위(2023-07)" }
+  ],
+  "early_signals": [
+    { "source_type": "kr-precursor-release", "date": "2015", "lead_months_vs_kr_mainstream": null, "evidence": "SHINee 'View' 이후 UK 하우스/개러지 사운드 간헐 유입 — 심층 선행 지표(소급 분류·검증 크레딧 부재)", "certainty": "낮음" },
+    { "source_type": "shortform-viral", "date": "2021-03~2021-10", "lead_months_vs_kr_mainstream": 28, "evidence": "PinkPantheress 틱톡 바이럴 + 미국 매체 조명 — 숏폼에서 UKG/DnB의 Z세대 적합성 검증", "certainty": "높음" },
+    { "source_type": "overseas-chart", "date": "2022-06~2022-07", "lead_months_vs_kr_mainstream": 13, "evidence": "Drake 『Honestly, Nevermind』·Beyoncé 『Renaissance』 — 클럽/댄스 장르의 글로벌 메가트렌드화", "certainty": "높음" },
+    { "source_type": "producer-credit", "date": "2022-07~2022-12", "lead_months_vs_kr_mainstream": 12, "evidence": "프로듀서 크레딧(250·FRNK) + 'Ditto' 1위 — 브레이크비트 클럽 문법이 한국 주류에서 통한다는 직접 증거", "certainty": "높음" },
+    { "source_type": "overseas-chart", "date": "2022-11", "lead_months_vs_kr_mainstream": 8, "evidence": "venbee UK 3위 — DnB의 UK 주류 재돌파", "certainty": "높음" },
+    { "source_type": "overseas-chart", "date": "2023-02~2023-03", "lead_months_vs_kr_mainstream": 5, "evidence": "'Boy's a liar Pt. 2' Hot 100 3위 — 미국 검증 완료", "certainty": "높음" },
+    { "source_type": "producer-credit", "date": "2023-07 직전", "lead_months_vs_kr_mainstream": 0, "evidence": "Get Up 크레딧에 Erika de Casier 공개 — 유럽 언더그라운드 직결 신호", "certainty": "높음" },
+    { "source_type": "kr-listener-consumption", "date": "시기 미상", "lead_months_vs_kr_mainstream": null, "evidence": "한국 리스너의 PinkPantheress 소비 — 정황상 유력하나 계량 증거 미확보", "certainty": "매우 낮음" }
+  ],
+  "element_borrowing": null,
+  "identity_formation": null,
+  "signature": {
+    "status": "pending-a2",
+    "predicted_axes": ["2-step 스킵 킥·셔플 하이햇", "리퀴드 DnB 고속 브레이크", "워블 베이스", "짧은 러닝타임·루프 구조"]
+  },
+  "peak_decline": {
+    "kr_peak": "2023-07~08 — 'Seven' Hot 100 1위 + 'Super Shy' 멜론 7주 1위 동시 발생 + 국내 미디어 공인. 이후 2024년까지 기본 문법으로 흡수",
+    "kr_decline": "2025 추정 — 단절 사건보다 포화: 견인차 뉴진스 활동 중단(2025-03), 2026-03 리뷰의 'UKG나 하우스에 기대지 않은 댄스팝이 절실했다' 표현이 장르 피로 시사",
+    "decline_certainty": "낮음",
+    "origin_decoupled": true,
+    "residue": "UK 본토 리바이벌은 지속(Nia Archives 머큐리 후보, PinkPantheress 2025 호평) — 한국 채용 사이클과 발원지 씬 수명이 분리되는 패턴"
+  },
+  "limits": [
+    "UKG·저지클럽·볼티모어·퓨처개러지가 리뷰마다 혼용 — Wikipedia·전문지 표기 우선 채택",
+    "틱톡 바이럴 '첫 도달'은 스니펫 게시일·보도일로 근사",
+    "서울 클럽/언더 DJ 씬의 UKG 수용 미조사 — 씬 셀을 프로듀서 크레딧으로 대체(과소측정 위험)",
+    "뉴진스 채용이 PinkPantheress 경로의 '수용'인지 병렬적 독자 기획인지 인터뷰 증거 부족 — 리드타임 해석 주의",
+    "쇠퇴 시점(2025)은 정황 종합 추정"
+  ],
+  "casebook_ref": "CASE 3"
+}

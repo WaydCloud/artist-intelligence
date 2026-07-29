@@ -1,0 +1,68 @@
+{
+  "id": "citypop",
+  "name_ko": "시티팝 리바이벌",
+  "name_en": "City pop revival",
+  "version": "1.0.0",
+  "updated": "2026-07-30",
+  "case_type": "algorithmic-excavation",
+  "origin": { "region": "JP", "scene": "일본 1970s 말~1980s 도쿄 버블기 팝/AOR 카탈로그" },
+  "adoption_mode": {
+    "mode": "full",
+    "notes": "특이 경로 — 알고리즘 발굴: 살아있는 씬의 수출이 아니라 유튜브 추천이 30년 묵은 죽은 카탈로그를 되살린 사후(死後) 확산. 구조적 특이점 3: ① 확산 단위가 아티스트/씬이 아닌 카탈로그 ② 비공식 업로드가 정본(권리자 워너뮤직재팬은 4년 후행) ③ 한국 수용이 순수 다운스트림이 아니라 자생 뉴트로 흐름과의 병행 합류. 확산 종착지가 씬 형성이 아닌 아이돌 콘셉트 풀 편입",
+    "mode_transitions": []
+  },
+  "trajectory": [
+    { "cell": "origin-catalog", "date": "1984~1985", "date_precision": "range", "evidence": "'Plastic Love' 1984 녹음/1985-03 싱글 — 오리콘 86위·약 1만 장, 당대엔 비히트", "sources": ["https://en.wikipedia.org/wiki/Plastic_Love"], "certainty": "높음" },
+    { "cell": "global-niche-scene", "date": "2013-05", "date_precision": "month", "evidence": "✅ 교차 검증 확정 — Saint Pepsi 『Hit Vibes』(2013-05-31, KEATS//COLLECTIVE) 퓨처펑크 분기, Macross 82-99 『ネオ東京』(2013-11) 시티팝 샘플링 관습화", "sources": ["https://saintpepsi.bandcamp.com/album/hit-vibes", "https://future-funk.fandom.com/wiki/History"], "certainty": "높음" },
+    { "cell": "global-viral-trigger", "date": "2017-07", "date_precision": "month", "evidence": "'Plastic Lover' 계정의 8분 리믹스판 업로드(2017-07-05, 삭제 전 5,500만+ 뷰)", "sources": ["https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/"], "certainty": "높음" },
+    { "cell": "global-viral", "date": "2018-03~2018-04", "date_precision": "range", "evidence": "알고리즘 바이럴 임계 — 조회 급증 구간 2018-03-17~04-05로 추적('알고리즘이 작동한 시기')", "sources": ["https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/"], "certainty": "높음" },
+    { "cell": "global-mainstream", "date": "2019-05", "date_precision": "month", "evidence": "상업 주류화(리이슈) — Light in the Attic 『Pacific Breeze』(2019-05-03) + 워너 공식 쇼트 MV(2019-05-18)", "sources": ["https://en.wikipedia.org/wiki/Pacific_Breeze:_Japanese_City_Pop,_AOR_and_Boogie_1976%E2%80%931986"], "certainty": "높음" },
+    { "cell": "global-viral-2nd", "date": "2020-10~2020-12", "date_precision": "range", "evidence": "마츠바라 미키 '真夜中のドア'(1979) — Rainych 커버(2020-10-29) 기점 틱톡 확산", "sources": ["https://en.wikipedia.org/wiki/Mayonaka_no_Door"], "certainty": "높음" },
+    { "cell": "origin-reinstitution", "date": "2020-11~2021-11", "date_precision": "range", "evidence": "일본 역수입 주류(권리자 공인) — 공식 스트리밍(2020-11) → 바이닐 재발매 오리콘 5위(2021-11), 37년 만의 톱10", "sources": ["https://kotaku.com/decades-later-mariya-takeuchi-s-plastic-love-is-a-top-1848081072"], "certainty": "높음" },
+    { "cell": "kr-underground", "date": "2017-11", "date_precision": "month", "evidence": "죠지 'Boat'(2017-11-17) — 시티팝 무드 R&B(분류는 사후 부여 성격), 바이럴 임계 이전의 자생 신호", "sources": ["https://www.melon.com/album/detail.htm?albumId=10111920"], "certainty": "중간" },
+    { "cell": "kr-idol-concept", "date": "2018-06", "date_precision": "month", "evidence": "유빈 '숙녀'(2018-06-05, 앨범 '도시여자') — '80s 신스 시티팝' 명시. ✅ 교차 검증: 가온 주간 디지털 톱100 미진입(Domestic Digital 96위 피크) → 콘셉트 선행 신호로는 유효하나 상업 성과 사례로는 사용 금지", "sources": ["https://www.allkpop.com/article/2018/05/check-out-the-tracklist-for-yubins-1st-solo-album-city-woman", "https://en.wikipedia.org/wiki/Kim_Yu-bin"], "certainty": "높음" },
+    { "cell": "kr-scene-institutionalization", "date": "2018-08", "date_precision": "month", "evidence": "네이버 온스테이지 '디깅클럽서울' — 죠지의 김현철 '오랜만에'(1989) 리메이크 등", "sources": ["https://music.bugs.co.kr/album/20194534"], "certainty": "높음" },
+    { "cell": "kr-viral", "date": "2019-07", "date_precision": "month", "evidence": "담론 폭발 — 주류 미디어 '시티팝 열풍' 보도 집중, 플랫폼 기획전", "sources": ["https://www.asiae.co.kr/article/2019070122453693202"], "certainty": "높음" },
+    { "cell": "kr-mainstream", "date": "2019-12~2020-06", "date_precision": "range", "evidence": "백예린 'Square (2017)'(2019-12) 멜론 1위 — 시티팝 '인접'; 선미 '보라빛 밤'(2020-06) 시티팝 표방 상위권 석권", "sources": ["https://www.sedaily.com/NewsVIew/1Z488EBI9N"], "certainty": "중간", "certainty_note": "차트 높음/분류 낮음 — 'Square'는 인접 표기" },
+    { "cell": "kr-decline", "date": "2021~2022", "date_precision": "range", "evidence": "레트로 담론이 8090 뉴트로→Y2K로 이동, 시티팝은 여름 시즌 관습으로 잔존", "sources": ["https://www.wkorea.com/2021/08/04/retro-guide-vol-1/"], "certainty": "중간" }
+  ],
+  "leadtimes": [
+    { "from_cell": "origin-catalog", "to_cell": "global-niche-scene", "months": 348, "note": "약 29년 — 씬 전파가 아닌 아카이브 발굴, 리드타임 개념 자체가 성립 안 하는 사후 구간" },
+    { "from_cell": "global-niche-scene", "to_cell": "global-viral", "months": 54, "note": "약 4.5년 — 샘플링 씬이 수요·검색어를 예열, 알고리즘이 점화" },
+    { "from_cell": "global-viral", "to_cell": "kr-idol-concept", "months": 2, "note": "핵심 수치. 단 죠지 'Boat'(2017-11)가 임계 이전 → 병행 합류로 읽어야 함" },
+    { "from_cell": "global-viral", "to_cell": "kr-viral", "months": 15 },
+    { "from_cell": "global-viral", "to_cell": "kr-mainstream", "months": 23, "months_range": "20~26" },
+    { "from_cell": "global-mainstream", "to_cell": "kr-mainstream", "months": 7, "note": "거의 동시 — 한국이 서구 주류화의 하류가 아니라 병렬 트랙" },
+    { "from_cell": "kr-mainstream", "to_cell": "origin-reinstitution", "months": 11, "months_range": "11~23", "note": "한국이 발원지(일본) 권리자 공인보다 1~2년 선행 — 발원지 주류 복귀가 가장 늦은 알고리즘 발굴형의 전형적 역전" }
+  ],
+  "early_signals": [
+    { "source_type": "sampling-scene", "date": "2013~", "lead_months_vs_kr_mainstream": null, "evidence": "SoundCloud/Bandcamp 퓨처펑크의 시티팝 샘플링 관습화 — 수요 예열", "certainty": "높음" },
+    { "source_type": "algorithmic-upload-surge", "date": "2017-07~2018-04", "lead_months_vs_kr_mainstream": 20, "evidence": "비공식 업로드의 추천 유입 급증 — 알고리즘 발굴형 확산의 최선행 정량 신호는 '권리자와 무관한 비공식 업로드의 조회 급증'", "certainty": "높음" },
+    { "source_type": "kr-underground-adoption", "date": "2017-11", "lead_months_vs_kr_mainstream": 25, "evidence": "죠지 'Boat' — 한국 인디 씬의 자생 신호(바이럴 임계 이전)", "certainty": "중간" },
+    { "source_type": "kr-idol-concept-adoption", "date": "2018-06", "lead_months_vs_kr_mainstream": 18, "evidence": "유빈 '숙녀' — 대형 기획사(JYP)가 이미 콘셉트로 포착", "certainty": "높음" },
+    { "source_type": "platform-infra", "date": "2018-08", "lead_months_vs_kr_mainstream": 16, "evidence": "디깅클럽서울 — 플랫폼(네이버)의 재발굴 제도화", "certainty": "높음" },
+    { "source_type": "debut-concept-productization", "date": "2019-02", "lead_months_vs_kr_mainstream": 10, "evidence": "유키카 '네온' — 시티팝이 신인 데뷔 기획 상품이 될 만큼 수요 확신 형성(제작진이 여자친구 작업팀 Oreo)", "certainty": "중간" },
+    { "source_type": "platform-infra", "date": "2019-05", "lead_months_vs_kr_mainstream": 7, "evidence": "서구 리이슈 인프라(『Pacific Breeze』) + 권리자 첫 반응(워너 공식 쇼트 MV)", "certainty": "높음" },
+    { "source_type": "press-naming", "date": "2019-07", "lead_months_vs_kr_mainstream": 5, "evidence": "국내 미디어 열풍 보도 — 주류 차트 도달 5~11개월 전", "certainty": "높음" }
+  ],
+  "element_borrowing": null,
+  "identity_formation": null,
+  "signature": {
+    "status": "pending-a2"
+  },
+  "peak_decline": {
+    "kr_peak": "담론 2019 여름 / 차트 2019-12~2020-06 (글로벌은 2020 말 틱톡 2차 파동으로 더 늦음)",
+    "kr_decline": "2021~2022 — 레트로 축이 Y2K로 이동, 시티팝은 여름 관습으로 잔존. 역설적으로 발원지 일본의 주류 공인(2021-11)은 한국 쇠퇴기와 겹침",
+    "decline_certainty": "중간",
+    "origin_decoupled": true,
+    "residue": "여름 시즌 관습으로 잔존 + '알고리즘이 옛 카탈로그를 되살린다'는 경로 자체가 표준화(2020 틱톡 파동이 재현 사례)"
+  },
+  "limits": [
+    "장르 정의 모호성(최대 한계) — '시티팝'은 당대 일본에서도 사후 소급된 무드/시대 태그이며 한국에선 마케팅 라벨로 과확장: 셀 판정이 분류 기준에 따라 ±1년 이상 흔들림('Square'는 인접 표기, 'Boat'도 R&B 시각 유력)",
+    "조회수 원자료 유실 — 원 바이럴 영상 저작권 삭제(2019, 2021)로 시계열 소실, 스파이크 시점은 제3자 사후 분석 의존",
+    "유빈·선미의 가온 주간 피크 미확인 · Saint Pepsi 발매 월은 교차 검증으로 확정(2013-05-31)됐으나 잔여 세부 미확인",
+    "인과 vs 병행 — 한국 초기 채용이 유튜브 바이럴의 결과인지 자생 뉴트로와의 동시 발생인지 제작 의사결정 수준 검증 불가: 병행 합류 가설 채택(반박 가능)",
+    "한국 내 유튜브/커뮤니티 정량 신호 미확보 — 미디어 보도 시점(2019-07)을 대리 지표로 사용"
+  ],
+  "casebook_ref": "CASE 6"
+}

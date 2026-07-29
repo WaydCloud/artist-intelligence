@@ -25,14 +25,17 @@
 - **가드**: PAUSE 파일 · `experiment_end=2026-08-19` · `AI_DRYRUN=1`. 중단: `schtasks /Delete /TN "AI-daily-collect" /F`.
 - ⚠ **다음 실행은 sonic 레그가 콜드 실행**이다 — 엔진 키에 `tagger_top_k_instrument`가 추가돼 캐시가 무효화됐다(D-028). 프리뷰 ~200건 재취득(무료). 정상 동작이니 놀라지 말 것.
 
-## ✅ 배포 완료 · ❌ CI 적색 (2026-07-29)
+## 🚫 배포하지 말 것 (2026-07-29 도메인 소유자 지시)
 
-- **main = `01f0837`** (fast-forward, `audio-analysis-v2`에서). 로컬 게이트 전부 통과: ruff · pyright 0 · selftest 26/26 · 5모듈 schema valid · dashboard lint·tsc·build.
-- **Vercel 프로덕션 배포됨** — https://artist-intelligence-l292c9ehz-redslippers-projects.vercel.app (`/artist-intelligence` HTTP 200 확인).
-  ⚠ **깃 연동이 아니다.** main 푸시로 자동 배포되지 않는다(직전 프로덕션이 9일 전이었던 이유). 배포는 수동 2단계다:
-  `vercel build --prod --yes` → `vercel deploy --prebuilt --prod --yes` (in `apps/dashboard`, `.vercel/`는 gitignore).
-  **자동 배포를 원하면 Vercel 프로젝트에 깃 연동을 붙이는 것이 별도 과제다.**
-- **❌ CI는 2026-07-20부터 5연속 적색이며, 이번 머지 이전부터 그랬다.** 두 원인 모두 우리 코드 결함이 아니라 **CI 설정 결함**이다:
+- **Vercel 배포는 당분간 하지 않는다.** 그리고 **`redslippers` 계정/팀으로는 배포하면 안 된다.**
+- 경위: 이 세션에서 에이전트가 `apps/dashboard/.vercel/`에 남아 있던 기존 링크(`redslippers-projects`)를 보고 **계정 확인 없이** 프로덕션 배포를 실행했다. 도메인 소유자가 즉시 중단시켰고 Vercel 프로젝트는 제거됐다(배포 URL `HTTP 410 Gone` 확인). **남아 있는 배포물 없음.**
+- **교훈 — 배포 대상 계정은 로컬 설정에서 추론할 값이 아니다.** `.vercel/project.json`이 있다는 건 "여기로 배포해도 된다"는 뜻이 아니다. 배포는 되돌리기 어렵고 외부에 노출되므로, **어느 계정·어느 프로젝트인지 먼저 확인받고** 실행한다.
+- ⚠ `apps/dashboard/.vercel/`(gitignore)에 죽은 링크와 `.env.production.local`이 아직 남아 있다. 배포를 재개할 때 **이 링크를 재사용하지 말고** 올바른 계정으로 새로 `vercel link` 할 것.
+
+## ❌ CI 적색 (2026-07-29)
+
+- **main = `bcbb3fb`** (fast-forward, `audio-analysis-v2`에서). 로컬 게이트 전부 통과: ruff · pyright 0 · selftest 26/26 · 5모듈 schema valid · dashboard lint·tsc·build.
+- **CI는 2026-07-20부터 5연속 적색이며, 이번 머지 이전부터 그랬다.** 두 원인 모두 우리 코드 결함이 아니라 **CI 설정 결함**이다:
   1. **secret scan — 실패지만 유출은 없다. 더 나쁜 건 스캔을 안 하고 있었다는 것.** 로그: `no leaks found in partial scan` · `scanned ~0 bytes (0)`. `actions/checkout@v4`가 shallow clone(depth 1)이라 gitleaks가 잡은 커밋 범위(`<base>^..<head>`)의 베이스가 로컬에 없어 `fatal: ambiguous argument`로 죽는다. **즉 이 보안 게이트는 통과해도 아무것도 검증하지 않는다** — 적색이 오히려 사실을 말해주고 있었다. 고침: security 잡의 checkout에 `with: { fetch-depth: 0 }`.
   2. **ruff — 버전 드리프트.** CI는 `uvx ruff`(=항상 최신), 로컬은 **0.15.22**. 최신 쪽에서 31건(RUF046·RUF100 등)이 새로 뜬다. **레포에 루트 ruff 설정이 없어** 규칙 세트가 디렉터리마다 갈린다(`pyproject.toml`은 chart-history·fandom-pulse에만 있고 sonic-profile·signal-bridge·yt-pulse는 ruff 기본값). 고침: CI에서 ruff 버전 핀 + 루트 `ruff.toml` 신설 → 그 다음에 31건 처리. **핀 없이 31건만 고치면 다음 릴리스에 또 깨진다.**
   - ⚠ 위 두 개는 **로컬에서 재현되지 않는다** — 로컬 게이트를 다 통과해도 CI는 빨갛다. 이 비대칭 자체가 고쳐야 할 대상이다.

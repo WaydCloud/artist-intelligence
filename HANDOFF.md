@@ -69,6 +69,18 @@
 - **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** `genre-impulse-plan` — 장르 임펄스 기획~모니터 v1 전체(23커밋+). ⚠ **베이스가 PR #3 브랜치**(스택) — #3 먼저 머지(squash면 이후 #5 리베이스 필요 가능).
 - **[PR #4](https://github.com/WaydCloud/artist-intelligence/pull/4)** `signal-series-schema` — signal-series JSON 스키마 패키지 + 검증기 + CI 게이트(D-030 잔여 구멍). PR #3과 파일 겹침 없음 — 순서 무관 머지 가능.
 
+## ✅ 빌보드 Hot 100 이력 레그 가동 (2026-07-30, D-035 ② 조건 충족)
+
+- **3자 대조 스모크 통과** — 판정·수치·한계 정본은 [`docs/REVIEW-billboard-3way-smoke.md`](docs/REVIEW-billboard-3way-smoke.md), 기계 판독분은 `data/research/genre-impulse/billboard_smoke.json`.
+  - 폭(위키 1위 208주) 사실 불일치 **0** · 깊이(acharts 톱100 300칸) **1건인데 acharts 측 오류** · 자체 정합성(706주·183,264검사) 위반 160건이 **전부 2018-01-06** = 빌보드 원본의 연말 주차 처리(acharts도 동일 이상 → 데이터셋 결함 아님).
+  - ⚠ **acharts 단독 근거 금지**(실측으로 틀린 것이 나왔다). ⚠ **스모크 표본은 2013~2023** — 1958~2012로 소급하면 그 시대 표본으로 다시 돌릴 것.
+- **도구 2종**: [`scripts/billboard_probe.py`](scripts/billboard_probe.py)(검증, `--selftest` 14항 네트워크 0) · [`scripts/billboard_ingest.py`](scripts/billboard_ingest.py)(수집: `cohort` · `trajectory`).
+  - 원문 캐시는 **레포 밖**(`--cache-dir`, 기본 시스템 임시). 코호트 물질화는 **주차 상한 8**로 강제 — 초과 시 조용히 자르지 않고 실패한다(원문 재배포 금지 전제).
+  - 전 이력 스캔은 캐시가 차면 **17초**(색인 매칭). 첫 실행은 3,548파일 받느라 ~20분.
+- **산출 2종**: `data/research/genre-impulse/cohort_us_2021-10-02.json`(톱100 — **sonic-profile `fetch --cohort` 입력 형태 그대로**) · `billboard_trajectories.json`(케이스 95곡 × 3,548주, **22 차트인**).
+  - **다음 액션 후보**: ① 이 코호트로 A2 본편의 US 기준 모집단 확보(sonic 서명 비교) ② 궤적 사실을 임펄스 레코드 `trajectory` 셀에 근거로 편입(확실성 등급은 도메인 판단).
+  - ⚠ `charted:false` 73건은 "영향 없음"이 아니다 — 시티팝 8건 전건 미차트인은 **그 경로가 미국 차트를 안 거쳤다는 사실**이고, 매칭 실패("못 찾았다")도 섞여 있다.
+
 ## 🧭 다음 행선지 — 장르 임펄스 모니터 가동 후 확장 (재개점)
 
 > **상태**: 기획(D-033)→조사(케이스북 10건+교차 검증+A2.1 실측)→원장(레코드 10건)→**모니터 v1 가동**(daily_collect 3.7 편입 — 다음 09:00부터 대시보드 탭 자동 갱신)까지 관통 완료. 결정 D-033(+보완⑤⑥)·D-034·D-035. 세션 상세·함정은 [`Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md`](Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md).
@@ -77,12 +89,12 @@
 다음 세션 작업 큐 (우선순위순):
 
 1. **틱톡 레그 가동**: 워치리스트 v0([`docs/DRAFT-tiktok-watchlist-v0.md`](docs/DRAFT-tiktok-watchlist-v0.md)) **A&R 확정 대기**(검토 포인트 8건) → 수집 스크립트 구축(khadinakbar 액터 — userCount 실증됨, 액터 교체 가능 구조, **월 상한 $15 가드**, url_pending 30건은 첫 수집 시 검색 모드로 해소). D-035 ① 참조.
-2. **빌보드 이력 파이프라인**: GitHub `mhollingshead/billboard-hot-100` 채택 확정(D-035 ②) — 위키·acharts **3자 대조 스모크 먼저**, 그다음 케이스 궤적 재구성 + US 동시대 코호트 소급. 소스 지도: [`docs/REVIEW-chart-history-sources.md`](docs/REVIEW-chart-history-sources.md).
+2. ~~**빌보드 이력 파이프라인**~~ → ✅ **완료(2026-07-30)**. 아래 "빌보드 레그 가동" 절 참조. 남은 것은 궤적 사실을 **임펄스 원장에 반영**하는 것(확실성 등급 부여가 필요해 분리했다).
 3. **스템 분리 구현**(D-034 ③ 승인됨): sonic-profile RULES에 드럼/보컬 스템 지표 **정의 먼저** → demucs 의존성 → 엔진 키 갱신·콜드 1회. 열리는 것: 드릴 슬라이딩 808·저지클럽 스네어·보컬 처리 축 → genre-impulse 규칙 추가(v1.1).
 4. **A2 본편**: 케이스별 원형↔한국 서명 비교(데이터 `data/research/genre-impulse/signature_merged.json` 확보됨) + 동시대 KR 코호트(Wayback 멜론 스냅샷 — CDX 사전 조회).
 5. **기타**: 크레딧 레지스트리 설계(D-034 ④) · "2021 저지클럽 관측" 실체 도메인 소유자 인터뷰(케이스북 CASE 1 한계 1) · genre-impulse 대시보드 탭 라이트/다크 육안 확인(AGENTS §7 — 신규 탭 첫 렌더 후).
 
-체크: ① **다음 sonic 레그에서 av 재발 여부**(위 🟡 참조 — 신곡 unresolved 다수면 재발) ② genre-impulse 데일리 첫 자동 실행 로그 확인.
+체크: ① **다음 sonic 레그에서 av 재발 여부**(위 🟡 참조 — 신곡 unresolved 다수면 재발) ② genre-impulse 데일리 첫 자동 실행 로그 확인 — **2026-07-30 09:00이 첫 자동 실행이다**(그 전까지 `data/live/state/run_2026-07-30.json` 없음이 정상). 데일리 레그 3.7 배선은 [`scripts/daily_collect.ps1:350-355`](scripts/daily_collect.ps1#L350-L355)에서 확인함.
 ## ⚠ 재개 첫 액션
 
 0. **✅ 완료 — PR #1 머지됨**(2026-07-29, squash → main `2ad0319`). main CI 5잡 전부 success. 브랜치 삭제됨.

@@ -17,7 +17,11 @@
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
 - 최근 작업 이력: [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
-## 🔴 신규 차단 (2026-07-29 밤): Smart App Control이 `av`(FFmpeg DLL)를 차단 — sonic 디코드 불가
+## 🟡 해소 관측 (2026-07-30 새벽): av 차단이 자연 해소 — 단 원인 불명, 재발 감시
+
+- **2026-07-30 새벽 `import av` 정상 복귀 확인**, A2.1 실측(89곡)까지 완주. 차단(23:29)→해소(수 시간 내) — SAC 클라우드 평판 판정 갱신으로 추정되나 **원인 미확정이라 재발 가능성 있음**. 오늘 09:00 데일리 sonic 레그 결과를 확인할 것(신곡 unresolved가 다수면 재발). 아래 원 기록은 재발 시 대응 절차로 보존.
+
+## ~~🔴 신규 차단 (2026-07-29 밤)~~: Smart App Control이 `av`(FFmpeg DLL)를 차단 — sonic 디코드 불가 (해소됨, 기록 보존)
 
 - **증상**: `import av` → `ImportError: DLL load failed ... An Application Control policy has blocked this file`. **오늘 21:01까지는 정상**(당일 sonic 스냅샷 해석 확인), 23:29 시점 차단 확인 — 그 사이 정책 상태 변화로 추정. `HKLM:\SYSTEM\...\CI\Policy\VerifiedAndReputablePolicyState = 1`(강제 모드). Defender 위협 탐지는 **없음**(악성 판정 아님, 비서명 DLL 평판 정책).
 - **범위 격리 완료**: onnxruntime·torch·soundfile·librosa는 정상. **av만** 차단. 샌드박스/PowerShell/Task Scheduler(데일리와 같은 경로) 전부에서 재현 — 시스템 전역이다.
@@ -72,7 +76,9 @@
 - 🔴 **증언 검증**: "저지클럽 빌보드 먼저" **검증됨**(2022-06/10 → 한국 2022-12). "2021 국내 강세"는 **확인 실패**(실질 확산 2022 하반기~2023) — **도메인 소유자에게 2021년 관측의 실체 확인 필요**(차트 밖 씬 관측이었을 가능성).
 - **✅ 교차 검증 1차 완료(2026-07-29 밤)**: 약출처 주장 18건 재확인 → **반증 3**("Push Back"은 ENHYPEN 아닌 신인 AtHeart 곡 · '이지리스닝' 명명 기점은 2023이 아니라 **어도어 데뷔 소개문 2022-07**(공급자 명명은 현상과 동시, 언론만 후행 — A4 신호 순위 수정됨) · 트로피컬 한국 첫 수용은 **f(x) "4 Walls" 2015-10**로 7개월 앞당김) · 격상 5(Attention=IZM 원출처·Seven=Forbes 프로듀서 인터뷰·Spell=보도자료 명시·Ditto·아마피아노 씬 증거는 얼루어 2023-08-30 DJ 인터뷰로 앞당김) · 확정 5(Vibe 2019-03-29·Hit Vibes 2013-05-31·가시나 2주차 1위·Sticky·보라빛밤 주간 #5) · 추정 유지 3(EK/수퍼비는 **근거 사용 금지**로 강등·Smoke·유빈 숙녀는 주간 톱100 미진입 판명).
 - **🔄 D-033 보완⑤(2026-07-29 밤, 도메인 소유자)**: 수용은 3모드 — 전면 수용 / **요소 차용**(명시적 목표 산출물: "하이퍼팝·드릴이 뜬다 → 요소를 빌린다 → 새 사운드 정체성") / 차단. 하이퍼팝·드릴을 음성→요소 차용 모드로 재분류하고 **요소 차용 타임라인 2차 조사 완료**(CASEBOOK CASE 9·10 하단): 하이퍼팝 → Savage(가온 2위, 1위 표기 정정) → **aespa '쇠맛' 정체성화**(2024-05 언론 공식화 — 요소→은어→표제화 경로), 드릴 → **ENHYPEN "Future Perfect"(2022-07)가 명시적 드릴 타이틀로 실존**(1차 조사의 "미발견" 뒤집힘) 단 1회 실험 후 정체성화 미발생. 가설 H1~H5 산출 — 특히 **H4(정체성화 = 요소×세계관 결합)·H5(정체성화 지표 = 팬덤 은어의 언론 공식화 → fandom-pulse 은어 태그 자산과 직결)**.
-- **다음 액션**: ① **A2 사운드 서명 — av 차단 해소 대기**(위 🔴 참조. 코호트·집계 스크립트 준비 완료, 해소 시 fetch 1회면 됨) ② 기준선 3안 중 도메인 소유자 선택(CASEBOOK §A3) ③ 스템 분리·격자 32칸·신규 데이터 레그(틱톡·해외 차트 이력) 승인 대기 지속 ④ "2021년 저지클럽 관측" 실체 도메인 소유자 인터뷰.
+- **✅ A2.1 1차 실측 완료(2026-07-30)**: 89곡 해석(오매칭 12건 수동 교정·커버리지 공백 6곡 확정). **판정: 하이퍼팝 텍스처 = `organic_ratio`↓+`spectral_flatness`↑+`over_unity`↑ 조합으로 부분 검출 가능**(Savage: organic P2.2·flatness P87.9·over_unity P80.2 / Whiplash: attack P96.7·over_unity P100) · **드릴 = 사전 등록 축 전부 중앙 — 축 공백 실증**(리듬 축 부재 → 스템 분리·슬라이딩 808 축의 정량 근거). 판정표 = CASEBOOK §A2.1, 수치 = `data/research/genre-impulse/signature_merged.json`. 비교 모집단이 2026-07 라이브 코호트(동시대 아님)인 근사 병기.
+- **🔨 Phase B 진행 중**: 임펄스 레코드 스키마(`impulse.schema.json` — 3모드·6등급·요소차용 4단계·정체성화 필드) + 예시(jersey-club.json) 완료, 나머지 9건 정형화 에이전트 가동 중.
+- **다음 액션**: ① Phase B 레코드 9건 검수·커밋 ② A2 본편(케이스별 원형↔한국 서명 비교 — 데이터는 이미 확보) ③ 동시대 코호트 소급 구축 검토 ④ 기준선 3안 선택·스템 분리·신규 레그 승인 대기 ⑤ "2021 저지클럽 관측" 인터뷰 ⑥ 오늘 데일리 sonic 레그에서 av 재발 여부 확인.
 
 ## ⚠ 재개 첫 액션
 

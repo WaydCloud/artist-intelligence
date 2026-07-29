@@ -1,0 +1,155 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "genre-impulse/impulse.schema.json",
+  "title": "임펄스 레코드 — 장르 임펄스 원장의 기계가 읽는 형식 (Phase B, D-033)",
+  "description": "케이스북(docs/CASEBOOK-genre-impulse.md, 사람용 원장)의 정형화. 임펄스는 버전 매겨진 가설이다 — 반증되면 version을 올리고 갱신한다. 확실성은 6등급(D-033 보완⑥)이며 소비자(리포트·모니터)는 '중간' 이상만 표면에 올리되 등급을 병기한다. 이 스키마는 연구 계약이며 Phase C 승격 시 packages/로 이전을 별도 승인받는다(AGENTS §1).",
+  "type": "object",
+  "required": ["id", "name_ko", "version", "updated", "case_type", "adoption_mode", "trajectory", "leadtimes", "early_signals", "signature", "limits"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name_ko": { "type": "string" },
+    "name_en": { "type": "string" },
+    "version": { "type": "string", "description": "가설 버전. 반증·재조정 시 올린다." },
+    "updated": { "type": "string", "pattern": "^\\d{4}-\\d{2}-\\d{2}$" },
+    "case_type": {
+      "type": "string",
+      "enum": ["import", "endogenous", "hybrid-endogenous", "revival", "continuity-revival", "algorithmic-excavation"],
+      "description": "확산 경로 유형. import=해외 유입, endogenous=내생, revival=사멸 장르 부활, algorithmic-excavation=알고리즘 카탈로그 발굴(시티팝형)"
+    },
+    "origin": {
+      "type": "object",
+      "properties": {
+        "region": { "type": "string", "description": "발원 지역 (US/UK/SA/JP/KR/LATAM 등)" },
+        "scene": { "type": "string" }
+      }
+    },
+    "adoption_mode": {
+      "type": "object",
+      "description": "한국 도달 판정 — 수용 3모드 (D-033 보완⑤). 이진 아님.",
+      "required": ["mode"],
+      "properties": {
+        "mode": { "type": "string", "enum": ["full", "element", "blocked", "in-progress"] },
+        "notes": { "type": "string" },
+        "mode_transitions": {
+          "type": "array",
+          "description": "모드 전환 관측 (예: element→full, ANTIFRAGILE형)",
+          "items": {
+            "type": "object",
+            "properties": {
+              "from": { "type": "string" }, "to": { "type": "string" },
+              "date": { "type": "string" }, "evidence": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "trajectory": {
+      "type": "array",
+      "description": "이중 축 매트릭스 궤적 — 셀별 첫 도달. cell 권장 어휘: origin-scene, origin-viral, origin-mainstream, global-scene, global-viral, global-mainstream, kr-underground, kr-viral, kr-mainstream (+자유 확장 허용: kr-idol-bside, kr-media-recognition, origin-reinstitution 등)",
+      "items": {
+        "type": "object",
+        "required": ["cell", "date", "evidence", "certainty"],
+        "properties": {
+          "cell": { "type": "string" },
+          "date": { "type": "string", "description": "YYYY-MM 권장. 불명확하면 'YYYY' 또는 'YYYY~YYYY'" },
+          "date_precision": { "type": "string", "enum": ["month", "year", "range", "unreached"] },
+          "evidence": { "type": "string" },
+          "sources": { "type": "array", "items": { "type": "string" } },
+          "certainty": { "$ref": "#/definitions/certainty" },
+          "certainty_note": { "type": "string", "description": "불가능한 수준일 때 해제 조건 필수 기재" }
+        }
+      }
+    },
+    "leadtimes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from_cell", "to_cell", "months"],
+        "properties": {
+          "from_cell": { "type": "string" },
+          "to_cell": { "type": "string" },
+          "months": { "type": ["number", "null"], "description": "null = 미완/미도달" },
+          "months_range": { "type": "string", "description": "구간 표기 필요 시 (예: '2~6')" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "early_signals": {
+      "type": "array",
+      "description": "한국 주류 도달 전 관측 가능했던 신호 (A4). source_type 권장 어휘: shortform-viral, kr-underground-adoption, producer-credit, low-risk-slot, overseas-chart, platform-infra, supplier-framing, press-naming, fandom-slang",
+      "items": {
+        "type": "object",
+        "required": ["source_type", "date", "evidence", "certainty"],
+        "properties": {
+          "source_type": { "type": "string" },
+          "date": { "type": "string" },
+          "lead_months_vs_kr_mainstream": { "type": ["number", "null"] },
+          "evidence": { "type": "string" },
+          "sources": { "type": "array", "items": { "type": "string" } },
+          "certainty": { "$ref": "#/definitions/certainty" }
+        }
+      }
+    },
+    "element_borrowing": {
+      "type": ["object", "null"],
+      "description": "모드 ② 관련 — 요소 차용 관측 (없으면 null)",
+      "properties": {
+        "elements": { "type": "array", "items": { "type": "string" }, "description": "차용된 텍스처/비트 시그니처 (H1)" },
+        "anchor_tracks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "artist": { "type": "string" }, "title": { "type": "string" },
+              "date": { "type": "string" }, "chart": { "type": "string" },
+              "certainty": { "$ref": "#/definitions/certainty" }
+            }
+          }
+        },
+        "stage_reached": { "type": "string", "enum": ["hiphop-pool", "bside-experiment", "title", "identity"], "description": "H2 4단계 경로에서 도달한 최종 단계" }
+      }
+    },
+    "identity_formation": {
+      "type": ["object", "null"],
+      "description": "H4·H5 — 요소가 그룹 정체성이 된 경우 (없으면 null)",
+      "properties": {
+        "occurred": { "type": "boolean" },
+        "group": { "type": "string" },
+        "fandom_slang": { "type": "string", "description": "팬덤 은어 (H5 관측 지표)" },
+        "press_formalization_date": { "type": "string", "description": "은어의 언론 표제화 시점" },
+        "worldview_coupling": { "type": "string", "description": "H4 — 결합한 세계관/서사" }
+      }
+    },
+    "signature": {
+      "type": "object",
+      "description": "사운드 서명 (A2) — 오디오 실측 전이면 status=pending",
+      "required": ["status"],
+      "properties": {
+        "status": { "type": "string", "enum": ["pending-a2", "measured", "partially-locked"] },
+        "predicted_axes": { "type": "array", "items": { "type": "string" }, "description": "사전 등록 예측 축 (A2.1 — 결과 보고 고르지 않는다)" },
+        "measured": { "type": "object", "description": "A2 실측 결과 (축별 코호트 분포 위치). measured 상태에서 채운다" },
+        "locks": { "type": "array", "items": { "type": "string" }, "description": "판별 잠금 (예: 'stem-separation: halftime snare', 'grid-32: hihat roll')" }
+      }
+    },
+    "peak_decline": {
+      "type": "object",
+      "properties": {
+        "kr_peak": { "type": "string" },
+        "kr_decline": { "type": "string" },
+        "decline_certainty": { "$ref": "#/definitions/certainty" },
+        "origin_decoupled": { "type": "boolean", "description": "발원지 씬 수명과 한국 사이클 분리 여부 (A3 패턴 5)" },
+        "residue": { "type": "string", "description": "쇠퇴 후 잔존 형태 (어휘화·기본 옵션화 등)" }
+      }
+    },
+    "limits": { "type": "array", "items": { "type": "string" }, "description": "한계·불확실성 — 케이스북 해당 절 요약" },
+    "casebook_ref": { "type": "string", "description": "케이스북 섹션 참조 (예: 'CASE 1')" }
+  },
+  "definitions": {
+    "certainty": {
+      "type": "string",
+      "enum": ["매우 높음", "높음", "중간", "낮음", "매우 낮음", "불가능한 수준"],
+      "description": "D-033 보완⑥ 6등급. 표면은 중간 이상만, 등급 병기."
+    }
+  }
+}

@@ -1,100 +1,575 @@
 {
   "note": "genre-impulse A2 사운드 서명용 조사 코호트. market=케이스 슬러그, platform=역할(origin|kr). CASEBOOK-genre-impulse.md 대표곡에서 선정. rank 없음(차트 아님).",
   "tracks": [
-    {"artist": "Cookiee Kawaii", "title": "Vibe (If I Back It Up)", "market": "jersey-club", "platform": "origin"},
-    {"artist": "Lil Uzi Vert", "title": "Just Wanna Rock", "market": "jersey-club", "platform": "origin"},
-    {"artist": "Drake", "title": "Sticky", "market": "jersey-club", "platform": "origin"},
-    {"artist": "PinkPantheress", "title": "Boy's a liar Pt. 2", "market": "jersey-club", "platform": "origin"},
-    {"artist": "UNIIQU3", "title": "Microdosing", "market": "jersey-club", "platform": "origin"},
-    {"artist": "NewJeans", "title": "Ditto", "market": "jersey-club", "platform": "kr"},
-    {"artist": "NewJeans", "title": "OMG", "market": "jersey-club", "platform": "kr"},
-    {"artist": "NewJeans", "title": "ETA", "market": "jersey-club", "platform": "kr"},
-    {"artist": "SEVENTEEN", "title": "Super", "market": "jersey-club", "platform": "kr"},
-    {"artist": "LE SSERAFIM", "title": "Eve, Psyche & The Bluebeard's wife", "market": "jersey-club", "platform": "kr"},
-    {"artist": "BABYMONSTER", "title": "BATTER UP", "market": "jersey-club", "platform": "kr"},
-    {"artist": "XUM", "title": "DDALALA", "market": "jersey-club", "platform": "kr"},
-    {"artist": "AJ Tracey", "title": "Ladbroke Grove", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "PinkPantheress", "title": "Just for me", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "PinkPantheress", "title": "Break It Off", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "venbee", "title": "messy in heaven", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "Nia Archives", "title": "Forbidden Feelingz", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "Chase & Status", "title": "Baddadan", "market": "ukg-dnb", "platform": "origin"},
-    {"artist": "NewJeans", "title": "Super Shy", "market": "ukg-dnb", "platform": "kr"},
-    {"artist": "NewJeans", "title": "New Jeans", "market": "ukg-dnb", "platform": "kr"},
-    {"artist": "NewJeans", "title": "Cool With You", "market": "ukg-dnb", "platform": "kr"},
-    {"artist": "NewJeans", "title": "ASAP", "market": "ukg-dnb", "platform": "kr"},
-    {"artist": "Jung Kook", "title": "Seven", "market": "ukg-dnb", "platform": "kr"},
-    {"artist": "Major Lazer", "title": "Lean On", "market": "moombahton-tropical", "platform": "origin"},
-    {"artist": "Justin Bieber", "title": "Sorry", "market": "moombahton-tropical", "platform": "origin"},
-    {"artist": "Kygo", "title": "Firestone", "market": "moombahton-tropical", "platform": "origin"},
-    {"artist": "Major Lazer", "title": "Cold Water", "market": "moombahton-tropical", "platform": "origin"},
-    {"artist": "BTS", "title": "Blood Sweat & Tears", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "TAEYEON", "title": "Why", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "WINNER", "title": "REALLY REALLY", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "BLACKPINK", "title": "As If It's Your Last", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "EXO", "title": "Ko Ko Bop", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "Red Velvet", "title": "Red Flavor", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "KARD", "title": "Hola Hola", "market": "moombahton-tropical", "platform": "kr"},
-    {"artist": "Daddy Yankee", "title": "Gasolina", "market": "reggaeton-dembow", "platform": "origin"},
-    {"artist": "Luis Fonsi", "title": "Despacito", "market": "reggaeton-dembow", "platform": "origin"},
-    {"artist": "J Balvin", "title": "Mi Gente", "market": "reggaeton-dembow", "platform": "origin"},
-    {"artist": "Shabba Ranks", "title": "Dem Bow", "market": "reggaeton-dembow", "platform": "origin"},
-    {"artist": "KARD", "title": "Oh NaNa", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "SUNMI", "title": "Gashina", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "SUPER JUNIOR", "title": "Lo Siento", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "(G)I-DLE", "title": "LATATA", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "CHUNG HA", "title": "PLAY", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "LE SSERAFIM", "title": "ANTIFRAGILE", "market": "reggaeton-dembow", "platform": "kr"},
-    {"artist": "Mariya Takeuchi", "title": "Plastic Love", "market": "citypop", "platform": "origin"},
-    {"artist": "Miki Matsubara", "title": "Mayonaka no Door / Stay With Me", "market": "citypop", "platform": "origin"},
-    {"artist": "Tatsuro Yamashita", "title": "Ride on Time", "market": "citypop", "platform": "origin"},
-    {"artist": "george", "title": "Boat", "market": "citypop", "platform": "kr"},
-    {"artist": "YUBIN", "title": "Lady", "market": "citypop", "platform": "kr"},
-    {"artist": "YUKIKA", "title": "NEON", "market": "citypop", "platform": "kr"},
-    {"artist": "Yerin Baek", "title": "Square (2017)", "market": "citypop", "platform": "kr"},
-    {"artist": "SUNMI", "title": "pporappippam", "market": "citypop", "platform": "kr"},
-    {"artist": "Bruno Mars", "title": "Finesse", "market": "njs", "platform": "origin"},
-    {"artist": "Bobby Brown", "title": "My Prerogative", "market": "njs", "platform": "origin"},
-    {"artist": "Guy", "title": "Groove Me", "market": "njs", "platform": "origin"},
-    {"artist": "SHINee", "title": "1 of 1", "market": "njs", "platform": "kr"},
-    {"artist": "EXID", "title": "Lady", "market": "njs", "platform": "kr"},
-    {"artist": "NCT U", "title": "90's Love", "market": "njs", "platform": "kr"},
-    {"artist": "NewJeans", "title": "Attention", "market": "njs", "platform": "kr"},
-    {"artist": "NewJeans", "title": "Supernatural", "market": "njs", "platform": "kr"},
-    {"artist": "PinkPantheress", "title": "Pain", "market": "easy-listening", "platform": "origin"},
-    {"artist": "IVE", "title": "LOVE DIVE", "market": "easy-listening", "platform": "kr"},
-    {"artist": "IVE", "title": "After LIKE", "market": "easy-listening", "platform": "kr"},
-    {"artist": "NewJeans", "title": "Hype Boy", "market": "easy-listening", "platform": "kr"},
-    {"artist": "FIFTY FIFTY", "title": "Cupid", "market": "easy-listening", "platform": "kr"},
-    {"artist": "TWS", "title": "plot twist", "market": "easy-listening", "platform": "kr"},
-    {"artist": "BIBI", "title": "Bam Yang Gang", "market": "easy-listening", "platform": "kr"},
-    {"artist": "ILLIT", "title": "Magnetic", "market": "easy-listening", "platform": "kr"},
-    {"artist": "RIIZE", "title": "Get A Guitar", "market": "easy-listening", "platform": "kr"},
-    {"artist": "Tyla", "title": "Water", "market": "amapiano", "platform": "origin"},
-    {"artist": "Kabza De Small", "title": "Abalele", "market": "amapiano", "platform": "origin"},
-    {"artist": "Young Stunna", "title": "Adiwele", "market": "amapiano", "platform": "origin"},
-    {"artist": "Uncle Waffles", "title": "Tanzania", "market": "amapiano", "platform": "origin"},
-    {"artist": "SEVENTEEN", "title": "Spell", "market": "amapiano", "platform": "kr"},
-    {"artist": "KISS OF LIFE", "title": "Sticky", "market": "amapiano", "platform": "kr"},
-    {"artist": "KAI", "title": "Off And Away", "market": "amapiano", "platform": "kr"},
-    {"artist": "100 gecs", "title": "money machine", "market": "hyperpop", "platform": "origin"},
-    {"artist": "SOPHIE", "title": "Immaterial", "market": "hyperpop", "platform": "origin"},
-    {"artist": "glaive", "title": "astrid", "market": "hyperpop", "platform": "origin"},
-    {"artist": "aespa", "title": "Savage", "market": "hyperpop", "platform": "kr"},
-    {"artist": "aespa", "title": "Black Mamba", "market": "hyperpop", "platform": "kr"},
-    {"artist": "aespa", "title": "Next Level", "market": "hyperpop", "platform": "kr"},
-    {"artist": "aespa", "title": "Supernova", "market": "hyperpop", "platform": "kr"},
-    {"artist": "aespa", "title": "Whiplash", "market": "hyperpop", "platform": "kr"},
-    {"artist": "NMIXX", "title": "O.O", "market": "hyperpop", "platform": "kr"},
-    {"artist": "tripleS", "title": "Rising", "market": "hyperpop", "platform": "kr"},
-    {"artist": "TOMORROW X TOGETHER", "title": "Frost", "market": "hyperpop", "platform": "kr"},
-    {"artist": "YENA", "title": "Catch Catch", "market": "hyperpop", "platform": "kr"},
-    {"artist": "Pop Smoke", "title": "Dior", "market": "drill", "platform": "origin"},
-    {"artist": "Central Cee", "title": "Doja", "market": "drill", "platform": "origin"},
-    {"artist": "Headie One", "title": "Ain't It Different", "market": "drill", "platform": "origin"},
-    {"artist": "CHANGMO", "title": "Swoosh Flow", "market": "drill", "platform": "kr"},
-    {"artist": "ENHYPEN", "title": "Future Perfect (Pass the MIC)", "market": "drill", "platform": "kr"},
-    {"artist": "STAYC", "title": "I WANT U BABY", "market": "drill", "platform": "kr"},
-    {"artist": "Stray Kids", "title": "3RACHA", "market": "drill", "platform": "kr"}
+    {
+      "artist": "Cookiee Kawaii",
+      "title": "Vibe (If I Back It Up)",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Lil Uzi Vert",
+      "title": "Just Wanna Rock",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Drake",
+      "title": "Sticky",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Boy's a liar Pt. 2",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "UNIIQU3",
+      "title": "Microdosing",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Ditto",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "OMG",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "ETA",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "SEVENTEEN",
+      "title": "Super 손오공",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "LE SSERAFIM",
+      "title": "Eve, Psyche & the Bluebeard’s wife",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "BABYMONSTER",
+      "title": "BATTER UP",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "XUM",
+      "title": "DDALALA",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "AJ Tracey",
+      "title": "Ladbroke Grove",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Just for me",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Break It Off",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "venbee",
+      "title": "messy in heaven",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "Nia Archives",
+      "title": "Forbidden Feelingz",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "Chase & Status",
+      "title": "Baddadan",
+      "market": "ukg-dnb",
+      "platform": "origin"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Super Shy",
+      "market": "ukg-dnb",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "New Jeans",
+      "market": "ukg-dnb",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Cool With You",
+      "market": "ukg-dnb",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "ASAP",
+      "market": "ukg-dnb",
+      "platform": "kr"
+    },
+    {
+      "artist": "Jung Kook",
+      "title": "Seven",
+      "market": "ukg-dnb",
+      "platform": "kr"
+    },
+    {
+      "artist": "Major Lazer",
+      "title": "Lean On",
+      "market": "moombahton-tropical",
+      "platform": "origin"
+    },
+    {
+      "artist": "Justin Bieber",
+      "title": "Sorry",
+      "market": "moombahton-tropical",
+      "platform": "origin"
+    },
+    {
+      "artist": "Kygo",
+      "title": "Firestone",
+      "market": "moombahton-tropical",
+      "platform": "origin"
+    },
+    {
+      "artist": "Major Lazer",
+      "title": "Cold Water",
+      "market": "moombahton-tropical",
+      "platform": "origin"
+    },
+    {
+      "artist": "BTS",
+      "title": "피 땀 눈물",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "TAEYEON",
+      "title": "Why",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "WINNER",
+      "title": "REALLY REALLY",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "BLACKPINK",
+      "title": "As If It's Your Last",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "EXO",
+      "title": "Ko Ko Bop",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "Red Velvet",
+      "title": "Red Flavor",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "KARD",
+      "title": "Hola Hola",
+      "market": "moombahton-tropical",
+      "platform": "kr"
+    },
+    {
+      "artist": "Daddy Yankee",
+      "title": "Gasolina",
+      "market": "reggaeton-dembow",
+      "platform": "origin"
+    },
+    {
+      "artist": "Luis Fonsi",
+      "title": "Despacito",
+      "market": "reggaeton-dembow",
+      "platform": "origin"
+    },
+    {
+      "artist": "J Balvin",
+      "title": "Mi Gente",
+      "market": "reggaeton-dembow",
+      "platform": "origin"
+    },
+    {
+      "artist": "Shabba Ranks",
+      "title": "Dem Bow",
+      "market": "reggaeton-dembow",
+      "platform": "origin"
+    },
+    {
+      "artist": "KARD",
+      "title": "Oh NaNa",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "SUNMI",
+      "title": "Gashina",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "SUPER JUNIOR",
+      "title": "Lo Siento",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "(G)I-DLE",
+      "title": "LATATA",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "CHUNG HA",
+      "title": "PLAY",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "LE SSERAFIM",
+      "title": "ANTIFRAGILE",
+      "market": "reggaeton-dembow",
+      "platform": "kr"
+    },
+    {
+      "artist": "Mariya Takeuchi",
+      "title": "Plastic Love",
+      "market": "citypop",
+      "platform": "origin"
+    },
+    {
+      "artist": "Miki Matsubara",
+      "title": "Mayonaka no Door / Stay With Me",
+      "market": "citypop",
+      "platform": "origin"
+    },
+    {
+      "artist": "Tatsuro Yamashita",
+      "title": "Ride on Time",
+      "market": "citypop",
+      "platform": "origin"
+    },
+    {
+      "artist": "george",
+      "title": "Boat",
+      "market": "citypop",
+      "platform": "kr"
+    },
+    {
+      "artist": "YUBIN",
+      "title": "Lady",
+      "market": "citypop",
+      "platform": "kr"
+    },
+    {
+      "artist": "유키카",
+      "title": "네온",
+      "market": "citypop",
+      "platform": "kr"
+    },
+    {
+      "artist": "Yerin Baek",
+      "title": "Square (2017)",
+      "market": "citypop",
+      "platform": "kr"
+    },
+    {
+      "artist": "SUNMI",
+      "title": "pporappippam",
+      "market": "citypop",
+      "platform": "kr"
+    },
+    {
+      "artist": "Bruno Mars",
+      "title": "Finesse",
+      "market": "njs",
+      "platform": "origin"
+    },
+    {
+      "artist": "Bobby Brown",
+      "title": "My Prerogative",
+      "market": "njs",
+      "platform": "origin"
+    },
+    {
+      "artist": "Guy",
+      "title": "Groove Me",
+      "market": "njs",
+      "platform": "origin"
+    },
+    {
+      "artist": "SHINee",
+      "title": "1 of 1",
+      "market": "njs",
+      "platform": "kr"
+    },
+    {
+      "artist": "EXID",
+      "title": "Lady",
+      "market": "njs",
+      "platform": "kr"
+    },
+    {
+      "artist": "NCT U",
+      "title": "90's Love",
+      "market": "njs",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Attention",
+      "market": "njs",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Supernatural",
+      "market": "njs",
+      "platform": "kr"
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Pain",
+      "market": "easy-listening",
+      "platform": "origin"
+    },
+    {
+      "artist": "IVE",
+      "title": "LOVE DIVE",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "IVE",
+      "title": "After LIKE",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Hype Boy",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "FIFTY FIFTY",
+      "title": "Cupid",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "TWS",
+      "title": "plot twist",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "비비",
+      "title": "밤양갱",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "ILLIT",
+      "title": "Magnetic",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "RIIZE",
+      "title": "Get A Guitar",
+      "market": "easy-listening",
+      "platform": "kr"
+    },
+    {
+      "artist": "Tyla",
+      "title": "Water",
+      "market": "amapiano",
+      "platform": "origin"
+    },
+    {
+      "artist": "Kabza De Small",
+      "title": "Abalele",
+      "market": "amapiano",
+      "platform": "origin"
+    },
+    {
+      "artist": "Young Stunna",
+      "title": "Adiwele",
+      "market": "amapiano",
+      "platform": "origin"
+    },
+    {
+      "artist": "Uncle Waffles",
+      "title": "Tanzania",
+      "market": "amapiano",
+      "platform": "origin"
+    },
+    {
+      "artist": "SEVENTEEN",
+      "title": "Spell",
+      "market": "amapiano",
+      "platform": "kr"
+    },
+    {
+      "artist": "KISS OF LIFE",
+      "title": "Sticky",
+      "market": "amapiano",
+      "platform": "kr"
+    },
+    {
+      "artist": "KAI",
+      "title": "Off And Away",
+      "market": "amapiano",
+      "platform": "kr"
+    },
+    {
+      "artist": "100 gecs",
+      "title": "money machine",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "SOPHIE",
+      "title": "Immaterial",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "glaive",
+      "title": "astrid",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "aespa",
+      "title": "Savage",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Black Mamba",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Next Level",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Supernova",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Whiplash",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "NMIXX",
+      "title": "O.O",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "tripleS",
+      "title": "Rising",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "TOMORROW X TOGETHER",
+      "title": "Frost",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "YENA",
+      "title": "Catch Catch",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "Pop Smoke",
+      "title": "Dior",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "Central Cee",
+      "title": "Doja",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "Headie One",
+      "title": "Ain't It Different",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "창모",
+      "title": "Swoosh Flow",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "ENHYPEN",
+      "title": "Future Perfect (Pass the MIC)",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "STAYC",
+      "title": "I WANT U BABY",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "Stray Kids",
+      "title": "3RACHA",
+      "market": "drill",
+      "platform": "kr"
+    }
   ]
 }

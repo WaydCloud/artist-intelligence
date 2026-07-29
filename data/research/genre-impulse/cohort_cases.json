@@ -81,10 +81,20 @@
     {"artist": "SOPHIE", "title": "Immaterial", "market": "hyperpop", "platform": "origin"},
     {"artist": "glaive", "title": "astrid", "market": "hyperpop", "platform": "origin"},
     {"artist": "aespa", "title": "Savage", "market": "hyperpop", "platform": "kr"},
+    {"artist": "aespa", "title": "Black Mamba", "market": "hyperpop", "platform": "kr"},
+    {"artist": "aespa", "title": "Next Level", "market": "hyperpop", "platform": "kr"},
+    {"artist": "aespa", "title": "Supernova", "market": "hyperpop", "platform": "kr"},
+    {"artist": "aespa", "title": "Whiplash", "market": "hyperpop", "platform": "kr"},
     {"artist": "NMIXX", "title": "O.O", "market": "hyperpop", "platform": "kr"},
+    {"artist": "tripleS", "title": "Rising", "market": "hyperpop", "platform": "kr"},
+    {"artist": "TOMORROW X TOGETHER", "title": "Frost", "market": "hyperpop", "platform": "kr"},
+    {"artist": "YENA", "title": "Catch Catch", "market": "hyperpop", "platform": "kr"},
     {"artist": "Pop Smoke", "title": "Dior", "market": "drill", "platform": "origin"},
     {"artist": "Central Cee", "title": "Doja", "market": "drill", "platform": "origin"},
     {"artist": "Headie One", "title": "Ain't It Different", "market": "drill", "platform": "origin"},
-    {"artist": "CHANGMO", "title": "Swoosh Flow", "market": "drill", "platform": "kr"}
+    {"artist": "CHANGMO", "title": "Swoosh Flow", "market": "drill", "platform": "kr"},
+    {"artist": "ENHYPEN", "title": "Future Perfect (Pass the MIC)", "market": "drill", "platform": "kr"},
+    {"artist": "STAYC", "title": "I WANT U BABY", "market": "drill", "platform": "kr"},
+    {"artist": "Stray Kids", "title": "3RACHA", "market": "drill", "platform": "kr"}
   ]
 }

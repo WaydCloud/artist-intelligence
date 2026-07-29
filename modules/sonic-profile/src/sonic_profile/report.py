@@ -818,7 +818,12 @@ def build_report(
 def build_signal_series(
     records: list[dict[str, Any]], *, field: str = "pulse_clarity", provenance: dict[str, Any] | None = None
 ) -> dict[str, Any]:
-    """act × 날짜 → 지표 시리즈 (공유 signal-series 계약)."""
+    """act × 날짜 → 지표 시리즈 (공유 signal-series 계약).
+
+    계약(packages/signal-series)은 unit 비어있지 않음 + provenance에
+    source/generatedAt/window를 요구한다. 스냅샷 provenance(module/version/
+    engine_provenance…)는 부가 맥락으로 그대로 실어 보낸다.
+    """
     dates = sorted({str(r.get("observed_date")) for r in records if r.get("observed_date")})
     idx = {d: i for i, d in enumerate(dates)}
     series: dict[str, list[Any]] = {}
@@ -828,13 +833,19 @@ def build_signal_series(
         if not key or d not in idx or not isinstance(v, (int, float)):
             continue
         series.setdefault(str(key), [None] * len(dates))[idx[str(d)]] = v
+    unit = next((u for f, _label, u in _SURFACED if f == field), "") or "unitless"
     return {
         "moduleId": MODULE_ID,
         "signal": field,
-        "unit": "",
+        "unit": unit,
         "higherIsStronger": True,
         "dates": dates,
         "series": series,
         "roster": {k: True for k in series},
-        "provenance": provenance or {},
+        "provenance": {
+            **(provenance or {}),
+            "source": "30초 프리뷰 분석 (sonic-profile signals · 오디오 무보관)",
+            "generatedAt": now_iso(),
+            "window": f"{dates[0]}..{dates[-1]}" if dates else "",
+        },
     }

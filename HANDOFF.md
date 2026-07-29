@@ -15,7 +15,7 @@
   4. **yt-pulse v1** — 워치리스트 공식 채널 velocity·신작.
   5. **sonic-profile v4** — 프리뷰 30초·**오디오 무보관** · **스칼라 축 71종 계산·저장 / 타일 24종 노출**(D-032) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축. 지표 3층 구조(D-031) + 축 카탈로그 100항([`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)).
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
-- 최근 작업 이력: [`Handoffs/2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
+- 최근 작업 이력: [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
 ## 🔴 가동 중: 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 
@@ -54,6 +54,33 @@
 
 - **[PR #3](https://github.com/WaydCloud/artist-intelligence/pull/3)** `sonic-metrics-d031` — D-031(지표 9종) + D-032(T0 축 37종·카탈로그 100항) + AGENTS §7 육안 확인 기록 + sonic signals 방출부 계약 수정.
 - **[PR #4](https://github.com/WaydCloud/artist-intelligence/pull/4)** `signal-series-schema` — signal-series JSON 스키마 패키지 + 검증기 + CI 게이트(D-030 잔여 구멍). PR #3과 파일 겹침 없음 — 순서 무관 머지 가능.
+
+## 🧭 다음 행선지 — 장르 임펄스 트래킹 (2026-07-29 도메인 소유자 신규 지시 · **기획 먼저, 구현 금지**)
+
+> 다음 세션은 **여기서 시작한다.** 순서는 도메인 소유자가 명시했다: **① 의도 파악 → ② 조사 전략 구축 → ③ 기획. 실제 진행(구현)은 구축과 기획이 완료된 후.**
+
+지시 원문의 핵심 (뉘앙스 보존):
+
+- **장르 파악이 매우 중요하다.** 사례: **저지클럽이 2021~2023 한국에서 압도적 강세**였고, **빌보드에서 먼저 선보였다.** 이런 흐름을 누구보다 빠르게 캐치해야 한다.
+- 단순히 차트를 읽는 게 아니라: **차트에 오르기 전** 어떤 장르·비트·느낌이 지금 바이럴되고 트렌드인지, 나아가 **현재 시대정신(Meso 시장 ~ Macro 시장)**까지 파악해야 한다. **섹션을 분리할 만큼 중요하다.**
+- 방법론 골격: ① **'차트인 할 흐름'을 과거에서 분석**(차트에 오르기 전 어떤 움직임이 있었는지) → ② 그 **임펄스를 기록** → ③ 임펄스와 **유사점을 띠는 것들을 매일 모니터링**.
+- 질문 형태: "현재 차트인 한 곡이 어떤 장르·비트·특색을 띠고, **차트인 하기 전에 어떤 과정을 거쳤는가.**" 현재 차트만이 아니라 **과거 차트도 함께 조사**한다.
+- **조사 과정에 80% 이상을 들여 임펄스를 찾는 데 힘을 쓴다.**
+
+다음 세션의 ① 의도 파악에서 확인할 것 (엔지니어가 정하면 안 되는 것들):
+
+- **Meso/Macro 시장의 정의** — 어떤 시장 단위인가(국내 팬덤↔대중, 한국↔글로벌, 틱톡↔라디오?).
+- **임펄스의 단위** — 장르인가(저지클럽), 비트 패턴인가(리듬 템플릿), 사운드 특질인가(sonic 축), 혹은 그 조합인가.
+- **"누구보다 빠르게"의 기준선** — 누구 대비, 며칠 선행이면 성공인가.
+- **과거 차트의 범위** — 몇 년 전까지, 어느 차트(빌보드 포함?)를 소급하나.
+
+② 조사 전략에서 검토할 기존 자산 (재조사 방지):
+
+- **signal-bridge가 이 질문의 원형이다** — 소셜 선행/지연(lead/lag)·온셋 판정이 이미 "차트인 전 움직임" 배선. 단, 현재는 아티스트 단위이고 지시는 **장르/비트/특질 단위** — 집계 축이 다르다.
+- **sonic-profile 한계 실측 완료**: 저지클럽·뭄바톤·아마피아노는 **태거 라벨에 없다**(AudioSet에 라벨 자체가 없음, 종료된 조사 참조) — 그 축은 **리듬 패턴**(저지클럽 시그니처 비트)이 담당하나 **스템 분리 전까지 판별 불가**(하이햇 롤·하프타임 스네어). 장르 임펄스를 하려면 이 잠금이 앞을 막는다 → 스템 분리(승인 대기 중)와 강하게 엮인다.
+- **T3 아티스트/레이블 임베딩**(카탈로그, 실증: 아이유↔악뮤 0.976)이 "유사점을 띠는 것" 모니터링의 후보 도구.
+- **과거 기준선**: AcousticBrainz(CC0, ~2022 중단)가 과거 장르/사운드 기준선 후보로 이미 조사돼 있다.
+- **데이터 공백**: 빌보드/미국 차트 이력, 틱톡/숏폼 바이럴 신호(멜론 화이트리스트·써클차트 제휴와 별개)는 현재 수집망에 없다.
 
 ## ⚠ 재개 첫 액션
 

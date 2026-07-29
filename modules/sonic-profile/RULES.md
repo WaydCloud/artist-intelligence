@@ -245,6 +245,60 @@ tempo = 60 × sr / (hop × lag) = 2583.98 / lag      (sr=22050, hop=512, lag은 
   - → **단일 곡 간 비교 금지.** 허용되는 사용은 **다수 곡의 분포**와 **같은 모집단의 시계열**뿐이다. 리포트는 이 문구를 insight로 항상 병기한다.
 - **표본 편향**: 프리뷰가 없는 곡은 표본에서 빠진다. 커버리지(`해석/시도`)를 항상 노출한다.
 
+## 3.6 파생 축 — 저장된 라벨·벡터에서 재계산 (오디오 불필요, D-032)
+
+> 구현 [`src/sonic_profile/derived.py`](src/sonic_profile/derived.py). 오디오를 저장하지 않으므로(§1) 소급 적용의 경로는 스냅샷에 남은 값뿐이다. 이 절의 축은 **옛 스냅샷에도 그대로 붙는다** — D-027이 리듬 유형 재계산을 위해 깔아 둔 경로의 연장이다. 전부 A층.
+
+| 지표 | 정의 | 하중/튜닝 | 도메인 근거 | 한계 · 불확실성 |
+|---|---|---|---|---|
+| **organic_ratio** | 저장된 악기 40종 확률에서 `유기음/(유기음+전자음)`. 모호 라벨은 **분자·분모 양쪽에서 제외** | **하중 · 값=A&R**(라벨 매핑) | **어쿠스틱 ↔ 일렉트로닉 팔레트.** 편곡 사조의 1차 축이며 A&R 어휘와 직결 | **🔴 측정하는 것은 음색 팔레트이지 제작 방식이 아니다.** K-pop은 사실상 전부 DAW 제작이며 실연 스트링이 든 발라드도 전자적으로 만들어진다. "이 곡은 어쿠스틱하게 제작됐다"로 읽으면 틀린다. 실측 **배제 질량 중앙 54.9%** — 비율의 근거가 절반 이하다 |
+| **organic_excluded_mass** | 위에서 배제된 확률 질량 비 | 무하중(측정) | 비율의 **근거 두께**. 크면 그 곡의 `organic_ratio`는 얇은 표본 위에 있다 | 이 값을 함께 읽지 않으면 `organic_ratio`를 과신하게 된다 |
+| **instrument_count** | 확률 ≥ 임계인 악기 종수 | 임계는 A&R(§3.1.6과 공유) | 편곡 밀도("몇 겹인가") | 임계에 직접 종속. 믹스에 묻힌 악기는 안 셈 |
+| **instrument_entropy** · **style_entropy** · **mood_entropy** | 각 확률 분포의 정규화 섀넌 엔트로피 | 무하중(측정) | 장르·편곡의 **순수성 vs 혼종성** | 저장된 **상위 k**에 대한 엔트로피다(스타일은 400 중 5만 저장) → 절대값 금지, 곡 간 상대 비교만 |
+| **rhythm_section_mass** · **synth_mass** | 리듬 섹션·신스 계열 라벨의 확률 질량 비 | **하중 · 값=A&R**(라벨 집합) | 리듬 주도 편곡 · 신스 팔레트 비중 | 위와 동일한 상위 k 종속 |
+| **bar_profile_entropy** | 16칸 마디 프로파일의 정규화 엔트로피 | 무하중(측정) | `contrast`(최고점 하나)가 못 보는 **꼬리 분포** | ⚠ **실측 분산 0.037 — 사실상 상수.** 16칸에서 엔트로피가 포화한다. 표면에 올리지 않는다 |
+| **kick_density** | 평균 초과 칸 수 | 무하중(측정) | 킥이 실제로 서 있는 자리의 수 | 다운비트 의존 |
+| **bar_half_asymmetry** | 앞 8칸 / (앞+뒤) | 무하중(측정) | 0.5에서 멀면 **2마디 루프** 신호 | ⚠ 실측 분산 0.129(약함). 드문 비대칭만 잡는다 |
+
+**매핑 원장** — **값은 도메인 소유자 소유**이며 코드에 은닉하지 않는다(`derived.py` 상단 상수):
+
+| 갈래 | 라벨 |
+|---|---|
+| **유기음(24)** | accordion · acousticbassguitar · acousticguitar · bongo · brass · cello · clarinet · classicalguitar · doublebass · flute · harmonica · harp · horn · oboe · orchestra · percussion · piano · pipeorgan · saxophone · strings · trombone · trumpet · viola · violin |
+| **전자음(7)** | beat · computer · drummachine · electricpiano · pad · sampler · synthesizer |
+| **배정 안 함(9)** | `bass`·`guitar`·`drums`·`keyboard`·`organ`·`rhodes`·`bell`(라벨이 어쿠스틱/전자를 구분하지 않음) · `electricguitar`('전기'지만 연주 악기 — 전자 프로덕션과 다른 축) · `voice` |
+
+- **모호 라벨을 억지로 배정하지 않는 것이 이 매핑의 요점**이다(§1 별칭 검증과 같은 규율). 배제율을 함께 내는 이유가 그것이다.
+
+## 3.7 DSP 축 묶음 (D-032) — 새 모델·새 의존성 0
+
+> 전부 A층(**정의가 곧 설명**). librosa/numpy만 쓰며 결정적이다. 구현은 [`features.py`](src/sonic_profile/features.py)·[`rhythm.py`](src/sonic_profile/rhythm.py).
+
+| 묶음 | 지표 | 무엇을 여는가 | 한계 |
+|---|---|---|---|
+| **스테레오** | `stereo_width_low/mid/high` · `phase_correlation` · `stereo_width_var` | **저역 모노화 규범** — 클럽·바이닐 호환 관행. 위상 상관이 낮으면 모노 합산에서 상쇄 위험 | AAC 조인트 스테레오가 side를 깎는다 → 절대값 금지, 상대 분포만 |
+| **라우드니스** | `loudness_range_lu`(EBU R128) · `crest_low/mid/high_db` | LRA는 crest와 **다른 것**: crest=순간 peak/RMS, LRA=**곡 안의 기복**. 밴드별 crest는 멀티밴드 컴프 흔적 | 30초 발췌의 LRA다(전곡 아님). crest와 같은 전제(프리뷰 미정규화, TESTS §3) |
+| **프로덕션 QC** | `peak_dbfs` · `over_unity_ratio` · `dc_offset` · `silence_ratio` | 리미팅 강도 · 발췌 품질 | **`over_unity_ratio`는 클리핑(결함)이 아니다** — 손실 압축을 디코드하면 인터샘플 피크로 1.0을 넘는다. 결함으로 읽으면 "현대 마스터는 전부 망가졌다"는 오답이 된다 |
+| **스펙트럼** | `spectral_contrast`(7밴드 벡터+평균) · `spectral_bandwidth_hz` · `spectral_skewness`·`kurtosis`·`entropy` · `spectral_flux` · `zero_crossing_rate` · `low_centroid_hz` · `high_energy_ratio` · `mfcc_mean`·`mfcc_std`(13차) | `brightness_hz`(중심)·`spectral_flatness`(톤성)가 못 보는 골짜기 구조·분포 형태·변화 속도·음색 지문 | `high_energy_ratio`는 **나이퀴스트 11kHz 위를 못 본다**(sr=22050). 에어밴드 지표가 아니다 |
+| **화성** | `tonnetz`(6차원) · `harmonic_change_rate`(HCDF) · `chroma_entropy` · `key_stability` | **절대 조성을 몰라도 성립한다** — 변화율·안정성은 상대량이라 조 추정 오류(§3 `key_mode`의 약점)에 견고 | `chroma_entropy` 실측 분산 **0.059(약함)**. `key_stability`는 6구간이라 해상도가 거칠다 |
+| **리듬** | `swing_ratio` · `ioi_entropy` · `attack_sharpness` · `downbeat_strength` · `rhythm_self_similarity` · `tempogram_duple`·`triple` · `onset_rate_low/mid/high` | `rhythm_self_similarity`가 **루프 고정성 vs 연주**를 가른다(실측 코르티스 0.826 ↔ 사티 0.072). 밴드별 온셋은 "하이햇이 빽빽한 곡"과 "킥이 빽빽한 곡"을 가른다 | 아래 철회·경고 참조 |
+
+### 3.7.1 실측으로 철회하거나 약하다고 표시한 것 (2026-07-29)
+
+**원장에 값을 적는 것이 채택 조건이므로, 판별력이 없으면 없다고 적는다.**
+
+- **🔴 `meter_duple_bias` 철회.** 2배·3배 lag 자기상관에서 박자 계열을 도출하려 했으나 **3/4박자 곡 두 개(사티 짐노페디·에반스 왈츠)를 모두 2박 우세로 판정했다.** 원인은 2배 lag 자기상관이 백비트 때문에 박자와 무관하게 늘 강하다는 것이고, 임계 조정으로 고쳐지는 문제가 아니라 **정의의 문제**다. → **원시 `tempogram_duple`·`tempogram_triple`만 남기고 해석을 버렸다.** 측정이 아니라 주장이 틀렸으므로 버릴 것은 주장이다.
+- **⚠ `swing_ratio`는 온셋이 빽빽하면 0.5로 수렴한다.** 대조 표본에서 말러 0.676·70s록 0.670은 잡혔으나 **재즈 왈츠가 0.510**으로 스트레이트하게 나왔다. 코호트 분산도 0.081(약함). **낮은 값을 "스트레이트"로 단정하지 말 것** — 타악이 성긴 곡에서만 의미가 있다.
+- **⚠ 사실상 상수인 축**(코호트 108곡 실측): `bar_profile_entropy` 0.037 · `chroma_entropy` 0.059 · `swing_ratio` 0.081 · `bar_half_asymmetry` 0.129. `silence_ratio`·`duration_s`는 전 곡 동일(프리뷰가 전부 30초라 당연). **계산·저장은 하되 지표 타일에 올리지 않는다.**
+- **⚠ `dc_offset`은 결함을 하나도 못 찾았다** — 전 곡 −0.002~0.001. 이건 실패가 아니라 **"이 소스에 DC 결함이 없다"는 정보**다. 감시용으로 남긴다.
+
+### 3.7.2 표면 선별 규율
+
+**71개 스칼라 축을 계산·저장하지만 지표 타일에는 24개만 올린다.** 근거: 축이 늘면 리포트가 읽히지 않고, 판별력 없는 축이 섞이면 **나머지 축의 신뢰까지 깎인다**(D-031에서 `danceability` 천장·`grid_deviation_ms` 잡음을 겪은 뒤 세운 규율). 선별 기준은 ① 코호트에서 분산이 확인될 것 ② 기존 축과 겹치지 않을 것.
+
+- 나머지 축은 **스냅샷·시리즈에 그대로 있다** — 지운 것이 아니라 표면에 안 올린 것이다. 필요하면 언제든 꺼낸다.
+- 0~1 축 선 그래프(`_UNIT_AXES`)는 **6~7개가 한 그림의 한계**라 더 엄격하게 고른다.
+
 ## 3.5 발매일 축 (관측일과 분리해야 트렌드가 보인다)
 
 > 이 절이 열린 근거(실측 2026-07-29): 차트 코호트는 **곡 나이 중앙값 407일 · 1년 초과 카탈로그 57%**의 혼합이다. 관측일 x축은 "소리가 변한 것"과 "차트 구성이 바뀐 것"을 분리하지 못한다(D-022·D-023 한계). `release_date`는 이미 전건 저장돼 있으므로 **축을 갈아 끼우면 된다**.

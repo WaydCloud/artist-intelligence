@@ -611,6 +611,90 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     drift = {k for k in base if k != "stereo_width" and base[k] != with_st.get(k)}
     check("🔴 모노 무회귀: stereo 인자가 기존 지표를 바꾸지 않는다", not drift, str(sorted(drift)))
 
+    # ── D-032 T0 축 묶음 (TESTS §7) ──────────────────────────────────────────
+    from sonic_profile.derived import derive_all, organic_ratio, profile_shape
+    from sonic_profile.features import (
+        _k_weight,
+        _loudness_range_lu,
+        production_qc,
+        stereo_detail,
+    )
+    from sonic_profile.rhythm import HOP as HOP_R
+    from sonic_profile.rhythm import ioi_entropy, rhythm_self_similarity, swing_ratio
+
+    # 파생(라벨) — 오디오 없이 도는 순수 함수
+    def ins(pairs: list[tuple[str, float]]) -> list[dict[str, Any]]:
+        return [{"label": k, "p": v} for k, v in pairs]
+
+    check("organic_ratio 상한: 유기음만 → 1.0",
+          organic_ratio(ins([("piano", 0.9), ("violin", 0.8)]))["organic_ratio"] == 1.0)
+    check("organic_ratio 하한: 전자음만 → 0.0",
+          organic_ratio(ins([("synthesizer", 0.9), ("drummachine", 0.5)]))["organic_ratio"] == 0.0)
+    mixed = organic_ratio(ins([("piano", 0.5), ("synthesizer", 0.5), ("bass", 0.9)]))
+    check("organic_ratio 모호 라벨은 분모에서 빠진다 (0.5)", mixed["organic_ratio"] == 0.5,
+          f"배제 질량 {mixed['organic_excluded_mass']}")
+    check("모호 라벨만 있으면 미해석 (0으로 채우지 않음)",
+          "organic_ratio" not in organic_ratio(ins([("bass", 0.9), ("guitar", 0.8)])))
+    flat_prof = [1.0 / 16] * 16
+    check("bar_profile_entropy: 완전 균일 → 1.0",
+          profile_shape(flat_prof)["bar_profile_entropy"] == 1.0)
+    check("bar_half_asymmetry: 앞 반마디에만 킥 → 1.0",
+          profile_shape([1.0] * 8 + [0.0] * 8)["bar_half_asymmetry"] == 1.0)
+    check("derive_all은 기존 키를 덮어쓰지 않는다",
+          "organic_ratio" not in derive_all({"instruments": ins([("piano", 1.0)]),
+                                             "organic_ratio": 0.123}))
+
+    # 라우드니스 레인지 — 일정 신호는 0, 크고 작은 구간이 섞이면 커야 한다
+    steady = sine(1000, 20.0)
+    varied = np.concatenate([sine(1000, 10.0) * 0.05, sine(1000, 10.0)]).astype(np.float32)
+    lra_s = _loudness_range_lu(_k_weight(steady, SR), SR)
+    lra_v = _loudness_range_lu(_k_weight(varied, SR), SR)
+    check("LRA 하한: 일정 진폭 → ≈0", lra_s < 0.2, f"{lra_s:.3f} LU")
+    check("LRA 단조성: 기복 있는 신호 > 일정 신호", lra_v > lra_s + 10, f"{lra_v:.1f} vs {lra_s:.1f} LU")
+
+    # 프로덕션 QC — "클리핑"이 아니라 0dBFS 초과다
+    qc = production_qc(sine(1000) * 3.0, SR, 1.5)
+    check("over_unity_ratio: 진폭 1.5 정현파는 상당 부분이 1.0 초과", qc["over_unity_ratio"] > 0.3,
+          f"{qc['over_unity_ratio']}")
+    check("over_unity_ratio: 정상 신호는 0", production_qc(sine(1000), SR, 0.5)["over_unity_ratio"] == 0.0)
+    check("silence_ratio: 무음 절반 → ≈0.5",
+          abs(production_qc(np.concatenate([sine(1000, 5.0), np.zeros(SR * 5, dtype=np.float32)]),
+                            SR, 0.5)["silence_ratio"] - 0.5) < 0.05)
+
+    # 스테레오 상세 — L=R이면 밴드별 폭이 전부 0이고 위상 상관은 1
+    same = np.stack([sine(440), sine(440)])
+    sd = stereo_detail(same, SR)
+    check("밴드별 스테레오 폭: L=R → 전 대역 0",
+          all(abs(sd.get(f"stereo_width_{b}", 0.0)) < 1e-6 for b in ("low", "mid", "high")))
+    check("위상 상관: L=R → 1.0", abs(sd.get("phase_correlation", 0.0) - 1.0) < 1e-6)
+    inv = stereo_detail(np.stack([sine(440), -sine(440)]), SR)
+    check("위상 상관: L=−R → −1.0", abs(inv.get("phase_correlation", 0.0) + 1.0) < 1e-6)
+
+    # 리듬 부가 축
+    reg = np.arange(0.0, 12.0, 0.5)
+    # `or`로 기본값을 주면 **0.0이 falsy라 기본값으로 바뀐다** — 하한 검사에서는 치명적이다
+    reg_e = ioi_entropy(reg)
+    check("ioi_entropy 하한: 완전 등간격 → 0 (미해석 아님)", reg_e == 0.0, f"{reg_e}")
+    beats_s = np.arange(0.0, 12.0, 0.5)
+    straight = np.sort(np.concatenate([beats_s, beats_s + 0.25]))
+    sw = swing_ratio(beats_s, straight)
+    check("swing_ratio: 정확히 중간에 앉은 온셋 → 0.5", sw is not None and abs(sw - 0.5) < 0.02,
+          f"{sw}")
+    swung = np.sort(np.concatenate([beats_s, beats_s + 1.0 / 3]))
+    sw2 = swing_ratio(beats_s, swung)
+    check("swing_ratio 단조성: 셔플 온셋 > 스트레이트", sw2 is not None and sw is not None and sw2 > sw,
+          f"{sw2} > {sw}")
+    # 같은 마디를 반복하면 자기유사도가 높아야 한다
+    # 마디당 프레임이 칸 수(16)와 같으면 접기 경계에서 밀려 자기유사도가 깎인다
+    # 임펄스를 칸 **안쪽**에 둔다 — 마디 경계에 놓으면 부동소수 오차로 앞 마디에 밀린다
+    # (TESTS §5가 기록한 격자 정렬 함정과 같은 것). 2·18·34·50 → 여전히 0·4·8·12번 칸.
+    one_bar = np.zeros(64, dtype=np.float64)
+    one_bar[[2, 18, 34, 50]] = 3.0
+    env_rep = np.tile(one_bar, 6)
+    db = np.arange(7, dtype=np.float64) * (64 * HOP_R / SR)
+    ss = rhythm_self_similarity(env_rep, SR, db)
+    check("마디 자기유사도: 같은 패턴 반복 → 높음", ss is not None and ss > 0.9, f"{ss}")
+
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0
 

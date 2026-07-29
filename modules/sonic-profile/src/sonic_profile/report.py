@@ -11,6 +11,7 @@ from datetime import UTC, date, datetime
 from statistics import median
 from typing import Any
 
+from sonic_profile.derived import derive_all
 from sonic_profile.rhythm import (
     BINS,
     MIN_MATCH_DEFAULT,
@@ -58,6 +59,16 @@ _SURFACED = [
     ("danceability", "danceability", ""),
     ("valence", "정서가(valence)", ""),
     ("arousal", "각성도(arousal)", ""),
+    # ── D-032 T0 축. **전부 올리지 않는다.** 71개 스칼라를 계산·저장하지만 타일에는
+    # 코호트에서 분산이 확인되고(§3.7 실측표) 서로 겹치지 않는 것만 올린다 — 축이 늘면
+    # 리포트가 읽히지 않고, 판별력 없는 축이 섞이면 나머지 신뢰까지 깎인다.
+    # 나머지는 스냅샷·시리즈에 그대로 있어 언제든 꺼내 볼 수 있다.
+    ("organic_ratio", "유기음 비율", ""),
+    ("loudness_range_lu", "라우드니스 레인지", "LU"),
+    ("stereo_width_low", "저역 스테레오 폭", ""),
+    ("phase_correlation", "위상 상관", ""),
+    ("rhythm_self_similarity", "마디 자기유사도", ""),
+    ("attack_sharpness", "어택 샤프니스", ""),
 ]
 
 
@@ -126,7 +137,9 @@ _UNIT_AXES = [
     ("percussive_ratio", "타악 비율"),
     ("spectral_flatness", "스펙트럼 평탄도"),
     ("stereo_width", "스테레오 폭"),
-    ("syncopation_ratio", "싱코페이션"),
+    # D-032 — 0~1 축이면서 코호트 분산이 확인된 것만. **선 6~7개가 한 그림의 한계**라
+    # `syncopation_ratio`(분산 0.191)는 타일·히트맵에만 두고 이 목록에서는 뺀다.
+    ("organic_ratio", "유기음 비율"),
 ]
 _ALL_AXES = [(f, la) for f, la, _ in _SURFACED]
 
@@ -271,7 +284,9 @@ def _counts_chart(pairs: list[tuple[str, int]], title: str) -> dict[str, Any] | 
     return {"type": "bar", "title": title, "data": data}
 
 
-def backfill_derived(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+def backfill_derived(
+    records: list[dict[str, Any]], *, min_prob: float = MIN_PROB_DEFAULT
+) -> list[dict[str, Any]]:
     """옛 스냅샷에 D-031 파생 지표를 채운다 — 저장된 `kick_bar_profile`에서 **재계산**.
 
     오디오를 저장하지 않으므로(RULES §1) 소급 적용의 경로는 이 프로파일뿐이다. 유형
@@ -287,21 +302,24 @@ def backfill_derived(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     out: list[dict[str, Any]] = []
     for r in records:
         f = r.get("features")
-        prof = f.get("kick_bar_profile") if isinstance(f, dict) else None
-        if not isinstance(f, dict) or not isinstance(prof, list) or len(prof) != BINS:
-            out.append(r)
-            continue
-        if not all(isinstance(v, (int, float)) for v in prof):
+        if not isinstance(f, dict):
             out.append(r)
             continue
         add: dict[str, Any] = {}
-        try:
-            if not isinstance(f.get("syncopation_ratio"), (int, float)):
-                add["syncopation_ratio"] = round(syncopation_ratio(prof), 4)
-            if not isinstance(f.get("bar_profile_contrast"), (int, float)):
-                add["bar_profile_contrast"] = round(bar_profile_contrast(prof), 3)
-        except RhythmUnavailable:
-            add = {}
+        # 리듬 파생은 마디 프로파일이 있을 때만. 없다고 **다른 파생까지 막지 않는다** —
+        # 리듬을 못 얻은 곡도 악기·스타일 라벨은 갖고 있다.
+        prof = f.get("kick_bar_profile")
+        if (isinstance(prof, list) and len(prof) == BINS
+                and all(isinstance(v, (int, float)) for v in prof)):
+            try:
+                if not isinstance(f.get("syncopation_ratio"), (int, float)):
+                    add["syncopation_ratio"] = round(syncopation_ratio(prof), 4)
+                if not isinstance(f.get("bar_profile_contrast"), (int, float)):
+                    add["bar_profile_contrast"] = round(bar_profile_contrast(prof), 3)
+            except RhythmUnavailable:
+                add = {}
+        # 라벨·벡터 파생(§3.6) — 악기·스타일·무드·마디 프로파일에서 재계산된다.
+        add.update(derive_all({**f, **add}, min_prob=min_prob))
         out.append({**r, "features": {**f, **add}} if add else r)
     return out
 
@@ -541,7 +559,7 @@ def build_report(
 ) -> dict[str, Any]:
     # 옛 스냅샷에도 D-031 파생 지표를 채운 뒤 시작한다 — 이 한 줄 덕분에 아래 전부가
     # 새 스냅샷과 옛 스냅샷을 구별하지 않는다(오디오 재취득 없음, RULES §1).
-    records = backfill_derived(records)
+    records = backfill_derived(records, min_prob=min_prob)
     resolved = [r for r in records if r.get("features")]
     unresolved = [r for r in records if not r.get("features")]
     n, n_un = len(resolved), len(unresolved)

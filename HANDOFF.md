@@ -13,7 +13,7 @@
   2. **fandom-pulse v3.1** — IG 해시태그 화력·참여·모멘텀 + 이중 귀속 + 은어 태그 51종.
   3. **signal-bridge v2** — 3소스 조인·분류 + 원인분석 레이어(D-021).
   4. **yt-pulse v1** — 워치리스트 공식 채널 velocity·신작.
-  5. **sonic-profile v3** — 프리뷰 30초·**오디오 무보관** · **지표 16종**(DSP 13 + 구성물 3) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축 트렌드. 지표 3층 구조(D-031).
+  5. **sonic-profile v4** — 프리뷰 30초·**오디오 무보관** · **스칼라 축 71종 계산·저장 / 타일 24종 노출**(D-032) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축. 지표 3층 구조(D-031) + 축 카탈로그 100항([`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)).
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
 - 최근 작업 이력: [`Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · 그 전 [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027·D-028·D-029)
 
@@ -87,6 +87,16 @@
 
 - **`tresillo(16분·반마디)` 제거 여부** — 관용 패턴이 아니라 제거를 권고했으나 값은 도메인 소유자 소유라 이름만 바로잡고 남겼다(현재 5곡 배정).
 - **`dembow` 템플릿의 정체** — 킥+스네어 합주 패턴인데 프로파일은 킥만 접는다. 무엇을 재고 있는지 **스템 분리 전까지 불확실**(6곡).
+
+## 🆕 sonic-profile T0 축 37종 추가 완료 (2026-07-29, D-032)
+
+- **모델 저장소 전수 조사 → [`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)에 100개 축**을 비용 계층(T0~T5)별로 정리. **구현한 것은 T0(새 모델·새 의존성 0) 37종뿐**이고 나머지는 쇼핑 목록이다.
+- **저장은 후하게, 표면은 인색하게**(D-032 결정): 스칼라 **71종 계산·저장 / 지표 타일 24종만 노출**. 판별력을 코호트에서 재고 통과한 것만 올린다 — 판별력 없는 축이 섞이면 나머지 신뢰까지 깎인다(D-031의 교훈).
+- **소급 9종**은 오디오 없이 옛 스냅샷에 붙는다(`derived.py`). 대표는 **`organic_ratio`(어쿠스틱↔일렉트로닉)** — 폭 0.802, 악뮤 0.878 ↔ 최예나 0.085.
+- 🔴 **`meter_duple_bias` 철회** — 3/4박자 곡 두 개를 2박 우세로 판정했다. 원시 자기상관만 남기고 **해석을 버렸다**.
+- ⚠ **`over_unity_ratio`는 클리핑(결함)이 아니다** — 손실 압축 디코드의 인터샘플 피크다. 처음 `clipping_ratio`로 이름 붙였다가 정정. **이름이 틀리면 해석이 틀린다.**
+- selftest **60개**. 게이트 전부 초록. `FEATURE_SET v3`·`RHYTHM_FEATURE_SET v3` 콜드 실행 완료.
+- **다음 후보**(카탈로그 참조): T1 effnet 헤드 29종(`mood_acoustic`·`voice_instrumental`·`timbre` 등 편승) · T3 **아티스트/레이블 임베딩**(유사도 공간 — 실증 완료: 아이유↔악뮤 0.976) · T4 YAMNet 521 이벤트.
 
 ## 🆕 sonic-profile 지표 9종 확장 완료 (2026-07-29, D-031)
 

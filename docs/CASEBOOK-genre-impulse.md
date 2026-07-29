@@ -4,6 +4,9 @@
 > ⚠ **A2(사운드 서명)는 환경 차단으로 보류**: Windows Smart App Control이 `av`(FFmpeg DLL)를 차단(2026-07-29 21시~23시 사이 발생, HANDOFF 참조). 조사 코호트·집계 스크립트는 준비 완료(`data/research/genre-impulse/`) — 차단 해소 시 즉시 실행 가능.
 > 이 문서는 케이스별 회고 조사 결과의 **사람이 읽는 원장**이다. 기계가 읽는 임펄스 레코드(JSON)는 Phase B에서 이 문서를 정형화해 만든다.
 > **규율**: 모든 시점 주장에 출처 병기 · 출처 없는 것은 `추정` 표기 · 웹 조사 결과는 1차 검증(교차 출처) 전까지 `미검증` — 하중받는 기준의 근거로 쓰지 않는다.
+>
+> **확실성 등급 (D-033 보완⑥, 2026-07-30)**: `매우 높음`(1차 출처 또는 독립 복수 교차) · `높음`(신뢰 매체 단일+정합) · `중간`(2차 단일 또는 팬 비평 수렴) · `낮음`(팬위키·단일 블로그·소급 위험) · `매우 낮음`(스니펫·전문) · `불가능한 수준`(원리적 불가 — 해제 조건 병기). **표면(종합·판정)은 중간 이상만 쓰되 등급 병기로 상위 3등급을 구별한다.** 낮음 이하는 삭제하지 않는다(재조사 목록).
+> ⚠ 구표기 매핑(점진 적용 중): `검증`·`상` → 높음(복수 교차 확인분은 매우 높음으로 승격) · `중` → 중간 · `추정` → 낮음~매우 낮음 · "부재 증명 불가"류 → 불가능한 수준. 요소 차용 타임라인부터 신등급 적용.
 
 ## 조사 방법 (요약)
 
@@ -771,7 +774,7 @@
 | 곡 | 발매 | 성적 | 차용 요소 | 근거 | 확실성 |
 |---|---|---|---|---|---|
 | ITZY "24HRS" | 2020-03 | 수록곡 | 과포화 일렉트로·반복 보컬 루프 | [Soompi 회고](https://www.soompi.com/article/1839542wpp/7-k-pop-tracks-that-turn-it-up-with-a-hyperpop-inspired-beat) | **낮음 — 소급 귀속 위험**(발매가 하이퍼팝 바이럴 이전) |
-| **aespa "Savage"** | 2021-10 | **가온 디지털 2위**·K-pop Hot 100 2위·Global 200 39위 | "크런치 하이퍼팝 신스"(NME)·"브래시 신스+트랩 하이퍼팝 혼합"(Paper)·SOPHIE 계열 금속성 클랭 | [NME](https://www.nme.com/reviews/album/aespa-savage-review-3064971), [PopMatters](https://www.popmatters.com/aespa-savage-debut-ep-review) | **높음** — 타이틀급 차용의 앵커 |
+| **aespa "Savage"** | 2021-10 | **가온 디지털 2위**·K-pop Hot 100 2위·Global 200 39위 | "크런치 하이퍼팝 신스"(NME)·"브래시 신스+트랩 하이퍼팝 혼합"(Paper)·SOPHIE 계열 금속성 클랭 | [NME](https://www.nme.com/reviews/album/aespa-savage-review-3064971), [PopMatters](https://www.popmatters.com/aespa-savage-debut-ep-review) | **매우 높음**(독립 전문지 3곳 교차) — 타이틀급 차용의 앵커 |
 | NMIXX "O.O" | 2022-02 | 가온 81위 | 맥시멀 접합은 확인 — **하이퍼팝 직접 귀속 근거는 미발견** | [The Bias List](https://thebiaslist.com/2022/02/22/song-review-nmixx-o-o/) | 하이퍼팝 귀속: 낮음 |
 | NCT DREAM "Glitch Mode" | 2022-03 | 앨범 밀리언 | 글리치 SFX·게임 노이즈 — '글리치 미학'까지만(인접) | [Seoulbeats](https://seoulbeats.com/2022/04/nct-dream-subvert-expectations-on-glitch-mode/) | 낮음 |
 | TXT "Frost" | 2022-05 | 수록곡 | 트랩+하이퍼팝 블렌드·헤비 보컬 처리 | [Soompi](https://www.soompi.com/article/1839542wpp/7-k-pop-tracks-that-turn-it-up-with-a-hyperpop-inspired-beat) | 중간 |
@@ -788,8 +791,8 @@
 
 | 곡 | 발매 | 성적 | 차용 요소 | 근거 | 확실성 |
 |---|---|---|---|---|---|
-| STAYC "I WANT U BABY" | 2022-02 | 수록곡 | 드릴 비트(전문지 명시) | [Hypebeast KR](https://hypebeast.kr/2023/1/korea-drill-blase-nsw-yoon-deadbois) | 중간~높음 |
-| **ENHYPEN "Future Perfect (Pass the MIC)"** | 2022-07 | 음방 3회 1위·앨범 빌보드 200 6위 (국내 디지털 유의미 진입 미확인) | **시카고 드릴 명시 타이틀** — 제작진 증언 "드릴은 잘 알려지지 않은 장르라 기획 단계부터 고민" | [Weverse Magazine](https://magazine.weverse.io/article/view/612?lang=en), [Wikipedia](https://en.wikipedia.org/wiki/Manifesto:_Day_1) | **높음** — 아이돌 드릴 타이틀 첫 명시 사례 |
+| STAYC "I WANT U BABY" | 2022-02 | 수록곡 | 드릴 비트(전문지 명시) | [Hypebeast KR](https://hypebeast.kr/2023/1/korea-drill-blase-nsw-yoon-deadbois) | 높음(전문지 단일) |
+| **ENHYPEN "Future Perfect (Pass the MIC)"** | 2022-07 | 음방 3회 1위·앨범 빌보드 200 6위 (국내 디지털 유의미 진입 미확인) | **시카고 드릴 명시 타이틀** — 제작진 증언 "드릴은 잘 알려지지 않은 장르라 기획 단계부터 고민" | [Weverse Magazine](https://magazine.weverse.io/article/view/612?lang=en), [Wikipedia](https://en.wikipedia.org/wiki/Manifesto:_Day_1) | **매우 높음**(제작진 1차 증언) — 아이돌 드릴 타이틀 첫 명시 사례 |
 | Stray Kids "3RACHA" | 2022-10 | 유닛 수록곡 | 드릴 활용(전문지 명시, 자체 프로듀싱) | [Hypebeast KR](https://hypebeast.kr/2023/1/korea-drill-blase-nsw-yoon-deadbois) | 중간 |
 | KISS OF LIFE "Igloo" | 2024-10 | 수록곡 | "드릴 비트 요소" — 팬위키 수준만 | [Fandom](https://kissoflife.fandom.com/wiki/Igloo) | 낮음(추정) |
 

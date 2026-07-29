@@ -133,7 +133,13 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     # 엔진 설정이 값의 일부다 — 리듬·태깅이 켜지면 키가 바뀌어 과거 캐시가 무효화된다(RULES §2).
     engine_key = "|".join([
         f"{eng['engine']}{eng['engine_version']}", str(eng["sample_rate"]), str(eng["low_hz"]),
+        # 지표 집합 버전 — 지표를 늘렸는데 이게 빠지면 캐시가 적중해 **새 지표가 빠진
+        # 옛 레코드가 그대로 되살아난다**(D-031). 절단본 함정과 같은 구조다.
+        str(eng.get("feature_set", "-")),
         eng.get("beat_engine", "-"), eng.get("tagger", "-"),
+        # 리듬 파생 지표(grid_deviation 등)가 늘면 리듬 엔진 산출도 달라진다.
+        str(eng.get("rhythm_feature_set", "-")),
+        eng.get("mood_head", "-"), eng.get("valence_head", "-"),
         # 저장 라벨 수가 늘면 옛 캐시(잘린 라벨)는 무효다 — 안 그러면 다음 수집이
         # 캐시 적중으로 절단본을 다시 써 넣어 과소집계가 되살아난다(RULES §3.1.6.1).
         str(eng.get("tagger_top_k_instrument", "-")),
@@ -543,6 +549,67 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           classify_rhythm(prof, tie_gap=1.0)["tie"]
           and classify_rhythm(prof, tie_gap=1.0)["assigned"] == "four-on-floor")
     check("분류 결정성: 같은 프로파일 → 같은 배정", classify_rhythm(prof) == c_beat)
+
+    # ── D-031 신규 지표 (TESTS §6) ───────────────────────────────────────────
+    from sonic_profile.features import stereo_width
+    from sonic_profile.rhythm import (
+        bar_profile_contrast,
+        beat_grid_fit,
+        syncopation_ratio,
+    )
+
+    # §6.1 리듬 파생 — 저장된 프로파일에서 재계산되므로 오디오가 필요 없다
+    on_beat = [1.0 if i % 4 == 0 else 0.0 for i in range(16)]
+    off_beat = [0.0 if i % 4 == 0 else 1.0 for i in range(16)]
+    check("싱코페이션 하한: 정박만 → 0.0", syncopation_ratio(on_beat) == 0.0,
+          f"{syncopation_ratio(on_beat)}")
+    check("싱코페이션 상한: 정박 칸이 빔 → 1.0", syncopation_ratio(off_beat) == 1.0,
+          f"{syncopation_ratio(off_beat)}")
+    flat16 = [1.0 / 16] * 16
+    check("마디 대비 기준점: 완전 균일 → 정확히 1.0", bar_profile_contrast(flat16) == 1.0,
+          f"{bar_profile_contrast(flat16)}")
+    spike = [1.0] + [0.0] * 15
+    check("마디 대비 상한: 한 칸 집중 → bins(16)", abs(bar_profile_contrast(spike) - 16.0) < 1e-9,
+          f"{bar_profile_contrast(spike)}")
+    # 그리드 편차: 완벽 등간격은 ≈0, 지터를 키우면 단조 증가해야 한다
+    perfect = np.arange(32, dtype=np.float64) * 0.5
+    _, dev0 = beat_grid_fit(perfect)
+    devs = []
+    for sigma in (0.002, 0.010, 0.030):
+        jit = perfect + np.random.default_rng(7).normal(0, sigma, perfect.size)
+        devs.append(beat_grid_fit(jit)[1])
+    check("그리드 편차 하한: 완벽 등간격 → ≈0", dev0 < 1e-6, f"{dev0:.3e} ms")
+    check("그리드 편차 단조 증가: 지터 σ↑ → 잔차↑",
+          devs[0] < devs[1] < devs[2], " < ".join(f"{d:.1f}" for d in devs))
+
+    # §6.2 신규 DSP
+    quiet = extract(sine(1000) * 0.5)
+    loud = extract(sine(1000))
+    if isinstance(quiet.get("loudness_lufs"), float) and isinstance(loud.get("loudness_lufs"), float):
+        delta = quiet["loudness_lufs"] - loud["loudness_lufs"]
+        # K-weighting은 선형이라 진폭 절반 = 정확히 −6.02 LUFS. 구현 정오를 가르는 검사다.
+        check("라우드니스 선형성: 진폭 −6dB → −6 LUFS 이동", abs(delta + 6.02) < 0.05,
+              f"{delta:+.2f} LUFS")
+    else:
+        check("라우드니스 선형성: 진폭 −6dB → −6 LUFS 이동", False, "값이 나오지 않음")
+    check("스펙트럼 평탄도 하한: 순음 → ≈0", fhi["spectral_flatness"] < 0.01,
+          f"{fhi['spectral_flatness']}")
+    check("스펙트럼 평탄도: 잡음 > 순음", fn["spectral_flatness"] > fhi["spectral_flatness"],
+          f"{fn['spectral_flatness']} > {fhi['spectral_flatness']}")
+    mono_sig = sine(440)
+    other = sine(660)
+    check("스테레오 폭 하한: L=R → 0.0", stereo_width(np.stack([mono_sig, mono_sig])) == 0.0)
+    check("스테레오 폭 상한: L=−R → 1.0", stereo_width(np.stack([mono_sig, -mono_sig])) == 1.0)
+    mid_w = stereo_width(np.stack([mono_sig, other]))
+    check("스테레오 폭 중간값: 다른 채널 → (0,1)", mid_w is not None and 0.0 < mid_w < 1.0,
+          f"{mid_w}")
+    # 모노 소스는 0.0("좁다")이 아니라 None("정보 없음")이다 — 결측 ≠ 0(§0)
+    check("모노 소스 → None (0.0으로 채우지 않음)", stereo_width(mono_sig) is None)
+    # 🔴 무회귀: 스테레오를 넘겨도 모노 지표는 한 톨도 바뀌지 않아야 한다(RULES §2)
+    base = extract(clicks(128))
+    with_st = extract(clicks(128), stereo=np.stack([clicks(128), other]))
+    drift = {k for k in base if k != "stereo_width" and base[k] != with_st.get(k)}
+    check("🔴 모노 무회귀: stereo 인자가 기존 지표를 바꾸지 않는다", not drift, str(sorted(drift)))
 
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0

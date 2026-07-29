@@ -47043,7 +47043,7 @@
     "moduleId": "sonic-profile",
     "title": "소닉 프로파일 · 30초 프리뷰 기반 소리 지표",
     "subtitle": "분포 안에서의 위치를 보는 증거 · 단일 곡 평결 아님",
-    "generatedAt": "2026-07-29T02:07:37Z",
+    "generatedAt": "2026-07-29T07:36:17Z",
     "metrics": [
       {
         "label": "관측 트랙",
@@ -47098,6 +47098,60 @@
         "value": 10.34,
         "unit": "dB",
         "hint": "관측 216곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "라우드니스 중앙값",
+        "value": -8.235,
+        "unit": "LUFS",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "스펙트럼 평탄도 중앙값",
+        "value": 0.015,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "스테레오 폭 중앙값",
+        "value": 0.115,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "싱코페이션 중앙값",
+        "value": 0.699,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "마디 프로파일 대비 중앙값",
+        "value": 1.656,
+        "unit": "×",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "그리드 편차 중앙값",
+        "value": 8.3,
+        "unit": "ms",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "danceability 중앙값",
+        "value": 0.995,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "정서가(valence) 중앙값",
+        "value": 5.737,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+      },
+      {
+        "label": "각성도(arousal) 중앙값",
+        "value": 5.666,
+        "unit": "",
+        "hint": "관측 108곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
       }
     ],
     "charts": [
@@ -47268,7 +47322,9 @@
                 0.0703,
                 0.0593
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6637,
+              "contrast": 1.895
             },
             {
               "name": "코르티스 - REDRED",
@@ -47290,7 +47346,9 @@
                 0.0433,
                 0.0569
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.5409,
+              "contrast": 2.384
             },
             {
               "name": "Hearts2Hearts - Lemon Tang",
@@ -47312,7 +47370,9 @@
                 0.0755,
                 0.0617
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7041,
+              "contrast": 1.346
             },
             {
               "name": "aespa - LEMONADE",
@@ -47334,7 +47394,9 @@
                 0.0535,
                 0.0608
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6897,
+              "contrast": 1.635
             },
             {
               "name": "리센느 - LOVE ATTACK",
@@ -47356,7 +47418,9 @@
                 0.0484,
                 0.0628
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6496,
+              "contrast": 1.456
             },
             {
               "name": "리센느 - Pretty Girl",
@@ -47378,7 +47442,9 @@
                 0.0491,
                 0.0606
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.5992,
+              "contrast": 1.824
             },
             {
               "name": "아일릿 - It's Me",
@@ -47400,7 +47466,9 @@
                 0.0564,
                 0.0503
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7031,
+              "contrast": 1.403
             },
             {
               "name": "리센느 - Deja Vu",
@@ -47422,7 +47490,9 @@
                 0.08,
                 0.0479
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.5796,
+              "contrast": 2.152
             },
             {
               "name": "에이티즈 - BAD (James Carter Ver.)",
@@ -47444,7 +47514,9 @@
                 0.071,
                 0.0437
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6513,
+              "contrast": 1.728
             },
             {
               "name": "Hearts2Hearts - RUDE!",
@@ -47466,7 +47538,9 @@
                 0.0388,
                 0.0396
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6265,
+              "contrast": 1.843
             },
             {
               "name": "코르티스 - ACAI",
@@ -47488,7 +47562,9 @@
                 0.0516,
                 0.0534
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6686,
+              "contrast": 1.598
             },
             {
               "name": "키키 - 404 (New Era)",
@@ -47510,7 +47586,9 @@
                 0.0466,
                 0.0544
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.5883,
+              "contrast": 2.157
             },
             {
               "name": "한로로 - 0+0",
@@ -47532,7 +47610,9 @@
                 0.0732,
                 0.0623
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7348,
+              "contrast": 1.485
             },
             {
               "name": "태연 - 만찬가 (Instrumental)",
@@ -47554,7 +47634,9 @@
                 0.0548,
                 0.0738
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7224,
+              "contrast": 1.674
             },
             {
               "name": "한로로 - 사랑하게 될 거야",
@@ -47576,7 +47658,9 @@
                 0.087,
                 0.0594
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7298,
+              "contrast": 1.491
             },
             {
               "name": "뉴진스 - How Sweet",
@@ -47598,7 +47682,9 @@
                 0.0584,
                 0.0381
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6431,
+              "contrast": 2.621
             },
             {
               "name": "NMIXX - Heavy Serenade",
@@ -47620,7 +47706,9 @@
                 0.0873,
                 0.0529
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7335,
+              "contrast": 1.635
             },
             {
               "name": "아이오아이 - 갑자기",
@@ -47642,7 +47730,9 @@
                 0.0593,
                 0.0419
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.5717,
+              "contrast": 1.731
             },
             {
               "name": "코르티스 - YOUNGCREATORCREW",
@@ -47664,7 +47754,9 @@
                 0.0728,
                 0.0474
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7529,
+              "contrast": 1.461
             },
             {
               "name": "나우아임영 & Royal 44 - KISS KISS KISS (Prod. by Hukky Shibaseki) [feat. SUNWOO]",
@@ -47686,7 +47778,9 @@
                 0.0511,
                 0.0557
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6988,
+              "contrast": 1.778
             },
             {
               "name": "볼빨간사춘기 - 여름아 부탁해",
@@ -47708,7 +47802,9 @@
                 0.0773,
                 0.0528
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.701,
+              "contrast": 1.424
             },
             {
               "name": "리센느 - Runaway",
@@ -47730,7 +47826,9 @@
                 0.0693,
                 0.0534
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6914,
+              "contrast": 2.13
             },
             {
               "name": "Ariana Grande - hate that i made you love me",
@@ -47752,7 +47850,9 @@
                 0.0758,
                 0.0639
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6122,
+              "contrast": 1.661
             },
             {
               "name": "리센느 - Pinball",
@@ -47774,7 +47874,9 @@
                 0.0525,
                 0.0673
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7439,
+              "contrast": 1.554
             },
             {
               "name": "뉴진스 - Attention",
@@ -47796,7 +47898,9 @@
                 0.0694,
                 0.0532
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.742,
+              "contrast": 1.608
             },
             {
               "name": "빈첸 - Flying High With U",
@@ -47818,7 +47922,9 @@
                 0.068,
                 0.0579
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6315,
+              "contrast": 1.8
             },
             {
               "name": "한로로 - 입춘",
@@ -47840,7 +47946,9 @@
                 0.0581,
                 0.0624
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7108,
+              "contrast": 1.387
             },
             {
               "name": "Justin Bieber - Beauty and a Beat (feat. Nicki Minaj)",
@@ -47862,7 +47970,9 @@
                 0.0608,
                 0.0524
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6652,
+              "contrast": 1.403
             },
             {
               "name": "뉴진스 - Hype Boy",
@@ -47884,7 +47994,9 @@
                 0.0612,
                 0.0595
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7421,
+              "contrast": 1.362
             },
             {
               "name": "검정치마 - 한시 오분 (1:05)",
@@ -47906,7 +48018,9 @@
                 0.074,
                 0.0561
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7034,
+              "contrast": 1.291
             },
             {
               "name": "헤이즈 - And July (feat. DEAN & dj friz)",
@@ -47928,7 +48042,9 @@
                 0.1252,
                 0.0357
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.693,
+              "contrast": 2.117
             },
             {
               "name": "양홍원 - Rose (feat. Skinny Brown & Homeboy)",
@@ -47950,7 +48066,9 @@
                 0.0623,
                 0.0787
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7375,
+              "contrast": 1.538
             },
             {
               "name": "아일릿 - Magnetic",
@@ -47972,7 +48090,9 @@
                 0.0963,
                 0.0463
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6453,
+              "contrast": 1.669
             },
             {
               "name": "aespa - Whiplash",
@@ -47994,7 +48114,9 @@
                 0.0544,
                 0.0414
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6703,
+              "contrast": 1.646
             },
             {
               "name": "코르티스 - FaSHioN",
@@ -48016,7 +48138,9 @@
                 0.0597,
                 0.0547
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7501,
+              "contrast": 1.792
             },
             {
               "name": "Hearts2Hearts - FOCUS",
@@ -48038,7 +48162,9 @@
                 0.0445,
                 0.048
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6714,
+              "contrast": 1.734
             },
             {
               "name": "희대의, 씨잼 & 블랙넛 - 잡아가세요",
@@ -48060,7 +48186,9 @@
                 0.048,
                 0.0684
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7266,
+              "contrast": 2.285
             },
             {
               "name": "OFFICIAL HIGE DANDISM - Pretender",
@@ -48082,7 +48210,9 @@
                 0.0688,
                 0.0717
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7462,
+              "contrast": 1.421
             },
             {
               "name": "로제 - toxic till the end",
@@ -48104,7 +48234,9 @@
                 0.0618,
                 0.0717
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7613,
+              "contrast": 1.542
             },
             {
               "name": "Hearts2Hearts - STYLE",
@@ -48126,7 +48258,9 @@
                 0.0534,
                 0.0533
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6704,
+              "contrast": 1.419
             },
             {
               "name": "검정치마 - Ling Ling",
@@ -48148,7 +48282,9 @@
                 0.0691,
                 0.0723
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7047,
+              "contrast": 1.466
             },
             {
               "name": "fromis_9 - Vitamin ME",
@@ -48170,7 +48306,9 @@
                 0.061,
                 0.0486
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7103,
+              "contrast": 2
             },
             {
               "name": "RIIZE - Do your dance",
@@ -48192,7 +48330,9 @@
                 0.0578,
                 0.0561
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7239,
+              "contrast": 1.539
             },
             {
               "name": "MEOVV - DDI RO RI",
@@ -48214,7 +48354,9 @@
                 0.0696,
                 0.0492
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6495,
+              "contrast": 1.509
             },
             {
               "name": "리도어 - 영원은 그렇듯",
@@ -48236,7 +48378,9 @@
                 0.0626,
                 0.076
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7262,
+              "contrast": 1.381
             },
             {
               "name": "코르티스 - GO!",
@@ -48258,7 +48402,9 @@
                 0.0536,
                 0.0271
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7335,
+              "contrast": 2.947
             },
             {
               "name": "뉴진스 - Bubble Gum",
@@ -48280,7 +48426,9 @@
                 0.1089,
                 0.0463
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6888,
+              "contrast": 1.742
             },
             {
               "name": "에픽하이 - Love Love Love (feat. 융진)",
@@ -48302,7 +48450,9 @@
                 0.0602,
                 0.0883
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7276,
+              "contrast": 2.133
             },
             {
               "name": "검정치마 - Antifreeze",
@@ -48324,7 +48474,9 @@
                 0.0672,
                 0.0582
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7061,
+              "contrast": 1.576
             },
             {
               "name": "검정치마 - EVERYTHING",
@@ -48346,7 +48498,9 @@
                 0.0517,
                 0.0627
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6126,
+              "contrast": 2.198
             },
             {
               "name": "aespa - KISS N TELL",
@@ -48368,7 +48522,9 @@
                 0.0505,
                 0.0554
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6609,
+              "contrast": 1.494
             },
             {
               "name": "아일릿 - 빌려온 고양이 (Do the Dance)",
@@ -48390,7 +48546,9 @@
                 0.0791,
                 0.0439
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6359,
+              "contrast": 1.637
             },
             {
               "name": "코르티스 - TNT",
@@ -48412,7 +48570,9 @@
                 0.0573,
                 0.0551
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7444,
+              "contrast": 1.328
             },
             {
               "name": "aespa - WDA (Whole Different Animal) [feat. G-DRAGON]",
@@ -48434,7 +48594,9 @@
                 0.0694,
                 0.0887
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6947,
+              "contrast": 2.294
             },
             {
               "name": "WOODZ - Drowning",
@@ -48456,7 +48618,9 @@
                 0.0633,
                 0.0649
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6887,
+              "contrast": 1.432
             },
             {
               "name": "백예린 - Antifreeze",
@@ -48478,7 +48642,9 @@
                 0.0967,
                 0.0466
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7263,
+              "contrast": 1.547
             },
             {
               "name": "최유리 - 생각을 멈추다 보면",
@@ -48500,7 +48666,9 @@
                 0.0592,
                 0.0658
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7304,
+              "contrast": 1.467
             },
             {
               "name": "코르티스 - JoyRide",
@@ -48522,7 +48690,9 @@
                 0.0722,
                 0.0433
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6231,
+              "contrast": 2.165
             },
             {
               "name": "Hearts2Hearts - The Chase",
@@ -48544,7 +48714,9 @@
                 0.0814,
                 0.06
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7036,
+              "contrast": 1.577
             },
             {
               "name": "넬 - 기억을 걷는 시간",
@@ -48566,7 +48738,9 @@
                 0.0526,
                 0.057
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7002,
+              "contrast": 2.136
             },
             {
               "name": "뉴진스 - OMG",
@@ -48588,7 +48762,9 @@
                 0.0798,
                 0.066
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.747,
+              "contrast": 1.629
             },
             {
               "name": "Post Malone & Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)",
@@ -48610,7 +48786,9 @@
                 0.0658,
                 0.0561
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7114,
+              "contrast": 1.612
             },
             {
               "name": "뉴진스 - Supernatural",
@@ -48632,7 +48810,9 @@
                 0.0694,
                 0.0544
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.746,
+              "contrast": 2.12
             },
             {
               "name": "tuki. - 晩餐歌 - Bansanka",
@@ -48654,7 +48834,9 @@
                 0.0651,
                 0.0648
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7224,
+              "contrast": 1.676
             },
             {
               "name": "한요한 - It's You (feat. NO:EL)",
@@ -48676,7 +48858,9 @@
                 0.0759,
                 0.0593
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7145,
+              "contrast": 1.282
             },
             {
               "name": "악뮤 - 소문의 낙원",
@@ -48698,7 +48882,9 @@
                 0.055,
                 0.0667
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6349,
+              "contrast": 1.84
             },
             {
               "name": "aespa - Next Level",
@@ -48720,7 +48906,9 @@
                 0.069,
                 0.054
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7074,
+              "contrast": 1.41
             },
             {
               "name": "뉴진스 - New Jeans",
@@ -48742,7 +48930,9 @@
                 0.0694,
                 0.0558
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7039,
+              "contrast": 1.448
             },
             {
               "name": "보이넥스트도어 - VIRAL",
@@ -48764,7 +48954,9 @@
                 0.0668,
                 0.0514
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6549,
+              "contrast": 1.6
             },
             {
               "name": "릴러말즈 - Trip (feat. Hannah)",
@@ -48786,7 +48978,9 @@
                 0.0683,
                 0.0662
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7529,
+              "contrast": 1.547
             },
             {
               "name": "코르티스 - What You Want",
@@ -48808,7 +49002,9 @@
                 0.0686,
                 0.0811
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7727,
+              "contrast": 1.749
             },
             {
               "name": "하모 - 아크라포빅",
@@ -48830,7 +49026,9 @@
                 0.0605,
                 0.0571
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6049,
+              "contrast": 1.768
             },
             {
               "name": "데이먼스 이어 - yours",
@@ -48852,7 +49050,9 @@
                 0.0695,
                 0.0596
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7185,
+              "contrast": 1.651
             },
             {
               "name": "권오선 - U",
@@ -48874,7 +49074,9 @@
                 0.0492,
                 0.048
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6321,
+              "contrast": 2.707
             },
             {
               "name": "아일릿 - Lucky Girl Syndrome",
@@ -48896,7 +49098,9 @@
                 0.0624,
                 0.0623
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6153,
+              "contrast": 1.851
             },
             {
               "name": "양홍원 - 사계",
@@ -48918,7 +49122,9 @@
                 0.0813,
                 0.0369
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6177,
+              "contrast": 1.968
             },
             {
               "name": "뉴진스 - Cookie",
@@ -48940,7 +49146,9 @@
                 0.0677,
                 0.0842
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7865,
+              "contrast": 2.051
             },
             {
               "name": "최예나 - 캐치 캐치",
@@ -48962,7 +49170,9 @@
                 0.0403,
                 0.0317
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6363,
+              "contrast": 1.814
             },
             {
               "name": "Justin Bieber - DAISIES",
@@ -48984,7 +49194,9 @@
                 0.0568,
                 0.0565
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6764,
+              "contrast": 1.44
             },
             {
               "name": "카더가든 - 그대 작은 나의 세상이 되어",
@@ -49006,7 +49218,9 @@
                 0.0667,
                 0.0576
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7701,
+              "contrast": 1.293
             },
             {
               "name": "aespa - Armageddon",
@@ -49028,7 +49242,9 @@
                 0.0678,
                 0.0917
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7253,
+              "contrast": 1.786
             },
             {
               "name": "NCT WISH - BOY MEETS GIRL",
@@ -49050,7 +49266,9 @@
                 0.0596,
                 0.0373
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6871,
+              "contrast": 1.339
             },
             {
               "name": "김하온 - Skrr (feat. 지젤)",
@@ -49072,7 +49290,9 @@
                 0.0865,
                 0.0451
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6676,
+              "contrast": 2.538
             },
             {
               "name": "우원재 - 시차 (feat. 로꼬 & 그레이)",
@@ -49094,7 +49314,9 @@
                 0.0781,
                 0.0542
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7393,
+              "contrast": 1.289
             },
             {
               "name": "르세라핌 - BOOMPALA",
@@ -49116,7 +49338,9 @@
                 0.1463,
                 0.03
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6853,
+              "contrast": 3.003
             },
             {
               "name": "한로로 - 너와 나",
@@ -49138,7 +49362,9 @@
                 0.0599,
                 0.0508
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6106,
+              "contrast": 1.669
             },
             {
               "name": "임현정 - 사랑은 봄비처럼...이별은 겨울비처럼",
@@ -49160,7 +49386,9 @@
                 0.0549,
                 0.066
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6829,
+              "contrast": 1.682
             },
             {
               "name": "악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
@@ -49182,7 +49410,9 @@
                 0.0618,
                 0.0754
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7098,
+              "contrast": 1.357
             },
             {
               "name": "Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
@@ -49204,7 +49434,9 @@
                 0.0627,
                 0.0671
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7183,
+              "contrast": 1.415
             },
             {
               "name": "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
@@ -49226,7 +49458,9 @@
                 0.0459,
                 0.0544
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7262,
+              "contrast": 1.917
             },
             {
               "name": "wave to earth - 사랑으로",
@@ -49248,7 +49482,9 @@
                 0.0733,
                 0.0611
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6521,
+              "contrast": 2.075
             },
             {
               "name": "잔나비 - 주저하는 연인들을 위해",
@@ -49270,7 +49506,9 @@
                 0.0614,
                 0.059
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6956,
+              "contrast": 1.509
             },
             {
               "name": "뉴진스 - Hurt",
@@ -49292,7 +49530,9 @@
                 0.0756,
                 0.0418
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6016,
+              "contrast": 2.296
             },
             {
               "name": "Oasis - Don't Look Back in Anger (Remastered)",
@@ -49314,7 +49554,9 @@
                 0.0581,
                 0.0703
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.7202,
+              "contrast": 1.222
             },
             {
               "name": "Young K - Shut The Door",
@@ -49336,7 +49578,9 @@
                 0.0888,
                 0.0499
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.72,
+              "contrast": 1.683
             },
             {
               "name": "Nerd Connection - 좋은 밤 좋은 꿈",
@@ -49358,7 +49602,9 @@
                 0.063,
                 0.0731
               ],
-              "cohort": "chart"
+              "cohort": "chart",
+              "syncopation": 0.6998,
+              "contrast": 1.565
             },
             {
               "name": "이즈나 - METRONOME",
@@ -49380,7 +49626,9 @@
                 0.0568,
                 0.0583
               ],
-              "cohort": "watchlist"
+              "cohort": "watchlist",
+              "syncopation": 0.6335,
+              "contrast": 1.697
             },
             {
               "name": "KATSEYE - Gameboy",
@@ -49402,7 +49650,9 @@
                 0.0683,
                 0.0609
               ],
-              "cohort": "watchlist"
+              "cohort": "watchlist",
+              "syncopation": 0.728,
+              "contrast": 2.318
             },
             {
               "name": "BABYMONSTER - 춤 (CHOOM)",
@@ -49424,7 +49674,9 @@
                 0.0774,
                 0.0508
               ],
-              "cohort": "watchlist"
+              "cohort": "watchlist",
+              "syncopation": 0.6841,
+              "contrast": 1.406
             },
             {
               "name": "KISS OF LIFE - Who is she",
@@ -49446,7 +49698,9 @@
                 0.065,
                 0.0364
               ],
-              "cohort": "watchlist"
+              "cohort": "watchlist",
+              "syncopation": 0.6386,
+              "contrast": 2.475
             },
             {
               "name": "Keyveatz - Key Beats",
@@ -49468,7 +49722,9 @@
                 0.0607,
                 0.0519
               ],
-              "cohort": "watchlist"
+              "cohort": "watchlist",
+              "syncopation": 0.7546,
+              "contrast": 2.12
             }
           ],
           "noMatchLabel": "해당 없음",
@@ -54264,6 +54520,27 @@
                 0.2539,
                 0.2527
               ]
+            },
+            {
+              "name": "스펙트럼 평탄도",
+              "values": [
+                null,
+                0.0154
+              ]
+            },
+            {
+              "name": "스테레오 폭",
+              "values": [
+                null,
+                0.1152
+              ]
+            },
+            {
+              "name": "싱코페이션",
+              "values": [
+                null,
+                0.6993
+              ]
             }
           ]
         }
@@ -54351,6 +54628,54 @@
                 0.3174,
                 0.2752,
                 0.2628
+              ]
+            },
+            {
+              "name": "스펙트럼 평탄도",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                0.0323
+              ]
+            },
+            {
+              "name": "스테레오 폭",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                0.1926
+              ]
+            },
+            {
+              "name": "싱코페이션",
+              "values": [
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null,
+                0.7201
               ]
             }
           ]
@@ -54467,6 +54792,27 @@
                 0.2539,
                 0.2537
               ]
+            },
+            {
+              "name": "스펙트럼 평탄도",
+              "values": [
+                null,
+                0.0153
+              ]
+            },
+            {
+              "name": "스테레오 폭",
+              "values": [
+                null,
+                0.115
+              ]
+            },
+            {
+              "name": "싱코페이션",
+              "values": [
+                null,
+                0.6989
+              ]
             }
           ]
         }
@@ -54500,6 +54846,27 @@
                 0.2462,
                 0.2462
               ]
+            },
+            {
+              "name": "스펙트럼 평탄도",
+              "values": [
+                null,
+                0.0162
+              ]
+            },
+            {
+              "name": "스테레오 폭",
+              "values": [
+                null,
+                0.1343
+              ]
+            },
+            {
+              "name": "싱코페이션",
+              "values": [
+                null,
+                0.6897
+              ]
             }
           ]
         }
@@ -54528,7 +54895,16 @@
             "저역 비율",
             "음색 밝기",
             "타악 비율",
-            "다이내믹 여유(crest)"
+            "다이내믹 여유(crest)",
+            "라우드니스",
+            "스펙트럼 평탄도",
+            "스테레오 폭",
+            "싱코페이션",
+            "마디 프로파일 대비",
+            "그리드 편차",
+            "danceability",
+            "정서가(valence)",
+            "각성도(arousal)"
           ],
           "cells": [
             [
@@ -54538,7 +54914,16 @@
               26,
               41,
               37,
-              45
+              45,
+              69,
+              45,
+              25,
+              62,
+              84,
+              88,
+              38,
+              10,
+              11
             ],
             [
               20,
@@ -54547,7 +54932,16 @@
               45,
               26,
               33,
-              39
+              39,
+              57,
+              33,
+              15,
+              84,
+              27,
+              43,
+              28,
+              18,
+              20
             ],
             [
               37,
@@ -54556,7 +54950,16 @@
               36,
               22,
               46,
-              61
+              61,
+              29,
+              33,
+              11,
+              22,
+              7,
+              31,
+              39,
+              17,
+              19
             ],
             [
               10,
@@ -54565,7 +54968,16 @@
               21,
               20,
               31,
-              71
+              71,
+              41,
+              25,
+              10,
+              79,
+              6,
+              70,
+              19,
+              25,
+              27
             ],
             [
               88,
@@ -54574,7 +54986,16 @@
               19,
               30,
               20,
-              89
+              89,
+              11,
+              26,
+              68,
+              5,
+              18,
+              65,
+              38,
+              26,
+              36
             ],
             [
               6,
@@ -54583,7 +55004,16 @@
               22,
               40,
               22,
-              23
+              23,
+              84,
+              59,
+              23,
+              76,
+              67,
+              39,
+              53,
+              57,
+              57
             ],
             [
               43,
@@ -54592,7 +55022,16 @@
               38,
               23,
               53,
-              74
+              74,
+              9,
+              19,
+              4,
+              75,
+              75,
+              87,
+              45,
+              17,
+              16
             ],
             [
               4,
@@ -54601,7 +55040,16 @@
               19,
               46,
               48,
-              68
+              68,
+              60,
+              48,
+              16,
+              48,
+              84,
+              18,
+              40,
+              19,
+              22
             ],
             [
               18,
@@ -54610,7 +55058,16 @@
               19,
               12,
               41,
-              32
+              32,
+              63,
+              24,
+              47,
+              82,
+              41,
+              64,
+              52,
+              10,
+              15
             ],
             [
               34,
@@ -54619,7 +55076,16 @@
               7,
               18,
               8,
-              91
+              91,
+              13,
+              16,
+              73,
+              97,
+              6,
+              78,
+              61,
+              25,
+              28
             ],
             [
               21,
@@ -54628,7 +55094,16 @@
               66,
               7,
               4,
-              65
+              65,
+              15,
+              3,
+              29,
+              94,
+              13,
+              58,
+              1,
+              3,
+              2
             ]
           ]
         }
@@ -54660,6 +55135,30 @@
           {
             "name": "타악 비율 · 차트",
             "value": 0.2457
+          },
+          {
+            "name": "스펙트럼 평탄도 · 워치리스트",
+            "value": 0.0254
+          },
+          {
+            "name": "스펙트럼 평탄도 · 차트",
+            "value": 0.0145
+          },
+          {
+            "name": "스테레오 폭 · 워치리스트",
+            "value": 0.1525
+          },
+          {
+            "name": "스테레오 폭 · 차트",
+            "value": 0.1101
+          },
+          {
+            "name": "싱코페이션 · 워치리스트",
+            "value": 0.6495
+          },
+          {
+            "name": "싱코페이션 · 차트",
+            "value": 0.701
           }
         ]
       }
@@ -54681,7 +55180,11 @@
       "⚠ 유형 정의에 알려진 결함이 둘 있습니다: `dembow`는 킥+스네어 **합주** 패턴인데 프로파일은 **킥만** 접으므로 무엇을 재고 있는지 불확실하고, `tresillo(16분·반마디)`는 반 마디에서 끊긴 조각이라 관용 패턴이 아닙니다(마디 끝까지 이으면 `dembow`와 같은 벡터). 이 두 유형의 곡 수는 특히 조심해서 읽으십시오",
       "⚠ 장르·악기는 **참고용이며 정확도를 아직 재지 않았습니다**(사람 라벨 대조 전). 단독 근거로 쓰지 마시고, 1순위 라벨을 그 곡의 장르로 확정하지 마십시오. 확률은 서로 배타적이지 않습니다",
       "저지클럽·뭄바톤·아마피아노는 이 태거의 라벨 목록에 없습니다 — 그 축은 리듬 패턴이 담당합니다",
-      "엔진 librosa 0.11.0 · 22050Hz 모노 · 저역 경계 150.0Hz. 엔진·설정이 바뀌면 과거 값과 비교할 수 없습니다(RULES §2)",
+      "⚠ 정서가·각성도(valence·arousal)는 **주석자들이 정의한 값**이지 곡의 물리적 성질이 아닙니다 — deam 기준이며 학습 데이터는 **K-pop이 아닙니다**. 곡 간 단일 비교는 하지 마십시오(발췌 위치가 곡마다 다릅니다)",
+      "⚠ danceability는 분류기가 낸 확률이며 **춤 실력·안무 품질·'춤추기 좋은 정도'의 판정이 아닙니다**. 차트 K-pop은 거의 전부 이 값이 천장에 붙어(실측 중앙 0.998) **코호트 안에서 곡을 가르지 못합니다** — 워치리스트 대 차트 비교 축으로 쓰지 마십시오",
+      "무드 태그는 무드와 **용도**(광고·크리스마스·영화)가 한 목록에 섞여 있고 확률도 낮아 (실측 상위 0.10~0.23) **순위로만** 읽어야 합니다",
+      "⚠ 그리드 편차는 **상당 부분이 측정 잡음입니다** — 비트 추적이 0.02초 격자라 바닥이 약 5.8ms인데 실측 중앙값이 8.19ms였습니다. 반대로 아주 큰 값은 그루브가 아니라 **템포 변화로 직선 맞춤이 실패한 것**입니다. 단독 해석하지 마십시오",
+      "엔진 librosa 0.11.0 · 22050Hz 모노 분석(스테레오 폭만 2채널) · 저역 경계 150.0Hz. 엔진·설정이 바뀌면 과거 값과 비교할 수 없습니다(RULES §2)",
       "템포는 비트 시각에 직선을 맞춰 구합니다. 이전 방식은 값이 고정 격자에만 떨어져 130BPM 부근에서 6.5BPM보다 작은 변화를 볼 수 없었습니다(101곡이 18개 값만 산출). 격자 값은 `tempo_bpm_grid`로 남겨 과거와 비교할 수 있게 했습니다",
       "워치리스트 커버리지 11/11 — BABYMONSTER, CORTIS, Hearts2Hearts, ILLIT, KATSEYE, KEYVEATZ, KISS OF LIFE, KiiiKiii"
     ],

@@ -17,7 +17,10 @@ from sonic_profile.rhythm import (
     NO_MATCH,
     TEMPLATES,
     TIE_GAP_DEFAULT,
+    RhythmUnavailable,
+    bar_profile_contrast,
     classify_rhythm,
+    syncopation_ratio,
 )
 from sonic_profile.tagging import TOP_K_INSTRUMENT
 
@@ -42,6 +45,19 @@ _SURFACED = [
     ("brightness_hz", "음색 밝기", "Hz"),
     ("percussive_ratio", "타악 비율", ""),
     ("crest_factor_db", "다이내믹 여유(crest)", "dB"),
+    # D-031 추가. `loudness_lufs`는 crest와 **같은 전제**(프리뷰 미정규화, TESTS §3)에
+    # 기대므로 그 전제가 무너지면 둘이 함께 무효가 된다.
+    ("loudness_lufs", "라우드니스", "LUFS"),
+    ("spectral_flatness", "스펙트럼 평탄도", ""),
+    ("stereo_width", "스테레오 폭", ""),
+    ("syncopation_ratio", "싱코페이션", ""),
+    ("bar_profile_contrast", "마디 프로파일 대비", "×"),
+    ("grid_deviation_ms", "그리드 편차", "ms"),
+    # C층 구성물 지표(RULES §3.1.6.2). **`_UNIT_AXES`에는 넣지 않는다** — valence는 0~1이
+    # 아니고, danceability는 K-pop에서 천장에 붙어(중앙 0.998) 분포 축으로 쓸 수 없다.
+    ("danceability", "danceability", ""),
+    ("valence", "정서가(valence)", ""),
+    ("arousal", "각성도(arousal)", ""),
 ]
 
 
@@ -102,8 +118,16 @@ def _hist(values: list[float], lo: float, hi: float, bins: int) -> list[dict[str
     ]
 
 
-# 분포 뷰에 쓰는 축 (0~1로 스케일이 같은 것끼리 묶어야 한 차트에 겹칠 수 있다)
-_UNIT_AXES = [("pulse_clarity", "펄스 명료도"), ("low_end_ratio", "저역 비율"), ("percussive_ratio", "타악 비율")]
+# 분포 뷰에 쓰는 축 (0~1로 스케일이 같은 것끼리 묶어야 한 차트에 겹칠 수 있다).
+# LUFS·ms·대비(×)·BPM·Hz는 여기 넣지 않는다 — RULES §4가 금지하는 스케일 혼합이다.
+_UNIT_AXES = [
+    ("pulse_clarity", "펄스 명료도"),
+    ("low_end_ratio", "저역 비율"),
+    ("percussive_ratio", "타악 비율"),
+    ("spectral_flatness", "스펙트럼 평탄도"),
+    ("stereo_width", "스테레오 폭"),
+    ("syncopation_ratio", "싱코페이션"),
+]
 _ALL_AXES = [(f, la) for f, la, _ in _SURFACED]
 
 
@@ -247,6 +271,41 @@ def _counts_chart(pairs: list[tuple[str, int]], title: str) -> dict[str, Any] | 
     return {"type": "bar", "title": title, "data": data}
 
 
+def backfill_derived(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """옛 스냅샷에 D-031 파생 지표를 채운다 — 저장된 `kick_bar_profile`에서 **재계산**.
+
+    오디오를 저장하지 않으므로(RULES §1) 소급 적용의 경로는 이 프로파일뿐이다. 유형
+    재계산(`_rhythm_rows`)과 같은 근거를 쓰며, **한 곳에서만** 채워 downstream(지표
+    타일·분포 차트·시리즈)이 새 스냅샷과 옛 스냅샷을 구별하지 않게 한다.
+
+    `grid_deviation_ms`는 **채울 수 없다** — 비트 시각은 저장돼 있지 않다. 0으로
+    메우지 않고 결측으로 남긴다(결측 ≠ 0, §0). 다음 콜드 실행부터 채워진다.
+
+    수집 시점에 이미 실린 값은 덮어쓰지 않는다. 두 경로가 같은 값을 내야 하며 그
+    일치는 TESTS §6.1이 대조한다.
+    """
+    out: list[dict[str, Any]] = []
+    for r in records:
+        f = r.get("features")
+        prof = f.get("kick_bar_profile") if isinstance(f, dict) else None
+        if not isinstance(f, dict) or not isinstance(prof, list) or len(prof) != BINS:
+            out.append(r)
+            continue
+        if not all(isinstance(v, (int, float)) for v in prof):
+            out.append(r)
+            continue
+        add: dict[str, Any] = {}
+        try:
+            if not isinstance(f.get("syncopation_ratio"), (int, float)):
+                add["syncopation_ratio"] = round(syncopation_ratio(prof), 4)
+            if not isinstance(f.get("bar_profile_contrast"), (int, float)):
+                add["bar_profile_contrast"] = round(bar_profile_contrast(prof), 3)
+        except RhythmUnavailable:
+            add = {}
+        out.append({**r, "features": {**f, **add}} if add else r)
+    return out
+
+
 def _rhythm_rows(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """리듬 관측 행 = (라벨, 마디 프로파일). **저장된 유형 이름은 쓰지 않는다.**
 
@@ -267,11 +326,16 @@ def _rhythm_rows(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
         if dedup in seen:
             continue
         seen.add(dedup)
+        vec = [round(float(v), 4) for v in prof]
         rows.append(
             {
                 "name": _label(r),
-                "profile": [round(float(v), 4) for v in prof],
+                "profile": vec,
                 "cohort": str(r.get("cohort") or ""),
+                # 유형과 같은 근거(저장된 프로파일)에서 **재계산**한다 — 옛 스냅샷에도
+                # 소급 적용된다(D-031). 오디오가 없어도 되는 것이 이 두 지표의 요점이다.
+                "syncopation": round(syncopation_ratio(vec), 4),
+                "contrast": round(bar_profile_contrast(vec), 3),
             }
         )
     return rows
@@ -475,6 +539,9 @@ def build_report(
     min_prob: float = MIN_PROB_DEFAULT,
     new_days: int = NEW_RELEASE_DAYS,
 ) -> dict[str, Any]:
+    # 옛 스냅샷에도 D-031 파생 지표를 채운 뒤 시작한다 — 이 한 줄 덕분에 아래 전부가
+    # 새 스냅샷과 옛 스냅샷을 구별하지 않는다(오디오 재취득 없음, RULES §1).
+    records = backfill_derived(records)
     resolved = [r for r in records if r.get("features")]
     unresolved = [r for r in records if not r.get("features")]
     n, n_un = len(resolved), len(unresolved)
@@ -671,9 +738,33 @@ def build_report(
         )
         if eng.get("attribution"):
             insights.append(f"장르·악기 모델 출처 {eng['attribution']} · {eng.get('tagger_license')}")
+    # C층 구성물 지표 — 병기가 채택 조건이다(RULES §3.1.6.2·§3.1.7 B, D-031).
+    if any((r.get("features") or {}).get("valence") is not None for r in resolved):
+        insights.append(
+            "⚠ 정서가·각성도(valence·arousal)는 **주석자들이 정의한 값**이지 곡의 물리적 성질이 "
+            f"아닙니다 — {eng.get('valence_head', 'deam')} 기준이며 학습 데이터는 **K-pop이 아닙니다**. "
+            "곡 간 단일 비교는 하지 마십시오(발췌 위치가 곡마다 다릅니다)"
+        )
+    if any((r.get("features") or {}).get("danceability") is not None for r in resolved):
+        insights.append(
+            "⚠ danceability는 분류기가 낸 확률이며 **춤 실력·안무 품질·'춤추기 좋은 정도'의 판정이 "
+            "아닙니다**. 차트 K-pop은 거의 전부 이 값이 천장에 붙어(실측 중앙 0.998) **코호트 안에서 "
+            "곡을 가르지 못합니다** — 워치리스트 대 차트 비교 축으로 쓰지 마십시오"
+        )
+    if any((r.get("features") or {}).get("moods") for r in resolved):
+        insights.append(
+            "무드 태그는 무드와 **용도**(광고·크리스마스·영화)가 한 목록에 섞여 있고 확률도 낮아 "
+            "(실측 상위 0.10~0.23) **순위로만** 읽어야 합니다"
+        )
+    if any((r.get("features") or {}).get("grid_deviation_ms") is not None for r in resolved):
+        insights.append(
+            "⚠ 그리드 편차는 **상당 부분이 측정 잡음입니다** — 비트 추적이 0.02초 격자라 바닥이 "
+            "약 5.8ms인데 실측 중앙값이 8.19ms였습니다. 반대로 아주 큰 값은 그루브가 아니라 "
+            "**템포 변화로 직선 맞춤이 실패한 것**입니다. 단독 해석하지 마십시오"
+        )
     insights.append(
-        f"엔진 {eng.get('engine')} {eng.get('engine_version')} · {eng.get('sample_rate')}Hz 모노 · "
-        f"저역 경계 {eng.get('low_hz')}Hz"
+        f"엔진 {eng.get('engine')} {eng.get('engine_version')} · {eng.get('sample_rate')}Hz "
+        f"모노 분석(스테레오 폭만 2채널) · 저역 경계 {eng.get('low_hz')}Hz"
         + (f" · 비트 {eng.get('beat_engine')}({eng.get('beat_checkpoint')})" if eng.get("beat_engine") else "")
         + ". 엔진·설정이 바뀌면 과거 값과 비교할 수 없습니다(RULES §2)"
     )

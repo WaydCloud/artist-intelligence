@@ -13,9 +13,9 @@
   2. **fandom-pulse v3.1** — IG 해시태그 화력·참여·모멘텀 + 이중 귀속 + 은어 태그 51종.
   3. **signal-bridge v2** — 3소스 조인·분류 + 원인분석 레이어(D-021).
   4. **yt-pulse v1** — 워치리스트 공식 채널 velocity·신작.
-  5. **sonic-profile v2.2** — 프리뷰 30초·**오디오 무보관** · DSP 7지표 · 리듬 패턴 · 장르/악기 태깅 · **발매일 축 트렌드**.
+  5. **sonic-profile v3** — 프리뷰 30초·**오디오 무보관** · **지표 16종**(DSP 13 + 구성물 3) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축 트렌드. 지표 3층 구조(D-031).
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
-- 최근 작업 이력: [`Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027·D-028·D-029)
+- 최근 작업 이력: [`Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · 그 전 [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027·D-028·D-029)
 
 ## 🔴 가동 중: 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 
@@ -23,7 +23,7 @@
 - **7개 레그**: spotify · apple · youtube · shazam(무료) → social(유료 $3/일) → yt → sonic(프리뷰·무보관).
 - **재개 가능**(D-018): `data/live/state/run_<date>.json`. 완주일 재실행 = no-op.
 - **가드**: PAUSE 파일 · `experiment_end=2026-08-19` · `AI_DRYRUN=1`. 중단: `schtasks /Delete /TN "AI-daily-collect" /F`.
-- ⚠ **다음 실행은 sonic 레그가 콜드 실행**이다 — 엔진 키에 `tagger_top_k_instrument`가 추가돼 캐시가 무효화됐다(D-028). 프리뷰 ~200건 재취득(무료). 정상 동작이니 놀라지 말 것.
+- ⚠ **다음 실행은 sonic 레그가 콜드 실행**이다 — 엔진 키에 `tagger_top_k_instrument`(D-028)에 이어 `feature_set`·`rhythm_feature_set`·태거 헤드(D-031)가 추가돼 캐시가 무효화됐다. 프리뷰 ~200건 재취득(무료). **정상 동작이며, 이 실행이 신규 지표 7종을 채운다.** 소요는 콜드 기준 수 분 + 태거.
 
 ## 🚫 배포하지 말 것 (2026-07-29 도메인 소유자 지시)
 
@@ -87,6 +87,25 @@
 
 - **`tresillo(16분·반마디)` 제거 여부** — 관용 패턴이 아니라 제거를 권고했으나 값은 도메인 소유자 소유라 이름만 바로잡고 남겼다(현재 5곡 배정).
 - **`dembow` 템플릿의 정체** — 킥+스네어 합주 패턴인데 프로파일은 킥만 접는다. 무엇을 재고 있는지 **스템 분리 전까지 불확실**(6곡).
+
+## 🆕 sonic-profile 지표 9종 확장 완료 (2026-07-29, D-031)
+
+도메인 소유자 지시로 DSP 6종 + 구성물 지표 3종을 추가했다. **문서(D-031·RULES §3.1.6.2·§3.1.7 B·TESTS §6) 먼저 갱신 후 구현.** 게이트 전부 초록: ruff · pyright 0 · **selftest 41/41** · schema valid · 전처리 회귀 **11/16 유지**.
+
+- **소급 적용됨(오디오 재취득 0)**: `syncopation_ratio`·`bar_profile_contrast`는 저장된 `kick_bar_profile`에서 재계산돼 **216레코드에 즉시 붙었다**(중앙 0.699 · 1.656).
+- **다음 콜드 실행에서 채워질 것**: `loudness_lufs`(BS.1770)·`spectral_flatness`·`stereo_width`·`grid_deviation_ms`·`danceability`·`moods`(56)·`valence`·`arousal`.
+- ⚠ **`engine_key`에 `feature_set`·`rhythm_feature_set`을 새로 넣었다.** 안 넣으면 캐시가 적중해 **새 지표가 빠진 옛 레코드가 되살아난다**(절단본 함정과 같은 구조). 그래서 다음 sonic 레그는 어차피 콜드였고 **지금 묶여 1회로 끝난다**.
+- 🔴 **`muse` 헤드가 퇴화해 있어 `deam`으로 교체했다.** 표본이 가장 크다는 이유로 골랐는데, 대조 표본에서 말러 5.249 · Happy 5.469 · 스크릴렉스 5.299로 **순서도 폭(0.22)도 없었다**. `deam`은 폭 3.20에 순서 정확. **TESTS §6.4에 붕괴 가드로 상설화**했다(모델 바꿀 때 반드시 돌릴 것).
+- 🔺 **판별력 없는 축은 없다고 적었다**: `danceability`는 K-pop 코호트에서 중앙 **0.998**(천장) — 모델은 건전하나 코호트 안에서 곡을 못 가른다. `grid_deviation_ms`는 중앙 8.19ms인데 beat_this 격자의 양자화 바닥이 **≈5.8ms**라 상당 부분이 측정 잡음이고, max 1,173ms는 그루브가 아니라 **직선 맞춤 실패**다. 둘 다 insights에 병기했다.
+- 새 모델 4종 추가(전부 CC BY-NC-SA — 상업 전환 시 걷어낼 목록에 포함): moodtheme · danceability · msd-musicnn · deam.
+
+## 🟢 스템 분리 — 실측 완료, **채택 승인 대기** (D-031 후속)
+
+- **Demucs 4.1.0 `htdemucs`**(4스템 @44.1kHz)로 확정. HANDOFF가 적어둔 `melband-roformer-infer`는 **2스템(보컬/반주)뿐이라 드럼이 안 나온다** — 목적에 안 맞는다.
+- **비용**: 30초당 6~7초(CPU) = 코호트 200곡 **20~25분**. **라이선스: 코드·가중치 모두 MIT** — 상업 전환 부채 아님.
+- **효과**: 중역 마디 대비 **1.17~1.41 → 1.56~2.38**(3곡 중 2곡이 저역 기준선 1.71 초과) → **하프타임 스네어가 열린다**.
+- ⚠ **하이햇 롤은 안 열린다** — 16칸 격자의 해상도 문제라 스템과 무관하다. 둘을 묶어 두지 말 것.
+- **채택 전 정할 것**: 의존성 `demucs`(+13) 승인 · 44.1kHz 스테레오 디코드 경로(현재 22050 모노) · 수집 +20분/일 · 드럼 스템 지표를 RULES에 먼저 정의.
 
 ## ⚠ sonic-profile 축에서 이어서 할 것
 

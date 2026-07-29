@@ -4,18 +4,19 @@
 > 과거 기록은 [`Handoffs/`](Handoffs/), 결정 이유는 [`docs/DECISIONS.md`](docs/DECISIONS.md).
 > 새 세션은 **이 파일 먼저** → `CLAUDE.md` → 관련 모듈 순으로 읽고 이어서 작업한다.
 
-## 현재 위치 (2026-07-29)
+## 현재 위치 (2026-07-30)
 
 - 프로젝트: `C:\Projects\artist-intelligence`. 로컬: Python 3.14.5 · Node 24 · **Windows(win32/AMD64)**. Docker Desktop/WSL2 있음.
 - **바닥 전제(D-006)**: **책임소재 불변식**(판단=책임질 인간·도구=증거에서 종료) + **기준 원장**(엔지니어=형식/도메인 소유자=값). 정본 `DOMAIN.md §0`·`AGENTS.md §2.1·§5`. **모든 신규 모듈 구속.**
-- **모듈 5종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통:
+- **모듈 6종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통:
   1. **chart-history v5** — 차트 5렌즈(Spotify·Apple·YouTube·Shazam·멜론 세션보조) · 통합 진입 지도 · `tracks` 명령(D-007).
   2. **fandom-pulse v3.1** — IG 해시태그 화력·참여·모멘텀 + 이중 귀속 + 은어 태그 51종.
   3. **signal-bridge v2** — 3소스 조인·분류 + 원인분석 레이어(D-021).
   4. **yt-pulse v1** — 워치리스트 공식 채널 velocity·신작.
   5. **sonic-profile v4** — 프리뷰 30초·**오디오 무보관** · **스칼라 축 71종 계산·저장 / 타일 24종 노출**(D-032) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축. 지표 3층 구조(D-031) + 축 카탈로그 100항([`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)).
+  6. **genre-impulse v1** (2026-07-30, D-034/D-035) — 임펄스 원장 × 일일 sonic 코호트 대조 모니터. 검출 규칙 1건(hyperpop-texture, A2.1 실측 근거)·daily_collect 3.7 편입. 원장: `docs/CASEBOOK-genre-impulse.md` + `data/research/genre-impulse/impulses/`.
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
-- 최근 작업 이력: [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
+- 최근 작업 이력: [`Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md`](Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md) (**장르 임펄스 기획→모니터 관통, D-033~D-035**) · [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
 ## 🟡 해소 관측 (2026-07-30 새벽): av 차단이 자연 해소 — 단 원인 불명, 재발 감시
 
@@ -62,29 +63,26 @@
 - ✅ **남은 구멍 메움(2026-07-29, PR #4 대기)**: `packages/signal-series/` 신설 — SPEC 정본의 기계검증형 스키마 + `scripts/validate_series.py`(길이·정렬·roster 일관성까지) + CI `data-contracts` 게이트(픽스처 4종 전수, 0건=실패). 음성 케이스 5종으로 게이트가 실제로 잡는 것 확인. **부수 발견**: `sonic_series.json`이 계약 이탈(unit 빈 문자열·provenance 3필드 누락) → 방출부를 이 브랜치(PR #3)에서 수정, 재생성 산출 게이트 통과.
 - **재현 방법**(다음에 툴 버전을 올릴 때 쓸 것): CI와 같은 패키지만 담은 격리 venv를 만들어 거기서 pyright를 돌린다. 개발자 PC의 전역 환경에서 확인한 "0건"은 CI를 예측하지 못한다 — 이번에 그걸로 한 번 틀렸다.
 
-## ⏳ 열린 PR 2건 — 도메인 소유자 머지 결정 대기 (2026-07-29)
+## ⏳ 열린 PR 3건 — 도메인 소유자 머지 결정 대기 (2026-07-30)
 
 - **[PR #3](https://github.com/WaydCloud/artist-intelligence/pull/3)** `sonic-metrics-d031` — D-031(지표 9종) + D-032(T0 축 37종·카탈로그 100항) + AGENTS §7 육안 확인 기록 + sonic signals 방출부 계약 수정.
+- **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** `genre-impulse-plan` — 장르 임펄스 기획~모니터 v1 전체(23커밋+). ⚠ **베이스가 PR #3 브랜치**(스택) — #3 먼저 머지(squash면 이후 #5 리베이스 필요 가능).
 - **[PR #4](https://github.com/WaydCloud/artist-intelligence/pull/4)** `signal-series-schema` — signal-series JSON 스키마 패키지 + 검증기 + CI 게이트(D-030 잔여 구멍). PR #3과 파일 겹침 없음 — 순서 무관 머지 가능.
 
-## 🧭 다음 행선지 — 장르 임펄스: **Phase A 1차 조사 완료 (케이스 10건)** → 교차 검증·A2·기준선 확정
+## 🧭 다음 행선지 — 장르 임펄스 모니터 가동 후 확장 (재개점)
 
-> 2026-07-29 하루에 진행: ①②③ 기획(D-033) → 도메인 소유자 "깔끔하게 진행" 승인 → **Phase A1·A3·A4 1차 완료**. 정본: [`docs/PLAN-genre-impulse.md`](docs/PLAN-genre-impulse.md)(기획) · [`docs/CASEBOOK-genre-impulse.md`](docs/CASEBOOK-genre-impulse.md)(**케이스 10건 + 종합** — 전부 웹 조사 1차, `미검증` 등급). 브랜치 `genre-impulse-plan`(PR #3·#4와 별도). **Phase C(모니터 구현)는 여전히 착수 금지** — 교차 검증 + 도메인 소유자 승인 전.
+> **상태**: 기획(D-033)→조사(케이스북 10건+교차 검증+A2.1 실측)→원장(레코드 10건)→**모니터 v1 가동**(daily_collect 3.7 편입 — 다음 09:00부터 대시보드 탭 자동 갱신)까지 관통 완료. 결정 D-033(+보완⑤⑥)·D-034·D-035. 세션 상세·함정은 [`Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md`](Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md).
+> **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** = 이 작업 전체(23커밋), ⚠ **베이스가 PR #3 브랜치**(스택) — #3 squash 머지 시 리베이스 필요 가능.
 
-- **프레임(D-033)**: 시장 = 이중 축 매트릭스(지리×확산) · 임펄스 = 특질 벡터+장르명 라벨 · 기준선 = 과거 사례에서 도출 · 소급 = 미국 외 경로 포함.
-- **핵심 발견**(CASEBOOK §종합): ① 글로벌 주류 확정→한국 주류 시차가 12개월(2016)→2~6개월(2023)로 **압축, 최근은 사실상 병렬**(빌보드는 확증 신호지 조기 신호가 아님) ② 조기 신호 1순위 = **발원지 숏폼 바이럴 파도**(12~34개월 선행, 현 수집망 없음), 3순위 = **프로듀서 크레딧 이동**(250·FRNK·LDN Noise 패턴) ③ **한국 선행 사례 3건**(레게톤·NJS·이지리스닝) — 양방향 관측 필요 ④ 음성 사례에서 "임펄스가 죽는 조건" 5개 추출(상품 핵심 충돌 시 요소만 수입 등) ⑤ 수용 창은 첫 수용→포화 13~15개월로 짧다.
-- 🔴 **증언 검증**: "저지클럽 빌보드 먼저" **검증됨**(2022-06/10 → 한국 2022-12). "2021 국내 강세"는 **확인 실패**(실질 확산 2022 하반기~2023) — **도메인 소유자에게 2021년 관측의 실체 확인 필요**(차트 밖 씬 관측이었을 가능성).
-- **✅ 교차 검증 1차 완료(2026-07-29 밤)**: 약출처 주장 18건 재확인 → **반증 3**("Push Back"은 ENHYPEN 아닌 신인 AtHeart 곡 · '이지리스닝' 명명 기점은 2023이 아니라 **어도어 데뷔 소개문 2022-07**(공급자 명명은 현상과 동시, 언론만 후행 — A4 신호 순위 수정됨) · 트로피컬 한국 첫 수용은 **f(x) "4 Walls" 2015-10**로 7개월 앞당김) · 격상 5(Attention=IZM 원출처·Seven=Forbes 프로듀서 인터뷰·Spell=보도자료 명시·Ditto·아마피아노 씬 증거는 얼루어 2023-08-30 DJ 인터뷰로 앞당김) · 확정 5(Vibe 2019-03-29·Hit Vibes 2013-05-31·가시나 2주차 1위·Sticky·보라빛밤 주간 #5) · 추정 유지 3(EK/수퍼비는 **근거 사용 금지**로 강등·Smoke·유빈 숙녀는 주간 톱100 미진입 판명).
-- **🔄 D-033 보완⑤(2026-07-29 밤, 도메인 소유자)**: 수용은 3모드 — 전면 수용 / **요소 차용**(명시적 목표 산출물: "하이퍼팝·드릴이 뜬다 → 요소를 빌린다 → 새 사운드 정체성") / 차단. 하이퍼팝·드릴을 음성→요소 차용 모드로 재분류하고 **요소 차용 타임라인 2차 조사 완료**(CASEBOOK CASE 9·10 하단): 하이퍼팝 → Savage(가온 2위, 1위 표기 정정) → **aespa '쇠맛' 정체성화**(2024-05 언론 공식화 — 요소→은어→표제화 경로), 드릴 → **ENHYPEN "Future Perfect"(2022-07)가 명시적 드릴 타이틀로 실존**(1차 조사의 "미발견" 뒤집힘) 단 1회 실험 후 정체성화 미발생. 가설 H1~H5 산출 — 특히 **H4(정체성화 = 요소×세계관 결합)·H5(정체성화 지표 = 팬덤 은어의 언론 공식화 → fandom-pulse 은어 태그 자산과 직결)**.
-- **✅ A2.1 1차 실측 완료(2026-07-30)**: 89곡 해석(오매칭 12건 수동 교정·커버리지 공백 6곡 확정). **판정: 하이퍼팝 텍스처 = `organic_ratio`↓+`spectral_flatness`↑+`over_unity`↑ 조합으로 부분 검출 가능**(Savage: organic P2.2·flatness P87.9·over_unity P80.2 / Whiplash: attack P96.7·over_unity P100) · **드릴 = 사전 등록 축 전부 중앙 — 축 공백 실증**(리듬 축 부재 → 스템 분리·슬라이딩 808 축의 정량 근거). 판정표 = CASEBOOK §A2.1, 수치 = `data/research/genre-impulse/signature_merged.json`. 비교 모집단이 2026-07 라이브 코호트(동시대 아님)인 근사 병기.
-- **✅ Phase B 완료(2026-07-30)**: 임펄스 레코드 10건(`data/research/genre-impulse/impulses/*.json`) 전건 스키마 검증 통과(독립 재검증 포함). 형식: 3모드·확실성 6등급·요소차용 4단계(`stage_reached`)·정체성화(H4/H5 필드)·사전 등록 예측 축·판별 잠금. 교차 검증 정정 후 값만 사용. 모드 분포: full 6 · element 3(hyperpop=identity 도달, drill=title, reggaeton=element→full 전환 중) · in-progress 1(amapiano). **PLAN §7 기준 Phase A(A2 본편 잔여 제외)·B 완료 — Phase C 착수는 도메인 소유자 승인 대기.**
-- **✅ D-034 4승인(2026-07-30 ASK)**: Phase C 착수+PR · 이중 기준선 · 스템 분리 · 수집망 3종(해외 이력·크레딧 무료 + 틱톡 유료 검토). **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** 생성(베이스=sonic-metrics-d031 스택 — #3 머지 시 리베이스 필요 가능).
-- **✅ Phase C v1 구현 완료(2026-07-30)**: `modules/genre-impulse/` — SPEC·RULES·TESTS 먼저, CLI(`analyze`·`selftest`) 구현. **selftest 13/13 · ruff·pyright 0 · report-schema 유효.** 검출 규칙 1건(`hyperpop-texture` = organic_ratio≤P20 AND (flatness≥P80 OR over_unity≥P80), A2.1 실측 근거·임계 CLI 노출). **실데이터 첫 실행: 라이브 코호트에서 11곡 매치 — 1위가 최예나 '캐치 캐치'(케이스북이 독립 확인한 하이퍼팝 귀속 곡, sanity 확인) + 워치리스트 3팀(코르티스·키키·Keyveatz).** ⚠ sonic_profile.derived import는 D-007의 문서화된 한시 예외(RULES §3 — packages/ 승격은 별도 승인). daily_collect 편입은 미실시(별도 결정).
-- **🆕 틱톡 레그 검토 완료**: [`docs/REVIEW-tiktok-leg.md`](docs/REVIEW-tiktok-leg.md) — 핵심: Billboard TikTok Top 50 **2025-03 중단**(라이브 소스 소멸), Research API 부적격(상업+지역). 권고 1안 = Apify 3액터 월 $8~12(현 소셜 레그의 1/9). **건별 확인 5항목(비용 상한·ToS 수용·계정·워치리스트 소유·소액 스모크) 도메인 소유자 대기.**
-- **✅ D-035 4확정(2026-07-30 ASK)**: 틱톡 1안(월 상한 $15·ToS 수용·스모크 승인) · 빌보드 GitHub 데이터셋 채택(사실 필드만·3자 대조 후) · genre-impulse **데일리 편입 완료**(daily_collect 3.7 단계, 파스 검증) · 틱톡 워치 소유=초안 엔지니어·확정 A&R.
-- **✅ 틱톡 스모크 통과(~$0.01)**: `khadinakbar/tiktok-sound-scraper`의 `userCount` 실증 — "luther" 1,427,352 반환. apidojo는 포스트 단위뿐이라 **부적합 확정**. 워치리스트는 music URL/clipId 기반으로 — 상세 [`docs/REVIEW-tiktok-leg.md`](docs/REVIEW-tiktok-leg.md) §스모크.
-- **다음 액션**: ① **틱톡 워치리스트 초안**(사운드 50·태그 20, music URL 기반 — 임펄스 원장·팬덤 은어 기반 초안 → A&R 확정) + 수집 스크립트(액터 교체 가능 구조) ② **빌보드 이력 파이프라인**(GitHub 데이터셋 → 케이스 궤적·US 코호트 소급, 위키·acharts 3자 대조 스모크 먼저) ③ 스템 분리 구현(sonic-profile RULES 정의 먼저 — D-034 ③) ④ A2 본편·동시대 KR 코호트(Wayback 멜론) ⑤ "2021 저지클럽 관측" 인터뷰 ⑥ 다음 sonic 레그 av 재발 확인.
+다음 세션 작업 큐 (우선순위순):
 
+1. **틱톡 레그 가동**: 워치리스트 v0([`docs/DRAFT-tiktok-watchlist-v0.md`](docs/DRAFT-tiktok-watchlist-v0.md)) **A&R 확정 대기**(검토 포인트 8건) → 수집 스크립트 구축(khadinakbar 액터 — userCount 실증됨, 액터 교체 가능 구조, **월 상한 $15 가드**, url_pending 30건은 첫 수집 시 검색 모드로 해소). D-035 ① 참조.
+2. **빌보드 이력 파이프라인**: GitHub `mhollingshead/billboard-hot-100` 채택 확정(D-035 ②) — 위키·acharts **3자 대조 스모크 먼저**, 그다음 케이스 궤적 재구성 + US 동시대 코호트 소급. 소스 지도: [`docs/REVIEW-chart-history-sources.md`](docs/REVIEW-chart-history-sources.md).
+3. **스템 분리 구현**(D-034 ③ 승인됨): sonic-profile RULES에 드럼/보컬 스템 지표 **정의 먼저** → demucs 의존성 → 엔진 키 갱신·콜드 1회. 열리는 것: 드릴 슬라이딩 808·저지클럽 스네어·보컬 처리 축 → genre-impulse 규칙 추가(v1.1).
+4. **A2 본편**: 케이스별 원형↔한국 서명 비교(데이터 `data/research/genre-impulse/signature_merged.json` 확보됨) + 동시대 KR 코호트(Wayback 멜론 스냅샷 — CDX 사전 조회).
+5. **기타**: 크레딧 레지스트리 설계(D-034 ④) · "2021 저지클럽 관측" 실체 도메인 소유자 인터뷰(케이스북 CASE 1 한계 1) · genre-impulse 대시보드 탭 라이트/다크 육안 확인(AGENTS §7 — 신규 탭 첫 렌더 후).
+
+체크: ① **다음 sonic 레그에서 av 재발 여부**(위 🟡 참조 — 신곡 unresolved 다수면 재발) ② genre-impulse 데일리 첫 자동 실행 로그 확인.
 ## ⚠ 재개 첫 액션
 
 0. **✅ 완료 — PR #1 머지됨**(2026-07-29, squash → main `2ad0319`). main CI 5잡 전부 success. 브랜치 삭제됨.

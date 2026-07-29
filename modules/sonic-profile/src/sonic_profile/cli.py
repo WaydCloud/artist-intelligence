@@ -77,6 +77,53 @@ def _snapshot_paths(inputs: list[str]) -> list[Path]:
     return out
 
 
+def _alias_map(acts: list[dict[str, Any]]) -> dict[str, str]:
+    """워치리스트 별칭(casefold) → 정본 키. 코호트 키 해석용(RULES §1 정체성)."""
+    amap: dict[str, str] = {}
+    for act in acts:
+        key = str(act.get("key") or "")
+        if not key:
+            continue
+        for al in [key, *(str(a) for a in (act.get("aliases") or []))]:
+            amap[al.casefold()] = key
+    return amap
+
+
+def _merge_dup(a: dict[str, Any], b: dict[str, Any]) -> dict[str, Any]:
+    """코호트·워치리스트 양 경로로 이중 저장된 같은 관측을 한 레코드로(RULES §1).
+    워치리스트 레코드(정본 키)를 몸통으로, 차트 필드를 보존한다."""
+    chart = a if a.get("cohort") == "chart" else (b if b.get("cohort") == "chart" else None)
+    watch = a if a.get("cohort") == "watchlist" else (b if b.get("cohort") == "watchlist" else None)
+    if chart is None or watch is None:
+        return a  # 같은 역할의 중복(비정상 입력) — 먼저 온 것 유지
+    merged = dict(watch)
+    for f in ("chart_rank", "chart_market", "chart_platform", "chart_label"):
+        if chart.get(f) is not None:
+            merged[f] = chart[f]
+    if not merged.get("features") and chart.get("features"):
+        merged["features"] = chart["features"]
+    return merged
+
+
+def _dedupe(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """(source, track_id, observed_date) 기준 병합 — 멱등. fetch(저장 전)와
+    _load(과거 스냅샷 방어) 양쪽에서 쓴다(RULES §1 정체성)."""
+    index: dict[tuple[Any, Any, Any], int] = {}
+    out: list[dict[str, Any]] = []
+    for r in records:
+        tid = r.get("track_id")
+        if not tid:
+            out.append(r)
+            continue
+        ident = (r.get("source"), tid, r.get("observed_date"))
+        if ident not in index:
+            index[ident] = len(out)
+            out.append(r)
+        else:
+            out[index[ident]] = _merge_dup(out[index[ident]], r)
+    return out
+
+
 def _load(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     records: list[dict[str, Any]] = []
     prov: dict[str, Any] = {}
@@ -85,7 +132,7 @@ def _load(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         if isinstance(doc, dict):
             records.extend(r for r in (doc.get("records") or []) if isinstance(r, dict))
             prov = prov or (doc.get("provenance") or {})
-    return records, prov
+    return _dedupe(records), prov
 
 
 def _cache_load(path: Path, engine_key: str) -> dict[str, Any]:
@@ -165,13 +212,20 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         time.sleep(args.delay)
         return feats
 
+    doc = json.loads(Path(args.watchlist).read_text(encoding="utf-8"))
+    acts = [a for a in (doc.get("artists") or []) if isinstance(a, dict) and a.get("key")]
+    amap = _alias_map(acts)
+
     # ── 코호트: 차트 트랙 (분포를 만들려면 모집단이 있어야 한다)
     if args.cohort:
         cdoc = json.loads(Path(args.cohort).read_text(encoding="utf-8"))
         for t in cdoc.get("tracks") or []:
             artist, title = str(t.get("artist") or ""), str(t.get("title") or "")
+            # 키는 정본으로 해석해 넣는다(RULES §1 정체성) — 아니면 시리즈에서
+            # 같은 팀이 차트 표기('키키')와 정본 키('KiiiKiii')로 쪼개진다.
             rec: dict[str, Any] = {
-                "key": artist,
+                "key": amap.get(artist.casefold(), artist),
+                "chart_label": artist,
                 "query": f"{artist} - {title}",
                 "observed_date": today,
                 "cohort": "chart",
@@ -200,8 +254,6 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         ok_c = sum(1 for r in records if r.get("features"))
         print(f"  코호트(차트): {ok_c}/{len(records)} 해석 · 캐시 적중 {cache_hits}")
 
-    doc = json.loads(Path(args.watchlist).read_text(encoding="utf-8"))
-    acts = [a for a in (doc.get("artists") or []) if isinstance(a, dict) and a.get("key")]
     for act in acts:
         key = str(act["key"])
         aliases = [str(a) for a in (act.get("aliases") or [])] or [key]
@@ -231,6 +283,9 @@ def cmd_fetch(args: argparse.Namespace) -> int:
             rec["unresolved"] = last
             print(f"  {key}: 미해석 ({last})")
         records.append(rec)
+
+    # 같은 트랙이 코호트·워치리스트 양 경로로 잡히면 한 레코드로(RULES §1 정체성).
+    records = _dedupe(records)
 
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -694,6 +749,23 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     db = np.arange(7, dtype=np.float64) * (64 * HOP_R / SR)
     ss = rhythm_self_similarity(env_rep, SR, db)
     check("마디 자기유사도: 같은 패턴 반복 → 높음", ss is not None and ss > 0.9, f"{ss}")
+
+    # ── 레코드 정체성·병합 (RULES §1) — 이중 저장이 분포를 이중 가중하던 결함의 가드
+    amap = _alias_map([{"key": "KiiiKiii", "aliases": ["키키"]}])
+    check("별칭 해석: 차트 표기 → 정본 키 (casefold)", amap.get("키키") == "KiiiKiii", f"{amap}")
+    chart_rec = {"key": "KiiiKiii", "chart_label": "키키", "cohort": "chart", "chart_rank": 8,
+                 "source": "apple", "track_id": "t1", "observed_date": "2026-07-29",
+                 "features": {"tempo_bpm": 120}}
+    watch_rec = {"key": "KiiiKiii", "cohort": "watchlist", "source": "apple", "track_id": "t1",
+                 "observed_date": "2026-07-29", "features": {"tempo_bpm": 120}}
+    other_day = {**watch_rec, "observed_date": "2026-07-28"}
+    merged = _dedupe([chart_rec, watch_rec, other_day])
+    check("병합: 같은 (source,track_id,date) 2건 → 1건 (다른 날은 유지)", len(merged) == 2,
+          f"{len(merged)}")
+    m = merged[0]
+    check("병합 결과: cohort=watchlist + 차트 필드 보존", m.get("cohort") == "watchlist"
+          and m.get("chart_rank") == 8 and m.get("chart_label") == "키키", f"{m.get('cohort')}·{m.get('chart_rank')}")
+    check("병합 멱등성: 재적용해도 불변", _dedupe(merged) == merged)
 
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0

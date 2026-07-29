@@ -616,7 +616,9 @@ def build_report(
     # ── 트렌드·비교 뷰 (SPEC §2). 단면 순위만으로는 트렌드가 보이지 않는다.
     latest = max((str(r.get("observed_date") or "") for r in resolved), default="")
     today_rec = [r for r in resolved if str(r.get("observed_date") or "") == latest]
-    cohort = [r for r in today_rec if r.get("cohort") == "chart"]
+    # 차트 모집단은 `chart_rank` 보유로 선별한다(RULES §1 정체성) — 워치리스트와
+    # 병합된 이중 소속 레코드(cohort="watchlist" + chart_rank)도 모집단에 한 번 든다.
+    cohort = [r for r in today_rec if r.get("cohort") == "chart" or r.get("chart_rank") is not None]
     focus = [r for r in today_rec if r.get("cohort") == "watchlist"]
     # 고정 코호트 = **최초 관측일에 잡힌 트랙 집합**. 이 집합은 날마다 바뀌지 않으므로
     # 여기서 움직이는 값은 "차트 구성이 바뀐 것"이 아니라 "이 곡들"의 이야기다(D-022·D-023).

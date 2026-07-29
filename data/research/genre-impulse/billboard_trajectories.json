@@ -1,0 +1,2627 @@
+{
+  "note": "Billboard Hot 100 케이스 궤적 (D-035 ② · 파생 사실 필드만). charted=false는 **아래 window 안에서** Hot 100에 없었다는 뜻이다 — 윈도가 전 이력이 아니면 발매 시점이 윈도 밖일 수 있으니 window를 먼저 볼 것. 차트에 없다는 것이 '영향이 없었다'는 뜻도 아니다: 발원지 바이럴 층은 Hot 100에 원리적으로 안 잡힌다(케이스북의 리드타임 논지 그대로). 매칭은 제목·아티스트 정규화 기반이라 크레딧 표기가 크게 다르면 놓칠 수 있다 — charted=false는 '못 찾았다'를 포함한다.",
+  "window": {
+    "from": "1958-08-04",
+    "to": "2026-08-01",
+    "weeks": 3548
+  },
+  "results": [
+    {
+      "artist": "Cookiee Kawaii",
+      "title": "Vibe (If I Back It Up)",
+      "case": "jersey-club",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Lil Uzi Vert",
+      "title": "Just Wanna Rock",
+      "case": "jersey-club",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2022-10-29",
+      "exit_date": "2023-06-03",
+      "weeks_in_window": 32,
+      "weeks_on_chart_reported": 32,
+      "peak_position": 10,
+      "peak_date": "2023-02-11",
+      "ranks": [
+        {
+          "date": "2022-10-29",
+          "rank": 86
+        },
+        {
+          "date": "2022-11-05",
+          "rank": 48
+        },
+        {
+          "date": "2022-11-12",
+          "rank": 48
+        },
+        {
+          "date": "2022-11-19",
+          "rank": 44
+        },
+        {
+          "date": "2022-11-26",
+          "rank": 47
+        },
+        {
+          "date": "2022-12-03",
+          "rank": 21
+        },
+        {
+          "date": "2022-12-10",
+          "rank": 35
+        },
+        {
+          "date": "2022-12-17",
+          "rank": 51
+        },
+        {
+          "date": "2022-12-24",
+          "rank": 60
+        },
+        {
+          "date": "2022-12-31",
+          "rank": 55
+        },
+        {
+          "date": "2023-01-07",
+          "rank": 53
+        },
+        {
+          "date": "2023-01-14",
+          "rank": 16
+        },
+        {
+          "date": "2023-01-21",
+          "rank": 16
+        },
+        {
+          "date": "2023-01-28",
+          "rank": 16
+        },
+        {
+          "date": "2023-02-04",
+          "rank": 12
+        },
+        {
+          "date": "2023-02-11",
+          "rank": 10
+        },
+        {
+          "date": "2023-02-18",
+          "rank": 12
+        },
+        {
+          "date": "2023-02-25",
+          "rank": 11
+        },
+        {
+          "date": "2023-03-04",
+          "rank": 11
+        },
+        {
+          "date": "2023-03-11",
+          "rank": 12
+        },
+        {
+          "date": "2023-03-18",
+          "rank": 22
+        },
+        {
+          "date": "2023-03-25",
+          "rank": 18
+        },
+        {
+          "date": "2023-04-01",
+          "rank": 19
+        },
+        {
+          "date": "2023-04-08",
+          "rank": 21
+        },
+        {
+          "date": "2023-04-15",
+          "rank": 25
+        },
+        {
+          "date": "2023-04-22",
+          "rank": 30
+        },
+        {
+          "date": "2023-04-29",
+          "rank": 36
+        },
+        {
+          "date": "2023-05-06",
+          "rank": 39
+        },
+        {
+          "date": "2023-05-13",
+          "rank": 41
+        },
+        {
+          "date": "2023-05-20",
+          "rank": 38
+        },
+        {
+          "date": "2023-05-27",
+          "rank": 43
+        },
+        {
+          "date": "2023-06-03",
+          "rank": 50
+        }
+      ]
+    },
+    {
+      "artist": "Drake",
+      "title": "Sticky",
+      "case": "jersey-club",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2022-07-02",
+      "exit_date": "2022-09-24",
+      "weeks_in_window": 13,
+      "weeks_on_chart_reported": 13,
+      "peak_position": 6,
+      "peak_date": "2022-07-02",
+      "ranks": [
+        {
+          "date": "2022-07-02",
+          "rank": 6
+        },
+        {
+          "date": "2022-07-09",
+          "rank": 17
+        },
+        {
+          "date": "2022-07-16",
+          "rank": 24
+        },
+        {
+          "date": "2022-07-23",
+          "rank": 28
+        },
+        {
+          "date": "2022-07-30",
+          "rank": 32
+        },
+        {
+          "date": "2022-08-06",
+          "rank": 36
+        },
+        {
+          "date": "2022-08-13",
+          "rank": 39
+        },
+        {
+          "date": "2022-08-20",
+          "rank": 36
+        },
+        {
+          "date": "2022-08-27",
+          "rank": 41
+        },
+        {
+          "date": "2022-09-03",
+          "rank": 46
+        },
+        {
+          "date": "2022-09-10",
+          "rank": 56
+        },
+        {
+          "date": "2022-09-17",
+          "rank": 69
+        },
+        {
+          "date": "2022-09-24",
+          "rank": 84
+        }
+      ]
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Boy's a liar Pt. 2",
+      "case": "jersey-club",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2023-02-18",
+      "exit_date": "2023-07-15",
+      "weeks_in_window": 22,
+      "weeks_on_chart_reported": 22,
+      "peak_position": 3,
+      "peak_date": "2023-03-04",
+      "ranks": [
+        {
+          "date": "2023-02-18",
+          "rank": 14
+        },
+        {
+          "date": "2023-02-25",
+          "rank": 4
+        },
+        {
+          "date": "2023-03-04",
+          "rank": 3
+        },
+        {
+          "date": "2023-03-11",
+          "rank": 4
+        },
+        {
+          "date": "2023-03-18",
+          "rank": 5
+        },
+        {
+          "date": "2023-03-25",
+          "rank": 6
+        },
+        {
+          "date": "2023-04-01",
+          "rank": 6
+        },
+        {
+          "date": "2023-04-08",
+          "rank": 7
+        },
+        {
+          "date": "2023-04-15",
+          "rank": 6
+        },
+        {
+          "date": "2023-04-22",
+          "rank": 8
+        },
+        {
+          "date": "2023-04-29",
+          "rank": 10
+        },
+        {
+          "date": "2023-05-06",
+          "rank": 9
+        },
+        {
+          "date": "2023-05-13",
+          "rank": 9
+        },
+        {
+          "date": "2023-05-20",
+          "rank": 12
+        },
+        {
+          "date": "2023-05-27",
+          "rank": 13
+        },
+        {
+          "date": "2023-06-03",
+          "rank": 15
+        },
+        {
+          "date": "2023-06-10",
+          "rank": 17
+        },
+        {
+          "date": "2023-06-17",
+          "rank": 26
+        },
+        {
+          "date": "2023-06-24",
+          "rank": 27
+        },
+        {
+          "date": "2023-07-01",
+          "rank": 37
+        },
+        {
+          "date": "2023-07-08",
+          "rank": 43
+        },
+        {
+          "date": "2023-07-15",
+          "rank": 44
+        }
+      ]
+    },
+    {
+      "artist": "UNIIQU3",
+      "title": "Microdosing",
+      "case": "jersey-club",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Ditto",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-01-21",
+      "exit_date": "2023-02-18",
+      "weeks_in_window": 5,
+      "weeks_on_chart_reported": 5,
+      "peak_position": 82,
+      "peak_date": "2023-02-18",
+      "ranks": [
+        {
+          "date": "2023-01-21",
+          "rank": 96
+        },
+        {
+          "date": "2023-01-28",
+          "rank": 85
+        },
+        {
+          "date": "2023-02-04",
+          "rank": 89
+        },
+        {
+          "date": "2023-02-11",
+          "rank": 90
+        },
+        {
+          "date": "2023-02-18",
+          "rank": 82
+        }
+      ]
+    },
+    {
+      "artist": "NewJeans",
+      "title": "OMG",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-01-28",
+      "exit_date": "2023-03-04",
+      "weeks_in_window": 6,
+      "weeks_on_chart_reported": 6,
+      "peak_position": 74,
+      "peak_date": "2023-02-18",
+      "ranks": [
+        {
+          "date": "2023-01-28",
+          "rank": 91
+        },
+        {
+          "date": "2023-02-04",
+          "rank": 79
+        },
+        {
+          "date": "2023-02-11",
+          "rank": 77
+        },
+        {
+          "date": "2023-02-18",
+          "rank": 74
+        },
+        {
+          "date": "2023-02-25",
+          "rank": 76
+        },
+        {
+          "date": "2023-03-04",
+          "rank": 89
+        }
+      ]
+    },
+    {
+      "artist": "NewJeans",
+      "title": "ETA",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-08-05",
+      "exit_date": "2023-08-05",
+      "weeks_in_window": 1,
+      "weeks_on_chart_reported": 1,
+      "peak_position": 81,
+      "peak_date": "2023-08-05",
+      "ranks": [
+        {
+          "date": "2023-08-05",
+          "rank": 81
+        }
+      ]
+    },
+    {
+      "artist": "SEVENTEEN",
+      "title": "Super 손오공",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "LE SSERAFIM",
+      "title": "Eve, Psyche & the Bluebeard’s wife",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "BABYMONSTER",
+      "title": "BATTER UP",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "XUM",
+      "title": "DDALALA",
+      "case": "jersey-club",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "AJ Tracey",
+      "title": "Ladbroke Grove",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Just for me",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Break It Off",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "venbee",
+      "title": "messy in heaven",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Nia Archives",
+      "title": "Forbidden Feelingz",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Chase & Status",
+      "title": "Baddadan",
+      "case": "ukg-dnb",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Super Shy",
+      "case": "ukg-dnb",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-07-22",
+      "exit_date": "2023-09-09",
+      "weeks_in_window": 8,
+      "weeks_on_chart_reported": 8,
+      "peak_position": 48,
+      "peak_date": "2023-08-05",
+      "ranks": [
+        {
+          "date": "2023-07-22",
+          "rank": 66
+        },
+        {
+          "date": "2023-07-29",
+          "rank": 64
+        },
+        {
+          "date": "2023-08-05",
+          "rank": 48
+        },
+        {
+          "date": "2023-08-12",
+          "rank": 77
+        },
+        {
+          "date": "2023-08-19",
+          "rank": 66
+        },
+        {
+          "date": "2023-08-26",
+          "rank": 79
+        },
+        {
+          "date": "2023-09-02",
+          "rank": 80
+        },
+        {
+          "date": "2023-09-09",
+          "rank": 95
+        }
+      ]
+    },
+    {
+      "artist": "NewJeans",
+      "title": "New Jeans",
+      "case": "ukg-dnb",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Cool With You",
+      "case": "ukg-dnb",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-08-05",
+      "exit_date": "2023-08-05",
+      "weeks_in_window": 1,
+      "weeks_on_chart_reported": 1,
+      "peak_position": 93,
+      "peak_date": "2023-08-05",
+      "ranks": [
+        {
+          "date": "2023-08-05",
+          "rank": 93
+        }
+      ]
+    },
+    {
+      "artist": "NewJeans",
+      "title": "ASAP",
+      "case": "ukg-dnb",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Jung Kook",
+      "title": "Seven",
+      "case": "ukg-dnb",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-07-29",
+      "exit_date": "2023-11-25",
+      "weeks_in_window": 15,
+      "weeks_on_chart_reported": 15,
+      "peak_position": 1,
+      "peak_date": "2023-07-29",
+      "ranks": [
+        {
+          "date": "2023-07-29",
+          "rank": 1
+        },
+        {
+          "date": "2023-08-05",
+          "rank": 9
+        },
+        {
+          "date": "2023-08-12",
+          "rank": 30
+        },
+        {
+          "date": "2023-08-19",
+          "rank": 28
+        },
+        {
+          "date": "2023-08-26",
+          "rank": 30
+        },
+        {
+          "date": "2023-09-02",
+          "rank": 32
+        },
+        {
+          "date": "2023-09-09",
+          "rank": 28
+        },
+        {
+          "date": "2023-09-16",
+          "rank": 37
+        },
+        {
+          "date": "2023-09-23",
+          "rank": 44
+        },
+        {
+          "date": "2023-09-30",
+          "rank": 53
+        },
+        {
+          "date": "2023-10-07",
+          "rank": 53
+        },
+        {
+          "date": "2023-10-14",
+          "rank": 57
+        },
+        {
+          "date": "2023-10-21",
+          "rank": 99
+        },
+        {
+          "date": "2023-11-18",
+          "rank": 49
+        },
+        {
+          "date": "2023-11-25",
+          "rank": 91
+        }
+      ]
+    },
+    {
+      "artist": "Major Lazer",
+      "title": "Lean On",
+      "case": "moombahton-tropical",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2015-04-25",
+      "exit_date": "2016-03-19",
+      "weeks_in_window": 48,
+      "weeks_on_chart_reported": 48,
+      "peak_position": 4,
+      "peak_date": "2015-08-29",
+      "ranks": [
+        {
+          "date": "2015-04-25",
+          "rank": 100
+        },
+        {
+          "date": "2015-05-02",
+          "rank": 87
+        },
+        {
+          "date": "2015-05-09",
+          "rank": 72
+        },
+        {
+          "date": "2015-05-16",
+          "rank": 59
+        },
+        {
+          "date": "2015-05-23",
+          "rank": 52
+        },
+        {
+          "date": "2015-05-30",
+          "rank": 36
+        },
+        {
+          "date": "2015-06-06",
+          "rank": 33
+        },
+        {
+          "date": "2015-06-13",
+          "rank": 24
+        },
+        {
+          "date": "2015-06-20",
+          "rank": 22
+        },
+        {
+          "date": "2015-06-27",
+          "rank": 20
+        },
+        {
+          "date": "2015-07-04",
+          "rank": 17
+        },
+        {
+          "date": "2015-07-11",
+          "rank": 13
+        },
+        {
+          "date": "2015-07-18",
+          "rank": 18
+        },
+        {
+          "date": "2015-07-25",
+          "rank": 17
+        },
+        {
+          "date": "2015-08-01",
+          "rank": 9
+        },
+        {
+          "date": "2015-08-08",
+          "rank": 10
+        },
+        {
+          "date": "2015-08-15",
+          "rank": 6
+        },
+        {
+          "date": "2015-08-22",
+          "rank": 5
+        },
+        {
+          "date": "2015-08-29",
+          "rank": 4
+        },
+        {
+          "date": "2015-09-05",
+          "rank": 4
+        },
+        {
+          "date": "2015-09-12",
+          "rank": 5
+        },
+        {
+          "date": "2015-09-19",
+          "rank": 6
+        },
+        {
+          "date": "2015-09-26",
+          "rank": 6
+        },
+        {
+          "date": "2015-10-03",
+          "rank": 10
+        },
+        {
+          "date": "2015-10-10",
+          "rank": 12
+        },
+        {
+          "date": "2015-10-17",
+          "rank": 12
+        },
+        {
+          "date": "2015-10-24",
+          "rank": 11
+        },
+        {
+          "date": "2015-10-31",
+          "rank": 11
+        },
+        {
+          "date": "2015-11-07",
+          "rank": 11
+        },
+        {
+          "date": "2015-11-14",
+          "rank": 17
+        },
+        {
+          "date": "2015-11-21",
+          "rank": 19
+        },
+        {
+          "date": "2015-11-28",
+          "rank": 19
+        },
+        {
+          "date": "2015-12-05",
+          "rank": 21
+        },
+        {
+          "date": "2015-12-12",
+          "rank": 19
+        },
+        {
+          "date": "2015-12-19",
+          "rank": 20
+        },
+        {
+          "date": "2015-12-26",
+          "rank": 17
+        },
+        {
+          "date": "2016-01-02",
+          "rank": 25
+        },
+        {
+          "date": "2016-01-09",
+          "rank": 28
+        },
+        {
+          "date": "2016-01-16",
+          "rank": 33
+        },
+        {
+          "date": "2016-01-23",
+          "rank": 31
+        },
+        {
+          "date": "2016-01-30",
+          "rank": 32
+        },
+        {
+          "date": "2016-02-06",
+          "rank": 36
+        },
+        {
+          "date": "2016-02-13",
+          "rank": 36
+        },
+        {
+          "date": "2016-02-20",
+          "rank": 41
+        },
+        {
+          "date": "2016-02-27",
+          "rank": 46
+        },
+        {
+          "date": "2016-03-05",
+          "rank": 49
+        },
+        {
+          "date": "2016-03-12",
+          "rank": 49
+        },
+        {
+          "date": "2016-03-19",
+          "rank": 48
+        }
+      ]
+    },
+    {
+      "artist": "Justin Bieber",
+      "title": "Sorry",
+      "case": "moombahton-tropical",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2015-11-14",
+      "exit_date": "2016-08-27",
+      "weeks_in_window": 42,
+      "weeks_on_chart_reported": 42,
+      "peak_position": 1,
+      "peak_date": "2016-01-23",
+      "ranks": [
+        {
+          "date": "2015-11-14",
+          "rank": 2
+        },
+        {
+          "date": "2015-11-21",
+          "rank": 4
+        },
+        {
+          "date": "2015-11-28",
+          "rank": 3
+        },
+        {
+          "date": "2015-12-05",
+          "rank": 2
+        },
+        {
+          "date": "2015-12-12",
+          "rank": 2
+        },
+        {
+          "date": "2015-12-19",
+          "rank": 2
+        },
+        {
+          "date": "2015-12-26",
+          "rank": 2
+        },
+        {
+          "date": "2016-01-02",
+          "rank": 2
+        },
+        {
+          "date": "2016-01-09",
+          "rank": 2
+        },
+        {
+          "date": "2016-01-16",
+          "rank": 2
+        },
+        {
+          "date": "2016-01-23",
+          "rank": 1
+        },
+        {
+          "date": "2016-01-30",
+          "rank": 1
+        },
+        {
+          "date": "2016-02-06",
+          "rank": 1
+        },
+        {
+          "date": "2016-02-13",
+          "rank": 2
+        },
+        {
+          "date": "2016-02-20",
+          "rank": 3
+        },
+        {
+          "date": "2016-02-27",
+          "rank": 3
+        },
+        {
+          "date": "2016-03-05",
+          "rank": 4
+        },
+        {
+          "date": "2016-03-12",
+          "rank": 4
+        },
+        {
+          "date": "2016-03-19",
+          "rank": 5
+        },
+        {
+          "date": "2016-03-26",
+          "rank": 8
+        },
+        {
+          "date": "2016-04-02",
+          "rank": 8
+        },
+        {
+          "date": "2016-04-09",
+          "rank": 11
+        },
+        {
+          "date": "2016-04-16",
+          "rank": 13
+        },
+        {
+          "date": "2016-04-23",
+          "rank": 14
+        },
+        {
+          "date": "2016-04-30",
+          "rank": 16
+        },
+        {
+          "date": "2016-05-07",
+          "rank": 21
+        },
+        {
+          "date": "2016-05-14",
+          "rank": 31
+        },
+        {
+          "date": "2016-05-21",
+          "rank": 27
+        },
+        {
+          "date": "2016-05-28",
+          "rank": 24
+        },
+        {
+          "date": "2016-06-04",
+          "rank": 29
+        },
+        {
+          "date": "2016-06-11",
+          "rank": 33
+        },
+        {
+          "date": "2016-06-18",
+          "rank": 31
+        },
+        {
+          "date": "2016-06-25",
+          "rank": 36
+        },
+        {
+          "date": "2016-07-02",
+          "rank": 33
+        },
+        {
+          "date": "2016-07-09",
+          "rank": 37
+        },
+        {
+          "date": "2016-07-16",
+          "rank": 37
+        },
+        {
+          "date": "2016-07-23",
+          "rank": 39
+        },
+        {
+          "date": "2016-07-30",
+          "rank": 42
+        },
+        {
+          "date": "2016-08-06",
+          "rank": 45
+        },
+        {
+          "date": "2016-08-13",
+          "rank": 41
+        },
+        {
+          "date": "2016-08-20",
+          "rank": 45
+        },
+        {
+          "date": "2016-08-27",
+          "rank": 50
+        }
+      ]
+    },
+    {
+      "artist": "Kygo",
+      "title": "Firestone",
+      "case": "moombahton-tropical",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2015-10-03",
+      "exit_date": "2015-10-03",
+      "weeks_in_window": 1,
+      "weeks_on_chart_reported": 1,
+      "peak_position": 92,
+      "peak_date": "2015-10-03",
+      "ranks": [
+        {
+          "date": "2015-10-03",
+          "rank": 92
+        }
+      ]
+    },
+    {
+      "artist": "Major Lazer",
+      "title": "Cold Water",
+      "case": "moombahton-tropical",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2016-08-13",
+      "exit_date": "2017-02-11",
+      "weeks_in_window": 27,
+      "weeks_on_chart_reported": 27,
+      "peak_position": 2,
+      "peak_date": "2016-08-13",
+      "ranks": [
+        {
+          "date": "2016-08-13",
+          "rank": 2
+        },
+        {
+          "date": "2016-08-20",
+          "rank": 5
+        },
+        {
+          "date": "2016-08-27",
+          "rank": 2
+        },
+        {
+          "date": "2016-09-03",
+          "rank": 3
+        },
+        {
+          "date": "2016-09-10",
+          "rank": 2
+        },
+        {
+          "date": "2016-09-17",
+          "rank": 2
+        },
+        {
+          "date": "2016-09-24",
+          "rank": 3
+        },
+        {
+          "date": "2016-10-01",
+          "rank": 3
+        },
+        {
+          "date": "2016-10-08",
+          "rank": 3
+        },
+        {
+          "date": "2016-10-15",
+          "rank": 4
+        },
+        {
+          "date": "2016-10-22",
+          "rank": 4
+        },
+        {
+          "date": "2016-10-29",
+          "rank": 7
+        },
+        {
+          "date": "2016-11-05",
+          "rank": 7
+        },
+        {
+          "date": "2016-11-12",
+          "rank": 8
+        },
+        {
+          "date": "2016-11-19",
+          "rank": 12
+        },
+        {
+          "date": "2016-11-26",
+          "rank": 12
+        },
+        {
+          "date": "2016-12-03",
+          "rank": 13
+        },
+        {
+          "date": "2016-12-10",
+          "rank": 16
+        },
+        {
+          "date": "2016-12-17",
+          "rank": 19
+        },
+        {
+          "date": "2016-12-24",
+          "rank": 21
+        },
+        {
+          "date": "2016-12-31",
+          "rank": 40
+        },
+        {
+          "date": "2017-01-07",
+          "rank": 38
+        },
+        {
+          "date": "2017-01-14",
+          "rank": 38
+        },
+        {
+          "date": "2017-01-21",
+          "rank": 34
+        },
+        {
+          "date": "2017-01-28",
+          "rank": 38
+        },
+        {
+          "date": "2017-02-04",
+          "rank": 42
+        },
+        {
+          "date": "2017-02-11",
+          "rank": 48
+        }
+      ]
+    },
+    {
+      "artist": "BTS",
+      "title": "피 땀 눈물",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "TAEYEON",
+      "title": "Why",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "WINNER",
+      "title": "REALLY REALLY",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "BLACKPINK",
+      "title": "As If It's Your Last",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "EXO",
+      "title": "Ko Ko Bop",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Red Velvet",
+      "title": "Red Flavor",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "KARD",
+      "title": "Hola Hola",
+      "case": "moombahton-tropical",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Daddy Yankee",
+      "title": "Gasolina",
+      "case": "reggaeton-dembow",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2004-11-13",
+      "exit_date": "2005-03-26",
+      "weeks_in_window": 20,
+      "weeks_on_chart_reported": 20,
+      "peak_position": 32,
+      "peak_date": "2005-01-29",
+      "ranks": [
+        {
+          "date": "2004-11-13",
+          "rank": 96
+        },
+        {
+          "date": "2004-11-20",
+          "rank": 91
+        },
+        {
+          "date": "2004-11-27",
+          "rank": 91
+        },
+        {
+          "date": "2004-12-04",
+          "rank": 91
+        },
+        {
+          "date": "2004-12-11",
+          "rank": 88
+        },
+        {
+          "date": "2004-12-18",
+          "rank": 83
+        },
+        {
+          "date": "2004-12-25",
+          "rank": 73
+        },
+        {
+          "date": "2005-01-01",
+          "rank": 50
+        },
+        {
+          "date": "2005-01-08",
+          "rank": 44
+        },
+        {
+          "date": "2005-01-15",
+          "rank": 43
+        },
+        {
+          "date": "2005-01-22",
+          "rank": 35
+        },
+        {
+          "date": "2005-01-29",
+          "rank": 32
+        },
+        {
+          "date": "2005-02-05",
+          "rank": 32
+        },
+        {
+          "date": "2005-02-12",
+          "rank": 52
+        },
+        {
+          "date": "2005-02-19",
+          "rank": 50
+        },
+        {
+          "date": "2005-02-26",
+          "rank": 63
+        },
+        {
+          "date": "2005-03-05",
+          "rank": 66
+        },
+        {
+          "date": "2005-03-12",
+          "rank": 79
+        },
+        {
+          "date": "2005-03-19",
+          "rank": 75
+        },
+        {
+          "date": "2005-03-26",
+          "rank": 63
+        }
+      ]
+    },
+    {
+      "artist": "Luis Fonsi",
+      "title": "Despacito",
+      "case": "reggaeton-dembow",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2017-02-04",
+      "exit_date": "2018-01-20",
+      "weeks_in_window": 51,
+      "weeks_on_chart_reported": 52,
+      "peak_position": 1,
+      "peak_date": "2017-05-27",
+      "ranks": [
+        {
+          "date": "2017-02-04",
+          "rank": 88
+        },
+        {
+          "date": "2017-02-11",
+          "rank": 77
+        },
+        {
+          "date": "2017-02-18",
+          "rank": 61
+        },
+        {
+          "date": "2017-02-25",
+          "rank": 61
+        },
+        {
+          "date": "2017-03-04",
+          "rank": 55
+        },
+        {
+          "date": "2017-03-11",
+          "rank": 59
+        },
+        {
+          "date": "2017-03-18",
+          "rank": 52
+        },
+        {
+          "date": "2017-03-25",
+          "rank": 56
+        },
+        {
+          "date": "2017-04-01",
+          "rank": 53
+        },
+        {
+          "date": "2017-04-08",
+          "rank": 52
+        },
+        {
+          "date": "2017-04-15",
+          "rank": 44
+        },
+        {
+          "date": "2017-04-22",
+          "rank": 49
+        },
+        {
+          "date": "2017-04-29",
+          "rank": 48
+        },
+        {
+          "date": "2017-05-06",
+          "rank": 9
+        },
+        {
+          "date": "2017-05-13",
+          "rank": 4
+        },
+        {
+          "date": "2017-05-20",
+          "rank": 3
+        },
+        {
+          "date": "2017-05-27",
+          "rank": 1
+        },
+        {
+          "date": "2017-06-03",
+          "rank": 1
+        },
+        {
+          "date": "2017-06-10",
+          "rank": 1
+        },
+        {
+          "date": "2017-06-17",
+          "rank": 1
+        },
+        {
+          "date": "2017-06-24",
+          "rank": 1
+        },
+        {
+          "date": "2017-07-01",
+          "rank": 1
+        },
+        {
+          "date": "2017-07-08",
+          "rank": 1
+        },
+        {
+          "date": "2017-07-15",
+          "rank": 1
+        },
+        {
+          "date": "2017-07-22",
+          "rank": 1
+        },
+        {
+          "date": "2017-07-29",
+          "rank": 1
+        },
+        {
+          "date": "2017-08-05",
+          "rank": 1
+        },
+        {
+          "date": "2017-08-12",
+          "rank": 1
+        },
+        {
+          "date": "2017-08-19",
+          "rank": 1
+        },
+        {
+          "date": "2017-08-26",
+          "rank": 1
+        },
+        {
+          "date": "2017-09-02",
+          "rank": 1
+        },
+        {
+          "date": "2017-09-09",
+          "rank": 1
+        },
+        {
+          "date": "2017-09-16",
+          "rank": 2
+        },
+        {
+          "date": "2017-09-23",
+          "rank": 3
+        },
+        {
+          "date": "2017-09-30",
+          "rank": 4
+        },
+        {
+          "date": "2017-10-07",
+          "rank": 5
+        },
+        {
+          "date": "2017-10-14",
+          "rank": 5
+        },
+        {
+          "date": "2017-10-21",
+          "rank": 9
+        },
+        {
+          "date": "2017-10-28",
+          "rank": 11
+        },
+        {
+          "date": "2017-11-04",
+          "rank": 15
+        },
+        {
+          "date": "2017-11-11",
+          "rank": 17
+        },
+        {
+          "date": "2017-11-18",
+          "rank": 20
+        },
+        {
+          "date": "2017-11-25",
+          "rank": 18
+        },
+        {
+          "date": "2017-12-02",
+          "rank": 22
+        },
+        {
+          "date": "2017-12-09",
+          "rank": 19
+        },
+        {
+          "date": "2017-12-16",
+          "rank": 23
+        },
+        {
+          "date": "2017-12-23",
+          "rank": 32
+        },
+        {
+          "date": "2017-12-30",
+          "rank": 31
+        },
+        {
+          "date": "2018-01-06",
+          "rank": 30
+        },
+        {
+          "date": "2018-01-13",
+          "rank": 25
+        },
+        {
+          "date": "2018-01-20",
+          "rank": 34
+        }
+      ]
+    },
+    {
+      "artist": "J Balvin",
+      "title": "Mi Gente",
+      "case": "reggaeton-dembow",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2017-07-22",
+      "exit_date": "2018-02-03",
+      "weeks_in_window": 29,
+      "weeks_on_chart_reported": 30,
+      "peak_position": 3,
+      "peak_date": "2017-10-21",
+      "ranks": [
+        {
+          "date": "2017-07-22",
+          "rank": 70
+        },
+        {
+          "date": "2017-07-29",
+          "rank": 53
+        },
+        {
+          "date": "2017-08-05",
+          "rank": 42
+        },
+        {
+          "date": "2017-08-12",
+          "rank": 30
+        },
+        {
+          "date": "2017-08-19",
+          "rank": 28
+        },
+        {
+          "date": "2017-08-26",
+          "rank": 23
+        },
+        {
+          "date": "2017-09-02",
+          "rank": 21
+        },
+        {
+          "date": "2017-09-09",
+          "rank": 24
+        },
+        {
+          "date": "2017-09-16",
+          "rank": 23
+        },
+        {
+          "date": "2017-09-23",
+          "rank": 22
+        },
+        {
+          "date": "2017-09-30",
+          "rank": 19
+        },
+        {
+          "date": "2017-10-07",
+          "rank": 19
+        },
+        {
+          "date": "2017-10-14",
+          "rank": 21
+        },
+        {
+          "date": "2017-10-21",
+          "rank": 3
+        },
+        {
+          "date": "2017-10-28",
+          "rank": 6
+        },
+        {
+          "date": "2017-11-04",
+          "rank": 6
+        },
+        {
+          "date": "2017-11-11",
+          "rank": 8
+        },
+        {
+          "date": "2017-11-18",
+          "rank": 9
+        },
+        {
+          "date": "2017-11-25",
+          "rank": 10
+        },
+        {
+          "date": "2017-12-02",
+          "rank": 10
+        },
+        {
+          "date": "2017-12-09",
+          "rank": 12
+        },
+        {
+          "date": "2017-12-16",
+          "rank": 13
+        },
+        {
+          "date": "2017-12-23",
+          "rank": 18
+        },
+        {
+          "date": "2017-12-30",
+          "rank": 20
+        },
+        {
+          "date": "2018-01-06",
+          "rank": 32
+        },
+        {
+          "date": "2018-01-13",
+          "rank": 30
+        },
+        {
+          "date": "2018-01-20",
+          "rank": 35
+        },
+        {
+          "date": "2018-01-27",
+          "rank": 39
+        },
+        {
+          "date": "2018-02-03",
+          "rank": 44
+        }
+      ]
+    },
+    {
+      "artist": "Shabba Ranks",
+      "title": "Dem Bow",
+      "case": "reggaeton-dembow",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "KARD",
+      "title": "Oh NaNa",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "SUNMI",
+      "title": "Gashina",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "SUPER JUNIOR",
+      "title": "Lo Siento",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "(G)I-DLE",
+      "title": "LATATA",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "CHUNG HA",
+      "title": "PLAY",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "LE SSERAFIM",
+      "title": "ANTIFRAGILE",
+      "case": "reggaeton-dembow",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Mariya Takeuchi",
+      "title": "Plastic Love",
+      "case": "citypop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Miki Matsubara",
+      "title": "Mayonaka no Door / Stay With Me",
+      "case": "citypop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Tatsuro Yamashita",
+      "title": "Ride on Time",
+      "case": "citypop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "george",
+      "title": "Boat",
+      "case": "citypop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "YUBIN",
+      "title": "Lady",
+      "case": "citypop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "유키카",
+      "title": "네온",
+      "case": "citypop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Yerin Baek",
+      "title": "Square (2017)",
+      "case": "citypop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "SUNMI",
+      "title": "pporappippam",
+      "case": "citypop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Bruno Mars",
+      "title": "Finesse",
+      "case": "njs",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2018-01-13",
+      "exit_date": "2018-06-16",
+      "weeks_in_window": 23,
+      "weeks_on_chart_reported": 23,
+      "peak_position": 3,
+      "peak_date": "2018-01-20",
+      "ranks": [
+        {
+          "date": "2018-01-13",
+          "rank": 35
+        },
+        {
+          "date": "2018-01-20",
+          "rank": 3
+        },
+        {
+          "date": "2018-01-27",
+          "rank": 4
+        },
+        {
+          "date": "2018-02-03",
+          "rank": 5
+        },
+        {
+          "date": "2018-02-10",
+          "rank": 3
+        },
+        {
+          "date": "2018-02-17",
+          "rank": 3
+        },
+        {
+          "date": "2018-02-24",
+          "rank": 3
+        },
+        {
+          "date": "2018-03-03",
+          "rank": 3
+        },
+        {
+          "date": "2018-03-10",
+          "rank": 4
+        },
+        {
+          "date": "2018-03-17",
+          "rank": 3
+        },
+        {
+          "date": "2018-03-24",
+          "rank": 3
+        },
+        {
+          "date": "2018-03-31",
+          "rank": 4
+        },
+        {
+          "date": "2018-04-07",
+          "rank": 3
+        },
+        {
+          "date": "2018-04-14",
+          "rank": 8
+        },
+        {
+          "date": "2018-04-21",
+          "rank": 10
+        },
+        {
+          "date": "2018-04-28",
+          "rank": 12
+        },
+        {
+          "date": "2018-05-05",
+          "rank": 25
+        },
+        {
+          "date": "2018-05-12",
+          "rank": 33
+        },
+        {
+          "date": "2018-05-19",
+          "rank": 31
+        },
+        {
+          "date": "2018-05-26",
+          "rank": 30
+        },
+        {
+          "date": "2018-06-02",
+          "rank": 37
+        },
+        {
+          "date": "2018-06-09",
+          "rank": 39
+        },
+        {
+          "date": "2018-06-16",
+          "rank": 50
+        }
+      ]
+    },
+    {
+      "artist": "Bobby Brown",
+      "title": "My Prerogative",
+      "case": "njs",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "1988-10-22",
+      "exit_date": "1989-04-01",
+      "weeks_in_window": 24,
+      "weeks_on_chart_reported": 24,
+      "peak_position": 1,
+      "peak_date": "1989-01-14",
+      "ranks": [
+        {
+          "date": "1988-10-22",
+          "rank": 78
+        },
+        {
+          "date": "1988-10-29",
+          "rank": 61
+        },
+        {
+          "date": "1988-11-05",
+          "rank": 45
+        },
+        {
+          "date": "1988-11-12",
+          "rank": 33
+        },
+        {
+          "date": "1988-11-19",
+          "rank": 22
+        },
+        {
+          "date": "1988-11-26",
+          "rank": 18
+        },
+        {
+          "date": "1988-12-03",
+          "rank": 13
+        },
+        {
+          "date": "1988-12-10",
+          "rank": 8
+        },
+        {
+          "date": "1988-12-17",
+          "rank": 4
+        },
+        {
+          "date": "1988-12-24",
+          "rank": 2
+        },
+        {
+          "date": "1988-12-31",
+          "rank": 2
+        },
+        {
+          "date": "1989-01-07",
+          "rank": 2
+        },
+        {
+          "date": "1989-01-14",
+          "rank": 1
+        },
+        {
+          "date": "1989-01-21",
+          "rank": 4
+        },
+        {
+          "date": "1989-01-28",
+          "rank": 12
+        },
+        {
+          "date": "1989-02-04",
+          "rank": 22
+        },
+        {
+          "date": "1989-02-11",
+          "rank": 31
+        },
+        {
+          "date": "1989-02-18",
+          "rank": 38
+        },
+        {
+          "date": "1989-02-25",
+          "rank": 45
+        },
+        {
+          "date": "1989-03-04",
+          "rank": 53
+        },
+        {
+          "date": "1989-03-11",
+          "rank": 69
+        },
+        {
+          "date": "1989-03-18",
+          "rank": 80
+        },
+        {
+          "date": "1989-03-25",
+          "rank": 87
+        },
+        {
+          "date": "1989-04-01",
+          "rank": 97
+        }
+      ]
+    },
+    {
+      "artist": "Guy",
+      "title": "Groove Me",
+      "case": "njs",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "SHINee",
+      "title": "1 of 1",
+      "case": "njs",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "EXID",
+      "title": "Lady",
+      "case": "njs",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NCT U",
+      "title": "90's Love",
+      "case": "njs",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Attention",
+      "case": "njs",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Supernatural",
+      "case": "njs",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Pain",
+      "case": "easy-listening",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "IVE",
+      "title": "LOVE DIVE",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "IVE",
+      "title": "After LIKE",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Hype Boy",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "FIFTY FIFTY",
+      "title": "Cupid",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2023-04-01",
+      "exit_date": "2023-09-16",
+      "weeks_in_window": 25,
+      "weeks_on_chart_reported": 25,
+      "peak_position": 17,
+      "peak_date": "2023-05-20",
+      "ranks": [
+        {
+          "date": "2023-04-01",
+          "rank": 100
+        },
+        {
+          "date": "2023-04-08",
+          "rank": 94
+        },
+        {
+          "date": "2023-04-15",
+          "rank": 85
+        },
+        {
+          "date": "2023-04-22",
+          "rank": 60
+        },
+        {
+          "date": "2023-04-29",
+          "rank": 50
+        },
+        {
+          "date": "2023-05-06",
+          "rank": 41
+        },
+        {
+          "date": "2023-05-13",
+          "rank": 19
+        },
+        {
+          "date": "2023-05-20",
+          "rank": 17
+        },
+        {
+          "date": "2023-05-27",
+          "rank": 18
+        },
+        {
+          "date": "2023-06-03",
+          "rank": 20
+        },
+        {
+          "date": "2023-06-10",
+          "rank": 23
+        },
+        {
+          "date": "2023-06-17",
+          "rank": 21
+        },
+        {
+          "date": "2023-06-24",
+          "rank": 24
+        },
+        {
+          "date": "2023-07-01",
+          "rank": 24
+        },
+        {
+          "date": "2023-07-08",
+          "rank": 24
+        },
+        {
+          "date": "2023-07-15",
+          "rank": 24
+        },
+        {
+          "date": "2023-07-22",
+          "rank": 27
+        },
+        {
+          "date": "2023-07-29",
+          "rank": 24
+        },
+        {
+          "date": "2023-08-05",
+          "rank": 29
+        },
+        {
+          "date": "2023-08-12",
+          "rank": 41
+        },
+        {
+          "date": "2023-08-19",
+          "rank": 25
+        },
+        {
+          "date": "2023-08-26",
+          "rank": 26
+        },
+        {
+          "date": "2023-09-02",
+          "rank": 25
+        },
+        {
+          "date": "2023-09-09",
+          "rank": 48
+        },
+        {
+          "date": "2023-09-16",
+          "rank": 45
+        }
+      ]
+    },
+    {
+      "artist": "TWS",
+      "title": "plot twist",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "비비",
+      "title": "밤양갱",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "ILLIT",
+      "title": "Magnetic",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": true,
+      "entry_date": "2024-04-20",
+      "exit_date": "2024-04-20",
+      "weeks_in_window": 1,
+      "weeks_on_chart_reported": 1,
+      "peak_position": 91,
+      "peak_date": "2024-04-20",
+      "ranks": [
+        {
+          "date": "2024-04-20",
+          "rank": 91
+        }
+      ]
+    },
+    {
+      "artist": "RIIZE",
+      "title": "Get A Guitar",
+      "case": "easy-listening",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Tyla",
+      "title": "Water",
+      "case": "amapiano",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2023-10-14",
+      "exit_date": "2024-04-27",
+      "weeks_in_window": 29,
+      "weeks_on_chart_reported": 29,
+      "peak_position": 7,
+      "peak_date": "2024-01-13",
+      "ranks": [
+        {
+          "date": "2023-10-14",
+          "rank": 67
+        },
+        {
+          "date": "2023-10-21",
+          "rank": 63
+        },
+        {
+          "date": "2023-10-28",
+          "rank": 46
+        },
+        {
+          "date": "2023-11-04",
+          "rank": 21
+        },
+        {
+          "date": "2023-11-11",
+          "rank": 35
+        },
+        {
+          "date": "2023-11-18",
+          "rank": 18
+        },
+        {
+          "date": "2023-11-25",
+          "rank": 15
+        },
+        {
+          "date": "2023-12-02",
+          "rank": 10
+        },
+        {
+          "date": "2023-12-09",
+          "rank": 15
+        },
+        {
+          "date": "2023-12-16",
+          "rank": 20
+        },
+        {
+          "date": "2023-12-23",
+          "rank": 21
+        },
+        {
+          "date": "2023-12-30",
+          "rank": 26
+        },
+        {
+          "date": "2024-01-06",
+          "rank": 32
+        },
+        {
+          "date": "2024-01-13",
+          "rank": 7
+        },
+        {
+          "date": "2024-01-20",
+          "rank": 7
+        },
+        {
+          "date": "2024-01-27",
+          "rank": 12
+        },
+        {
+          "date": "2024-02-03",
+          "rank": 11
+        },
+        {
+          "date": "2024-02-10",
+          "rank": 11
+        },
+        {
+          "date": "2024-02-17",
+          "rank": 12
+        },
+        {
+          "date": "2024-02-24",
+          "rank": 13
+        },
+        {
+          "date": "2024-03-02",
+          "rank": 14
+        },
+        {
+          "date": "2024-03-09",
+          "rank": 16
+        },
+        {
+          "date": "2024-03-16",
+          "rank": 17
+        },
+        {
+          "date": "2024-03-23",
+          "rank": 19
+        },
+        {
+          "date": "2024-03-30",
+          "rank": 20
+        },
+        {
+          "date": "2024-04-06",
+          "rank": 19
+        },
+        {
+          "date": "2024-04-13",
+          "rank": 22
+        },
+        {
+          "date": "2024-04-20",
+          "rank": 24
+        },
+        {
+          "date": "2024-04-27",
+          "rank": 26
+        }
+      ]
+    },
+    {
+      "artist": "Kabza De Small",
+      "title": "Abalele",
+      "case": "amapiano",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Young Stunna",
+      "title": "Adiwele",
+      "case": "amapiano",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Uncle Waffles",
+      "title": "Tanzania",
+      "case": "amapiano",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "SEVENTEEN",
+      "title": "Spell",
+      "case": "amapiano",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "KISS OF LIFE",
+      "title": "Sticky",
+      "case": "amapiano",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "KAI",
+      "title": "Off And Away",
+      "case": "amapiano",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "100 gecs",
+      "title": "money machine",
+      "case": "hyperpop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "SOPHIE",
+      "title": "Immaterial",
+      "case": "hyperpop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "glaive",
+      "title": "astrid",
+      "case": "hyperpop",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "aespa",
+      "title": "Savage",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "aespa",
+      "title": "Black Mamba",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "aespa",
+      "title": "Next Level",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "aespa",
+      "title": "Supernova",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "aespa",
+      "title": "Whiplash",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "NMIXX",
+      "title": "O.O",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "tripleS",
+      "title": "Rising",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "TOMORROW X TOGETHER",
+      "title": "Frost",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "YENA",
+      "title": "Catch Catch",
+      "case": "hyperpop",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Pop Smoke",
+      "title": "Dior",
+      "case": "drill",
+      "role": "origin",
+      "charted": true,
+      "entry_date": "2020-02-29",
+      "exit_date": "2020-07-18",
+      "weeks_in_window": 21,
+      "weeks_on_chart_reported": 21,
+      "peak_position": 22,
+      "peak_date": "2020-07-18",
+      "ranks": [
+        {
+          "date": "2020-02-29",
+          "rank": 49
+        },
+        {
+          "date": "2020-03-07",
+          "rank": 30
+        },
+        {
+          "date": "2020-03-14",
+          "rank": 47
+        },
+        {
+          "date": "2020-03-21",
+          "rank": 55
+        },
+        {
+          "date": "2020-03-28",
+          "rank": 50
+        },
+        {
+          "date": "2020-04-04",
+          "rank": 58
+        },
+        {
+          "date": "2020-04-11",
+          "rank": 54
+        },
+        {
+          "date": "2020-04-18",
+          "rank": 55
+        },
+        {
+          "date": "2020-04-25",
+          "rank": 46
+        },
+        {
+          "date": "2020-05-02",
+          "rank": 54
+        },
+        {
+          "date": "2020-05-09",
+          "rank": 52
+        },
+        {
+          "date": "2020-05-16",
+          "rank": 63
+        },
+        {
+          "date": "2020-05-23",
+          "rank": 53
+        },
+        {
+          "date": "2020-05-30",
+          "rank": 59
+        },
+        {
+          "date": "2020-06-06",
+          "rank": 56
+        },
+        {
+          "date": "2020-06-13",
+          "rank": 54
+        },
+        {
+          "date": "2020-06-20",
+          "rank": 48
+        },
+        {
+          "date": "2020-06-27",
+          "rank": 49
+        },
+        {
+          "date": "2020-07-04",
+          "rank": 46
+        },
+        {
+          "date": "2020-07-11",
+          "rank": 44
+        },
+        {
+          "date": "2020-07-18",
+          "rank": 22
+        }
+      ]
+    },
+    {
+      "artist": "Central Cee",
+      "title": "Doja",
+      "case": "drill",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "Headie One",
+      "title": "Ain't It Different",
+      "case": "drill",
+      "role": "origin",
+      "charted": false
+    },
+    {
+      "artist": "창모",
+      "title": "Swoosh Flow",
+      "case": "drill",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "ENHYPEN",
+      "title": "Future Perfect (Pass the MIC)",
+      "case": "drill",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "STAYC",
+      "title": "I WANT U BABY",
+      "case": "drill",
+      "role": "kr",
+      "charted": false
+    },
+    {
+      "artist": "Stray Kids",
+      "title": "3RACHA",
+      "case": "drill",
+      "role": "kr",
+      "charted": false
+    }
+  ]
+}

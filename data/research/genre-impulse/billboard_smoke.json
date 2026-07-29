@@ -1,0 +1,328 @@
+{
+  "probe": "billboard-hot-100 3-way cross-check",
+  "decision": "D-035 ②",
+  "source_under_test": "github.com/mhollingshead/billboard-hot-100",
+  "license_note": "LICENSE 부재 확인 — 사실 필드만 내부 파생 저장·원문 재배포 금지",
+  "coverage": {
+    "charts": 3548,
+    "first": "1958-08-04",
+    "last": "2026-08-01",
+    "non_weekly_steps": 1,
+    "non_weekly_examples": [
+      {
+        "from": "1961-12-25",
+        "to": "1962-01-06",
+        "days": 12
+      }
+    ]
+  },
+  "breadth": {
+    "layer": "breadth (Wikipedia #1 only)",
+    "years": [
+      2013,
+      2018,
+      2021,
+      2023
+    ],
+    "compared": 208,
+    "tally": {
+      "exact": 207,
+      "notation": 1,
+      "mismatch": 0
+    },
+    "agree_rate": 1.0,
+    "exact_rate": 0.9952,
+    "per_year": {
+      "2013": {
+        "exact": 52,
+        "notation": 0,
+        "mismatch": 0
+      },
+      "2018": {
+        "exact": 52,
+        "notation": 0,
+        "mismatch": 0
+      },
+      "2021": {
+        "exact": 52,
+        "notation": 0,
+        "mismatch": 0
+      },
+      "2023": {
+        "exact": 51,
+        "notation": 1,
+        "mismatch": 0
+      }
+    },
+    "dates_absent_from_dataset": [
+      "2018-01-03"
+    ],
+    "examples": [
+      {
+        "date": "2023-11-11",
+        "grade": "notation",
+        "dataset": "Is It Over Now? (Taylor's Version) [From The Vault] — Taylor Swift",
+        "wikipedia": "Is It Over Now? — Taylor Swift"
+      }
+    ]
+  },
+  "depth": {
+    "layer": "depth (acharts full top-100)",
+    "weeks": [
+      "2013-10-05",
+      "2021-10-02",
+      "2023-07-01"
+    ],
+    "compared": 300,
+    "agree_rate": 0.9967,
+    "per_week": [
+      {
+        "date": "2013-10-05",
+        "ranks_compared": 100,
+        "tally": {
+          "exact": 99,
+          "notation": 1,
+          "mismatch": 0
+        },
+        "agree_rate": 1.0,
+        "peak_weeks_checked": 100,
+        "peak_weeks_agree": 100
+      },
+      {
+        "date": "2021-10-02",
+        "ranks_compared": 100,
+        "tally": {
+          "exact": 98,
+          "notation": 1,
+          "mismatch": 1
+        },
+        "agree_rate": 0.99,
+        "peak_weeks_checked": 100,
+        "peak_weeks_agree": 100
+      },
+      {
+        "date": "2023-07-01",
+        "ranks_compared": 100,
+        "tally": {
+          "exact": 99,
+          "notation": 1,
+          "mismatch": 0
+        },
+        "agree_rate": 1.0,
+        "peak_weeks_checked": 100,
+        "peak_weeks_agree": 100
+      }
+    ],
+    "examples": [
+      {
+        "date": "2013-10-05",
+        "rank": 23,
+        "grade": "notation",
+        "dataset": "Cups (Pitch Perfect's When I'm Gone) — Anna Kendrick",
+        "acharts": "Cups — Anna Kendrick"
+      },
+      {
+        "date": "2021-10-02",
+        "rank": 8,
+        "grade": "notation",
+        "dataset": "Knife Talk — Drake Featuring 21 Savage & Project Pat",
+        "acharts": "Knife Talk (with 21 Savage Ft. Project Pat) — Drake and 21 Savage and Project Pat"
+      },
+      {
+        "date": "2021-10-02",
+        "rank": 31,
+        "grade": "mismatch",
+        "dataset": "Hurricane — Kanye West",
+        "acharts": "Hurricance 2.0 — 30 Seconds To Mars and Kanye West"
+      },
+      {
+        "date": "2023-07-01",
+        "rank": 34,
+        "grade": "notation",
+        "dataset": "Dance The Night — Dua Lipa",
+        "acharts": "Dance The Night (from Barbie The Album) — Dua Lipa"
+      }
+    ]
+  },
+  "self_consistency": {
+    "layer": "self-consistency (dataset vs itself)",
+    "span": {
+      "from": "2013-01-05",
+      "to": "2026-07-11",
+      "weeks": 706
+    },
+    "checks_run": {
+      "last_week": 61088,
+      "weeks_on_chart": 61088,
+      "peak_position": 61088
+    },
+    "violations": {
+      "last_week": 68,
+      "weeks_on_chart": 83,
+      "peak_position": 9
+    },
+    "violation_rate": 0.00087,
+    "examples": [
+      {
+        "date": "2018-01-06",
+        "rank": 1,
+        "entry": "Perfect — Ed Sheeran",
+        "field": "weeks_on_chart",
+        "got": 18,
+        "expected": 17
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 2,
+        "entry": "Rockstar — Post Malone Featuring 21 Savage",
+        "field": "weeks_on_chart",
+        "got": 15,
+        "expected": 14
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 3,
+        "entry": "Havana — Camila Cabello Featuring Young Thug",
+        "field": "weeks_on_chart",
+        "got": 20,
+        "expected": 19
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 4,
+        "entry": "No Limit — G-Eazy Featuring A$AP Rocky & Cardi B",
+        "field": "last_week",
+        "got": 5,
+        "expected": 10
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 4,
+        "entry": "No Limit — G-Eazy Featuring A$AP Rocky & Cardi B",
+        "field": "weeks_on_chart",
+        "got": 16,
+        "expected": 15
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 5,
+        "entry": "Thunder — Imagine Dragons",
+        "field": "last_week",
+        "got": 6,
+        "expected": 5
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 5,
+        "entry": "Thunder — Imagine Dragons",
+        "field": "weeks_on_chart",
+        "got": 35,
+        "expected": 34
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 6,
+        "entry": "Gucci Gang — Lil Pump",
+        "field": "weeks_on_chart",
+        "got": 16,
+        "expected": 15
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 7,
+        "entry": "MotorSport — Migos, Nicki Minaj & Cardi B",
+        "field": "last_week",
+        "got": 7,
+        "expected": 6
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 7,
+        "entry": "MotorSport — Migos, Nicki Minaj & Cardi B",
+        "field": "weeks_on_chart",
+        "got": 9,
+        "expected": 8
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 8,
+        "entry": "Too Good At Goodbyes — Sam Smith",
+        "field": "last_week",
+        "got": 8,
+        "expected": 7
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 8,
+        "entry": "Too Good At Goodbyes — Sam Smith",
+        "field": "weeks_on_chart",
+        "got": 16,
+        "expected": 15
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 9,
+        "entry": "Bad At Love — Halsey",
+        "field": "last_week",
+        "got": 10,
+        "expected": 8
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 9,
+        "entry": "Bad At Love — Halsey",
+        "field": "weeks_on_chart",
+        "got": 17,
+        "expected": 16
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 10,
+        "entry": "Bodak Yellow (Money Moves) — Cardi B",
+        "field": "last_week",
+        "got": 12,
+        "expected": 11
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 10,
+        "entry": "Bodak Yellow (Money Moves) — Cardi B",
+        "field": "weeks_on_chart",
+        "got": 26,
+        "expected": 25
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 11,
+        "entry": "Love. — Kendrick Lamar Featuring Zacari",
+        "field": "last_week",
+        "got": 22,
+        "expected": 25
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 11,
+        "entry": "Love. — Kendrick Lamar Featuring Zacari",
+        "field": "weeks_on_chart",
+        "got": 27,
+        "expected": 26
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 12,
+        "entry": "New Rules — Dua Lipa",
+        "field": "last_week",
+        "got": 13,
+        "expected": 14
+      },
+      {
+        "date": "2018-01-06",
+        "rank": 12,
+        "entry": "New Rules — Dua Lipa",
+        "field": "weeks_on_chart",
+        "got": 22,
+        "expected": 21
+      }
+    ]
+  }
+}

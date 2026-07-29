@@ -1,0 +1,808 @@
+{
+  "note": "Billboard Hot 100 동시대 US 코호트 (D-035 ② · 파생 사실 필드만). source=github.com/mhollingshead/billboard-hot-100 — 순위·주차 사실만 내부 저장하며 원문 재배포 금지. platform=billboard-hot100.",
+  "chart_dates": [
+    "2021-10-02"
+  ],
+  "tracks": [
+    {
+      "artist": "The Kid LAROI & Justin Bieber",
+      "title": "Stay",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 1,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X & Jack Harlow",
+      "title": "Industry Baby",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 2,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring Future & Young Thug",
+      "title": "Way 2 Sexy",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 3,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Ed Sheeran",
+      "title": "Bad Habits",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 4,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Walker Hayes",
+      "title": "Fancy Like",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 5,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Olivia Rodrigo",
+      "title": "Good 4 U",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 6,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Doja Cat Featuring SZA",
+      "title": "Kiss Me More",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 7,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring 21 Savage & Project Pat",
+      "title": "Knife Talk",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 8,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Montero (Call Me By Your Name)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 9,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Thats What I Want",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 10,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Dua Lipa",
+      "title": "Levitating",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 11,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "The Weeknd & Ariana Grande",
+      "title": "Save Your Tears",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 12,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring Lil Baby",
+      "title": "Girls Want Girls",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 13,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Wizkid Featuring Justin Bieber & Tems",
+      "title": "Essence",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 14,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring Travis Scott",
+      "title": "Fair Trade",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 15,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Glass Animals",
+      "title": "Heat Waves",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 16,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Ed Sheeran",
+      "title": "Shivers",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 17,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Doja Cat",
+      "title": "Need To Know",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 18,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Doja Cat & The Weeknd",
+      "title": "You Right",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 19,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Maneskin",
+      "title": "Beggin'",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 20,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "The Weeknd",
+      "title": "Take My Breath",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 21,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Jason Aldean & Carrie Underwood",
+      "title": "If I Didn't Love You",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 22,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Olivia Rodrigo",
+      "title": "Deja Vu",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 23,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "BTS",
+      "title": "Butter",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 24,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Olivia Rodrigo",
+      "title": "Traitor",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 25,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Marshmello X Jonas Brothers",
+      "title": "Leave Before You Love Me",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 26,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Farruko",
+      "title": "Pepas",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 27,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Billie Eilish",
+      "title": "Happier Than Ever",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 28,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Jameson Rodgers Featuring Luke Combs",
+      "title": "Cold Beer Calling My Name",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 29,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "Champagne Poetry",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 30,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Kanye West",
+      "title": "Hurricane",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 31,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Ryan Hurd With Maren Morris",
+      "title": "Chasing After You",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 32,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Silk Sonic (Bruno Mars & Anderson .Paak)",
+      "title": "Leave The Door Open",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 33,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lainey Wilson",
+      "title": "Things A Man Oughta Know",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 34,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Moneybagg Yo",
+      "title": "Wockesha",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 35,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Justin Bieber Featuring Daniel Caesar & Giveon",
+      "title": "Peaches",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 36,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Taylor Swift",
+      "title": "Wildest Dreams (Taylor's Version)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 37,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Baby Keem & Kendrick Lamar",
+      "title": "Family Ties",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 38,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Tai Verdes",
+      "title": "A-O-K",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 39,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "No Friends In The Industry",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 40,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Duncan Laurence",
+      "title": "Arcade",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 41,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X Featuring Doja Cat",
+      "title": "Scoop",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 42,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring Lil Durk & Giveon",
+      "title": "In The Bible",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 43,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "THE ANXIETY: WILLOW & Tyler Cole",
+      "title": "Meet Me At Our Spot",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 44,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Roddy Ricch",
+      "title": "Late At Night",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 45,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lizzo Featuring Cardi B",
+      "title": "Rumors",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 46,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X Featuring Megan Thee Stallion",
+      "title": "Dolla Sign Slime",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 47,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "TSU",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 48,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Megan Thee Stallion",
+      "title": "Thot Shit",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 49,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Scotty McCreery",
+      "title": "You Time",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 50,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Dua Lipa",
+      "title": "Love Again",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 51,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Normani Featuring Cardi B",
+      "title": "Wild Side",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 52,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Old Dominion",
+      "title": "I Was On A Boat That Day",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 53,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lee Brice",
+      "title": "Memory I Don't Mess With",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 54,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Jordan Davis Featuring Luke Bryan",
+      "title": "Buy Dirt",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 55,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Chloe",
+      "title": "Have Mercy",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 56,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring JAY-Z",
+      "title": "Love All",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 57,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "BIA Featuring Nicki Minaj",
+      "title": "Whole Lotta Money",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 58,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake Featuring Future",
+      "title": "N 2 Deep",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 59,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Luke Bryan",
+      "title": "Waves",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 60,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Meek Mill Featuring Lil Baby & Lil Durk",
+      "title": "Sharing Locations",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 61,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Doja Cat",
+      "title": "Woman",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 62,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "DaBaby X Lil Wayne",
+      "title": "Lonely",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 63,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Capella Grey",
+      "title": "Gyalis",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 64,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Sleepy Hallow",
+      "title": "2055",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 65,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "Papi's Home",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 66,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Elvie Shane",
+      "title": "My Boy",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 67,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "Pipe Down",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 68,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Luke Combs",
+      "title": "Cold As You",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 69,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Elle King & Miranda Lambert",
+      "title": "Drunk (And I Don't Wanna Go Home)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 70,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "YoungBoy Never Broke Again",
+      "title": "On My Side",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 71,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Dead Right Now",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 72,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Kane Brown X blackbear",
+      "title": "Memory",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 73,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Elton John & Dua Lipa",
+      "title": "Cold Heart (PNAU Remix)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 74,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Aventura x Bad Bunny",
+      "title": "Volvi",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 75,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Kanye West",
+      "title": "Moon",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 76,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Chase Rice Featuring Florida Georgia Line",
+      "title": "Drinkin' Beer. Talkin' God. Amen.",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 77,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Yung Bleu, Chris Brown & 2 Chainz",
+      "title": "Baddest",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 78,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "YoungBoy Never Broke Again",
+      "title": "Life Support",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 79,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "CKay",
+      "title": "Love Nwantiti (Ah Ah Ah)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 80,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Dustin Lynch Featuring Lauren Alaina Or MacKenzie Porter",
+      "title": "Thinking 'Bout You",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 81,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Rauw Alejandro",
+      "title": "Todo de Ti",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 82,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Chris Stapleton",
+      "title": "You Should Probably Leave",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 83,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Doja Cat",
+      "title": "Get Into It (Yuh)",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 84,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Bad Bunny",
+      "title": "Yonaguni",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 85,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Tales Of Dominica",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 86,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Shawn Mendes & Tainy",
+      "title": "Summer Of Love",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 87,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X Featuring Elton John",
+      "title": "One Of Me",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 88,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "Race My Mind",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 89,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Lost In The Citadel",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 90,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X",
+      "title": "Sun Goes Down",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 91,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Drake",
+      "title": "7am On Bridle Path",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 92,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Kanye West",
+      "title": "Off The Grid",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 93,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "J Balvin & Skrillex",
+      "title": "In Da Getto",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 94,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Silk Sonic (Bruno Mars & Anderson .Paak)",
+      "title": "Skate",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 95,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Kenny Chesney",
+      "title": "Knowing You",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 96,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Lil Nas X Featuring Miley Cyrus",
+      "title": "Am I Dreaming",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 97,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Zac Brown Band",
+      "title": "Same Boat",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 98,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "H.E.R. Featuring Chris Brown",
+      "title": "Come Through",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 99,
+      "chart_date": "2021-10-02"
+    },
+    {
+      "artist": "Camila Cabello",
+      "title": "Don't Go Yet",
+      "market": "US",
+      "platform": "billboard-hot100",
+      "rank": 100,
+      "chart_date": "2021-10-02"
+    }
+  ]
+}

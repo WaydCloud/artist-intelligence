@@ -27,7 +27,11 @@ from sonic_profile.models import DEFAULT_DIR
 # Essentia TensorflowInputMusiCNN 사양 — 바꾸면 과거 값과 비교 불가(RULES §3.3)
 TAG_SR = 16000
 N_FFT, HOP, N_MELS, PATCH = 512, 256, 96, 128
+# 저장할 라벨 수. **임계로 곡 수를 세는 축은 잘라 두면 그 수가 하한이 된다** —
+# 악기는 임계(A&R 소유, RULES §3.1.6) 기준으로 집계하므로 40클래스 전부를 남긴다.
+# 스타일(400)·장르(87)는 상위 k 표시용이라 5로 둔다(RULES §5: 1위를 확정하지 않는다).
 TOP_K = 5
+TOP_K_INSTRUMENT = 40
 
 _SESSIONS: dict[str, Any] = {}
 _LABELS: dict[str, list[str]] = {}
@@ -97,7 +101,7 @@ def extract_tags(y: np.ndarray, sr: int, *, directory: Path | None = None) -> di
     genre = _SESSIONS["genre"].run(["activations"], {"embeddings": emb})[0]
     return {
         "styles": _top(_LABELS["effnet"], styles.mean(0)),
-        "instruments": _top(_LABELS["instrument"], inst.mean(0)),
+        "instruments": _top(_LABELS["instrument"], inst.mean(0), k=TOP_K_INSTRUMENT),
         "genres": _top(_LABELS["genre"], genre.mean(0)),
         "tag_patches": int(len(patches)),
         # RULES §3.1.7 — 정확도를 아직 사람 라벨로 재지 않았다. 표면에 그대로 전파된다.

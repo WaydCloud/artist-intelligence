@@ -74,10 +74,16 @@ def models_present(directory: Path | None = None) -> bool:
 
 def tagger_provenance() -> dict[str, Any]:
     """값의 일부인 태거 설정 — 캐시 키·시리즈 버전 분리에 쓰인다(RULES §2)."""
+    from sonic_profile.tagging import TOP_K, TOP_K_INSTRUMENT
+
     return {
         "tagger": "discogs-effnet-bsdynamic-1",
         "tagger_heads": ["mtg_jamendo_instrument-1", "mtg_jamendo_genre-1"],
         "tagger_sample_rate": 16000,
+        # 저장 라벨 수는 **값의 일부다** — 잘라 두면 임계 집계가 하한이 된다(RULES §3.1.6.1).
+        # 캐시 키에 들어가야 이 값을 늘렸을 때 옛 절단본이 조용히 되살아나지 않는다.
+        "tagger_top_k": TOP_K,
+        "tagger_top_k_instrument": TOP_K_INSTRUMENT,
         "tagger_license": LICENSE,
         "attribution": ATTRIBUTION,
     }

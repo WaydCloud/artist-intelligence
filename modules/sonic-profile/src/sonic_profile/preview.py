@@ -176,14 +176,48 @@ def _decode(path: str) -> np.ndarray:
         raise Unresolved(f"decode failed: {type(exc).__name__}") from exc
 
 
-def features_from_preview(
-    url: str, *, low_hz: float, suffix: str = ".audio",
-    rhythm: bool = True, tags: bool = True,
-) -> dict[str, Any]:
-    """프리뷰 URL → 지표. 오디오는 이 함수를 벗어나지 않는다(무보관 §1).
+def lookup_preview(source: str, track_id: str, *, country: str = "KR") -> dict[str, Any] | None:
+    """(소스, 트랙 ID) → 그 **정확한 녹음**의 프리뷰 후보. 검색이 아니라 ID 조회다.
 
-    DSP 지표(§3)에 이어 리듬(§3.1.5)·태깅(§3.1.6)을 **같은 배열 위에서** 잰다.
-    둘 중 하나가 실패해도 나머지는 낸다 — 결측은 0이 아니라 사유와 함께 비워둔다.
+    이미 관측한 트랙을 다시 재려면 검색으로 되찾아선 안 된다 — 표기·리마스터·지역판이
+    끼어들어 **다른 녹음**을 잴 수 있다. ID 조회는 그 위험이 없다(RULES §1 별칭 검증의 연장).
+    """
+    tid = str(track_id or "").strip()
+    if not tid:
+        return None
+    try:
+        if source == "apple":
+            q = urllib.parse.urlencode({"id": tid, "country": country, "entity": "song"})
+            items = _get_json(f"https://itunes.apple.com/lookup?{q}").get("results") or []
+            item = next((x for x in items if x.get("previewUrl")), None)
+            if not item:
+                return None
+            return {
+                "source": "apple", "track_id": tid, "suffix": ".m4a",
+                "artist": str(item.get("artistName") or ""),
+                "title": str(item.get("trackName") or ""),
+                "preview_url": item["previewUrl"],
+            }
+        if source == "deezer":
+            item = _get_json(f"https://api.deezer.com/track/{urllib.parse.quote(tid)}")
+            if not item.get("preview"):
+                return None
+            return {
+                "source": "deezer", "track_id": tid, "suffix": ".mp3",
+                "artist": str((item.get("artist") or {}).get("name") or ""),
+                "title": str(item.get("title") or ""),
+                "preview_url": item["preview"],
+            }
+    except Exception:  # noqa: BLE001 — 조회 실패는 복구 대상에서 빠질 뿐 치명적이지 않다
+        return None
+    return None
+
+
+def _audio_from_url(url: str, suffix: str) -> np.ndarray:
+    """프리뷰 URL → 모노 배열. **오디오 파일은 이 함수를 벗어나지 않는다**(무보관 §1).
+
+    다운로드·임시파일·삭제가 한 곳에만 있어야 무보관 불변식을 한 곳에서 보증한다 —
+    호출자가 늘 때마다 복사하면 언젠가 한 곳에서 삭제가 빠진다.
     """
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
@@ -194,14 +228,35 @@ def features_from_preview(
     try:
         with os.fdopen(fd, "wb") as fh:
             fh.write(blob)
-        y = _decode(tmp)
+        return _decode(tmp)
     finally:
         try:
             os.unlink(tmp)  # 무보관 불변식 — 예외 경로에서도 반드시
         except OSError:
             pass
-    del blob
 
+
+def tags_from_preview(url: str, *, suffix: str = ".audio") -> dict[str, Any]:
+    """프리뷰 URL → 태그만. 이미 잰 DSP·리듬을 건드리지 않고 라벨만 다시 딴다(retag 경로).
+
+    지표는 녹음의 성질이라 값이 같게 나오지만, **불필요한 재계산과 재기록을 하지 않는 것**이
+    복구를 감사 가능하게 만든다 — 바뀐 필드가 악기 라벨뿐이어야 diff로 확인된다.
+    """
+    from sonic_profile.tagging import extract_tags
+
+    return extract_tags(_audio_from_url(url, suffix), SR)
+
+
+def features_from_preview(
+    url: str, *, low_hz: float, suffix: str = ".audio",
+    rhythm: bool = True, tags: bool = True,
+) -> dict[str, Any]:
+    """프리뷰 URL → 지표. 오디오는 이 함수를 벗어나지 않는다(무보관 §1).
+
+    DSP 지표(§3)에 이어 리듬(§3.1.5)·태깅(§3.1.6)을 **같은 배열 위에서** 잰다.
+    둘 중 하나가 실패해도 나머지는 낸다 — 결측은 0이 아니라 사유와 함께 비워둔다.
+    """
+    y = _audio_from_url(url, suffix)
     feats = extract(y, SR, low_hz=low_hz)
     if rhythm:
         from sonic_profile.rhythm import extract_rhythm

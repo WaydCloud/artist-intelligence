@@ -20,7 +20,14 @@ from pathlib import Path
 from typing import Any, cast
 
 from sonic_profile.features import LOW_HZ_DEFAULT, SR, Unresolved, engine_provenance, extract
-from sonic_profile.report import build_report, build_signal_series, now_iso
+from sonic_profile.report import (
+    MIN_PROB_DEFAULT,
+    NEW_RELEASE_DAYS,
+    build_report,
+    build_signal_series,
+    now_iso,
+)
+from sonic_profile.rhythm import MIN_MATCH_DEFAULT, TIE_GAP_DEFAULT
 
 MODULE_VERSION = "0.1.0"
 
@@ -122,6 +129,9 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     engine_key = "|".join([
         f"{eng['engine']}{eng['engine_version']}", str(eng["sample_rate"]), str(eng["low_hz"]),
         eng.get("beat_engine", "-"), eng.get("tagger", "-"),
+        # 저장 라벨 수가 늘면 옛 캐시(잘린 라벨)는 무효다 — 안 그러면 다음 수집이
+        # 캐시 적중으로 절단본을 다시 써 넣어 과소집계가 되살아난다(RULES §3.1.6.1).
+        str(eng.get("tagger_top_k_instrument", "-")),
     ])
     cache_path = Path(args.cache) if args.cache else Path(args.output).parent / "cache.json"
     cache = _cache_load(cache_path, engine_key)
@@ -242,7 +252,16 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     if args.watchlist and Path(args.watchlist).exists():
         doc = json.loads(Path(args.watchlist).read_text(encoding="utf-8"))
         watch = [a["key"] for a in (doc.get("artists") or []) if isinstance(a, dict) and a.get("key")]
-    report = build_report(records, generated_at=now_iso(), provenance=prov, watchlist=watch)
+    report = build_report(
+        records,
+        generated_at=now_iso(),
+        provenance=prov,
+        watchlist=watch,
+        min_match=args.rhythm_min_match,
+        tie_gap=args.rhythm_tie_gap,
+        min_prob=args.min_prob,
+        new_days=args.new_release_days,
+    )
     checked, errors = validate_report(report)
     if errors:
         print(f"report is schema-INVALID ({len(errors)} error(s)) — not writing:", file=sys.stderr)
@@ -256,6 +275,98 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     )
     status = "schema valid" if checked else "UNCHECKED (jsonschema/schema not found)"
     print(f"wrote {outdir / 'report.json'} · {len(records)} record(s) · {status}")
+    return 0
+
+
+def cmd_retag(args: argparse.Namespace) -> int:
+    """상위 k 절단으로 라벨이 잘린 과거 레코드를 **복구**한다 (RULES §3.1.6.1).
+
+    임계로 곡 수를 세는 축에서 라벨 절단은 조용한 과소집계다. 태깅에는 오디오가 필요한데
+    오디오는 저장하지 않으므로(§1) 복구하려면 프리뷰를 다시 받는 수밖에 없다. 그래서
+    **잘린 레코드만** 골라 **ID 정확 조회**로 같은 녹음을 받고 **악기 라벨만** 덮어쓴다.
+
+    - 멱등: 두 번째 실행은 복구 대상이 0이라 네트워크를 타지 않는다.
+    - 무보관 유지: 오디오는 `tags_from_preview` 안에서 폐기된다.
+    - 감사 가능: 바뀌는 필드가 `features.instruments` 하나뿐이라 diff로 확인된다.
+    """
+    from sonic_profile.preview import lookup_preview, tags_from_preview
+    from sonic_profile.tagging import TOP_K_INSTRUMENT
+
+    from sonic_profile.models import ensure_models, model_dir
+
+    paths = _snapshot_paths(args.inputs)
+    # (source, track_id) → 그 녹음을 담고 있는 (파일, 레코드) 전부. 같은 트랙이 여러 날짜에
+    # 걸쳐 있으므로 한 번 받아서 **전부** 고쳐야 한다 — 안 그러면 날짜마다 값이 갈린다.
+    targets: dict[tuple[str, str], list[tuple[Path, dict[str, Any]]]] = {}
+    docs: dict[Path, dict[str, Any]] = {}
+    total = 0
+    for p in paths:
+        doc = json.loads(p.read_text(encoding="utf-8"))
+        if not isinstance(doc, dict):
+            continue
+        docs[p] = doc
+        for rec in doc.get("records") or []:
+            feats = rec.get("features") or {}
+            inst = feats.get("instruments")
+            if not isinstance(inst, list) or not inst:
+                continue
+            total += 1
+            if len(inst) >= TOP_K_INSTRUMENT:
+                continue
+            src, tid = str(rec.get("source") or ""), str(rec.get("track_id") or "")
+            if not src or not tid:
+                continue
+            targets.setdefault((src, tid), []).append((p, rec))
+
+    if not targets:
+        print(f"복구 대상 없음 — 태깅된 {total}개 레코드가 모두 완전합니다 (no-op)")
+        return 0
+    print(f"태깅 레코드 {total}개 중 절단 {sum(len(v) for v in targets.values())}개 "
+          f"· 고유 녹음 {len(targets)}개 → 프리뷰 재취득 (오디오 미저장)")
+    if args.dry_run:
+        for (src, tid), hits in list(targets.items())[:10]:
+            print(f"  [dry-run] {src}:{tid} · {len(hits)}개 레코드 · {hits[0][1].get('title')}")
+        print(f"  [dry-run] 총 {len(targets)}개 녹음 — 실제 변경 없음")
+        return 0
+
+    ensure_models(model_dir(args.model_dir))
+    fixed = failed = 0
+    touched: set[Path] = set()
+    for (src, tid), hits in sorted(targets.items()):
+        cand = lookup_preview(src, tid, country=args.country)
+        if not cand:
+            failed += 1
+            print(f"  !! {src}:{tid} 프리뷰 재조회 실패 — 원래 라벨 유지")
+            continue
+        try:
+            tags = tags_from_preview(cand["preview_url"], suffix=cand.get("suffix", ".audio"))
+        except Exception as exc:  # noqa: BLE001 — 한 곡 실패가 전체를 멈추지 않는다
+            failed += 1
+            print(f"  !! {src}:{tid} 태깅 실패 ({type(exc).__name__}) — 원래 라벨 유지")
+            continue
+        inst = tags.get("instruments")
+        if not isinstance(inst, list) or len(inst) < TOP_K_INSTRUMENT:
+            failed += 1
+            print(f"  !! {src}:{tid} 여전히 불완전 — 건너뜀")
+            continue
+        for path, rec in hits:
+            rec["features"]["instruments"] = inst
+            touched.add(path)
+        fixed += 1
+        print(f"  {cand['artist']} - {cand['title']}: 악기 라벨 {len(inst)}개로 복구 "
+              f"({len(hits)}개 레코드)")
+        time.sleep(args.delay)
+
+    for path in sorted(touched):
+        doc = docs[path]
+        # 복구 사실을 스냅샷에 남긴다 — 값이 언제 왜 바뀌었는지 추적 가능해야 한다
+        prov = doc.setdefault("provenance", {})
+        log = prov.setdefault("retag_log", [])
+        log.append({"date": time.strftime("%Y-%m-%d"), "field": "instruments",
+                    "reason": "top-k truncation repair", "k": TOP_K_INSTRUMENT})
+        path.write_text(json.dumps(doc, ensure_ascii=False, indent=2), encoding="utf-8")
+
+    print(f"복구 {fixed}개 녹음 · 실패 {failed}개 · 스냅샷 {len(touched)}개 갱신 (오디오 미저장)")
     return 0
 
 
@@ -370,6 +481,65 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     except RhythmUnavailable:
         check("다운비트 부족 → 미해석", True)
 
+    # ── 템플릿 원장 무결성 · 임계 규약 (TESTS §5 · RULES §3.1.5)
+    from sonic_profile.rhythm import TEMPLATES, classify_rhythm
+
+    # 이름과 격자가 어긋나면 도메인 소유자가 원장을 읽고 조정할 수 없다(2026-07-29 결함, D-027)
+    check(
+        "8분 3+3+2 tresillo 위치 = (0,6,12) (16분 격자에서 8분음 n = 칸 2n)",
+        TEMPLATES.get("tresillo(8분 3+3+2)") == (0, 6, 12),
+        str(TEMPLATES.get("tresillo(8분 3+3+2)")),
+    )
+    half = TEMPLATES.get("tresillo(16분·반마디)") or ()
+    tiled = tuple(sorted(set(half) | {p + 8 for p in half}))
+    check(
+        "16분 3+3+2를 마디 끝까지 이으면 dembow와 동일 (원장 결함 ① 고정)",
+        tiled == tuple(sorted(TEMPLATES.get("dembow") or ())),
+        f"{tiled} vs {TEMPLATES.get('dembow')}",
+    )
+    # 비직교성이 이 이상 올라가면 두 이름이 같은 것을 재고 있다는 뜻 → 원장 재검토 신호
+    def _unit(pos: tuple[int, ...]) -> np.ndarray:
+        t = np.zeros(BINS)
+        t[list(pos)] = 1.0
+        t = t - t.mean()
+        return t / float(np.linalg.norm(t))
+
+    names = list(TEMPLATES)
+    pairs = [
+        (abs(float(_unit(TEMPLATES[a]) @ _unit(TEMPLATES[b]))), a, b)
+        for i, a in enumerate(names)
+        for b in names[i + 1 :]
+    ]
+    worst, wa, wb = max(pairs)
+    check("템플릿 최악 쌍 상관 ≤ 0.85 (초과 시 원장 재검토)", worst <= 0.85,
+          f"{wa} ↔ {wb} = {worst:.2f}")
+
+    # θ 규약: 저정합·음의 상관·평탄은 유형 이름을 받지 않는다("해당 없음"이지 "다른 유형" 아님)
+    # 어느 템플릿도 쓰지 않는 칸(1·5·9·13)에만 킥이 있는 프로파일 → 전 템플릿과 음의 상관.
+    # 정박의 반대 위상(2·6·10·14)으로는 부족하다 — four-on-floor와는 음이지만 trap-synco와
+    # +0.33이라 argmax가 이름을 뱉는다. 임계가 막아야 하는 건 이 "다른 이름으로의 도피"다.
+    inv = np.zeros(BINS)
+    inv[[1, 5, 9, 13]] = 1.0
+    c_inv = classify_rhythm(inv / inv.sum())
+    check("전 템플릿 음의 상관 → 해당 없음 (argmax가 이름을 뱉지 않음)",
+          c_inv["assigned"] is None and c_inv["top_score"] < 0,
+          f"top={c_inv['top']} {c_inv['top_score']}")
+    flat = np.full(BINS, 1.0 / BINS)
+    c_flat = classify_rhythm(flat)
+    check("평탄 프로파일 → 해당 없음 (사전 첫 키 폴백 차단)",
+          c_flat["assigned"] is None and c_flat["top_score"] == 0.0,
+          f"top={c_flat['top']} {c_flat['top_score']}")
+    check("θ=0으로 내리면 폴백 경로가 되살아난다 (임계가 유일한 방어선임을 고정)",
+          classify_rhythm(flat, min_match=0.0)["assigned"] is not None)
+    # 동점은 지우지 않고 표시만 한다
+    c_beat = classify_rhythm(prof)
+    check("정박 킥 → 유형 배정됨 (four-on-floor)", c_beat["assigned"] == "four-on-floor",
+          f"{c_beat['assigned']} {c_beat['top_score']}")
+    check("동점 폭을 1.0으로 열면 동점으로 표시된다 (행 삭제 아님)",
+          classify_rhythm(prof, tie_gap=1.0)["tie"]
+          and classify_rhythm(prof, tie_gap=1.0)["assigned"] == "four-on-floor")
+    check("분류 결정성: 같은 프로파일 → 같은 배정", classify_rhythm(prof) == c_beat)
+
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0
 
@@ -414,8 +584,36 @@ def main(argv: list[str] | None = None) -> int:
     p_a = sub.add_parser("analyze", help="스냅샷 → report.json (오프라인)")
     p_a.add_argument("inputs", nargs="+")
     p_a.add_argument("--watchlist", default=None)
+    # 하중받는 기준 — 코드에 은닉하지 않는다(AGENTS §2.1). 값은 도메인 소유자(A&R) 소유.
+    # 유형은 저장된 kick_bar_profile에서 재계산되므로 이 값을 바꿔도 오디오를 다시 받지 않는다.
+    p_a.add_argument(
+        "--rhythm-min-match", type=float, default=MIN_MATCH_DEFAULT,
+        help=f"리듬 유형 배정 최소 정합도 — 미만은 '해당 없음' (기본 {MIN_MATCH_DEFAULT}, 관습값)",
+    )
+    p_a.add_argument(
+        "--rhythm-tie-gap", type=float, default=TIE_GAP_DEFAULT,
+        help=f"1위−2위 차가 이 값 미만이면 동점 표시 (기본 {TIE_GAP_DEFAULT}, 관습값)",
+    )
+    p_a.add_argument(
+        "--min-prob", type=float, default=MIN_PROB_DEFAULT,
+        help=f"악기 검출로 볼 최소 확률 (기본 {MIN_PROB_DEFAULT}, 관습값)",
+    )
+    p_a.add_argument(
+        "--new-release-days", type=int, default=NEW_RELEASE_DAYS,
+        help=f"'신곡'으로 볼 발매 경과일 상한 (기본 {NEW_RELEASE_DAYS}, 관습값)",
+    )
     p_a.add_argument("-o", "--output", required=True)
     p_a.set_defaults(func=cmd_analyze)
+
+    p_r = sub.add_parser(
+        "retag", help="상위 k 절단으로 잘린 과거 악기 라벨 복구 (라이브·멱등·오디오 미저장)"
+    )
+    p_r.add_argument("inputs", nargs="+")
+    p_r.add_argument("--country", default="KR")
+    p_r.add_argument("--delay", type=float, default=0.5, help="요청 간 간격(초) — 저빈도 접근")
+    p_r.add_argument("--model-dir", default=None)
+    p_r.add_argument("--dry-run", action="store_true", help="대상만 세고 아무것도 바꾸지 않는다")
+    p_r.set_defaults(func=cmd_retag)
 
     p_s = sub.add_parser("signals", help="스냅샷 → signal-series (오프라인)")
     p_s.add_argument("inputs", nargs="+")

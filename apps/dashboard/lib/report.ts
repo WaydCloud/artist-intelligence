@@ -51,7 +51,33 @@ export interface LeadLagTunableData {
   knobs: Knob[];
   note?: string;
 }
-export type TunableData = WhitespaceTunableData | LeadLagTunableData;
+// rhythm: sonic-profile — raw bar-kick profiles + the named template ledger; the client
+// recomputes cosine match, the "no match" bucket and near-ties as the viewer drags.
+// 값=A&R 소유(노출·반박). 배정 임계가 없으면 argmax가 늘 이름을 뱉어 음의 상관도 유형이 된다.
+export interface RhythmTunableData {
+  view: "rhythm";
+  bins: number;
+  templates: Record<string, number[]>;
+  tracks: { name: string; profile: number[]; cohort?: string }[];
+  noMatchLabel: string;
+  knobs: Knob[];
+  note?: string;
+}
+// tags: sonic-profile — per-track label probabilities + a detection threshold knob.
+// `floor`/`truncated` carry the tagger's top-k cutoff so the client can count how many
+// tracks the current threshold reads as a lower bound rather than a count (결측 ≠ 0).
+export interface TagsTunableData {
+  view: "tags";
+  tracks: { name: string; labels: { label: string; p: number }[]; floor: number; truncated: boolean }[];
+  topBuckets?: number;
+  knobs: Knob[];
+  note?: string;
+}
+export type TunableData =
+  | WhitespaceTunableData
+  | LeadLagTunableData
+  | RhythmTunableData
+  | TagsTunableData;
 
 export interface Chart {
   type: "line" | "bar" | "heatmap" | "radar" | "tunable";

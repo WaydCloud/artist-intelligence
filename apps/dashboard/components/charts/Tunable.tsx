@@ -1,7 +1,13 @@
 "use client";
 
 import { useMemo } from "react";
-import type { LeadLagTunableData, TunableData, WhitespaceTunableData } from "@/lib/report";
+import type {
+  LeadLagTunableData,
+  RhythmTunableData,
+  TagsTunableData,
+  TunableData,
+  WhitespaceTunableData,
+} from "@/lib/report";
 import { scopeOf, useKnob } from "@/lib/knobs";
 import { CriteriaActions, type CriteriaItem } from "./CriteriaActions";
 
@@ -10,7 +16,185 @@ import { CriteriaActions, type CriteriaItem } from "./CriteriaActions";
 // 기준 원장 §2.1: 값=도메인 소유자 — 노출(슬라이더)·반박(재계산)·전달(CriteriaActions).
 export function Tunable({ data, title }: { data: TunableData; title?: string }) {
   if (data.view === "leadlag") return <LeadLag data={data} title={title} />;
+  if (data.view === "rhythm") return <Rhythm data={data} title={title} />;
+  if (data.view === "tags") return <Tags data={data} title={title} />;
   return <Whitespace data={data} title={title} />;
+}
+
+// 집계 막대는 접힌 요약이고, 펼치면 그 칸에 들어간 곡이 나온다.
+// 곡 수만 보이면 반박할 대상이 없다 — 배정이 틀렸는지는 곡 이름을 봐야 눈에 띈다.
+// <details>를 쓰는 이유: 상태 없이 키보드·스크린리더가 그대로 동작한다.
+interface BucketMember {
+  name: string;
+  detail: string;
+  flagged?: boolean;
+}
+interface Bucket {
+  name: string;
+  total: number;
+  /** 막대 안에 겹쳐 표시할 몫(동점 등). 없으면 0 */
+  highlight?: number;
+  muted?: boolean;
+  members: BucketMember[];
+  hint?: string;
+}
+
+function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
+  const maxCount = Math.max(1, ...buckets.map((b) => b.total));
+  if (buckets.length === 0) return <p className="text-sm text-[var(--muted)]">{empty}</p>;
+  return (
+    <div className="space-y-0.5">
+      {buckets.map((b) => {
+        const w = (b.total / maxCount) * 100;
+        const hi = b.highlight ?? 0;
+        const hiW = b.total > 0 ? (hi / b.total) * w : 0;
+        return (
+          <details key={b.name} className="group rounded-sm">
+            <summary
+              className="flex cursor-pointer list-none items-center gap-2 rounded-sm py-0.5 text-xs hover:bg-[var(--hairline)]"
+              title={b.hint}
+            >
+              <span
+                className="w-3 shrink-0 text-center text-[var(--muted)] transition-transform duration-150 group-open:rotate-90"
+                aria-hidden
+              >
+                ›
+              </span>
+              <span className="w-32 shrink-0 truncate text-right text-[var(--ink-secondary)]" title={b.name}>
+                {b.name}
+              </span>
+              <span className="relative h-4 flex-1">
+                <span
+                  className="absolute inset-y-0.5 left-0 rounded-sm"
+                  style={{
+                    width: `${w}%`,
+                    background: b.muted ? "var(--baseline)" : "var(--series)",
+                    opacity: b.muted ? 0.6 : 1,
+                  }}
+                />
+                {hi > 0 && !b.muted && (
+                  <span
+                    className="absolute inset-y-0.5 rounded-sm"
+                    style={{ left: `${w - hiW}%`, width: `${hiW}%`, background: "var(--series2)" }}
+                  />
+                )}
+              </span>
+              <span className="w-8 shrink-0 text-right tabular-nums text-[var(--muted)]">{b.total}</span>
+            </summary>
+            <ul className="mb-1 ml-5 mt-1 space-y-0.5 border-l pl-3 text-xs" style={{ borderColor: "var(--hairline)" }}>
+              {b.members.map((m) => (
+                <li key={m.name} className="flex items-baseline gap-2">
+                  <span className="truncate text-[var(--ink-secondary)]" title={m.name}>
+                    {m.name}
+                  </span>
+                  <span
+                    className="shrink-0 tabular-nums"
+                    style={{ color: m.flagged ? "var(--series2)" : "var(--muted)" }}
+                  >
+                    {m.detail}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </details>
+        );
+      })}
+    </div>
+  );
+}
+
+// view=tags — sonic-profile 악기 구성. 검출 임계는 A&R 소유라 코드가 아니라 노브에 있다.
+// 태거가 상위 k개만 남기므로, 임계가 그 절단선 아래로 내려간 곡은 곡 수가 **하한**이 된다.
+function Tags({ data, title }: { data: TagsTunableData; title?: string }) {
+  const knob = data.knobs.find((k) => k.key === "min_prob") ?? data.knobs[0];
+  const scope = scopeOf("tags", title);
+  const [minProb, setMinProb] = useKnob(scope, knob?.key ?? "min_prob", knob?.default ?? 0.3);
+  const topBuckets = data.topBuckets ?? 14;
+
+  const { buckets, hidden, lowerBound } = useMemo(() => {
+    const map = new Map<string, BucketMember[]>();
+    let cut = 0;
+    for (const track of data.tracks) {
+      if (track.truncated && track.floor > minProb) cut++;
+      for (const l of track.labels) {
+        if (l.p < minProb) continue;
+        const list = map.get(l.label) ?? [];
+        list.push({ name: track.name, detail: l.p.toFixed(2) });
+        map.set(l.label, list);
+      }
+    }
+    const all = [...map.entries()]
+      .map(([name, members]) => ({
+        name,
+        total: members.length,
+        members: members.sort((a, b) => Number(b.detail) - Number(a.detail) || a.name.localeCompare(b.name)),
+      }))
+      .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+    return { buckets: all.slice(0, topBuckets), hidden: Math.max(0, all.length - topBuckets), lowerBound: cut };
+  }, [data, minProb, topBuckets]);
+
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+        <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
+          <span>{knob?.label ?? "검출로 볼 최소 확률"}</span>
+          <input
+            type="range"
+            min={knob?.min ?? 0.05}
+            max={knob?.max ?? 0.9}
+            step={knob?.step ?? 0.05}
+            value={minProb}
+            onChange={(e) => setMinProb(Number(e.target.value))}
+            className="accent-[var(--series)]"
+            aria-label={knob?.label ?? "검출로 볼 최소 확률"}
+          />
+          <b className="w-9 tabular-nums text-[var(--ink)]">{minProb.toFixed(2)}</b>
+        </label>
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
+        <span>관측 <b className="text-[var(--ink)]">{data.tracks.length}</b>곡</span>
+        <span>이 임계에서 잡힌 악기 <b className="text-[var(--ink)]">{buckets.length + hidden}</b>종</span>
+        {lowerBound > 0 && (
+          <span title="태깅 당시 상위 라벨만 저장돼 임계를 넘는 악기가 더 있어도 세지 못하는 곡">
+            곡 수가 하한인 곡 <b className="text-[var(--ink)]">{lowerBound}</b>
+          </span>
+        )}
+      </div>
+
+      <BucketRows buckets={buckets} empty="이 임계에서 검출된 악기 없음. 슬라이더를 낮추면 후보 표시" />
+
+      {hidden > 0 && (
+        <p className="mt-2 text-xs text-[var(--muted)]">상위 {buckets.length}종만 표시 · {hidden}종 생략</p>
+      )}
+      {lowerBound > 0 && (
+        <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+          ⚠ {lowerBound}곡은 곡 수가 <b>하한</b>입니다 — 태깅 당시 상위 라벨만 저장돼, 임계를 넘는 악기가
+          더 있어도 세지 못합니다. 임계를 올리면 이 수가 줄어듭니다.
+        </p>
+      )}
+      {data.note && <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">{data.note}</p>}
+
+      <CriteriaActions
+        title={title ?? "악기 검출 기준"}
+        items={
+          knob
+            ? [
+                {
+                  label: knob.label,
+                  from: knob.default.toFixed(2),
+                  to: minProb.toFixed(2),
+                  changed: minProb !== knob.default,
+                },
+              ]
+            : []
+        }
+        summary={`악기 ${buckets.length + hidden}종 · 관측 ${data.tracks.length}곡${
+          lowerBound > 0 ? ` · 하한 ${lowerBound}곡` : ""
+        }`}
+      />
+    </div>
+  );
 }
 
 // view=whitespace — a gap map: proven markets (≥threshold roster acts) × top acts,
@@ -153,6 +337,189 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
           },
         ]}
         summary={`개척 시장 ${provenIdx.length}개국`}
+      />
+    </div>
+  );
+}
+
+// view=rhythm — sonic-profile: 마디 킥 프로파일 × 명명 템플릿의 코사인 정합을 클라이언트에서
+// 다시 계산한다. 템플릿이 서로 직교하지 않아 1위는 순위일 뿐이므로, 화면은 세 가지를 같이 낸다:
+// 배정 임계 미만인 '해당 없음' 버킷 · 1·2위가 근소차인 '동점' 몫 · 두 기준의 슬라이더.
+// 막대 하나에 곡 수만 찍으면 그 형식 자체가 순위를 판정으로 되돌린다.
+function cosine(profile: number[], positions: number[], bins: number): number {
+  const n = Math.min(profile.length, bins);
+  if (n === 0) return 0;
+  const a = profile.slice(0, n);
+  const aMean = a.reduce((s, v) => s + v, 0) / n;
+  const t: number[] = Array.from({ length: n }, (_, i) => (positions.includes(i) ? 1 : 0));
+  const tMean = t.reduce((s, v) => s + v, 0) / n;
+  let dot = 0;
+  let na = 0;
+  let nt = 0;
+  for (let i = 0; i < n; i++) {
+    const da = a[i] - aMean;
+    const dt = t[i] - tMean;
+    dot += da * dt;
+    na += da * da;
+    nt += dt * dt;
+  }
+  // 완전 평탄한 프로파일은 노름 0 — 0을 돌려주고 임계가 배정을 막는다.
+  // 여기서 임의의 이름을 뽑으면 "리듬 없음"이 "정박"으로 둔갑한다.
+  return na > 0 && nt > 0 ? dot / Math.sqrt(na * nt) : 0;
+}
+
+function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
+  const kM = data.knobs.find((k) => k.key === "min_match");
+  const kT = data.knobs.find((k) => k.key === "tie_gap");
+  const scope = scopeOf("rhythm", title);
+  const [minMatch, setMinMatch] = useKnob(scope, "min_match", kM?.default ?? 0.3);
+  const [tieGap, setTieGap] = useKnob(scope, "tie_gap", kT?.default ?? 0.05);
+
+  const { buckets, assigned, ties, noMatch } = useMemo(() => {
+    const names = Object.keys(data.templates);
+    const acc = new Map<string, { tie: number; members: BucketMember[] }>();
+    const bucketOf = (k: string) => {
+      const cur = acc.get(k) ?? { tie: 0, members: [] };
+      acc.set(k, cur);
+      return cur;
+    };
+
+    let nTie = 0;
+    let nNone = 0;
+    for (const track of data.tracks) {
+      const scored = names
+        .map((name) => ({ name, score: cosine(track.profile, data.templates[name], data.bins) }))
+        // 동점은 이름순으로 깬다 — 객체 키 순서에 배정이 좌우되면 안 된다
+        .sort((x, y) => y.score - x.score || x.name.localeCompare(y.name));
+      const top = scored[0];
+      if (!top || top.score < minMatch) {
+        nNone++;
+        bucketOf(data.noMatchLabel).members.push({
+          name: track.name,
+          // 어디에 가장 가까웠는지는 남긴다 — 배정하지 않을 뿐 정보를 버리지는 않는다
+          detail: top ? `최고 ${top.name} ${top.score.toFixed(2)}` : "—",
+        });
+        continue;
+      }
+      const gap = scored.length > 1 ? top.score - scored[1].score : Infinity;
+      const tie = gap < tieGap;
+      if (tie) nTie++;
+      const b = bucketOf(top.name);
+      if (tie) b.tie++;
+      b.members.push({
+        name: track.name,
+        detail: tie
+          ? `${top.score.toFixed(2)} · 동점 ${scored[1].name} ${scored[1].score.toFixed(2)}`
+          : top.score.toFixed(2),
+        flagged: tie,
+      });
+    }
+    const rows: Bucket[] = [...acc.entries()]
+      .map(([name, v]) => ({
+        name,
+        total: v.members.length,
+        highlight: v.tie,
+        muted: name === data.noMatchLabel,
+        members: v.members.sort(
+          (a, b) => parseFloat(b.detail) - parseFloat(a.detail) || a.name.localeCompare(b.name),
+        ),
+        hint:
+          name === data.noMatchLabel
+            ? "어느 유형에도 충분히 가깝지 않음 — '다른 유형'이 아니라 '해당 없음'"
+            : `${v.members.length}곡 (그중 동점 ${v.tie}곡)`,
+      }))
+      .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
+    return {
+      buckets: rows,
+      assigned: data.tracks.length - nNone,
+      ties: nTie,
+      noMatch: nNone,
+    };
+  }, [data, minMatch, tieGap]);
+
+  const fmt = (v: number) => v.toFixed(2);
+
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+        <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
+          <span>{kM?.label ?? "유형 배정 최소 정합도"}</span>
+          <input
+            type="range"
+            min={kM?.min ?? 0}
+            max={kM?.max ?? 0.8}
+            step={kM?.step ?? 0.05}
+            value={minMatch}
+            onChange={(e) => setMinMatch(Number(e.target.value))}
+            className="accent-[var(--series)]"
+            aria-label={kM?.label ?? "유형 배정 최소 정합도"}
+          />
+          <b className="w-9 tabular-nums text-[var(--ink)]">{fmt(minMatch)}</b>
+        </label>
+        <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
+          <span>{kT?.label ?? "동점으로 볼 1위−2위 차"}</span>
+          <input
+            type="range"
+            min={kT?.min ?? 0}
+            max={kT?.max ?? 0.3}
+            step={kT?.step ?? 0.01}
+            value={tieGap}
+            onChange={(e) => setTieGap(Number(e.target.value))}
+            className="accent-[var(--series)]"
+            aria-label={kT?.label ?? "동점으로 볼 1위−2위 차"}
+          />
+          <b className="w-9 tabular-nums text-[var(--ink)]">{fmt(tieGap)}</b>
+        </label>
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
+        <span>관측 <b className="text-[var(--ink)]">{data.tracks.length}</b>곡</span>
+        <span>유형 배정 <b className="text-[var(--ink)]">{assigned}</b></span>
+        <span title="정합도가 임계 미만 — '다른 유형'이 아니라 '해당 없음'">
+          해당 없음 <b className="text-[var(--ink)]">{noMatch}</b>
+        </span>
+        <span title="1위와 2위의 정합도 차가 동점 폭 미만 — 표본이 조금만 흔들려도 뒤집힌다">
+          그중 동점 <b className="text-[var(--ink)]">{ties}</b>
+        </span>
+      </div>
+
+      <BucketRows buckets={buckets} empty="이 기준에서는 집계할 곡이 없음" />
+
+      <div className="mt-3 flex flex-wrap items-center gap-1.5 text-xs text-[var(--muted)]">
+        <span className="inline-block h-3 w-3 rounded" style={{ background: "var(--series)" }} />
+        <span>유형 배정</span>
+        <span className="ml-2 inline-block h-3 w-3 rounded" style={{ background: "var(--series2)" }} />
+        <span>그중 동점(1·2위 근소차 — 뒤집힐 수 있음)</span>
+        <span
+          className="ml-2 inline-block h-3 w-3 rounded"
+          style={{ background: "var(--baseline)", opacity: 0.6 }}
+        />
+        <span>해당 없음</span>
+        <span className="ml-2">행을 클릭하면 그 칸에 든 곡과 정합도가 펼쳐집니다</span>
+      </div>
+      <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
+        정합도는 −1~1이며 0은 &quot;닮지도 반대도 아님&quot;입니다. 임계를 0까지 내리면 어떤 곡도
+        해당 없음이 되지 않아 반대로 생긴 곡까지 유형을 받습니다.
+      </p>
+      {data.note && <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">{data.note}</p>}
+
+      <CriteriaActions
+        title={title ?? "리듬 유형 기준"}
+        items={[
+          kM && {
+            label: kM.label,
+            from: fmt(kM.default),
+            to: fmt(minMatch),
+            changed: minMatch !== kM.default,
+          },
+          kT && {
+            label: kT.label,
+            from: fmt(kT.default),
+            to: fmt(tieGap),
+            changed: tieGap !== kT.default,
+          },
+        ].filter(Boolean) as CriteriaItem[]}
+        summary={`유형 배정 ${assigned} · 해당 없음 ${noMatch} · 그중 동점 ${ties}`}
       />
     </div>
   );

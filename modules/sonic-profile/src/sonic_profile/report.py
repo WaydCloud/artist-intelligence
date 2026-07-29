@@ -6,11 +6,32 @@ insights에 **반드시** 병기한다 — 병기는 선택이 아니라 §5 준
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from collections.abc import Callable
+from datetime import date, datetime, timezone
 from statistics import median
 from typing import Any
 
+from sonic_profile.rhythm import (
+    BINS,
+    MIN_MATCH_DEFAULT,
+    NO_MATCH,
+    TEMPLATES,
+    TIE_GAP_DEFAULT,
+    classify_rhythm,
+)
+from sonic_profile.tagging import TOP_K_INSTRUMENT
+
 MODULE_ID = "sonic-profile"
+
+# 악기 검출 임계 — **A&R 소유**(RULES §3.1.6). 인자 기본값에 숨겨 두지 않는다.
+MIN_PROB_DEFAULT = 0.3
+# 노브가 내려갈 수 있는 최저 기준 = 리포트에 싣는 확률 하한. 둘이 같아야
+# 전송 절감이 집계를 바꾸지 않는다(더 낮은 기준은 애초에 고를 수 없다).
+SHIP_FLOOR = 0.05
+# "신곡"의 경계 — **하중받는 기준**(RULES §3.5). 90일은 관습값이며 도메인 소유자 소유.
+NEW_RELEASE_DAYS = 90
+# 발매 분기 칸의 최소 표본. 얇은 칸은 중앙값이 튀어 트렌드로 읽히면 안 된다.
+VINTAGE_MIN_N = 3
 
 # 리포트 표면에 올리는 지표. crest_factor_db는 TESTS §3 검증 통과(2026-07-28)로 활성화
 _SURFACED = [
@@ -138,15 +159,72 @@ def _cohort_compare(focus: list[dict[str, Any]], cohort: list[dict[str, Any]]) -
     )
 
 
-def _median_series(records: list[dict[str, Any]], axes: list[tuple[str, str]], title: str) -> dict[str, Any] | None:
-    """축별 중앙값의 날짜 시계열 — 트렌드는 **분포가 움직이는가**로만 보인다.
+def _as_date(value: Any) -> date | None:
+    """`YYYY-MM-DD` → date. 파싱 실패는 **결측**이지 오늘이 아니다(§0)."""
+    try:
+        y, m, d = (int(x) for x in str(value)[:10].split("-"))
+        return date(y, m, d)
+    except (ValueError, TypeError):
+        return None
 
-    단면 순위는 트렌드가 아니다. 날짜가 하나뿐이면 점 하나가 찍히고 축적되며 채워진다.
+
+def _release_age_days(r: dict[str, Any]) -> int | None:
+    """관측 시점의 곡 나이(일) = 관측일 − 발매일.
+
+    **오늘 기준이 아니라 관측일 기준**이다. 오늘로 재면 과거 스냅샷의 나이가 리포트를
+    돌릴 때마다 자라서 "그날 차트가 얼마나 신곡 중심이었나"를 못 잰다.
+    """
+    rel, obs = _as_date(r.get("release_date")), _as_date(r.get("observed_date"))
+    if rel is None or obs is None:
+        return None
+    age = (obs - rel).days
+    # 발매 예정일이 관측일보다 뒤인 경우(선공개·시차)는 0으로 눕히지 않고 버린다
+    return age if age >= 0 else None
+
+
+def _vintage_key(r: dict[str, Any]) -> str | None:
+    """발매 분기 라벨. 분기는 관습 단위이며 표본이 얇으면 호출부가 걸러낸다."""
+    rel = _as_date(r.get("release_date"))
+    return f"{rel.year}-Q{(rel.month - 1) // 3 + 1}" if rel else None
+
+
+def _observed_key(r: dict[str, Any]) -> str | None:
+    v = r.get("observed_date")
+    return str(v) if v else None
+
+
+def _median_series(
+    records: list[dict[str, Any]],
+    axes: list[tuple[str, str]],
+    title: str,
+    *,
+    key_of: Callable[[dict[str, Any]], str | None] = _observed_key,
+    min_n: int = 1,
+    dedup: bool = False,
+) -> dict[str, Any] | None:
+    """축별 중앙값 시계열 — 트렌드는 **분포가 움직이는가**로만 보인다.
+
+    단면 순위는 트렌드가 아니다. 점이 하나뿐이면 하나가 찍히고 축적되며 채워진다.
+
+    `key_of`로 **무엇을 x축으로 삼을지**를 갈아 끼운다. 관측일이면 "차트가 어떻게
+    움직였나", 발매 분기면 "제작 사조가 어떻게 움직였나"가 된다 — 후자는 차트 재편성에
+    흔들리지 않는다(D-022·D-023 한계의 해소 경로). `dedup`은 녹음 단위 축(발매 빈티지)에
+    쓴다: 같은 곡이 여러 날 잡혔다고 그 발매 분기의 표본이 늘어나는 것은 아니다.
     """
     by_date: dict[str, list[dict[str, Any]]] = {}
+    seen: set[str] = set()
     for r in records:
-        if r.get("features") and r.get("observed_date"):
-            by_date.setdefault(str(r["observed_date"]), []).append(r)
+        k = key_of(r) if r.get("features") else None
+        if not k:
+            continue
+        if dedup:
+            tid = str(r.get("track_id") or "") or _label(r)
+            if tid in seen:
+                continue
+            seen.add(tid)
+        by_date.setdefault(k, []).append(r)
+    # 표본이 얇은 칸은 중앙값이 튄다 — 빼되 몇 곡이 빠졌는지는 호출부가 병기한다
+    by_date = {k: v for k, v in by_date.items() if len(v) >= min_n}
     dates = sorted(by_date)
     if not dates:
         return None
@@ -169,33 +247,155 @@ def _counts_chart(pairs: list[tuple[str, int]], title: str) -> dict[str, Any] | 
     return {"type": "bar", "title": title, "data": data}
 
 
-def _rhythm_mix(records: list[dict[str, Any]]) -> dict[str, Any] | None:
-    """코호트에서 각 킥 패턴이 최고 정합인 곡 수 — "지금 차트의 리듬 구성".
+def _rhythm_rows(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """리듬 관측 행 = (라벨, 마디 프로파일). **저장된 유형 이름은 쓰지 않는다.**
 
-    최고 정합은 **순위이지 판정이 아니다**(템플릿끼리 직교하지 않는다, RULES §3.1.5).
+    유형은 `kick_bar_profile`에서 **매번 재계산**한다(RULES §3.1.5 재계산 가능성).
+    스냅샷에 박제된 `rhythm_top`을 믿으면 템플릿 원장을 고쳐도 과거 산출물이 옛 이름을
+    달고 남는다 — 2026-07-29에 두 tresillo의 이름이 서로 뒤바뀐 채 저장된 것이 그 사례다.
+    오디오는 저장하지 않으므로(§1) 다시 잴 수단은 이 프로파일뿐이다.
     """
-    counts: dict[str, int] = {}
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
     for r in records:
-        top = (r.get("features") or {}).get("rhythm_top")
-        if isinstance(top, str):
-            counts[top] = counts.get(top, 0) + 1
-    return _counts_chart(
-        list(counts.items()),
-        "리듬 패턴 구성 · 마디 안 킥 배치가 가장 가까운 유형 (판정 아닌 순위)",
-    )
+        prof = (r.get("features") or {}).get("kick_bar_profile")
+        if not isinstance(prof, list) or len(prof) != BINS:
+            continue
+        if not all(isinstance(v, (int, float)) for v in prof):
+            continue
+        dedup = str(r.get("track_id") or "") or _label(r)
+        if dedup in seen:
+            continue
+        seen.add(dedup)
+        rows.append(
+            {
+                "name": _label(r),
+                "profile": [round(float(v), 4) for v in prof],
+                "cohort": str(r.get("cohort") or ""),
+            }
+        )
+    return rows
 
 
-def _instrument_mix(records: list[dict[str, Any]], thresh: float = 0.3, top: int = 12) -> dict[str, Any] | None:
-    """악기별 검출 곡 수. 임계값은 표시용이며 도메인 소유자가 조정한다(RULES §3.1.6)."""
-    counts: dict[str, int] = {}
+def _rhythm_tunable(
+    rows: list[dict[str, Any]], *, min_match: float, tie_gap: float
+) -> dict[str, Any] | None:
+    """리듬 유형 구성(view=rhythm) — 원자료(마디 프로파일)+템플릿+노브를 실어 보낸다.
+
+    클라이언트가 코사인 정합을 다시 계산하므로 A&R가 θ를 움직여 **직접 반박**할 수 있고,
+    각 유형을 펼쳐 **어느 곡이 거기 들어갔는지**까지 확인할 수 있다. 곡 수만 보이면
+    반박할 대상이 없다 — 틀린 배정은 곡 이름을 봐야 눈에 띈다(§2.1 노출의 실질).
+    백엔드 없이(static-first) 성립한다.
+    """
+    if not rows:
+        return None
+    return {
+        "type": "tunable",
+        "title": "리듬 패턴 구성 · 마디 안 킥 배치가 가장 가까운 유형 (판정 아닌 순위 · 펼치면 곡 목록)",
+        "data": {
+            "view": "rhythm",
+            "bins": BINS,
+            "templates": {name: list(pos) for name, pos in TEMPLATES.items()},
+            "tracks": rows,
+            "noMatchLabel": NO_MATCH,
+            "knobs": [
+                {
+                    "key": "min_match",
+                    "label": "유형 배정 최소 정합도 (미만 = 해당 없음)",
+                    "default": min_match,
+                    "min": 0.0,
+                    "max": 0.8,
+                    "step": 0.05,
+                },
+                {
+                    "key": "tie_gap",
+                    "label": "동점으로 볼 1위−2위 차",
+                    "default": tie_gap,
+                    "min": 0.0,
+                    "max": 0.3,
+                    "step": 0.01,
+                },
+            ],
+            "note": "정합도 = 마디 킥 프로파일과 템플릿의 코사인(평균 제거). 템플릿끼리 직교하지 "
+            "않아(최악 쌍 0.83) **1위는 순위이지 판정이 아니다**. 임계 미만은 '다른 유형'이 아니라 "
+            "'해당 없음'이며, 동점 곡은 지우지 않고 표시만 한다. 기본값 0.30·0.05는 엔지니어가 정한 "
+            "관습값이라 도메인 소유자가 결과를 보기 전에 정하는 편이 옳다",
+        },
+    }
+
+
+def _tag_rows(
+    records: list[dict[str, Any]], field: str, full_k: int, ship_floor: float = 0.0
+) -> list[dict[str, Any]]:
+    """트랙별 (라벨, 확률) + **저장 절단 지점**.
+
+    태거는 라벨을 상위 k개만 남긴다. 임계로 곡 수를 세는 축에서 이 절단은 조용한
+    과소집계가 된다 — 6번째 라벨이 임계를 넘어도 저장돼 있지 않으면 세지 못한다.
+    그래서 트랙마다 `floor`(저장된 최소 확률)와 `truncated`를 같이 실어, 클라이언트가
+    "이 임계에서 몇 곡이 불완전할 수 있는가"를 **셀 수 있게** 한다(결측 ≠ 0, §0).
+    """
+    rows: list[dict[str, Any]] = []
+    seen: set[str] = set()
     for r in records:
-        for d in (r.get("features") or {}).get("instruments") or []:
-            if isinstance(d, dict) and float(d.get("p") or 0) >= thresh:
-                counts[str(d["label"])] = counts.get(str(d["label"]), 0) + 1
-    chart = _counts_chart(list(counts.items()), f"악기 구성 · 확률 {thresh} 이상 검출된 곡 수 (정확도 미측정)")
-    if chart:
-        chart["data"] = chart["data"][:top]
-    return chart
+        labels = (r.get("features") or {}).get(field) or []
+        pairs = [
+            {"label": str(d["label"]), "p": round(float(d["p"]), 4)}
+            for d in labels
+            if isinstance(d, dict) and d.get("label") is not None and d.get("p") is not None
+        ]
+        if not pairs:
+            continue
+        dedup = str(r.get("track_id") or "") or _label(r)
+        if dedup in seen:
+            continue
+        seen.add(dedup)
+        rows.append(
+            {
+                "name": _label(r),
+                # 전송 절감: 노브 하한 미만은 어떤 기준에서도 표시되지 않으므로 싣지 않는다.
+                # **태거 절단과 혼동하면 안 된다** — `floor`·`truncated`는 잘라내기 전
+                # 원본 목록으로 판정한다. 그래야 "몇 곡이 하한인가"가 계속 옳다.
+                "labels": [x for x in pairs if x["p"] >= ship_floor],
+                "floor": min(x["p"] for x in pairs),
+                "truncated": len(pairs) < full_k,
+            }
+        )
+    return rows
+
+
+def _instrument_tunable(
+    rows: list[dict[str, Any]], *, thresh: float, top: int = 14
+) -> dict[str, Any] | None:
+    """악기 구성(view=tags) — **임계를 코드에서 꺼내 노브로 만든다**(RULES §3.1.6).
+
+    "확률 몇 이상을 검출로 볼 것인가"는 A&R 소유인데 `0.3`이 인자 기본값에 박혀 있었다.
+    펼치면 곡 목록과 각 곡의 확률이 나와, 임계를 옮겼을 때 **무엇이 들고 나는지**가 보인다.
+    """
+    if not rows:
+        return None
+    return {
+        "type": "tunable",
+        "title": "악기 구성 · 검출 확률 임계 이상인 곡 수 (참고 · 정확도 미측정 · 펼치면 곡 목록)",
+        "data": {
+            "view": "tags",
+            "tracks": rows,
+            "topBuckets": top,
+            "knobs": [
+                {
+                    "key": "min_prob",
+                    "label": "검출로 볼 최소 확률",
+                    "default": thresh,
+                    "min": SHIP_FLOOR,
+                    "max": 0.9,
+                    "step": 0.05,
+                }
+            ],
+            "note": "확률은 **존재 가능성이지 비중이 아닙니다** — '기타 0.5'는 '기타가 절반'이 "
+            "아니라 '있을 법함'입니다. 라벨끼리 배타적이지 않아 한 곡이 여러 칸에 들어갑니다. "
+            "정확도는 아직 사람 라벨로 재지 않았으므로 단독 근거로 쓰지 마십시오. "
+            "기본 임계 0.3은 엔지니어가 정한 관습값이라 담당자가 정할 사안입니다",
+        },
+    }
 
 
 def _style_mix(records: list[dict[str, Any]], top: int = 12) -> dict[str, Any] | None:
@@ -211,12 +411,69 @@ def _style_mix(records: list[dict[str, Any]], top: int = 12) -> dict[str, Any] |
     return chart
 
 
+def _age_hist(records: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """최신 관측일 코호트의 곡 나이 분포 — "지금 차트가 얼마나 신곡 중심인가"."""
+    latest = max((str(r.get("observed_date") or "") for r in records if r.get("features")), default="")
+    if not latest:
+        return None
+    seen: set[str] = set()
+    buckets = [("0–30일", 0, 30), ("31–90일", 31, 90), ("91–365일", 91, 365),
+               ("1–3년", 366, 1095), ("3년 초과", 1096, 10**9)]
+    counts = dict.fromkeys((b[0] for b in buckets), 0)
+    for r in records:
+        if str(r.get("observed_date") or "") != latest:
+            continue
+        age = _release_age_days(r)
+        if age is None:
+            continue
+        tid = str(r.get("track_id") or "") or _label(r)
+        if tid in seen:
+            continue
+        seen.add(tid)
+        for name, lo, hi in buckets:
+            if lo <= age <= hi:
+                counts[name] += 1
+                break
+    if not any(counts.values()):
+        return None
+    return {
+        "type": "bar",
+        "title": f"곡 나이 분포 · {latest} 관측 코호트 (관측일 − 발매일)",
+        # 순서를 보존한다 — 나이 구간은 크기순이 아니라 시간순으로 읽어야 한다
+        "data": [{"name": n, "value": counts[n]} for n, _, _ in buckets if counts[n]],
+    }
+
+
+def _age_series(records: list[dict[str, Any]]) -> dict[str, Any] | None:
+    """날짜별 곡 나이 중앙값 — 차트가 신곡 쪽으로 움직이는지 카탈로그 쪽으로 움직이는지."""
+    by_date: dict[str, list[int]] = {}
+    for r in records:
+        age = _release_age_days(r) if r.get("features") else None
+        if age is not None:
+            by_date.setdefault(str(r["observed_date"]), []).append(age)
+    dates = sorted(by_date)
+    if not dates:
+        return None
+    return {
+        "type": "line",
+        "title": "곡 나이 추이 · 관측 코호트의 나이 중앙값 (일)",
+        "data": {
+            "x": dates,
+            "series": [{"name": "나이 중앙값(일)", "values": [round(median(by_date[d]), 1) for d in dates]}],
+        },
+    }
+
+
 def build_report(
     records: list[dict[str, Any]],
     *,
     generated_at: str,
     provenance: dict[str, Any],
     watchlist: list[str] | None = None,
+    min_match: float = MIN_MATCH_DEFAULT,
+    tie_gap: float = TIE_GAP_DEFAULT,
+    min_prob: float = MIN_PROB_DEFAULT,
+    new_days: int = NEW_RELEASE_DAYS,
 ) -> dict[str, Any]:
     resolved = [r for r in records if r.get("features")]
     unresolved = [r for r in records if not r.get("features")]
@@ -260,7 +517,14 @@ def build_report(
         )
 
     # ── 리듬 패턴 · 악기 · 스타일 (RULES §3.1.5·§3.1.6)
-    for view in (_rhythm_mix(resolved), _instrument_mix(resolved), _style_mix(resolved)):
+    rhythm_rows = _rhythm_rows(resolved)
+    # 싣는 하한 = 노브 최솟값(_instrument_tunable). 그 아래는 어떤 기준에서도 안 보인다.
+    inst_rows = _tag_rows(resolved, "instruments", TOP_K_INSTRUMENT, ship_floor=SHIP_FLOOR)
+    for view in (
+        _rhythm_tunable(rhythm_rows, min_match=min_match, tie_gap=tie_gap),
+        _instrument_tunable(inst_rows, thresh=min_prob),
+        _style_mix(resolved),
+    ):
         if view:
             charts.append(view)
 
@@ -269,9 +533,39 @@ def build_report(
     today_rec = [r for r in resolved if str(r.get("observed_date") or "") == latest]
     cohort = [r for r in today_rec if r.get("cohort") == "chart"]
     focus = [r for r in today_rec if r.get("cohort") == "watchlist"]
+    # 고정 코호트 = **최초 관측일에 잡힌 트랙 집합**. 이 집합은 날마다 바뀌지 않으므로
+    # 여기서 움직이는 값은 "차트 구성이 바뀐 것"이 아니라 "이 곡들"의 이야기다(D-022·D-023).
+    first_date = min((str(r.get("observed_date") or "") for r in resolved), default="")
+    fixed_ids = {
+        str(r.get("track_id") or "") or _label(r)
+        for r in resolved
+        if str(r.get("observed_date") or "") == first_date
+    }
+    fixed = [r for r in resolved if (str(r.get("track_id") or "") or _label(r)) in fixed_ids]
+    fresh = [r for r in resolved if (a := _release_age_days(r)) is not None and a <= new_days]
+
     for view in (
         _median_series(resolved, _UNIT_AXES, "분포 추이 · 0~1 축 중앙값 (날짜가 쌓이며 채워짐)"),
         _median_series(resolved, [("tempo_bpm", "템포 중앙값")], "분포 추이 · 템포 중앙값 (BPM)"),
+        # ① 발매 빈티지 — x축이 관측일이 아니라 발매 분기라 차트 재편성에 흔들리지 않는다
+        _median_series(
+            resolved, _UNIT_AXES,
+            f"발매 빈티지별 분포 · 0~1 축 중앙값 (발매 분기 · 표본 {VINTAGE_MIN_N}곡 이상)",
+            key_of=_vintage_key, min_n=VINTAGE_MIN_N, dedup=True,
+        ),
+        _median_series(
+            resolved, [("tempo_bpm", "템포 중앙값")],
+            f"발매 빈티지별 템포 · 중앙값 BPM (발매 분기 · 표본 {VINTAGE_MIN_N}곡 이상)",
+            key_of=_vintage_key, min_n=VINTAGE_MIN_N, dedup=True,
+        ),
+        # ② 곡 나이 — 지금 차트가 얼마나 신곡 중심인가, 그리고 그게 움직이는가
+        _age_hist(resolved),
+        _age_series(resolved),
+        # ③ 고정 코호트 — 같은 곡들만 따라가면 구성 변화가 제거된다
+        _median_series(fixed, _UNIT_AXES,
+                       f"고정 코호트 추이 · {first_date} 관측 {len(fixed_ids)}곡만 계속 추적"),
+        # ④ 신곡만 — 카탈로그 혼입을 걷어낸 분포
+        _median_series(fresh, _UNIT_AXES, f"신곡만 분포 추이 · 발매 {new_days}일 이내 (0~1 축 중앙값)"),
         _position_heatmap(focus, cohort),
         _cohort_compare(focus, cohort),
     ):
@@ -302,18 +596,70 @@ def build_report(
     insights.append(
         "펄스 명료도 = 온셋 포락 자기상관의 주 피크. **danceability가 아니며** 춤 실력·인기·품질과 무관합니다(RULES §5)"
     )
+    ages = [a for r in resolved if (a := _release_age_days(r)) is not None]
+    if ages:
+        n_fresh = sum(1 for a in ages if a <= new_days)
+        insights.append(
+            f"관측 코호트는 **카탈로그 혼합**입니다 — 곡 나이 중앙값 {int(median(ages))}일, "
+            f"발매 {new_days}일 이내 신곡은 관측 {len(ages)}건 중 {n_fresh}건입니다. "
+            "그래서 관측일 기준 `분포 추이`는 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있습니다 — "
+            "**발매 빈티지·고정 코호트·신곡만 뷰가 그 둘을 분리하려는 것**입니다"
+        )
+        insights.append(
+            "⚠ **발매 빈티지 뷰는 생존 편향이 있습니다** — 옛 분기 칸에 들어간 곡은 그 분기의 대표 "
+            "표본이 아니라 **오늘까지 차트에 살아남은 곡**입니다. 따라서 '2021년 음악은 이랬다'가 "
+            "아니라 '2021년 발매곡 중 지금도 들리는 것은 이렇다'로만 읽으십시오. 최근 분기로 갈수록 "
+            "이 편향은 줄어듭니다"
+        )
+        insights.append(
+            f"⚠ 발매일은 유통사 표기(Apple)이며 **원곡 발매일이 아닐 수 있습니다** — 리마스터·재발매·"
+            "지역판이 그날짜로 잡힙니다. 오래된 곡의 빈티지 배치는 그만큼 흔들립니다. "
+            f"'신곡' 경계 {new_days}일·빈티지 칸 최소 표본 {VINTAGE_MIN_N}곡도 관습값이라 "
+            "담당자가 정할 사안입니다"
+        )
     eng = provenance.get("engine_provenance") or {}
-    if any((r.get("features") or {}).get("rhythm_top") for r in resolved):
+    if rhythm_rows:
+        cls = [classify_rhythm(x["profile"], min_match=min_match, tie_gap=tie_gap) for x in rhythm_rows]
+        n_none = sum(1 for c in cls if c["assigned"] is None)
+        n_tie = sum(1 for c in cls if c["tie"])
         insights.append(
             "리듬 패턴 = 마디를 16분음 16칸으로 나눠 저역(20–120Hz) 킥 배치를 접은 뒤 "
             "이름 붙은 유형과 맞춰 본 것입니다. 유형끼리 서로 겹치므로 **가장 가까운 유형은 순위이지 판정이 아닙니다**. "
             "정합도가 낮으면 '다른 유형'이 아니라 '해당 없음'입니다"
+        )
+        # 막대 높이를 그대로 읽으면 안 되는 이유를 수치로 병기한다(RULES §4 리듬 뷰 규약)
+        insights.append(
+            f"⚠ 리듬 관측 {len(cls)}곡 중 **{n_tie}곡은 1위와 2위 차가 {tie_gap:g} 미만인 동점**이고 "
+            f"**{n_none}곡은 정합도 {min_match:g} 미만이라 '해당 없음'**입니다. 템플릿이 서로 직교하지 않아 "
+            "(최악 쌍 상관 0.83) 동점 곡의 유형은 표본이 조금만 흔들려도 뒤집힙니다 — "
+            "**막대 높이를 곡 수 그대로 읽지 마시고 튜너로 기준을 움직여 확인하십시오**"
+        )
+        insights.append(
+            f"기준값 {min_match:g}(배정 임계)·{tie_gap:g}(동점 폭)는 **엔지니어가 정한 관습값이며 "
+            "도메인 근거가 있는 값이 아닙니다** — 결과를 보기 전에 담당자가 정할 사안입니다. "
+            "리듬 기준 튜너에서 조정한 값은 되돌려 보낼 수 있습니다"
         )
         insights.append(
             "⚠ 트랩·저지클럽의 특징인 하이햇 롤과 하프타임 스네어는 아직 측정하지 못합니다 — "
             "믹스에서 스네어가 분리되지 않습니다(중역 대비 1.22 대 저역 1.71). 지금 내는 것은 "
             "정박·3+3+2·싱코페이션 여부까지입니다"
         )
+        insights.append(
+            "⚠ 유형 정의에 알려진 결함이 둘 있습니다: `dembow`는 킥+스네어 **합주** "
+            "패턴인데 프로파일은 **킥만** 접으므로 무엇을 재고 있는지 불확실하고, "
+            "`tresillo(16분·반마디)`는 반 마디에서 끊긴 조각이라 관용 패턴이 아닙니다"
+            "(마디 끝까지 이으면 `dembow`와 같은 벡터). 이 두 유형의 곡 수는 특히 조심해서 읽으십시오"
+        )
+    if inst_rows:
+        # 상위 k 절단이 임계 집계에서 조용한 과소집계가 된다 — 몇 곡이 영향권인지 센다
+        n_cut = sum(1 for x in inst_rows if x["truncated"] and x["floor"] > min_prob)
+        if n_cut:
+            insights.append(
+                f"⚠ 악기 곡 수는 **하한입니다** — 관측 {len(inst_rows)}곡 중 **{n_cut}곡**은 "
+                f"태깅 당시 상위 라벨 일부만 저장돼(가장 낮은 저장 확률이 임계 {min_prob:g}보다 높음) "
+                "임계를 넘는 악기가 더 있어도 세지 못합니다. 이후 수집분부터는 40개 악기를 모두 "
+                "남기므로 이 하한은 점차 해소됩니다"
+            )
     if any((r.get("features") or {}).get("styles") for r in resolved):
         insights.append(
             "⚠ 장르·악기는 **참고용이며 정확도를 아직 재지 않았습니다**(사람 라벨 대조 전). "

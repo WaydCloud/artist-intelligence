@@ -24,14 +24,24 @@ KICK_BAND = (20.0, 120.0)
 MIN_DOWNBEATS = 3
 
 # RULES §3.1.5 템플릿 원장 — 16분 격자 위 킥 위치. **값은 도메인 소유자 소유.**
+# 이름은 격자와 맞아야 한다: 16분 16칸에서 8분음 n = 칸 2n이므로 8분 3+3+2 = 0·6·12다.
+# (2026-07-29 이전에는 두 tresillo의 이름과 근거가 서로 뒤바뀌어 있었다 — D-027.)
 TEMPLATES: dict[str, tuple[int, ...]] = {
     "four-on-floor": (0, 4, 8, 12),
     "backbeat(1·3)": (0, 8),
-    "tresillo 3+3+2": (0, 3, 6),
-    "tresillo(16th)": (0, 6, 12),
+    "tresillo(8분 3+3+2)": (0, 6, 12),
+    # 반마디 조각이라 관용 패턴이 아니다 — 마디 끝까지 이으면 dembow와 같은 벡터가 된다.
+    # 제거를 권고하되 값은 도메인 소유자 소유라 이름·근거만 바로잡고 남긴다(RULES §3.1.5 결함 ①).
+    "tresillo(16분·반마디)": (0, 3, 6),
     "dembow": (0, 3, 6, 8, 11, 14),
     "trap-synco": (0, 3, 6, 10),
 }
+
+# 하중받는 기준 — **관습 기본값이며 도메인 소유자(A&R)가 재조정한다**(RULES §3.1.5 원장).
+# θ가 없으면 argmax가 언제나 이름을 뱉어 음의 상관도 "가장 가까운 유형"이 된다.
+MIN_MATCH_DEFAULT = 0.30
+TIE_GAP_DEFAULT = 0.05
+NO_MATCH = "해당 없음"
 
 _A2B: Any = None
 
@@ -93,8 +103,9 @@ def bar_profile(env: np.ndarray, sr: int, downbeats: np.ndarray, bins: int = BIN
 def match_templates(profile: np.ndarray) -> dict[str, float]:
     """프로파일 × 명명 템플릿의 코사인 정합도(평균 제거 후).
 
-    템플릿끼리 **직교하지 않는다** — four-on-floor와 backbeat는 상관이 높다.
-    따라서 최고 정합은 **판정이 아니라 순위**다(RULES §3.1.5).
+    템플릿끼리 **직교하지 않는다** — 실측 최악 쌍이 0.83이다(RULES §3.1.5.1).
+    따라서 최고 정합은 **판정이 아니라 순위**이고, 이 함수의 출력을 그대로
+    `max()`에 넣으면 안 된다 — 임계·동점 처리는 `classify_rhythm`이 한다.
     """
     a = np.asarray(profile, dtype=np.float64)
     a = a - a.mean()
@@ -107,6 +118,44 @@ def match_templates(profile: np.ndarray) -> dict[str, float]:
         nt = float(np.linalg.norm(t))
         out[name] = round(float(a @ t / (na * nt)) if na > 0 and nt > 0 else 0.0, 4)
     return out
+
+
+def classify_rhythm(
+    profile: np.ndarray | list[float],
+    *,
+    min_match: float = MIN_MATCH_DEFAULT,
+    tie_gap: float = TIE_GAP_DEFAULT,
+) -> dict[str, Any]:
+    """마디 프로파일 → **유형 배정 + 그 배정을 못 믿을 이유**(RULES §3.1.5).
+
+    `match_templates`에 `max()`를 씌우는 것만으로는 두 가지가 조용히 깨진다:
+
+    1. 코사인은 0을 중심으로 대칭이라 **음의 상관도 1위가 된다.** 실측 코호트에
+       −0.027짜리 곡이 `backbeat`로 집계돼 있었다. → `min_match` 미만은 `None`.
+    2. 프로파일이 완전 평탄하면 전 정합도가 0이 되고, `max()`는 **사전 첫 키인
+       `four-on-floor`를 조용히 뽑는다.** "리듬 없음"이 "정박"으로 둔갑한다.
+       (1)의 임계가 이 경로도 막는다 — θ를 0으로 내리면 되살아나므로 TESTS §5에 고정.
+
+    `assigned=None`은 "다른 유형"이 아니라 **"해당 없음"**이다. `tie`는 1·2위가
+    근소차라 표본이 조금만 흔들려도 뒤집힌다는 표시이며, **행을 지우지 않는다**.
+    """
+    match = match_templates(np.asarray(profile, dtype=np.float64))
+    ranked = sorted(match.items(), key=lambda kv: (-kv[1], kv[0]))
+    top, score = ranked[0]
+    second, second_score = ranked[1] if len(ranked) > 1 else (None, None)
+    gap = round(score - second_score, 4) if second_score is not None else None
+    assigned = top if score >= min_match else None
+    return {
+        "match": match,
+        "top": top,
+        "top_score": score,
+        "second": second,
+        "second_score": second_score,
+        "gap": gap,
+        "assigned": assigned,
+        # 동점은 배정된 곡에서만 의미가 있다 — 해당 없음은 애초에 순위를 주장하지 않는다
+        "tie": bool(assigned is not None and gap is not None and gap < tie_gap),
+    }
 
 
 def _beat_tracker() -> Any:
@@ -131,18 +180,22 @@ def extract_rhythm(y: np.ndarray, sr: int) -> dict[str, Any]:
 
     tempo = tempo_from_beats(beats)
     profile = bar_profile(kick_envelope(y, sr), sr, downbeats)
-    match = match_templates(profile)
-    top = max(match, key=lambda k: match[k])
+    cls = classify_rhythm(profile)
     return {
         "tempo_bpm_fit": round(tempo, 2),
         "beats_per_bar": round(float(len(beats)) / len(downbeats), 2) if len(downbeats) else None,
         "n_beats": int(len(beats)),
         "n_downbeats": int(len(downbeats)),
+        # 리포트는 이 프로파일에서 유형을 **재계산**한다 — 템플릿·θ를 고쳐도 오디오를
+        # 다시 받지 않아도 되게 하는 것이 무보관 불변식(§1)과 기준 재조정(§2.1)의 접점이다.
         "kick_bar_profile": [round(float(v), 4) for v in profile],
-        "rhythm_match": match,
+        "rhythm_match": cls["match"],
         # 순위이지 판정이 아니다 — 저정합도는 "해당 없음"이지 "다른 스타일"이 아니다
-        "rhythm_top": top,
-        "rhythm_top_score": match[top],
+        "rhythm_top": cls["top"],
+        "rhythm_top_score": cls["top_score"],
+        "rhythm_assigned": cls["assigned"],
+        "rhythm_gap": cls["gap"],
+        "rhythm_tie": cls["tie"],
     }
 
 
@@ -154,5 +207,9 @@ def rhythm_provenance() -> dict[str, Any]:
         "beat_dbn": False,
         "rhythm_hop": HOP,
         "rhythm_bins": BINS,
+        # 템플릿·임계는 **캐시 키가 아니다**(cli.py `engine_key` 참조). 저장된
+        # kick_bar_profile에서 재계산되므로 값을 바꿔도 프리뷰를 다시 받지 않는다.
         "rhythm_templates": sorted(TEMPLATES),
+        "rhythm_min_match": MIN_MATCH_DEFAULT,
+        "rhythm_tie_gap": TIE_GAP_DEFAULT,
     }

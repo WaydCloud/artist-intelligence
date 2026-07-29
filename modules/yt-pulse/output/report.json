@@ -1,8 +1,8 @@
 {
   "moduleId": "yt-pulse",
   "title": "YT 펄스 · 워치리스트 공식 채널",
-  "subtitle": "YouTube Data API v3 (official) · 2026-07-20T00:16:53Z",
-  "generatedAt": "2026-07-20T02:48:31Z",
+  "subtitle": "YouTube Data API v3 (official) · 2026-07-29T00:19:19Z",
+  "generatedAt": "2026-07-29T00:19:20Z",
   "metrics": [
     {
       "label": "추적 팀",
@@ -12,24 +12,24 @@
     },
     {
       "label": "최근작 영상",
-      "value": 65,
+      "value": 163,
       "unit": "개",
       "hint": "채널당 최근 업로드 창"
     },
     {
       "label": "최근작 조회 합",
-      "value": 31273268,
+      "value": 98325037,
       "unit": "views"
     },
     {
       "label": "최고 평균 일 조회(velocity)",
-      "value": 1165870,
+      "value": 1371521,
       "unit": "views/일",
       "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)"
     },
     {
       "label": "신작",
-      "value": 65,
+      "value": 158,
       "unit": "개",
       "hint": "최근 14일 내 업로드(캠페인 활성)"
     }
@@ -41,47 +41,47 @@
       "data": [
         {
           "name": "KATSEYE",
-          "value": 16438200
-        },
-        {
-          "name": "CORTIS",
-          "value": 3872459
-        },
-        {
-          "name": "BABYMONSTER",
-          "value": 3304464
-        },
-        {
-          "name": "Hearts2Hearts",
-          "value": 2376103
-        },
-        {
-          "name": "RESCENE",
-          "value": 2132218
+          "value": 45116593
         },
         {
           "name": "ILLIT",
-          "value": 1994676
+          "value": 14417765
         },
         {
-          "name": "MEOVV",
-          "value": 606206
+          "name": "CORTIS",
+          "value": 13978932
         },
         {
-          "name": "izna",
-          "value": 221238
+          "name": "BABYMONSTER",
+          "value": 11064206
+        },
+        {
+          "name": "Hearts2Hearts",
+          "value": 6002935
+        },
+        {
+          "name": "RESCENE",
+          "value": 4411813
         },
         {
           "name": "KISS OF LIFE",
-          "value": 177953
+          "value": 1256233
+        },
+        {
+          "name": "MEOVV",
+          "value": 1167946
+        },
+        {
+          "name": "izna",
+          "value": 550266
         },
         {
           "name": "KiiiKiii",
-          "value": 107324
+          "value": 228506
         },
         {
           "name": "KEYVEATZ",
-          "value": 42427
+          "value": 129842
         }
       ]
     },
@@ -91,58 +91,58 @@
       "data": [
         {
           "name": "KATSEYE",
-          "value": 1165870
-        },
-        {
-          "name": "Hearts2Hearts",
-          "value": 484645
-        },
-        {
-          "name": "BABYMONSTER",
-          "value": 432231
+          "value": 1371521
         },
         {
           "name": "ILLIT",
-          "value": 430949
+          "value": 970893
         },
         {
           "name": "CORTIS",
-          "value": 418739
+          "value": 808982
+        },
+        {
+          "name": "BABYMONSTER",
+          "value": 486767
         },
         {
           "name": "RESCENE",
-          "value": 292552
+          "value": 236528
         },
         {
-          "name": "MEOVV",
-          "value": 71141
+          "name": "Hearts2Hearts",
+          "value": 180246
         },
         {
           "name": "KISS OF LIFE",
-          "value": 42584
+          "value": 66845
+        },
+        {
+          "name": "MEOVV",
+          "value": 42599
         },
         {
           "name": "izna",
-          "value": 30191
+          "value": 21666
         },
         {
           "name": "KiiiKiii",
-          "value": 18398
+          "value": 13326
         },
         {
           "name": "KEYVEATZ",
-          "value": 5002
+          "value": 6668
         }
       ]
     }
   ],
   "media": [],
   "insights": [
-    "신작: KATSEYE · 'must have been the wind #KATSEYE' (1일 전, 조회 783,100, +783,100/일) · 캠페인 활성 신호(참고)",
-    "신작: KISS OF LIFE · 'Preview : SWEAT EQUITY' (1일 전, 조회 25,997, +25,997/일) · 캠페인 활성 신호(참고)",
-    "신작: KEYVEATZ · 'いなせだね夏を連れて来た #Keyveatz' (1일 전, 조회 1,630, +1,630/일) · 캠페인 활성 신호(참고)",
-    "신작: CORTIS · 'martin pov 📹 #CORTIS #코르티스 #CORTIS_TOUR #PUTYOURPHONEDOWN #PYPD_IN_INCHEON' (1일 전, 조회 108,626, +108,626/일) · 캠페인 활성 신호(참고)",
-    "신작: Hearts2Hearts · 'yet my move wont bug you #Hearts2Hearts #하츠투하츠 #H2H #JUUN #주은' (1일 전, 조회 175,148, +175,148/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'reporting for duty #KATSEYE' (1일 전, 조회 425,540, +425,540/일) · 캠페인 활성 신호(참고)",
+    "신작: KEYVEATZ · 'ねえ ほら Kiss n tell' (1일 전, 조회 3,195, +3,195/일) · 캠페인 활성 신호(참고)",
+    "신작: ILLIT · '등산 ootd 야호＞_＜' (1일 전, 조회 338,950, +338,950/일) · 캠페인 활성 신호(참고)",
+    "신작: Hearts2Hearts · 'bruhh #Hearts2Hearts #하츠투하츠 #H2H' (1일 전, 조회 169,454, +169,454/일) · 캠페인 활성 신호(참고)",
+    "신작: RESCENE · '#조은찬 님과 어디서나 당당하게 걷기 🎀' (1일 전, 조회 73,064, +73,064/일) · 캠페인 활성 신호(참고)",
     "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
     "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
     "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"

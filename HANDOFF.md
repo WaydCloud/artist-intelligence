@@ -15,7 +15,7 @@
   4. **yt-pulse v1** — 워치리스트 공식 채널 velocity·신작.
   5. **sonic-profile v4** — 프리뷰 30초·**오디오 무보관** · **스칼라 축 71종 계산·저장 / 타일 24종 노출**(D-032) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축. 지표 3층 구조(D-031) + 축 카탈로그 100항([`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)).
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
-- 최근 작업 이력: [`Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · 그 전 [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027·D-028·D-029)
+- 최근 작업 이력: [`Handoffs/2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
 ## 🔴 가동 중: 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 

@@ -26,8 +26,18 @@ jobs:
       # 로컬 게이트가 `modules/ scripts/`를 검사하므로 CI도 같은 범위를 본다.
       - name: Lint (ruff)
         run: uvx "ruff@${RUFF_VERSION}" check modules scripts
+      # 타입체커는 **버전만 핀해서는 부족하다 — 환경도 맞춰야 한다.**
+      # 맨몸 `uvx pyright`는 numpy·librosa·onnxruntime을 못 풀어 15건을 낸다. 개발자 PC에는
+      # 깔려 있으니 로컬은 0건 — 정확히 우리가 없애려던 "로컬 초록·CI 적색" 비대칭이다.
+      # (이 단계는 여태 ruff가 먼저 죽어서 **실행된 적이 없었다.** 그래서 안 보였다.)
+      #
+      # beat_this는 여기 넣지 않는다 — torch를 끌고 오는데 임포트 한 줄 때문에 CI에
+      # 기가바이트를 받을 이유가 없다. 코드가 이미 ImportError를 잡아 RhythmUnavailable로
+      # 올리는 **선택적 의존성**이라, 호출부에 `av`와 같은 방식으로 표시해 둔다.
       - name: Typecheck (pyright)
-        run: uvx "pyright@${PYRIGHT_VERSION}" modules
+        run: >
+          uvx --with numpy --with librosa --with onnxruntime --with jsonschema
+          "pyright@${PYRIGHT_VERSION}" modules
       # 핵심 흐름 스모크: 각 모듈 CLI를 픽스처로 돌려 report.json을 생성한다.
       # 구현된 모듈은 강제 통과, 아직 구현 안 된 모듈은 건너뛴다(파이프라인은 코드가 채워질수록 자란다).
       - name: Smoke — chart-history (v3 국가 교차 + 엔티티)
@@ -170,8 +180,12 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      # PR 이벤트를 스캔하려면 GITHUB_TOKEN이 필요하다(gitleaks-action v2). 없으면
+      # 스캔 자체가 시작되지 못한다 — 자동 발급 토큰이라 별도 시크릿 설정은 없다.
       - name: Secret scan (gitleaks)
         uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - uses: astral-sh/setup-uv@v3
       - name: Python deps audit
         run: uvx pip-audit || true   # 초기엔 경고만, 안정화 후 hard-fail 전환

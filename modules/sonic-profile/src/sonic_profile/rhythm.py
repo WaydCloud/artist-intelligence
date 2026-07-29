@@ -163,7 +163,9 @@ def _beat_tracker() -> Any:
     global _A2B
     if _A2B is None:
         try:
-            from beat_this.inference import Audio2Beats
+            # torch를 끌고 오는 선택적 의존성 — 미설치는 정상 경로이고(바로 아래에서 잡아
+            # RhythmUnavailable로 올린다), CI 타입체크 환경에도 일부러 넣지 않는다.
+            from beat_this.inference import Audio2Beats  # type: ignore
         except ImportError as exc:
             raise RhythmUnavailable("beat_this not installed") from exc
         try:

@@ -46,8 +46,13 @@
   4. **pyright는 여태 한 번도 실행된 적이 없었다** — ruff가 같은 잡의 앞 단계라 늘 먼저 죽었다. 되살리니 15건 실패: 맨몸 `uvx pyright`는 numpy를 못 푸는데 개발자 PC엔 깔려 있어 로컬만 0건이었다. **버전을 핀해도 환경이 다르면 같은 비대칭이 남는다.** → CI 타입체크에 `--with numpy --with jsonschema`.
   5. **librosa를 CI에 끌어오려던 시도는 실패했고 접었다** — uv가 `numba 0.53.1 → llvmlite 0.36.0`을 골라 Python 3.12에서 빌드가 깨졌다. 버전 핀으로 쫓으려면 다른 OS·파이썬의 해석 결과를 추측해야 하고 확인은 CI 왕복 1회씩 든다. 대신 **코드가 이미 선언한 설계를 따랐다**: `numpy`만 모듈 최상단(진짜 필수), `librosa`·`onnxruntime`·`beat_this`는 전부 함수 안 지연 임포트(선택적 중량)라 호출부에 `# type: ignore`로 표시(`av`가 쓰던 방식).
 - **유출 없음은 이번에 실제로 확인했다** — 17개 커밋 트리를 직접 패턴 스캔(클린, `.env.example`만 존재하고 전부 자리표시자). 이전 기록의 "유출 없음"은 0바이트 스캔에 근거한 것이라 무효였다.
-- ⚠ **남은 구멍**: `signal-series`는 JSON 스키마 패키지가 없어(문서 관례로만 존재) series 픽스처 4종이 **어떤 계약으로도 검증되지 않는다**. `packages/signal-series/` 신설은 별도 건.
+- ✅ **남은 구멍 메움(2026-07-29, PR #4 대기)**: `packages/signal-series/` 신설 — SPEC 정본의 기계검증형 스키마 + `scripts/validate_series.py`(길이·정렬·roster 일관성까지) + CI `data-contracts` 게이트(픽스처 4종 전수, 0건=실패). 음성 케이스 5종으로 게이트가 실제로 잡는 것 확인. **부수 발견**: `sonic_series.json`이 계약 이탈(unit 빈 문자열·provenance 3필드 누락) → 방출부를 이 브랜치(PR #3)에서 수정, 재생성 산출 게이트 통과.
 - **재현 방법**(다음에 툴 버전을 올릴 때 쓸 것): CI와 같은 패키지만 담은 격리 venv를 만들어 거기서 pyright를 돌린다. 개발자 PC의 전역 환경에서 확인한 "0건"은 CI를 예측하지 못한다 — 이번에 그걸로 한 번 틀렸다.
+
+## ⏳ 열린 PR 2건 — 도메인 소유자 머지 결정 대기 (2026-07-29)
+
+- **[PR #3](https://github.com/WaydCloud/artist-intelligence/pull/3)** `sonic-metrics-d031` — D-031(지표 9종) + D-032(T0 축 37종·카탈로그 100항) + AGENTS §7 육안 확인 기록 + sonic signals 방출부 계약 수정.
+- **[PR #4](https://github.com/WaydCloud/artist-intelligence/pull/4)** `signal-series-schema` — signal-series JSON 스키마 패키지 + 검증기 + CI 게이트(D-030 잔여 구멍). PR #3과 파일 겹침 없음 — 순서 무관 머지 가능.
 
 ## ⚠ 재개 첫 액션
 

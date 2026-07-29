@@ -45,6 +45,9 @@ export interface LeadLagTunableData {
   socialDates: string[];
   chartDates: string[];
   series: Record<string, { social?: number[]; chart?: (number | null)[] }>;
+  // 원인분석 레이어 (signal-bridge RULES §3.1): 분류를 믿을지 판단할 근거.
+  // censored = 차트 온셋이 수집 개시일과 같아 이전 진입을 배제하지 못하는 상태.
+  evidence?: Record<string, { posts: number; days: number; censored: boolean }>;
   knobs: Knob[];
   note?: string;
 }

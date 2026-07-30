@@ -4,16 +4,14 @@
 > 과거 기록은 [`Handoffs/`](Handoffs/), 결정 이유는 [`docs/DECISIONS.md`](docs/DECISIONS.md).
 > 새 세션은 **이 파일 먼저** → `CLAUDE.md` → 관련 모듈 순으로 읽고 이어서 작업한다.
 
-## 🧭 다음 행선지 — **대기 목록(행 늘리기)** (재개점)
+## 🧭 다음 행선지 (재개점)
 
-> **시각화가 닫혔다.** 여섯 탭 전부 구획(D-047) · 계약 6/6(D-044) · 인터랙션(D-045) · 모션(D-046) · **표시 결정 3건 위임 구현(D-048)**.
-> 계약 = D-041 · 채택 경계 = D-042 · 구획 = D-043 · 값의 방향 = D-044 · 인터랙션 = D-045 · 모션 = D-046 · 구획+앵커 = D-047 · **긴 목록·용어·표면 인색 = D-048** · 형식 정본 = [`DESIGN.md`](DESIGN.md) §7.1~§7.7.
+> **A2 본편이 닫혔다**(2026-07-31 · [`Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md`](Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md)). 동시대(2021-10 앵커) US·KR 두 프레임 위에서 규칙 미확정 임펄스 전부 실측 → **genre-impulse v1.2 규칙 3종**(hyperpop + 신규 ukg-origin-shuffle·moombahton-kr-tropical) · 커버리지 3/10. amapiano는 정답지 7/7인데 **베이스라인 20%라 등재 철회**(정답지가 극단이어도 그 극단이 붐비면 규칙이 아니다 — RULES §2.2).
+> 시각화는 계속 닫혀 있다(D-041~D-048 · 정본 [`DESIGN.md`](DESIGN.md) §7).
 
-**도메인 소유자 결정 대기가 비었다.** 남은 표시 판단은 하나뿐이고 화면을 보고 답할 것이다: **`sonic-profile` 타일 23개를 더 줄일까**(자리는 D-047이 정했고, 원장이 무효라고 적은 축은 D-048이 코드로 막았다).
+⏳ **1순위 — 콜드 실행 실측**: **오늘(07-31) 09:00 daily가 v4 첫 실행이다**(07-30 실행은 v4 커밋 12:34보다 먼저 돌아 v3였다 — 원인 확정됨). 스냅샷에 하이햇 축 6종·`bar_profile_bins`가 채워지면 **사전 등록한 H3·H4 게이트를 돌린다**(RULES §3.1.5.4). 기준은 이미 적혀 있다 — 결과를 보고 고치지 않는다.
 
-그러므로 다음은 **대기 목록**(아래)에서 고르는 것이 자연스럽다 — 전부 "행"만 늘리는 작업이고 시각화 계약을 건드리지 않는다. 우선 후보: **A2 본편**(원형↔한국 서명 비교) · **빌보드 궤적 → 임펄스 원장** · **저지클럽 정답지 미해석 8곡 대체**(사전 등록한 H3의 표본을 채우는 일이다).
-
-> ⏳ **콜드 실행이 오면 먼저 할 것**: 사전 등록한 H3·H4 게이트를 돌린다(RULES §3.1.5.4). 축은 이미 저장되고 있고 **기준도 이미 적혀 있다** — 결과를 보고 기준을 고치지 않는다.
+그다음 대기 목록 우선 후보: **빌보드 궤적 → 임펄스 원장** · **저지클럽 정답지 미해석 8곡 대체**(v4 재취득에서도 그 8곡만 iTunes 부재로 남았다 — H3 표본을 채우는 일) · **케이스별 동시대 앵커 확장**(easy-listening은 2021 앵커가 동시대가 아니라 판정 유보 — US는 `billboard_ingest`로 즉시, KR은 Wayback 커버리지가 병목).
 
 ### 탭별 구획 (지금 화면의 모양)
 
@@ -23,7 +21,7 @@
 | chart-history | 플랫폼 커버리지 레이더 | 플랫폼 · 규모 · 지리 · 신인 |
 | fandom-pulse | 곡 라벨로 잡힌 팀(bar) | 게시 흐름 · 사운드 · 게시물 |
 | yt-pulse | 팀별 대표 일 조회(bar) | 쌓인 조회 · 새 영상 |
-| genre-impulse | **커버리지**(규칙 1 / 작업 중 1 / 없음 8) | 매치 · 기준 |
+| genre-impulse | **커버리지**(규칙 3 / 실측·미확정 4 / 작업 중 1 / 없음 2) | 매치 · 기준 |
 | signal-bridge | **선행 62 : 지연 44 : 동시 8** | 선행·지연 · 한 팀 보기 · 차트 밖 · 기준 |
 
 - **구획 수는 질문의 수다.** 질문이 둘인 탭에 구획 넷을 만들지 않았다(yt-pulse·genre-impulse는 2). 거꾸로 sonic-profile이 여섯인 것은 실제로 여섯을 묻기 때문이고, **상한(차트 3개)이 그 구조를 강제했다** — 차트 15개를 담으려면 최소 다섯이 필요하다.
@@ -75,11 +73,11 @@
 
 - 프로젝트: `C:\Projects\artist-intelligence`. 로컬: Python 3.14.5 · Node 24 · **Windows(win32/AMD64)**.
 - **바닥 전제(D-006)**: **책임소재 불변식**(판단=책임질 인간·도구=증거에서 종료) + **기준 원장**(엔지니어=형식 / 도메인 소유자=값). 정본 `DOMAIN.md §0`·`AGENTS.md §2.1·§5`. **모든 신규 모듈 구속.**
-- **모듈 6종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통: chart-history v5 · fandom-pulse v3.1 · signal-bridge v2 · yt-pulse v1 · **sonic-profile v4** · genre-impulse v1.
+- **모듈 6종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통: chart-history v5 · fandom-pulse v3.1 · signal-bridge v2 · yt-pulse v1 · **sonic-profile v4** · **genre-impulse v1.2**(규칙 3종 · high_all 조합 · 커버리지 4구획).
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(**D-036** 차트 페이로드 제약 · **D-041** 시각화 필드 · **D-043** 구획) + PII 게이트 + `packages/entity-master`.
 - **시각화 계약 채택**: **6/6 완료**(D-044). 강제 경계는 `scripts/validate_report_data.py`의 `ADOPTED_MODULES`(D-042) — 새 모듈은 여기 한 줄로 계약에 들어온다.
 - **디자인 스킬 벤더링 완료**: `.claude/skills/`에 `frontend-design` + 모션 4종(MIT · LICENSE 동봉). ✅ **커밋됐다**(13파일, `bd83e87`) — "미추적이라 커밋 여부가 확인 대상"이라고 적혀 있었지만 그 커밋에 이미 들어가 있었다. 결정할 것이 남아 있지 않다.
-- ✅ **git 정리 완료**: 열린 PR **0**. 최근 세션 이력은 [`Handoffs/2026-07-30-preregistered-roll-continuity.md`](Handoffs/2026-07-30-preregistered-roll-continuity.md)(롤 연속성·2마디 블록 사전 등록), 그 앞이 [`Handoffs/2026-07-30-delegated-display-decisions.md`](Handoffs/2026-07-30-delegated-display-decisions.md)(표시 결정 3건 + 카피 게이트), 그 앞이 [`Handoffs/2026-07-30-sonic-profile-sections.md`](Handoffs/2026-07-30-sonic-profile-sections.md)(구획 여섯 + 앵커 게이트), 그 앞이 [`Handoffs/2026-07-30-motion-discipline.md`](Handoffs/2026-07-30-motion-discipline.md)(모션 규율 + reduced-motion 안전망), 그 앞이 [`Handoffs/2026-07-30-interaction-crosshair-tooltip.md`](Handoffs/2026-07-30-interaction-crosshair-tooltip.md)(인터랙션 + 스모크 게이트), 그 앞이 [`Handoffs/2026-07-30-visualization-six-tabs.md`](Handoffs/2026-07-30-visualization-six-tabs.md)(6/6 채택 · 값의 방향), 그 앞이 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭).
+- ✅ **git 정리 완료**: 열린 PR **0**. 최근 세션 이력은 [`Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md`](Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md)(A2 본편·규칙 2종 등재·amapiano 철회), 그 앞이 [`Handoffs/2026-07-30-preregistered-roll-continuity.md`](Handoffs/2026-07-30-preregistered-roll-continuity.md)(롤 연속성·2마디 블록 사전 등록), 그 앞이 [`Handoffs/2026-07-30-delegated-display-decisions.md`](Handoffs/2026-07-30-delegated-display-decisions.md)(표시 결정 3건 + 카피 게이트), 그 앞이 [`Handoffs/2026-07-30-sonic-profile-sections.md`](Handoffs/2026-07-30-sonic-profile-sections.md)(구획 여섯 + 앵커 게이트), 그 앞이 [`Handoffs/2026-07-30-motion-discipline.md`](Handoffs/2026-07-30-motion-discipline.md)(모션 규율 + reduced-motion 안전망), 그 앞이 [`Handoffs/2026-07-30-interaction-crosshair-tooltip.md`](Handoffs/2026-07-30-interaction-crosshair-tooltip.md)(인터랙션 + 스모크 게이트), 그 앞이 [`Handoffs/2026-07-30-visualization-six-tabs.md`](Handoffs/2026-07-30-visualization-six-tabs.md)(6/6 채택 · 값의 방향), 그 앞이 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭).
 - **프리미티브 일반화**(D-044 딸린 결과): `Heatmap`이 순위 전용에서 벗어나 값의 방향을 payload로 받는다(`scale: "rank" | "value"` + 범례 문구). `palette.seqColor`가 그 공통 램프다. chart-history의 순위 격자 4종은 기본값이라 무회귀.
 - **인터랙션 프리미티브**(D-045): `ChartTooltip.tsx`가 `show`(마크 기준)와 `showAt`(좌표 기준 — 크로스헤어처럼 스냅된 위치)을 낸다. 🔴 `unstyled`를 쓰지 않는다(우리 `style`까지 버린다). 라인차트는 표 뷰까지 갖췄고, 격자는 `<th scope>`로 표 의미가 서 있다.
 - **모션 규율**(D-046 · §7.7): 쓰는 곳 넷 · 기각 여섯. `prefers-reduced-motion`은 **`globals.css` 전역 규칙 하나**가 집행한다 — CSS 전환은 컴포넌트에서 다시 묻지 않는다. CSS 밖의 예외 둘만 호출부에서 묻는다: `motion/react`의 JS 애니메이션(`useReducedMotion`) · `scrollIntoView({behavior})`(명시값이 CSS를 이긴다).
@@ -89,8 +87,9 @@
 - **Task Scheduler `AI-daily-collect`** → `scripts/daily_collect.ps1`. 설정 정본은 [`scripts/register_task.ps1`](scripts/register_task.ps1)(멱등).
 - **8단계**: spotify · apple · youtube · shazam(무료) → social(유료 $3/일) → yt → sonic(프리뷰·무보관) → genre-impulse.
 - **재개 가능**(D-018): `data/live/state/run_<date>.json`. 완주일 재실행 = no-op. **가드**: PAUSE 파일 · `experiment_end=2026-08-19` · `AI_DRYRUN=1`. 중단: `schtasks /Delete /TN "AI-daily-collect" /F`.
-- ⚠ **다음 sonic 레그는 콜드 실행이다** — `RHYTHM_FEATURE_SET` v4(D-038: HOP 128 · 32칸 격자)로 캐시가 무효화됐다. 프리뷰 ~200건 재취득(무료). **정상 동작이며 이 실행이 32칸 격자와 하이햇 축을 라이브 스냅샷에 채운다.**
-  - **실측 확인(2026-07-30)**: 아직 안 왔다. 최신 스냅샷 102곡의 축 79개에 하이햇 계열이 **하나도 없고** `bar_profile_bins`도 미기록이다. 그래서 §3.1.5.4 사전 등록이 데이터보다 앞선 것이 사실로 증명된다.
+- ⚠ **다음 sonic 레그(07-31 09:00)가 콜드 실행이다** — `RHYTHM_FEATURE_SET` v4(D-038: HOP 128 · 32칸 격자)로 캐시가 무효화됐다. 프리뷰 ~200건 재취득(무료). **정상 동작이며 이 실행이 32칸 격자와 하이햇 축을 라이브 스냅샷에 채운다.**
+  - **원인 확정(2026-07-31)**: 07-30 실행이 v3였던 이유 = daily(09:00)가 v4 커밋(`d2f8eca`, 12:34)보다 **먼저** 돌았다. §3.1.5.4 사전 등록이 데이터보다 앞선 것은 그대로 사실이다.
+  - 참고: A2 본편의 연구 코호트(케이스 101곡 + US 98 + KR 98)는 이미 v4로 취득됐다(연구 캐시 `data/research/genre-impulse/cache.json` — 라이브 캐시와 별개라 콜드 실행 비용은 그대로다).
   - 이 실행이 채우는 축이 **6종으로 늘었다**: 기존 4종 + 사전 등록한 `hihat_roll_burst_ratio`·`hihat_active_ratio`, 그리고 `bar_profile_split_half_2bar`.
 - **로그에서 볼 것**(재시도 감사 실측 확인 · 미완): ① `attempt n/3`(일시 실패를 흡수한 것) ② `day left INCOMPLETE on purpose`(부분 실패가 재시도된 것) ③ Kworb 실패 사유. **세 줄 다 안 뜨면 전부 1회에 성공한 것이므로 정상.**
 - **시간 깊이**: social 103일 · chart 14일 · yt 7일 · sonic 3일. 실험 종료 기준 chart ~34일 · sonic ~23일 — **시각화 완성 시점이 결과를 그릴 수 있는 시점과 맞는다.**
@@ -115,6 +114,8 @@
 | ~~**용어 설명의 자리**~~ | ✅ 위임 구현 완료(D-048). 남은 `title` 4곳은 전부 **대시보드가 계산하는 집계 라벨**이라 리포트가 소유할 값이 아니었다 — **계약 변경이 필요 없었다.** 보이는 `Terms` 펼침으로 전환 |
 | **유료 소셜 레그 재시도** | 재시도는 돈에 관한 결정이라 제외해 둠 |
 | **저지클럽 정답지 20곡 확정** | [초안](docs/DRAFT-jersey-club-answer-sheet.md) 확인 포인트 4건 — VIBE 캐논 단독 근거를 수용할지 |
+| **신규 검출 규칙 2종 임계 검토** | `ukg-origin-shuffle`·`moombahton-kr-tropical`(genre-impulse RULES §2.1.2~3) — 임계는 공유 관습값 P20/P80이며 튜너로 재조정 가능. 베이스라인(7~10%·5~8%)·재현(3/6·5/7) 병기 |
+| **hyperpop 규칙 over_unity 갈래** | A2 본편 재검: 동시대 프레임에서 over_unity가 중앙(P66) — A2.1의 극단은 2026 라이브 코호트(리미팅 상향) 의존이었다. OR 조합이라 규칙은 유효하나 갈래 유지 여부는 취향 판단 |
 | **틱톡 워치리스트 v0** | [초안](docs/DRAFT-tiktok-watchlist-v0.md) 검토 포인트 8건 (D-035 ①, 월 상한 $15) |
 | **사람 라벨 50~100곡** | 장르·악기 **정확도 미측정**. 태그를 화면 중심에 놓고 디자인한 뒤 정확도가 낮으면 중심을 다시 만들어야 한다. **리드타임이 길어 먼저 걸어둘 것** |
 
@@ -137,8 +138,8 @@
 
 ## 대기 목록 (시각화와 병행 가능 — 전부 "행"만 늘린다)
 
-1. **sonic 축 후속** — ✅ ①② **사전 등록 완료**(2026-07-30 · RULES §3.1.5.4 · TESTS §7.4·§7.2.5-a): `hihat_roll_burst_ratio`(+짝 축 `hihat_active_ratio`) · `bar_profile_split_half_2bar`. 구현·합성 검사까지 끝났고 **저장은 하되 표면은 금지**다. ⏳ **남은 것은 콜드 실행 뒤의 게이트 실측**(H3 · H4) — 지금 라이브 스냅샷에는 하이햇 축이 없다. ③ 저지클럽 정답지 **미해석 8곡 대체 후보**는 그대로 열려 있고, 표본이 얇으면 H3은 **판정 불가**이지 실패가 아니다(둘을 미리 갈라 뒀다).
-2. **A2 본편**: 원형↔한국 서명 비교(`data/research/genre-impulse/signature_merged.json`) + US 동시대 코호트(`cohort_us_2021-10-02.json` — `fetch --cohort` 입력 형태 그대로) + 동시대 KR 코호트(Wayback 멜론 CDX).
+1. **sonic 축 후속** — ✅ ①② **사전 등록 완료**(2026-07-30 · RULES §3.1.5.4 · TESTS §7.4·§7.2.5-a): `hihat_roll_burst_ratio`(+짝 축 `hihat_active_ratio`) · `bar_profile_split_half_2bar`. 구현·합성 검사까지 끝났고 **저장은 하되 표면은 금지**다. ⏳ **남은 것은 콜드 실행(07-31 09:00) 뒤의 게이트 실측**(H3 · H4). ③ 저지클럽 정답지 **미해석 8곡 대체 후보**는 그대로 열려 있고, 표본이 얇으면 H3은 **판정 불가**이지 실패가 아니다(둘을 미리 갈라 뒀다).
+2. ~~**A2 본편**~~ ✅ **완료**(2026-07-31): 동시대 두 프레임(US 빌보드 · KR = Wayback 멜론, 신규 `scripts/melon_wayback_ingest.py`) 위 백분위 실측(`scripts/a2_signature_compare.py` · `a2_signature_compare.json`) → 규칙 2종 등재 + amapiano 철회 + 원장 10건 measured. **후속**: 케이스별 동시대 앵커 확장(easy-listening 2023 등).
 3. **빌보드 궤적 → 임펄스 원장**: `chart_evidence` 22건을 `trajectory` 셀에 연결(확실성 등급 부여가 도메인 판단이라 분리).
 4. **멜론 복구**: 대화형 세션에서 `/mcp` 재연결 → 4콜 → `convert-melon`이면 4번째 렌즈 복귀. 화이트리스트 회신 대기.
 5. **1958~2012 빌보드 스모크**(현 스모크 표본은 2013~2023뿐) · 크레딧 레지스트리 설계(D-034 ④) · "2021 저지클럽 관측" 실체 도메인 소유자 인터뷰.
@@ -172,6 +173,14 @@ PYTHONPATH=modules/sonic-profile/src python -m sonic_profile selftest       # �
 PYTHONPATH=modules/sonic-profile/src python -m sonic_profile analyze data/live/sonic \
   --watchlist packages/entity-master/watchlist.json -o "$TMP/"
 #   ⚠ -o modules/sonic-profile/output/ 은 커밋된 라이브 산출을 덮는다. 검증만 할 때는 임시 디렉터리로.
+
+# ── A2 본편 재현 (오디오 0 — 저장 스냅샷에서 백분위 재계산)
+python scripts/a2_signature_compare.py \
+  --cases data/research/genre-impulse/signature_v4_merged.json \
+  --cohort-us data/research/genre-impulse/cohort_us_features_2021-10-02.json \
+  --cohort-kr data/research/genre-impulse/cohort_kr_features_2021-10-02.json \
+  -o data/research/genre-impulse/a2_signature_compare.json
+# KR 동시대 코호트 목록(네트워크 = Wayback만): python scripts/melon_wayback_ingest.py cohort 2021-10-02 -o <out>
 
 # ── 스템·격자 축 채택 게이트 (오디오 0 — 저장 프로파일에서 재게이트)
 PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python scripts/stem_gate.py \

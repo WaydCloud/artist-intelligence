@@ -44,29 +44,44 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
     // 찍으면 데이터 키가 새어 나온 것처럼 읽힌다(DESIGN §6.1). 없으면 키로 되돌아간다.
     const axLabel = (key: string) => data.axisLabels?.[key] ?? key;
     return data.rules.map((rule) => {
+        // 규칙 형식 셋(genre-impulse RULES §4) — CLI의 evaluate()와 같은 판정이어야
+        // 화면과 리포트의 매치가 갈라지지 않는다. 빈 조합은 "조건 없음"이다:
+        // `[].some()`은 false라 그대로 쓰면 highAny 없는 규칙(§2.1.2~3)이 전부 죽는다.
+        const highAll = rule.highAll ?? [];
+        const ruleAxes = [...rule.lowAll, ...highAll, ...rule.highAny];
         const members = data.tracks
           .filter(
             (t) =>
               rule.lowAll.every((ax) => (t.pcts[ax] ?? Infinity) <= lowPct) &&
-              rule.highAny.some((ax) => (t.pcts[ax] ?? -Infinity) >= highPct),
+              highAll.every((ax) => (t.pcts[ax] ?? -Infinity) >= highPct) &&
+              (rule.highAny.length === 0 ||
+                rule.highAny.some((ax) => (t.pcts[ax] ?? -Infinity) >= highPct)),
           )
           .map((t) => ({
             name: (t.watch ? "★ " : "") + t.name,
-            // 어느 축이 얼마로 걸렸는지 보여야 배정을 반박할 수 있다.
-            detail: data.axes.map((a) => `${axLabel(a)} P${t.pcts[a]?.toFixed(0) ?? "-"}`).join(" · "),
+            // 어느 축이 얼마로 걸렸는지 보여야 배정을 반박할 수 있다 — 그 규칙의
+            // 축만 보인다(규칙 4건 × 축 9종을 전부 찍으면 걸린 축이 묻힌다).
+            detail: ruleAxes.map((a) => `${axLabel(a)} P${t.pcts[a]?.toFixed(0) ?? "-"}`).join(" · "),
             flagged: t.watch,
           }))
           .sort((a, b) => a.name.localeCompare(b.name));
+        const hintParts = [
+          rule.lowAll.length ? `하한 ${rule.lowAll.map(axLabel).join("·")} ≤ P${lowPct}` : "",
+          highAll.length ? `상한(모두) ${highAll.map(axLabel).join("·")} ≥ P${highPct}` : "",
+          rule.highAny.length ? `상한 ${rule.highAny.map(axLabel).join(" 또는 ")} ≥ P${highPct}` : "",
+        ].filter(Boolean);
         return {
           name: rule.id,
           total: members.length,
           members,
-          hint: `하한 ${rule.lowAll.map(axLabel).join("·")} ≤ P${lowPct} · 상한 ${rule.highAny.map(axLabel).join(" 또는 ")} ≥ P${highPct}`,
+          hint: hintParts.join(" · "),
         };
     });
   }, [data, lowPct, highPct]);
 
-  const matched = buckets.reduce((n, b) => n + b.total, 0);
+  // "곡"은 유일 곡으로 센다 — 한 곡이 규칙 셋에 걸리면 매치는 3이지만 곡은 1이다.
+  // 버킷 합을 그대로 "곡"이라 부르면 과대 집계다(2026-07-31 육안 검사 실측).
+  const matched = new Set(buckets.flatMap((b) => b.members.map((m) => m.name))).size;
 
   return (
     <div>

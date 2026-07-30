@@ -169,7 +169,9 @@ export interface ImpulseRulesTunableData {
   /** 축의 화면 표기(저장 키 → 사람이 읽는 이름). 없으면 키를 그대로 쓴다. */
   axisLabels?: Record<string, string>;
   pools: Record<string, number[]>;
-  rules: { id: string; impulseId: string; lowAll: string[]; highAny: string[] }[];
+  // 규칙 형식 셋(genre-impulse RULES §4): lowAll(전건 하위) · highAll(전건 상위) ·
+  // highAny(하나 이상 상위). highAll은 v1.2에 추가 — 옛 리포트에는 없을 수 있다.
+  rules: { id: string; impulseId: string; lowAll: string[]; highAll?: string[]; highAny: string[] }[];
   tracks: { name: string; watch?: boolean; pcts: Record<string, number> }[];
   knobs: Knob[];
   note?: string;

@@ -24,17 +24,56 @@ HIGH_PCT_DEFAULT = 80.0
 SURFACE_GRADES = ("매우 높음", "높음", "중간")
 
 # 검출 규칙 원장(RULES §2). 사전 등록·실측 검증을 거친 규칙만 올린다.
+# 조합 형식 셋: low_all(전건 하위) · high_all(전건 상위) · high_any(하나 이상 상위).
 RULES: list[dict[str, Any]] = [
     {
         "id": "hyperpop-texture",
         "impulse_id": "hyperpop",
+        # short = 격자 행 접두용 표시명. 전체 id를 행에 붙이면 곡명이 잘린다
+        # (2026-07-31 육안: "moombahton-kr-tropical · ★코르티…"에서 주어가 사라졌다).
+        "short": "하이퍼팝",
         "low_all": ["organic_ratio"],
+        "high_all": [],
         "high_any": ["spectral_flatness", "over_unity_ratio"],
-        "basis": "A2.1 실측 2026-07-30. Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1)",
+        "basis": "A2.1 실측 2026-07-30. Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1). "
+                 "A2 본편 재검(2026-07-31): organic↓·flatness↑은 동시대 프레임에서도 성립, "
+                 "over_unity는 프레임 의존(동시대 중앙 P66, RULES §2.1 한계 참조)",
+    },
+    # amapiano는 **등재 철회**(2026-07-31): 예측 2축(onset_rate_high·silence_ratio)이
+    # 정답지 7/7 상위 20%였으나 조합의 코호트 베이스라인이 20~21%(세 코호트 일관 —
+    # 축이 어디서나 양의 상관)라 규칙이 아니라 넓은 텍스처 통이다. RULES §2.2 참조.
+    {
+        "id": "ukg-origin-shuffle",
+        "impulse_id": "ukg-dnb",
+        "short": "UKG 원형",
+        "low_all": [],
+        "high_all": ["swing_ratio", "tempo_bpm"],
+        "high_any": [],
+        "basis": "A2 본편 실측 2026-07-31. 원형 swing P91.3(▲4/6)·tempo P96.0(▲5/6). "
+                 "한국 수용형은 스윙 소거(P37.8)로 안 걸린다. 원형 진입 감지용 (CASEBOOK §A2 본편)",
+    },
+    {
+        "id": "moombahton-kr-tropical",
+        "impulse_id": "moombahton-tropical",
+        "short": "뭄바톤 KR",
+        "low_all": ["spectral_contrast_mean"],
+        "high_all": [],
+        "high_any": ["brightness_hz"],
+        "basis": "A2 본편 실측 2026-07-31. 한국 수용형 contrast ▼7/7(P17.3)·brightness ▲5/7(P88.8). "
+                 "청량 변형 검출용, 원형(명도 P73)은 경계 아래 (CASEBOOK §A2 본편)",
     },
 ]
 
-RULE_AXES = sorted({ax for r in RULES for ax in [*r["low_all"], *r["high_any"]]})
+
+def _rule_axes(rule: dict[str, Any]) -> list[str]:
+    return [*rule["low_all"], *rule["high_all"], *rule["high_any"]]
+
+
+def _rule_short(rule_id: str) -> str:
+    return next((str(r["short"]) for r in RULES if r["id"] == rule_id), rule_id)
+
+
+RULE_AXES = sorted({ax for r in RULES for ax in _rule_axes(r)})
 
 # 축의 화면 표기(DESIGN §6.1). 저장 키(`organic_ratio`)를 그대로 찍으면 데이터 키가 새어
 # 나온 것처럼 읽힌다. 표기는 sonic-profile의 타일 라벨과 같은 말을 쓴다 — 두 탭에서 같은
@@ -45,6 +84,13 @@ AXIS_LABELS: dict[str, str] = {
     "organic_ratio": "유기음 비율",
     "spectral_flatness": "스펙트럼 평탄도",
     "over_unity_ratio": "인터샘플 피크 비율",
+    # §2.1.2~4 (A2 본편). 템포·음색 밝기는 sonic-profile 타일 라벨과 같은 말.
+    "onset_rate_high": "고역 온셋 밀도",
+    "silence_ratio": "무음 비율",
+    "swing_ratio": "스윙 비율",
+    "tempo_bpm": "템포",
+    "brightness_hz": "음색 밝기",
+    "spectral_contrast_mean": "스펙트럼 대비",
 }
 
 
@@ -85,8 +131,9 @@ _CHART_META: dict[str, dict[str, str]] = {
         "title": "규칙에 걸린 곡의 축별 위치",
         "question": "그 곡들은 어느 축에서 그렇게 걸렸나?",
         "definition": "칸의 값은 그날 코호트 안에서의 백분위(0~100)이고, 진할수록 코호트 상위다. "
-        "규칙은 유기음 비율이 낮고 나머지 축 중 하나가 높은 곡을 고르므로, 걸린 곡은 첫 열이 옅고 "
-        "나머지 중 하나가 진하다. 이름 앞의 ★는 워치리스트 팀이라는 표시다.",
+        "행은 규칙과 곡의 짝이다. 한 곡이 여러 규칙에 걸리면 규칙마다 한 행씩 나오며, 어느 규칙의 "
+        "어느 축이 걸렸는지는 행 머리의 규칙 이름과 기준 구획의 규칙 정의로 읽는다. 이름 앞의 ★는 "
+        "워치리스트 팀이라는 표시다.",
     },
     "impulse-tuner": {
         "section": "tuner",
@@ -111,13 +158,14 @@ _METRIC_META: dict[str, dict[str, str]] = {
     "당일 코호트": {
         "section": "matches",
         "label": "오늘 본 곡",
-        "definition": "이번 실행에서 세 축이 모두 계산된 곡의 수. 백분위의 분모이며, 이 집합이 바뀌면 "
+        "definition": "이번 스냅샷에서 특질이 계산된 곡의 수. 백분위의 분모이며, 이 집합이 바뀌면 "
         "같은 곡의 백분위도 바뀐다.",
     },
     "규칙 매치": {
         "section": "matches",
         "label": "규칙에 걸린 곡",
-        "definition": "확정된 검출 규칙의 하한·상한 조건을 모두 만족한 곡의 수. 검토 후보이지 판정이 아니다.",
+        "definition": "확정된 검출 규칙의 하한·상한 조건을 모두 만족한 곡의 수. 여러 규칙에 걸린 곡도 "
+        "한 번만 센다. 검토 후보이지 판정이 아니다.",
     },
 }
 
@@ -188,46 +236,61 @@ def evaluate(
         ax: [f[ax] for _, f in feats if isinstance(f.get(ax), (int, float))]
         for ax in RULE_AXES
     }
-    matches: list[dict[str, Any]] = []
-    for rule in RULES:
-        for rec, f in feats:
-            pcts: dict[str, float] = {}
-            evaluable = True
-            for ax in [*rule["low_all"], *rule["high_any"]]:
-                v = f.get(ax)
-                if not isinstance(v, (int, float)):
-                    evaluable = False
-                    break
-                pcts[ax] = _percentile(pools[ax], float(v))
-            if not evaluable:
-                continue
-            low_ok = all(pcts[ax] <= low_pct for ax in rule["low_all"])
-            high_ok = any(pcts[ax] >= high_pct for ax in rule["high_any"])
-            if low_ok and high_ok:
-                matches.append({
-                    "rule": rule["id"],
-                    "impulse_id": rule["impulse_id"],
-                    "key": str(rec.get("key") or rec.get("query") or "?"),
-                    "label": f"{rec.get('artist', rec.get('key', '?'))} - {rec.get('title', '?')}",
-                    "pcts": pcts,
-                })
-    matches.sort(key=lambda m: (m["rule"], m["pcts"][RULES[0]["low_all"][0]], m["label"]))
-
-    scored: list[dict[str, Any]] = []
-    for rec, f in feats:
-        pcts = {
+    # 곡별 백분위는 한 번만 계산해 매치·튜너가 같은 값을 쓴다. 결측 축은 키를 만들지
+    # 않는다(§0 결측 ≠ 0) — 규칙 판정은 자기 축이 전부 있을 때만 한다.
+    all_pcts: list[dict[str, float]] = [
+        {
             ax: _percentile(pools[ax], float(v))
             for ax in RULE_AXES
             if isinstance((v := f.get(ax)), (int, float))
         }
-        if len(pcts) != len(RULE_AXES):
-            continue  # 축이 하나라도 결측이면 규칙을 적용할 수 없다(§0 결측 ≠ 0)
+        for _, f in feats
+    ]
+
+    matches: list[dict[str, Any]] = []
+    for rule in RULES:
+        axes = _rule_axes(rule)
+        for (rec, _f), pcts in zip(feats, all_pcts):
+            if any(ax not in pcts for ax in axes):
+                continue  # 규칙 축이 하나라도 결측이면 이 규칙은 평가 불능
+            low_ok = all(pcts[ax] <= low_pct for ax in rule["low_all"])
+            high_all_ok = all(pcts[ax] >= high_pct for ax in rule["high_all"])
+            # any([]) == False라 빈 목록을 그대로 넘기면 high_any 없는 규칙이 전부
+            # 죽는다 — 빈 조합은 "조건 없음"으로 읽는다.
+            high_any_ok = not rule["high_any"] or any(pcts[ax] >= high_pct for ax in rule["high_any"])
+            if low_ok and high_all_ok and high_any_ok:
+                matches.append({
+                    "rule": rule["id"],
+                    "impulse_id": rule["impulse_id"],
+                    "key": str(rec.get("key") or rec.get("query") or "?"),
+                    # 격자 행이 되므로 규칙 축만이 아니라 **가진 축 전부**를 싣는다 —
+                    # 규칙 축만 실으면 나머지 칸이 "축 결측"으로 그려진다(있는 값인데).
+                    "label": f"{rec.get('artist', rec.get('key', '?'))} - {rec.get('title', '?')}",
+                    "pcts": pcts,
+                })
+    # 정렬 극단 축은 규칙마다 다르다 — 첫 규칙의 축을 전 매치에 쓰면 그 축이 없는
+    # 매치에서 죽는다(규칙이 하나일 때만 우연히 성립하던 정렬).
+    def _extremity(m: dict[str, Any]) -> float:
+        rule = next(r for r in RULES if r["id"] == m["rule"])
+        if rule["low_all"]:
+            return m["pcts"][rule["low_all"][0]]          # 낮을수록 부합 → 오름차순
+        return -m["pcts"][_rule_axes(rule)[0]]             # 높을수록 부합 → 내림차순
+
+    matches.sort(key=lambda m: (m["rule"], _extremity(m), m["label"]))
+
+    scored: list[dict[str, Any]] = []
+    for (rec, _f), pcts in zip(feats, all_pcts):
+        # 어느 한 규칙이라도 평가 가능하면 튜너에 남긴다 — 전 축(9종)을 요구하면
+        # 리듬 축이 없는 곡이 통째로 사라져 임계를 낮춰도 나타날 수 없다.
+        if not any(all(ax in pcts for ax in _rule_axes(r)) for r in RULES):
+            continue
         scored.append({
             "key": str(rec.get("key") or rec.get("query") or "?"),
             "name": f"{rec.get('artist', rec.get('key', '?'))} - {rec.get('title', '?')}",
             "pcts": pcts,
         })
-    scored.sort(key=lambda t: (t["pcts"][RULES[0]["low_all"][0]], t["name"]))
+    primary = RULES[0]["low_all"][0] if RULES and RULES[0]["low_all"] else (RULE_AXES[0] if RULE_AXES else "")
+    scored.sort(key=lambda t: (t["pcts"].get(primary, 101.0), t["name"]))
     return matches, pools, scored
 
 
@@ -267,7 +330,14 @@ def _coverage_lines(impulses: list[dict[str, Any]], ruled_ids: set[str]) -> list
             continue
         sig = imp.get("signature", {})
         locks = sig.get("locks") or []
-        reason = "; ".join(locks) if locks else f"서명이 아직 도출되지 않아 규칙이 없다(상태 {sig.get('status', '?')})"
+        measured = sig.get("measured") or {}
+        if locks:
+            reason = "; ".join(locks)
+        elif measured:
+            # A2 실측까지 갔는데 규칙이 안 선 경우 — "서명이 없다"고 말하면 거짓이다.
+            reason = str(measured.get("rule") or "실측 완료, 규칙 미확정")
+        else:
+            reason = f"서명이 아직 도출되지 않아 규칙이 없다(상태 {sig.get('status', '?')})"
         # `흐름이`를 붙여 이름 뒤 조사를 고정한다 — 받침 유무로 조사를 갈라 쓰면 문장이 깨진다.
         lines.append(f"{imp.get('name_ko', imp['id'])} 흐름이 지금 도는지. {reason}")
     return lines
@@ -334,19 +404,30 @@ def _coverage_summary(impulses: list[dict[str, Any]], ruled_ids: set[str]) -> di
         for i in impulses
         if i["id"] not in ruled_ids and (i.get("signature", {}).get("locks") or [])
     )
+    # A2 실측까지 갔는데 규칙이 안 선 상태를 "서명 없음"으로 부르면 거짓이다 —
+    # 실측 결과(판별력 없음·표본 부족·프레임 부적합)도 원장에 적힌 정보다.
+    measured_no_rule = sum(
+        1
+        for i in impulses
+        if i["id"] not in ruled_ids
+        and not (i.get("signature", {}).get("locks") or [])
+        and (i.get("signature", {}).get("measured") or {})
+    )
     return {
         "type": "bar",
         "id": SUMMARY_ID,
         "title": "원장에서 관측 가능한 임펄스",
         "question": "이 화면이 지금 관측할 수 있는 임펄스는 얼마나 되나?",
-        "definition": "검출 규칙이 확정된 임펄스만 이 화면에서 관측된다. 서명 작업 중은 무엇이 막고 "
-        "있는지가 원장에 적혀 있는 상태이고, 나머지는 아직 서명 자체가 없다. 관측되지 않는 것과 "
+        "definition": "검출 규칙이 확정된 임펄스만 이 화면에서 관측된다. 실측·규칙 미확정은 서명을 "
+        "쟀으나 규칙이 서지 않은 상태(사유는 답하지 않는 것 목록), 서명 작업 중은 무엇이 막고 "
+        "있는지가 원장에 적혀 있는 상태, 나머지는 아직 서명 자체가 없다. 관측되지 않는 것과 "
         "일어나지 않는 것은 다르다.",
         "reliability": {"sample": f"원장 {len(impulses)}건"},
         "data": [
             {"name": "검출 규칙 확정", "value": ruled},
+            {"name": "실측·규칙 미확정", "value": measured_no_rule},
             {"name": "서명 작업 중", "value": working},
-            {"name": "아직 서명 없음", "value": max(0, len(impulses) - ruled - working)},
+            {"name": "아직 서명 없음", "value": max(0, len(impulses) - ruled - working - measured_no_rule)},
         ],
     }
 
@@ -404,11 +485,14 @@ def _impulse_inferences(
         })
 
     # ② 매치의 규모가 컷에 매여 있다는 것. 임계값이 결과를 만든다는 사실을 화면이 들고 있게 한다.
+    # ⚠ "곡"을 셀 때는 매치(곡×규칙 쌍)가 아니라 **유일 곡**을 센다 — 한 곡이 규칙
+    # 셋에 걸리면 매치는 3이지만 곡은 1이다(2026-07-31 육안 검사에서 잡힌 과대 집계).
+    matched_tracks = len(dict.fromkeys(m["label"] for m in matches))
     if cohort_n and matches:
         out.append({
-            "text": f"코호트 {cohort_n}곡 중 {len(matches)}곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
-            "basis": f"컷 P{low_pct:g}/P{high_pct:g} · 매치 {len(matches)}/{cohort_n}곡 "
-            f"({100.0 * len(matches) / cohort_n:.0f}%)",
+            "text": f"코호트 {cohort_n}곡 중 {matched_tracks}곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
+            "basis": f"컷 P{low_pct:g}/P{high_pct:g} · 매치 {len(matches)}건 · 곡 {matched_tracks}/{cohort_n} "
+            f"({100.0 * matched_tracks / cohort_n:.0f}%)",
             "sample": f"코호트 {cohort_n}곡",
             "confidence": "medium",
             "limits": "이 수는 컷을 움직이면 함께 움직인다. 백분위는 그날 코호트 안에서의 상대 위치라 "
@@ -417,15 +501,15 @@ def _impulse_inferences(
         })
 
     # ③ 워치리스트가 걸렸는가 — 이 도구를 보는 사람이 실제로 담당하는 팀인지.
-    watched = [m for m in matches if m["key"] in watch_keys]
-    if watched:
-        names = ", ".join(dict.fromkeys(m["label"] for m in watched))[:120]
+    watched_names = list(dict.fromkeys(m["label"] for m in matches if m["key"] in watch_keys))
+    if watched_names:
+        names = ", ".join(watched_names)[:120]
         out.append({
-            "text": f"워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. {len(watched)}곡이다.",
-            "basis": f"매치 {len(matches)}곡 중 워치리스트 {len(watched)}곡 · {names}",
+            "text": f"워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. {len(watched_names)}곡이다.",
+            "basis": f"매치된 {matched_tracks}곡 중 워치리스트 {len(watched_names)}곡 · {names}",
             "sample": f"워치리스트 {len(watch_keys)}팀",
             "confidence": "medium",
-            "limits": "걸렸다는 것은 세 축의 위치가 규칙과 맞았다는 뜻이며 그 곡이 그 장르라는 판정이 아니다.",
+            "limits": "걸렸다는 것은 축의 위치가 규칙과 맞았다는 뜻이며 그 곡이 그 장르라는 판정이 아니다.",
             "chartId": "match-axes",
         })
     return out
@@ -476,13 +560,18 @@ def build_report(
         charts.append({
             "type": "heatmap",
             "id": "match-axes",
-            "reliability": {"sample": f"매치 {len(matches)}곡 / 코호트 {len(cohort)}곡"},
+            "reliability": {"sample": f"매치 {len(matches)}건 / 코호트 {len(cohort)}곡"},
             # 공유 계약의 bar 항목 키는 **`name`**이다(대시보드 BarChart·타 모듈 전부).
             # 2026-07-30까지 여기만 `label`을 내보내 막대 11개가 **이름 없이** 그려졌다.
             # report-schema는 data를 제약하지 않아(`"data": {}`) 검증도 통과했다 —
             # 스키마가 못 잡는 계약은 이런 식으로 조용히 어긋난다.
             "data": {
-                "rows": [("★" if m["key"] in watch_keys else "") + m["label"] for m in matches],
+                # 행 = "규칙(짧은 표시명) · 곡". 규칙 셋의 매치가 한 격자에 섞이므로
+                # 귀속을 행이 들고 있어야 한다 — 없으면 여러 규칙에 걸린 곡이 중복 행
+                # 결함처럼 읽힌다(2026-07-31 육안 검사 실측). 전체 규칙 id는 길어서
+                # 곡명을 잘라먹으므로 short를 쓴다(전체 id는 기준 구획·인사이트에 있다).
+                "rows": [f"{_rule_short(m['rule'])} · " + ("★" if m["key"] in watch_keys else "") + m["label"]
+                         for m in matches],
                 "cols": [axis_label(ax) for ax in RULE_AXES],
                 "cells": [[m["pcts"].get(ax) for ax in RULE_AXES] for m in matches],
                 # 값의 방향을 명시한다 — 격자 프리미티브의 기본은 순위(작을수록 강함)라,
@@ -521,7 +610,7 @@ def build_report(
                 # 클라이언트가 규칙을 추측하면 원장과 갈라진다.
                 "rules": [
                     {"id": r["id"], "impulseId": r["impulse_id"],
-                     "lowAll": r["low_all"], "highAny": r["high_any"]}
+                     "lowAll": r["low_all"], "highAll": r["high_all"], "highAny": r["high_any"]}
                     for r in RULES
                 ],
                 "tracks": tunable_tracks,
@@ -540,7 +629,8 @@ def build_report(
         {"label": "검출 규칙 확정", "value": len(RULES), "unit": "건",
          "hint": f"원장 {len(impulses) or 0}건 중 · 축 공백·스템 잠금은 RULES §2.2"},
         {"label": "당일 코호트", "value": len(cohort), "unit": "곡"},
-        {"label": "규칙 매치", "value": len(matches), "unit": "곡"},
+        # 유일 곡 수 — 매치(곡×규칙 쌍) 수를 "곡"으로 내보내면 과대 집계다.
+        {"label": "규칙 매치", "value": len(dict.fromkeys(m["label"] for m in matches)), "unit": "곡"},
     ]
     charts = _apply_meta(metrics, charts)
     sections = _place_sections(metrics, charts)
@@ -555,7 +645,7 @@ def build_report(
             *_coverage_lines(impulses, ruled_ids),
         ],
         "reliability": {
-            "sample": f"원장 {len(impulses)}건 · 코호트 {len(cohort)}곡 · 매치 {len(matches)}곡",
+            "sample": f"원장 {len(impulses)}건 · 코호트 {len(cohort)}곡 · 매치 {len(matches)}건",
             "accuracy": "검출 규칙은 과거 사례에서 뽑은 가설이다. 사람 라벨이 없어 정확도 미측정",
             "missing": "세 축 중 하나라도 계산되지 않은 곡은 규칙을 적용하지 않는다(결측을 0으로 읽지 않는다)",
             "engine": f"genre-impulse v{MODULE_VERSION} · 스냅샷 {snapshot_name or '입력 없음'} "
@@ -605,15 +695,22 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     # 매치 수는 지표에서 읽는다. 인사이트 줄을 세면 문구를 다듬는 순간 수가 바뀐다
     # (실제로 곡별 줄을 규칙별 한 줄로 줄였을 때 11 → 1로 잘못 찍혔다).
     matched = next((m["value"] for m in report["metrics"] if m["label"] == "규칙에 걸린 곡"), 0)
-    print(f"wrote {out} · 매치 {matched}건")
+    print(f"wrote {out} · 매치 {matched}곡")
     return 0
 
 
 # ── selftest ──────────────────────────────────────────────────────────────
 
-def _fx_track(key: str, organic: float, flat: float, over: float) -> dict[str, Any]:
+def _fx_track(
+    key: str, organic: float, flat: float, over: float,
+    onset_high: float = 5.0, silence: float = 0.05, swing: float = 0.5,
+    tempo: float = 120.0, bright: float = 2000.0, contrast: float = 20.0,
+) -> dict[str, Any]:
+    """합성 코호트 트랙 — 규칙 축 9종 전부. 기본값은 중앙(어느 규칙에도 안 걸린다)."""
     return {"key": key, "artist": key, "title": key, "cohort": "chart",
-            "features": {"organic_ratio": organic, "spectral_flatness": flat, "over_unity_ratio": over}}
+            "features": {"organic_ratio": organic, "spectral_flatness": flat, "over_unity_ratio": over,
+                         "onset_rate_high": onset_high, "silence_ratio": silence, "swing_ratio": swing,
+                         "tempo_bpm": tempo, "brightness_hz": bright, "spectral_contrast_mean": contrast}}
 
 
 def _fx_impulse(iid: str, grade: str = "매우 높음") -> dict[str, Any]:
@@ -648,7 +745,13 @@ def cmd_selftest(_args: argparse.Namespace) -> int:
         passed, failed = (passed + 1, failed) if ok else (passed, failed + 1)
         print(f"  {'PASS' if ok else 'FAIL'} {name}" + (f" — {detail}" if detail and not ok else ""))
 
-    cohort = [_fx_track(f"mid{i}", 0.5 + i * 0.01, 0.010 + i * 0.001, 0.02 + i * 0.001) for i in range(8)]
+    # 새 축(§2.1.2~4)은 **반상관**으로 흩는다: 한 축이 커질 때 짝 축이 작아지게 —
+    # 단조로 같이 키우면 꼭대기 트랙이 high_all 조합(둘 다 상위)에 우연히 걸려
+    # "중앙 트랙 무매치"(검사 7)가 성립하지 않는다.
+    cohort = [_fx_track(f"mid{i}", 0.5 + i * 0.01, 0.010 + i * 0.001, 0.02 + i * 0.001,
+                        onset_high=4 + i * 0.1, silence=0.06 - i * 0.002,
+                        swing=0.45 + i * 0.005, tempo=140 - i * 3,
+                        bright=1500 + i * 50, contrast=18 + i * 0.5) for i in range(8)]
     planted = _fx_track("planted", 0.01, 0.09, 0.20)  # organic 최하위 + flat/over 최상위
     cohort_pos = [*cohort, planted]
 
@@ -713,6 +816,23 @@ def cmd_selftest(_args: argparse.Namespace) -> int:
             ),
         )
         check("13 정직성 인사이트", "예측이 아니" in rep["insights"][0])
+
+        # §3.18~21 — high_all 조합과 다규칙 견고성 (TESTS 2026-07-31)
+        ukg_pos = _fx_track("ukg", 0.55, 0.014, 0.024, swing=0.99, tempo=200.0)
+        ukg_half = _fx_track("half", 0.55, 0.014, 0.024, swing=0.99, tempo=90.0)
+        m18, _, _ = evaluate([*cohort, ukg_pos], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        check("18 high_all 양성", any(x["key"] == "ukg" and x["rule"] == "ukg-origin-shuffle" for x in m18))
+        m19, _, _ = evaluate([*cohort, ukg_half], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        check("19 high_all 반쪽은 무매치", not any(x["key"] == "half" for x in m19),
+              "any로 구현하면 상한 하나로 걸린다")
+        m20, _, _ = evaluate([*cohort, planted, ukg_pos], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        check("20 다규칙 매치 정렬이 죽지 않는다",
+              {x["rule"] for x in m20} >= {"hyperpop-texture", "ukg-origin-shuffle"})
+        # 리듬 축이 없는 트랙(hyperpop 축만 보유)이 튜너 목록에서 통째로 사라지면 안 된다.
+        bare = {"key": "bare", "artist": "bare", "title": "bare", "cohort": "chart",
+                "features": {"organic_ratio": 0.5, "spectral_flatness": 0.014, "over_unity_ratio": 0.024}}
+        _, _, sc21 = evaluate([*cohort, bare], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        check("21 부분 결측 튜너 잔류", any(t["key"] == "bare" for t in sc21))
 
     print(f"selftest: {passed} passed · {failed} failed")
     return 0 if failed == 0 else 1

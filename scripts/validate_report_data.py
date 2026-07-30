@@ -145,6 +145,12 @@ def check_report(path: str, views: set[str]) -> list[str]:
 
 
 # --- selftest: 게이트가 실제로 잡는지. 음성 케이스가 없는 검사기는 초록인 채로 아무것도 안 한다 ---
+#
+# 아래 표는 **이 검사기**가 잡는 것이고, `_SCHEMA_CASES`는 **스키마**가 잡는 것이다.
+# 일부(bar `name` 누락 등)는 의도적으로 겹친다: 이 스크립트는 stdlib만 쓰므로
+# jsonschema가 없는 환경에서도 단독으로 돌아야 하고, 겹치는 검사가 그 보루다.
+# 겹치지 않는 것 = 이 검사기만 잡는 것: **교차 필드 길이**(JSON Schema로 표현 불가),
+# **렌더러 결합**(아는 view인지), **범위**(기본값이 [min,max] 안인지), 공백뿐인 이름.
 _CASES: list[tuple[str, dict[str, Any], bool]] = [
     ("bar 정상", {"type": "bar", "data": [{"name": "a", "value": 1}]}, True),
     ("bar 빈 배열(유효)", {"type": "bar", "data": []}, True),
@@ -164,21 +170,83 @@ _CASES: list[tuple[str, dict[str, Any], bool]] = [
 ]
 
 
+# 스키마가 잡아야 하는 것(키 이름·타입·required). 여기 두는 이유: 계약은 두 층으로
+# 나뉘어 있고(스키마=형태 / 이 검사기=교차 필드·렌더러 결합), **분업이 실제로 성립하는지를
+# 한 곳에서 증명**해야 한다. 층을 옮기려면 이 표가 먼저 바뀌어야 한다.
+_SCHEMA_CASES: list[tuple[str, dict[str, Any], bool]] = [
+    ("bar 정상", {"type": "bar", "data": [{"name": "a", "value": 1}]}, True),
+    ("bar 빈 배열(유효)", {"type": "bar", "data": []}, True),
+    ("bar label 오용(7-30 결함)", {"type": "bar", "data": [{"label": "a", "value": 1}]}, False),
+    ("bar name 빈 문자열", {"type": "bar", "data": [{"name": "", "value": 1}]}, False),
+    ("bar value 문자열", {"type": "bar", "data": [{"name": "a", "value": "1"}]}, False),
+    ("bar 여분 키", {"type": "bar", "data": [{"name": "a", "value": 1, "hint": "x"}]}, False),
+    ("bar가 객체", {"type": "bar", "data": {"name": "a"}}, False),
+    ("line 정상", {"type": "line", "data": {"x": ["d"], "series": [{"name": "s", "values": [1]}]}}, True),
+    ("line 결측 null(유효)", {"type": "line", "data": {"x": ["d"], "series": [{"name": "s", "values": [None]}]}}, True),
+    ("line x 누락", {"type": "line", "data": {"series": []}}, False),
+    ("line series name 없음", {"type": "line", "data": {"x": ["d"], "series": [{"values": [1]}]}}, False),
+    ("line values에 문자열", {"type": "line", "data": {"x": ["d"], "series": [{"name": "s", "values": ["1"]}]}}, False),
+    ("heatmap 정상", {"type": "heatmap", "data": {"rows": ["r"], "cols": ["c"], "cells": [[1]]}}, True),
+    ("heatmap cells 1차원", {"type": "heatmap", "data": {"rows": ["r"], "cols": ["c"], "cells": [1]}}, False),
+    ("heatmap cols 누락", {"type": "heatmap", "data": {"rows": ["r"], "cells": [[1]]}}, False),
+    ("tunable 정상", {"type": "tunable", "data": {"view": "rhythm", "bins": 16, "templates": {}}}, True),
+    ("tunable view 없음", {"type": "tunable", "data": {"bins": 16}}, False),
+    ("tunable knob 필드 누락",
+     {"type": "tunable", "data": {"view": "rhythm", "knobs": [{"key": "k", "label": "L", "default": 1, "min": 0, "max": 2}]}}, False),
+    ("tunable knob step 0", {"type": "tunable", "data": {"view": "rhythm", "knobs": [{"key": "k", "label": "L", "default": 1, "min": 0, "max": 2, "step": 0}]}}, False),
+    ("차트 여분 키", {"type": "bar", "data": [{"name": "a", "value": 1}], "color": "red"}, False),
+]
+
+_SCHEMA_PATH = Path("packages/report-schema/report.schema.json")
+_EMPTY_REPORT: dict[str, Any] = {
+    "moduleId": "selftest", "title": "T", "generatedAt": "2026-01-01T00:00:00Z",
+    "metrics": [], "charts": [], "media": [], "insights": [], "recommendations": [],
+}
+
+
+def _schema_selftest() -> tuple[int, int]:
+    """스키마 층: `report.schema.json`이 형태 위반을 실제로 잡는지."""
+    try:
+        from jsonschema import Draft202012Validator
+    except ImportError:
+        print("  SKIP 스키마 층 — jsonschema 미설치", file=sys.stderr)
+        return (0, 1)  # 검사 못 했으면 실패로 센다 (0건 통과 금지)
+    if not _SCHEMA_PATH.exists():
+        print(f"  SKIP 스키마 층 — {_SCHEMA_PATH} 없음", file=sys.stderr)
+        return (0, 1)
+    schema = json.loads(_SCHEMA_PATH.read_text(encoding="utf-8"))
+    Draft202012Validator.check_schema(schema)
+    v = Draft202012Validator(schema)
+    failed = 0
+    for name, chart, should_pass in _SCHEMA_CASES:
+        errs = list(v.iter_errors({**_EMPTY_REPORT, "charts": [chart]}))
+        ok = (not errs) if should_pass else bool(errs)
+        if not ok:
+            failed += 1
+        why = errs[0].message[:64] if errs else "없음"
+        print(f"  {'ok  ' if ok else 'FAIL'} [스키마]  {name:34} {'통과 기대' if should_pass else '검출 기대'} → {why}")
+    return (len(_SCHEMA_CASES) - failed, failed)
+
+
 def selftest() -> int:
     views, note = known_tunable_views()
-    print(f"tunable view 정본: {note}")
+    print(f"tunable view 정본: {note}\n")
     if not views:
         print("!! view 검사를 못 하는 상태다 — 렌더러 경로를 확인할 것", file=sys.stderr)
         return 1
+
+    s_ok, s_bad = _schema_selftest()
+    print()
     failed = 0
     for name, chart, should_pass in _CASES:
         msgs = check_chart(chart, views)
         ok = (not msgs) if should_pass else bool(msgs)
         if not ok:
             failed += 1
-        print(f"  {'ok  ' if ok else 'FAIL'} {name:38} {'통과 기대' if should_pass else '검출 기대'} → {msgs or '없음'}")
-    print(f"\nselftest {len(_CASES) - failed}/{len(_CASES)}")
-    return 1 if failed else 0
+        print(f"  {'ok  ' if ok else 'FAIL'} [검사기] {name:34} {'통과 기대' if should_pass else '검출 기대'} → {msgs or '없음'}")
+    total_ok, total_bad = s_ok + len(_CASES) - failed, s_bad + failed
+    print(f"\nselftest {total_ok}/{total_ok + total_bad} (스키마 {s_ok}/{s_ok + s_bad} · 검사기 {len(_CASES) - failed}/{len(_CASES)})")
+    return 1 if total_bad else 0
 
 
 def main() -> int:

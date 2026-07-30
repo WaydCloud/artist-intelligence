@@ -46,6 +46,8 @@ artist-intelligence/
 - 정본은 `packages/report-schema/report.schema.json` (JSON Schema, draft 2020-12).
 - TS 타입과 pydantic 모델이 이를 미러링. 모듈은 pydantic으로 검증 후 write, 대시보드는 TS 타입으로 read.
 - 필드: `moduleId, title, subtitle?, generatedAt, metrics[], charts[], media[], insights[], recommendations[]`.
+- **차트 페이로드도 제약된다**(D-036): `chart.type`이 `chart.data`의 형태를 결정한다(bar·line·heatmap·tunable 판별 분기). 2026-07-30까지 `"data": {}`로 무제약이었고, 그 틈으로 계약 이탈이 세 번 화면까지 나갔다. 읽는 쪽 정본은 `apps/dashboard/lib/report.ts`의 판별 유니온이며 **둘은 짝으로 갱신한다**.
+- **계약은 두 층**이다: 스키마가 **형태**(키·타입·required)를, [`scripts/validate_report_data.py`](scripts/validate_report_data.py)가 **스키마로 표현할 수 없는 것**(교차 필드 길이, 렌더러가 아는 tunable `view`인지, 노브 기본값이 범위 안인지)을 본다. 분업이 성립하는지는 `--selftest`가 두 층을 한꺼번에 증명한다.
 - **이 스키마를 어기는 변경은 금지**(핵심 흐름 계약). → [`AGENTS.md`](AGENTS.md)
 
 ## 스택

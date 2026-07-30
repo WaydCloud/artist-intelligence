@@ -31,7 +31,9 @@
         "hint": { "type": "string" }
       }
     },
+
     "chart": {
+      "description": "차트 하나. `type`이 `data`의 형태를 결정한다(아래 allOf 분기). 읽는 쪽 정본은 apps/dashboard/lib/report.ts이며 이 스키마와 짝으로 갱신한다(AGENTS §0).",
       "type": "object",
       "additionalProperties": false,
       "required": ["type", "data"],
@@ -39,8 +41,104 @@
         "type": { "enum": ["line", "bar", "heatmap", "radar", "tunable"] },
         "title": { "type": "string" },
         "data": {}
+      },
+      "allOf": [
+        {
+          "if": { "required": ["type"], "properties": { "type": { "const": "bar" } } },
+          "then": { "properties": { "data": { "$ref": "#/$defs/barData" } } }
+        },
+        {
+          "if": { "required": ["type"], "properties": { "type": { "const": "line" } } },
+          "then": { "properties": { "data": { "$ref": "#/$defs/lineData" } } }
+        },
+        {
+          "if": { "required": ["type"], "properties": { "type": { "const": "heatmap" } } },
+          "then": { "properties": { "data": { "$ref": "#/$defs/heatmapData" } } }
+        },
+        {
+          "if": { "required": ["type"], "properties": { "type": { "const": "tunable" } } },
+          "then": { "properties": { "data": { "$ref": "#/$defs/tunableData" } } }
+        }
+      ]
+    },
+
+    "barData": {
+      "description": "가로 막대. 공유 계약의 키는 `name`이다 — 2026-07-30에 한 모듈이 `label`을 내보내 막대 11개가 이름 없이 그려졌고, 그때는 `data`가 무제약이라 검증을 통과했다. 그래서 추가 키를 막는다(막대에 필드를 더하는 것은 의도적 계약 변경이며 렌더러 동시 갱신이 전제).",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "value"],
+        "properties": {
+          "name": { "type": "string", "minLength": 1 },
+          "value": { "type": "number" }
+        }
       }
     },
+
+    "lineData": {
+      "description": "시계열. `values`는 `x`와 같은 길이여야 하며 결측은 null이다(0이 아니다 — 0은 관측값이라 그래프가 바닥을 찍는다). 길이 일치는 JSON Schema로 표현할 수 없어 scripts/validate_report_data.py가 검사한다.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "series"],
+      "properties": {
+        "x": { "type": "array", "items": { "type": "string" } },
+        "series": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "values"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "values": { "type": "array", "items": { "type": ["number", "null"] } }
+            }
+          }
+        }
+      }
+    },
+
+    "heatmapData": {
+      "description": "행×열 격자. `cells[i]`는 `rows[i]`의 행이고 폭은 `cols`와 같아야 한다(격자 정합성은 위와 같은 이유로 검사기 담당). null = 해당 없음(0과 구별된다).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["rows", "cols", "cells"],
+      "properties": {
+        "rows": { "type": "array", "items": { "type": "string" } },
+        "cols": { "type": "array", "items": { "type": "string" } },
+        "cells": {
+          "type": "array",
+          "items": { "type": "array", "items": { "type": ["number", "null"] } }
+        }
+      }
+    },
+
+    "tunableData": {
+      "description": "임계 노브를 실은 차트: 리포트가 원자료 + 노브를 싣고 대시보드가 파생 뷰를 클라이언트에서 다시 계산한다(기준 원장 — 값=도메인 소유자, 임계를 코드에 은닉하지 않는다). **뷰별 페이로드 키는 여기서 제약하지 않는다**: 뷰마다 형태가 전혀 다르고, 정본은 렌더러(apps/dashboard/components/charts/Tunable.tsx)다. 스키마에 5종을 베끼면 새 뷰마다 승인이 필요해지고 두 곳이 어긋난다. 렌더러가 아는 view인지는 scripts/validate_report_data.py가 렌더러를 직접 읽어 검사한다.",
+      "type": "object",
+      "required": ["view"],
+      "properties": {
+        "view": { "type": "string", "minLength": 1 },
+        "note": { "type": "string" },
+        "knobs": { "type": "array", "items": { "$ref": "#/$defs/knob" } }
+      }
+    },
+
+    "knob": {
+      "description": "도메인 소유자가 화면에서 돌리는 임계 하나. 6필드 전부 필수다 — 하나라도 없으면 슬라이더가 조용히 렌더되지 않아 임계가 다시 코드에 숨는다. 기본값이 [min, max] 밖인지는 검사기가 본다.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "label", "default", "min", "max", "step"],
+      "properties": {
+        "key": { "type": "string", "minLength": 1 },
+        "label": { "type": "string", "minLength": 1 },
+        "default": { "type": "number" },
+        "min": { "type": "number" },
+        "max": { "type": "number" },
+        "step": { "type": "number", "exclusiveMinimum": 0 }
+      }
+    },
+
     "media": {
       "type": "object",
       "additionalProperties": false,

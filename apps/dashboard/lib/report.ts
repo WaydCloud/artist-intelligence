@@ -95,11 +95,18 @@ export type TunableData =
   | TagsTunableData
   | ImpulseRulesTunableData;
 
-export interface Chart {
-  type: "line" | "bar" | "heatmap" | "radar" | "tunable";
-  title?: string;
-  data: BarData | LineData | HeatmapData | TunableData | unknown;
-}
+// `type`이 `data`의 형태를 결정한다 — 판별 유니온이라 `as BarData` 같은 캐스트가 필요 없고,
+// 분기를 빼먹으면 컴파일러가 잡는다. 예전엔 `data: ... | unknown`이라 캐스트가 검사를 무력화했고,
+// 그래서 2026-07-30에 bar 키 오용(`label`)이 타입체크·스키마 양쪽을 통과해 화면까지 나갔다.
+// **쓰는 쪽 정본은 packages/report-schema/report.schema.json이며 둘은 짝으로 갱신한다**(AGENTS §0).
+export type Chart =
+  | { type: "bar"; title?: string; data: BarData }
+  | { type: "line"; title?: string; data: LineData }
+  | { type: "heatmap"; title?: string; data: HeatmapData }
+  | { type: "tunable"; title?: string; data: TunableData }
+  // radar는 아직 렌더러가 없다(카드가 "미지원"을 표시한다). 스키마도 같은 이유로 무제약이며,
+  // 구현할 때 스키마 분기와 여기 형태를 함께 정한다.
+  | { type: "radar"; title?: string; data: unknown };
 
 export interface Media {
   type: "image" | "video";

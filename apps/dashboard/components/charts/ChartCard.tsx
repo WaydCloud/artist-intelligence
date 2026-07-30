@@ -1,4 +1,4 @@
-import type { BarData, Chart, HeatmapData, LineData, TunableData } from "@/lib/report";
+import type { Chart } from "@/lib/report";
 import { BarChart } from "./BarChart";
 import { LineChart } from "./LineChart";
 import { Heatmap } from "./Heatmap";
@@ -11,10 +11,10 @@ export function ChartCard({ chart, dark }: { chart: Chart; dark: boolean }) {
     <section className="glass-card p-5">
       {chart.title && <h2 className="mb-4 font-display text-sm font-medium tracking-wide">{chart.title}</h2>}
       <ChartBoundary label={chart.title ?? chart.type}>
-        {chart.type === "bar" && <BarChart data={chart.data as BarData} />}
-        {chart.type === "line" && <LineChart data={chart.data as LineData} />}
-        {chart.type === "heatmap" && <Heatmap data={chart.data as HeatmapData} dark={dark} />}
-        {chart.type === "tunable" && <Tunable data={chart.data as TunableData} title={chart.title} />}
+        {chart.type === "bar" && <BarChart data={chart.data} />}
+        {chart.type === "line" && <LineChart data={chart.data} />}
+        {chart.type === "heatmap" && <Heatmap data={chart.data} dark={dark} />}
+        {chart.type === "tunable" && <Tunable data={chart.data} title={chart.title} />}
         {chart.type === "radar" && <p className="text-sm text-[var(--muted)]">radar 차트는 아직 미지원</p>}
       </ChartBoundary>
     </section>

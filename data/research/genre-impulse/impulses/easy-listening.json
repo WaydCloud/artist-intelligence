@@ -1,367 +1,368 @@
 {
-  "id": "easy-listening",
-  "name_ko": "이지리스닝",
-  "name_en": "Easy listening (K-pop frame)",
-  "version": "1.0.0",
-  "updated": "2026-07-30",
-  "case_type": "hybrid-endogenous",
-  "origin": {
-    "region": "KR",
-    "scene": "혼성 내생 — 프레임과 공식은 내생(250 등 국내 언더 전자음악·국내 담론), 프로덕션 재료(UKG·저지/볼티모어 클럽·브레이크비트·리퀴드 DnB)는 영·미 클럽 언더그라운드산 부분 수입"
+ "id": "easy-listening",
+ "name_ko": "이지리스닝",
+ "name_en": "Easy listening (K-pop frame)",
+ "version": "1.1.0",
+ "updated": "2026-07-31",
+ "case_type": "hybrid-endogenous",
+ "origin": {
+  "region": "KR",
+  "scene": "혼성 내생 — 프레임과 공식은 내생(250 등 국내 언더 전자음악·국내 담론), 프로덕션 재료(UKG·저지/볼티모어 클럽·브레이크비트·리퀴드 DnB)는 영·미 클럽 언더그라운드산 부분 수입"
+ },
+ "adoption_mode": {
+  "mode": "full",
+  "notes": "역방향 대조군 — 확산 방향이 한국 주류 → 글로벌. '이지리스닝' 프레임 자체가 서구에 대응물이 없는 한국 담론의 산물. 재료 층위의 글로벌 선행자는 PinkPantheress(2021-10, 경량·짧은 러닝타임·속삭임 보컬 문법), 2기(『Get Up』 2023)에는 Erika de Casier가 6곡 중 4곡 공동작곡. 공식·프레임 층위는 한국 — 250은 국내 언더 전자음악·『뽕』 출신, 시티팝·뉴트로·Y2K 국내 선행 흐름 위에서 작업",
+  "mode_transitions": []
+ },
+ "trajectory": [
+  {
+   "cell": "overseas-underground-material",
+   "date": "2021-10",
+   "date_precision": "month",
+   "evidence": "해외 언더 선행(재료) — PinkPantheress 『To Hell with It』",
+   "sources": [
+    "https://en.wikipedia.org/wiki/To_Hell_with_It"
+   ],
+   "certainty": "높음"
   },
-  "adoption_mode": {
-    "mode": "full",
-    "notes": "역방향 대조군 — 확산 방향이 한국 주류 → 글로벌. '이지리스닝' 프레임 자체가 서구에 대응물이 없는 한국 담론의 산물. 재료 층위의 글로벌 선행자는 PinkPantheress(2021-10, 경량·짧은 러닝타임·속삭임 보컬 문법), 2기(『Get Up』 2023)에는 Erika de Casier가 6곡 중 4곡 공동작곡. 공식·프레임 층위는 한국 — 250은 국내 언더 전자음악·『뽕』 출신, 시티팝·뉴트로·Y2K 국내 선행 흐름 위에서 작업",
-    "mode_transitions": []
+  {
+   "cell": "kr-underground",
+   "date": "2022-03",
+   "date_precision": "month",
+   "evidence": "250 『뽕』 발매·국내 전자음악 씬(추정)",
+   "sources": [
+    "https://www.nylon.com/entertainment/newjeans-producer-250-kpop-trot-ppong-album"
+   ],
+   "certainty": "중간"
   },
-  "trajectory": [
-    {
-      "cell": "overseas-underground-material",
-      "date": "2021-10",
-      "date_precision": "month",
-      "evidence": "해외 언더 선행(재료) — PinkPantheress 『To Hell with It』",
-      "sources": [
-        "https://en.wikipedia.org/wiki/To_Hell_with_It"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-underground",
-      "date": "2022-03",
-      "date_precision": "month",
-      "evidence": "250 『뽕』 발매·국내 전자음악 씬(추정)",
-      "sources": [
-        "https://www.nylon.com/entertainment/newjeans-producer-250-kpop-trot-ppong-album"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "cell": "kr-mainstream-entry",
-      "date": "2022-04",
-      "date_precision": "month",
-      "evidence": "아이브 'LOVE DIVE' 멜론 1위, MAMA·MMA 올해의 노래 — 주류 진입(원형)",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Love_Dive_(song)"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-mainstream",
-      "date": "2022-07",
-      "date_precision": "month",
-      "evidence": "뉴진스 데뷔 'Attention' 즉시 차트 석권 — 주류 확립",
-      "sources": [
-        "https://biz.heraldcorp.com/article/3289333"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-supplier-naming",
-      "date": "2022-07",
-      "date_precision": "month",
-      "evidence": "담론 프레임화(명명) — 교차 검증으로 반증·앞당김: 어도어의 뉴진스 데뷔(2022-07-22) 공식 소개문('세련된 이지리스닝 팝')이 기점. 디스패치가 2022-08-08 이미 '2022년 유행 음악인 이지리스닝 팝' 지칭, 일반 언론 확산은 2023",
-      "sources": [
-        "https://www.dispatch.co.kr/2212299",
-        "https://www.bntnews.co.kr/article/view/bnt202209160060"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-chart-dominance",
-      "date": "2022-12",
-      "date_precision": "month",
-      "evidence": "'Ditto' PAK(2022-12-26), 멜론 주간 1위 14주(사상 최장)",
-      "sources": [
-        "https://www.soompi.com/article/1569746wpp/newjeans-ditto-becomes-1st-song-in-melon-history-to-chart-at-no-1-for-10-consecutive-weeks"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "global-mainstream",
-      "date": "2023-02",
-      "date_precision": "month",
-      "evidence": "'OMG' Hot 100 #74; FIFTY FIFTY 'Cupid'(2023-02-24) 최고 #17 — 중소기획사발 글로벌 증명",
-      "sources": [
-        "https://www.billboard.com/music/chart-beat/fifty-fifty-cupid-hot-100-debut-1235293747/"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-industry-standardization",
-      "date": "2023-05~2023-09",
-      "date_precision": "range",
-      "evidence": "보이넥스트도어 데뷔(2023-05), RIIZE 'Get A Guitar'(2023-09) — 보이그룹까지 공식화",
-      "sources": [
-        "https://www.imaeil.com/page/view/2023100909594244883"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-saturation",
-      "date": "2024-03",
-      "date_precision": "month",
-      "evidence": "문법 복제 논쟁(포화) — 아일릿 'Magnetic' 뉴진스 유사성 논란",
-      "sources": [
-        "https://www.allkpop.com/article/2024/05/music-industry-experts-discuss-whether-illit-is-a-copy-of-newjeans"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "jp-export",
-      "date": "2024-06",
-      "date_precision": "month",
-      "evidence": "'Supernatural' 오리콘 데일리 1위 — 일본 역수출",
-      "sources": [
-        "https://www.nocutnews.co.kr/news/6165356"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-reversal",
-      "date": "2024-05~2024-10",
-      "date_precision": "range",
-      "evidence": "반전(맥시멀 회귀) — 에스파 'Supernova'·'Armageddon'·'Whiplash' 3연속 히트",
-      "sources": [
-        "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-decline-discourse",
-      "date": "2025-03",
-      "date_precision": "month",
-      "evidence": "쇠퇴 담론 공식화 — NMIXX 『Fe3O4: FORWARD』 호평, '어려운 노래 뜨나' 평론",
-      "sources": [
-        "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
-      ],
-      "certainty": "중간"
-    }
-  ],
-  "leadtimes": [
-    {
-      "from_cell": "overseas-underground-material",
-      "to_cell": "kr-mainstream",
-      "months": 7,
-      "months_range": "6~9",
-      "note": "재료 수입 → 주류 원형(LOVE DIVE 2022-04 / 뉴진스 2022-07)"
-    },
-    {
-      "from_cell": "kr-mainstream",
-      "to_cell": "kr-chart-dominance",
-      "months": 5,
-      "note": "원형 → 차트 지배(Ditto PAK)"
-    },
-    {
-      "from_cell": "kr-mainstream",
-      "to_cell": "kr-supplier-naming",
-      "months": 0,
-      "note": "🔄 교차 검증으로 수정 — 공급자 명명은 데뷔와 동시(2022-07 어도어 소개문). 음향 특질 추적의 가치는 유지되나 근거가 바뀜: 특질은 공급자 선언 이전의 데모·언더 층을 잡는 데 쓰인다"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "press-generalization",
-      "months": 6,
-      "note": "언론 일반화만 후행(2023, 지배 후 ~6개월)"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "kr-industry-standardization",
-      "months": 7,
-      "months_range": "6~9",
-      "note": "지배 → 산업 전면 추종"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "kr-saturation",
-      "months": 15,
-      "note": "문법 복제 포화(2024-03)까지"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "global-mainstream",
-      "months": 5,
-      "note": "역수출 — Hot 100 상위권(2023-05 Cupid 피크) 기준"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "jp-export",
-      "months": 18,
-      "note": "일본 정면 공략(2024-06)"
-    },
-    {
-      "from_cell": "kr-chart-dominance",
-      "to_cell": "kr-reversal",
-      "months": 22,
-      "note": "반전 신호(에스파 맥시멀 3연타 2024-05~10) — 전체 지배 기간 약 2년(임펄스로서 긴 편)"
-    }
-  ],
-  "early_signals": [
-    {
-      "source_type": "kr-precursor-aesthetic",
-      "date": "2019~2021",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "국내 선행 미학 — 시티팝·뉴트로·Y2K가 취향 저변을 예열, 250 『뽕』이 방향 제시",
-      "certainty": "중간"
-    },
-    {
-      "source_type": "listener-fatigue-discourse",
-      "date": "2021~2022",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "맥시멀리즘 피로 담론 — 4세대 '센 콘셉트'·세계관 과부하에 대한 청취자 피로가 업계에서 감지('대중은 시끄럽고 강력한 사운드보다 이해 가능한 리듬을 원한다'). 직전 지배 문법과의 단절 자체가 임펄스",
-      "sources": [
-        "https://www.imaeil.com/page/view/2023100909594244883"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "source_type": "shortform-viral",
-      "date": "2021",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "해외 언더의 선(先)증명 — PinkPantheress 틱톡 성공이 상업성 검증",
-      "certainty": "높음"
-    },
-    {
-      "source_type": "kr-parallel-prototype",
-      "date": "2022-04",
-      "lead_months_vs_kr_mainstream": 3,
-      "evidence": "비(非)뉴진스 원형 — LOVE DIVE가 뉴진스 데뷔 3개월 전 이미 미니멀 팝으로 올해의 노래급 성공(단독 발원설 약화)",
-      "certainty": "높음"
-    },
-    {
-      "source_type": "supplier-framing",
-      "date": "2022-07",
-      "lead_months_vs_kr_mainstream": 0,
-      "evidence": "공급자의 프레임 선언(어도어 데뷔 소개문 '세련된 이지리스닝 팝')은 현상과 동시적 신호 — 보도자료 텍스트가 관측 대상이 된다. 언론 일반화만 후행",
-      "certainty": "높음"
-    }
-  ],
-  "element_borrowing": null,
-  "identity_formation": null,
-  "signature": {
-    "status": "pending-a2",
-    "predicted_axes": [
-      "템포: 미드템포 중심(약 100~130 BPM 추정), 클럽 계열은 빠른 BPM이라도 하프타임 체감 설계 — 실측 필요",
-      "다이내믹스: 드롭·클라이맥스 회피, 벌스-후렴 에너지 격차 축소 → LRA(라우드니스 레인지) 저하로 측정",
-      "보컬: 벨팅·고음 애드립 배제, 대화체/breathy 톤 → 피치 중앙값·범위 축소, 보컬 다이내믹 레인지 축소",
-      "편곡 밀도: 신스 레이어 최소화·로파이 질감·여백 → 스펙트럴 플럭스·대역 점유율 저하",
-      "구조·길이: 3분 미만·인트로 단축·훅 조기 배치(매우 낮음)",
-      "측정 설계: '동시대 차트 대비 저부하'라는 상대 위치 — 코호트 분포상 위치로 설계"
-    ]
+  {
+   "cell": "kr-mainstream-entry",
+   "date": "2022-04",
+   "date_precision": "month",
+   "evidence": "아이브 'LOVE DIVE' 멜론 1위, MAMA·MMA 올해의 노래 — 주류 진입(원형)",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Love_Dive_(song)"
+   ],
+   "certainty": "높음"
   },
-  "peak_decline": {
-    "kr_peak": "2023~2024 상반기 — 2023 멜론 연간 뉴진스 톱10 4곡, 2024 초 '밤양갱'까지 비아이돌 일반화",
-    "kr_decline": "쇠퇴 동인 — ① 에스파 맥시멀 3연속 메가히트(2024-05~10)의 취향 반전 ② 하이브-어도어 분쟁(2024-04~)으로 원조 동력 상실 + '복제 문법' 피로 ③ '미국 시장용 인위 제작' 피로 담론 ④ 밴드 붐(데이식스·QWER 2024)의 '편안함' 수요 흡수. 2025 '하드리스닝' 담론(NMIXX 호평)·ALLDAY PROJECT 등 맥시멀 크루형 재편",
-    "decline_certainty": "중간",
-    "residue": "완전 소멸이 아니라 '기본 옵션화'"
+  {
+   "cell": "kr-mainstream",
+   "date": "2022-07",
+   "date_precision": "month",
+   "evidence": "뉴진스 데뷔 'Attention' 즉시 차트 석권 — 주류 확립",
+   "sources": [
+    "https://biz.heraldcorp.com/article/3289333"
+   ],
+   "certainty": "높음"
   },
-  "chart_evidence": [
-    {
-      "chart": "billboard-hot100",
-      "artist": "FIFTY FIFTY",
-      "title": "Cupid",
-      "role": "kr",
-      "charted": true,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "entry_date": "2023-04-01",
-      "exit_date": "2023-09-16",
-      "peak_position": 17,
-      "peak_date": "2023-05-20",
-      "weeks_on_chart": 25,
-      "weeks_counted": 25
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "ILLIT",
-      "title": "Magnetic",
-      "role": "kr",
-      "charted": true,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "entry_date": "2024-04-20",
-      "exit_date": "2024-04-20",
-      "peak_position": 91,
-      "peak_date": "2024-04-20",
-      "weeks_on_chart": 1,
-      "weeks_counted": 1
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "IVE",
-      "title": "LOVE DIVE",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "IVE",
-      "title": "After LIKE",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "NewJeans",
-      "title": "Hype Boy",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "PinkPantheress",
-      "title": "Pain",
-      "role": "origin",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "RIIZE",
-      "title": "Get A Guitar",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "TWS",
-      "title": "plot twist",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "비비",
-      "title": "밤양갱",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    }
-  ],
-  "limits": [
-    "'이지리스닝'은 장르가 아니라 사후 명명된 마케팅/평론 프레임 — 실체는 이질적(UKG·저지클럽·디스코팝·어쿠스틱 힙합·발라드). 임펄스 정의는 '맥시멀리즘 대비 저부하'라는 상대 위치로 해야 함",
-    "명명 기점은 교차 검증으로 해소 — 기점=어도어 데뷔 소개문(2022-07), 언론 최초 확인=디스패치 2022-08-08",
-    "원형을 아이브로 잡으면 내생성 강화, 뉴진스로 잡으면 해외 재료 의존 커짐 — '혼성 내생' 판정은 이 민감도 반영",
-    "'차트 상위 이지리스닝 비중' 정량은 곡 단위 분류 기준 선행 필요(분류 기준 자체가 원장 등재 대상)",
-    "TWS·아일릿 일본 성과 등 일부 미검증(매우 낮음 표기)"
-  ],
-  "casebook_ref": "CASE 8"
+  {
+   "cell": "kr-supplier-naming",
+   "date": "2022-07",
+   "date_precision": "month",
+   "evidence": "담론 프레임화(명명) — 교차 검증으로 반증·앞당김: 어도어의 뉴진스 데뷔(2022-07-22) 공식 소개문('세련된 이지리스닝 팝')이 기점. 디스패치가 2022-08-08 이미 '2022년 유행 음악인 이지리스닝 팝' 지칭, 일반 언론 확산은 2023",
+   "sources": [
+    "https://www.dispatch.co.kr/2212299",
+    "https://www.bntnews.co.kr/article/view/bnt202209160060"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-chart-dominance",
+   "date": "2022-12",
+   "date_precision": "month",
+   "evidence": "'Ditto' PAK(2022-12-26), 멜론 주간 1위 14주(사상 최장)",
+   "sources": [
+    "https://www.soompi.com/article/1569746wpp/newjeans-ditto-becomes-1st-song-in-melon-history-to-chart-at-no-1-for-10-consecutive-weeks"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "global-mainstream",
+   "date": "2023-02",
+   "date_precision": "month",
+   "evidence": "'OMG' Hot 100 #74; FIFTY FIFTY 'Cupid'(2023-02-24) 최고 #17 — 중소기획사발 글로벌 증명",
+   "sources": [
+    "https://www.billboard.com/music/chart-beat/fifty-fifty-cupid-hot-100-debut-1235293747/"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-industry-standardization",
+   "date": "2023-05~2023-09",
+   "date_precision": "range",
+   "evidence": "보이넥스트도어 데뷔(2023-05), RIIZE 'Get A Guitar'(2023-09) — 보이그룹까지 공식화",
+   "sources": [
+    "https://www.imaeil.com/page/view/2023100909594244883"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-saturation",
+   "date": "2024-03",
+   "date_precision": "month",
+   "evidence": "문법 복제 논쟁(포화) — 아일릿 'Magnetic' 뉴진스 유사성 논란",
+   "sources": [
+    "https://www.allkpop.com/article/2024/05/music-industry-experts-discuss-whether-illit-is-a-copy-of-newjeans"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "jp-export",
+   "date": "2024-06",
+   "date_precision": "month",
+   "evidence": "'Supernatural' 오리콘 데일리 1위 — 일본 역수출",
+   "sources": [
+    "https://www.nocutnews.co.kr/news/6165356"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-reversal",
+   "date": "2024-05~2024-10",
+   "date_precision": "range",
+   "evidence": "반전(맥시멀 회귀) — 에스파 'Supernova'·'Armageddon'·'Whiplash' 3연속 히트",
+   "sources": [
+    "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-decline-discourse",
+   "date": "2025-03",
+   "date_precision": "month",
+   "evidence": "쇠퇴 담론 공식화 — NMIXX 『Fe3O4: FORWARD』 호평, '어려운 노래 뜨나' 평론",
+   "sources": [
+    "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
+   ],
+   "certainty": "중간"
+  }
+ ],
+ "leadtimes": [
+  {
+   "from_cell": "overseas-underground-material",
+   "to_cell": "kr-mainstream",
+   "months": 7,
+   "months_range": "6~9",
+   "note": "재료 수입 → 주류 원형(LOVE DIVE 2022-04 / 뉴진스 2022-07)"
+  },
+  {
+   "from_cell": "kr-mainstream",
+   "to_cell": "kr-chart-dominance",
+   "months": 5,
+   "note": "원형 → 차트 지배(Ditto PAK)"
+  },
+  {
+   "from_cell": "kr-mainstream",
+   "to_cell": "kr-supplier-naming",
+   "months": 0,
+   "note": "🔄 교차 검증으로 수정 — 공급자 명명은 데뷔와 동시(2022-07 어도어 소개문). 음향 특질 추적의 가치는 유지되나 근거가 바뀜: 특질은 공급자 선언 이전의 데모·언더 층을 잡는 데 쓰인다"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "press-generalization",
+   "months": 6,
+   "note": "언론 일반화만 후행(2023, 지배 후 ~6개월)"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "kr-industry-standardization",
+   "months": 7,
+   "months_range": "6~9",
+   "note": "지배 → 산업 전면 추종"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "kr-saturation",
+   "months": 15,
+   "note": "문법 복제 포화(2024-03)까지"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "global-mainstream",
+   "months": 5,
+   "note": "역수출 — Hot 100 상위권(2023-05 Cupid 피크) 기준"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "jp-export",
+   "months": 18,
+   "note": "일본 정면 공략(2024-06)"
+  },
+  {
+   "from_cell": "kr-chart-dominance",
+   "to_cell": "kr-reversal",
+   "months": 22,
+   "note": "반전 신호(에스파 맥시멀 3연타 2024-05~10) — 전체 지배 기간 약 2년(임펄스로서 긴 편)"
+  }
+ ],
+ "early_signals": [
+  {
+   "source_type": "kr-precursor-aesthetic",
+   "date": "2019~2021",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "국내 선행 미학 — 시티팝·뉴트로·Y2K가 취향 저변을 예열, 250 『뽕』이 방향 제시",
+   "certainty": "중간"
+  },
+  {
+   "source_type": "listener-fatigue-discourse",
+   "date": "2021~2022",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "맥시멀리즘 피로 담론 — 4세대 '센 콘셉트'·세계관 과부하에 대한 청취자 피로가 업계에서 감지('대중은 시끄럽고 강력한 사운드보다 이해 가능한 리듬을 원한다'). 직전 지배 문법과의 단절 자체가 임펄스",
+   "sources": [
+    "https://www.imaeil.com/page/view/2023100909594244883"
+   ],
+   "certainty": "중간"
+  },
+  {
+   "source_type": "shortform-viral",
+   "date": "2021",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "해외 언더의 선(先)증명 — PinkPantheress 틱톡 성공이 상업성 검증",
+   "certainty": "높음"
+  },
+  {
+   "source_type": "kr-parallel-prototype",
+   "date": "2022-04",
+   "lead_months_vs_kr_mainstream": 3,
+   "evidence": "비(非)뉴진스 원형 — LOVE DIVE가 뉴진스 데뷔 3개월 전 이미 미니멀 팝으로 올해의 노래급 성공(단독 발원설 약화)",
+   "certainty": "높음"
+  },
+  {
+   "source_type": "supplier-framing",
+   "date": "2022-07",
+   "lead_months_vs_kr_mainstream": 0,
+   "evidence": "공급자의 프레임 선언(어도어 데뷔 소개문 '세련된 이지리스닝 팝')은 현상과 동시적 신호 — 보도자료 텍스트가 관측 대상이 된다. 언론 일반화만 후행",
+   "certainty": "높음"
+  }
+ ],
+ "element_borrowing": null,
+ "identity_formation": null,
+ "signature": {
+  "status": "pending-a2",
+  "predicted_axes": [
+   "템포: 미드템포 중심(약 100~130 BPM 추정), 클럽 계열은 빠른 BPM이라도 하프타임 체감 설계 — 실측 필요",
+   "다이내믹스: 드롭·클라이맥스 회피, 벌스-후렴 에너지 격차 축소 → LRA(라우드니스 레인지) 저하로 측정",
+   "보컬: 벨팅·고음 애드립 배제, 대화체/breathy 톤 → 피치 중앙값·범위 축소, 보컬 다이내믹 레인지 축소",
+   "편곡 밀도: 신스 레이어 최소화·로파이 질감·여백 → 스펙트럴 플럭스·대역 점유율 저하",
+   "구조·길이: 3분 미만·인트로 단축·훅 조기 배치(매우 낮음)",
+   "측정 설계: '동시대 차트 대비 저부하'라는 상대 위치 — 코호트 분포상 위치로 설계"
+  ]
+ },
+ "peak_decline": {
+  "kr_peak": "2023~2024 상반기 — 2023 멜론 연간 뉴진스 톱10 4곡, 2024 초 '밤양갱'까지 비아이돌 일반화",
+  "kr_decline": "쇠퇴 동인 — ① 에스파 맥시멀 3연속 메가히트(2024-05~10)의 취향 반전 ② 하이브-어도어 분쟁(2024-04~)으로 원조 동력 상실 + '복제 문법' 피로 ③ '미국 시장용 인위 제작' 피로 담론 ④ 밴드 붐(데이식스·QWER 2024)의 '편안함' 수요 흡수. 2025 '하드리스닝' 담론(NMIXX 호평)·ALLDAY PROJECT 등 맥시멀 크루형 재편",
+  "decline_certainty": "중간",
+  "residue": "완전 소멸이 아니라 '기본 옵션화'"
+ },
+ "chart_evidence": [
+  {
+   "chart": "billboard-hot100",
+   "artist": "FIFTY FIFTY",
+   "title": "Cupid",
+   "role": "kr",
+   "charted": true,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "entry_date": "2023-04-01",
+   "exit_date": "2023-09-16",
+   "peak_position": 17,
+   "peak_date": "2023-05-20",
+   "weeks_on_chart": 25,
+   "weeks_counted": 25
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "ILLIT",
+   "title": "Magnetic",
+   "role": "kr",
+   "charted": true,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "entry_date": "2024-04-20",
+   "exit_date": "2024-04-20",
+   "peak_position": 91,
+   "peak_date": "2024-04-20",
+   "weeks_on_chart": 1,
+   "weeks_counted": 1
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "IVE",
+   "title": "LOVE DIVE",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "IVE",
+   "title": "After LIKE",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "NewJeans",
+   "title": "Hype Boy",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "PinkPantheress",
+   "title": "Pain",
+   "role": "origin",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "RIIZE",
+   "title": "Get A Guitar",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "TWS",
+   "title": "plot twist",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "비비",
+   "title": "밤양갱",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  }
+ ],
+ "limits": [
+  "'이지리스닝'은 장르가 아니라 사후 명명된 마케팅/평론 프레임 — 실체는 이질적(UKG·저지클럽·디스코팝·어쿠스틱 힙합·발라드). 임펄스 정의는 '맥시멀리즘 대비 저부하'라는 상대 위치로 해야 함",
+  "명명 기점은 교차 검증으로 해소 — 기점=어도어 데뷔 소개문(2022-07), 언론 최초 확인=디스패치 2022-08-08",
+  "원형을 아이브로 잡으면 내생성 강화, 뉴진스로 잡으면 해외 재료 의존 커짐 — '혼성 내생' 판정은 이 민감도 반영",
+  "'차트 상위 이지리스닝 비중' 정량은 곡 단위 분류 기준 선행 필요(분류 기준 자체가 원장 등재 대상)",
+  "TWS·아일릿 일본 성과 등 일부 미검증(매우 낮음 표기)",
+  "A2 본편(2026-07-31): 2021-10 앵커 코호트는 이 케이스(2023 주류화)의 동시대가 아니라 판정 유보 — 수용형 8곡 전 축 중앙은 비교 시점 오류일 수 있다. 2023 앵커 코호트 확보 후 재측(CASEBOOK §A2 본편)"
+ ],
+ "casebook_ref": "CASE 8"
 }

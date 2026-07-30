@@ -1,395 +1,402 @@
 {
-  "id": "reggaeton-dembow",
-  "name_ko": "레게톤/뎀보우",
-  "name_en": "Reggaeton / Dembow",
-  "version": "1.0.0",
-  "updated": "2026-07-30",
-  "case_type": "import",
-  "origin": {
-    "region": "LATAM",
-    "scene": "자메이카(리딤 원형) → 파나마(스페인어화) → 푸에르토리코(레게톤 성립)"
+ "id": "reggaeton-dembow",
+ "name_ko": "레게톤/뎀보우",
+ "name_en": "Reggaeton / Dembow",
+ "version": "1.1.0",
+ "updated": "2026-07-31",
+ "case_type": "import",
+ "origin": {
+  "region": "LATAM",
+  "scene": "자메이카(리딤 원형) → 파나마(스페인어화) → 푸에르토리코(레게톤 성립)"
+ },
+ "adoption_mode": {
+  "mode": "element",
+  "notes": "부분 수용 판정 — 글로벌 메가트렌드(빌보드 16주 1위, Spotify 3년 연속 최다 스트리밍)가 한국에서는 수출 전략 중심의 부분 수용에 그침: '글로벌 신호 강도 ≠ 한국 주류 도달'의 캘리브레이션 데이터. K-pop 유입 벡터가 레게톤 직수입이 아니라 뭄바톤 경유(EDM 필터)가 지배적. 부분 삽입 구조(코러스·드롭 한정)·스페인어 토큰화·수출 도구화가 수용 형태",
+  "mode_transitions": [
+   {
+    "from": "element",
+    "to": "full",
+    "date": "2022-10",
+    "evidence": "LE SSERAFIM 'ANTIFRAGILE'(써클 디지털 2위) — 라틴 '콘셉트' 탈각, 퍼포먼스 팝 리듬 어휘로 흡수돼 국내 히트와 양립한 첫 형태. 전환 진행 중(명시 귀속 타이틀 1위는 미도달, 최고 #2)"
+   }
+  ]
+ },
+ "trajectory": [
+  {
+   "cell": "origin-scene-jamaica",
+   "date": "1989~1990",
+   "date_precision": "range",
+   "evidence": "Steely & Clevie 리딤('Poco Man Jam' 1989) → Shabba Ranks 'Dem Bow'(1990)로 명명",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Dembow_beat"
+   ],
+   "certainty": "높음"
   },
-  "adoption_mode": {
-    "mode": "element",
-    "notes": "부분 수용 판정 — 글로벌 메가트렌드(빌보드 16주 1위, Spotify 3년 연속 최다 스트리밍)가 한국에서는 수출 전략 중심의 부분 수용에 그침: '글로벌 신호 강도 ≠ 한국 주류 도달'의 캘리브레이션 데이터. K-pop 유입 벡터가 레게톤 직수입이 아니라 뭄바톤 경유(EDM 필터)가 지배적. 부분 삽입 구조(코러스·드롭 한정)·스페인어 토큰화·수출 도구화가 수용 형태",
-    "mode_transitions": [
-      {
-        "from": "element",
-        "to": "full",
-        "date": "2022-10",
-        "evidence": "LE SSERAFIM 'ANTIFRAGILE'(써클 디지털 2위) — 라틴 '콘셉트' 탈각, 퍼포먼스 팝 리듬 어휘로 흡수돼 국내 히트와 양립한 첫 형태. 전환 진행 중(명시 귀속 타이틀 1위는 미도달, 최고 #2)"
-      }
-    ]
+  {
+   "cell": "origin-scene-panama",
+   "date": "1990~1991",
+   "date_precision": "range",
+   "evidence": "El General 등 스패니시 레게 씬의 리메이크",
+   "sources": [
+    "https://daily.redbullmusicacademy.com/2013/07/dembow-a-loop-history/"
+   ],
+   "certainty": "중간"
   },
-  "trajectory": [
-    {
-      "cell": "origin-scene-jamaica",
-      "date": "1989~1990",
-      "date_precision": "range",
-      "evidence": "Steely & Clevie 리딤('Poco Man Jam' 1989) → Shabba Ranks 'Dem Bow'(1990)로 명명",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Dembow_beat"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "origin-scene-panama",
-      "date": "1990~1991",
-      "date_precision": "range",
-      "evidence": "El General 등 스패니시 레게 씬의 리메이크",
-      "sources": [
-        "https://daily.redbullmusicacademy.com/2013/07/dembow-a-loop-history/"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "cell": "origin-scene-pr",
-      "date": "1992-07",
-      "date_precision": "month",
-      "evidence": "DJ Playero 『Playero 37』 — Daddy Yankee 데뷔, 방송 금지 속 카세트 유통",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Playero_37"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "origin-mainstream",
-      "date": "2004-07",
-      "date_precision": "month",
-      "evidence": "『Barrio Fino』 레게톤 앨범 최초 빌보드 Top Latin 1위, 'Gasolina' Hot 100 #32",
-      "sources": [
-        "https://www.billboard.com/music/latin/daddy-yankee-on-gasolina-barrio-fino-reggaeton-10-years-later-i-knew-it-was-a-home-6207108/"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "global-mainstream",
-      "date": "2017-05",
-      "date_precision": "month",
-      "evidence": "글로벌 주류 정점 2차 — 'Despacito'(리믹스) Hot 100 1위 16주 연속",
-      "sources": [
-        "https://www.billboard.com/pro/luis-fonsi-daddy-yankee-despacito-justin-bieber-number-one/"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "global-streaming-dominance",
-      "date": "2017-06~2020-12",
-      "date_precision": "range",
-      "evidence": "'Mi Gente' 라틴곡 최초 Spotify 글로벌 1위(2017-06); Bad Bunny 2020~22 3년 연속 최다 스트리밍",
-      "sources": [
-        "https://www.billboard.com/pro/bad-bunny-spotify-most-streamed-artist-2020/"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-first-adoption",
-      "date": "2016-12",
-      "date_precision": "month",
-      "evidence": "KARD 'Oh NaNa'(2016-12-13) — 레게톤/뭄바톤, 수출형 기획(K-pop 첫 채용)",
-      "sources": [
-        "https://www.koreatimes.co.kr/entertainment/k-pop/20260710/why-is-coed-k-pop-group-kard-ending-its-journey"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "cell": "kr-viral",
-      "date": "2017 중반",
-      "date_precision": "year",
-      "evidence": "외래곡 소비(추정) — 'Despacito' 가온 국제차트 최고 7위, 1위 미도달(2017 국제 주간 1위 목록에 라틴곡 부재)",
-      "sources": [
-        "https://en.wikipedia.org/wiki/List_of_number-one_international_songs_of_2017_(South_Korea)"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "cell": "kr-mainstream-entry",
-      "date": "2018-05",
-      "date_precision": "month",
-      "evidence": "(여자)아이들 'LATATA'(moombahton/reggae/trap-pop) 가온 디지털 12위",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Latata"
-      ],
-      "certainty": "중간"
-    },
-    {
-      "cell": "kr-near-peak",
-      "date": "2022-10",
-      "date_precision": "month",
-      "evidence": "LE SSERAFIM 'ANTIFRAGILE'(팝/레게톤) 써클 디지털 2위 — 레게톤 귀속 타이틀의 국내 최고 확인 성적",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Antifragile_(song)"
-      ],
-      "certainty": "높음"
-    },
-    {
-      "cell": "kr-mainstream",
-      "date": "미도달",
-      "date_precision": "unreached",
-      "evidence": "레게톤/뎀보우 명시 타이틀의 디지털 1위 확인 안 됨. 인접 사례: 선미 '가시나'(2017-08, 댄스홀 — 뎀보우 사촌 리듬) 가온 1위",
-      "sources": [
-        "https://en.wikipedia.org/wiki/Gashina"
-      ],
-      "certainty": "불가능한 수준",
-      "certainty_note": "해제 조건: 가온·써클/멜론 원자료 전수 대조 시 재평가 — 전수조사 아님"
-    }
-  ],
-  "leadtimes": [
-    {
-      "from_cell": "origin-scene-jamaica",
-      "to_cell": "origin-scene-pr",
-      "months": 24,
-      "note": "약 2년(1990 → 1992-07)"
-    },
-    {
-      "from_cell": "origin-scene-pr",
-      "to_cell": "global-mainstream-1st",
-      "months": 150,
-      "note": "약 13년(1992-07 → 글로벌 주류 1차 2005)"
-    },
-    {
-      "from_cell": "global-mainstream-1st",
-      "to_cell": "kr-first-adoption",
-      "months": null,
-      "note": "미발생(매우 낮음) — 1차 파동은 K-pop에 전이 안 됨"
-    },
-    {
-      "from_cell": "moombahton-formation",
-      "to_cell": "kr-first-adoption",
-      "months": 84,
-      "note": "뭄바톤 성립(2009) → K-pop 첫 채용(2016-12), 약 7년 — EDM 매개 경로"
-    },
-    {
-      "from_cell": "kr-first-adoption",
-      "to_cell": "global-mainstream",
-      "months": -5,
-      "note": "한국 씬 채용(2016-12)이 Despacito 정점(2017-05)보다 5개월 선행 — EDM 경유 유입이었기 때문"
-    },
-    {
-      "from_cell": "global-mainstream",
-      "to_cell": "kr-latin-strategy",
-      "months": 11,
-      "note": "글로벌 정점(2017-05) → 라틴 전략 본격화(2018-04, 슈퍼주니어 'Lo Siento')"
-    },
-    {
-      "from_cell": "global-mainstream",
-      "to_cell": "kr-near-peak",
-      "months": 65,
-      "note": "글로벌 정점(2017-05) → 국내 준정점(2022-10, #2), 약 5년 5개월"
-    }
-  ],
-  "early_signals": [
-    {
-      "source_type": "genre-elementization",
-      "date": "2009~2015",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "뭄바톤의 글로벌 EDM 어휘화 — 뎀보우 패턴이 레게톤 맥락 없이 수입 가능해짐",
-      "certainty": "높음"
-    },
-    {
-      "source_type": "overseas-chart",
-      "date": "2016-12~2017-07",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "KARD의 비대칭 신호 — 국내 부진 vs 빌보드 World top5 연속·데뷔 전 미주 11개 도시 투어. '한국 밖 수요가 한국 안 공급을 견인'하는 패턴이 주류 채용 1년+ 전 관측 가능",
-      "certainty": "중간"
-    },
-    {
-      "source_type": "overseas-chart",
-      "date": "2017-05~2017-08",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "Despacito 폭발 + 가온 국제 #7 — 국제차트 1위 미도달이 이미 '제한 수용' 예고 신호",
-      "certainty": "중간"
-    },
-    {
-      "source_type": "kr-adjacent-hit",
-      "date": "2017-09",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "'가시나' 가온 1위(데뷔주 #2 → 발매 2주차 #1) — 뎀보우 인접(댄스홀) 리듬의 국내 수용성 실증",
-      "sources": [
-        "https://www.sbs.com.au/popasia/blog/2017/09/07/wanna-one-and-sunmi-rule-gaon-chart"
-      ],
-      "certainty": "매우 높음"
-    },
-    {
-      "source_type": "supplier-framing",
-      "date": "2018-04",
-      "lead_months_vs_kr_mainstream": null,
-      "evidence": "SM의 'Lo Siento'(Latin Digital #13 — K-pop 최초 라틴 차트 진입, 가온 미진입) — 대형 기획사가 라틴 시장 명시 타깃(국내용 아닌 수출용 채용 성격 확정)",
-      "certainty": "중간"
-    }
-  ],
-  "element_borrowing": {
-    "elements": [
-      "뎀보우 그리드(뭄바톤/트로피컬 변형 경유 — EDM 필터 가공형)",
-      "부분 삽입 구조(코러스·드롭 등 특정 섹션 한정 — 청하 'PLAY'가 전형)",
-      "스페인어 토큰(제목·훅 단위 차용 — 리듬 없이 라틴 '콘셉트'만 차용한 사례 다수)"
-    ],
-    "anchor_tracks": [
-      {
-        "artist": "(여자)아이들",
-        "title": "LATATA",
-        "date": "2018-05",
-        "chart": "가온 디지털 12위",
-        "certainty": "중간"
-      },
-      {
-        "artist": "청하",
-        "title": "PLAY",
-        "date": "2020-07",
-        "chart": "가온 14위",
-        "certainty": "중간"
-      },
-      {
-        "artist": "LE SSERAFIM",
-        "title": "ANTIFRAGILE",
-        "date": "2022-10",
-        "chart": "써클 디지털 2위",
-        "certainty": "높음"
-      }
-    ],
-    "stage_reached": "title"
+  {
+   "cell": "origin-scene-pr",
+   "date": "1992-07",
+   "date_precision": "month",
+   "evidence": "DJ Playero 『Playero 37』 — Daddy Yankee 데뷔, 방송 금지 속 카세트 유통",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Playero_37"
+   ],
+   "certainty": "높음"
   },
-  "identity_formation": null,
-  "signature": {
-    "status": "pending-a2",
-    "predicted_axes": [
-      "뎀보우 리듬 그리드 — 원형 뎀보우와 뭄바톤 변형의 구분 필수(CASE 4와 교차)",
-      "부분 삽입 패턴(섹션 한정 리딤)",
-      "시스템 보유 dembow 리듬 템플릿과 직결 — 오디오 리듬 매칭 검증이 후속 과제"
-    ]
+  {
+   "cell": "origin-mainstream",
+   "date": "2004-07",
+   "date_precision": "month",
+   "evidence": "『Barrio Fino』 레게톤 앨범 최초 빌보드 Top Latin 1위, 'Gasolina' Hot 100 #32",
+   "sources": [
+    "https://www.billboard.com/music/latin/daddy-yankee-on-gasolina-barrio-fino-reggaeton-10-years-later-i-knew-it-was-a-home-6207108/"
+   ],
+   "certainty": "높음"
   },
-  "peak_decline": {
-    "kr_peak": "두 국소 정점 — (1) 2018 한-라틴 콜라보 전략기(수출 지향, 국내 성과 미미) (2) 2022-10 ANTIFRAGILE(콘셉트 탈각형, 써클 #2)",
-    "kr_decline": "2021 콜라보 성과 급감(청하 × Guaynaa 'Demente' 가온 다운로드 134위) 후 전략 후퇴 — 이후 리듬 어휘로만 잔존",
-    "decline_certainty": "중간",
-    "origin_decoupled": true,
-    "residue": "글로벌은 2017-05~2022 이후에도 주류 문법으로 상시화(쇠퇴 아님) — 한국은 리듬 어휘로만 잔존"
+  {
+   "cell": "global-mainstream",
+   "date": "2017-05",
+   "date_precision": "month",
+   "evidence": "글로벌 주류 정점 2차 — 'Despacito'(리믹스) Hot 100 1위 16주 연속",
+   "sources": [
+    "https://www.billboard.com/pro/luis-fonsi-daddy-yankee-despacito-justin-bieber-number-one/"
+   ],
+   "certainty": "높음"
   },
-  "chart_evidence": [
-    {
-      "chart": "billboard-hot100",
-      "artist": "Luis Fonsi",
-      "title": "Despacito",
-      "role": "origin",
-      "charted": true,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "entry_date": "2017-02-04",
-      "exit_date": "2018-01-20",
-      "peak_position": 1,
-      "peak_date": "2017-05-27",
-      "weeks_on_chart": 52,
-      "weeks_counted": 51,
-      "note": "보고 체류주와 발행 주차 수가 다르다 — 차트 런이 2018-01-06 연말 경계를 지났다(REVIEW-billboard-3way-smoke §3)."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "J Balvin",
-      "title": "Mi Gente",
-      "role": "origin",
-      "charted": true,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "entry_date": "2017-07-22",
-      "exit_date": "2018-02-03",
-      "peak_position": 3,
-      "peak_date": "2017-10-21",
-      "weeks_on_chart": 30,
-      "weeks_counted": 29,
-      "note": "보고 체류주와 발행 주차 수가 다르다 — 차트 런이 2018-01-06 연말 경계를 지났다(REVIEW-billboard-3way-smoke §3)."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "Daddy Yankee",
-      "title": "Gasolina",
-      "role": "origin",
-      "charted": true,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "entry_date": "2004-11-13",
-      "exit_date": "2005-03-26",
-      "peak_position": 32,
-      "peak_date": "2005-01-29",
-      "weeks_on_chart": 20,
-      "weeks_counted": 20
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "(G)I-DLE",
-      "title": "LATATA",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "CHUNG HA",
-      "title": "PLAY",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "KARD",
-      "title": "Oh NaNa",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "LE SSERAFIM",
-      "title": "ANTIFRAGILE",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "SUNMI",
-      "title": "Gashina",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "SUPER JUNIOR",
-      "title": "Lo Siento",
-      "role": "kr",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    },
-    {
-      "chart": "billboard-hot100",
-      "artist": "Shabba Ranks",
-      "title": "Dem Bow",
-      "role": "origin",
-      "charted": false,
-      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
-      "certainty": "매우 높음",
-      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
-    }
+  {
+   "cell": "global-streaming-dominance",
+   "date": "2017-06~2020-12",
+   "date_precision": "range",
+   "evidence": "'Mi Gente' 라틴곡 최초 Spotify 글로벌 1위(2017-06); Bad Bunny 2020~22 3년 연속 최다 스트리밍",
+   "sources": [
+    "https://www.billboard.com/pro/bad-bunny-spotify-most-streamed-artist-2020/"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-first-adoption",
+   "date": "2016-12",
+   "date_precision": "month",
+   "evidence": "KARD 'Oh NaNa'(2016-12-13) — 레게톤/뭄바톤, 수출형 기획(K-pop 첫 채용)",
+   "sources": [
+    "https://www.koreatimes.co.kr/entertainment/k-pop/20260710/why-is-coed-k-pop-group-kard-ending-its-journey"
+   ],
+   "certainty": "중간"
+  },
+  {
+   "cell": "kr-viral",
+   "date": "2017 중반",
+   "date_precision": "year",
+   "evidence": "외래곡 소비(추정) — 'Despacito' 가온 국제차트 최고 7위, 1위 미도달(2017 국제 주간 1위 목록에 라틴곡 부재)",
+   "sources": [
+    "https://en.wikipedia.org/wiki/List_of_number-one_international_songs_of_2017_(South_Korea)"
+   ],
+   "certainty": "중간"
+  },
+  {
+   "cell": "kr-mainstream-entry",
+   "date": "2018-05",
+   "date_precision": "month",
+   "evidence": "(여자)아이들 'LATATA'(moombahton/reggae/trap-pop) 가온 디지털 12위",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Latata"
+   ],
+   "certainty": "중간"
+  },
+  {
+   "cell": "kr-near-peak",
+   "date": "2022-10",
+   "date_precision": "month",
+   "evidence": "LE SSERAFIM 'ANTIFRAGILE'(팝/레게톤) 써클 디지털 2위 — 레게톤 귀속 타이틀의 국내 최고 확인 성적",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Antifragile_(song)"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "kr-mainstream",
+   "date": "미도달",
+   "date_precision": "unreached",
+   "evidence": "레게톤/뎀보우 명시 타이틀의 디지털 1위 확인 안 됨. 인접 사례: 선미 '가시나'(2017-08, 댄스홀 — 뎀보우 사촌 리듬) 가온 1위",
+   "sources": [
+    "https://en.wikipedia.org/wiki/Gashina"
+   ],
+   "certainty": "불가능한 수준",
+   "certainty_note": "해제 조건: 가온·써클/멜론 원자료 전수 대조 시 재평가 — 전수조사 아님"
+  }
+ ],
+ "leadtimes": [
+  {
+   "from_cell": "origin-scene-jamaica",
+   "to_cell": "origin-scene-pr",
+   "months": 24,
+   "note": "약 2년(1990 → 1992-07)"
+  },
+  {
+   "from_cell": "origin-scene-pr",
+   "to_cell": "global-mainstream-1st",
+   "months": 150,
+   "note": "약 13년(1992-07 → 글로벌 주류 1차 2005)"
+  },
+  {
+   "from_cell": "global-mainstream-1st",
+   "to_cell": "kr-first-adoption",
+   "months": null,
+   "note": "미발생(매우 낮음) — 1차 파동은 K-pop에 전이 안 됨"
+  },
+  {
+   "from_cell": "moombahton-formation",
+   "to_cell": "kr-first-adoption",
+   "months": 84,
+   "note": "뭄바톤 성립(2009) → K-pop 첫 채용(2016-12), 약 7년 — EDM 매개 경로"
+  },
+  {
+   "from_cell": "kr-first-adoption",
+   "to_cell": "global-mainstream",
+   "months": -5,
+   "note": "한국 씬 채용(2016-12)이 Despacito 정점(2017-05)보다 5개월 선행 — EDM 경유 유입이었기 때문"
+  },
+  {
+   "from_cell": "global-mainstream",
+   "to_cell": "kr-latin-strategy",
+   "months": 11,
+   "note": "글로벌 정점(2017-05) → 라틴 전략 본격화(2018-04, 슈퍼주니어 'Lo Siento')"
+  },
+  {
+   "from_cell": "global-mainstream",
+   "to_cell": "kr-near-peak",
+   "months": 65,
+   "note": "글로벌 정점(2017-05) → 국내 준정점(2022-10, #2), 약 5년 5개월"
+  }
+ ],
+ "early_signals": [
+  {
+   "source_type": "genre-elementization",
+   "date": "2009~2015",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "뭄바톤의 글로벌 EDM 어휘화 — 뎀보우 패턴이 레게톤 맥락 없이 수입 가능해짐",
+   "certainty": "높음"
+  },
+  {
+   "source_type": "overseas-chart",
+   "date": "2016-12~2017-07",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "KARD의 비대칭 신호 — 국내 부진 vs 빌보드 World top5 연속·데뷔 전 미주 11개 도시 투어. '한국 밖 수요가 한국 안 공급을 견인'하는 패턴이 주류 채용 1년+ 전 관측 가능",
+   "certainty": "중간"
+  },
+  {
+   "source_type": "overseas-chart",
+   "date": "2017-05~2017-08",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "Despacito 폭발 + 가온 국제 #7 — 국제차트 1위 미도달이 이미 '제한 수용' 예고 신호",
+   "certainty": "중간"
+  },
+  {
+   "source_type": "kr-adjacent-hit",
+   "date": "2017-09",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "'가시나' 가온 1위(데뷔주 #2 → 발매 2주차 #1) — 뎀보우 인접(댄스홀) 리듬의 국내 수용성 실증",
+   "sources": [
+    "https://www.sbs.com.au/popasia/blog/2017/09/07/wanna-one-and-sunmi-rule-gaon-chart"
+   ],
+   "certainty": "매우 높음"
+  },
+  {
+   "source_type": "supplier-framing",
+   "date": "2018-04",
+   "lead_months_vs_kr_mainstream": null,
+   "evidence": "SM의 'Lo Siento'(Latin Digital #13 — K-pop 최초 라틴 차트 진입, 가온 미진입) — 대형 기획사가 라틴 시장 명시 타깃(국내용 아닌 수출용 채용 성격 확정)",
+   "certainty": "중간"
+  }
+ ],
+ "element_borrowing": {
+  "elements": [
+   "뎀보우 그리드(뭄바톤/트로피컬 변형 경유 — EDM 필터 가공형)",
+   "부분 삽입 구조(코러스·드롭 등 특정 섹션 한정 — 청하 'PLAY'가 전형)",
+   "스페인어 토큰(제목·훅 단위 차용 — 리듬 없이 라틴 '콘셉트'만 차용한 사례 다수)"
   ],
-  "limits": [
-    "한국 첫 도달(2016-12) 하한 미확정 — 2013~16 B-side 전수조사 안 함",
-    "장르 귀속이 영문 위키/매체 의존 — dembow 템플릿 오디오 검증(리듬 매칭)이 후속 과제",
-    "가온/써클 수치 2차 인용 — 원 차트 대조 미실시",
-    "댄스홀 vs 레게톤 경계에 따라 '정점 미도달' 판정이 달라짐 — 본 레코드는 레게톤 협의 정의 채택",
-    "부정 주장('미발생'·'미도달')은 탐색 실패일 수 있음 — 매우 낮음~불가능한 수준 등급 취급"
+  "anchor_tracks": [
+   {
+    "artist": "(여자)아이들",
+    "title": "LATATA",
+    "date": "2018-05",
+    "chart": "가온 디지털 12위",
+    "certainty": "중간"
+   },
+   {
+    "artist": "청하",
+    "title": "PLAY",
+    "date": "2020-07",
+    "chart": "가온 14위",
+    "certainty": "중간"
+   },
+   {
+    "artist": "LE SSERAFIM",
+    "title": "ANTIFRAGILE",
+    "date": "2022-10",
+    "chart": "써클 디지털 2위",
+    "certainty": "높음"
+   }
   ],
-  "casebook_ref": "CASE 5"
+  "stage_reached": "title"
+ },
+ "identity_formation": null,
+ "signature": {
+  "status": "measured",
+  "predicted_axes": [
+   "뎀보우 리듬 그리드 — 원형 뎀보우와 뭄바톤 변형의 구분 필수(CASE 4와 교차)",
+   "부분 삽입 패턴(섹션 한정 리딤)",
+   "시스템 보유 dembow 리듬 템플릿과 직결 — 오디오 리듬 매칭 검증이 후속 과제"
+  ],
+  "measured": {
+   "date": "2026-07-31",
+   "cohorts": "동시대 2021-10 앵커 — US 빌보드 Hot 100 98곡 · KR 멜론 주간(Wayback 스냅샷 +23일) 98곡 · 전판 rhythm v4",
+   "source": "data/research/genre-impulse/a2_signature_compare.json · CASEBOOK §A2 본편",
+   "verdict": "수용형 4/6 dembow 배정 vs 원형 0/4 — 킥만 접는 dembow 템플릿의 정체(D-038)가 원형 쪽에서 재현. 탐색 관측(사전 번역 밖·규칙 자격 없음): 원형 syncopation_ratio 4/4 하위 20%(P2.5)",
+   "rule": "등재 없음. 템플릿 정체 해소 선행"
+  }
+ },
+ "peak_decline": {
+  "kr_peak": "두 국소 정점 — (1) 2018 한-라틴 콜라보 전략기(수출 지향, 국내 성과 미미) (2) 2022-10 ANTIFRAGILE(콘셉트 탈각형, 써클 #2)",
+  "kr_decline": "2021 콜라보 성과 급감(청하 × Guaynaa 'Demente' 가온 다운로드 134위) 후 전략 후퇴 — 이후 리듬 어휘로만 잔존",
+  "decline_certainty": "중간",
+  "origin_decoupled": true,
+  "residue": "글로벌은 2017-05~2022 이후에도 주류 문법으로 상시화(쇠퇴 아님) — 한국은 리듬 어휘로만 잔존"
+ },
+ "chart_evidence": [
+  {
+   "chart": "billboard-hot100",
+   "artist": "Luis Fonsi",
+   "title": "Despacito",
+   "role": "origin",
+   "charted": true,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "entry_date": "2017-02-04",
+   "exit_date": "2018-01-20",
+   "peak_position": 1,
+   "peak_date": "2017-05-27",
+   "weeks_on_chart": 52,
+   "weeks_counted": 51,
+   "note": "보고 체류주와 발행 주차 수가 다르다 — 차트 런이 2018-01-06 연말 경계를 지났다(REVIEW-billboard-3way-smoke §3)."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "J Balvin",
+   "title": "Mi Gente",
+   "role": "origin",
+   "charted": true,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "entry_date": "2017-07-22",
+   "exit_date": "2018-02-03",
+   "peak_position": 3,
+   "peak_date": "2017-10-21",
+   "weeks_on_chart": 30,
+   "weeks_counted": 29,
+   "note": "보고 체류주와 발행 주차 수가 다르다 — 차트 런이 2018-01-06 연말 경계를 지났다(REVIEW-billboard-3way-smoke §3)."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "Daddy Yankee",
+   "title": "Gasolina",
+   "role": "origin",
+   "charted": true,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "entry_date": "2004-11-13",
+   "exit_date": "2005-03-26",
+   "peak_position": 32,
+   "peak_date": "2005-01-29",
+   "weeks_on_chart": 20,
+   "weeks_counted": 20
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "(G)I-DLE",
+   "title": "LATATA",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "CHUNG HA",
+   "title": "PLAY",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "KARD",
+   "title": "Oh NaNa",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "LE SSERAFIM",
+   "title": "ANTIFRAGILE",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "SUNMI",
+   "title": "Gashina",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "SUPER JUNIOR",
+   "title": "Lo Siento",
+   "role": "kr",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  },
+  {
+   "chart": "billboard-hot100",
+   "artist": "Shabba Ranks",
+   "title": "Dem Bow",
+   "role": "origin",
+   "charted": false,
+   "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+   "certainty": "매우 높음",
+   "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+  }
+ ],
+ "limits": [
+  "한국 첫 도달(2016-12) 하한 미확정 — 2013~16 B-side 전수조사 안 함",
+  "장르 귀속이 영문 위키/매체 의존 — dembow 템플릿 오디오 검증(리듬 매칭)이 후속 과제",
+  "가온/써클 수치 2차 인용 — 원 차트 대조 미실시",
+  "댄스홀 vs 레게톤 경계에 따라 '정점 미도달' 판정이 달라짐 — 본 레코드는 레게톤 협의 정의 채택",
+  "부정 주장('미발생'·'미도달')은 탐색 실패일 수 있음 — 매우 낮음~불가능한 수준 등급 취급"
+ ],
+ "casebook_ref": "CASE 5"
 }

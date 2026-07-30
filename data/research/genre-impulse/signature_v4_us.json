@@ -1,0 +1,1567 @@
+{
+  "records": [
+    {
+      "key": "100 gecs",
+      "chart_label": "100 gecs",
+      "query": "100 gecs - money machine",
+      "observed_date": "2026-07-31",
+      "cohort": "chart",
+      "chart_rank": null,
+      "chart_market": "hyperpop",
+      "chart_platform": "origin",
+      "source": "apple",
+      "track_id": "1601861131",
+      "artist": "fxnny dxpression",
+      "title": "Money Machine (100 Gecs and Fxnny Dxpression)",
+      "release_date": "2021-12-21",
+      "suffix": ".m4a",
+      "matched_by": "title-core",
+      "features": {
+        "duration_s": 29.93,
+        "tempo_bpm": 125.97,
+        "pulse_clarity": 0.8832,
+        "onset_rate": 5.045,
+        "low_end_ratio": 0.5836,
+        "brightness_hz": 4564.6,
+        "percussive_ratio": 0.5118,
+        "crest_factor_db": 9.33,
+        "crest_factor_status": "validated-2026-07-28",
+        "loudness_lufs": -2.96,
+        "loudness_range_lu": 0.25,
+        "spectral_flatness": 0.0808,
+        "stereo_width": 0.1231,
+        "spectral_contrast": [
+          19.404,
+          13.288,
+          17.211,
+          16.5,
+          16.801,
+          17.141,
+          17.816
+        ],
+        "spectral_contrast_mean": 17.071,
+        "spectral_bandwidth_hz": 3294.0,
+        "zero_crossing_rate": 0.23779,
+        "spectral_flux": 0.001228,
+        "spectral_skewness": 1.7323,
+        "spectral_kurtosis": 4.2813,
+        "spectral_entropy": 0.6224,
+        "low_centroid_hz": 79.26,
+        "high_energy_ratio": 0.17164,
+        "mfcc_mean": [
+          65.64,
+          36.66,
+          45.84,
+          13.99,
+          11.81,
+          12.57,
+          2.86,
+          11.87,
+          -0.56,
+          6.44,
+          -4.58,
+          4.52,
+          1.54
+        ],
+        "mfcc_std": [
+          42.94,
+          34.26,
+          20.67,
+          14.96,
+          10.16,
+          8.75,
+          11.31,
+          7.65,
+          9.4,
+          6.38,
+          7.65,
+          6.9,
+          7.28
+        ],
+        "tonnetz": [
+          0.0042,
+          -0.021,
+          0.016,
+          -0.035,
+          -0.0003,
+          -0.0128
+        ],
+        "harmonic_change_rate": 0.01864,
+        "chroma_entropy": 0.9959,
+        "key_stability": 0.6667,
+        "crest_low_db": 4.7,
+        "crest_mid_db": 7.1,
+        "crest_high_db": 6.41,
+        "dc_offset": 0.002812,
+        "over_unity_ratio": 0.226953,
+        "peak_dbfs": 6.8,
+        "silence_ratio": 0.0,
+        "phase_correlation": 0.7538,
+        "stereo_width_low": 0.0254,
+        "stereo_width_mid": 0.4716,
+        "stereo_width_high": 0.1737,
+        "stereo_width_var": 0.1238,
+        "key": "B",
+        "mode": "minor",
+        "key_corr": 0.41,
+        "swing_ratio": 0.4851,
+        "ioi_entropy": 0.6602,
+        "attack_sharpness": 0.3878,
+        "downbeat_strength": 1.0379,
+        "rhythm_self_similarity": 0.8472,
+        "tempogram_duple": 0.879,
+        "tempogram_triple": 0.7712,
+        "onset_rate_low": 8.32,
+        "onset_rate_mid": 6.181,
+        "onset_rate_high": 5.747,
+        "bar_profile_bins": 32,
+        "kick_bar_profile_triplet": [
+          0.0543,
+          0.0363,
+          0.0319,
+          0.0299,
+          0.0249,
+          0.0588,
+          0.0605,
+          0.0362,
+          0.0372,
+          0.0275,
+          0.0235,
+          0.0875,
+          0.0536,
+          0.033,
+          0.0388,
+          0.0256,
+          0.0218,
+          0.0637,
+          0.0582,
+          0.0352,
+          0.0367,
+          0.0283,
+          0.0242,
+          0.0724
+        ],
+        "hihat_bar_profile": [
+          0.0189,
+          0.0288,
+          0.0266,
+          0.0551,
+          0.0487,
+          0.0239,
+          0.035,
+          0.0248,
+          0.028,
+          0.0167,
+          0.022,
+          0.0477,
+          0.0477,
+          0.0213,
+          0.0221,
+          0.0331,
+          0.0199,
+          0.0281,
+          0.0265,
+          0.0509,
+          0.0464,
+          0.024,
+          0.0364,
+          0.0246,
+          0.0279,
+          0.0165,
+          0.0198,
+          0.0502,
+          0.0521,
+          0.0207,
+          0.022,
+          0.0335
+        ],
+        "hihat_bar_profile_triplet": [
+          0.0279,
+          0.0383,
+          0.0633,
+          0.0557,
+          0.0454,
+          0.0314,
+          0.0341,
+          0.0245,
+          0.0557,
+          0.0541,
+          0.0297,
+          0.0404,
+          0.0303,
+          0.0353,
+          0.0598,
+          0.0533,
+          0.0472,
+          0.0308,
+          0.0341,
+          0.0225,
+          0.0579,
+          0.0585,
+          0.0284,
+          0.0415
+        ],
+        "hihat_bar_contrast": 1.7648,
+        "hihat_roll_ratio": 0.5001,
+        "hihat_triplet_bias": 0.5268,
+        "hihat_roll_burst_ratio": 0.0,
+        "hihat_active_ratio": 0.375,
+        "bar_profile_split_half": 0.9206,
+        "bar_profile_split_half_2bar": 0.9188,
+        "grid_deviation_ms": 6.57,
+        "syncopation_ratio": 0.8288,
+        "bar_profile_contrast": 2.554,
+        "beats_per_bar": 3.94,
+        "n_beats": 63,
+        "n_downbeats": 16,
+        "kick_bar_profile": [
+          0.0394,
+          0.0353,
+          0.0243,
+          0.0234,
+          0.027,
+          0.0117,
+          0.0217,
+          0.0532,
+          0.0466,
+          0.0349,
+          0.0243,
+          0.0282,
+          0.0244,
+          0.0108,
+          0.0235,
+          0.0798,
+          0.0411,
+          0.0313,
+          0.024,
+          0.029,
+          0.022,
+          0.0096,
+          0.0229,
+          0.0566,
+          0.044,
+          0.0348,
+          0.0236,
+          0.0277,
+          0.0242,
+          0.0146,
+          0.0199,
+          0.0662
+        ],
+        "rhythm_match": {
+          "four-on-floor": 0.2811,
+          "backbeat(1·3)": 0.1501,
+          "tresillo(8분 3+3+2)": 0.0977,
+          "dembow": -0.0712,
+          "trap-synco": -0.1062
+        },
+        "rhythm_top": "four-on-floor",
+        "rhythm_top_score": 0.2811,
+        "rhythm_assigned": null,
+        "rhythm_gap": 0.131,
+        "rhythm_tie": false,
+        "tempo_bpm_grid": 129.2,
+        "tempo_source": "beat_this-fit",
+        "styles": [
+          {
+            "label": "Electronic---House",
+            "p": 0.779
+          },
+          {
+            "label": "Electronic---Techno",
+            "p": 0.5691
+          },
+          {
+            "label": "Electronic---Deep House",
+            "p": 0.4251
+          },
+          {
+            "label": "Electronic---Euro House",
+            "p": 0.2696
+          },
+          {
+            "label": "Electronic---Garage House",
+            "p": 0.1651
+          }
+        ],
+        "instruments": [
+          {
+            "label": "synthesizer",
+            "p": 0.8639
+          },
+          {
+            "label": "sampler",
+            "p": 0.2407
+          },
+          {
+            "label": "drummachine",
+            "p": 0.2105
+          },
+          {
+            "label": "keyboard",
+            "p": 0.1604
+          },
+          {
+            "label": "bass",
+            "p": 0.1594
+          },
+          {
+            "label": "drums",
+            "p": 0.1586
+          },
+          {
+            "label": "saxophone",
+            "p": 0.0808
+          },
+          {
+            "label": "computer",
+            "p": 0.0772
+          },
+          {
+            "label": "electricguitar",
+            "p": 0.0752
+          },
+          {
+            "label": "piano",
+            "p": 0.06
+          },
+          {
+            "label": "electricpiano",
+            "p": 0.0479
+          },
+          {
+            "label": "rhodes",
+            "p": 0.0262
+          },
+          {
+            "label": "voice",
+            "p": 0.0243
+          },
+          {
+            "label": "acousticguitar",
+            "p": 0.024
+          },
+          {
+            "label": "percussion",
+            "p": 0.0219
+          },
+          {
+            "label": "flute",
+            "p": 0.0196
+          },
+          {
+            "label": "classicalguitar",
+            "p": 0.0139
+          },
+          {
+            "label": "guitar",
+            "p": 0.0128
+          },
+          {
+            "label": "acousticbassguitar",
+            "p": 0.0121
+          },
+          {
+            "label": "trumpet",
+            "p": 0.0105
+          },
+          {
+            "label": "beat",
+            "p": 0.0103
+          },
+          {
+            "label": "accordion",
+            "p": 0.0093
+          },
+          {
+            "label": "strings",
+            "p": 0.0073
+          },
+          {
+            "label": "pipeorgan",
+            "p": 0.0059
+          },
+          {
+            "label": "violin",
+            "p": 0.0051
+          },
+          {
+            "label": "trombone",
+            "p": 0.005
+          },
+          {
+            "label": "bongo",
+            "p": 0.0044
+          },
+          {
+            "label": "pad",
+            "p": 0.0044
+          },
+          {
+            "label": "bell",
+            "p": 0.0036
+          },
+          {
+            "label": "organ",
+            "p": 0.0033
+          },
+          {
+            "label": "doublebass",
+            "p": 0.003
+          },
+          {
+            "label": "brass",
+            "p": 0.0019
+          },
+          {
+            "label": "harmonica",
+            "p": 0.0017
+          },
+          {
+            "label": "horn",
+            "p": 0.0015
+          },
+          {
+            "label": "cello",
+            "p": 0.0012
+          },
+          {
+            "label": "clarinet",
+            "p": 0.0008
+          },
+          {
+            "label": "orchestra",
+            "p": 0.0007
+          },
+          {
+            "label": "harp",
+            "p": 0.0007
+          },
+          {
+            "label": "viola",
+            "p": 0.0004
+          },
+          {
+            "label": "oboe",
+            "p": 0.0003
+          }
+        ],
+        "genres": [
+          {
+            "label": "electronic",
+            "p": 0.8186
+          },
+          {
+            "label": "dance",
+            "p": 0.3855
+          },
+          {
+            "label": "house",
+            "p": 0.1616
+          },
+          {
+            "label": "techno",
+            "p": 0.0927
+          },
+          {
+            "label": "ambient",
+            "p": 0.0919
+          }
+        ],
+        "moods": [
+          {
+            "label": "melodic",
+            "p": 0.1513
+          },
+          {
+            "label": "energetic",
+            "p": 0.1275
+          },
+          {
+            "label": "dream",
+            "p": 0.0643
+          },
+          {
+            "label": "deep",
+            "p": 0.0439
+          },
+          {
+            "label": "space",
+            "p": 0.0386
+          }
+        ],
+        "danceability": 0.9999,
+        "tag_patches": 14,
+        "tag_status": "unvalidated",
+        "valence": 7.0242,
+        "arousal": 6.9828,
+        "va_source": "deam-msd-musicnn-1"
+      }
+    },
+    {
+      "key": "glaive",
+      "chart_label": "glaive",
+      "query": "glaive - astrid",
+      "observed_date": "2026-07-31",
+      "cohort": "chart",
+      "chart_rank": null,
+      "chart_market": "hyperpop",
+      "chart_platform": "origin",
+      "unresolved": "no verified preview (artist/title mismatch)"
+    },
+    {
+      "key": "Central Cee",
+      "chart_label": "Central Cee",
+      "query": "Central Cee - Doja",
+      "observed_date": "2026-07-31",
+      "cohort": "chart",
+      "chart_rank": null,
+      "chart_market": "drill",
+      "chart_platform": "origin",
+      "source": "apple",
+      "track_id": "1639371506",
+      "artist": "3 Dope Brothas",
+      "title": "Doja (Originally Performed by Central Cee) [Instrumental]",
+      "release_date": "2022-08-11",
+      "suffix": ".m4a",
+      "matched_by": "title-core",
+      "features": {
+        "duration_s": 29.93,
+        "tempo_bpm": 70.42,
+        "pulse_clarity": 0.7198,
+        "onset_rate": 3.575,
+        "low_end_ratio": 0.9231,
+        "brightness_hz": 1891.3,
+        "percussive_ratio": 0.1608,
+        "crest_factor_db": 14.05,
+        "crest_factor_status": "validated-2026-07-28",
+        "loudness_lufs": -14.38,
+        "loudness_range_lu": 11.31,
+        "spectral_flatness": 0.0026,
+        "stereo_width": 0.1512,
+        "spectral_contrast": [
+          19.964,
+          16.315,
+          19.375,
+          18.302,
+          17.128,
+          18.671,
+          20.53
+        ],
+        "spectral_contrast_mean": 19.482,
+        "spectral_bandwidth_hz": 2112.4,
+        "zero_crossing_rate": 0.07373,
+        "spectral_flux": 0.00161,
+        "spectral_skewness": 9.4969,
+        "spectral_kurtosis": 108.2583,
+        "spectral_entropy": 0.3024,
+        "low_centroid_hz": 50.31,
+        "high_energy_ratio": 0.00429,
+        "mfcc_mean": [
+          -239.08,
+          73.08,
+          11.71,
+          15.12,
+          -9.74,
+          -4.56,
+          2.89,
+          -1.55,
+          -5.3,
+          2.92,
+          -6.52,
+          -0.47,
+          -5.58
+        ],
+        "mfcc_std": [
+          136.65,
+          40.25,
+          30.75,
+          22.68,
+          16.34,
+          14.78,
+          13.73,
+          13.55,
+          12.78,
+          12.14,
+          9.87,
+          11.68,
+          9.69
+        ],
+        "tonnetz": [
+          -0.1417,
+          -0.0461,
+          0.1741,
+          0.0566,
+          -0.0307,
+          0.0185
+        ],
+        "harmonic_change_rate": 0.03915,
+        "chroma_entropy": 0.9628,
+        "key_stability": 0.5,
+        "crest_low_db": 9.2,
+        "crest_mid_db": 12.31,
+        "crest_high_db": 11.59,
+        "dc_offset": 0.002733,
+        "over_unity_ratio": 0.002012,
+        "peak_dbfs": 2.43,
+        "silence_ratio": 0.0313,
+        "phase_correlation": 0.6981,
+        "stereo_width_low": 0.1196,
+        "stereo_width_mid": 0.4553,
+        "stereo_width_high": 0.5259,
+        "stereo_width_var": 0.1844,
+        "key": "G#",
+        "mode": "minor",
+        "key_corr": 0.636,
+        "swing_ratio": 0.5149,
+        "ioi_entropy": 0.3514,
+        "attack_sharpness": 3.6931,
+        "downbeat_strength": 1.5207,
+        "rhythm_self_similarity": 0.4632,
+        "tempogram_duple": 0.7104,
+        "tempogram_triple": 0.6775,
+        "onset_rate_low": 3.475,
+        "onset_rate_mid": 3.976,
+        "onset_rate_high": 3.475,
+        "bar_profile_bins": 32,
+        "kick_bar_profile_triplet": [
+          0.0905,
+          0.0257,
+          0.0502,
+          0.0309,
+          0.0464,
+          0.0368,
+          0.0375,
+          0.0314,
+          0.0425,
+          0.0248,
+          0.06,
+          0.0247,
+          0.0499,
+          0.0221,
+          0.0542,
+          0.0333,
+          0.0558,
+          0.0311,
+          0.0694,
+          0.0416,
+          0.0377,
+          0.0437,
+          0.0377,
+          0.0219
+        ],
+        "hihat_bar_profile": [
+          0.0702,
+          0.0111,
+          0.0154,
+          0.062,
+          0.0063,
+          0.0117,
+          0.0631,
+          0.0189,
+          0.0559,
+          0.0078,
+          0.0102,
+          0.0652,
+          0.0064,
+          0.0095,
+          0.0656,
+          0.0108,
+          0.0784,
+          0.0093,
+          0.0119,
+          0.0657,
+          0.0147,
+          0.0095,
+          0.0626,
+          0.0108,
+          0.0613,
+          0.0195,
+          0.0364,
+          0.0413,
+          0.0191,
+          0.0141,
+          0.0452,
+          0.0098
+        ],
+        "hihat_bar_profile_triplet": [
+          0.0741,
+          0.0127,
+          0.0718,
+          0.0078,
+          0.0705,
+          0.0218,
+          0.0582,
+          0.0092,
+          0.0718,
+          0.0079,
+          0.0708,
+          0.0137,
+          0.0813,
+          0.0117,
+          0.0723,
+          0.0166,
+          0.0675,
+          0.0135,
+          0.0635,
+          0.048,
+          0.047,
+          0.0227,
+          0.0534,
+          0.0121
+        ],
+        "hihat_bar_contrast": 2.5092,
+        "hihat_roll_ratio": 0.3771,
+        "hihat_triplet_bias": 0.6126,
+        "hihat_roll_burst_ratio": 0.0,
+        "hihat_active_ratio": 0.4062,
+        "bar_profile_split_half": 0.7028,
+        "bar_profile_split_half_2bar": 0.8171,
+        "grid_deviation_ms": 6.76,
+        "syncopation_ratio": 0.777,
+        "bar_profile_contrast": 2.661,
+        "beats_per_bar": 3.89,
+        "n_beats": 35,
+        "n_downbeats": 9,
+        "kick_bar_profile": [
+          0.0831,
+          0.0192,
+          0.0218,
+          0.0421,
+          0.0233,
+          0.0223,
+          0.0393,
+          0.0293,
+          0.0302,
+          0.0234,
+          0.0222,
+          0.0356,
+          0.0202,
+          0.0144,
+          0.0569,
+          0.0181,
+          0.0452,
+          0.0186,
+          0.012,
+          0.0503,
+          0.0283,
+          0.0142,
+          0.0548,
+          0.0227,
+          0.0644,
+          0.0182,
+          0.0346,
+          0.0315,
+          0.0384,
+          0.0164,
+          0.0314,
+          0.0173
+        ],
+        "rhythm_match": {
+          "four-on-floor": 0.5704,
+          "backbeat(1·3)": 0.5239,
+          "tresillo(8분 3+3+2)": 0.4889,
+          "dembow": 0.4618,
+          "trap-synco": 0.2677
+        },
+        "rhythm_top": "four-on-floor",
+        "rhythm_top_score": 0.5704,
+        "rhythm_assigned": "four-on-floor",
+        "rhythm_gap": 0.0465,
+        "rhythm_tie": true,
+        "tempo_bpm_grid": 69.84,
+        "tempo_source": "beat_this-fit",
+        "styles": [
+          {
+            "label": "Electronic---UK Garage",
+            "p": 0.2486
+          },
+          {
+            "label": "Electronic---Grime",
+            "p": 0.2466
+          },
+          {
+            "label": "Folk, World, & Country---African",
+            "p": 0.1211
+          },
+          {
+            "label": "Hip Hop---Grime",
+            "p": 0.1196
+          },
+          {
+            "label": "Electronic---Bassline",
+            "p": 0.0989
+          }
+        ],
+        "instruments": [
+          {
+            "label": "bass",
+            "p": 0.466
+          },
+          {
+            "label": "synthesizer",
+            "p": 0.3975
+          },
+          {
+            "label": "percussion",
+            "p": 0.3804
+          },
+          {
+            "label": "drums",
+            "p": 0.333
+          },
+          {
+            "label": "keyboard",
+            "p": 0.1959
+          },
+          {
+            "label": "piano",
+            "p": 0.1205
+          },
+          {
+            "label": "electricguitar",
+            "p": 0.0866
+          },
+          {
+            "label": "guitar",
+            "p": 0.0804
+          },
+          {
+            "label": "sampler",
+            "p": 0.0756
+          },
+          {
+            "label": "computer",
+            "p": 0.0623
+          },
+          {
+            "label": "drummachine",
+            "p": 0.0507
+          },
+          {
+            "label": "electricpiano",
+            "p": 0.0485
+          },
+          {
+            "label": "acousticguitar",
+            "p": 0.0451
+          },
+          {
+            "label": "beat",
+            "p": 0.0436
+          },
+          {
+            "label": "voice",
+            "p": 0.0342
+          },
+          {
+            "label": "saxophone",
+            "p": 0.0316
+          },
+          {
+            "label": "flute",
+            "p": 0.0261
+          },
+          {
+            "label": "rhodes",
+            "p": 0.0227
+          },
+          {
+            "label": "bongo",
+            "p": 0.0154
+          },
+          {
+            "label": "violin",
+            "p": 0.0149
+          },
+          {
+            "label": "accordion",
+            "p": 0.0144
+          },
+          {
+            "label": "classicalguitar",
+            "p": 0.0142
+          },
+          {
+            "label": "trumpet",
+            "p": 0.0129
+          },
+          {
+            "label": "strings",
+            "p": 0.0127
+          },
+          {
+            "label": "bell",
+            "p": 0.0119
+          },
+          {
+            "label": "brass",
+            "p": 0.0118
+          },
+          {
+            "label": "acousticbassguitar",
+            "p": 0.0114
+          },
+          {
+            "label": "trombone",
+            "p": 0.0089
+          },
+          {
+            "label": "pipeorgan",
+            "p": 0.0084
+          },
+          {
+            "label": "cello",
+            "p": 0.0084
+          },
+          {
+            "label": "horn",
+            "p": 0.0059
+          },
+          {
+            "label": "doublebass",
+            "p": 0.005
+          },
+          {
+            "label": "organ",
+            "p": 0.0047
+          },
+          {
+            "label": "harmonica",
+            "p": 0.0037
+          },
+          {
+            "label": "viola",
+            "p": 0.0034
+          },
+          {
+            "label": "orchestra",
+            "p": 0.0032
+          },
+          {
+            "label": "pad",
+            "p": 0.0031
+          },
+          {
+            "label": "clarinet",
+            "p": 0.0021
+          },
+          {
+            "label": "harp",
+            "p": 0.0019
+          },
+          {
+            "label": "oboe",
+            "p": 0.0008
+          }
+        ],
+        "genres": [
+          {
+            "label": "electronic",
+            "p": 0.2599
+          },
+          {
+            "label": "hiphop",
+            "p": 0.2214
+          },
+          {
+            "label": "reggae",
+            "p": 0.1298
+          },
+          {
+            "label": "house",
+            "p": 0.1117
+          },
+          {
+            "label": "pop",
+            "p": 0.1096
+          }
+        ],
+        "moods": [
+          {
+            "label": "deep",
+            "p": 0.1407
+          },
+          {
+            "label": "energetic",
+            "p": 0.1325
+          },
+          {
+            "label": "happy",
+            "p": 0.1209
+          },
+          {
+            "label": "summer",
+            "p": 0.0949
+          },
+          {
+            "label": "love",
+            "p": 0.0662
+          }
+        ],
+        "danceability": 0.9936,
+        "tag_patches": 14,
+        "tag_status": "unvalidated",
+        "valence": 5.0579,
+        "arousal": 4.9321,
+        "va_source": "deam-msd-musicnn-1"
+      }
+    },
+    {
+      "key": "Tatsuro Yamashita",
+      "chart_label": "Tatsuro Yamashita",
+      "query": "Tatsuro Yamashita - Ride on Time",
+      "observed_date": "2026-07-31",
+      "cohort": "chart",
+      "chart_rank": null,
+      "chart_market": "citypop",
+      "chart_platform": "origin",
+      "source": "apple",
+      "track_id": "1547545629",
+      "artist": "DEEN",
+      "title": "Ride On Time",
+      "release_date": "2021-01-20",
+      "suffix": ".m4a",
+      "matched_by": "title",
+      "features": {
+        "duration_s": 29.93,
+        "tempo_bpm": 120.01,
+        "pulse_clarity": 0.5383,
+        "onset_rate": 3.709,
+        "low_end_ratio": 0.2617,
+        "brightness_hz": 2231.4,
+        "percussive_ratio": 0.2661,
+        "crest_factor_db": 11.32,
+        "crest_factor_status": "validated-2026-07-28",
+        "loudness_lufs": -8.27,
+        "loudness_range_lu": 1.95,
+        "spectral_flatness": 0.0179,
+        "stereo_width": 0.1103,
+        "spectral_contrast": [
+          23.348,
+          14.214,
+          19.095,
+          19.503,
+          19.252,
+          19.612,
+          17.598
+        ],
+        "spectral_contrast_mean": 19.39,
+        "spectral_bandwidth_hz": 2397.3,
+        "zero_crossing_rate": 0.10693,
+        "spectral_flux": 0.001336,
+        "spectral_skewness": 3.106,
+        "spectral_kurtosis": 17.1697,
+        "spectral_entropy": 0.7155,
+        "low_centroid_hz": 76.36,
+        "high_energy_ratio": 0.01069,
+        "mfcc_mean": [
+          14.54,
+          91.02,
+          -8.08,
+          33.39,
+          5.02,
+          6.07,
+          2.79,
+          1.54,
+          -5.4,
+          3.6,
+          -1.97,
+          1.68,
+          2.64
+        ],
+        "mfcc_std": [
+          74.89,
+          20.31,
+          12.6,
+          15.1,
+          12.98,
+          12.28,
+          9.88,
+          8.46,
+          8.73,
+          9.04,
+          7.59,
+          8.93,
+          7.05
+        ],
+        "tonnetz": [
+          0.1063,
+          -0.0975,
+          -0.0343,
+          -0.0494,
+          -0.0068,
+          0.0054
+        ],
+        "harmonic_change_rate": 0.04493,
+        "chroma_entropy": 0.9883,
+        "key_stability": 0.5,
+        "crest_low_db": 8.95,
+        "crest_mid_db": 5.37,
+        "crest_high_db": 7.95,
+        "dc_offset": -0.000251,
+        "over_unity_ratio": 0.023507,
+        "peak_dbfs": 3.37,
+        "silence_ratio": 0.0,
+        "phase_correlation": 0.7794,
+        "stereo_width_low": 0.0338,
+        "stereo_width_mid": 0.1549,
+        "stereo_width_high": 0.1388,
+        "stereo_width_var": 0.0692,
+        "key": "F#",
+        "mode": "minor",
+        "key_corr": 0.846,
+        "swing_ratio": 0.5305,
+        "ioi_entropy": 0.5574,
+        "attack_sharpness": 0.3138,
+        "downbeat_strength": 1.1285,
+        "rhythm_self_similarity": 0.7113,
+        "tempogram_duple": 0.4393,
+        "tempogram_triple": 0.4554,
+        "onset_rate_low": 9.088,
+        "onset_rate_mid": 5.647,
+        "onset_rate_high": 4.377,
+        "bar_profile_bins": 32,
+        "kick_bar_profile_triplet": [
+          0.0799,
+          0.0313,
+          0.0262,
+          0.0404,
+          0.0321,
+          0.0351,
+          0.0815,
+          0.0275,
+          0.0318,
+          0.0536,
+          0.0442,
+          0.0363,
+          0.0697,
+          0.0277,
+          0.0266,
+          0.0425,
+          0.0298,
+          0.0306,
+          0.0622,
+          0.028,
+          0.0357,
+          0.0709,
+          0.0281,
+          0.0282
+        ],
+        "hihat_bar_profile": [
+          0.0311,
+          0.0254,
+          0.0297,
+          0.0298,
+          0.0435,
+          0.0238,
+          0.0268,
+          0.0296,
+          0.0539,
+          0.0248,
+          0.0263,
+          0.0247,
+          0.0424,
+          0.0249,
+          0.0301,
+          0.0262,
+          0.0397,
+          0.0253,
+          0.0315,
+          0.0248,
+          0.0498,
+          0.0277,
+          0.0245,
+          0.0297,
+          0.0391,
+          0.0244,
+          0.0232,
+          0.0327,
+          0.0509,
+          0.0277,
+          0.0253,
+          0.0306
+        ],
+        "hihat_bar_profile_triplet": [
+          0.0391,
+          0.0374,
+          0.0395,
+          0.052,
+          0.0325,
+          0.0392,
+          0.063,
+          0.0331,
+          0.0336,
+          0.0508,
+          0.0379,
+          0.0348,
+          0.0468,
+          0.0409,
+          0.0335,
+          0.0596,
+          0.0344,
+          0.0377,
+          0.0478,
+          0.0317,
+          0.0399,
+          0.0603,
+          0.0356,
+          0.0386
+        ],
+        "hihat_bar_contrast": 1.7257,
+        "hihat_roll_ratio": 0.4321,
+        "hihat_triplet_bias": 0.4062,
+        "hihat_roll_burst_ratio": 0.0,
+        "hihat_active_ratio": 0.2812,
+        "bar_profile_split_half": 0.9207,
+        "bar_profile_split_half_2bar": 0.8598,
+        "grid_deviation_ms": 5.44,
+        "syncopation_ratio": 0.7327,
+        "bar_profile_contrast": 2.397,
+        "beats_per_bar": 4.0,
+        "n_beats": 60,
+        "n_downbeats": 15,
+        "kick_bar_profile": [
+          0.0749,
+          0.0212,
+          0.0208,
+          0.0205,
+          0.035,
+          0.0212,
+          0.0254,
+          0.0259,
+          0.072,
+          0.021,
+          0.0246,
+          0.0232,
+          0.0473,
+          0.0229,
+          0.0413,
+          0.0226,
+          0.0642,
+          0.0183,
+          0.0225,
+          0.0191,
+          0.0361,
+          0.0218,
+          0.0216,
+          0.0234,
+          0.0563,
+          0.0203,
+          0.0243,
+          0.0251,
+          0.0638,
+          0.0203,
+          0.0229,
+          0.0202
+        ],
+        "rhythm_match": {
+          "four-on-floor": 0.8139,
+          "backbeat(1·3)": 0.5985,
+          "tresillo(8분 3+3+2)": 0.5498,
+          "dembow": 0.532,
+          "trap-synco": 0.3364
+        },
+        "rhythm_top": "four-on-floor",
+        "rhythm_top_score": 0.8139,
+        "rhythm_assigned": "four-on-floor",
+        "rhythm_gap": 0.2154,
+        "rhythm_tie": false,
+        "tempo_bpm_grid": 117.45,
+        "tempo_source": "beat_this-fit",
+        "styles": [
+          {
+            "label": "Pop---K-pop",
+            "p": 0.1253
+          },
+          {
+            "label": "Pop---J-pop",
+            "p": 0.1192
+          },
+          {
+            "label": "Pop---Ballad",
+            "p": 0.0667
+          },
+          {
+            "label": "Folk, World, & Country---Folk",
+            "p": 0.058
+          },
+          {
+            "label": "Rock---Pop Rock",
+            "p": 0.0526
+          }
+        ],
+        "instruments": [
+          {
+            "label": "drums",
+            "p": 0.4646
+          },
+          {
+            "label": "electricguitar",
+            "p": 0.4506
+          },
+          {
+            "label": "bass",
+            "p": 0.3923
+          },
+          {
+            "label": "guitar",
+            "p": 0.3497
+          },
+          {
+            "label": "acousticguitar",
+            "p": 0.3011
+          },
+          {
+            "label": "synthesizer",
+            "p": 0.2458
+          },
+          {
+            "label": "voice",
+            "p": 0.1754
+          },
+          {
+            "label": "piano",
+            "p": 0.1339
+          },
+          {
+            "label": "keyboard",
+            "p": 0.1223
+          },
+          {
+            "label": "saxophone",
+            "p": 0.097
+          },
+          {
+            "label": "accordion",
+            "p": 0.0928
+          },
+          {
+            "label": "percussion",
+            "p": 0.0698
+          },
+          {
+            "label": "violin",
+            "p": 0.0611
+          },
+          {
+            "label": "electricpiano",
+            "p": 0.0607
+          },
+          {
+            "label": "classicalguitar",
+            "p": 0.0371
+          },
+          {
+            "label": "trumpet",
+            "p": 0.0343
+          },
+          {
+            "label": "trombone",
+            "p": 0.0339
+          },
+          {
+            "label": "rhodes",
+            "p": 0.0315
+          },
+          {
+            "label": "sampler",
+            "p": 0.0289
+          },
+          {
+            "label": "flute",
+            "p": 0.0264
+          },
+          {
+            "label": "drummachine",
+            "p": 0.023
+          },
+          {
+            "label": "pipeorgan",
+            "p": 0.0216
+          },
+          {
+            "label": "computer",
+            "p": 0.021
+          },
+          {
+            "label": "strings",
+            "p": 0.0207
+          },
+          {
+            "label": "organ",
+            "p": 0.0193
+          },
+          {
+            "label": "harmonica",
+            "p": 0.0152
+          },
+          {
+            "label": "acousticbassguitar",
+            "p": 0.0134
+          },
+          {
+            "label": "bell",
+            "p": 0.012
+          },
+          {
+            "label": "bongo",
+            "p": 0.012
+          },
+          {
+            "label": "cello",
+            "p": 0.0102
+          },
+          {
+            "label": "doublebass",
+            "p": 0.0087
+          },
+          {
+            "label": "viola",
+            "p": 0.008
+          },
+          {
+            "label": "orchestra",
+            "p": 0.0079
+          },
+          {
+            "label": "horn",
+            "p": 0.0074
+          },
+          {
+            "label": "brass",
+            "p": 0.0057
+          },
+          {
+            "label": "clarinet",
+            "p": 0.0047
+          },
+          {
+            "label": "oboe",
+            "p": 0.0039
+          },
+          {
+            "label": "harp",
+            "p": 0.0022
+          },
+          {
+            "label": "beat",
+            "p": 0.0018
+          },
+          {
+            "label": "pad",
+            "p": 0.0017
+          }
+        ],
+        "genres": [
+          {
+            "label": "pop",
+            "p": 0.5566
+          },
+          {
+            "label": "rock",
+            "p": 0.3043
+          },
+          {
+            "label": "indie",
+            "p": 0.2101
+          },
+          {
+            "label": "poprock",
+            "p": 0.1545
+          },
+          {
+            "label": "funk",
+            "p": 0.136
+          }
+        ],
+        "moods": [
+          {
+            "label": "happy",
+            "p": 0.1622
+          },
+          {
+            "label": "energetic",
+            "p": 0.1603
+          },
+          {
+            "label": "love",
+            "p": 0.1535
+          },
+          {
+            "label": "melodic",
+            "p": 0.1092
+          },
+          {
+            "label": "positive",
+            "p": 0.0805
+          }
+        ],
+        "danceability": 0.7791,
+        "tag_patches": 14,
+        "tag_status": "unvalidated",
+        "valence": 6.1368,
+        "arousal": 6.4219,
+        "va_source": "deam-msd-musicnn-1"
+      }
+    }
+  ],
+  "provenance": {
+    "module": "sonic-profile",
+    "version": "0.1.0",
+    "collected": "2026-07-31",
+    "country": "US",
+    "engine_provenance": {
+      "engine": "librosa",
+      "engine_version": "0.11.0",
+      "sample_rate": 22050,
+      "mono": false,
+      "low_hz": 150.0,
+      "feature_set": "v3",
+      "decoders": [
+        "libsndfile",
+        "pyav 18.0.0"
+      ],
+      "aac_capable": true,
+      "beat_engine": "beat_this",
+      "beat_checkpoint": "final0",
+      "beat_dbn": false,
+      "rhythm_hop": 128,
+      "rhythm_bins": 32,
+      "rhythm_triplet_bins": 24,
+      "rhythm_templates": [
+        "backbeat(1·3)",
+        "dembow",
+        "four-on-floor",
+        "trap-synco",
+        "tresillo(8분 3+3+2)"
+      ],
+      "rhythm_min_match": 0.3,
+      "rhythm_tie_gap": 0.05,
+      "rhythm_feature_set": "v4",
+      "tagger": "discogs-effnet-bsdynamic-1",
+      "tagger_heads": [
+        "mtg_jamendo_instrument-1",
+        "mtg_jamendo_genre-1",
+        "mtg_jamendo_moodtheme-1",
+        "danceability-1"
+      ],
+      "tagger_sample_rate": 16000,
+      "mood_head": "mtg_jamendo_moodtheme-discogs-effnet-1",
+      "valence_head": "deam-msd-musicnn-1",
+      "valence_embedding": "msd-musicnn-1",
+      "valence_patch": 187,
+      "tagger_top_k": 5,
+      "tagger_top_k_instrument": 40,
+      "tagger_license": "CC BY-NC-SA 4.0 (non-commercial)",
+      "attribution": "Essentia models by MTG-UPF (CC BY-NC-SA 4.0) · MTG-Jamendo (Bogdanov et al., ICML 2019 workshop)"
+    },
+    "cohort": {
+      "chart": 4,
+      "watchlist": 0
+    },
+    "cache_hits": 0,
+    "audio_retained": false,
+    "note": "30s preview, features only; audio processed in memory and discarded"
+  }
+}

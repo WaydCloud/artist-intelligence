@@ -11,6 +11,7 @@ import type {
 } from "@/lib/report";
 import { scopeOf, useKnob } from "@/lib/knobs";
 import { CriteriaActions, type CriteriaItem } from "./CriteriaActions";
+import { ChartTooltip, useChartTooltip } from "./ChartTooltip";
 
 // Interactive threshold views: the report ships raw data + knobs; we recompute the
 // derived view client-side as the viewer turns each knob (static-first, no backend).
@@ -335,6 +336,10 @@ function Tags({ data, title }: { data: TagsTunableData; title?: string }) {
 // view=whitespace — a gap map: proven markets (≥threshold roster acts) × top acts,
 // empty cell = greenfield the act hasn't reached.
 function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: string }) {
+  // 칸 툴팁은 `Heatmap`과 같은 규율이다(DESIGN §7.6): 칸에서 멀리 떨어진 머리글을
+  // 되짚지 않게 좌표를 커서 옆에서 말하고, 칸마다 `tabIndex`를 뿌리는 대신 행·열
+  // 머리글을 `<th scope>`로 선언해 표 의미로 닿게 한다.
+  const tip = useChartTooltip<{ row: string; col: string; text: string; gap: boolean }>();
   const knob = data.knobs?.[0];
   const scope = scopeOf("whitespace", title);
   const [threshold, setThreshold] = useKnob(scope, knob?.key ?? "threshold", knob?.default ?? 2);
@@ -370,7 +375,7 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
   };
 
   return (
-    <div>
+    <div className="relative" ref={tip.containerRef}>
       <div className="mb-4 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs">
         <label htmlFor="tunable-knob" className="text-[var(--ink-secondary)]">
           {knob?.label ?? "기준"}
@@ -397,13 +402,14 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
         <p className="text-sm text-[var(--muted)]">이 기준에서는 개척 시장 없음. 슬라이더를 낮추면 후보 표시</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="border-separate" style={{ borderSpacing: 2 }}>
+          <table data-plot="heatmap" className="border-separate" style={{ borderSpacing: 2 }}>
             <thead>
               <tr>
                 <th />
                 {provenIdx.map((j) => (
                   <th
                     key={j}
+                    scope="col"
                     className="px-2 pb-1 text-center text-xs font-normal text-[var(--muted)]"
                   >
                     {matrix.cols[j]}
@@ -414,29 +420,39 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
             <tbody>
               {rowIdx.map((i) => (
                 <tr key={i}>
-                  <td className="pr-3">
+                  <th scope="row" className="pr-3 text-left font-normal">
                     <div
                       className="max-w-[160px] truncate text-xs text-[var(--ink-secondary)]"
                       title={matrix.rows[i]}
                     >
                       {matrix.rows[i]}
                     </div>
-                  </td>
+                  </th>
                   {provenIdx.map((j) => {
                     const v = matrix.cells[i][j];
-                    const label = `${matrix.rows[i]} · ${matrix.cols[j]}`;
-                    return v == null ? (
-                      <td key={j} style={{ width: 40, height: 26 }} title={`${label}: 미개척`}>
-                        <div className="h-6 rounded" style={gapBox} />
-                      </td>
-                    ) : (
-                      <td key={j} style={{ width: 40, height: 26 }} title={`${label}: ${v}위`}>
-                        <div
-                          className="flex h-6 items-center justify-center rounded text-xs tabular-nums text-[var(--muted)]"
-                          style={{ background: "var(--hairline)" }}
-                        >
-                          {v}
-                        </div>
+                    const datum = {
+                      row: matrix.rows[i],
+                      col: matrix.cols[j],
+                      text: v == null ? "미개척" : `${v}위`,
+                      gap: v == null,
+                    };
+                    return (
+                      <td
+                        key={j}
+                        style={{ width: 40, height: 26 }}
+                        onPointerMove={(e) => tip.show(e, datum)}
+                        onPointerLeave={tip.hide}
+                      >
+                        {v == null ? (
+                          <div className="h-6 rounded" style={gapBox} />
+                        ) : (
+                          <div
+                            className="flex h-6 items-center justify-center rounded text-xs tabular-nums text-[var(--muted)]"
+                            style={{ background: "var(--hairline)" }}
+                          >
+                            {v}
+                          </div>
+                        )}
                       </td>
                     );
                   })}
@@ -446,6 +462,20 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
           </table>
         </div>
       )}
+
+      <ChartTooltip tip={tip}>
+        {tip.datum && (
+          <>
+            <div
+              className={`font-medium ${tip.datum.gap ? "text-[var(--good)]" : "text-[var(--ink)]"}`}
+            >
+              {tip.datum.text}
+            </div>
+            <div className="mt-0.5 text-[var(--ink-secondary)]">{tip.datum.row}</div>
+            <div className="text-[var(--muted)]">{tip.datum.col}</div>
+          </>
+        )}
+      </ChartTooltip>
 
       <div className="mt-3 flex items-center gap-1.5 text-xs text-[var(--muted)]">
         <span className="inline-block h-3 w-3 rounded" style={gapBox} />
@@ -665,6 +695,14 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
 const DAY_MS = 86400000;
 
 function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) {
+  // 판단 보류 사유는 `title` 속성에만 있었다 — 캡션이 "마우스를 올리면 사유"라고
+  // 안내할 정도로 **포인터 전용 경로**였고 키보드로는 닿지 않았다(DESIGN §7.6).
+  //
+  // 툴팁이 아니라 **보이는 텍스트**로 내놓는다. 처음엔 ⓘ를 포커스 가능한 마크로 만들어
+  // 툴팁을 달았는데, 실제 렌더에서 최소 표본 기준이 20건이면 **110행 중 대부분이 보류**라
+  // 탭 정지가 100개 넘게 생겼다 — 격자에 `tabIndex`를 뿌리지 않기로 한 것과 같은 벽이다.
+  // 사유는 짧아서(`표본 12건 < 20건` · `좌측 절단`) 그냥 적으면 감춰진 것이 0이 되고
+  // 인터랙션도 0이 된다. 여기서는 그게 더 나은 답이다(§1: 더하기 전에 뺄 것을 먼저).
   const kS = data.knobs.find((k) => k.key === "theta_social");
   const kR = data.knobs.find((k) => k.key === "theta_rank");
   const kP = data.knobs.find((k) => k.key === "min_posts");
@@ -818,17 +856,14 @@ function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) 
             const w = (Math.abs(lead) / maxAbs) * 50;
             // 판정 근거가 약한 행은 지우지 않고 흐리게 — 도구가 대신 결론내지 않는다
             const held = r.weak || r.censored;
-            const why = [
-              r.weak ? `표본 ${r.posts}건 < ${minPosts}건` : null,
-              r.censored ? "차트 온셋 좌측절단(수집 개시일과 동일)" : null,
-            ]
+            // 화면에 그대로 적을 짧은 사유. 자세한 뜻은 아래 캡션이 한 번 설명한다.
+            const why = [r.weak ? `표본 ${r.posts}건 < ${minPosts}건` : null, r.censored ? "좌측 절단" : null]
               .filter(Boolean)
               .join(" · ");
             return (
               <div
                 key={r.key}
                 className={`flex items-center gap-2 text-xs ${held ? "opacity-45" : ""}`}
-                title={`${r.key}: ${lead > 0 ? "+" : ""}${lead}일${why ? ` — 판단 보류: ${why}` : ""}`}
               >
                 <div className="w-28 truncate text-right text-[var(--ink-secondary)]" title={r.key}>
                   {r.key}
@@ -844,13 +879,16 @@ function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) 
                     }
                   />
                 </div>
-                <div className="w-10 tabular-nums text-[var(--muted)]">
+                {/* `+127일`이 w-10에서 두 줄로 접혀 있었다 — 숫자 칸은 최댓값이 들어갈
+                    만큼 잡고 줄바꿈을 막는다. 값이 접히면 읽는 사람이 두 값으로 센다. */}
+                <div className="w-12 shrink-0 whitespace-nowrap text-right tabular-nums text-[var(--muted)]">
                   {lead > 0 ? "+" : ""}
                   {lead}일
                 </div>
-                <div className="w-4 text-center text-[var(--muted)]" aria-hidden={!held}>
-                  {held ? "ⓘ" : ""}
-                </div>
+                {/* 사유를 그대로 적는다 — 툴팁도 `title`도 없다(위 주석 참고).
+                    칸은 사유 두 개가 같이 들어갈 폭으로 잡는다. 좁게 잡아 잘라 두면
+                    감춰진 것을 툴팁에서 잘린 텍스트로 옮긴 것일 뿐이다. */}
+                <div className="w-40 shrink-0 truncate text-[var(--muted)]">{why}</div>
               </div>
             );
           })}
@@ -862,7 +900,9 @@ function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) 
         <span>양수 = 소셜이 먼저</span>
         <span className="ml-2 inline-block h-3 w-3 rounded" style={{ background: "var(--series2)" }} />
         <span>음수 = 차트가 먼저</span>
-        {data.evidence && <span className="ml-2">ⓘ 흐린 행 = 판단 보류(표본 부족 또는 좌측 절단) · 마우스를 올리면 사유</span>}
+        {/* '좌측 절단'의 뜻은 아래 `note`(리포트가 싣는다)가 이미 정의한다 — 여기서
+            되풀이하면 같은 문장이 두 줄로 남는다. */}
+        {data.evidence && <span className="ml-2">흐린 행 = 판단 보류 · 사유는 행 오른쪽</span>}
       </div>
       {data.note && <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">{data.note}</p>}
 

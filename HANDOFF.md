@@ -16,7 +16,7 @@
   5. **sonic-profile v4** — 프리뷰 30초·**오디오 무보관** · **스칼라 축 71종 계산·저장 / 타일 24종 노출**(D-032) · 리듬 패턴 · 장르/악기/무드 태깅 · 발매일 축. 지표 3층 구조(D-031) + 축 카탈로그 100항([`docs/CATALOG-analysis-axes.md`](docs/CATALOG-analysis-axes.md)).
   6. **genre-impulse v1** (2026-07-30, D-034/D-035) — 임펄스 원장 × 일일 sonic 코호트 대조 모니터. 검출 규칙 1건(hyperpop-texture, A2.1 실측 근거)·daily_collect 3.7 편입. 원장: `docs/CASEBOOK-genre-impulse.md` + `data/research/genre-impulse/impulses/`.
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(무변경) + PII 게이트 + `packages/entity-master`.
-- 최근 작업 이력: [`Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md`](Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md) (**장르 임펄스 기획→모니터 관통, D-033~D-035**) · [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
+- 최근 작업 이력: [`Handoffs/2026-07-30-reliability-gates.md`](Handoffs/2026-07-30-reliability-gates.md) (**탭 스모크·에러 바운더리·재시도 감사**) · [`Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md`](Handoffs/2026-07-30-genre-impulse-phase-a-to-c.md) (**장르 임펄스 기획→모니터 관통, D-033~D-035**) · [`Handoffs/2026-07-29-series-contract-identity-fix.md`](Handoffs/2026-07-29-series-contract-identity-fix.md) (시리즈 계약·정체성 수정) · [`2026-07-29-axis-catalog-t0-expansion.md`](Handoffs/2026-07-29-axis-catalog-t0-expansion.md) (**D-032**) · [`2026-07-29-sonic-metrics-expansion-stem-probe.md`](Handoffs/2026-07-29-sonic-metrics-expansion-stem-probe.md) (D-031) · [`2026-07-29-rhythm-audit-drilldown-release-axis.md`](Handoffs/2026-07-29-rhythm-audit-drilldown-release-axis.md) (D-027~D-029)
 
 ## 🟡 해소 관측 (2026-07-30 새벽): av 차단이 자연 해소 — 단 원인 불명, 재발 감시
 
@@ -67,6 +67,7 @@
 
 - **[PR #3](https://github.com/WaydCloud/artist-intelligence/pull/3)** `sonic-metrics-d031` — D-031(지표 9종) + D-032(T0 축 37종·카탈로그 100항) + AGENTS §7 육안 확인 기록 + sonic signals 방출부 계약 수정.
 - **[PR #5](https://github.com/WaydCloud/artist-intelligence/pull/5)** `genre-impulse-plan` — 장르 임펄스 기획~모니터 v1 전체(23커밋+). ⚠ **베이스가 PR #3 브랜치**(스택) — #3 먼저 머지(squash면 이후 #5 리베이스 필요 가능).
+- **브랜치 `reliability-gates`**(커밋 `bf46219`, **PR 미개설**) — §A 재발 방지 3건. 베이스가 `genre-impulse-plan`이라 **스택 3단**(#3 → #5 → 이것). PR을 안 만든 이유: 이미 3건이 머지 대기라 순서 결정이 도메인 소유자 몫이다. 푸시·PR 개설은 지시가 있으면 즉시 가능.
 - **[PR #4](https://github.com/WaydCloud/artist-intelligence/pull/4)** `signal-series-schema` — signal-series JSON 스키마 패키지 + 검증기 + CI 게이트(D-030 잔여 구멍). PR #3과 파일 겹침 없음 — 순서 무관 머지 가능.
 
 ## ✅ 빌보드 Hot 100 이력 레그 가동 (2026-07-30, D-035 ② 조건 충족)
@@ -85,11 +86,16 @@
 
 > 오늘 실측에서 **나온 것**만 적는다. 각 항목은 "왜 지금"의 근거를 달았다. A는 승인 없이 진행 가능, C·D는 별도 승인이 필요하다.
 
-### A. 재발 방지 — 오늘 드러난 구멍 (엔지니어 판단, 승인 불필요)
+### ✅ A. 재발 방지 — **완료(2026-07-30, 브랜치 `reliability-gates` · 커밋 `bf46219`)**
 
-1. **대시보드 탭 스모크 신설** ⭐ 가장 싸고 가장 크다. headless로 **전 탭을 클릭하고 콘솔 에러 0 + body 비어 있지 않음**을 검사한다. 오늘 결함 3건 중 **2건(전체 언마운트·뷰 미구현)을 자동으로 잡았을 것**이고, lint·typecheck·schema-validate는 셋 다 통과한 상태였다. 재현 스크립트는 세션 스크래치패드 `theme_shots_gi.mjs` 패턴 그대로.
-2. **`ChartCard` 단위 에러 바운더리.** 오늘 고친 것은 *원인*(미지 view의 fallthrough)이고 이건 *폭발 반경*이다 — 한 차트의 예외가 대시보드 전체를 죽이면 **다른 모듈 6개의 탭까지 못 본다**. 둘 다 필요하다.
-3. **수집기 재시도 감사.** Apple만 고쳤다. spotify·youtube·shazam·yt·social 레그도 같은 **단발 요청** 패턴인지 확인할 것 — 오늘 Apple만 걸린 것은 운이지 구조가 아니다. 차트는 소급 수집이 안 된다.
+3건 전부 처리했고 **각 게이트가 실제로 잡는지 결함을 주입해 확인**했다. 세션 상세·함정은 [`Handoffs/2026-07-30-reliability-gates.md`](Handoffs/2026-07-30-reliability-gates.md).
+
+1. **탭 스모크** — `cd apps/dashboard && npm run smoke:tabs`(dev 실행 중). 전 탭 × 라이트/다크에서 콘솔 에러 0 · main 렌더 · 빈 카드 없음 · `<details>` 펼친 뒤에도 유지. playwright는 **의존성으로 넣지 않고** 이 PC의 것을 찾아 쓰며(AGENTS §1), 없으면 조용히 넘어가지 않고 exit 1. DESIGN §7·WORKFLOW DoD에 게이트로 등재.
+2. **`ChartBoundary`** — 실측 대조: 바운더리 없음 = **탭 0개**(전체 언마운트, 7-30 결함 재현) / 있음 = **탭 6개 유지**, 실패 카드만 축소. 콘솔 에러는 일부러 삼키지 않는다(스모크의 판정 근거).
+3. **수집기 재시도 감사** — Kworb 3레그·yt-pulse도 **같은 단발 요청**이었다(Apple만 걸린 것은 운이었다). 재시도를 `chart_history._fetch_bytes` 한 곳에 모았고, yt-pulse는 5xx·네트워크만(4xx는 쿼터 보호로 즉시 종료). 🔴 **더 큰 결함**: 데일리가 `Save-State $true`를 무조건 불러 `pending` 타깃이 **한 번도 재시도되지 않았다** — D-018 재개가 부분 실패에는 안 돌고 있었다. 무료 레그 pending이 남으면 하루를 미완으로 두고 4회 뒤 결손 확정. **유료 소셜 레그는 제외 — 재시도는 돈에 관한 결정이라 도메인 소유자 승인 대기.**
+
+- ⚠ **남은 갈래(범위 밖으로 남김)**: SSR 시점에 던지는 결함은 바운더리로 못 막는다(차트가 서버 컴포넌트라 페이지가 500이 된다). 카드 단위로 막으려면 `error.tsx` 라우트 경계가 별도로 필요하다.
+- ⚠ **함정**: `TESTS.md`가 지시하는 스모크 명령(`-o modules/<m>/output/`)이 **커밋된 라이브 산출을 덮는다**(실측: chart-history 5,171줄→196줄). 양쪽 TESTS.md에 경고를 넣었다. 검증만 할 때는 `-o`를 임시 디렉터리로.
 
 ### B. 스템 후속 — 게이트가 남긴 3갈래 (분리 자체는 성공했다, RULES §3.8.4.2)
 
@@ -122,6 +128,7 @@
 
 다음 세션 작업 큐 (우선순위순):
 
+0. **§A 재발 방지는 끝났다**(위 ✅ A 절). 남은 것은 **다음 09:00 데일리에서 재시도 감사 결과를 실측 확인**하는 것 — 로그에서 볼 것: ① `attempt n/3` 줄이 뜨는지(뜨면 일시 실패를 실제로 흡수한 것) ② `day left INCOMPLETE on purpose` 줄이 뜨는지(뜨면 부분 실패가 처음으로 재시도된 것) ③ Kworb 실패 사유가 로그에 남는지. 세 줄 다 안 뜨면 그날은 전부 1회에 성공한 것이므로 정상이다.
 1. **틱톡 레그 가동**: 워치리스트 v0([`docs/DRAFT-tiktok-watchlist-v0.md`](docs/DRAFT-tiktok-watchlist-v0.md)) **A&R 확정 대기**(검토 포인트 8건) → 수집 스크립트 구축(khadinakbar 액터 — userCount 실증됨, 액터 교체 가능 구조, **월 상한 $15 가드**, url_pending 30건은 첫 수집 시 검색 모드로 해소). D-035 ① 참조.
 2. ~~**빌보드 이력 파이프라인**~~ → ✅ **완료(2026-07-30)**. 아래 "빌보드 레그 가동" 절 참조. 남은 것은 궤적 사실을 **임펄스 원장에 반영**하는 것(확실성 등급 부여가 필요해 분리했다).
 3. ~~**스템 분리 구현**~~ → 구현·게이트 완료(2026-07-30), **전 축 보류**. 위 🔴 절 참조. 남은 것은 pyin 해상도 비용 판단 · 하프타임 유효성 게이트 임계 재조정(도메인 소유자) · 드릴 새 가설 사전 등록.
@@ -133,7 +140,7 @@
 ## 🔧 2026-07-30 부수 수정 3건 (데일리·대시보드 운영 결함)
 
 1. **Apple RSS 레이트 리밋** — 데일리가 49개 스토어프론트 중 **9개 실패**(kr 포함 = sonic 코호트의 소스). 재현하니 일시적 실패였고 3초 간격 재시도로 9개 전부 복구됐다. `collect-apple`에 **재시도·백오프**(`--attempts` 3 · `--backoff` 2.0)를 넣고, 데일리가 `2>$null`로 삼키던 **실패 사유를 로그에 남기게** 했다. **차트는 소급 수집이 안 되므로 스토어프론트 하나가 비면 그 시장의 하루가 영구히 사라진다** — 그래서 단발 요청은 위험하다.
-2. 🔴 **genre-impulse 탭이 대시보드 전체를 죽이고 있었다** — `Tunable`의 뷰 분기가 미지의 view를 무조건 `Whitespace`로 흘려 `matrix.cols`에서 TypeError → **React 트리 전체 언마운트**. 한 모듈의 신규 뷰가 다른 모듈 탭까지 못 보게 만드는 구조였다. 모르는 view는 "모른다"고 표시하도록 고치고, **`impulse-rules` 뷰를 신설**했다(payload에 곡별 백분위·규칙 형식 추가 — 분포만 보내면 컷을 낮춰도 새 곡이 못 나타난다).
+2. 🔴 **genre-impulse 탭이 대시보드 전체를 죽이고 있었다**(폭발 반경은 `ChartBoundary`로, 재발 감지는 탭 스모크로 후속 처리됨 — 위 §A) — `Tunable`의 뷰 분기가 미지의 view를 무조건 `Whitespace`로 흘려 `matrix.cols`에서 TypeError → **React 트리 전체 언마운트**. 한 모듈의 신규 뷰가 다른 모듈 탭까지 못 보게 만드는 구조였다. 모르는 view는 "모른다"고 표시하도록 고치고, **`impulse-rules` 뷰를 신설**했다(payload에 곡별 백분위·규칙 형식 추가 — 분포만 보내면 컷을 낮춰도 새 곡이 못 나타난다).
 3. **매치 막대 11개가 이름 없이 그려졌다** — 공유 계약의 bar 키는 `name`인데 이 모듈만 `label`을 냈다. **`report-schema`가 `data`를 제약하지 않아(`"data": {}`) 검증도 통과했다** — 스키마가 못 잡는 계약은 육안 확인에서만 드러난다.
    - ⚠ **미결 제안**: `report.schema.json`의 bar/line 데이터 형태를 제약하면 이 부류가 CI에서 잡힌다. 다만 스키마 변경은 **별도 승인 + 대시보드 동시 갱신**이 전제다(AGENTS §0).
 - ✅ **AGENTS §7 육안 확인 완료** — genre-impulse 탭 라이트/다크 1440px, **콘솔 에러 0**. KPI 4종·매치 막대(★ 워치리스트가 `--series2`로 양쪽 분리)·튜너 슬라이더 2종·펼친 매치 목록 전부 정상.

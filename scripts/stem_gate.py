@@ -26,6 +26,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
@@ -92,6 +93,37 @@ GATES: list[dict[str, Any]] = [
         "expect_n": 5,
         "need": 3,
         "note": "🔺 사전 등록 프록시 — 실패 시 해석을 버린다(meter_duple_bias 선례)",
+    },
+    # ── 하이햇 축 (D-038 · TESTS §7.3 · 사전 등록). 기준은 **비율**이다: 정답지 크기가
+    #    바뀌어도 같은 엄격도를 유지해야 한다(기존 5곡 중 3곡 = 60%).
+    {
+        "axis": "hihat_roll_ratio",
+        "case": "jersey-club",
+        "roles": ["origin"],
+        "expect_n": 20,
+        "need_frac": 0.60,
+        "min_measured": 10,
+        "note": "H1 하이햇 롤 (RULES §3.1.5.3) — 16칸에서는 정의상 0이던 축",
+    },
+    {
+        "axis": "hihat_triplet_bias",
+        "case": "drill",
+        "roles": ["origin"],
+        "expect_n": 3,
+        "need": 2,
+        "note": "H2 드릴 새 가설 (RULES §3.1.5.3) — ⚠ 트랩도 트리플렛 하이햇을 쓴다. "
+                "실패는 측정 결함이 아니라 케이스북 CASE 10 가설의 실측 지지다",
+    },
+    # 하프타임은 확대된 정답지로 다시 잰다(D-037의 판정은 5곡 기준이었다)
+    {
+        "axis": "halftime_snare_ratio",
+        "case": "jersey-club",
+        "roles": ["origin"],
+        "expect_n": 20,
+        "need_frac": 0.60,
+        "min_measured": 10,
+        "label": "halftime_snare_ratio (확대 정답지)",
+        "note": "D-037 재실행 — 정답지 5 → 20곡(검정력 인상, 기준 비율은 60% 유지)",
     },
 ]
 
@@ -195,18 +227,25 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
             })
         scored = [x for x in rows if x["percentile"] is not None]
         hits = sum(1 for x in scored if x["percentile"] >= TOP_PCT)
+        # 기준이 비율이면 **측정된 표본**에서 계산한다 — 결측을 실패로 세면 "못 쟀다"가
+        # "못 가른다"로 뭉개진다(§0). 최소 표본은 별도 조건으로 둔다.
+        if gate.get("need_frac") is not None:
+            gate = {**gate, "need": max(1, math.ceil(gate["need_frac"] * len(scored)))}
         # **"못 쟀다"와 "못 가른다"를 뭉치면 원장에 거짓이 들어간다**(§0 결측 ≠ 0).
         # 특히 측정된 정답지가 기준(need)보다 적으면 판별력과 무관하게 산술적으로
         # 실패가 강제된다 — 그걸 "판별력 없음"으로 적으면 축을 억울하게 죽인다.
         # (2026-07-30 실측: 하프타임은 유효성 게이트가 정답지 5곡 중 3곡을
         #  떨어뜨려 2곡만 남았고, 기준 3을 넘을 방법이 원리적으로 없었다.)
-        if not scored or len(pool) < 10 or len(scored) < gate["need"]:
+        min_measured = gate.get("min_measured", gate["need"])
+        if not scored or len(pool) < 10 or len(scored) < min_measured:
             verdict = "unmeasured"
         else:
             verdict = "pass" if hits >= gate["need"] else "fail"
         results.append({
-            "axis": axis,
+            "axis": gate.get("label") or axis,
             "note": gate["note"],
+            "need_frac": gate.get("need_frac"),
+            "min_measured": min_measured,
             "cohort_n": len(pool),
             "answers_expected": gate["expect_n"],
             "answers_measured": len(scored),
@@ -227,7 +266,7 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
             results[-1]["verdict"] = "unmeasured"
             verdict = "unmeasured"
         flag = " ⚠양자화" if quantized else ""
-        print(f"  {verdict.upper():10s} {axis:26s} "
+        print(f"  {verdict.upper():10s} {(gate.get('label') or axis)[:32]:32s} "
               f"상위20% {hits}/{len(scored)} (기준 {gate['need']}) · 코호트 {len(pool)}곡 "
               f"· 고유값 {distinct}{flag}",
               file=sys.stderr)

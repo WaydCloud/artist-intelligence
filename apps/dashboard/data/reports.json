@@ -5394,7 +5394,7 @@
     "moduleId": "genre-impulse",
     "title": "장르 임펄스 모니터",
     "subtitle": "원장 10건 × 코호트 102곡 (2026-07-30.json) · v0.1.0",
-    "generatedAt": "2026-07-30T00:47:27.070626+00:00",
+    "generatedAt": "2026-07-30T00:59:48.191770+00:00",
     "metrics": [
       {
         "label": "원장 임펄스",
@@ -5424,47 +5424,47 @@
         "title": "검출 매치 · organic_ratio 코호트 백분위 (낮을수록 규칙 부합)",
         "data": [
           {
-            "label": "최예나 - 캐치 캐치",
+            "name": "최예나 - 캐치 캐치",
             "value": 1
           },
           {
-            "label": "RIIZE - Do your dance",
+            "name": "RIIZE - Do your dance",
             "value": 2
           },
           {
-            "label": "★코르티스 - REDRED",
+            "name": "★코르티스 - REDRED",
             "value": 3.9
           },
           {
-            "label": "NCT WISH - BOY MEETS GIRL",
+            "name": "NCT WISH - BOY MEETS GIRL",
             "value": 6.9
           },
           {
-            "label": "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
+            "name": "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
             "value": 7.8
           },
           {
-            "label": "★코르티스 - YOUNGCREATORCREW",
+            "name": "★코르티스 - YOUNGCREATORCREW",
             "value": 12.7
           },
           {
-            "label": "★Keyveatz - Key Beats",
+            "name": "★Keyveatz - Key Beats",
             "value": 13.7
           },
           {
-            "label": "NMIXX - Heavy Serenade",
+            "name": "NMIXX - Heavy Serenade",
             "value": 14.7
           },
           {
-            "label": "★키키 - 404 (New Era)",
+            "name": "★키키 - 404 (New Era)",
             "value": 15.7
           },
           {
-            "label": "Young K - Shut The Door",
+            "name": "Young K - Shut The Door",
             "value": 16.7
           },
           {
-            "label": "뉴진스 - Bubble Gum",
+            "name": "뉴진스 - Bubble Gum",
             "value": 17.6
           }
         ]
@@ -5794,7 +5794,959 @@
               0.0566,
               0.0644
             ]
-          }
+          },
+          "rules": [
+            {
+              "id": "hyperpop-texture",
+              "impulseId": "hyperpop",
+              "lowAll": [
+                "organic_ratio"
+              ],
+              "highAny": [
+                "spectral_flatness",
+                "over_unity_ratio"
+              ]
+            }
+          ],
+          "tracks": [
+            {
+              "name": "최예나 - 캐치 캐치",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 1,
+                "over_unity_ratio": 62.7,
+                "spectral_flatness": 97.1
+              }
+            },
+            {
+              "name": "RIIZE - Do your dance",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 2,
+                "over_unity_ratio": 94.1,
+                "spectral_flatness": 84.3
+              }
+            },
+            {
+              "name": "아일릿 - It's Me",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 2.9,
+                "over_unity_ratio": 52,
+                "spectral_flatness": 50
+              }
+            },
+            {
+              "name": "코르티스 - REDRED",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 3.9,
+                "over_unity_ratio": 91.2,
+                "spectral_flatness": 85.3
+              }
+            },
+            {
+              "name": "뉴진스 - New Jeans",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 4.9,
+                "over_unity_ratio": 28.4,
+                "spectral_flatness": 23.5
+              }
+            },
+            {
+              "name": "뉴진스 - Cookie",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 5.9,
+                "over_unity_ratio": 67.6,
+                "spectral_flatness": 46.1
+              }
+            },
+            {
+              "name": "NCT WISH - BOY MEETS GIRL",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 6.9,
+                "over_unity_ratio": 70.6,
+                "spectral_flatness": 92.2
+              }
+            },
+            {
+              "name": "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 7.8,
+                "over_unity_ratio": 99,
+                "spectral_flatness": 50
+              }
+            },
+            {
+              "name": "Hearts2Hearts - The Chase",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 8.8,
+                "over_unity_ratio": 65.7,
+                "spectral_flatness": 30.4
+              }
+            },
+            {
+              "name": "아일릿 - Magnetic",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 9.8,
+                "over_unity_ratio": 53.9,
+                "spectral_flatness": 36.3
+              }
+            },
+            {
+              "name": "코르티스 - ACAI",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 10.8,
+                "over_unity_ratio": 75.5,
+                "spectral_flatness": 38.2
+              }
+            },
+            {
+              "name": "코르티스 - GO!",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 11.8,
+                "over_unity_ratio": 57.8,
+                "spectral_flatness": 67.6
+              }
+            },
+            {
+              "name": "코르티스 - YOUNGCREATORCREW",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 12.7,
+                "over_unity_ratio": 16.7,
+                "spectral_flatness": 99
+              }
+            },
+            {
+              "name": "Keyveatz - Key Beats",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 13.7,
+                "over_unity_ratio": 93.1,
+                "spectral_flatness": 73.5
+              }
+            },
+            {
+              "name": "NMIXX - Heavy Serenade",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 14.7,
+                "over_unity_ratio": 98,
+                "spectral_flatness": 81.4
+              }
+            },
+            {
+              "name": "키키 - 404 (New Era)",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 15.7,
+                "over_unity_ratio": 80.4,
+                "spectral_flatness": 98
+              }
+            },
+            {
+              "name": "Young K - Shut The Door",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 16.7,
+                "over_unity_ratio": 54.9,
+                "spectral_flatness": 87.3
+              }
+            },
+            {
+              "name": "뉴진스 - Bubble Gum",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 17.6,
+                "over_unity_ratio": 59.8,
+                "spectral_flatness": 90.2
+              }
+            },
+            {
+              "name": "KISS OF LIFE - Who is she",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 18.6,
+                "over_unity_ratio": 68.6,
+                "spectral_flatness": 75.5
+              }
+            },
+            {
+              "name": "헤이즈 - And July (feat. DEAN & dj friz)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 19.6,
+                "over_unity_ratio": 43.1,
+                "spectral_flatness": 44.1
+              }
+            },
+            {
+              "name": "aespa - Whiplash",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 20.6,
+                "over_unity_ratio": 100,
+                "spectral_flatness": 59.8
+              }
+            },
+            {
+              "name": "aespa - Next Level",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 21.6,
+                "over_unity_ratio": 32.4,
+                "spectral_flatness": 66.7
+              }
+            },
+            {
+              "name": "aespa - Armageddon",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 22.5,
+                "over_unity_ratio": 61.8,
+                "spectral_flatness": 55.9
+              }
+            },
+            {
+              "name": "리센느 - Deja Vu",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 23.5,
+                "over_unity_ratio": 84.3,
+                "spectral_flatness": 72.5
+              }
+            },
+            {
+              "name": "에픽하이 - Love Love Love (feat. 융진)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 24.5,
+                "over_unity_ratio": 66.7,
+                "spectral_flatness": 80.4
+              }
+            },
+            {
+              "name": "아일릿 - 빌려온 고양이 (Do the Dance)",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 25.5,
+                "over_unity_ratio": 87.3,
+                "spectral_flatness": 86.3
+              }
+            },
+            {
+              "name": "KATSEYE - Gameboy",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 26.5,
+                "over_unity_ratio": 79.4,
+                "spectral_flatness": 65.7
+              }
+            },
+            {
+              "name": "아이오아이 - 갑자기",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 27.5,
+                "over_unity_ratio": 37.3,
+                "spectral_flatness": 76.5
+              }
+            },
+            {
+              "name": "나우아임영 & Royal 44 - KISS KISS KISS (Prod. by Hukky Shibaseki) [feat. SUNWOO]",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 28.4,
+                "over_unity_ratio": 95.1,
+                "spectral_flatness": 70.6
+              }
+            },
+            {
+              "name": "뉴진스 - OMG",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 29.4,
+                "over_unity_ratio": 52.9,
+                "spectral_flatness": 47.1
+              }
+            },
+            {
+              "name": "희대의, 씨잼 & 블랙넛 - 잡아가세요",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 30.4,
+                "over_unity_ratio": 89.2,
+                "spectral_flatness": 30.4
+              }
+            },
+            {
+              "name": "검정치마 - Antifreeze",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 31.4,
+                "over_unity_ratio": 29.4,
+                "spectral_flatness": 54.9
+              }
+            },
+            {
+              "name": "aespa - KISS N TELL",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 33.3,
+                "over_unity_ratio": 72.5,
+                "spectral_flatness": 100
+              }
+            },
+            {
+              "name": "에이티즈 - BAD (Japanese Ver.)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 33.3,
+                "over_unity_ratio": 90.2,
+                "spectral_flatness": 35.3
+              }
+            },
+            {
+              "name": "aespa - LEMONADE",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 34.3,
+                "over_unity_ratio": 82.4,
+                "spectral_flatness": 88.2
+              }
+            },
+            {
+              "name": "희대의, 씨잼 & 블랙넛 - 리킹 더 스카이",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 35.3,
+                "over_unity_ratio": 92.2,
+                "spectral_flatness": 26.5
+              }
+            },
+            {
+              "name": "코르티스 - What You Want",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 36.3,
+                "over_unity_ratio": 50,
+                "spectral_flatness": 51
+              }
+            },
+            {
+              "name": "Hearts2Hearts - Lemon Tang",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 37.3,
+                "over_unity_ratio": 41.2,
+                "spectral_flatness": 68.6
+              }
+            },
+            {
+              "name": "WOODZ - Drowning",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 38.2,
+                "over_unity_ratio": 23.5,
+                "spectral_flatness": 74.5
+              }
+            },
+            {
+              "name": "fromis_9 - Vitamin ME",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 39.2,
+                "over_unity_ratio": 58.8,
+                "spectral_flatness": 91.2
+              }
+            },
+            {
+              "name": "리센느 - Pretty Girl",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 40.2,
+                "over_unity_ratio": 86.3,
+                "spectral_flatness": 94.1
+              }
+            },
+            {
+              "name": "르세라핌 - BOOMPALA",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 41.2,
+                "over_unity_ratio": 85.3,
+                "spectral_flatness": 37.3
+              }
+            },
+            {
+              "name": "Hearts2Hearts - FOCUS",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 42.2,
+                "over_unity_ratio": 55.9,
+                "spectral_flatness": 93.1
+              }
+            },
+            {
+              "name": "뉴진스 - Attention",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 43.1,
+                "over_unity_ratio": 44.1,
+                "spectral_flatness": 83.3
+              }
+            },
+            {
+              "name": "이즈나 - METRONOME",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 44.1,
+                "over_unity_ratio": 46.1,
+                "spectral_flatness": 77.5
+              }
+            },
+            {
+              "name": "Hearts2Hearts - STYLE",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 45.1,
+                "over_unity_ratio": 42.2,
+                "spectral_flatness": 89.2
+              }
+            },
+            {
+              "name": "양홍원 - Rose (feat. Skinny Brown & Homeboy)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 46.1,
+                "over_unity_ratio": 73.5,
+                "spectral_flatness": 30.4
+              }
+            },
+            {
+              "name": "MEOVV - DDI RO RI",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 47.1,
+                "over_unity_ratio": 14.7,
+                "spectral_flatness": 39.2
+              }
+            },
+            {
+              "name": "양홍원 - 사계",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 48,
+                "over_unity_ratio": 96.1,
+                "spectral_flatness": 32.4
+              }
+            },
+            {
+              "name": "Hearts2Hearts - RUDE!",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 49,
+                "over_unity_ratio": 48,
+                "spectral_flatness": 64.7
+              }
+            },
+            {
+              "name": "aespa - WDA (Whole Different Animal) [feat. G-DRAGON]",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 50,
+                "over_unity_ratio": 71.6,
+                "spectral_flatness": 58.8
+              }
+            },
+            {
+              "name": "리센느 - Runaway",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 51,
+                "over_unity_ratio": 64.7,
+                "spectral_flatness": 43.1
+              }
+            },
+            {
+              "name": "코르티스 - TNT",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 52,
+                "over_unity_ratio": 81.4,
+                "spectral_flatness": 33.3
+              }
+            },
+            {
+              "name": "Justin Bieber - Beauty and a Beat (feat. Nicki Minaj)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 52.9,
+                "over_unity_ratio": 27.5,
+                "spectral_flatness": 56.9
+              }
+            },
+            {
+              "name": "리센느 - LOVE ATTACK",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 53.9,
+                "over_unity_ratio": 77.5,
+                "spectral_flatness": 82.4
+              }
+            },
+            {
+              "name": "뉴진스 - Hurt",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 54.9,
+                "over_unity_ratio": 45.1,
+                "spectral_flatness": 21.6
+              }
+            },
+            {
+              "name": "코르티스 - FaSHioN",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 55.9,
+                "over_unity_ratio": 56.9,
+                "spectral_flatness": 61.8
+              }
+            },
+            {
+              "name": "뉴진스 - How Sweet",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 56.9,
+                "over_unity_ratio": 60.8,
+                "spectral_flatness": 95.1
+              }
+            },
+            {
+              "name": "리센느 - Pinball",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 57.8,
+                "over_unity_ratio": 83.3,
+                "spectral_flatness": 71.6
+              }
+            },
+            {
+              "name": "김하온 - Skrr (feat. 지젤)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 58.8,
+                "over_unity_ratio": 88.2,
+                "spectral_flatness": 9.8
+              }
+            },
+            {
+              "name": "뉴진스 - Hype Boy",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 59.8,
+                "over_unity_ratio": 20.6,
+                "spectral_flatness": 96.1
+              }
+            },
+            {
+              "name": "뉴진스 - Supernatural",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 60.8,
+                "over_unity_ratio": 63.7,
+                "spectral_flatness": 69.6
+              }
+            },
+            {
+              "name": "검정치마 - 한시 오분 (1:05)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 61.8,
+                "over_unity_ratio": 25.5,
+                "spectral_flatness": 18.6
+              }
+            },
+            {
+              "name": "아일릿 - Lucky Girl Syndrome",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 62.7,
+                "over_unity_ratio": 26.5,
+                "spectral_flatness": 79.4
+              }
+            },
+            {
+              "name": "코르티스 - JoyRide",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 63.7,
+                "over_unity_ratio": 74.5,
+                "spectral_flatness": 35.3
+              }
+            },
+            {
+              "name": "리도어 - 영원은 그렇듯",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 64.7,
+                "over_unity_ratio": 11.8,
+                "spectral_flatness": 17.6
+              }
+            },
+            {
+              "name": "로제 - toxic till the end",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 65.7,
+                "over_unity_ratio": 40.2,
+                "spectral_flatness": 60.8
+              }
+            },
+            {
+              "name": "하모 - 아크라포빅",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 66.7,
+                "over_unity_ratio": 31.4,
+                "spectral_flatness": 48
+              }
+            },
+            {
+              "name": "BABYMONSTER - 춤 (CHOOM)",
+              "watch": true,
+              "pcts": {
+                "organic_ratio": 67.6,
+                "over_unity_ratio": 39.2,
+                "spectral_flatness": 53.9
+              }
+            },
+            {
+              "name": "임현정 - 사랑은 봄비처럼...이별은 겨울비처럼",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 68.6,
+                "over_unity_ratio": 4.9,
+                "spectral_flatness": 26.5
+              }
+            },
+            {
+              "name": "우원재 - 시차 (feat. 로꼬 & 그레이)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 69.6,
+                "over_unity_ratio": 21.6,
+                "spectral_flatness": 4.9
+              }
+            },
+            {
+              "name": "한로로 - 너와 나",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 70.6,
+                "over_unity_ratio": 34.3,
+                "spectral_flatness": 62.7
+              }
+            },
+            {
+              "name": "제니 - Less than a Lover",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 71.6,
+                "over_unity_ratio": 51,
+                "spectral_flatness": 42.2
+              }
+            },
+            {
+              "name": "Post Malone & Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 72.5,
+                "over_unity_ratio": 24.5,
+                "spectral_flatness": 19.6
+              }
+            },
+            {
+              "name": "빈첸 - Flying High With U",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 73.5,
+                "over_unity_ratio": 97.1,
+                "spectral_flatness": 24.5
+              }
+            },
+            {
+              "name": "릴러말즈 - Trip (feat. Hannah)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 74.5,
+                "over_unity_ratio": 10.8,
+                "spectral_flatness": 78.4
+              }
+            },
+            {
+              "name": "Ariana Grande - hate that i made you love me",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 75.5,
+                "over_unity_ratio": 35.3,
+                "spectral_flatness": 11.8
+              }
+            },
+            {
+              "name": "권오선 - U",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 76.5,
+                "over_unity_ratio": 38.2,
+                "spectral_flatness": 41.2
+              }
+            },
+            {
+              "name": "Justin Bieber - DAISIES",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 77.5,
+                "over_unity_ratio": 76.5,
+                "spectral_flatness": 23.5
+              }
+            },
+            {
+              "name": "검정치마 - EVERYTHING",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 78.4,
+                "over_unity_ratio": 9.8,
+                "spectral_flatness": 1
+              }
+            },
+            {
+              "name": "보이넥스트도어 - VIRAL",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 79.4,
+                "over_unity_ratio": 36.3,
+                "spectral_flatness": 63.7
+              }
+            },
+            {
+              "name": "카더가든 - 그대 작은 나의 세상이 되어",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 80.4,
+                "over_unity_ratio": 47.1,
+                "spectral_flatness": 16.7
+              }
+            },
+            {
+              "name": "tuki. - 晩餐歌 - Bansanka",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 81.4,
+                "over_unity_ratio": 69.6,
+                "spectral_flatness": 14.7
+              }
+            },
+            {
+              "name": "볼빨간사춘기 - 여름아 부탁해",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 82.4,
+                "over_unity_ratio": 6.9,
+                "spectral_flatness": 31.4
+              }
+            },
+            {
+              "name": "태연 - 만찬가 (Instrumental)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 83.3,
+                "over_unity_ratio": 8.8,
+                "spectral_flatness": 6.9
+              }
+            },
+            {
+              "name": "넬 - 기억을 걷는 시간",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 84.3,
+                "over_unity_ratio": 13.7,
+                "spectral_flatness": 13.7
+              }
+            },
+            {
+              "name": "백예린 - Antifreeze",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 85.3,
+                "over_unity_ratio": 33.3,
+                "spectral_flatness": 12.7
+              }
+            },
+            {
+              "name": "Oasis - Don't Look Back in Anger (Remastered)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 86.3,
+                "over_unity_ratio": 18.6,
+                "spectral_flatness": 53.9
+              }
+            },
+            {
+              "name": "OFFICIAL HIGE DANDISM - Pretender",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 87.3,
+                "over_unity_ratio": 19.6,
+                "spectral_flatness": 40.2
+              }
+            },
+            {
+              "name": "한요한 - It's You (feat. NO:EL)",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 88.2,
+                "over_unity_ratio": 30.4,
+                "spectral_flatness": 52
+              }
+            },
+            {
+              "name": "잔나비 - 주저하는 연인들을 위해",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 89.2,
+                "over_unity_ratio": 22.5,
+                "spectral_flatness": 16.7
+              }
+            },
+            {
+              "name": "wave to earth - 사랑으로",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 90.2,
+                "over_unity_ratio": 2,
+                "spectral_flatness": 4.9
+              }
+            },
+            {
+              "name": "한로로 - 입춘",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 91.2,
+                "over_unity_ratio": 78.4,
+                "spectral_flatness": 45.1
+              }
+            },
+            {
+              "name": "한로로 - 사랑하게 될 거야",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 92.2,
+                "over_unity_ratio": 17.6,
+                "spectral_flatness": 20.6
+              }
+            },
+            {
+              "name": "Nerd Connection - 좋은 밤 좋은 꿈",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 93.1,
+                "over_unity_ratio": 7.8,
+                "spectral_flatness": 2.9
+              }
+            },
+            {
+              "name": "한로로 - 0+0",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 94.1,
+                "over_unity_ratio": 49,
+                "spectral_flatness": 27.5
+              }
+            },
+            {
+              "name": "검정치마 - Ling Ling",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 95.1,
+                "over_unity_ratio": 12.7,
+                "spectral_flatness": 57.8
+              }
+            },
+            {
+              "name": "악뮤 - 소문의 낙원",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 96.1,
+                "over_unity_ratio": 5.9,
+                "spectral_flatness": 10.8
+              }
+            },
+            {
+              "name": "데이먼스 이어 - yours",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 97.1,
+                "over_unity_ratio": 15.7,
+                "spectral_flatness": 8.8
+              }
+            },
+            {
+              "name": "Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 98,
+                "over_unity_ratio": 3.9,
+                "spectral_flatness": 8.8
+              }
+            },
+            {
+              "name": "악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 99,
+                "over_unity_ratio": 1,
+                "spectral_flatness": 2.9
+              }
+            },
+            {
+              "name": "최유리 - 생각을 멈추다 보면",
+              "watch": false,
+              "pcts": {
+                "organic_ratio": 100,
+                "over_unity_ratio": 2.9,
+                "spectral_flatness": 5.9
+              }
+            }
+          ],
+          "knobs": [
+            {
+              "key": "lowPct",
+              "label": "하위 백분위 P_low",
+              "default": 20,
+              "min": 0,
+              "max": 50,
+              "step": 1
+            },
+            {
+              "key": "highPct",
+              "label": "상위 백분위 P_high",
+              "default": 80,
+              "min": 50,
+              "max": 100,
+              "step": 1
+            }
+          ],
+          "note": "유사 ≠ 도달. 매치는 후속 검토 후보이지 판정이 아니다."
         }
       }
     ],

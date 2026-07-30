@@ -93,8 +93,13 @@ def load_cohort(path: Path) -> tuple[list[dict[str, Any]], str]:
 
 def evaluate(
     cohort: list[dict[str, Any]], low_pct: float, high_pct: float
-) -> tuple[list[dict[str, Any]], dict[str, list[float]]]:
-    """규칙 평가 — 축별 코호트 백분위 계산 후 조합 판정."""
+) -> tuple[list[dict[str, Any]], dict[str, list[float]], list[dict[str, Any]]]:
+    """규칙 평가 — 축별 코호트 백분위 계산 후 조합 판정.
+
+    셋째 반환값은 **곡별 백분위 전건**이다. 튜너가 임계를 움직여 매치를 다시
+    계산하려면 매치된 곡만이 아니라 후보 전부의 백분위가 필요하다 — 매치만 보내면
+    임계를 낮춰도 새 곡이 나타날 수 없다.
+    """
     feats = [(r, _derive(r["features"])) for r in cohort]
     pools: dict[str, list[float]] = {
         # 0.0은 유효값이다 — falsy 검사 금지(TESTS §3.10, D-032 함정).
@@ -125,7 +130,23 @@ def evaluate(
                     "pcts": pcts,
                 })
     matches.sort(key=lambda m: (m["rule"], m["pcts"][RULES[0]["low_all"][0]], m["label"]))
-    return matches, pools
+
+    scored: list[dict[str, Any]] = []
+    for rec, f in feats:
+        pcts = {
+            ax: _percentile(pools[ax], float(v))
+            for ax in RULE_AXES
+            if isinstance((v := f.get(ax)), (int, float))
+        }
+        if len(pcts) != len(RULE_AXES):
+            continue  # 축이 하나라도 결측이면 규칙을 적용할 수 없다(§0 결측 ≠ 0)
+        scored.append({
+            "key": str(rec.get("key") or rec.get("query") or "?"),
+            "name": f"{rec.get('artist', rec.get('key', '?'))} - {rec.get('title', '?')}",
+            "pcts": pcts,
+        })
+    scored.sort(key=lambda t: (t["pcts"][RULES[0]["low_all"][0]], t["name"]))
+    return matches, pools, scored
 
 
 def _context_lines(impulse: dict[str, Any]) -> list[str]:
@@ -172,7 +193,7 @@ def build_report(
     high_pct: float,
     watch_keys: set[str],
 ) -> dict[str, Any]:
-    matches, pools = evaluate(cohort, low_pct, high_pct) if cohort else ([], {})
+    matches, pools, scored = evaluate(cohort, low_pct, high_pct) if cohort else ([], {}, [])
     ruled_ids = {r["impulse_id"] for r in RULES}
     by_id = {i["id"]: i for i in impulses}
 
@@ -202,12 +223,25 @@ def build_report(
         charts.append({
             "type": "bar",
             "title": f"검출 매치 · {low_ax} 코호트 백분위 (낮을수록 규칙 부합)",
+            # 공유 계약의 bar 항목 키는 **`name`**이다(대시보드 BarChart·타 모듈 전부).
+            # 2026-07-30까지 여기만 `label`을 내보내 막대 11개가 **이름 없이** 그려졌다.
+            # report-schema는 data를 제약하지 않아(`"data": {}`) 검증도 통과했다 —
+            # 스키마가 못 잡는 계약은 이런 식으로 조용히 어긋난다.
             "data": [
-                {"label": ("★" if m["key"] in watch_keys else "") + m["label"], "value": m["pcts"][low_ax]}
+                {"name": ("★" if m["key"] in watch_keys else "") + m["label"], "value": m["pcts"][low_ax]}
                 for m in matches
             ],
         })
     if cohort:
+        # 튜너가 임계를 움직여 **어느 곡이 매치인지** 다시 계산하려면 곡별 백분위가
+        # 있어야 한다. 분포(pools)만 실으면 컷 값은 그려도 매치는 못 바꾼다 —
+        # 2026-07-30까지 이 payload가 그 상태였고, 뷰가 아예 렌더되지 않아(대시보드에
+        # 핸들러가 없었다) 드러나지 않았다. 백분위는 이미 계산돼 있으므로 오디오
+        # 재접근은 없다(RULES §4).
+        tunable_tracks = [
+            {"name": t["name"], "watch": t["key"] in watch_keys, "pcts": t["pcts"]}
+            for t in scored
+        ]
         charts.append({
             "type": "tunable",
             "title": "임계 튜너 — 백분위 컷 재계산 (값=A&R 소유)",
@@ -217,6 +251,21 @@ def build_report(
                 "highPct": high_pct,
                 "axes": RULE_AXES,
                 "pools": {ax: sorted(v) for ax, v in pools.items()},
+                # 규칙의 형식(어느 축이 하한이고 어느 축이 상한인가)도 함께 보낸다 —
+                # 클라이언트가 규칙을 추측하면 원장과 갈라진다.
+                "rules": [
+                    {"id": r["id"], "impulseId": r["impulse_id"],
+                     "lowAll": r["low_all"], "highAny": r["high_any"]}
+                    for r in RULES
+                ],
+                "tracks": tunable_tracks,
+                "knobs": [
+                    {"key": "lowPct", "label": "하위 백분위 P_low", "default": low_pct,
+                     "min": 0, "max": 50, "step": 1},
+                    {"key": "highPct", "label": "상위 백분위 P_high", "default": high_pct,
+                     "min": 50, "max": 100, "step": 1},
+                ],
+                "note": "유사 ≠ 도달. 매치는 후속 검토 후보이지 판정이 아니다.",
             },
         })
 
@@ -336,13 +385,13 @@ def cmd_selftest(_args: argparse.Namespace) -> int:
         check("5 중간 미만 등급 미표면", not any("과거 차용 앵커" in i for i in rep_low["insights"])
               and any("과거 차용 앵커" in i for i in rep["insights"]))
 
-        m, _pools = evaluate(cohort_pos, LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        m, _pools, _sc = evaluate(cohort_pos, LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
         check("6 양성 매치", any(x["key"] == "planted" for x in m))
         check("7 음성 무매치", not any(x["key"].startswith("mid") for x in m))
-        m_tight, _ = evaluate(cohort_pos, 1.0, 99.9)
+        m_tight, _, _ = evaluate(cohort_pos, 1.0, 99.9)
         check("8 임계 극단 → 매치 0", not m_tight)
         check("9 n=1 백분위", _percentile([0.5], 0.5) == 100.0 and evaluate([planted], 20, 80) is not None)
-        m_zero, _ = evaluate([_fx_track("z", 0.0, 0.09, 0.2), *cohort], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
+        m_zero, _, _ = evaluate([_fx_track("z", 0.0, 0.09, 0.2), *cohort], LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT)
         check("10 organic 0.0은 유효값", any(x["key"] == "z" for x in m_zero))
 
         blob = json.dumps(rep, ensure_ascii=False)

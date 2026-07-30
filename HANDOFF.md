@@ -109,7 +109,9 @@
 
 ### D. 계약 강화 (⚠ 승인 필요 — 스키마 변경은 대시보드 동시 갱신이 전제, AGENTS §0)
 
-8. **`report.schema.json`이 `data`를 제약하지 않는다**(`"data": {}`). 그래서 오늘 `label`/`name` 어긋남이 **검증을 통과했고** 막대 11개가 이름 없이 그려졌다. bar/line 데이터 형태를 제약하면 이 부류가 CI에서 잡힌다.
+8. **`report.schema.json`이 `data`를 제약하지 않는다**(`"data": {}`). 그래서 `label`/`name` 어긋남이 **검증을 통과했고** 막대 11개가 이름 없이 그려졌다.
+   - 🟡 **부분 해소(2026-07-30, 승인 불필요 경로)**: 스키마를 건드리지 않고 [`scripts/validate_report_data.py`](scripts/validate_report_data.py)를 신설해 CI `schema-validate` 잡에 붙였다. bar `name`·line 시리즈 길이·heatmap 셀 격자·**대시보드가 모르는 tunable `view`**·노브 범위 밖 기본값을 잡는다. tunable view 목록은 렌더러(`Tunable.tsx`)에서 직접 읽어 정본이 하나다. selftest **14/14**(음성 9·양성 5)로 게이트가 실제로 잡는 것을 확인했다.
+   - **여전히 열려 있는 것**: 스키마 자체를 고치는 정공법. 계약을 **기계가 읽는 한 곳**에 두는 것이 옳고, 지금은 읽는 쪽 기대가 파이썬 스크립트에 있어 방출부가 계약을 어겨도 **모듈 CLI 단계에서는 여전히 통과한다**(CI에서만 걸린다). 스키마 변경은 별도 승인 + 대시보드 동시 갱신이 전제(AGENTS §0).
 
 ### E. 빌보드 레그 후속
 
@@ -268,6 +270,8 @@ PYTHONPATH=modules/signal-bridge/src python -m signal_bridge analyze \
 
 # ── 상태·게이트
 python scripts/bridge_summary.py · Get-ChildItem data\live\state
+python scripts/validate_report_data.py [--selftest]   # 차트 데이터 계약(스키마가 못 보는 것)
+cd apps/dashboard && npm run smoke:tabs               # 전 탭 x 라이트/다크 (dev 실행 중일 때)
 python -m ruff check modules/ scripts/ · python -m pyright modules/<m>
 node apps/dashboard/scripts/collect-reports.mjs
 cd apps/dashboard && npm run dev -- --port 3100    # 3000은 다른 프로젝트가 점유 중

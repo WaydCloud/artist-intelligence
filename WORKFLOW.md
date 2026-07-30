@@ -25,6 +25,7 @@
 - [ ] `RULES.md` 불변식 위반 없음
 - [ ] `TESTS.md` 수용조건 통과
 - [ ] 모듈 CLI가 **스키마 유효 `report.json`** 산출 (smoke)
+- [ ] **차트 데이터 계약 통과**: `python scripts/validate_report_data.py`(+`--selftest`). `report.schema.json`이 `data`를 제약하지 않아 스키마만으로는 bar/line/heatmap/tunable 페이로드가 검증되지 않는다 — 이름 없는 막대·어긋난 시리즈 길이·대시보드가 모르는 tunable `view`가 여기서 걸린다
 - [ ] lint · typecheck · security 통과
 - [ ] **대시보드를 만졌으면 탭 스모크 통과**: `cd apps/dashboard && npm run smoke:tabs`(dev 실행 중). 전 탭 × 라이트/다크에서 콘솔 에러 0 · 렌더 확인 — lint·typecheck·schema-validate가 셋 다 통과하고도 대시보드 전체가 죽어 있던 사례(2026-07-30)를 막는 게이트다
 - [ ] 관련 문서(SPEC/RULES/DOMAIN 등) 갱신

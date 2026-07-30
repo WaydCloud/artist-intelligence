@@ -241,6 +241,40 @@ async function checkInteraction(page, where) {
   }
 }
 
+// --- 질문 앵커 게이트 (R1) -----------------------------------------------------
+// "질문을 누르면 그 답이 있는 카드로 내려간다"가 R1의 실체다. 구획(D-043)이 들어온 뒤로
+// **대상이 다른 구획에 있으면 조용히 아무 일도 일어나지 않았다** — 구획은 바뀌는데
+// 스크롤도 도착 표시도 없었다. 새 구획은 나가는 모션이 끝난 뒤에야 마운트되는데 앵커는
+// 두 프레임만 기다리고 포기했기 때문이고, 2026-07-30 실측에서 6탭 중 3탭이 이 상태였다.
+// 정적 게이트도 렌더 스모크도 이것을 못 봤다(콘솔 에러가 나지 않는다).
+//
+// 테마와 무관한 동작이라 첫 테마에서만 돈다.
+async function checkAnchors(page, where) {
+  const qs = await page.locator("main ol li button").all();
+  for (let i = 0; i < qs.length; i++) {
+    const label = (await qs[i].innerText()).trim().replace(/\s+/g, " ").slice(0, 24);
+    // 매번 첫 구획으로 되돌린 뒤 눌러야 "구획을 넘어가는" 경로가 실제로 검사된다
+    const first = page.locator('nav[aria-label="구획"] button[role="tab"]').first();
+    if (await first.count()) {
+      await first.click();
+      await page.waitForTimeout(300);
+    }
+    await qs[i].click();
+    await page.waitForTimeout(900); // 구획 전환 모션(0.22s) + 스크롤이 끝날 만큼
+    const r = await page.evaluate(() => {
+      const el = document.querySelector("main section[data-landed=true]");
+      return el ? { top: Math.round(el.getBoundingClientRect().top) } : null;
+    });
+    if (!check(where, r !== null, `질문 ${i + 1}("${label}…")을 눌러도 대상 카드에 도착하지 않습니다`))
+      continue;
+    check(
+      where,
+      Math.abs(r.top) < 400,
+      `질문 ${i + 1}("${label}…") 대상 카드가 화면 위쪽에 오지 않았습니다 (top ${r.top}px)`,
+    );
+  }
+}
+
 async function run() {
   await assertServer();
   const { chromium, from } = await loadChromium();
@@ -300,6 +334,9 @@ async function run() {
       );
       // 여기서 죽었으면 아래 검사는 전부 첫 탭 내용을 다시 재는 것이라 의미가 없다.
       if (selected !== "true") continue;
+
+      // R1 앵커는 테마와 무관하므로 첫 테마에서만 (탭당 질문 3~4개 × 왕복 1초)
+      if (theme === THEMES[0]) await checkAnchors(page, `${theme}/${name}`);
 
       // 구획(D-043)이 있으면 **구획마다** 검사한다. 한 번에 한 구획만 DOM에 있으므로
       // 첫 구획만 보면 나머지 구획의 렌더 결함이 그대로 통과한다 -- 이 스모크가 존재하는

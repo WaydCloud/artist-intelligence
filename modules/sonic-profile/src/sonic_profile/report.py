@@ -285,12 +285,73 @@ def _summary_radar(
 # 🔴 R3의 규율은 "질문을 채운다"가 아니라 **"답할 질문이 없으면 그 차트를 뺀다"**다.
 # 여기 새 항목을 적을 때 질문이 억지로 나온다면 그것은 문구 문제가 아니라 그 차트가
 # 화면에 있을 이유가 없다는 신호다.
+# ── 구획 (D-043 · DESIGN §7.1.1) ──────────────────────────────────────────────
+#
+# 이 탭은 파일럿이라 구획 없이 한 줄로 렌더되고 있었다. 차트 15개 · 타일 24개가
+# 한 화면에 쏟아져 본문이 28,000자였다(구획을 쓰는 다른 탭은 구획당 2,400~9,900자).
+#
+# **구획 수는 질문의 수다.** 여섯인 이유는 이 탭이 실제로 여섯 가지를 묻기 때문이고,
+# 상한(한 구획에 차트 3개)이 그것을 강제한다 — 답이 겹치는 차트를 한 칸에 몰아넣으면
+# 검사기가 멈춰 세운다. 순서가 곧 읽는 차례다: 무엇인가(1·2) → 움직이나(3) →
+# 그 움직임이 진짜인가(4·5) → 우리 팀은 어디 있나(6).
+#
+# 요약 도형이 답하는 "워치리스트가 어느 축에서 다른가"는 구획이 아니라 첫 화면의
+# 도형 하나로 나간다(R2). 6번 구획은 그 위치를 곡별·원값으로 내려가 보는 자리다.
+_SECTIONS: list[dict[str, str]] = [
+    {
+        "id": "sound",
+        "label": "템포·박",
+        "question": "이 곡들은 어떤 템포와 박인가?",
+        "note": "30초 발췌에서 잰 값이고 곡 전체가 아니다. 미해석 곡은 0이 아니라 결측으로 빠진다.",
+    },
+    {
+        "id": "rhythm",
+        "label": "리듬·태그",
+        "question": "리듬과 태그는 무엇으로 쏠려 있나?",
+        "note": "리듬 유형은 가장 가까운 순위이지 판정이 아니다. 악기·스타일·정서 태그는 분류기가 낸 "
+        "확률이며 정확도를 아직 재지 않았다.",
+    },
+    {
+        "id": "drift",
+        "label": "날짜별 추이",
+        "question": "날짜가 쌓이면서 분포가 움직이나?",
+        "note": "x축이 관측일이라 소리가 변한 것과 차트 구성이 바뀐 것이 섞여 있다. 그 둘을 가르는 것이 "
+        "다음 두 구획이다.",
+    },
+    {
+        "id": "control",
+        "label": "같은 곡만",
+        "question": "그 움직임이 소리의 변화가 맞나?",
+        "note": "구성 변화를 걷어내는 두 가지 방법이다. 고정 코호트는 곡 집합을 묶고, 신곡만 뷰는 "
+        "카탈로그 혼입을 뺀다.",
+    },
+    {
+        "id": "vintage",
+        "label": "발매 시기",
+        "question": "발매 시기가 다르면 소리도 다른가?",
+        "note": "x축이 발매 분기라 차트 재편성에 흔들리지 않는다. 대신 생존 편향이 있다: 옛 분기 칸의 "
+        "곡은 그 분기의 대표 표본이 아니라 오늘까지 차트에 남은 곡이다.",
+    },
+    {
+        "id": "watchlist",
+        "label": "워치리스트",
+        "question": "워치리스트는 이 코호트에서 어디인가?",
+        # 이 구획의 타일은 워치리스트 값이 아니라 **차트 코호트 중앙값**이다. 아래 격자가
+        # 그 축들을 전부 열로 그리므로 타일은 순위의 기준선 역할을 한다 — 그 사실을 적지
+        # 않으면 워치리스트 질문 아래 놓인 코호트 숫자가 무엇인지 알 수 없다.
+        "note": "위 타일은 순위의 기준이 되는 차트 코호트 중앙값이다. 표본이 다른 층이라 워치리스트 곡을 "
+        "코호트에 합쳐 세웠고, 순위는 곡 사이의 간격을 표현하지 않는다.",
+    },
+]
+
 _CHART_META: dict[str, dict[str, str]] = {
     "tempo-hist": {
+        "section": "sound",
         "question": "이 코호트의 템포는 어느 구간에 모여 있나?",
         "definition": "비트 시각에 직선을 맞춰 구한 BPM을 20BPM 폭으로 세운 것. 막대 높이는 곡 수.",
     },
     "pulse-top": {
+        "section": "sound",
         "question": "박이 가장 또렷하게 잡히는 곡은 무엇인가?",
         "definition": (
             "펄스 명료도는 온셋 포락 자기상관의 주 피크. 박이 규칙적으로 강하게 반복될수록 높음. "
@@ -298,6 +359,7 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "rhythm-mix": {
+        "section": "rhythm",
         "question": "이 코호트의 킥 배치는 어떤 리듬 유형에 가까운가?",
         "definition": (
             "마디를 16분음 격자로 나눠 저역 킥 배치를 접은 뒤 이름 붙은 유형과 코사인 정합도를 낸 것. "
@@ -305,6 +367,7 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "instrument-mix": {
+        "section": "rhythm",
         "question": "검출 임계를 어디에 두면 어떤 악기가 몇 곡에서 잡히나?",
         "definition": (
             "태거가 낸 악기별 확률이 임계를 넘는 곡 수. 확률은 서로 배타적이지 않아 한 곡이 여러 칸에 셈. "
@@ -312,6 +375,7 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "style-mix": {
+        "section": "rhythm",
         "question": "1순위 스타일 라벨은 무엇으로 쏠려 있나?",
         "definition": (
             "Discogs 택소노미 기준 확률 1순위 라벨별 곡 수. 저지클럽·뭄바톤·아마피아노는 이 라벨 "
@@ -319,6 +383,7 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "unit-trend": {
+        "section": "drift",
         "question": "관측일이 쌓이면서 코호트의 소리 분포가 움직이나?",
         "definition": (
             "날짜별 0~1 축 중앙값. x축이 관측일이라 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있음. "
@@ -326,10 +391,12 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "tempo-trend": {
+        "section": "drift",
         "question": "코호트 템포 중앙값이 날짜에 따라 움직이나?",
         "definition": "날짜별 템포 중앙값(BPM). 관측일 기준이라 차트 구성 변화가 섞여 있음.",
     },
     "vintage-unit": {
+        "section": "vintage",
         "question": "발매 시기별로 소리 분포가 다른가?",
         "definition": (
             "x축이 관측일이 아니라 발매 분기이므로 차트 재편성에 흔들리지 않음. 대신 생존 편향이 있음: "
@@ -337,10 +404,12 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "vintage-tempo": {
+        "section": "vintage",
         "question": "발매 시기별 템포 중앙값이 다른가?",
         "definition": "발매 분기별 템포 중앙값. 위 뷰와 같은 생존 편향이 적용됨.",
     },
     "age-hist": {
+        "section": "vintage",
         "question": "지금 차트는 얼마나 신곡 중심인가?",
         "definition": (
             "관측일에서 발매일을 뺀 곡 나이를 구간별로 센 것. 발매일은 유통사 표기라 리마스터·재발매가 "
@@ -348,10 +417,12 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "age-trend": {
+        "section": "drift",
         "question": "차트가 신곡 쪽으로 움직이나, 카탈로그 쪽으로 움직이나?",
         "definition": "날짜별 관측 코호트의 곡 나이 중앙값(일). 값이 내려가면 신곡 쪽.",
     },
     "fixed-cohort": {
+        "section": "control",
         "question": "차트 구성 변화를 제거하면 같은 곡들의 소리 지표가 움직이나?",
         "definition": (
             "최초 관측일에 잡힌 곡 집합만 계속 따라간 중앙값. 집합이 날마다 바뀌지 않으므로 "
@@ -360,10 +431,12 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "fresh-trend": {
+        "section": "control",
         "question": "카탈로그 혼입을 걷어낸 신곡만 보면 분포가 다른가?",
         "definition": "발매 90일 이내 곡만 남긴 날짜별 0~1 축 중앙값. 90일 경계는 관습값.",
     },
     "watchlist-rank": {
+        "section": "watchlist",
         "question": "워치리스트의 각 곡은 축마다 차트 코호트에서 몇 위인가?",
         "definition": (
             "곡 하나의 축별 값을 차트 코호트에 합쳐 내림차순으로 세운 순위(1이 가장 높음). "
@@ -371,6 +444,7 @@ _CHART_META: dict[str, dict[str, str]] = {
         ),
     },
     "cohort-compare": {
+        "section": "watchlist",
         "question": "두 코호트의 축별 중앙값은 각각 얼마인가?",
         "definition": (
             "요약 도형은 위치(백분위)를 보여주고 이 막대는 원값을 보여줌. 위치가 같아도 원값 차이는 "
@@ -403,6 +477,44 @@ _METRIC_DEFS: dict[str, str] = {
     "위상 상관": "좌우 채널의 위상 일치도. 1에 가까우면 모노에 가까움.",
     "마디 자기유사도": "마디끼리 얼마나 같은 패턴을 반복하는가.",
     "어택 샤프니스": "소리 시작점의 상승 급격함.",
+}
+
+# 타일도 구획에 나눠 넣는다(D-043) — 지표는 자기 질문 옆에 있을 때만 읽힌다.
+#
+# 배정 규칙은 하나다: **그 축을 실제로 그리는 차트가 있는 구획에 놓는다.** 24개를 주제별로
+# 묶으면 그럴듯하지만 어느 그림도 그 축을 쓰지 않는 칸이 생기고, 그러면 타일이 다시
+# "읽을 곳 없는 숫자"가 된다. 여기 남은 것들(밝기·음량·공간)은 전 축 비교 뷰에만
+# 나오므로 워치리스트 구획으로 간다.
+#
+# 키는 `_SURFACED`의 라벨(타일 라벨의 ` 중앙값` 앞부분)과 표본 타일 2종이다.
+# **어느 축을 표면에서 뺄지는 도메인 소유자 몫이다** — 여기서 정하는 것은 자리뿐이다.
+_METRIC_SECTIONS: dict[str, str] = {
+    "관측 트랙": "sound",
+    "미해석": "sound",
+    "템포": "sound",
+    "펄스 명료도": "sound",
+    "온셋 밀도": "sound",
+    "어택 샤프니스": "sound",
+    "싱코페이션": "rhythm",
+    "마디 프로파일 대비": "rhythm",
+    "마디 자기유사도": "rhythm",
+    "그리드 편차": "rhythm",
+    "danceability": "rhythm",
+    "정서가(valence)": "rhythm",
+    "각성도(arousal)": "rhythm",
+    # unit-trend·vintage-unit·fixed-cohort·fresh-trend가 그리는 0~1 축
+    "저역 비율": "drift",
+    "타악 비율": "drift",
+    "스펙트럼 평탄도": "drift",
+    "스테레오 폭": "drift",
+    "유기음 비율": "drift",
+    # 전 축 비교 뷰(watchlist-rank·cohort-compare)에만 나오는 축
+    "음색 밝기": "watchlist",
+    "다이내믹 여유(crest)": "watchlist",
+    "라우드니스": "watchlist",
+    "라우드니스 레인지": "watchlist",
+    "저역 스테레오 폭": "watchlist",
+    "위상 상관": "watchlist",
 }
 
 
@@ -932,12 +1044,14 @@ def build_report(
     n, n_un = len(resolved), len(unresolved)
 
     metrics: list[dict[str, Any]] = [
-        {"label": "관측 트랙", "value": n, "unit": "곡", "hint": "프리뷰 해석 성공"},
+        {"label": "관측 트랙", "value": n, "unit": "곡", "hint": "프리뷰 해석 성공",
+         "section": _METRIC_SECTIONS["관측 트랙"]},
         {
             "label": "미해석",
             "value": n_un,
             "unit": "곡",
             "hint": "프리뷰 없음·디코드 실패·과단축 — 0이 아니라 결측으로 집계 제외",
+            "section": _METRIC_SECTIONS["미해석"],
         },
     ]
     for field, label, unit in _SURFACED:
@@ -952,6 +1066,11 @@ def build_report(
             # R5 — 정의가 화면에 없으면 해석이 조용히 틀린다.
             if label in _METRIC_DEFS:
                 m["definition"] = _METRIC_DEFS[label]
+            # 구획을 선언한 리포트에서 `section` 없는 타일은 **어느 구획에서도 렌더되지
+            # 않는다**(대시보드가 활성 구획으로 거른다). 표에서 빠뜨리면 조용히 사라지므로
+            # 아래 배정 검증이 그것을 잡는다.
+            if label in _METRIC_SECTIONS:
+                m["section"] = _METRIC_SECTIONS[label]
             metrics.append(m)
 
     charts: list[dict[str, Any]] = []
@@ -1204,6 +1323,21 @@ def build_report(
         if meta:
             c.update(meta)
 
+    # ── D-043: 구획을 선언한다. 놓을 차트가 없는 구획은 선언하지 않는다 — 이름만 있고
+    # 눌러도 아무것도 없는 칸이 생기고, 검사기가 그것을 잡는다. 빈 입력에서도 계약이
+    # 서야 하므로(라이브 수집이 하루 비는 것은 정상) 여기는 실측이 아니라 charts를 센다.
+    sections = [dict(s) for s in _SECTIONS if any(c.get("section") == s["id"] for c in charts)]
+    live_secs = {s["id"] for s in sections}
+    # 배정된 구획이 살아남지 못한 타일은 **화면에서 사라진다**(대시보드가 활성 구획으로
+    # 거른다). 지워지는 대신 첫 구획으로 내려 보낸다 — 축이 하나 빠진 날 지표까지 조용히
+    # 없어지면 그것이 결측인지 0인지 화면에서 알 수 없다(§0).
+    for m in metrics:
+        sid = m.get("section")
+        if not live_secs:
+            m.pop("section", None)
+        elif sid not in live_secs:
+            m["section"] = sections[0]["id"]
+
     summary = _summary_radar(focus, cohort)
 
     # ── R8: 리포트 전체 기본 신뢰도. 차트별로 다른 것만 그 차트가 덮는다.
@@ -1258,6 +1392,7 @@ def build_report(
         "subtitle": "분포 안에서의 위치를 보는 증거 · 단일 곡 평결 아님",
         "generatedAt": generated_at,
         "summary": summary,
+        "sections": sections,
         "questions": questions,
         "notAnswered": not_answered,
         "reliability": reliability,

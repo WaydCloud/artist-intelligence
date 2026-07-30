@@ -245,6 +245,33 @@ def _rss_date(updated: str) -> str:
         return "unknown"
 
 
+def _fetch_apple_feed(url: str, sf: str, *, attempts: int, backoff: float) -> dict[str, Any]:
+    """Apple RSS를 **재시도와 함께** 가져온다.
+
+    *왜 필요한가(2026-07-30 실측)*: 데일리가 49개 스토어프론트를 연달아 때리면
+    **9개가 실패**했다(kr 포함 — sonic 코호트의 소스다). 같은 요청을 몇 초 뒤에
+    다시 보내면 9개 전부 성공한다. 즉 소스가 죽은 것이 아니라 **연속 요청에
+    걸린 것**이고, 단발 요청은 그것을 "수집 실패"로 기록해 그날 데이터를 통째로
+    비운다. 스토어프론트 하나가 비면 그 시장의 하루가 영구히 없어진다 —
+    차트는 소급 수집이 안 되기 때문이다.
+
+    재시도는 **저빈도 접근 규율과 충돌하지 않는다**: 실패한 요청만, 지수 백오프로,
+    상한을 두고 다시 보낸다.
+    """
+    last: Exception | None = None
+    for i in range(max(1, attempts)):
+        if i:
+            time.sleep(backoff * (2 ** (i - 1)))
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": _UA})
+            with urllib.request.urlopen(req, timeout=30) as resp:  # official Apple feed
+                return cast("dict[str, Any]", json.loads(resp.read().decode("utf-8"))["feed"])
+        except Exception as exc:  # noqa: BLE001 — 마지막 시도까지 실패하면 아래에서 올린다
+            last = exc
+            print(f"  ! {sf} attempt {i + 1}/{attempts}: {type(exc).__name__}", file=sys.stderr)
+    raise RuntimeError(f"apple feed unavailable for {sf} after {attempts} attempts: {last}")
+
+
 def cmd_collect_apple(args: argparse.Namespace) -> int:
     """Apple 공식 RSS(most-played) → facts-only 차트 테이블 스냅샷 (v4 멀티플랫폼, D-016).
 
@@ -253,9 +280,12 @@ def cmd_collect_apple(args: argparse.Namespace) -> int:
     """
     sf = args.storefront.lower()
     url = _APPLE_RSS.format(sf=sf, limit=args.limit)
-    req = urllib.request.Request(url, headers={"User-Agent": _UA})
-    with urllib.request.urlopen(req, timeout=30) as resp:  # official Apple feed
-        feed = json.loads(resp.read().decode("utf-8"))["feed"]
+    try:
+        feed = _fetch_apple_feed(url, sf, attempts=args.attempts, backoff=args.backoff)
+    except RuntimeError as exc:
+        # traceback이 아니라 한 줄로 죽는다 — 호출자(데일리)가 로그에 옮겨 적을 수 있어야 한다.
+        print(str(exc), file=sys.stderr)
+        return 1
     results = feed.get("results") or []
     if not results:
         print(f"empty feed for storefront {sf}", file=sys.stderr)
@@ -557,6 +587,11 @@ def main(argv: list[str] | None = None) -> int:
     p_apple.add_argument("--storefront", required=True, help="Apple storefront 코드 (kr, jp, us…)")
     p_apple.add_argument("--store", required=True, help="snapshot store directory")
     p_apple.add_argument("--limit", type=int, default=100, help="상위 N곡 (최대 100)")
+    # 2026-07-30 실측: 49개 스토어프론트를 연달아 때리면 9개가 실패하고, 몇 초 뒤
+    # 재시도하면 전부 성공한다. 단발 요청은 그것을 "그날 데이터 없음"으로 굳힌다.
+    p_apple.add_argument("--attempts", type=int, default=3, help="실패 시 재시도 횟수 (기본 3)")
+    p_apple.add_argument("--backoff", type=float, default=2.0,
+                         help="재시도 대기 초 — 지수 증가 (기본 2.0 → 2s·4s)")
     p_apple.set_defaults(func=cmd_collect_apple)
 
     p_melon = sub.add_parser(

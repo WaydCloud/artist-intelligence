@@ -1,0 +1,641 @@
+{
+ "note": "genre-impulse A2 조사 코호트의 v4 재취득 입력 (RHYTHM_FEATURE_SET v4 — cohort_cases.json에 A2.1 재시도 교정을 선반영: KR 표기 7건 치환, US 스토어 전용 4건은 retry_us.json으로 분리 취득 후 병합). market=케이스 슬러그, platform=역할(origin|kr).",
+ "tracks": [
+  {
+   "artist": "Cookiee Kawaii",
+   "title": "Vibe (If I Back It Up)",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Lil Uzi Vert",
+   "title": "Just Wanna Rock",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Drake",
+   "title": "Sticky",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "PinkPantheress",
+   "title": "Boy's a liar Pt. 2",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "UNIIQU3",
+   "title": "Microdosing",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Ditto",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "OMG",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "ETA",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "세븐틴",
+   "title": "손오공",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "르세라핌",
+   "title": "이브, 프시케 그리고 푸른 수염의 아내",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "BABYMONSTER",
+   "title": "BATTER UP",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "XUM",
+   "title": "DDALALA",
+   "market": "jersey-club",
+   "platform": "kr"
+  },
+  {
+   "artist": "AJ Tracey",
+   "title": "Ladbroke Grove",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "PinkPantheress",
+   "title": "Just for me",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "PinkPantheress",
+   "title": "Break It Off",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "venbee",
+   "title": "messy in heaven",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "Nia Archives",
+   "title": "Forbidden Feelingz",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "Chase & Status",
+   "title": "Baddadan",
+   "market": "ukg-dnb",
+   "platform": "origin"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Super Shy",
+   "market": "ukg-dnb",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "New Jeans",
+   "market": "ukg-dnb",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Cool With You",
+   "market": "ukg-dnb",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "ASAP",
+   "market": "ukg-dnb",
+   "platform": "kr"
+  },
+  {
+   "artist": "Jung Kook",
+   "title": "Seven",
+   "market": "ukg-dnb",
+   "platform": "kr"
+  },
+  {
+   "artist": "Major Lazer",
+   "title": "Lean On",
+   "market": "moombahton-tropical",
+   "platform": "origin"
+  },
+  {
+   "artist": "Justin Bieber",
+   "title": "Sorry",
+   "market": "moombahton-tropical",
+   "platform": "origin"
+  },
+  {
+   "artist": "Kygo",
+   "title": "Firestone",
+   "market": "moombahton-tropical",
+   "platform": "origin"
+  },
+  {
+   "artist": "Major Lazer",
+   "title": "Cold Water",
+   "market": "moombahton-tropical",
+   "platform": "origin"
+  },
+  {
+   "artist": "BTS",
+   "title": "피 땀 눈물",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "TAEYEON",
+   "title": "Why",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "WINNER",
+   "title": "REALLY REALLY",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "BLACKPINK",
+   "title": "As If It's Your Last",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "EXO",
+   "title": "Ko Ko Bop",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "레드벨벳",
+   "title": "빨간 맛",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "KARD",
+   "title": "Hola Hola",
+   "market": "moombahton-tropical",
+   "platform": "kr"
+  },
+  {
+   "artist": "Daddy Yankee",
+   "title": "Gasolina",
+   "market": "reggaeton-dembow",
+   "platform": "origin"
+  },
+  {
+   "artist": "Luis Fonsi",
+   "title": "Despacito",
+   "market": "reggaeton-dembow",
+   "platform": "origin"
+  },
+  {
+   "artist": "J Balvin",
+   "title": "Mi Gente",
+   "market": "reggaeton-dembow",
+   "platform": "origin"
+  },
+  {
+   "artist": "Shabba Ranks",
+   "title": "Dem Bow",
+   "market": "reggaeton-dembow",
+   "platform": "origin"
+  },
+  {
+   "artist": "KARD",
+   "title": "Oh NaNa",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "선미",
+   "title": "가시나",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "SUPER JUNIOR",
+   "title": "Lo Siento",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "(G)I-DLE",
+   "title": "LATATA",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "CHUNG HA",
+   "title": "PLAY",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "LE SSERAFIM",
+   "title": "ANTIFRAGILE",
+   "market": "reggaeton-dembow",
+   "platform": "kr"
+  },
+  {
+   "artist": "Mariya Takeuchi",
+   "title": "Plastic Love",
+   "market": "citypop",
+   "platform": "origin"
+  },
+  {
+   "artist": "Miki Matsubara",
+   "title": "Mayonaka no Door / Stay With Me",
+   "market": "citypop",
+   "platform": "origin"
+  },
+  {
+   "artist": "george",
+   "title": "Boat",
+   "market": "citypop",
+   "platform": "kr"
+  },
+  {
+   "artist": "YUBIN",
+   "title": "Lady",
+   "market": "citypop",
+   "platform": "kr"
+  },
+  {
+   "artist": "유키카",
+   "title": "네온",
+   "market": "citypop",
+   "platform": "kr"
+  },
+  {
+   "artist": "Yerin Baek",
+   "title": "Square (2017)",
+   "market": "citypop",
+   "platform": "kr"
+  },
+  {
+   "artist": "선미",
+   "title": "보라빛 밤",
+   "market": "citypop",
+   "platform": "kr"
+  },
+  {
+   "artist": "Bruno Mars",
+   "title": "Finesse",
+   "market": "njs",
+   "platform": "origin"
+  },
+  {
+   "artist": "Bobby Brown",
+   "title": "My Prerogative",
+   "market": "njs",
+   "platform": "origin"
+  },
+  {
+   "artist": "Guy",
+   "title": "Groove Me",
+   "market": "njs",
+   "platform": "origin"
+  },
+  {
+   "artist": "SHINee",
+   "title": "1 of 1",
+   "market": "njs",
+   "platform": "kr"
+  },
+  {
+   "artist": "EXID",
+   "title": "Lady",
+   "market": "njs",
+   "platform": "kr"
+  },
+  {
+   "artist": "NCT U",
+   "title": "90's Love",
+   "market": "njs",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Attention",
+   "market": "njs",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Supernatural",
+   "market": "njs",
+   "platform": "kr"
+  },
+  {
+   "artist": "PinkPantheress",
+   "title": "Pain",
+   "market": "easy-listening",
+   "platform": "origin"
+  },
+  {
+   "artist": "IVE",
+   "title": "LOVE DIVE",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "IVE",
+   "title": "After LIKE",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "NewJeans",
+   "title": "Hype Boy",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "FIFTY FIFTY",
+   "title": "Cupid",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "투어스",
+   "title": "첫 만남은 계획대로 되지 않아",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "비비",
+   "title": "밤양갱",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "ILLIT",
+   "title": "Magnetic",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "RIIZE",
+   "title": "Get A Guitar",
+   "market": "easy-listening",
+   "platform": "kr"
+  },
+  {
+   "artist": "Tyla",
+   "title": "Water",
+   "market": "amapiano",
+   "platform": "origin"
+  },
+  {
+   "artist": "Kabza De Small",
+   "title": "Abalele",
+   "market": "amapiano",
+   "platform": "origin"
+  },
+  {
+   "artist": "Young Stunna",
+   "title": "Adiwele",
+   "market": "amapiano",
+   "platform": "origin"
+  },
+  {
+   "artist": "Uncle Waffles",
+   "title": "Tanzania",
+   "market": "amapiano",
+   "platform": "origin"
+  },
+  {
+   "artist": "SEVENTEEN",
+   "title": "Spell",
+   "market": "amapiano",
+   "platform": "kr"
+  },
+  {
+   "artist": "KISS OF LIFE",
+   "title": "Sticky",
+   "market": "amapiano",
+   "platform": "kr"
+  },
+  {
+   "artist": "KAI",
+   "title": "Off And Away",
+   "market": "amapiano",
+   "platform": "kr"
+  },
+  {
+   "artist": "SOPHIE",
+   "title": "Immaterial",
+   "market": "hyperpop",
+   "platform": "origin"
+  },
+  {
+   "artist": "aespa",
+   "title": "Savage",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "aespa",
+   "title": "Black Mamba",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "aespa",
+   "title": "Next Level",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "aespa",
+   "title": "Supernova",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "aespa",
+   "title": "Whiplash",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "NMIXX",
+   "title": "O.O",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "tripleS",
+   "title": "Rising",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "TOMORROW X TOGETHER",
+   "title": "Frost",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "YENA",
+   "title": "Catch Catch",
+   "market": "hyperpop",
+   "platform": "kr"
+  },
+  {
+   "artist": "Pop Smoke",
+   "title": "Dior",
+   "market": "drill",
+   "platform": "origin"
+  },
+  {
+   "artist": "Headie One",
+   "title": "Ain't It Different",
+   "market": "drill",
+   "platform": "origin"
+  },
+  {
+   "artist": "창모",
+   "title": "Swoosh Flow",
+   "market": "drill",
+   "platform": "kr"
+  },
+  {
+   "artist": "ENHYPEN",
+   "title": "Future Perfect (Pass the MIC)",
+   "market": "drill",
+   "platform": "kr"
+  },
+  {
+   "artist": "STAYC",
+   "title": "I WANT U BABY",
+   "market": "drill",
+   "platform": "kr"
+  },
+  {
+   "artist": "Stray Kids",
+   "title": "3RACHA",
+   "market": "drill",
+   "platform": "kr"
+  },
+  {
+   "artist": "DJ Tameil",
+   "title": "Ay Bay Bay",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Tim Dolla",
+   "title": "Swing Dat Shit",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Tim Dolla",
+   "title": "Falsetto",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Frosty",
+   "title": "Ride Dat Wave",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Sliink",
+   "title": "Official Number One (Patty Cake)",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Jayhood",
+   "title": "Heartbroken",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Jayhood",
+   "title": "Rock My Hips",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Lil Man",
+   "title": "Sexy Walk",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "DJ Lil Man",
+   "title": "I Like The Way She Move",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Ms. Porsh",
+   "title": "Can't Bounce Like Me",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Pure",
+   "title": "Let Ya Body Talk",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Chad B",
+   "title": "Hit It",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Bandmanrill",
+   "title": "Jiggy In Jersey",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "ZEDDY WILL",
+   "title": "Freak You",
+   "market": "jersey-club",
+   "platform": "origin"
+  },
+  {
+   "artist": "Coi Leray",
+   "title": "Players (DJ Smallz 732 Remix)",
+   "market": "jersey-club",
+   "platform": "origin"
+  }
+ ]
+}

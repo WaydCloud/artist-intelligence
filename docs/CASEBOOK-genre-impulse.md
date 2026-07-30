@@ -842,6 +842,35 @@
 
 ---
 
+### A2 본편 — 동시대 코호트 실측 (2026-07-31 착수)
+
+> A2.1의 근사(비교 모집단 = 2026-07 라이브 차트)를 걷어낸다. 비교 모집단을 **동시대(2021-10 앵커) 코호트 둘**로 교체하고, 규칙 미확정 임펄스 전부에 대해 원형↔한국 서명을 같은 시점 모집단 위에서 잰다. 도구: `scripts/a2_signature_compare.py`(백분위 = genre-impulse `_percentile` 공유 · 파생 축 = `derive_all` 공유).
+
+**비교 모집단** (프레임 2개 — 합치지 않는다. 합치면 코호트 차이가 곡 차이로 읽힌다):
+
+- **US 프레임**: Billboard Hot 100 주간 2021-10-02 톱100 (`cohort_us_2021-10-02.json` → 특질 98/100 해석). 원형이 자기 시장에서 극단이었는지를 가른다.
+- **KR 프레임**: 멜론 주간 톱100, Wayback 스냅샷 2021-10-25(차트 주간 2021-10-18~24 — 앵커에서 +16~22일, `scripts/melon_wayback_ingest.py`). **데일리 모니터가 실제로 재는 프레임**이라 규칙 후보의 임계는 여기서 읽는다. 앵커 정확 주차 스냅샷은 Wayback에 없다(커버리지 불균일 실측) — 거리 병기.
+- 케이스 곡·코호트 전부 **rhythm v4**(32칸 격자·HOP 128)로 재취득 — A2.1의 v3 수치와 리듬 축이 섞이지 않게 판을 통일했다.
+
+#### 측정 번역 (사전 — 백분위 결과를 보기 전에 적음, AGENTS §2.1)
+
+> 원장의 `predicted_axes`(사전 등록 예측, 산문)를 우리 축으로 번역한 것. **이 표를 적는 시점에 백분위 산출물은 존재하지 않는다**(특질 취득 진행 중). 결과가 번역과 어긋나면 그대로 기록한다 — A2.1의 brightness 실패 기록과 같은 규율.
+
+| 임펄스 | 예측(원장 산문) | 기계 축 번역 | 비고 |
+|---|---|---|---|
+| ukg-dnb | 2-step 스킵 킥·셔플 하이햇 / 고속 브레이크 / 워블 베이스 | `swing_ratio`↑·`syncopation_ratio`↑·`ioi_entropy`↑ / `tempo_bpm`↑ 또는 `onset_rate_high`↑ / **전용 축 없음(공백 후보)** | 짧은 러닝타임은 프리뷰 30초로 측정 불가 |
+| moombahton-tropical | 뎀보우 그리드(108BPM 감속) / 트로피컬 신스 / KR 변형은 BPM·명도 상승 | `rhythm_assigned`=dembow 비율 / `brightness_hz`·`spectral_contrast_mean` / 원형↔KR `tempo_bpm`·`brightness_hz` 대조 | |
+| reggaeton-dembow | 뎀보우 리듬 그리드 / 부분 삽입 리딤 | `rhythm_assigned`=dembow 비율·`rhythm_top_score` / 부분 삽입은 30초 프리뷰로 섹션 커버리지 한계 병기 | |
+| citypop | **예측 미등록** (원장 predicted_axes 없음) | 탐색만: `organic_ratio`↑·`harmonic_change_rate`·`key_stability`·`spectral_flatness`↓ | 탐색 라벨 — 규칙 후보 자격 없음, 재검증 필요 |
+| njs | 드럼머신 스윙 골격 / KR 변형은 타격감 저하·에어리 보컬 | `swing_ratio`↑·`attack_sharpness`·`percussive_ratio` / 원형↔KR `attack_sharpness` 하강 대조 | |
+| easy-listening | 동시대 차트 대비 저부하(LRA↓·드롭 회피·밀도↓) | `loudness_range_lu`↓·`spectral_flux`↓·`high_energy_ratio`↓·`onset_rate`↓ | KR 내생 — 원형 표본은 PinkPantheress 1곡뿐(참고만) |
+| amapiano | log drum 베이스 / 셰이커 그루브 / 미드템포 바운스·여백 | `low_end_ratio`·`low_centroid_hz` / `onset_rate_high`↑ / `tempo_bpm`(~112)·`silence_ratio`↑ | |
+| jersey-club | kick 5연타·tempo 135~160 | `tempo_bpm`·`kick_density`·`bar_half_asymmetry`(비잠금 축만) | 리듬 정밀 축은 **H3 사전 등록·스템 잠금과 별건** — 여기서 선점하지 않는다 |
+| hyperpop | A2.1 확정 조합의 동시대 재검 | `organic_ratio`↓·`spectral_flatness`↑·`over_unity_ratio`↑ (§2.1 규칙 그대로) | 근사 모집단 주석의 해소 여부만 판정 |
+| drill | (재검 없음) | 사전 명시 공백 유지 — 스템 축 미취득(이번 fetch는 --stems 미사용) | 판정 변경 없음 |
+
+<!-- A2 본편 결과는 아래에 붙는다 — 위 번역 표를 커밋한 뒤에만. -->
+
 # 종합 (A3·A4) — 10케이스 교차 분석 (2026-07-29 · 1차 — 교차 검증 전)
 
 > 아래 수치·순위는 위 케이스 1차 조사에서 도출한 **버전 매겨진 가설**이다(D-033 결정 ③: 기준선은 여기서 도메인 소유자가 정한다). 교차 검증·오디오 검증(A2) 전이므로 하중받는 기준의 근거로 쓰지 않는다.

@@ -1,0 +1,709 @@
+{
+  "note": "멜론 주간 톱100 동시대 KR 코호트 (Wayback 스냅샷 파생 · 사실 필드만 내부 저장 · 원문 재배포 금지). 앵커 날짜의 주가 아니라 **가장 가까운 스냅샷의 주**다 — chart_week와 anchor_date의 거리를 볼 것. platform=melon-weekly.",
+  "anchor_date": "2021-10-02",
+  "snapshot_timestamp": "20211025203139",
+  "snapshot_distance_days": 23,
+  "chart_week": "2021-10-18~2021-10-24",
+  "tracks": [
+    {
+      "artist": "아이유",
+      "title": "strawberry moon",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 1
+    },
+    {
+      "artist": "aespa",
+      "title": "Savage",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 2
+    },
+    {
+      "artist": "The Kid LAROI",
+      "title": "STAY",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 3
+    },
+    {
+      "artist": "이무진",
+      "title": "신호등",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 4
+    },
+    {
+      "artist": "aespa",
+      "title": "Next Level",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 5
+    },
+    {
+      "artist": "Coldplay",
+      "title": "My Universe",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 6
+    },
+    {
+      "artist": "AKMU (악뮤)",
+      "title": "낙하 (with 아이유)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 7
+    },
+    {
+      "artist": "디핵 (D-Hack)",
+      "title": "OHAYO MY NIGHT",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 8
+    },
+    {
+      "artist": "경서예지",
+      "title": "다정히 내 이름을 부르면",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 9
+    },
+    {
+      "artist": "MSG워너비(M.O.M)",
+      "title": "바라만 본다",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 10
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "Permission to Dance",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 11
+    },
+    {
+      "artist": "태연 (TAEYEON)",
+      "title": "Weekend",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 12
+    },
+    {
+      "artist": "Justin Bieber",
+      "title": "Peaches (Feat. Daniel Caesar & Giveon)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 13
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "Butter",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 14
+    },
+    {
+      "artist": "임영웅",
+      "title": "사랑은 늘 도망가",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 15
+    },
+    {
+      "artist": "Ed Sheeran",
+      "title": "Bad Habits",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 16
+    },
+    {
+      "artist": "헤이즈 (Heize)",
+      "title": "헤픈 우연",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 17
+    },
+    {
+      "artist": "주시크 (Joosiq)",
+      "title": "너를 생각해",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 18
+    },
+    {
+      "artist": "조정석",
+      "title": "좋아좋아",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 19
+    },
+    {
+      "artist": "케이윌",
+      "title": "시간을 거슬러 (낮에 뜨는 달 X 케이윌)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 20
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "Dynamite",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 21
+    },
+    {
+      "artist": "멜로망스",
+      "title": "고백",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 22
+    },
+    {
+      "artist": "다비치",
+      "title": "나의 첫사랑",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 23
+    },
+    {
+      "artist": "아이유",
+      "title": "라일락",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 24
+    },
+    {
+      "artist": "전소미",
+      "title": "DUMB DUMB",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 25
+    },
+    {
+      "artist": "Red Velvet (레드벨벳)",
+      "title": "Queendom",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 26
+    },
+    {
+      "artist": "아이유",
+      "title": "Celebrity",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 27
+    },
+    {
+      "artist": "이무진",
+      "title": "가을 타나 봐",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 28
+    },
+    {
+      "artist": "브레이브걸스",
+      "title": "롤린 (Rollin')",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 29
+    },
+    {
+      "artist": "이무진",
+      "title": "비와 당신",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 30
+    },
+    {
+      "artist": "호미들",
+      "title": "사이렌 Remix (Feat. UNEDUCATED KID, Paul Blanco)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 31
+    },
+    {
+      "artist": "오마이걸 (OH MY GIRL)",
+      "title": "Dun Dun Dance",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 32
+    },
+    {
+      "artist": "헤이즈 (Heize)",
+      "title": "비가 오는 날엔 (2021)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 33
+    },
+    {
+      "artist": "Justin Bieber",
+      "title": "Off My Face",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 34
+    },
+    {
+      "artist": "마크툽 (MAKTUB)",
+      "title": "찰나가 영원이 될 때 (The Eternal Moment)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 35
+    },
+    {
+      "artist": "아이유",
+      "title": "내 손을 잡아",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 36
+    },
+    {
+      "artist": "임영웅",
+      "title": "이제 나만 믿어요",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 37
+    },
+    {
+      "artist": "STAYC(스테이씨)",
+      "title": "ASAP",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 38
+    },
+    {
+      "artist": "송이한",
+      "title": "밝게 빛나는 별이 되어 비춰줄게",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 39
+    },
+    {
+      "artist": "STAYC(스테이씨)",
+      "title": "색안경 (STEREOTYPE)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 40
+    },
+    {
+      "artist": "AKMU (악뮤)",
+      "title": "어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 41
+    },
+    {
+      "artist": "제시 (Jessi)",
+      "title": "Cold Blooded",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 42
+    },
+    {
+      "artist": "빅마마",
+      "title": "하루만 더",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 43
+    },
+    {
+      "artist": "ITZY (있지)",
+      "title": "LOCO",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 44
+    },
+    {
+      "artist": "정동하",
+      "title": "추억은 만남보다 이별에 남아",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 45
+    },
+    {
+      "artist": "경서",
+      "title": "밤하늘의 별을(2020)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 46
+    },
+    {
+      "artist": "김대명",
+      "title": "가을 우체국 앞에서",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 47
+    },
+    {
+      "artist": "Jawsh 685",
+      "title": "Savage Love (Laxed - Siren Beat) (BTS Remix)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 48
+    },
+    {
+      "artist": "아이유",
+      "title": "Blueming",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 49
+    },
+    {
+      "artist": "폴킴",
+      "title": "모든 날, 모든 순간 (Every day, Every Moment)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 50
+    },
+    {
+      "artist": "BLACKPINK",
+      "title": "Lovesick Girls",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 51
+    },
+    {
+      "artist": "ASH ISLAND",
+      "title": "멜로디",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 52
+    },
+    {
+      "artist": "산들",
+      "title": "취기를 빌려 (취향저격 그녀 X 산들)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 53
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "작은 것들을 위한 시 (Boy With Luv) (Feat. Halsey)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 54
+    },
+    {
+      "artist": "마크툽 (MAKTUB)",
+      "title": "오늘도 빛나는 너에게 (To You My Light) (Feat.이라온)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 55
+    },
+    {
+      "artist": "아이유",
+      "title": "에잇(Prod.&Feat. SUGA of BTS)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 56
+    },
+    {
+      "artist": "David Guetta",
+      "title": "Hey Mama (Feat. Nicki Minaj, Bebe Rexha & Afrojack)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 57
+    },
+    {
+      "artist": "장범준",
+      "title": "잠이 오질 않네요",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 58
+    },
+    {
+      "artist": "조정석",
+      "title": "아로하",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 59
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "봄날",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 60
+    },
+    {
+      "artist": "SG 워너비",
+      "title": "Timeless",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 61
+    },
+    {
+      "artist": "이예준",
+      "title": "그날에 나는 맘이 편했을까",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 62
+    },
+    {
+      "artist": "스탠딩 에그",
+      "title": "오래된 노래",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 63
+    },
+    {
+      "artist": "장범준",
+      "title": "흔들리는 꽃들 속에서 네 샴푸향이 느껴진거야",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 64
+    },
+    {
+      "artist": "이해리 (다비치)",
+      "title": "사랑은 언제나 목마르다 (N번째 연애 X 이해리 (다비치))",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 65
+    },
+    {
+      "artist": "조이 (JOY)",
+      "title": "안녕 (Hello)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 66
+    },
+    {
+      "artist": "브레이브걸스",
+      "title": "운전만해 (We Ride)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 67
+    },
+    {
+      "artist": "창모 (CHANGMO)",
+      "title": "METEOR",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 68
+    },
+    {
+      "artist": "Anne-Marie",
+      "title": "2002",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 69
+    },
+    {
+      "artist": "아이유",
+      "title": "어푸 (Ah puh)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 70
+    },
+    {
+      "artist": "브레이브걸스",
+      "title": "치맛바람 (Chi Mat Ba Ram)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 71
+    },
+    {
+      "artist": "TWICE (트와이스)",
+      "title": "Alcohol-Free",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 72
+    },
+    {
+      "artist": "임영웅",
+      "title": "그대라는 사치",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 73
+    },
+    {
+      "artist": "방탄소년단",
+      "title": "Life Goes On",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 74
+    },
+    {
+      "artist": "경서예지",
+      "title": "사실 나는 (Feat.전건호)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 75
+    },
+    {
+      "artist": "#안녕",
+      "title": "너의 번호를 누르고 (Prod. 영화처럼)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 76
+    },
+    {
+      "artist": "Etham",
+      "title": "12:45 (Stripped)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 77
+    },
+    {
+      "artist": "라붐 (LABOUM)",
+      "title": "상상더하기",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 78
+    },
+    {
+      "artist": "임영웅",
+      "title": "다시 사랑한다면 (김필 Ver.)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 79
+    },
+    {
+      "artist": "양요섭",
+      "title": "LOVE DAY (2021) (바른연애 길잡이 X 양요섭, 정은지)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 80
+    },
+    {
+      "artist": "세븐틴",
+      "title": "여전히 아름다운지",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 81
+    },
+    {
+      "artist": "10CM",
+      "title": "고백",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 82
+    },
+    {
+      "artist": "임영웅",
+      "title": "별빛 같은 나의 사랑아",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 83
+    },
+    {
+      "artist": "에픽하이 (EPIK HIGH)",
+      "title": "비 오는 날 듣기 좋은 노래 (Feat. Colde)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 84
+    },
+    {
+      "artist": "오마이걸 (OH MY GIRL)",
+      "title": "Dolphin",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 85
+    },
+    {
+      "artist": "MSG워너비(정상동기)",
+      "title": "나를 아는 사람",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 86
+    },
+    {
+      "artist": "신예영",
+      "title": "전화 한 번 못하니",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 87
+    },
+    {
+      "artist": "정동하",
+      "title": "너의 모습",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 88
+    },
+    {
+      "artist": "이하이",
+      "title": "빨간 립스틱 (Feat. 윤미래)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 89
+    },
+    {
+      "artist": "임영웅",
+      "title": "잊었니",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 90
+    },
+    {
+      "artist": "임영웅",
+      "title": "HERO",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 91
+    },
+    {
+      "artist": "임영웅",
+      "title": "끝사랑",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 92
+    },
+    {
+      "artist": "미도와 파라솔",
+      "title": "이젠 잊기로 해요 (Drama Ver.)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 93
+    },
+    {
+      "artist": "폴킴",
+      "title": "찬란한 계절",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 94
+    },
+    {
+      "artist": "B.I",
+      "title": "역겹겠지만 (Remember me)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 95
+    },
+    {
+      "artist": "허각",
+      "title": "신촌을 못가",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 96
+    },
+    {
+      "artist": "임영웅",
+      "title": "Bk Love",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 97
+    },
+    {
+      "artist": "케이시 (Kassy)",
+      "title": "밤새 니가 내려",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 98
+    },
+    {
+      "artist": "백예린 (Yerin Baek)",
+      "title": "산책",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 99
+    },
+    {
+      "artist": "적재",
+      "title": "나랑 같이 걸을래 (바른연애 길잡이 X 적재)",
+      "market": "KR",
+      "platform": "melon-weekly",
+      "rank": 100
+    }
+  ]
+}

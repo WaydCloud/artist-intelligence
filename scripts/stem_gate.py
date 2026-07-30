@@ -132,9 +132,12 @@ def run(snapshot: Path) -> dict[str, Any]:
             })
         scored = [x for x in rows if x["percentile"] is not None]
         hits = sum(1 for x in scored if x["percentile"] >= TOP_PCT)
-        # 정답지가 통째로 결측이거나 모집단이 너무 작으면 "판별력 없음"이 아니라
-        # **못 쟀다**이다 — 둘을 구별한다(§0 결측 ≠ 0).
-        if not scored or len(pool) < 10:
+        # **"못 쟀다"와 "못 가른다"를 뭉치면 원장에 거짓이 들어간다**(§0 결측 ≠ 0).
+        # 특히 측정된 정답지가 기준(need)보다 적으면 판별력과 무관하게 산술적으로
+        # 실패가 강제된다 — 그걸 "판별력 없음"으로 적으면 축을 억울하게 죽인다.
+        # (2026-07-30 실측: 하프타임은 유효성 게이트가 정답지 5곡 중 3곡을
+        #  떨어뜨려 2곡만 남았고, 기준 3을 넘을 방법이 원리적으로 없었다.)
+        if not scored or len(pool) < 10 or len(scored) < gate["need"]:
             verdict = "unmeasured"
         else:
             verdict = "pass" if hits >= gate["need"] else "fail"
@@ -149,8 +152,21 @@ def run(snapshot: Path) -> dict[str, Any]:
             "verdict": verdict,
             "tracks": sorted(rows, key=lambda x: -(x["percentile"] or -1)),
         })
+        # 축이 실제로 무엇을 재는지 — 고유값 수가 표본 수보다 훨씬 적으면 그 축은
+        # 음악이 아니라 **측정기의 격자**를 재고 있다(D-031 `grid_deviation_ms` 선례).
+        distinct = len({round(v, 6) for v in pool})
+        quantized = bool(pool and distinct <= max(4, len(pool) // 10))
+        results[-1]["distinct_values"] = distinct
+        results[-1]["quantized"] = quantized
+        if quantized and results[-1]["verdict"] == "fail":
+            # 값이 몇 개뿐이면 백분위가 의미를 잃는다 — 이 축의 "실패"는 판별력이
+            # 없다는 뜻이 아니라 **측정이 깨졌다**는 뜻이다. 원장에 잘못 적지 않는다.
+            results[-1]["verdict"] = "unmeasured"
+            verdict = "unmeasured"
+        flag = " ⚠양자화" if quantized else ""
         print(f"  {verdict.upper():10s} {axis:26s} "
-              f"상위20% {hits}/{len(scored)} (기준 {gate['need']}) · 코호트 {len(pool)}곡",
+              f"상위20% {hits}/{len(scored)} (기준 {gate['need']}) · 코호트 {len(pool)}곡 "
+              f"· 고유값 {distinct}{flag}",
               file=sys.stderr)
     return {
         "gate": "sonic-profile stem axes (TESTS §7.2.2)",
@@ -175,9 +191,13 @@ def main(argv: list[str] | None = None) -> int:
         print(f"wrote {args.out}", file=sys.stderr)
     else:
         print(text)
-    failed = [r["axis"] for r in payload["results"] if r["verdict"] != "pass"]
+    # 두 결론은 다른 후속을 부른다 — 뭉쳐서 보고하면 잘못된 후속이 따라온다.
+    failed = [r["axis"] for r in payload["results"] if r["verdict"] == "fail"]
+    unmeasured = [r["axis"] for r in payload["results"] if r["verdict"] == "unmeasured"]
     if failed:
-        print(f"\n채택 보류: {failed} — 원장에 '판별력 없음'으로 적는다(RULES §3.7.1)",
+        print(f"\n판별력 없음(원장에 그대로 적는다, RULES §3.7.1): {failed}", file=sys.stderr)
+    if unmeasured:
+        print(f"판정 불가(표본 부족·측정 결함 — 원인을 고친 뒤 재실행): {unmeasured}",
               file=sys.stderr)
     return 0
 

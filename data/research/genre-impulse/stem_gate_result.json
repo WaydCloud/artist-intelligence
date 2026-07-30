@@ -1,0 +1,149 @@
+{
+  "gate": "sonic-profile stem axes (TESTS §7.2.2)",
+  "decision": "D-034 ③",
+  "top_pct": 80.0,
+  "snapshot": "data\\research\\genre-impulse\\stem_gate_snapshot.json",
+  "cohort_records": 100,
+  "results": [
+    {
+      "axis": "halftime_snare_ratio",
+      "note": "저지클럽 하프타임 스네어 (RULES §3.8.2)",
+      "cohort_n": 44,
+      "answers_expected": 5,
+      "answers_measured": 2,
+      "hits_top20": 0,
+      "need": 3,
+      "verdict": "unmeasured",
+      "tracks": [
+        {
+          "track": "Drake - Sticky",
+          "value": 0.688715,
+          "percentile": 77.3,
+          "unresolved": null
+        },
+        {
+          "track": "PinkPantheress - Boy's a liar Pt. 2",
+          "value": 0.568016,
+          "percentile": 77.3,
+          "unresolved": null
+        },
+        {
+          "track": "Cookiee Kawaii - Vibe (If I Back It Up)",
+          "value": null,
+          "percentile": null,
+          "unresolved": null
+        },
+        {
+          "track": "Lil Uzi Vert - Just Wanna Rock",
+          "value": null,
+          "percentile": null,
+          "unresolved": null
+        },
+        {
+          "track": "UNIIQU3 - Microdosing",
+          "value": null,
+          "percentile": null,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 44,
+      "quantized": false
+    },
+    {
+      "axis": "bass_glide_ratio",
+      "note": "드릴 슬라이딩 808 (RULES §3.8.3) — A2.1에서 축 공백이 실증된 케이스",
+      "cohort_n": 97,
+      "answers_expected": 3,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 2,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "Headie One - Ain't It Different",
+          "value": 0.093625,
+          "percentile": 53.6,
+          "unresolved": null
+        },
+        {
+          "track": "Pop Smoke - Dior",
+          "value": 0.090278,
+          "percentile": 52.6,
+          "unresolved": null
+        },
+        {
+          "track": "Central Cee - Doja",
+          "value": 0.037229,
+          "percentile": 21.6,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 97,
+      "quantized": false
+    },
+    {
+      "axis": "vocal_tuning_hardness",
+      "note": "하이퍼팝 보컬 처리 (RULES §3.8.4) — 쇠맛 계보 5곡",
+      "cohort_n": 96,
+      "answers_expected": 5,
+      "answers_measured": 3,
+      "hits_top20": 1,
+      "need": 3,
+      "verdict": "unmeasured",
+      "tracks": [
+        {
+          "track": "aespa - Black Mamba",
+          "value": 0.815806,
+          "percentile": 89.6,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Supernova",
+          "value": 0.784194,
+          "percentile": 41.7,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Savage",
+          "value": 0.615806,
+          "percentile": 18.8,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 6,
+      "quantized": true
+    },
+    {
+      "axis": "vocal_pitch_shift_proxy",
+      "note": "🔺 사전 등록 프록시 — 실패 시 해석을 버린다(meter_duple_bias 선례)",
+      "cohort_n": 96,
+      "answers_expected": 5,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 3,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "aespa - Supernova",
+          "value": 8.674617,
+          "percentile": 37.5,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Savage",
+          "value": 7.992219,
+          "percentile": 24.0,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Black Mamba",
+          "value": 7.214042,
+          "percentile": 11.5,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 96,
+      "quantized": false
+    }
+  ]
+}

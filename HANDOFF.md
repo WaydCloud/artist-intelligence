@@ -34,7 +34,7 @@
 ⚠ **눈으로만 잡히는 결함이 세 라운드에 걸쳐 열여섯 건 나왔다** — 전부 정적 게이트 4종과 탭 스모크를 **통과한 상태**였다.
 - 1차(파일럿) 5건: 색 순환 · 기준 링 겹침 · 결측 마커 위치 · 순위를 막대 길이로 · 타일 값 잘림.
 - 2차(6탭 확산) 6건: 부호를 막대에 · 역방향 축을 막대에 · 격자 색 방향 반대 · 미관측 구간을 0으로 · 계정명 노출 · 저장 키 노출. 공통점은 **그림의 방향과 주장의 방향이 어긋난 것**(§7.5).
-- 3차(인터랙션) 5건: **툴팁이 표면 없는 맨 텍스트**(visx `unstyled`가 우리 `style`까지 버린다 — D-041의 요약 도형 툴팁이 그때부터 이 상태였다) · 결측 안내선 91개가 배경 해치 · `+127일`이 두 줄로 접힘 · **그리고 3건 중 2건은 이 세션에 내가 새로 만든 것**(ⓘ 툴팁이 탭 정지 110개를 만든 것 · 사유 칸을 좁게 잡아 자른 것). 규율은 §7.6.
+- 3차(인터랙션) 5건: **툴팁이 표면 없는 맨 텍스트**(visx `unstyled`가 우리 `style`까지 버린다 — D-041의 요약 도형 툴팁이 그때부터 이 상태였다) · 결측 안내선 91개가 배경 해치 · `+127일`이 두 줄로 접힘 · **그리고 다섯 중 둘은 이 세션에 새로 쓴 코드에서 나온 것**(ⓘ 툴팁이 탭 정지 110개를 만든 것 · 사유 칸을 좁게 잡아 자른 것). 규율은 §7.6.
 
 **탭마다, 구획마다 렌더를 실제로 볼 것.** 열여섯 건 중 정적 게이트가 잡은 것은 없다. 3차에서 배운 것 하나: **인터랙션 결함은 스크린샷 한 장으로도 안 보인다**(마우스를 올려야 나타나는 것이 대상이므로) — 그래서 `smoke:tabs`가 대신 센다. **새로 고친 코드도 같은 눈으로 다시 볼 것**(3차의 절반이 그렇게 나왔다).
 
@@ -56,7 +56,7 @@
 - **모듈 6종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통: chart-history v5 · fandom-pulse v3.1 · signal-bridge v2 · yt-pulse v1 · **sonic-profile v4** · genre-impulse v1.
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(**D-036** 차트 페이로드 제약 · **D-041** 시각화 필드 · **D-043** 구획) + PII 게이트 + `packages/entity-master`.
 - **시각화 계약 채택**: **6/6 완료**(D-044). 강제 경계는 `scripts/validate_report_data.py`의 `ADOPTED_MODULES`(D-042) — 새 모듈은 여기 한 줄로 계약에 들어온다.
-- **디자인 스킬 벤더링 완료**: `.claude/skills/`에 `frontend-design` + 모션 4종(MIT · LICENSE 동봉). **아직 커밋되지 않았다**(미추적) — 외부 지시문을 레포에 들이는 것이라 커밋 여부는 확인 대상.
+- **디자인 스킬 벤더링 완료**: `.claude/skills/`에 `frontend-design` + 모션 4종(MIT · LICENSE 동봉). ✅ **커밋됐다**(13파일, `bd83e87`) — "미추적이라 커밋 여부가 확인 대상"이라고 적혀 있었지만 그 커밋에 이미 들어가 있었다. 결정할 것이 남아 있지 않다.
 - ✅ **git 정리 완료**: 열린 PR **0**. 최근 세션 이력은 [`Handoffs/2026-07-30-interaction-crosshair-tooltip.md`](Handoffs/2026-07-30-interaction-crosshair-tooltip.md)(인터랙션 + 스모크 게이트), 그 앞이 [`Handoffs/2026-07-30-visualization-six-tabs.md`](Handoffs/2026-07-30-visualization-six-tabs.md)(6/6 채택 · 값의 방향), 그 앞이 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭).
 - **프리미티브 일반화**(D-044 딸린 결과): `Heatmap`이 순위 전용에서 벗어나 값의 방향을 payload로 받는다(`scale: "rank" | "value"` + 범례 문구). `palette.seqColor`가 그 공통 램프다. chart-history의 순위 격자 4종은 기본값이라 무회귀.
 - **인터랙션 프리미티브**(D-045): `ChartTooltip.tsx`가 `show`(마크 기준)와 `showAt`(좌표 기준 — 크로스헤어처럼 스냅된 위치)을 낸다. 🔴 `unstyled`를 쓰지 않는다(우리 `style`까지 버린다). 라인차트는 표 뷰까지 갖췄고, 격자는 `<th scope>`로 표 의미가 서 있다.
@@ -85,6 +85,8 @@
 |---|---|
 | ~~**`inferences` 리포트 계약**~~ | ✅ 승인·구현 완료(D-041·D-042) |
 | ~~**디자인 스킬 벤더링**~~ | ✅ 승인·완료 — `.claude/skills/`에 `frontend-design` + 모션 4종(`animation-vocabulary`·`find-animation-opportunities`·`improve-animations`·`review-animations`). 둘 다 MIT, LICENSE 동봉 |
+| **긴 목록의 형태** | `leadlag` 튜너가 **115행을 세로로 쏟는다**(스크롤 세 화면). 막대로 둘지 표·검색·정렬로 바꿀지는 "이 목록을 어떻게 쓰는가"에 달렸다 — 훑는 것이면 표, 상위만 보는 것이면 자르는 것이 맞다(D-045 딸림) |
+| **용어 설명의 자리** | `Tunable`에 설명문 `title` 5곳. 리포트 `definition` 필드로 옮기면 §7.1 R5와 맞지만 **리포트 계약 변경**이라 승인 대상(대시보드 안에서 인라인 펼침으로 끝내는 선택지도 있다) |
 | **유료 소셜 레그 재시도** | 재시도는 돈에 관한 결정이라 제외해 둠 |
 | **저지클럽 정답지 20곡 확정** | [초안](docs/DRAFT-jersey-club-answer-sheet.md) 확인 포인트 4건 — VIBE 캐논 단독 근거를 수용할지 |
 | **틱톡 워치리스트 v0** | [초안](docs/DRAFT-tiktok-watchlist-v0.md) 검토 포인트 8건 (D-035 ①, 월 상한 $15) |

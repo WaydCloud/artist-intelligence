@@ -1,43 +1,53 @@
 {
   "moduleId": "yt-pulse",
   "title": "YT 펄스 · 워치리스트 공식 채널",
-  "subtitle": "YouTube Data API v3 (official) · 2026-07-30T00:18:46Z",
-  "generatedAt": "2026-07-30T00:18:46Z",
+  "subtitle": "YouTube Data API v3 (official) · 수집 2026-07-30",
+  "generatedAt": "2026-07-30T08:23:32Z",
   "metrics": [
     {
       "label": "추적 팀",
       "value": 11,
       "unit": "팀",
-      "hint": "채널 해석·영상 보유"
+      "hint": "채널 해석·영상 보유",
+      "section": "reach",
+      "definition": "채널이 확인되고 영상이 하나라도 수집된 팀의 수. 워치리스트 전체가 아니다."
     },
     {
-      "label": "최근작 영상",
+      "label": "수집한 영상",
       "value": 178,
       "unit": "개",
-      "hint": "채널당 최근 업로드 창"
+      "hint": "채널당 최근 업로드 창",
+      "section": "reach",
+      "definition": "이번 스냅샷에 들어 있는 영상 수. 같은 영상이 여러 날 잡히면 최신 것 하나로 센다."
     },
     {
-      "label": "최근작 조회 합",
+      "label": "조회 합",
       "value": 110213834,
-      "unit": "views"
+      "unit": "views",
+      "section": "reach",
+      "definition": "수집한 영상의 조회수를 모두 더한 값. 공개 집계 수치이며 인기의 총점이 아니다."
     },
     {
-      "label": "최고 평균 일 조회(velocity)",
+      "label": "가장 빠른 영상의 일 조회",
       "value": 2541463,
       "unit": "views/일",
-      "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)"
+      "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)",
+      "section": "fresh",
+      "definition": "수집한 영상 중 평균 일 조회가 가장 높은 한 편의 값. 조회수를 공개 후 지난 날로 나눈 수명 평균이라, 갓 올라온 영상의 초반 화력은 낮게 잡힌다."
     },
     {
-      "label": "신작",
+      "label": "새 영상",
       "value": 169,
       "unit": "개",
-      "hint": "최근 14일 내 업로드(캠페인 활성)"
+      "hint": "최근 14일 내 업로드(캠페인 활성)",
+      "section": "fresh",
+      "definition": "판정 기간 안에 공개된 영상 수. 기간은 캠페인 주기에 맞춰 조정 가능한 가설이다."
     }
   ],
   "charts": [
     {
       "type": "bar",
-      "title": "팀별 최근작 조회 합 (공식 채널)",
+      "id": "views-by-act",
       "data": [
         {
           "name": "KATSEYE",
@@ -83,57 +93,68 @@
           "name": "KEYVEATZ",
           "value": 140133
         }
-      ]
+      ],
+      "section": "reach",
+      "title": "팀별 조회 합",
+      "question": "수집한 영상의 조회는 어느 팀이 큰가?",
+      "definition": "채널 캐시에 있는 영상의 조회수를 팀별로 더한 값. 영상 수가 많을수록 커지므로 팀 사이의 크기 비교가 아니라 이 표본 안에서의 합이다."
     },
     {
       "type": "bar",
-      "title": "팀별 대표 평균 일 조회 (최대작 기준)",
+      "id": "fresh-by-act",
+      "reliability": {
+        "sample": "최근 14일 · 영상 169개 / 178개"
+      },
       "data": [
         {
-          "name": "KATSEYE",
-          "value": 2541463
-        },
-        {
-          "name": "CORTIS",
-          "value": 1196565
-        },
-        {
           "name": "ILLIT",
-          "value": 746952
+          "value": 23
         },
         {
           "name": "Hearts2Hearts",
-          "value": 480221
-        },
-        {
-          "name": "BABYMONSTER",
-          "value": 395748
-        },
-        {
-          "name": "RESCENE",
-          "value": 306793
-        },
-        {
-          "name": "KISS OF LIFE",
-          "value": 306336
-        },
-        {
-          "name": "MEOVV",
-          "value": 35787
-        },
-        {
-          "name": "KiiiKiii",
-          "value": 28145
-        },
-        {
-          "name": "izna",
-          "value": 15166
+          "value": 20
         },
         {
           "name": "KEYVEATZ",
-          "value": 5556
+          "value": 18
+        },
+        {
+          "name": "KISS OF LIFE",
+          "value": 18
+        },
+        {
+          "name": "CORTIS",
+          "value": 17
+        },
+        {
+          "name": "RESCENE",
+          "value": 16
+        },
+        {
+          "name": "KATSEYE",
+          "value": 13
+        },
+        {
+          "name": "KiiiKiii",
+          "value": 13
+        },
+        {
+          "name": "BABYMONSTER",
+          "value": 12
+        },
+        {
+          "name": "izna",
+          "value": 12
+        },
+        {
+          "name": "MEOVV",
+          "value": 7
         }
-      ]
+      ],
+      "section": "fresh",
+      "title": "최근 업로드 수",
+      "question": "최근에 새 영상을 올린 팀은 어디인가?",
+      "definition": "기준일로부터 판정 기간 안에 공개된 영상 수. 채널 캐시가 최근 업로드 위주라 이 수가 수집 영상 수와 가까울 수 있다."
     }
   ],
   "media": [],
@@ -151,5 +172,100 @@
     "다일 축적(daily_collect)이 쌓이면 조회 증분 라인·실측 velocity가 열립니다(v2).",
     "채널 오매칭은 채널 목록(yt_channels.json)에서 직접 정정 가능",
     "신작 판정 기간은 캠페인 주기에 맞춰 조정 가능. 기준은 조정 가능한 가설"
+  ],
+  "summary": {
+    "type": "bar",
+    "id": "velocity-by-act",
+    "title": "팀별 대표 평균 일 조회",
+    "question": "지금 가장 빠르게 조회를 모으는 팀은 어디인가?",
+    "definition": "팀의 영상 중 평균 일 조회가 가장 높은 한 편의 값(조회수 ÷ 공개 후 지난 날, 상위 8팀). 수명 전체 평균이라 갓 올라온 영상의 초반 화력은 낮게, 오래된 영상은 평탄하게 잡힌다. 채널 규모가 크면 같은 반응에서도 값이 커진다.",
+    "reliability": {
+      "sample": "팀 11팀 · 영상 178개"
+    },
+    "data": [
+      {
+        "name": "KATSEYE",
+        "value": 2541463
+      },
+      {
+        "name": "CORTIS",
+        "value": 1196565
+      },
+      {
+        "name": "ILLIT",
+        "value": 746952
+      },
+      {
+        "name": "Hearts2Hearts",
+        "value": 480221
+      },
+      {
+        "name": "BABYMONSTER",
+        "value": 395748
+      },
+      {
+        "name": "RESCENE",
+        "value": 306793
+      },
+      {
+        "name": "KISS OF LIFE",
+        "value": 306336
+      },
+      {
+        "name": "MEOVV",
+        "value": 35787
+      }
+    ]
+  },
+  "questions": [
+    {
+      "q": "지금 가장 빠르게 조회를 모으는 팀은 어디인가?",
+      "chartId": "velocity-by-act"
+    },
+    {
+      "q": "수집한 영상의 조회는 어느 팀이 큰가?",
+      "chartId": "views-by-act"
+    },
+    {
+      "q": "최근에 새 영상을 올린 팀은 어디인가?",
+      "chartId": "fresh-by-act"
+    }
+  ],
+  "notAnswered": [
+    "이 영상이 차트로 이어질지. 이 화면은 채널 조회까지만 다룬다",
+    "레이블 채널(HYBE LABELS 등)에 올라간 영상. 여기는 팀 공식 채널만 본다",
+    "조회가 오르는 중인지 멈췄는지. 하루치 스냅샷은 증분을 알 수 없다",
+    "누가 봤는지. 공개 집계 수치에는 지역도 연령도 없다",
+    "광고가 붙은 조회인지. 유기적 조회와 구분하지 않는다"
+  ],
+  "reliability": {
+    "sample": "팀 11팀 · 영상 178개 · 기준일 2026-07-30",
+    "accuracy": "조회·구독은 API가 돌려준 공개 집계값. 평균 일 조회는 수명 평균 근사이며 정확도 미측정",
+    "missing": "팀 공식 채널만 본다. 레이블 채널 업로드와 채널이 확인되지 않은 팀은 이 표본에 없다",
+    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-07-30T00:18:46Z"
+  },
+  "inferences": [
+    {
+      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 8배다.",
+      "basis": "1위 KATSEYE 2,541,463/일 · 중앙값 306,793/일 · 팀 11팀",
+      "sample": "팀 11팀 · 영상 178개",
+      "confidence": "medium",
+      "limits": "구독자 규모가 큰 채널은 같은 반응에서도 값이 커진다. 이 값은 화력의 분포이지 완성도의 순위가 아니다.",
+      "chartId": "velocity-by-act"
+    }
+  ],
+  "sections": [
+    {
+      "id": "reach",
+      "label": "쌓인 조회",
+      "question": "공식 채널에 조회가 얼마나 쌓였나?",
+      "note": "채널 캐시에 들어 있는 최근 업로드만 더한 값이다. 영상을 많이 올리는 팀이 커지는 값이라 팀의 크기나 인기가 아니다. 레이블 채널에 올라간 영상은 이 표본에 없다."
+    },
+    {
+      "id": "fresh",
+      "label": "새 영상",
+      "question": "지금 새 영상이 도는 팀은 어디인가?",
+      "note": "업로드가 있다는 것은 캠페인이 돌고 있다는 신호로 읽을 수 있을 뿐, 성과가 아니다. 판정 기간은 조정 가능한 기준이다."
+    }
   ]
 }

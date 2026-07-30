@@ -1,62 +1,82 @@
 {
   "moduleId": "signal-bridge",
   "title": "시그널 브리지 · 소셜 → 차트 선행신호",
-  "subtitle": "소셜(fandom-pulse) × 차트(chart-history) × YT(yt-pulse) 선행/지연 · 조인 114팀 · θ_social=1, θ_rank=200 · 차트 51시장 · 소셜 2026-03-10..2026-07-29 / 차트 2026-07-17..2026-07-30",
-  "generatedAt": "2026-07-30T00:19:20Z",
+  "subtitle": "소셜(fandom-pulse) × 차트(chart-history) × YT(yt-pulse) 선행/지연 · 두 신호가 다 있는 팀 114팀 · 차트 51시장 · 소셜 2026-03-10..2026-07-29 / 차트 2026-07-17..2026-07-30",
+  "generatedAt": "2026-07-30T08:51:15Z",
   "metrics": [
     {
       "label": "추적 아티스트",
       "value": 378,
       "unit": "팀",
-      "hint": "두 신호 합집합"
+      "hint": "두 신호 합집합",
+      "section": "pre",
+      "definition": "두 신호 중 하나라도 있는 팀의 수. 이 화면이 보는 전체 모집단이다."
     },
     {
-      "label": "조인(양측 신호)",
+      "label": "두 신호가 다 있는 팀",
       "value": 114,
       "unit": "팀",
-      "hint": "소셜·차트 온셋 모두 존재"
+      "hint": "소셜·차트 온셋 모두 존재",
+      "section": "leadlag",
+      "definition": "소셜과 차트 양쪽에서 온셋이 잡힌 팀의 수. 선행·지연을 잴 수 있는 대상이다."
     },
     {
       "label": "소셜 선행",
       "value": 62,
       "unit": "팀",
-      "hint": "소셜 버즈가 차트 진입보다 먼저"
+      "hint": "소셜 버즈가 차트 진입보다 먼저",
+      "section": "leadlag",
+      "definition": "소셜 온셋이 차트 온셋보다 앞선 팀의 수. 시간 순서이며 인과가 아니다."
     },
     {
       "label": "판정 가능 선행",
       "value": 1,
       "unit": "팀",
-      "hint": "소셜 선행 중 표본 ≥20건 · 차트 온셋 비검열 (RULES §3.1 · 나머지는 판단 보류)"
+      "hint": "소셜 선행 중 표본 ≥20건 · 차트 온셋 비검열 (RULES §3.1 · 나머지는 판단 보류)",
+      "section": "leadlag",
+      "definition": "소셜 선행 중 표본이 기준 이상이고 차트 온셋이 좌측 절단되지 않은 팀의 수. 나머지는 판단을 보류한다."
     },
     {
       "label": "중앙값 선행",
       "value": 9,
       "unit": "일",
-      "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님"
+      "hint": "소셜 선행 팀 한정 · 표본 극소 · 인과 아님",
+      "section": "leadlag",
+      "definition": "소셜 선행 팀들의 선행 일수 중앙값. 표본이 극소라 값이 쉽게 흔들린다."
     },
     {
-      "label": "소셜-온리 관측대상",
+      "label": "차트 밖에서 도는 팀",
       "value": 264,
       "unit": "팀",
-      "hint": "차트 진입 전 소셜 활성"
+      "hint": "차트 진입 전 소셜 활성",
+      "section": "pre",
+      "definition": "이번 창에서 차트 온셋 없이 소셜 온셋만 있는 팀의 수."
     },
     {
-      "label": "차트-온리",
+      "label": "소셜 신호가 없는 팀",
       "value": 0,
       "unit": "팀",
-      "hint": "소셜 사운드 확산 없음"
+      "hint": "소셜 사운드 확산 없음",
+      "section": "pre",
+      "definition": "차트 온셋만 있고 이 해시태그 소셜 신호가 없는 팀의 수."
     },
     {
       "label": "워치리스트 커버리지",
       "value": "11/11",
       "unit": "소셜",
-      "hint": "차트 10/11 · YT 11/11 · 양측 10 · 팔로우 팀 중 신호 관측 수"
+      "hint": "차트 10/11 · YT 11/11 · 양측 10 · 팔로우 팀 중 신호 관측 수",
+      "section": "pre",
+      "definition": "팔로우하는 팀 중 소셜 신호가 관측된 팀의 비율. 수집이 관심 대상을 실제로 비추고 있는지 보는 검증 지표다."
     }
   ],
   "charts": [
     {
       "type": "line",
-      "title": "선행신호 예시 · KiiiKiii · 소셜 버즈 vs 차트 강도 (0~1로 정규화)",
+      "id": "lead-example",
+      "reliability": {
+        "sample": "KiiiKiii · 창 104일 중 소셜 관측 103일 · 차트 관측 14일",
+        "missing": "관측하지 않은 날은 선을 끊는다(0으로 잇지 않는다). 두 신호의 수집 창이 다르다"
+      },
       "data": {
         "x": [
           "2026-03-10",
@@ -271,102 +291,102 @@
               0.231,
               0.154,
               0.0,
-              0.0
+              null
             ]
           },
           {
             "name": "차트 강도(정규화, 201−rank 개념)",
             "values": [
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
-              0.0,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
+              null,
               0.92,
               0.925,
               0.93,
@@ -384,11 +404,18 @@
             ]
           }
         ]
-      }
+      },
+      "section": "example",
+      "title": "KiiiKiii · 두 신호의 겹침",
+      "question": "두 신호가 겹치는 모양은 실제로 어떤가?",
+      "definition": "소셜 버즈는 그 팀의 최고 일간 게시수를 1로 둔 값, 차트 강도는 순위가 높을수록 1에 가까워지는 값이다. 단위가 다른 두 축을 각각 정규화한 것이라 높낮이를 서로 견주지 않는다."
     },
     {
       "type": "bar",
-      "title": "팀별 선행/지연 일수 (양수=소셜이 차트보다 먼저, 음수=차트가 먼저)",
+      "id": "lead-days",
+      "reliability": {
+        "sample": "소셜 선행 62팀 · 상위 30팀만 표시 · 두 신호가 다 있는 팀 114팀"
+      },
       "data": [
         {
           "name": "KiiiKiii",
@@ -509,348 +536,152 @@
         {
           "name": "blackbear",
           "value": 10
-        },
-        {
-          "name": "i-dle",
-          "value": 10
-        },
-        {
-          "name": "Camila Cabello",
-          "value": 9
-        },
-        {
-          "name": "IVE",
-          "value": 9
-        },
-        {
-          "name": "ADÉLA",
-          "value": 7
-        },
-        {
-          "name": "Wael Kfoury",
-          "value": 7
-        },
-        {
-          "name": "YENA",
-          "value": 7
-        },
-        {
-          "name": "ITZY",
-          "value": 5
-        },
-        {
-          "name": "Selena Gomez",
-          "value": 5
-        },
-        {
-          "name": "U-KNOW",
-          "value": 5
-        },
-        {
-          "name": "AOA",
-          "value": 4
-        },
-        {
-          "name": "Baby Dolls",
-          "value": 4
-        },
-        {
-          "name": "Fifth Harmony",
-          "value": 4
-        },
-        {
-          "name": "Post Malone",
-          "value": 4
-        },
-        {
-          "name": "The Black Skirts",
-          "value": 4
-        },
-        {
-          "name": "Ace of Base",
-          "value": 3
-        },
-        {
-          "name": "BESTie",
-          "value": 3
-        },
-        {
-          "name": "Coogie",
-          "value": 3
-        },
-        {
-          "name": "IU",
-          "value": 3
-        },
-        {
-          "name": "Melanie Martinez",
-          "value": 3
-        },
-        {
-          "name": "Shakira",
-          "value": 3
-        },
-        {
-          "name": "TWICE",
-          "value": 3
-        },
-        {
-          "name": "YEONJUN",
-          "value": 3
-        },
-        {
-          "name": "aespa",
-          "value": 3
-        },
-        {
-          "name": "Alphaville",
-          "value": 2
-        },
-        {
-          "name": "Crush",
-          "value": 2
-        },
-        {
-          "name": "Doja Cat",
-          "value": 2
-        },
-        {
-          "name": "Lil Nas X",
-          "value": 2
-        },
-        {
-          "name": "The Ronettes",
-          "value": 2
-        },
-        {
-          "name": "Woody",
-          "value": 2
-        },
-        {
-          "name": "BLACKPINK",
-          "value": 1
-        },
-        {
-          "name": "Barry Manilow",
-          "value": 1
-        },
-        {
-          "name": "Chris Brown",
-          "value": 1
-        },
-        {
-          "name": "(sic)boy",
-          "value": 0
-        },
-        {
-          "name": "Ajda Pekkan",
-          "value": 0
-        },
-        {
-          "name": "Daniel Caesar",
-          "value": 0
-        },
-        {
-          "name": "Naughty Boy",
-          "value": 0
-        },
-        {
-          "name": "Prod.Nifour",
-          "value": 0
-        },
-        {
-          "name": "Taylor Swift",
-          "value": 0
-        },
-        {
-          "name": "manifest",
-          "value": 0
-        },
-        {
-          "name": "pupsies",
-          "value": 0
-        },
-        {
-          "name": "Fat Papi",
-          "value": -1
-        },
-        {
-          "name": "GIRLSET",
-          "value": -1
-        },
-        {
-          "name": "Hikaru Utada",
-          "value": -1
-        },
-        {
-          "name": "Kenshi Yonezu",
-          "value": -1
-        },
-        {
-          "name": "Loco",
-          "value": -1
-        },
-        {
-          "name": "Oasis",
-          "value": -1
-        },
-        {
-          "name": "RIIZE",
-          "value": -1
-        },
-        {
-          "name": "Sevdaliza",
-          "value": -1
-        },
-        {
-          "name": "Yerin Baek",
-          "value": -1
-        },
-        {
-          "name": "Young Miko",
-          "value": -1
-        },
-        {
-          "name": "Fujii Kaze",
-          "value": -2
-        },
-        {
-          "name": "Paramore",
-          "value": -2
-        },
-        {
-          "name": "Primary",
-          "value": -2
-        },
-        {
-          "name": "freestyle",
-          "value": -2
-        },
-        {
-          "name": "Bizzey",
-          "value": -4
-        },
-        {
-          "name": "Justin Bieber",
-          "value": -4
-        },
-        {
-          "name": "Sam Smith",
-          "value": -4
-        },
-        {
-          "name": "AKMU",
-          "value": -6
-        },
-        {
-          "name": "Lloyd",
-          "value": -6
-        },
-        {
-          "name": "Adrian Khalif",
-          "value": -7
-        },
-        {
-          "name": "BIG Naughty",
-          "value": -7
-        },
-        {
-          "name": "DPR LIVE",
-          "value": -7
-        },
-        {
-          "name": "NewJeans",
-          "value": -7
-        },
-        {
-          "name": "Omar Apollo",
-          "value": -7
-        },
-        {
-          "name": "88rising",
-          "value": -9
-        },
-        {
-          "name": "AURORA",
-          "value": -9
-        },
-        {
-          "name": "Akbar Chalay",
-          "value": -9
-        },
-        {
-          "name": "CKay",
-          "value": -9
-        },
-        {
-          "name": "HANA",
-          "value": -9
-        },
-        {
-          "name": "Kesha",
-          "value": -9
-        },
-        {
-          "name": "Lukas Graham",
-          "value": -9
-        },
-        {
-          "name": "Tame Impala",
-          "value": -9
-        },
-        {
-          "name": "The Weeknd",
-          "value": -9
-        },
-        {
-          "name": "george",
-          "value": -9
-        },
-        {
-          "name": "hamo",
-          "value": -9
-        },
-        {
-          "name": "Backstreet Boys",
-          "value": -10
-        },
-        {
-          "name": "Bruno Mars",
-          "value": -10
-        },
-        {
-          "name": "Choi Yu Ree",
-          "value": -10
-        },
-        {
-          "name": "Lady Gaga",
-          "value": -10
-        },
-        {
-          "name": "Miguel",
-          "value": -10
-        },
-        {
-          "name": "D-Hack",
-          "value": -11
-        },
-        {
-          "name": "HANRORO",
-          "value": -11
-        },
-        {
-          "name": "Heize",
-          "value": -11
-        },
-        {
-          "name": "PROXIE",
-          "value": -11
         }
-      ]
+      ],
+      "section": "leadlag",
+      "title": "소셜이 먼저였던 팀 · 며칠 먼저",
+      "question": "소셜 버즈가 차트보다 먼저 움직인 팀은 어디이고 얼마나 먼저인가?",
+      "definition": "소셜 온셋 날짜와 차트 온셋 날짜의 차이(일). 온셋은 각 기준을 처음 넘은 날이며 수집 창 안에서만 정해진다. 시간 순서일 뿐 인과가 아니다."
     },
     {
       "type": "bar",
-      "title": "소셜-온리 · 차트 밖 관측대상 (차트 진입 전, 최고 일간 게시수)",
+      "id": "lag-days",
+      "reliability": {
+        "sample": "차트 선행 44팀 · 상위 30팀만 표시 · 두 신호가 다 있는 팀 114팀"
+      },
+      "data": [
+        {
+          "name": "D-Hack",
+          "value": 11
+        },
+        {
+          "name": "HANRORO",
+          "value": 11
+        },
+        {
+          "name": "Heize",
+          "value": 11
+        },
+        {
+          "name": "PROXIE",
+          "value": 11
+        },
+        {
+          "name": "Backstreet Boys",
+          "value": 10
+        },
+        {
+          "name": "Bruno Mars",
+          "value": 10
+        },
+        {
+          "name": "Choi Yu Ree",
+          "value": 10
+        },
+        {
+          "name": "Lady Gaga",
+          "value": 10
+        },
+        {
+          "name": "Miguel",
+          "value": 10
+        },
+        {
+          "name": "88rising",
+          "value": 9
+        },
+        {
+          "name": "AURORA",
+          "value": 9
+        },
+        {
+          "name": "Akbar Chalay",
+          "value": 9
+        },
+        {
+          "name": "CKay",
+          "value": 9
+        },
+        {
+          "name": "HANA",
+          "value": 9
+        },
+        {
+          "name": "Kesha",
+          "value": 9
+        },
+        {
+          "name": "Lukas Graham",
+          "value": 9
+        },
+        {
+          "name": "Tame Impala",
+          "value": 9
+        },
+        {
+          "name": "The Weeknd",
+          "value": 9
+        },
+        {
+          "name": "george",
+          "value": 9
+        },
+        {
+          "name": "hamo",
+          "value": 9
+        },
+        {
+          "name": "Adrian Khalif",
+          "value": 7
+        },
+        {
+          "name": "BIG Naughty",
+          "value": 7
+        },
+        {
+          "name": "DPR LIVE",
+          "value": 7
+        },
+        {
+          "name": "NewJeans",
+          "value": 7
+        },
+        {
+          "name": "Omar Apollo",
+          "value": 7
+        },
+        {
+          "name": "AKMU",
+          "value": 6
+        },
+        {
+          "name": "Lloyd",
+          "value": 6
+        },
+        {
+          "name": "Bizzey",
+          "value": 4
+        },
+        {
+          "name": "Justin Bieber",
+          "value": 4
+        },
+        {
+          "name": "Sam Smith",
+          "value": 4
+        }
+      ],
+      "section": "leadlag",
+      "title": "차트가 먼저였던 팀 · 며칠 먼저",
+      "question": "소셜이 차트를 뒤따른 반례는 얼마나 되나?",
+      "definition": "차트 온셋이 소셜 온셋보다 앞선 팀과 그 간격(일). **선행이 항상 성립하지 않는다는 반례**이며, 이 목록이 옆의 선행 목록과 같은 크기라면 선행은 규칙이 아니라 절반의 사례다."
+    },
+    {
+      "type": "bar",
+      "id": "social-only",
+      "reliability": {
+        "sample": "차트 온셋 없는 팀 264팀 · 상위 30팀만 표시"
+      },
       "data": [
         {
           "name": "KEYVEATZ",
@@ -971,948 +802,19 @@
         {
           "name": "Billlie",
           "value": 1
-        },
-        {
-          "name": "Blaiz Fayah",
-          "value": 1
-        },
-        {
-          "name": "Blaxian",
-          "value": 1
-        },
-        {
-          "name": "BoA",
-          "value": 1
-        },
-        {
-          "name": "Bobby V.",
-          "value": 1
-        },
-        {
-          "name": "Bone Thugs-n-Harmony",
-          "value": 1
-        },
-        {
-          "name": "Buck Owens",
-          "value": 1
-        },
-        {
-          "name": "Burna Boy",
-          "value": 1
-        },
-        {
-          "name": "CHOI YOOJUNG",
-          "value": 1
-        },
-        {
-          "name": "CLOSE YOUR EYES",
-          "value": 1
-        },
-        {
-          "name": "CODE KUNST",
-          "value": 1
-        },
-        {
-          "name": "COSKO",
-          "value": 1
-        },
-        {
-          "name": "Cacau Chuu",
-          "value": 1
-        },
-        {
-          "name": "Cameron Boyce",
-          "value": 1
-        },
-        {
-          "name": "Cardi B",
-          "value": 1
-        },
-        {
-          "name": "Carpe",
-          "value": 1
-        },
-        {
-          "name": "Catshi",
-          "value": 1
-        },
-        {
-          "name": "Chase Atlantic",
-          "value": 1
-        },
-        {
-          "name": "Coco & Clair Clair",
-          "value": 1
-        },
-        {
-          "name": "CrazAngel",
-          "value": 1
-        },
-        {
-          "name": "DJ 338",
-          "value": 1
-        },
-        {
-          "name": "DJ GADALOFF",
-          "value": 1
-        },
-        {
-          "name": "DJ JAVI26",
-          "value": 1
-        },
-        {
-          "name": "DJ Mahathir Alphonse",
-          "value": 1
-        },
-        {
-          "name": "DJ acdme",
-          "value": 1
-        },
-        {
-          "name": "DJ阿峰",
-          "value": 1
-        },
-        {
-          "name": "DJ아승",
-          "value": 1
-        },
-        {
-          "name": "Daniela Kiara",
-          "value": 1
-        },
-        {
-          "name": "Dawin",
-          "value": 1
-        },
-        {
-          "name": "Deutsches Filmorchester Babelsberg",
-          "value": 1
-        },
-        {
-          "name": "Dr Zeus",
-          "value": 1
-        },
-        {
-          "name": "Dr. Dre",
-          "value": 1
-        },
-        {
-          "name": "Dreamcatcher",
-          "value": 1
-        },
-        {
-          "name": "E.ul",
-          "value": 1
-        },
-        {
-          "name": "EVERGLOW",
-          "value": 1
-        },
-        {
-          "name": "EXO",
-          "value": 1
-        },
-        {
-          "name": "Emil Gilel",
-          "value": 1
-        },
-        {
-          "name": "Ena Sen",
-          "value": 1
-        },
-        {
-          "name": "Feist",
-          "value": 1
-        },
-        {
-          "name": "Funny Song Studio",
-          "value": 1
-        },
-        {
-          "name": "G-DRAGON - That XX",
-          "value": 1
-        },
-        {
-          "name": "GANG",
-          "value": 1
-        },
-        {
-          "name": "George Alexander Stewart",
-          "value": 1
-        },
-        {
-          "name": "Girl's Day",
-          "value": 1
-        },
-        {
-          "name": "Girls' Generation",
-          "value": 1
-        },
-        {
-          "name": "Grover Washington",
-          "value": 1
-        },
-        {
-          "name": "HAEWON",
-          "value": 1
-        },
-        {
-          "name": "HEART OF WOMAN",
-          "value": 1
-        },
-        {
-          "name": "HappyPizzaBread",
-          "value": 1
-        },
-        {
-          "name": "Hayes Kael",
-          "value": 1
-        },
-        {
-          "name": "Hyolyn",
-          "value": 1
-        },
-        {
-          "name": "IDID",
-          "value": 1
-        },
-        {
-          "name": "IMLAY",
-          "value": 1
-        },
-        {
-          "name": "IZ*ONE",
-          "value": 1
-        },
-        {
-          "name": "Ice Spice",
-          "value": 1
-        },
-        {
-          "name": "JANG HANEUM",
-          "value": 1
-        },
-        {
-          "name": "JM",
-          "value": 1
-        },
-        {
-          "name": "JOY",
-          "value": 1
-        },
-        {
-          "name": "Jaebin",
-          "value": 1
-        },
-        {
-          "name": "Japan DoGs",
-          "value": 1
-        },
-        {
-          "name": "Japanese City Pop",
-          "value": 1
-        },
-        {
-          "name": "Jay Park",
-          "value": 1
-        },
-        {
-          "name": "Jeamy Insane",
-          "value": 1
-        },
-        {
-          "name": "Jeiff",
-          "value": 1
-        },
-        {
-          "name": "Jr.",
-          "value": 1
-        },
-        {
-          "name": "Justin Hurwitz",
-          "value": 1
-        },
-        {
-          "name": "Kaede Azusagawa(CV:Yurika Kubo)",
-          "value": 1
-        },
-        {
-          "name": "Kael Rowan",
-          "value": 1
-        },
-        {
-          "name": "Kale Joseph",
-          "value": 1
-        },
-        {
-          "name": "Kayhin",
-          "value": 1
-        },
-        {
-          "name": "Kevin Jz Prodigy",
-          "value": 1
-        },
-        {
-          "name": "Khantrast",
-          "value": 1
-        },
-        {
-          "name": "KickFlip",
-          "value": 1
-        },
-        {
-          "name": "LABOUM",
-          "value": 1
-        },
-        {
-          "name": "LOVELI LORI",
-          "value": 1
-        },
-        {
-          "name": "Labrinth",
-          "value": 1
-        },
-        {
-          "name": "LeeHi",
-          "value": 1
-        },
-        {
-          "name": "Lil Moshpit",
-          "value": 1
-        },
-        {
-          "name": "Lofi Beats To Chill Study Sleep",
-          "value": 1
-        },
-        {
-          "name": "Lorix",
-          "value": 1
-        },
-        {
-          "name": "Luv8z",
-          "value": 1
-        },
-        {
-          "name": "MIKOYUSH",
-          "value": 1
-        },
-        {
-          "name": "MXEEN",
-          "value": 1
-        },
-        {
-          "name": "Mac DeMarco - No Other Heart",
-          "value": 1
-        },
-        {
-          "name": "Maci Mcglynn",
-          "value": 1
-        },
-        {
-          "name": "Mad Clown",
-          "value": 1
-        },
-        {
-          "name": "Mae Stephens",
-          "value": 1
-        },
-        {
-          "name": "Mai Sakurajima(CV:Asami Seto)",
-          "value": 1
-        },
-        {
-          "name": "MarJan",
-          "value": 1
-        },
-        {
-          "name": "Mask Sauce",
-          "value": 1
-        },
-        {
-          "name": "Massive Attack",
-          "value": 1
-        },
-        {
-          "name": "Mc Gw",
-          "value": 1
-        },
-        {
-          "name": "Mingse",
-          "value": 1
-        },
-        {
-          "name": "Mommy Son",
-          "value": 1
-        },
-        {
-          "name": "Mr Flintstone",
-          "value": 1
-        },
-        {
-          "name": "Mustafa",
-          "value": 1
-        },
-        {
-          "name": "Mxnvra",
-          "value": 1
-        },
-        {
-          "name": "Médio grave",
-          "value": 1
-        },
-        {
-          "name": "NAYEON",
-          "value": 1
-        },
-        {
-          "name": "NEXZ",
-          "value": 1
-        },
-        {
-          "name": "Neo",
-          "value": 1
-        },
-        {
-          "name": "Nodoka Toyohama(CV:Maaya Uchida)",
-          "value": 1
-        },
-        {
-          "name": "Nueve Lio",
-          "value": 1
-        },
-        {
-          "name": "Okini nam",
-          "value": 1
-        },
-        {
-          "name": "PHYLLIS RHODA",
-          "value": 1
-        },
-        {
-          "name": "POODEE",
-          "value": 1
-        },
-        {
-          "name": "Party Tyme",
-          "value": 1
-        },
-        {
-          "name": "Party Tyme Karaoke",
-          "value": 1
-        },
-        {
-          "name": "Phuwin",
-          "value": 1
-        },
-        {
-          "name": "Pomplamoose",
-          "value": 1
-        },
-        {
-          "name": "Pond Naravit",
-          "value": 1
-        },
-        {
-          "name": "Pororo the Little Penguin",
-          "value": 1
-        },
-        {
-          "name": "Punch",
-          "value": 1
-        },
-        {
-          "name": "RAINBOW",
-          "value": 1
-        },
-        {
-          "name": "ROSÉ",
-          "value": 1
-        },
-        {
-          "name": "Raf Sandou",
-          "value": 1
-        },
-        {
-          "name": "Rich Brian",
-          "value": 1
-        },
-        {
-          "name": "Rico",
-          "value": 1
-        },
-        {
-          "name": "Rio Futaba(CV:Atsumi Tanezaki)",
-          "value": 1
-        },
-        {
-          "name": "SEVENTEEN",
-          "value": 1
-        },
-        {
-          "name": "SHINee",
-          "value": 1
-        },
-        {
-          "name": "SKARS",
-          "value": 1
-        },
-        {
-          "name": "SUNMI",
-          "value": 1
-        },
-        {
-          "name": "SUNNYSIDE MJ",
-          "value": 1
-        },
-        {
-          "name": "SUPER JUNIOR-D&E",
-          "value": 1
-        },
-        {
-          "name": "Sade",
-          "value": 1
-        },
-        {
-          "name": "Salako",
-          "value": 1
-        },
-        {
-          "name": "Samuel",
-          "value": 1
-        },
-        {
-          "name": "Secondhand Serenade",
-          "value": 1
-        },
-        {
-          "name": "Secret Potion",
-          "value": 1
-        },
-        {
-          "name": "Shoko Makinohara(CV:Inori Minase)",
-          "value": 1
-        },
-        {
-          "name": "Shortie",
-          "value": 1
-        },
-        {
-          "name": "Slom",
-          "value": 1
-        },
-        {
-          "name": "Social House",
-          "value": 1
-        },
-        {
-          "name": "Soulja Boy Tell'em",
-          "value": 1
-        },
-        {
-          "name": "Soyou & Junggigo",
-          "value": 1
-        },
-        {
-          "name": "Specialhn",
-          "value": 1
-        },
-        {
-          "name": "Storys Funk - Ela ké Leitada",
-          "value": 1
-        },
-        {
-          "name": "Stray Kids",
-          "value": 1
-        },
-        {
-          "name": "Sumsher",
-          "value": 1
-        },
-        {
-          "name": "Suzy",
-          "value": 1
-        },
-        {
-          "name": "Swae Lee",
-          "value": 1
-        },
-        {
-          "name": "THE 8",
-          "value": 1
-        },
-        {
-          "name": "TORIDI GIVEND",
-          "value": 1
-        },
-        {
-          "name": "TRADE L",
-          "value": 1
-        },
-        {
-          "name": "TREASURE",
-          "value": 1
-        },
-        {
-          "name": "TVXQ!",
-          "value": 1
-        },
-        {
-          "name": "TWERNKATION28 - Kavkaz",
-          "value": 1
-        },
-        {
-          "name": "Takey",
-          "value": 1
-        },
-        {
-          "name": "Taylor Swift - All Too Well (Sad Girl Autumn Version)",
-          "value": 1
-        },
-        {
-          "name": "The Cardigans",
-          "value": 1
-        },
-        {
-          "name": "The Pharcyde",
-          "value": 1
-        },
-        {
-          "name": "Tomoe Koga(CV:Nao Toyama)",
-          "value": 1
-        },
-        {
-          "name": "Tribal Kush",
-          "value": 1
-        },
-        {
-          "name": "URock",
-          "value": 1
-        },
-        {
-          "name": "USPEER",
-          "value": 1
-        },
-        {
-          "name": "VAYONN",
-          "value": 1
-        },
-        {
-          "name": "Vedo",
-          "value": 1
-        },
-        {
-          "name": "Vernon",
-          "value": 1
-        },
-        {
-          "name": "Votabias",
-          "value": 1
-        },
-        {
-          "name": "Way Ched",
-          "value": 1
-        },
-        {
-          "name": "Westwood",
-          "value": 1
-        },
-        {
-          "name": "Wonder Girls",
-          "value": 1
-        },
-        {
-          "name": "World Scout: The Final Piece",
-          "value": 1
-        },
-        {
-          "name": "XLOV",
-          "value": 1
-        },
-        {
-          "name": "Xkashi",
-          "value": 1
-        },
-        {
-          "name": "YUGYEOM",
-          "value": 1
-        },
-        {
-          "name": "YooA",
-          "value": 1
-        },
-        {
-          "name": "Yuki Chiba",
-          "value": 1
-        },
-        {
-          "name": "ZEROBASEONE",
-          "value": 1
-        },
-        {
-          "name": "Zorven",
-          "value": 1
-        },
-        {
-          "name": "absurd.excrod",
-          "value": 1
-        },
-        {
-          "name": "andrew_artspace",
-          "value": 1
-        },
-        {
-          "name": "angelfabulosoo",
-          "value": 1
-        },
-        {
-          "name": "archive_rescene",
-          "value": 1
-        },
-        {
-          "name": "bbsayitditto",
-          "value": 1
-        },
-        {
-          "name": "boodmag",
-          "value": 1
-        },
-        {
-          "name": "cordeiro xavier",
-          "value": 1
-        },
-        {
-          "name": "dip_magazine",
-          "value": 1
-        },
-        {
-          "name": "dori",
-          "value": 1
-        },
-        {
-          "name": "dotori sounds",
-          "value": 1
-        },
-        {
-          "name": "emilogue",
-          "value": 1
-        },
-        {
-          "name": "eyesmag",
-          "value": 1
-        },
-        {
-          "name": "f(x)",
-          "value": 1
-        },
-        {
-          "name": "fhyzhicz04",
-          "value": 1
-        },
-        {
-          "name": "goback_you",
-          "value": 1
-        },
-        {
-          "name": "halcali",
-          "value": 1
-        },
-        {
-          "name": "ifeye",
-          "value": 1
-        },
-        {
-          "name": "izna_offcl",
-          "value": 1
-        },
-        {
-          "name": "jeff_guo2021",
-          "value": 1
-        },
-        {
-          "name": "jehoda",
-          "value": 1
-        },
-        {
-          "name": "lararajagopalan1",
-          "value": 1
-        },
-        {
-          "name": "lhuiczy",
-          "value": 1
-        },
-        {
-          "name": "lujaen_art",
-          "value": 1
-        },
-        {
-          "name": "miss A",
-          "value": 1
-        },
-        {
-          "name": "momo_dance923",
-          "value": 1
-        },
-        {
-          "name": "noli",
-          "value": 1
-        },
-        {
-          "name": "ovg!",
-          "value": 1
-        },
-        {
-          "name": "prod.jk8",
-          "value": 1
-        },
-        {
-          "name": "prodshushy",
-          "value": 1
-        },
-        {
-          "name": "pryme!",
-          "value": 1
-        },
-        {
-          "name": "punchnello",
-          "value": 1
-        },
-        {
-          "name": "riemiour",
-          "value": 1
-        },
-        {
-          "name": "rose.babymons7er",
-          "value": 1
-        },
-        {
-          "name": "rudo made it",
-          "value": 1
-        },
-        {
-          "name": "sakuracloud",
-          "value": 1
-        },
-        {
-          "name": "shushubobo",
-          "value": 1
-        },
-        {
-          "name": "simplymarkanthony",
-          "value": 1
-        },
-        {
-          "name": "singlesmagazine",
-          "value": 1
-        },
-        {
-          "name": "siso(시소)",
-          "value": 1
-        },
-        {
-          "name": "slowed + reverb",
-          "value": 1
-        },
-        {
-          "name": "slurpee_pinky - Hearts2Hearts",
-          "value": 1
-        },
-        {
-          "name": "sped upped",
-          "value": 1
-        },
-        {
-          "name": "ss.__.bm - KISS OF LIFE",
-          "value": 1
-        },
-        {
-          "name": "ted.archive",
-          "value": 1
-        },
-        {
-          "name": "tiayu_tyty",
-          "value": 1
-        },
-        {
-          "name": "tripleS",
-          "value": 1
-        },
-        {
-          "name": "wawip",
-          "value": 1
-        },
-        {
-          "name": "xoxo.cortisology",
-          "value": 1
-        },
-        {
-          "name": "zxcphonkk?",
-          "value": 1
-        },
-        {
-          "name": "ดิด คิตตี้",
-          "value": 1
-        },
-        {
-          "name": "さんうさぎ",
-          "value": 1
-        },
-        {
-          "name": "丢丢",
-          "value": 1
-        },
-        {
-          "name": "天逸",
-          "value": 1
-        },
-        {
-          "name": "徐靖雯",
-          "value": 1
-        },
-        {
-          "name": "楽音",
-          "value": 1
-        },
-        {
-          "name": "永彬Ryan.B",
-          "value": 1
-        },
-        {
-          "name": "王忻辰",
-          "value": 1
-        },
-        {
-          "name": "나뭇가쥐",
-          "value": 1
-        },
-        {
-          "name": "리쌍 LeeSSang",
-          "value": 1
-        },
-        {
-          "name": "모두의 브금",
-          "value": 1
-        },
-        {
-          "name": "이달의 소녀",
-          "value": 1
-        },
-        {
-          "name": "토끼양",
-          "value": 1
-        },
-        {
-          "name": "포근",
-          "value": 1
-        },
-        {
-          "name": "한민주",
-          "value": 1
         }
-      ]
+      ],
+      "section": "pre",
+      "title": "차트 밖에서 도는 팀 · 최고 일간 게시수",
+      "question": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?",
+      "definition": "이번 창의 차트 온셋이 없고 소셜 온셋만 있는 팀. 값은 그 팀의 하루 최고 게시수다. 조사·모니터 후보이며 진출 지시가 아니다."
     },
     {
       "type": "tunable",
-      "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
+      "id": "leadlag-tuner",
+      "reliability": {
+        "sample": "시계열이 있는 팀 378팀"
+      },
       "data": {
         "view": "leadlag",
         "socialDates": [
@@ -46235,7 +45137,11 @@
           }
         },
         "note": "기준값은 조정 가능한 가설. 슬라이더는 탐색용이고 리포트 수치는 고정 기준으로 산출. '좌측 절단' = 차트 온셋이 수집 개시일과 같아 이전 진입을 배제 못하는 상태(축적되면 풀림). 선행 = 시간 순서일 뿐 인과 아님"
-      }
+      },
+      "section": "tuner",
+      "title": "온셋 기준을 움직여 다시 분류하기",
+      "question": "기준을 바꾸면 어느 팀이 선행으로 남나?",
+      "definition": "두 슬라이더는 소셜·차트의 온셋 기준이다. 화면 안에서 분류를 다시 계산할 뿐 원자료와 원장의 기준값을 바꾸지 않는다."
     }
   ],
   "media": [],
@@ -46267,5 +45173,109 @@
     "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",
     "온셋 기준값은 담당자 판단으로 조정 가능. 기준은 조정 가능한 가설",
     "소셜-온리 관측대상은 조사 우선순위 후보일 뿐 확정 아님. 개별 검증 필요"
+  ],
+  "summary": {
+    "type": "bar",
+    "id": "class-mix",
+    "title": "어느 쪽이 먼저였나",
+    "question": "소셜이 먼저인 사례와 차트가 먼저인 사례 중 어느 쪽이 많나?",
+    "definition": "두 신호의 온셋 순서로 팀을 가른 수. 차트 온셋이 없어 순서를 잴 수 없는 팀 264팀은 여기 없고 '차트 밖' 구획에 있다(같은 눈금에 얹으면 그 수가 커서 비교가 눌린다). 순서는 시간 순서일 뿐 인과가 아니며, 두 창의 시작이 다르면 이 구성도 함께 흔들린다.",
+    "data": [
+      {
+        "name": "소셜이 먼저",
+        "value": 62
+      },
+      {
+        "name": "차트가 먼저",
+        "value": 44
+      },
+      {
+        "name": "같은 날",
+        "value": 8
+      }
+    ]
+  },
+  "questions": [
+    {
+      "q": "소셜이 먼저인 사례와 차트가 먼저인 사례 중 어느 쪽이 많나?",
+      "chartId": "class-mix"
+    },
+    {
+      "q": "소셜이 먼저 움직인 팀은 얼마나 먼저였나?",
+      "chartId": "lead-days"
+    },
+    {
+      "q": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?",
+      "chartId": "social-only"
+    },
+    {
+      "q": "기준을 바꾸면 어느 팀이 선행으로 남나?",
+      "chartId": "leadlag-tuner"
+    }
+  ],
+  "notAnswered": [
+    "이 버즈가 차트 진입을 만들었는지. 이 화면이 재는 것은 시간 순서까지다",
+    "버즈 없이 차트에 오른 곡이 어떻게 올랐는지. 여기 대상은 버즈가 있는 팀이다",
+    "해시태그를 붙이지 않은 확산. 소셜 쪽 표본은 태그와 사운드 라벨에 매여 있다",
+    "수집을 시작하기 전의 순위 이력. 그 이전은 좌측 절단이라 알 수 없다",
+    "같은 팀에서 선행이 다시 관측되는지. 창이 짧아 재현성은 아직 보지 못한다"
+  ],
+  "reliability": {
+    "sample": "추적 378팀 · 두 신호가 다 있는 팀 114팀 · 소셜 2026-03-10..2026-07-29 / 차트 2026-07-17..2026-07-30",
+    "accuracy": "이름 매칭은 공용 아티스트 사전 기준. 온셋은 수집 창 안에서만 정해지며 정확도 미측정",
+    "missing": "수집 개시일과 차트 온셋이 같은 팀은 좌측 절단이라 '그날 진입'과 '이미 있었음'을 구분하지 못한다",
+    "engine": "signal-bridge · 소셜 온셋 ≥1건/일 · 차트 온셋 ≤200위"
+  },
+  "inferences": [
+    {
+      "text": "소셜 선행이 항상 성립하지는 않는 상태와 정합한다. 소셜이 먼저인 팀이 62팀, 차트가 먼저인 팀이 44팀이다.",
+      "basis": "두 신호가 다 있는 114팀 중 소셜 선행 62팀 · 차트 선행 44팀",
+      "sample": "두 신호가 다 있는 팀 114팀",
+      "confidence": "high",
+      "limits": "온셋은 수집 창 안에서만 정해진다. 두 창의 시작이 다르면 이 구성도 함께 흔들린다.",
+      "chartId": "class-mix"
+    },
+    {
+      "text": "선행 62팀 중 표본과 절단을 함께 통과한 팀은 1팀으로 읽힌다.",
+      "basis": "표본 20건 이상 · 차트 온셋 비검열 = 1팀 / 선행 62팀",
+      "sample": "소셜 선행 62팀",
+      "confidence": "medium",
+      "limits": "표본 부족은 기준값의 문제이고 절단은 시간이 푸는 문제라, 두 축은 성격이 다르다. 남은 팀도 판정이 아니라 검토 대상이다.",
+      "chartId": "lead-days"
+    },
+    {
+      "text": "회고로 잰 선행 일수가 창의 산물일 수 있는 상태와 정합한다. 소셜 창이 차트 창보다 먼저 시작한다.",
+      "basis": "소셜 2026-03-10..2026-07-29 · 차트 2026-07-17..2026-07-30",
+      "sample": "두 신호가 다 있는 팀 114팀",
+      "confidence": "high",
+      "limits": "태그 수집은 과거 게시물을 함께 가져오므로 소셜 쪽 시작이 앞당겨진다. 방향 판단은 앞으로의 축적으로 본다.",
+      "chartId": "lead-days"
+    }
+  ],
+  "sections": [
+    {
+      "id": "leadlag",
+      "label": "선행·지연",
+      "question": "소셜과 차트 중 어느 쪽이 먼저 움직였나?",
+      "note": "일수는 시간 순서일 뿐 인과가 아니다. 두 창의 시작이 다르면 회고로 잰 선행 일수는 창의 산물일 수 있고, 수집 개시일과 온셋이 같은 팀은 '그날 진입'과 '이미 있었음'을 구분하지 못한다."
+    },
+    {
+      "id": "example",
+      "label": "한 팀 보기",
+      "question": "한 팀에서 두 신호는 실제로 어떻게 겹치나?",
+      "note": "두 축은 단위가 달라 0~1로 각각 정규화한 값이다. 선의 높낮이를 서로 견주지 않고 **오르내리는 시점**만 본다."
+    },
+    {
+      "id": "pre",
+      "label": "차트 밖",
+      "question": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?",
+      "note": "차트에 없다는 것은 이번 수집 창의 차트에서 보이지 않았다는 뜻이다. 조사 후보이며 진출 지시가 아니다."
+    },
+    {
+      "id": "tuner",
+      "label": "기준",
+      "question": "기준을 움직이면 분류가 어떻게 달라지나?",
+      "note": "온셋 기준은 담당자가 소유한다. 여기서 움직이는 것은 화면 안의 계산이다."
+    }
   ]
 }

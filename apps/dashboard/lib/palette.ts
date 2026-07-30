@@ -4,11 +4,17 @@
 const SEQ_LIGHT = ["#2e1065", "#4c1d95", "#6d28d9", "#8b5cf6", "#a78bfa", "#ddd6fe"];
 const SEQ_DARK = ["#c4b5fd", "#a78bfa", "#8b5cf6", "#6d28d9", "#5b21b6", "#3c1a78"];
 
-export function rankColor(rank: number, maxRank: number, dark: boolean): string {
+// 시퀀셜 램프 위의 한 점. t=0 이 가장 진한 끝(강함), t=1 이 가장 옅은 끝이다.
+// 순위든 값이든 **어느 끝이 강한가를 부르는 쪽이 정하고** 여기에는 t만 넘긴다.
+export function seqColor(t: number, dark: boolean): string {
   const ramp = dark ? SEQ_DARK : SEQ_LIGHT;
-  if (maxRank <= 1) return ramp[0];
-  const t = Math.min(1, Math.max(0, (rank - 1) / (maxRank - 1)));
-  return ramp[Math.round(t * (ramp.length - 1))];
+  const u = Math.min(1, Math.max(0, t));
+  return ramp[Math.round(u * (ramp.length - 1))];
+}
+
+export function rankColor(rank: number, maxRank: number, dark: boolean): string {
+  if (maxRank <= 1) return seqColor(0, dark);
+  return seqColor((rank - 1) / (maxRank - 1), dark);
 }
 
 // Contrast-safe ink for text on a given fill (WCAG relative luminance).

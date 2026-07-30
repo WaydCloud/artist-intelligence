@@ -54,7 +54,17 @@ def _num(v: object) -> bool:
 # 그 규율을 무력화한다). 그래서 스키마는 필드를 **선택**으로 열어 두고, 탭이 실제로
 # 완성될 때 여기 한 줄을 추가한다. **이 목록에 없는 모듈은 게이트를 우회하는 것이
 # 아니라 아직 계약을 채택하지 않은 것이다** — 목록이 줄지 않고 멈추면 그게 신호다.
-ADOPTED_MODULES = frozenset({"sonic-profile", "chart-history"})
+#
+# 2026-07-30: **여섯 모듈 전부 채택 완료.** 새 모듈은 여기 한 줄을 추가하는 것으로
+# 계약에 들어온다(추가하지 않으면 R1~R8이 걸리지 않는다는 뜻이므로 그것도 결정이다).
+ADOPTED_MODULES = frozenset({
+    "sonic-profile",
+    "chart-history",
+    "fandom-pulse",
+    "yt-pulse",
+    "genre-impulse",
+    "signal-bridge",
+})
 
 # 구획 하나가 담을 수 있는 차트 수 (D-043 · 도메인 소유자 지시 2026-07-30:
 # "하나의 채널에는 최대 3가지의 정보만 담는다. 페이지가 극도로 길어지더라도").
@@ -369,26 +379,32 @@ _CASES: list[tuple[str, dict[str, Any], bool]] = [
 ]
 
 # 리포트 층(R1~R8) — 차트 하나로는 표현할 수 없는 계약. 채택 모듈 강제는 moduleId로 갈린다.
+#
+# 미채택 쪽 케이스에는 **실재하지 않는 모듈 id**를 쓴다. 실제 모듈 이름(예: yt-pulse)을
+# 쓰면 그 모듈이 계약을 채택하는 날 selftest가 무더기로 깨진다 — 실제로 6모듈이 전부
+# 채택되던 날 리포트 층 20건 중 6건이 그렇게 빨개졌다. 이 표가 검사하는 것은
+# **"목록에 없으면 면제된다"는 규칙**이지 특정 모듈이 아니다.
+_UNADOPTED = "not-adopted-module"
 _REPORT_CASES: list[tuple[str, dict[str, Any], bool]] = [
-    ("미채택 모듈은 R1~R8 면제", {"moduleId": "yt-pulse", "charts": []}, True),
-    ("끊긴 질문 앵커", {"moduleId": "yt-pulse", "charts": [{"type": "bar", "id": "a", "data": []}],
+    ("미채택 모듈은 R1~R8 면제", {"moduleId": _UNADOPTED, "charts": []}, True),
+    ("끊긴 질문 앵커", {"moduleId": _UNADOPTED, "charts": [{"type": "bar", "id": "a", "data": []}],
                   "questions": [{"q": "?", "chartId": "nope"}]}, False),
-    ("정상 질문 앵커", {"moduleId": "yt-pulse", "charts": [{"type": "bar", "id": "a", "data": []}],
+    ("정상 질문 앵커", {"moduleId": _UNADOPTED, "charts": [{"type": "bar", "id": "a", "data": []}],
                   "questions": [{"q": "?", "chartId": "a"}]}, True),
-    ("요약을 가리키는 앵커(유효)", {"moduleId": "yt-pulse", "charts": [],
+    ("요약을 가리키는 앵커(유효)", {"moduleId": _UNADOPTED, "charts": [],
                        "summary": {"type": "radar", "id": "s", "data": {"axes": []}},
                        "questions": [{"q": "?", "chartId": "s"}]}, True),
-    ("차트 id 중복", {"moduleId": "yt-pulse", "charts": [
+    ("차트 id 중복", {"moduleId": _UNADOPTED, "charts": [
         {"type": "bar", "id": "a", "data": []}, {"type": "bar", "id": "a", "data": []}]}, False),
-    ("추론 인과 단정", {"moduleId": "yt-pulse", "charts": [], "inferences": [
+    ("추론 인과 단정", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "저역이 낮기 때문이다", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, False),
-    ("추론 명령형", {"moduleId": "yt-pulse", "charts": [], "inferences": [
+    ("추론 명령형", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "이 축을 확인하십시오", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, False),
-    ("추론 예측 단정", {"moduleId": "yt-pulse", "charts": [], "inferences": [
+    ("추론 예측 단정", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "차트에 진입할 것이다", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, False),
-    ("추론 em dash", {"moduleId": "yt-pulse", "charts": [], "inferences": [
+    ("추론 em dash", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "저역 축과 정합한다 — 표본 주의", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, False),
-    ("추론 허용 어법", {"moduleId": "yt-pulse", "charts": [], "inferences": [
+    ("추론 허용 어법", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "저역이 높은 쪽과 정합하는 신호가 있다", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, True),
     ("채택 모듈: 요약·질문·신뢰도 누락", {"moduleId": "sonic-profile", "charts": []}, False),
     ("채택 모듈: 차트에 question 없음", {
@@ -404,22 +420,22 @@ _REPORT_CASES: list[tuple[str, dict[str, Any], bool]] = [
         "notAnswered": ["x"], "reliability": {"sample": "n=1", "engine": "e"},
         "charts": [{"type": "bar", "id": "a", "question": "q", "data": []}]}, True),
     # ── 구획(D-043)
-    ("구획 정상", {"moduleId": "yt-pulse", "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
+    ("구획 정상", {"moduleId": _UNADOPTED, "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
                 "charts": [{"type": "bar", "id": "c1", "section": "a", "data": []},
                            {"type": "bar", "id": "c2", "section": "b", "data": []}]}, True),
-    ("구획 상한 초과(4개)", {"moduleId": "yt-pulse", "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
+    ("구획 상한 초과(4개)", {"moduleId": _UNADOPTED, "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
                       "charts": [{"type": "bar", "id": f"c{i}", "section": "a", "data": []} for i in range(4)]
                       + [{"type": "bar", "id": "cz", "section": "b", "data": []}]}, False),
-    ("구획 미배정 차트", {"moduleId": "yt-pulse", "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
+    ("구획 미배정 차트", {"moduleId": _UNADOPTED, "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
                     "charts": [{"type": "bar", "id": "c1", "section": "a", "data": []},
                                {"type": "bar", "id": "c2", "section": "b", "data": []},
                                {"type": "bar", "id": "c3", "data": []}]}, False),
-    ("없는 구획 참조", {"moduleId": "yt-pulse", "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
+    ("없는 구획 참조", {"moduleId": _UNADOPTED, "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
                    "charts": [{"type": "bar", "id": "c1", "section": "a", "data": []},
                               {"type": "bar", "id": "c2", "section": "zz", "data": []}]}, False),
-    ("빈 구획", {"moduleId": "yt-pulse", "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
+    ("빈 구획", {"moduleId": _UNADOPTED, "sections": [{"id": "a", "label": "A"}, {"id": "b", "label": "B"}],
                "charts": [{"type": "bar", "id": "c1", "section": "a", "data": []}]}, False),
-    ("구획 미선언은 면제", {"moduleId": "yt-pulse", "charts": [{"type": "bar", "id": "c1", "data": []}]}, True),
+    ("구획 미선언은 면제", {"moduleId": _UNADOPTED, "charts": [{"type": "bar", "id": "c1", "data": []}]}, True),
     ("채택 모듈: 신뢰도 engine 누락", {
         "moduleId": "sonic-profile",
         "summary": {"type": "radar", "id": "s", "question": "q", "data": {"axes": []}},
@@ -448,6 +464,13 @@ _SCHEMA_CASES: list[tuple[str, dict[str, Any], bool]] = [
     ("heatmap 정상", {"type": "heatmap", "data": {"rows": ["r"], "cols": ["c"], "cells": [[1]]}}, True),
     ("heatmap cells 1차원", {"type": "heatmap", "data": {"rows": ["r"], "cols": ["c"], "cells": [1]}}, False),
     ("heatmap cols 누락", {"type": "heatmap", "data": {"rows": ["r"], "cells": [[1]]}}, False),
+    # 값의 방향(D-044). 방향을 못 싣게 두면 백분위 격자가 순위처럼 칠해진다.
+    ("heatmap 값 방향 + 범례 문구", {"type": "heatmap", "data": {
+        "rows": ["r"], "cols": ["c"], "cells": [[1]], "scale": "value",
+        "strongLabel": "코호트 상위", "weakLabel": "코호트 하위", "emptyLabel": "축 결측",
+        "valuePrefix": "백분위 "}}, True),
+    ("heatmap 모르는 방향", {"type": "heatmap", "data": {
+        "rows": ["r"], "cols": ["c"], "cells": [[1]], "scale": "sideways"}}, False),
     ("tunable 정상", {"type": "tunable", "data": {"view": "rhythm", "bins": 16, "templates": {}}}, True),
     ("tunable view 없음", {"type": "tunable", "data": {"bins": 16}}, False),
     ("tunable knob 필드 누락",

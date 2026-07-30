@@ -35,6 +35,7 @@
 | **최근작 창** | 채널당 최근 업로드 `--per-channel`개 (기본 5) | 관습 | `--per-channel` | 최근 활동 표본 — 전체 카탈로그가 아니라 현재 화력 | TESTS B | 업로드 빈도 높은 채널은 창이 짧아짐 |
 | **대표 velocity**(signals) | act별 최근작 중 **최대** 평균 일 조회 | 관습 | — | act의 '지금 가장 빠른 콘텐츠' = 시리즈 대표값 | TESTS D | 단일 대표값이라 분포 은닉 — 상세는 report/프로필 |
 | **채널 화력 베이스** | 구독자 수(수집 시점) | 관습 | — | 도달 가능 규모의 공개 베이스라인 | TESTS B | 구독자≠활성 팬덤(§5) |
+| **팀별 최근 업로드 수**(v1.1 차트) | 판정 기간 안에 공개된 영상 수(act별) | 관습 | `--recent-days` | 업로드 케이던스 = 캠페인이 도는지의 직접 증거. 조회 합(누적)·velocity(속도)가 답하지 않는 셋째 축 | TESTS L | 채널 캐시가 최근 업로드 위주라 이 수는 수집 창의 산물이기도 함. **활동량이며 성과가 아님**(§5) |
 
 - **`charts[].data` 규약**: bar=`[{name,value}]` · line=`{x,series}` (공유 렌더 계약).
 - **signal-series**(`signals`): `signal:"yt-velocity"` · `unit:"avg views/day"` · `higherIsStronger:true` · 날짜=스냅샷 수집일 · 선택 필드 `subscribers`(act→구독자)·`videos`(act→대표작 {title,views,avg_daily,published_at}) — 브리지 프로필 소비(SPEC의 signal-bridge 계약 준수).
@@ -42,8 +43,10 @@
 ## 4. 출력 규칙 (report.json)
 
 - `moduleId = "yt-pulse"`. 공유 report-schema 준수. `generatedAt` 외 비결정 금지(정렬 고정).
-- 채널 미해석/영상 0이어도 크래시 금지 — 유효 report + insight 명시.
+- 채널 미해석/영상 0이어도 크래시 금지 — 유효 report + insight 명시. **빈 스냅샷도 시각화 계약을 지킨다**(요약 도형은 빈 막대, 구획 미선언).
 - `insights` **반드시 병기**: (a) 공식 채널 한정(레이블 채널 MV 미포착), (b) velocity는 수명 평균 근사(다일 축적이 본선), (c) 조회수≠인기·실력 단정 아님(§0·§5).
+- **시각화 계약 채택**(D-041·D-042·D-043): `summary`(R2) · `questions`(R1) · `charts[].question`(R3) · `inferences`(R4) · `definition`(R5) · `notAnswered`(R7) · `reliability`(R8) · `sections`(구획) 전부 산출. 배치는 [`SPEC.md`](SPEC.md) UX, 문구는 `report.py`의 `_SECTIONS`·`_CHART_META`·`_METRIC_META` 세 표에 모은다.
+- **추론은 관측이 실제로 그럴 때만 낸다.** 업로드 쏠림은 1위가 중앙값의 2배 이상일 때만, 속도 쏠림은 5배 이상일 때만 문장이 나간다 — 5·5·5를 놓고 "몰렸다"고 말하는 순간 배지는 신뢰가 아니라 장식이 된다.
 
 ## 5. 금지 (윤리 · 과대주장 — §0·§5)
 

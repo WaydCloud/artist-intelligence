@@ -2,84 +2,138 @@
   "moduleId": "genre-impulse",
   "title": "장르 임펄스 모니터",
   "subtitle": "원장 10건 × 코호트 102곡 (2026-07-30.json) · v0.1.0",
-  "generatedAt": "2026-07-30T00:59:48.191770+00:00",
+  "generatedAt": "2026-07-30T08:39:42.420704+00:00",
   "metrics": [
     {
       "label": "원장 임펄스",
       "value": 10,
-      "unit": "건"
+      "unit": "건",
+      "section": "tuner",
+      "definition": "임펄스 원장에 등재된 장르 흐름의 수. 스키마를 어긴 항목은 세지 않고 따로 보고한다."
     },
     {
-      "label": "검출 규칙 확정",
+      "label": "관측 가능한 임펄스",
       "value": 1,
       "unit": "건",
-      "hint": "커버리지 1/10 — 축 공백·스템 잠금은 RULES §2.2"
+      "hint": "원장 10건 중 · 축 공백·스템 잠금은 RULES §2.2",
+      "section": "tuner",
+      "definition": "실측으로 검증된 검출 규칙이 있는 임펄스의 수. 나머지는 이 화면에서 관측되지 않으며, 관측되지 않는 것과 일어나지 않는 것은 다르다."
     },
     {
-      "label": "당일 코호트",
+      "label": "오늘 본 곡",
       "value": 102,
-      "unit": "곡"
+      "unit": "곡",
+      "section": "matches",
+      "definition": "이번 실행에서 세 축이 모두 계산된 곡의 수. 백분위의 분모이며, 이 집합이 바뀌면 같은 곡의 백분위도 바뀐다."
     },
     {
-      "label": "규칙 매치",
+      "label": "규칙에 걸린 곡",
       "value": 11,
-      "unit": "곡"
+      "unit": "곡",
+      "section": "matches",
+      "definition": "확정된 검출 규칙의 하한·상한 조건을 모두 만족한 곡의 수. 검토 후보이지 판정이 아니다."
     }
   ],
   "charts": [
     {
-      "type": "bar",
-      "title": "검출 매치 · organic_ratio 코호트 백분위 (낮을수록 규칙 부합)",
-      "data": [
-        {
-          "name": "최예나 - 캐치 캐치",
-          "value": 1.0
-        },
-        {
-          "name": "RIIZE - Do your dance",
-          "value": 2.0
-        },
-        {
-          "name": "★코르티스 - REDRED",
-          "value": 3.9
-        },
-        {
-          "name": "NCT WISH - BOY MEETS GIRL",
-          "value": 6.9
-        },
-        {
-          "name": "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
-          "value": 7.8
-        },
-        {
-          "name": "★코르티스 - YOUNGCREATORCREW",
-          "value": 12.7
-        },
-        {
-          "name": "★Keyveatz - Key Beats",
-          "value": 13.7
-        },
-        {
-          "name": "NMIXX - Heavy Serenade",
-          "value": 14.7
-        },
-        {
-          "name": "★키키 - 404 (New Era)",
-          "value": 15.7
-        },
-        {
-          "name": "Young K - Shut The Door",
-          "value": 16.7
-        },
-        {
-          "name": "뉴진스 - Bubble Gum",
-          "value": 17.6
-        }
-      ]
+      "type": "heatmap",
+      "id": "match-axes",
+      "reliability": {
+        "sample": "매치 11곡 / 코호트 102곡"
+      },
+      "data": {
+        "rows": [
+          "최예나 - 캐치 캐치",
+          "RIIZE - Do your dance",
+          "★코르티스 - REDRED",
+          "NCT WISH - BOY MEETS GIRL",
+          "르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE",
+          "★코르티스 - YOUNGCREATORCREW",
+          "★Keyveatz - Key Beats",
+          "NMIXX - Heavy Serenade",
+          "★키키 - 404 (New Era)",
+          "Young K - Shut The Door",
+          "뉴진스 - Bubble Gum"
+        ],
+        "cols": [
+          "유기음 비율",
+          "인터샘플 피크 비율",
+          "스펙트럼 평탄도"
+        ],
+        "cells": [
+          [
+            1.0,
+            62.7,
+            97.1
+          ],
+          [
+            2.0,
+            94.1,
+            84.3
+          ],
+          [
+            3.9,
+            91.2,
+            85.3
+          ],
+          [
+            6.9,
+            70.6,
+            92.2
+          ],
+          [
+            7.8,
+            99.0,
+            50.0
+          ],
+          [
+            12.7,
+            16.7,
+            99.0
+          ],
+          [
+            13.7,
+            93.1,
+            73.5
+          ],
+          [
+            14.7,
+            98.0,
+            81.4
+          ],
+          [
+            15.7,
+            80.4,
+            98.0
+          ],
+          [
+            16.7,
+            54.9,
+            87.3
+          ],
+          [
+            17.6,
+            59.8,
+            90.2
+          ]
+        ],
+        "scale": "value",
+        "strongLabel": "코호트 상위",
+        "weakLabel": "코호트 하위",
+        "emptyLabel": "축 결측",
+        "valuePrefix": "백분위 "
+      },
+      "section": "matches",
+      "title": "규칙에 걸린 곡의 축별 위치",
+      "question": "그 곡들은 어느 축에서 그렇게 걸렸나?",
+      "definition": "칸의 값은 그날 코호트 안에서의 백분위(0~100)이고, 진할수록 코호트 상위다. 규칙은 유기음 비율이 낮고 나머지 축 중 하나가 높은 곡을 고르므로, 걸린 곡은 첫 열이 옅고 나머지 중 하나가 진하다. 이름 앞의 ★는 워치리스트 팀이라는 표시다."
     },
     {
       "type": "tunable",
-      "title": "임계 튜너 — 백분위 컷 재계산 (값=A&R 소유)",
+      "id": "impulse-tuner",
+      "reliability": {
+        "sample": "코호트 102곡 · 축 3종"
+      },
       "data": {
         "view": "impulse-rules",
         "lowPct": 20.0,
@@ -89,6 +143,11 @@
           "over_unity_ratio",
           "spectral_flatness"
         ],
+        "axisLabels": {
+          "organic_ratio": "유기음 비율",
+          "over_unity_ratio": "인터샘플 피크 비율",
+          "spectral_flatness": "스펙트럼 평탄도"
+        },
         "pools": {
           "organic_ratio": [
             0.0847,
@@ -1355,7 +1414,11 @@
           }
         ],
         "note": "유사 ≠ 도달. 매치는 후속 검토 후보이지 판정이 아니다."
-      }
+      },
+      "section": "tuner",
+      "title": "컷을 움직여 다시 세기",
+      "question": "컷을 바꾸면 어느 곡이 들어오고 나가나?",
+      "definition": "두 슬라이더는 규칙의 하한·상한 백분위다. 화면 안에서 매치를 다시 계산할 뿐 원장의 기준값을 바꾸지 않는다. 기준은 버전 매겨진 가설이다."
     }
   ],
   "media": [],
@@ -1363,17 +1426,7 @@
     "[정직성] 유사 ≠ 도달 — 매치는 검토 후보이지 예측이 아니다. 판단은 A&R의 몫.",
     "[정직성] 검출 규칙 커버리지 1/10 — 대부분의 임펄스는 아직 규칙이 없다(아래 관측 불가 표).",
     "[정직성] 백분위는 당일 코호트 내 상대 위치다 — 코호트 구성이 바뀌면 같은 곡도 값이 달라진다.",
-    "[매치] 최예나 - 캐치 캐치 — 규칙 hyperpop-texture (organic_ratio P1.0 · over_unity_ratio P62.7 · spectral_flatness P97.1)",
-    "[매치] RIIZE - Do your dance — 규칙 hyperpop-texture (organic_ratio P2.0 · over_unity_ratio P94.1 · spectral_flatness P84.3)",
-    "[매치] ★코르티스 - REDRED — 규칙 hyperpop-texture (organic_ratio P3.9 · over_unity_ratio P91.2 · spectral_flatness P85.3)",
-    "[매치] NCT WISH - BOY MEETS GIRL — 규칙 hyperpop-texture (organic_ratio P6.9 · over_unity_ratio P70.6 · spectral_flatness P92.2)",
-    "[매치] 르세라핌, 아일릿 & KATSEYE - ICONIC BY MISTAKE — 규칙 hyperpop-texture (organic_ratio P7.8 · over_unity_ratio P99.0 · spectral_flatness P50.0)",
-    "[매치] ★코르티스 - YOUNGCREATORCREW — 규칙 hyperpop-texture (organic_ratio P12.7 · over_unity_ratio P16.7 · spectral_flatness P99.0)",
-    "[매치] ★Keyveatz - Key Beats — 규칙 hyperpop-texture (organic_ratio P13.7 · over_unity_ratio P93.1 · spectral_flatness P73.5)",
-    "[매치] NMIXX - Heavy Serenade — 규칙 hyperpop-texture (organic_ratio P14.7 · over_unity_ratio P98.0 · spectral_flatness P81.4)",
-    "[매치] ★키키 - 404 (New Era) — 규칙 hyperpop-texture (organic_ratio P15.7 · over_unity_ratio P80.4 · spectral_flatness P98.0)",
-    "[매치] Young K - Shut The Door — 규칙 hyperpop-texture (organic_ratio P16.7 · over_unity_ratio P54.9 · spectral_flatness P87.3)",
-    "[매치] 뉴진스 - Bubble Gum — 규칙 hyperpop-texture (organic_ratio P17.6 · over_unity_ratio P59.8 · spectral_flatness P90.2)",
+    "[매치] 규칙 hyperpop-texture — 11곡 (곡별 위치는 격자 참조)",
     "[문맥] '하이퍼팝' 수용 모드: element (원장 1.0.0)",
     "[문맥] 과거 차용 앵커: aespa - Savage (2021-10, 확실성 매우 높음)",
     "[문맥] 과거 차용 앵커: TXT - Frost (2022-05, 확실성 중간)",
@@ -1382,19 +1435,111 @@
     "[문맥] 과거 차용 앵커: aespa - Hot Mess (2024-07, 확실성 중간)",
     "[문맥] 과거 차용 앵커: 최예나 - Catch Catch (2026-03, 확실성 중간)",
     "[문맥] 정체성화 전례: aespa '쇠맛' (언론 공식화 2024-05)",
-    "[규칙 근거] hyperpop-texture: A2.1 실측 2026-07-30 — Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1)",
-    "[관측 불가] 아마피아노: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 시티팝 리바이벌: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 드릴: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 이지리스닝: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 저지클럽/볼티모어클럽: stem-separation: 하프타임 스네어 판별(승인 대기); grid-32: 하이햇 롤(스템과 별개, 격자 해상도)",
-    "[관측 불가] 뭄바톤·트로피컬하우스: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 뉴잭스윙 리바이벌: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] 레게톤/뎀보우: 서명 상태 pending-a2 — 규칙 미도출",
-    "[관측 불가] UK개러지·드럼앤베이스 리바이벌: 서명 상태 pending-a2 — 규칙 미도출"
+    "[규칙 근거] hyperpop-texture: A2.1 실측 2026-07-30 — Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1)"
   ],
   "recommendations": [
     "매치 트랙은 요소 차용 관점의 청취 검토 후보다 — 과거 사례 문맥(모드·리드타임)과 함께 볼 것.",
     "규칙이 없는 임펄스의 신호는 이 리포트에 없다 — 부재를 '신호 없음'으로 읽지 말 것."
+  ],
+  "summary": {
+    "type": "bar",
+    "id": "impulse-coverage",
+    "title": "원장에서 관측 가능한 임펄스",
+    "question": "이 화면이 지금 관측할 수 있는 임펄스는 얼마나 되나?",
+    "definition": "검출 규칙이 확정된 임펄스만 이 화면에서 관측된다. 서명 작업 중은 무엇이 막고 있는지가 원장에 적혀 있는 상태이고, 나머지는 아직 서명 자체가 없다. 관측되지 않는 것과 일어나지 않는 것은 다르다.",
+    "reliability": {
+      "sample": "원장 10건"
+    },
+    "data": [
+      {
+        "name": "검출 규칙 확정",
+        "value": 1
+      },
+      {
+        "name": "서명 작업 중",
+        "value": 1
+      },
+      {
+        "name": "아직 서명 없음",
+        "value": 8
+      }
+    ]
+  },
+  "questions": [
+    {
+      "q": "이 화면이 지금 관측할 수 있는 임펄스는 얼마나 되나?",
+      "chartId": "impulse-coverage"
+    },
+    {
+      "q": "오늘 코호트에서 규칙에 걸린 곡은 무엇인가?",
+      "chartId": "match-axes"
+    },
+    {
+      "q": "그 곡들은 어느 축에서 걸렸나?",
+      "chartId": "match-axes"
+    },
+    {
+      "q": "컷을 바꾸면 어느 곡이 들어오고 나가나?",
+      "chartId": "impulse-tuner"
+    }
+  ],
+  "notAnswered": [
+    "이 곡들이 실제로 그 장르로 읽히는지. 사람 라벨이 없어 규칙의 정확도는 재지 않았다",
+    "요소 차용이 정체성으로 굳는지. 원장은 과거 전례를 들 뿐 지금 것을 판정하지 않는다",
+    "아마피아노 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "시티팝 리바이벌 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "드릴 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "이지리스닝 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "저지클럽/볼티모어클럽 흐름이 지금 도는지. stem-separation: 하프타임 스네어 판별(승인 대기); grid-32: 하이햇 롤(스템과 별개, 격자 해상도)",
+    "뭄바톤·트로피컬하우스 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "뉴잭스윙 리바이벌 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "레게톤/뎀보우 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)",
+    "UK개러지·드럼앤베이스 리바이벌 흐름이 지금 도는지. 서명이 아직 도출되지 않아 규칙이 없다(상태 pending-a2)"
+  ],
+  "reliability": {
+    "sample": "원장 10건 · 코호트 102곡 · 매치 11곡",
+    "accuracy": "검출 규칙은 과거 사례에서 뽑은 가설이다. 사람 라벨이 없어 정확도 미측정",
+    "missing": "세 축 중 하나라도 계산되지 않은 곡은 규칙을 적용하지 않는다(결측을 0으로 읽지 않는다)",
+    "engine": "genre-impulse v0.1.0 · 스냅샷 2026-07-30.json · 컷 P20/P80"
+  },
+  "inferences": [
+    {
+      "text": "이 화면의 침묵을 신호 없음으로 읽을 수 없는 상태와 정합한다. 원장 10건 중 규칙이 있는 것은 1건이다.",
+      "basis": "검출 규칙 1건 · 규칙 없는 임펄스 9건",
+      "sample": "원장 10건",
+      "confidence": "high",
+      "limits": "규칙이 없다는 것은 서명을 아직 못 뽑았다는 뜻이며, 그 임펄스가 조용하다는 뜻이 아니다.",
+      "chartId": "impulse-coverage"
+    },
+    {
+      "text": "코호트 102곡 중 11곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
+      "basis": "컷 P20/P80 · 매치 11/102곡 (11%)",
+      "sample": "코호트 102곡",
+      "confidence": "medium",
+      "limits": "이 수는 컷을 움직이면 함께 움직인다. 백분위는 그날 코호트 안에서의 상대 위치라 코호트 구성이 바뀌면 같은 곡도 다른 값을 받는다.",
+      "chartId": "match-axes"
+    },
+    {
+      "text": "워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. 4곡이다.",
+      "basis": "매치 11곡 중 워치리스트 4곡 · 코르티스 - REDRED, 코르티스 - YOUNGCREATORCREW, Keyveatz - Key Beats, 키키 - 404 (New Era)",
+      "sample": "워치리스트 11팀",
+      "confidence": "medium",
+      "limits": "걸렸다는 것은 세 축의 위치가 규칙과 맞았다는 뜻이며 그 곡이 그 장르라는 판정이 아니다.",
+      "chartId": "match-axes"
+    }
+  ],
+  "sections": [
+    {
+      "id": "matches",
+      "label": "매치",
+      "question": "오늘 코호트에서 규칙에 걸린 곡은 무엇인가?",
+      "note": "백분위는 그날 코호트 안에서의 상대 위치다. 코호트가 바뀌면 같은 곡의 값도 바뀐다. 걸렸다는 것은 요소가 닮았다는 뜻이며 도달이나 성공이 아니다."
+    },
+    {
+      "id": "tuner",
+      "label": "기준",
+      "question": "기준을 움직이면 걸리는 곡이 어떻게 달라지나?",
+      "note": "컷 값은 A&R이 소유한다. 여기서 움직이는 것은 화면 안의 계산이고 원장은 바뀌지 않는다."
+    }
   ]
 }

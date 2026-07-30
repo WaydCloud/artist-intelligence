@@ -1,66 +1,87 @@
 {
   "moduleId": "fandom-pulse",
   "title": "팬덤 펄스 · #kpopdance",
-  "subtitle": "Instagram / Apify apify~instagram-hashtag-scraper · 2026-07-19T03:08:23Z · 30건",
-  "generatedAt": "2026-07-20T02:48:32Z",
+  "subtitle": "Instagram 공개 해시태그 · 수집 2026-07-18 · 30건",
+  "generatedAt": "2026-07-30T08:14:35Z",
   "metrics": [
     {
       "label": "게시물 수",
       "value": 30,
-      "unit": "건"
+      "unit": "건",
+      "section": "cadence",
+      "definition": "이번 수집에서 저장된 공개 게시물 수. 이 태그 전체가 아니라 수집한 표본의 크기다."
     },
     {
       "label": "총 참여",
-      "value": 54632,
-      "unit": "likes+comments"
+      "value": 54968,
+      "unit": "likes+comments",
+      "section": "posts",
+      "definition": "표본 게시물의 좋아요와 댓글을 모두 더한 값."
     },
     {
       "label": "중앙값 좋아요",
-      "value": 890,
-      "unit": "likes"
+      "value": 969,
+      "unit": "likes",
+      "section": "posts",
+      "definition": "표본 게시물의 좋아요 수를 줄 세웠을 때 한가운데 값. 바이럴 한 건에 덜 흔들리도록 평균 대신 쓴다."
     },
     {
       "label": "중앙값 댓글",
-      "value": 16,
-      "unit": "comments"
+      "value": 23,
+      "unit": "comments",
+      "section": "posts",
+      "definition": "표본 게시물의 댓글 수를 줄 세웠을 때 한가운데 값."
     },
     {
       "label": "고참여 게시물",
       "value": 3,
       "unit": "건",
-      "hint": "상위 90분위(≥4558) 초과"
+      "hint": "이 표본 상위 10% 기준선 ≥ 4,443",
+      "section": "posts",
+      "definition": "좋아요와 댓글의 합이 표본 상위 분위 기준선 이상인 게시물 수. 절대값이 아니라 이 표본 안에서의 상대 위치로 세며, 기준 분위는 조정 가능한 가설이다."
     },
     {
       "label": "릴스 비중",
       "value": 100,
-      "unit": "%"
+      "unit": "%",
+      "section": "posts",
+      "definition": "표본에서 릴스(동영상)가 차지하는 비율."
     },
     {
       "label": "게시 가속",
-      "value": 2.0,
+      "value": 2.8,
       "unit": "건/일",
-      "hint": "2026-07-05~2026-07-18 최근−이전"
+      "hint": "최근 절반 − 이전 절반",
+      "section": "cadence",
+      "definition": "수집 창을 절반으로 갈라, 최근 절반의 하루 평균 게시수에서 이전 절반의 하루 평균을 뺀 값. 창이 짧으면 쉽게 뒤집힌다."
     },
     {
-      "label": "사운드 확산 아티스트",
+      "label": "곡 라벨로 잡힌 팀",
       "value": 14,
-      "unit": "팀"
+      "unit": "팀",
+      "section": "sounds",
+      "definition": "게시물의 사운드 라벨에서 한 번이라도 아티스트로 읽힌 팀의 수."
     },
     {
-      "label": "로스터 밖 확산",
-      "value": 7,
+      "label": "아티스트 사전에 없는 팀",
+      "value": 10,
       "unit": "팀",
-      "hint": "차트 로스터 미포함 소셜 활성"
+      "section": "sounds",
+      "definition": "곡 라벨로 잡힌 팀 중 공유 아티스트 사전에 없는 팀의 수. 사전은 차트 수집에서 만든 목록이라, 여기 없다는 것이 차트에 없다는 뜻은 아니다.",
+      "hint": "차트 수집으로 만든 사전에 없음"
     }
   ],
   "charts": [
     {
       "type": "bar",
-      "title": "Top 공동 해시태그",
+      "id": "co-hashtags",
+      "reliability": {
+        "sample": "해시태그가 붙은 게시물 30건 / 30건"
+      },
       "data": [
         {
           "name": "#dance",
-          "value": 6
+          "value": 7
         },
         {
           "name": "#fyp",
@@ -75,37 +96,52 @@
           "value": 4
         },
         {
-          "name": "#kpopdancecover",
-          "value": 4
-        },
-        {
           "name": "#bad",
-          "value": 4
-        },
-        {
-          "name": "#iconicbymistake",
-          "value": 2
+          "value": 3
         },
         {
           "name": "#dancecover",
-          "value": 2
+          "value": 3
+        },
+        {
+          "name": "#kpopdancecover",
+          "value": 3
         },
         {
           "name": "#challenge",
           "value": 2
         },
         {
-          "name": "#kpopcover",
+          "name": "#dancechallenge",
+          "value": 2
+        },
+        {
+          "name": "#kpopinpublic",
           "value": 2
         }
-      ]
+      ],
+      "section": "posts",
+      "title": "함께 붙은 해시태그",
+      "question": "이 태그를 쓰는 게시물은 어떤 태그를 같이 다나?",
+      "definition": "같은 게시물에 함께 붙은 다른 해시태그의 등장 횟수. 질의한 태그 자신은 뺀다. 무관한 태그를 붙인 게시물이 섞일 수 있다."
     },
     {
       "type": "line",
-      "title": "일별 게시량",
+      "id": "daily-posts",
+      "reliability": {
+        "sample": "2026-06-29~2026-07-17 19일(게시물이 있는 날 11일) · 30건"
+      },
       "data": {
         "x": [
+          "2026-06-29",
+          "2026-06-30",
+          "2026-07-01",
+          "2026-07-02",
+          "2026-07-03",
+          "2026-07-04",
           "2026-07-05",
+          "2026-07-06",
+          "2026-07-07",
           "2026-07-08",
           "2026-07-09",
           "2026-07-10",
@@ -115,56 +151,54 @@
           "2026-07-14",
           "2026-07-15",
           "2026-07-16",
-          "2026-07-17",
-          "2026-07-18"
+          "2026-07-17"
         ],
         "series": [
           {
             "name": "#kpopdance 게시물",
             "values": [
               1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
               1,
-              2,
-              2,
-              1,
-              2,
-              2,
-              6,
-              1,
-              6,
               3,
-              3
+              1,
+              1,
+              1,
+              3,
+              7,
+              1,
+              6,
+              5
             ]
           }
         ]
-      }
+      },
+      "section": "cadence",
+      "title": "하루당 게시물 수",
+      "question": "이 태그의 게시량이 늘고 있나, 줄고 있나?",
+      "definition": "게시 시각(UTC) 기준으로 하루에 몇 건이 올라왔는지. 수집한 표본 안에서의 값이며 그날 이 태그로 올라온 전체 게시물 수가 아니다."
     },
     {
       "type": "bar",
-      "title": "Top 사운드",
+      "id": "top-sounds",
+      "reliability": {
+        "sample": "곡 라벨이 있는 게시물 16건 / 30건",
+        "missing": "개인이 올린 오디오로 표기된 14건은 곡이 아니라 제외(계정명은 싣지 않는다)"
+      },
       "data": [
         {
+          "name": "ATEEZ - BAD",
+          "value": 4
+        },
+        {
           "name": "ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE",
-          "value": 2
-        },
-        {
-          "name": "ITZY - THAT'S A NO NO",
-          "value": 2
-        },
-        {
-          "name": "YENA - Catch Catch",
-          "value": 1
-        },
-        {
-          "name": "megatdream - Original audio",
-          "value": 1
-        },
-        {
-          "name": "ENHYPEN - Bad Desire (With or Without You) (English Ver.)",
-          "value": 1
-        },
-        {
-          "name": "i-dle - Gimme Dat Love",
           "value": 1
         },
         {
@@ -172,64 +206,37 @@
           "value": 1
         },
         {
-          "name": "itsjoymoves_ - Original audio",
+          "name": "i-dle - Gimme Dat Love",
+          "value": 1
+        },
+        {
+          "name": "ENHYPEN - Bad Desire (With or Without You) (English Ver.)",
+          "value": 1
+        },
+        {
+          "name": "ITZY - THAT'S A NO NO",
+          "value": 1
+        },
+        {
+          "name": "BOYNEXTDOOR - ADIOS!",
+          "value": 1
+        },
+        {
+          "name": "YooA - Bon voyage",
           "value": 1
         }
-      ]
-    },
-    {
-      "type": "bar",
-      "title": "Top 아티스트 · 사운드 확산",
-      "data": [
-        {
-          "name": "ILLIT",
-          "value": 2
-        },
-        {
-          "name": "LE SSERAFIM",
-          "value": 2
-        },
-        {
-          "name": "KATSEYE",
-          "value": 2
-        },
-        {
-          "name": "ITZY",
-          "value": 2
-        },
-        {
-          "name": "YENA",
-          "value": 1
-        },
-        {
-          "name": "ENHYPEN",
-          "value": 1
-        },
-        {
-          "name": "i-dle",
-          "value": 1
-        },
-        {
-          "name": "izna",
-          "value": 1
-        },
-        {
-          "name": "BABYMONSTER",
-          "value": 1
-        },
-        {
-          "name": "YEONJUN",
-          "value": 1
-        }
-      ]
+      ],
+      "section": "sounds",
+      "title": "가장 많이 쓰인 사운드",
+      "question": "이 태그의 게시물은 어떤 곡을 쓰고 있나?",
+      "definition": "게시물에 붙은 사운드 라벨을 표기 그대로 센 값. 같은 곡이라도 라벨 표기가 다르면 다른 항목으로 세어진다."
     }
   ],
   "media": [],
   "insights": [
-    "차트 로스터 밖 소셜 확산: ITZY, ENHYPEN, i-dle, iKON, YooA 등 7팀 · 차트(top-200)로 안 잡히는 소셜 활성(차트 진입 전 신인 포함, 조사 대상). 선행 신호일 뿐 진출 지시 아님",
     "사운드→아티스트 귀속은 공식 트랙 라벨 기준('Original audio'·협업 표기·표기차로 일부 누락). 참고 신호",
-    "#kpopdance 공개 게시물 30건 기준 · 총 참여 54,632(좋아요+댓글).",
-    "중앙값 좋아요 890 · 댓글 16 · 평균 대신 중앙값 사용(바이럴 1건에 덜 흔들림)",
+    "#kpopdance 공개 게시물 30건 기준 · 총 참여 54,968(좋아요+댓글).",
+    "중앙값 좋아요 969 · 댓글 23 · 평균 대신 중앙값 사용(바이럴 1건에 덜 흔들림)",
     "공동 해시태그 상위: #dance, #fyp, #ateez · 확산과 도달 맥락 참고용",
     "공개 인스타그램 표본이라 편향 가능. 공식 지표가 아니며 인기·품질의 단정 아님"
   ],
@@ -237,5 +244,119 @@
     "특정 그룹/컴백 해시태그로 fetch하면 그 캠페인의 화력·참여 신호를 집중 관측할 수 있습니다.",
     "다일 축적(collect)하면 게시 가속(모멘텀)을 실데이터 라인으로 볼 수 있습니다(v2).",
     "고참여 기준값은 도메인 판단으로 조정 가능. 기준은 조정 가능한 가설"
+  ],
+  "summary": {
+    "type": "bar",
+    "id": "spread-artists",
+    "title": "곡 라벨로 잡힌 팀",
+    "question": "이 태그에서 이름이 도는 팀은 누구인가?",
+    "definition": "사운드 라벨 'Artist - Song'의 앞부분을 아티스트로 읽어 그 팀의 게시물 수를 센 값(상위 8팀). 개인이 올린 오디오('Original audio')는 곡으로 세지 않고, 협업 표기와 표기 차이로 일부가 빠진다. 게시물 수이며 재생이나 판매가 아니다.",
+    "reliability": {
+      "sample": "곡 라벨로 귀속된 게시물 16건 / 30건 · 14팀",
+      "missing": "곡 라벨이 없거나 개인이 올린 오디오로 표기된 게시물은 아티스트 귀속에서 빠진다"
+    },
+    "data": [
+      {
+        "name": "ATEEZ",
+        "value": 4
+      },
+      {
+        "name": "LE SSERAFIM",
+        "value": 2
+      },
+      {
+        "name": "ILLIT",
+        "value": 1
+      },
+      {
+        "name": "KATSEYE",
+        "value": 1
+      },
+      {
+        "name": "izna",
+        "value": 1
+      },
+      {
+        "name": "i-dle",
+        "value": 1
+      },
+      {
+        "name": "ENHYPEN",
+        "value": 1
+      },
+      {
+        "name": "ITZY",
+        "value": 1
+      }
+    ]
+  },
+  "questions": [
+    {
+      "q": "이 태그에서 이름이 도는 팀은 누구인가?",
+      "chartId": "spread-artists"
+    },
+    {
+      "q": "이 태그는 지금 늘고 있나?",
+      "chartId": "daily-posts"
+    },
+    {
+      "q": "어떤 곡이 이 태그를 움직이나?",
+      "chartId": "top-sounds"
+    },
+    {
+      "q": "이 게시물들은 어떤 태그를 같이 다나?",
+      "chartId": "co-hashtags"
+    }
+  ],
+  "notAnswered": [
+    "이 곡이 차트에 오를지. 이 화면은 게시량과 반응까지만 다룬다",
+    "틱톡·유튜브 쇼츠의 확산. 이 화면이 보는 표면은 인스타그램 해시태그 하나뿐이다",
+    "게시물을 올린 쪽이 팬인지 홍보인지. 공개 게시물에서 계정 성격을 구분하지 않는다",
+    "실제로 얼마나 들었는지. 게시수와 좋아요는 재생이나 판매가 아니다",
+    "태그를 붙이지 않은 확산. 태그가 없으면 이 표본에 들어오지 않는다"
+  ],
+  "reliability": {
+    "sample": "#kpopdance 공개 게시물 30건 · 2026-06-29~2026-07-17",
+    "accuracy": "좋아요·댓글은 수집 시점의 공개 표시값. 귀속과 분류의 정확도는 미측정",
+    "missing": "태그를 붙이지 않았거나 이번 수집에 들어오지 않은 게시물은 이 표본에 없다",
+    "engine": "Instagram / Apify apify~instagram-hashtag-scraper · 스냅샷 2026-07-18T11:36:59Z"
+  },
+  "inferences": [
+    {
+      "text": "차트 수집으로 만든 아티스트 사전에 없는 팀이 이 태그에서 곡으로 퍼지고 있는 신호가 있다. BABYMONSTER, BOYNEXTDOOR, ENHYPEN, ITZY, IVE 등 10팀이다.",
+      "basis": "곡 라벨로 잡힌 14팀 중 10팀이 사전에 없음 · BABYMONSTER 1건 · BOYNEXTDOOR 1건 · ENHYPEN 1건 · ITZY 1건 · IVE 1건",
+      "sample": "#kpopdance 공개 게시물 30건 · 곡 라벨로 귀속된 16건",
+      "confidence": "low",
+      "limits": "사전은 차트 수집에서 만든 목록이라 '사전에 없다'가 '차트에 없다'는 뜻이 아니다. 표기가 다르면 같은 팀이 다른 이름으로 세어지고, 공개 표본이라 편향이 있다.",
+      "chartId": "spread-artists"
+    },
+    {
+      "text": "최근 절반 구간의 하루 평균 게시수가 이전 절반보다 높은 상태와 정합한다.",
+      "basis": "2026-06-29~2026-07-07 하루 평균 0.1건 → 2026-07-08~2026-07-17 하루 평균 2.9건",
+      "sample": "19일 · 게시물 30건",
+      "confidence": "low",
+      "limits": "해시태그 수집은 과거 게시물을 함께 가져오므로 창의 양 끝이 실제 흐름과 어긋날 수 있다. 창이 짧아 하루의 스파이크 하나로 방향이 뒤집힌다.",
+      "chartId": "daily-posts"
+    }
+  ],
+  "sections": [
+    {
+      "id": "cadence",
+      "label": "게시 흐름",
+      "question": "이 태그는 지금 늘고 있나?",
+      "note": "수집한 표본 안에서의 하루당 게시수다. 태그를 붙이지 않은 게시물과 수집되지 않은 게시물은 여기 없다. 창이 짧으면 방향이 쉽게 뒤집힌다."
+    },
+    {
+      "id": "sounds",
+      "label": "사운드",
+      "question": "어떤 곡이 이 태그를 움직이나?",
+      "note": "사운드 라벨은 게시물이 붙인 표기 그대로다. 개인이 올린 오디오('Original audio')는 곡으로 세지 않는다."
+    },
+    {
+      "id": "posts",
+      "label": "게시물",
+      "question": "이 게시물들은 어떤 모습인가?",
+      "note": "좋아요와 댓글은 공개 표시값이고 계정 규모에 크게 좌우된다. 반응의 크기이지 인기나 완성도가 아니다."
+    }
   ]
 }

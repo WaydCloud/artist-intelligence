@@ -19,6 +19,132 @@ from typing import Any
 
 MODULE_ID = "signal-bridge"
 
+# 진입 요약(R2)의 id. `questions`·`inferences`가 앵커하는 대상이라 한 곳에 둔다.
+SUMMARY_ID = "class-mix"
+
+# 막대 차트 한 장에 그리는 최대 행 수. 264줄짜리 막대는 읽는 것이 아니라 스크롤하는 것이다.
+# 자른 사실은 **신뢰도 라인에 적는다** — 말없이 자르면 화면이 전부를 보여준 것처럼 읽힌다.
+TOP_ROWS = 30
+
+
+def _capped(total: int, what: str) -> str:
+    """신뢰도 라인용 표본 문구 — 잘랐으면 잘랐다고 적는다."""
+    return f"{what} {total}팀" + (f" · 상위 {TOP_ROWS}팀만 표시" if total > TOP_ROWS else "")
+
+# ── 구획·문구 (D-043 · DESIGN §6.1·§7.1) ──────────────────────────────────────
+#
+# 이 탭은 **네 개의 다른 질문**에 답한다: 누가 먼저였나 · 한 팀에서 실제로 어떻게 겹치나
+# · 차트 밖에서 도는 팀은 누구인가 · 기준을 움직이면 분류가 어떻게 달라지나. 요약이
+# 답하는 "선행이 보편적인가"는 다섯째 질문이고, 이 탭에서 가장 오해받기 쉬운 지점이라
+# 첫 화면의 도형 하나로 나간다 — 반례(차트가 먼저인 팀)를 같은 도형에 놓는다.
+_SECTIONS: list[dict[str, str]] = [
+    {
+        "id": "leadlag",
+        "label": "선행·지연",
+        "question": "소셜과 차트 중 어느 쪽이 먼저 움직였나?",
+        "note": "일수는 시간 순서일 뿐 인과가 아니다. 두 창의 시작이 다르면 회고로 잰 선행 일수는 "
+        "창의 산물일 수 있고, 수집 개시일과 온셋이 같은 팀은 '그날 진입'과 '이미 있었음'을 구분하지 못한다.",
+    },
+    {
+        "id": "example",
+        "label": "한 팀 보기",
+        "question": "한 팀에서 두 신호는 실제로 어떻게 겹치나?",
+        "note": "두 축은 단위가 달라 0~1로 각각 정규화한 값이다. 선의 높낮이를 서로 견주지 않고 "
+        "**오르내리는 시점**만 본다.",
+    },
+    {
+        "id": "pre",
+        "label": "차트 밖",
+        "question": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?",
+        "note": "차트에 없다는 것은 이번 수집 창의 차트에서 보이지 않았다는 뜻이다. 조사 후보이며 "
+        "진출 지시가 아니다.",
+    },
+    {
+        "id": "tuner",
+        "label": "기준",
+        "question": "기준을 움직이면 분류가 어떻게 달라지나?",
+        "note": "온셋 기준은 담당자가 소유한다. 여기서 움직이는 것은 화면 안의 계산이다.",
+    },
+]
+
+_CHART_META: dict[str, dict[str, str]] = {
+    "lead-days": {
+        "section": "leadlag",
+        "title": "소셜이 먼저였던 팀 · 며칠 먼저",
+        "question": "소셜 버즈가 차트보다 먼저 움직인 팀은 어디이고 얼마나 먼저인가?",
+        "definition": "소셜 온셋 날짜와 차트 온셋 날짜의 차이(일). 온셋은 각 기준을 처음 넘은 날이며 "
+        "수집 창 안에서만 정해진다. 시간 순서일 뿐 인과가 아니다.",
+    },
+    "lag-days": {
+        "section": "leadlag",
+        "title": "차트가 먼저였던 팀 · 며칠 먼저",
+        "question": "소셜이 차트를 뒤따른 반례는 얼마나 되나?",
+        "definition": "차트 온셋이 소셜 온셋보다 앞선 팀과 그 간격(일). **선행이 항상 성립하지 않는다는 "
+        "반례**이며, 이 목록이 옆의 선행 목록과 같은 크기라면 선행은 규칙이 아니라 절반의 사례다.",
+    },
+    "lead-example": {
+        "section": "example",
+        "title": "한 팀에서 본 두 신호",
+        "question": "두 신호가 겹치는 모양은 실제로 어떤가?",
+        "definition": "소셜 버즈는 그 팀의 최고 일간 게시수를 1로 둔 값, 차트 강도는 순위가 높을수록 1에 "
+        "가까워지는 값이다. 단위가 다른 두 축을 각각 정규화한 것이라 높낮이를 서로 견주지 않는다.",
+    },
+    "social-only": {
+        "section": "pre",
+        "title": "차트 밖에서 도는 팀 · 최고 일간 게시수",
+        "question": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?",
+        "definition": "이번 창의 차트 온셋이 없고 소셜 온셋만 있는 팀. 값은 그 팀의 하루 최고 게시수다. "
+        "조사·모니터 후보이며 진출 지시가 아니다.",
+    },
+    "leadlag-tuner": {
+        "section": "tuner",
+        "title": "온셋 기준을 움직여 다시 분류하기",
+        "question": "기준을 바꾸면 어느 팀이 선행으로 남나?",
+        "definition": "두 슬라이더는 소셜·차트의 온셋 기준이다. 화면 안에서 분류를 다시 계산할 뿐 "
+        "원자료와 원장의 기준값을 바꾸지 않는다.",
+    },
+}
+
+_METRIC_META: dict[str, dict[str, str]] = {
+    "추적 아티스트": {
+        "section": "pre",
+        "definition": "두 신호 중 하나라도 있는 팀의 수. 이 화면이 보는 전체 모집단이다.",
+    },
+    "조인(양측 신호)": {
+        "section": "leadlag",
+        "label": "두 신호가 다 있는 팀",
+        "definition": "소셜과 차트 양쪽에서 온셋이 잡힌 팀의 수. 선행·지연을 잴 수 있는 대상이다.",
+    },
+    "소셜 선행": {
+        "section": "leadlag",
+        "definition": "소셜 온셋이 차트 온셋보다 앞선 팀의 수. 시간 순서이며 인과가 아니다.",
+    },
+    "판정 가능 선행": {
+        "section": "leadlag",
+        "definition": "소셜 선행 중 표본이 기준 이상이고 차트 온셋이 좌측 절단되지 않은 팀의 수. "
+        "나머지는 판단을 보류한다.",
+    },
+    "중앙값 선행": {
+        "section": "leadlag",
+        "definition": "소셜 선행 팀들의 선행 일수 중앙값. 표본이 극소라 값이 쉽게 흔들린다.",
+    },
+    "소셜-온리 관측대상": {
+        "section": "pre",
+        "label": "차트 밖에서 도는 팀",
+        "definition": "이번 창에서 차트 온셋 없이 소셜 온셋만 있는 팀의 수.",
+    },
+    "차트-온리": {
+        "section": "pre",
+        "label": "소셜 신호가 없는 팀",
+        "definition": "차트 온셋만 있고 이 해시태그 소셜 신호가 없는 팀의 수.",
+    },
+    "워치리스트 커버리지": {
+        "section": "pre",
+        "definition": "팔로우하는 팀 중 소셜 신호가 관측된 팀의 비율. 수집이 관심 대상을 실제로 "
+        "비추고 있는지 보는 검증 지표다.",
+    },
+}
+
 
 def now_iso() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
@@ -187,17 +313,28 @@ def _line_overlay(
 ) -> dict[str, Any]:
     """One artist: normalized social buzz vs chart strength over union dates (선행 시각화)."""
     union = sorted(set(social["dates"]) | set(chart["dates"]))
-    s_al = _align(social["dates"], social["series"].get(key, []), union, 0)
+    # 🔴 **관측하지 않은 날을 0으로 그리지 않는다**(R6). 두 신호의 수집 창이 다르므로 합집합
+    # 날짜에는 한쪽만 있는 구간이 있고, 거기에 0을 채우면 화면이 "그때는 차트에 없었다"고
+    # 말한다 — 사실은 "그때는 아직 수집하지 않았다"다. 실제로 2026-07-30 육안 검사에서
+    # 차트 강도 선이 넉 달 동안 바닥에 붙어 있다가 수집 개시일에 1로 치솟고 있었다.
+    # 없는 값은 null로 두고 선을 끊는다(렌더러가 그렇게 그린다).
+    s_al = _align(social["dates"], social["series"].get(key, []), union, None)
     c_al = _align(chart["dates"], chart["series"].get(key, []), union, None)
     s_max = max((v for v in s_al if isinstance(v, (int, float))), default=0) or 1
-    social_norm = [round((v or 0) / s_max, 3) for v in s_al]
+    social_norm = [round(v / s_max, 3) if isinstance(v, (int, float)) else None for v in s_al]
     chart_strength = [
-        round(max(0.0, (theta_rank + 1 - v) / theta_rank), 3) if isinstance(v, (int, float)) else 0.0
+        round(max(0.0, (theta_rank + 1 - v) / theta_rank), 3) if isinstance(v, (int, float)) else None
         for v in c_al
     ]
+    seen_s = sum(1 for v in social_norm if v is not None)
+    seen_c = sum(1 for v in chart_strength if v is not None)
     return {
         "type": "line",
-        "title": f"선행신호 예시 · {key} · 소셜 버즈 vs 차트 강도 (0~1로 정규화)",
+        "id": "lead-example",
+        "reliability": {
+            "sample": f"{key} · 창 {len(union)}일 중 소셜 관측 {seen_s}일 · 차트 관측 {seen_c}일",
+            "missing": "관측하지 않은 날은 선을 끊는다(0으로 잇지 않는다). 두 신호의 수집 창이 다르다",
+        },
         "data": {
             "x": union,
             "series": [
@@ -237,7 +374,8 @@ def _tunable_leadlag(
             }
     return {
         "type": "tunable",
-        "title": "기준 튜너 · 상승 시작(온셋) 기준을 움직여 분류 변화 확인 (기준값은 담당자가 조정)",
+        "id": "leadlag-tuner",
+        "reliability": {"sample": f"시계열이 있는 팀 {len(series)}팀"},
         "data": {
             "view": "leadlag",
             "socialDates": social["dates"],
@@ -442,6 +580,174 @@ def _evidence_crosstab(joined: list[dict[str, Any]], min_posts: int) -> str | No
     )
 
 
+# ── 시각화 계약 헬퍼 (D-041 · D-043) ──────────────────────────────────────────
+#
+# 다른 모듈에도 같은 모양의 함수가 있다. 공유 모듈로 묶지 않는 것이 이 레포의 구조다
+# (D-007: 모듈은 코드가 아니라 데이터·계약을 공유한다).
+
+
+def _apply_meta(
+    metrics: list[dict[str, Any]], charts: list[dict[str, Any]]
+) -> list[dict[str, Any]]:
+    """차트·지표에 구획과 문구를 붙이고, 표에 없는 차트는 **떨어낸다**(R3)."""
+    for m in metrics:
+        meta = _METRIC_META.get(str(m.get("label") or ""))
+        if not meta:
+            continue
+        m["section"] = meta["section"]
+        m["definition"] = meta["definition"]
+        if meta.get("label"):  # 라벨 갈아 끼우기는 맨 마지막 — 위 조회가 원래 라벨을 키로 쓴다
+            m["label"] = meta["label"]
+
+    kept: list[dict[str, Any]] = []
+    for c in charts:
+        meta = _CHART_META.get(str(c.get("id") or ""))
+        if meta:
+            c.update(meta)
+            kept.append(c)
+    return kept
+
+
+def _place_sections(
+    metrics: list[dict[str, Any]], charts: list[dict[str, Any]]
+) -> list[dict[str, str]]:
+    """차트가 실제로 놓인 구획만 남기고, 구획을 잃은 지표를 되찾아 준다."""
+    sections = [dict(s) for s in _SECTIONS if any(c.get("section") == s["id"] for c in charts)]
+    if len(sections) < 2:  # 구획이 하나뿐이면 내비게이션이 할 일이 없다 → 한 줄 렌더
+        sections = []
+    live = {s["id"] for s in sections}
+    for m in metrics:
+        sid = str(m.get("section") or "")
+        if not sid or sid in live:
+            continue
+        if sections:
+            m["section"] = str(sections[0]["id"])
+        else:
+            m.pop("section", None)
+    return sections
+
+
+def _class_mix_summary(
+    led: list[dict[str, Any]],
+    chart_led: list[dict[str, Any]],
+    coincident: list[dict[str, Any]],
+    social_only: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """진입 요약 하나(R2) — **선행이 규칙인가 절반의 사례인가**.
+
+    이 탭에서 가장 오해받기 쉬운 지점이 "소셜이 먼저다"라는 한 줄이라, 첫 화면의 도형에
+    반례(차트가 먼저인 팀)를 같은 눈금 위에 놓는다. 선행만 세어 보여주면 그 수가 곧
+    법칙처럼 읽힌다.
+    """
+    return {
+        "type": "bar",
+        "id": SUMMARY_ID,
+        "title": "어느 쪽이 먼저였나",
+        "question": "소셜이 먼저인 사례와 차트가 먼저인 사례 중 어느 쪽이 많나?",
+        "definition": f"두 신호의 온셋 순서로 팀을 가른 수. 차트 온셋이 없어 순서를 잴 수 없는 팀 "
+        f"{len(social_only)}팀은 여기 없고 '차트 밖' 구획에 있다(같은 눈금에 얹으면 그 수가 커서 "
+        f"비교가 눌린다). 순서는 시간 순서일 뿐 인과가 아니며, 두 창의 시작이 다르면 이 구성도 "
+        f"함께 흔들린다.",
+        "data": [
+            {"name": "소셜이 먼저", "value": len(led)},
+            {"name": "차트가 먼저", "value": len(chart_led)},
+            {"name": "같은 날", "value": len(coincident)},
+        ],
+    }
+
+
+def _questions(have: set[str]) -> list[dict[str, str]]:
+    """R1 — 이 탭에서 답할 수 있는 질문(상한 4). 끊긴 앵커는 검사기가 잡는다."""
+    kept = [
+        q
+        for q in (
+            {"q": "소셜이 먼저인 사례와 차트가 먼저인 사례 중 어느 쪽이 많나?", "chartId": SUMMARY_ID},
+            {"q": "소셜이 먼저 움직인 팀은 얼마나 먼저였나?", "chartId": "lead-days"},
+            {"q": "차트에 아직 없는데 소셜에서 도는 팀은 누구인가?", "chartId": "social-only"},
+            {"q": "기준을 바꾸면 어느 팀이 선행으로 남나?", "chartId": "leadlag-tuner"},
+        )
+        if q["chartId"] in have
+    ]
+    for spare in (
+        {"q": "두 신호가 다 있는 팀은 몇 팀인가?", "chartId": SUMMARY_ID},
+        {"q": "순서를 잴 수 없는 팀은 몇 팀인가?", "chartId": SUMMARY_ID},
+    ):
+        if len(kept) >= 3:
+            break
+        kept.append(spare)
+    return kept
+
+
+def _not_answered() -> list[str]:
+    """R7 — 이 화면이 **답하지 않는** 질문."""
+    return [
+        "이 버즈가 차트 진입을 만들었는지. 이 화면이 재는 것은 시간 순서까지다",
+        "버즈 없이 차트에 오른 곡이 어떻게 올랐는지. 여기 대상은 버즈가 있는 팀이다",
+        "해시태그를 붙이지 않은 확산. 소셜 쪽 표본은 태그와 사운드 라벨에 매여 있다",
+        "수집을 시작하기 전의 순위 이력. 그 이전은 좌측 절단이라 알 수 없다",
+        "같은 팀에서 선행이 다시 관측되는지. 창이 짧아 재현성은 아직 보지 못한다",
+    ]
+
+
+def _bridge_inferences(
+    *,
+    led: list[dict[str, Any]],
+    chart_led: list[dict[str, Any]],
+    joined: list[dict[str, Any]],
+    social_only: list[dict[str, Any]],
+    min_posts: int,
+    s_win: str,
+    c_win: str,
+) -> list[dict[str, Any]]:
+    """태그된 자동 추론(R4 · D-039). 전부 관측에서 계산한다.
+
+    허용 어법은 "~와 정합한다"·"~신호가 있다"·"~로 읽힌다"뿐이고, 명령·예측·인과 단정과
+    em dash는 scripts/validate_report_data.py가 CI에서 잡는다.
+    """
+    out: list[dict[str, Any]] = []
+
+    # ① 선행이 규칙이 아니라는 것. 반례의 수를 같은 문장에 적는다.
+    if led and chart_led:
+        out.append({
+            "text": f"소셜 선행이 항상 성립하지는 않는 상태와 정합한다. 소셜이 먼저인 팀이 {len(led)}팀, "
+            f"차트가 먼저인 팀이 {len(chart_led)}팀이다.",
+            "basis": f"두 신호가 다 있는 {len(joined)}팀 중 소셜 선행 {len(led)}팀 · 차트 선행 "
+            f"{len(chart_led)}팀",
+            "sample": f"두 신호가 다 있는 팀 {len(joined)}팀",
+            "confidence": "high",
+            "limits": "온셋은 수집 창 안에서만 정해진다. 두 창의 시작이 다르면 이 구성도 함께 흔들린다.",
+            "chartId": SUMMARY_ID,
+        })
+
+    # ② 표본과 좌측 절단을 함께 통과한 팀이 몇인지 — 숫자를 크게 읽지 않도록.
+    if led:
+        solid = [r for r in led if r["posts"] >= min_posts and not r.get("censored")]
+        out.append({
+            "text": f"선행 {len(led)}팀 중 표본과 절단을 함께 통과한 팀은 {len(solid)}팀으로 읽힌다.",
+            "basis": f"표본 {min_posts}건 이상 · 차트 온셋 비검열 = {len(solid)}팀 / 선행 {len(led)}팀",
+            "sample": f"소셜 선행 {len(led)}팀",
+            "confidence": "medium",
+            "limits": "표본 부족은 기준값의 문제이고 절단은 시간이 푸는 문제라, 두 축은 성격이 다르다. "
+            "남은 팀도 판정이 아니라 검토 대상이다.",
+            "chartId": "lead-days",
+        })
+
+    # ③ 창 비대칭 — 회고로 잰 선행 일수가 창의 산물일 수 있다는 것.
+    s0, c0 = s_win[:10], c_win[:10]
+    if s0 and c0 and s0 < c0:
+        out.append({
+            "text": "회고로 잰 선행 일수가 창의 산물일 수 있는 상태와 정합한다. 소셜 창이 차트 창보다 "
+            "먼저 시작한다.",
+            "basis": f"소셜 {s_win} · 차트 {c_win}",
+            "sample": f"두 신호가 다 있는 팀 {len(joined)}팀",
+            "confidence": "high",
+            "limits": "태그 수집은 과거 게시물을 함께 가져오므로 소셜 쪽 시작이 앞당겨진다. 방향 판단은 "
+            "앞으로의 축적으로 본다.",
+            "chartId": "lead-days",
+        })
+    return out
+
+
 def build_report(
     social: dict[str, Any],
     chart: dict[str, Any],
@@ -521,14 +827,36 @@ def build_report(
     if exemplar:
         charts.append(_line_overlay(exemplar, social, chart, theta_rank))
 
-    # lead/lag per joined artist (positive = social first). chart-led shown negative.
-    join_sorted = sorted(joined, key=lambda r: (-(r["lead_days"] or 0), r["key"]))
-    if join_sorted:
+    # 선행과 지연을 **두 차트로 가른다**. 예전에는 부호 있는 값 하나를 막대에 실었는데,
+    # 막대 길이는 음수를 그릴 수 없어(렌더러가 최소 폭으로 클램프한다) 차트 선행 팀들이
+    # 전부 같은 길이의 짧은 막대가 됐다 — 44팀의 차이가 화면에서 사라진 상태였다.
+    # 부호는 방향이지 크기가 아니므로, 방향은 차트를 가르는 데 쓰고 길이에는 크기만 싣는다.
+    led_sorted = sorted(led, key=lambda r: (-(r["lead_days"] or 0), r["key"]))
+    if led_sorted:
         charts.append(
             {
                 "type": "bar",
-                "title": "팀별 선행/지연 일수 (양수=소셜이 차트보다 먼저, 음수=차트가 먼저)",
-                "data": [{"name": r["key"], "value": r["lead_days"]} for r in join_sorted],
+                "id": "lead-days",
+                "reliability": {
+                    "sample": _capped(len(led_sorted), "소셜 선행")
+                    + f" · 두 신호가 다 있는 팀 {len(joined)}팀"
+                },
+                "data": [{"name": r["key"], "value": r["lead_days"]} for r in led_sorted[:TOP_ROWS]],
+            }
+        )
+    lag_sorted = sorted(chart_led, key=lambda r: (r["lead_days"] or 0, r["key"]))
+    if lag_sorted:
+        charts.append(
+            {
+                "type": "bar",
+                "id": "lag-days",
+                "reliability": {
+                    "sample": _capped(len(lag_sorted), "차트 선행")
+                    + f" · 두 신호가 다 있는 팀 {len(joined)}팀"
+                },
+                "data": [
+                    {"name": r["key"], "value": abs(r["lead_days"] or 0)} for r in lag_sorted[:TOP_ROWS]
+                ],
             }
         )
 
@@ -538,8 +866,11 @@ def build_report(
         charts.append(
             {
                 "type": "bar",
-                "title": "소셜-온리 · 차트 밖 관측대상 (차트 진입 전, 최고 일간 게시수)",
-                "data": [{"name": r["key"], "value": r["peak_social"]} for r in only_rows],
+                "id": "social-only",
+                "reliability": {"sample": _capped(len(only_rows), "차트 온셋 없는 팀")},
+                "data": [
+                    {"name": r["key"], "value": r["peak_social"]} for r in only_rows[:TOP_ROWS]
+                ],
             }
         )
 
@@ -569,10 +900,44 @@ def build_report(
     c_win = str((chart.get("provenance") or {}).get("window") or "")
     mkt_txt = f" · 차트 {mkt_count}시장" if isinstance(mkt_count, int) and mkt_count > 1 else ""
     yt_src = " × YT(yt-pulse)" if youtube else ""
+    # 부제에서 기준값 표기(θ)를 걷어낸다 — 신뢰도 라인의 `engine`이 말로 들고 있다(DESIGN §6.1).
+    # 모듈 id는 남긴다: 대시보드가 이 문자열에서 출처 모듈을 찾아 탭 링크를 만든다.
     subtitle = (
-        f"소셜(fandom-pulse) × 차트(chart-history){yt_src} 선행/지연 · 조인 {len(joined)}팀 · "
-        f"θ_social={theta_social}, θ_rank={theta_rank}{mkt_txt} · 소셜 {s_win} / 차트 {c_win}"
+        f"소셜(fandom-pulse) × 차트(chart-history){yt_src} 선행/지연 · "
+        f"두 신호가 다 있는 팀 {len(joined)}팀{mkt_txt} · 소셜 {s_win} / 차트 {c_win}"
     )
+    charts = _apply_meta(metrics, charts)
+    # 예시 차트의 제목만 동적이다 — 어느 팀을 골랐는지가 제목에 없으면 카드가 무엇을
+    # 보여주는지 알 수 없다. 표의 문구를 덮는 유일한 자리라 여기 한 줄로 둔다.
+    for c in charts:
+        if c.get("id") == "lead-example" and exemplar:
+            c["title"] = f"{exemplar} · 두 신호의 겹침"
+    sections = _place_sections(metrics, charts)
+    extra: dict[str, Any] = {
+        "summary": _class_mix_summary(led, chart_led, coincident, social_only),
+        "questions": _questions({str(c["id"]) for c in charts} | {SUMMARY_ID}),
+        "notAnswered": _not_answered(),
+        "reliability": {
+            "sample": f"추적 {len(rows)}팀 · 두 신호가 다 있는 팀 {len(joined)}팀 "
+            f"· 소셜 {s_win or '?'} / 차트 {c_win or '?'}",
+            "accuracy": "이름 매칭은 공용 아티스트 사전 기준. 온셋은 수집 창 안에서만 정해지며 정확도 미측정",
+            "missing": "수집 개시일과 차트 온셋이 같은 팀은 좌측 절단이라 '그날 진입'과 '이미 있었음'을 "
+            "구분하지 못한다",
+            "engine": f"signal-bridge · 소셜 온셋 ≥{theta_social}건/일 · 차트 온셋 ≤{theta_rank}위",
+        },
+        "inferences": _bridge_inferences(
+            led=led,
+            chart_led=chart_led,
+            joined=joined,
+            social_only=social_only,
+            min_posts=min_posts,
+            s_win=s_win,
+            c_win=c_win,
+        ),
+    }
+    if sections:
+        extra["sections"] = sections
+
     return {
         "moduleId": MODULE_ID,
         "title": "시그널 브리지 · 소셜 → 차트 선행신호",
@@ -583,6 +948,7 @@ def build_report(
         "media": [],
         "insights": insights,
         "recommendations": recos,
+        **extra,
     }
 
 

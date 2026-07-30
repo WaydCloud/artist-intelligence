@@ -37,10 +37,11 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
   const scope = scopeOf("impulse-rules", title);
   const [lowPct, setLowPct] = useKnob(scope, "lowPct", lowKnob?.default ?? data.lowPct);
   const [highPct, setHighPct] = useKnob(scope, "highPct", highKnob?.default ?? data.highPct);
-
-  const buckets = useMemo<Bucket[]>(
-    () =>
-      data.rules.map((rule) => {
+  const buckets = useMemo<Bucket[]>(() => {
+    // 축의 화면 표기는 리포트가 함께 싣는다(`axisLabels`). 저장 키(`organic_ratio`)를 그대로
+    // 찍으면 데이터 키가 새어 나온 것처럼 읽힌다(DESIGN §6.1). 없으면 키로 되돌아간다.
+    const axLabel = (key: string) => data.axisLabels?.[key] ?? key;
+    return data.rules.map((rule) => {
         const members = data.tracks
           .filter(
             (t) =>
@@ -50,7 +51,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
           .map((t) => ({
             name: (t.watch ? "★ " : "") + t.name,
             // 어느 축이 얼마로 걸렸는지 보여야 배정을 반박할 수 있다.
-            detail: data.axes.map((ax) => `${ax} P${t.pcts[ax]?.toFixed(0) ?? "-"}`).join(" · "),
+            detail: data.axes.map((a) => `${axLabel(a)} P${t.pcts[a]?.toFixed(0) ?? "-"}`).join(" · "),
             flagged: t.watch,
           }))
           .sort((a, b) => a.name.localeCompare(b.name));
@@ -58,11 +59,10 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
           name: rule.id,
           total: members.length,
           members,
-          hint: `하한 ${rule.lowAll.join("·")} ≤ P${lowPct} · 상한 ${rule.highAny.join(" 또는 ")} ≥ P${highPct}`,
+          hint: `하한 ${rule.lowAll.map(axLabel).join("·")} ≤ P${lowPct} · 상한 ${rule.highAny.map(axLabel).join(" 또는 ")} ≥ P${highPct}`,
         };
-      }),
-    [data, lowPct, highPct],
-  );
+    });
+  }, [data, lowPct, highPct]);
 
   const matched = buckets.reduce((n, b) => n + b.total, 0);
 

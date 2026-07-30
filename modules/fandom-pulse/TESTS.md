@@ -30,11 +30,12 @@ PYTHONPATH=modules/fandom-pulse/src python -m fandom_pulse analyze \
 - [ ] **G. 게이트**: `ruff check` · `pyright` 통과.
 - [ ] **H. 기준 원장(튜닝)**: 하중 기준 임계값이 CLI 플래그로 노출(`--high-pct`·`--momentum-min-days`), 값 변경 시 지표 변화. RULES §3 원장과 일치.
 - [ ] **I. facts-only**: fetch 산출/픽스처에 PII·원문 필드 부재(캡션·유저명·url 등).
-- [ ] **J. (v2 선행신호) 사운드→아티스트 조인**: `--entities`(공유 entity-master) 제공 시 사운드 라벨→아티스트 귀속 `Top 아티스트 · 사운드 확산` bar + `사운드 확산 아티스트`·`로스터 밖 확산` 지표 + "차트 로스터 밖 소셜 활성" 선행신호 insight. 'Original audio'(UGC) 제외. 미제공 시 확산 bar만(로스터 대조 생략, 하위호환). chart-history 코드 import 없음(데이터만 공유). **평결 아님**(§0). 결정적.
+- [ ] **J. (v2 선행신호) 사운드→아티스트 조인**: `--entities`(공유 entity-master) 제공 시 사운드 라벨→아티스트 귀속 → **진입 요약 도형**(`spread-artists`, v3.2부터 `charts`가 아니라 `summary`) + `곡 라벨로 잡힌 팀`·`아티스트 사전에 없는 팀` 지표 + "차트 로스터 밖 소셜 활성" 선행신호 insight. 'Original audio'(UGC) 제외. 미제공 시 확산 bar만(로스터 대조 생략, 하위호환). chart-history 코드 import 없음(데이터만 공유). **평결 아님**(§0). 결정적.
 
 ## 검증 로그 (2026-07-18, v1)
 
 - **A/B/C** ✅ smoke(실 픽스처 `#kpopdance` reels 30건) → schema valid. 게시물 30 · 총 참여 54,968 · 중앙값 좋아요 969/댓글 23 · 고참여 3(≥4443) · 릴스 100% · 게시 가속 +2.4/일. 차트 3종: 공동 해시태그 bar(#dance·#fyp·#ateez·#kpop) · 일별 게시량 line(6/29~7/17, 11일) · Top 사운드 bar(ATEEZ-BAD 등).
+  - ⚠ 이 줄의 게시 가속(+2.4)과 라인 길이(11일)는 **v3.2에서 바뀌었다**(달력 날짜 19일 · +2.8). 아래 2026-07-30 로그를 정본으로 본다.
 - **D** ✅ `empty.json`(0건) → 지표 1(게시물 수 0)·차트 0·schema valid·exit 0, insight "게시물 없음" 명시.
 - **E** ✅ 같은 입력 2회 → `generatedAt` 제외 산출 동일(`deterministic: True`).
 - **F** ✅ 금지 단정어(예측/히트/실력/인기총점) 부재 + "표본 편향·공식 지표 아님·인기·품질 단정 아님" 병기.
@@ -43,7 +44,18 @@ PYTHONPATH=modules/fandom-pulse/src python -m fandom_pulse analyze \
 - **I** ✅ facts-only: 레코드 키 = `{likes, comments, plays, type, timestamp, hashtags, music}` 뿐. PII/원문 필드(캡션·유저명·url 등) **0건**. posts·reels 양쪽 확인.
 - 비고: reels는 `plays·music` 존재 → 사운드/모멘텀 경로 실데이터 실증. posts 스냅샷은 music 결측·단일일자라 차트 1종으로 정직하게 축소(정상).
 
+- [ ] **L. (v3.2) 시각화 계약 + 구획**: `scripts/validate_report_data.py`가 이 모듈을 **채택 모듈**로 검사(R1~R8 하드 게이트) 통과 · 구획 3개에 차트 1개씩(상한 3) · 지표가 전부 구획에 배정됨 · 요약 도형은 `charts`에 중복되지 않음 · 0건 스냅샷도 계약 유지(구획 미선언).
+- [ ] **M. (v3.2) 계정명 비게재**: 산출 `report.json` 어디에도 UGC 사운드 라벨(`… - Original audio`)이 없다. 제외 건수는 `top-sounds`의 신뢰도 라인에 표기(RULES §3·§5).
+- [ ] **N. (v3.2) 일별 라인의 빈 날**: `daily-posts`의 `x`가 창의 달력 날짜 전부이고, 게시물이 없는 날의 값이 `0`이다(관측된 날만 세우지 않는다).
 - [ ] **K. (v3 이중 귀속·D-013) 워치리스트**: `signals --watchlist` 제공 시 ① 워치리스트 acts가 추적 유니버스 합류(roster=true) ② 게시물 해시태그가 등록 태그와 일치하면 **해시태그 직접 귀속**(사운드와 합집합, 게시물당 1회) ③ `engagement`(참여 합)·`drivers`(top 사운드/태그) 필드 방출 ④ `overrides`가 엔티티 필드 정정. 미제공 시 v2 동작(사운드만, 하위호환). 결정적.
+
+## 검증 로그 (2026-07-30, v3.2 시각화 계약 + 구획 · D-041·D-042·D-043)
+
+- **L** ✅ `ADOPTED_MODULES`에 `fandom-pulse` 추가 → 검사기 CLEAN(전수 6리포트). 구획 3(게시 흐름 1 · 사운드 1 · 게시물 1) · 지표 9개 전부 배정 · 요약(`spread-artists`)은 `charts`에 없음 · 질문 4개 앵커 정상. 0건 스냅샷: 차트 0 · 구획 미선언 · 요약(빈 막대) + 질문 3개 유지 → CLEAN.
+- **M** ✅ 산출 `report.json`에 `… - Original audio` 라벨 **0건**(남은 것은 설명 문구뿐). 이전 산출에는 계정명 4개(`megatdream`·`qianyihere`·`oakids_maggie`·`glxefanaccount`)가 막대로 그려지고 있었다 — 정적 게이트 4종·탭 스모크를 **전부 통과한 상태**였고 **육안 검사에서만** 잡혔다. `top-sounds` 신뢰도 라인이 제외 14건을 표기.
+- **N** ✅ `daily-posts` x축 = 2026-06-29~07-17 **19일**(관측 11일), 값 `[1,0,0,0,0,0,0,0,0,1,3,…]`. 이전에는 관측된 11일만 세워 6/29→7/9의 **열흘이 한 칸으로 접혀** 선이 그 위를 곧게 지나가고 있었다. 창 정의가 바뀌며 게시 가속 +2.4 → **+2.8/일**(RULES §3 분모 = 달력 날짜).
+- **육안**(라이트/다크 × 구획 3) ✅ 부제에서 액터 id·초 단위 타임스탬프 제거(정확한 출처는 신뢰도 `engine`이 유지) · `게시 가속` 힌트 잘림 해소(창 표기를 정의로 이동) · `게시물 수`를 게시 흐름 구획으로 옮겨 타일 1개짜리 행 해소.
+- **게이트** ✅ ruff · pyright 0 · schema valid · `validate_report_data.py`(+`--selftest` 79/79) · `smoke:tabs` 6탭 × 2테마 PASS(구획마다) · 결정성 True.
 
 ## 검증 로그 (2026-07-19, v3 이중 귀속·워치리스트 · D-013)
 

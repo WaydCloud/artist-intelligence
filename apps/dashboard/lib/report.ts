@@ -67,6 +67,18 @@ export interface HeatmapData {
   rows: string[];
   cols: string[];
   cells: (number | null)[][];
+  /**
+   * 칸 값의 성격. `"rank"`(기본) = **작을수록 강함**(순위 1이 최상) ·
+   * `"value"` = **클수록 강함**(백분위 등). 색 램프의 방향과 범례 문구가 여기서 갈린다.
+   * 예전에는 rank만 있다고 가정해 백분위를 실으면 낮은 값이 "상위"로 칠해졌다.
+   */
+  scale?: "rank" | "value";
+  /** 범례 양끝·빈칸의 표기. 없으면 순위 기준 기본값(상위/하위/미진입). */
+  strongLabel?: string;
+  weakLabel?: string;
+  emptyLabel?: string;
+  /** 툴팁에서 숫자 앞에 붙는 말(예: `P`). rank일 때는 대신 `위`가 뒤에 붙는다. */
+  valuePrefix?: string;
 }
 
 // radar: 요약 도형(R2). 절대값이 아니라 **비교 위치**를 그린다 — 스케일이 다른 축을
@@ -154,6 +166,8 @@ export interface ImpulseRulesTunableData {
   lowPct: number;
   highPct: number;
   axes: string[];
+  /** 축의 화면 표기(저장 키 → 사람이 읽는 이름). 없으면 키를 그대로 쓴다. */
+  axisLabels?: Record<string, string>;
   pools: Record<string, number[]>;
   rules: { id: string; impulseId: string; lowAll: string[]; highAny: string[] }[];
   tracks: { name: string; watch?: boolean; pcts: Record<string, number> }[];

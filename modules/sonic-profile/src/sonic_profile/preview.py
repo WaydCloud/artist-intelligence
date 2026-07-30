@@ -179,6 +179,46 @@ def _decode(path: str) -> np.ndarray:
         raise Unresolved(f"decode failed: {type(exc).__name__}") from exc
 
 
+def _decode_stereo(path: str) -> np.ndarray | None:
+    """오디오 파일 → **2×N 스테레오** float32 @ SR. 모노 소스·실패는 None.
+
+    **모노 경로(`_decode`)를 건드리지 않는 것이 이 함수의 존재 이유다**(D-031). width를
+    얻자고 기존 로드를 스테레오로 바꾸면 `to_mono`와 리샘플의 **순서가 뒤바뀌어** 전 지표의
+    부동소수 말단이 흔들릴 수 있다 — 과거 값과 비교 불가가 되는 위험(RULES §2)을 감수할
+    이유가 없다. 디코드 한 번이 더 들지만 그 비용은 신경망 추론 옆에서 무시할 만하다.
+    """
+    try:
+        import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
+
+        y, _ = librosa.load(path, sr=SR, mono=False)
+        arr = np.asarray(y, dtype=np.float32)
+        if arr.ndim == 2 and arr.shape[0] >= 2:
+            return arr[:2]
+        if arr.size:
+            return None  # 모노 소스 — "좁다"가 아니라 정보 없음(§0)
+    except Exception:  # noqa: BLE001, S110 — 다음 백엔드로
+        pass
+    try:
+        import av  # type: ignore[import-not-found]  # PyAV: FFmpeg 번들 — AAC/m4a 해독용
+
+        with av.open(path) as container:
+            stream = container.streams.audio[0]
+            resampler = av.AudioResampler(format="flt", layout="stereo", rate=SR)
+            chunks: list[np.ndarray] = []
+            for frame in container.decode(stream):
+                for out in resampler.resample(frame):
+                    chunks.append(out.to_ndarray().reshape(-1))
+        if not chunks:
+            return None
+        # PyAV의 packed 'flt' 스테레오는 L,R,L,R… 순서다
+        inter = np.concatenate(chunks).astype(np.float32)
+        if inter.size < 2:
+            return None
+        return np.stack([inter[0::2], inter[1::2]])
+    except Exception:  # noqa: BLE001 — width는 선택 지표다. 실패는 결측으로 남는다
+        return None
+
+
 def lookup_preview(source: str, track_id: str, *, country: str = "KR") -> dict[str, Any] | None:
     """(소스, 트랙 ID) → 그 **정확한 녹음**의 프리뷰 후보. 검색이 아니라 ID 조회다.
 
@@ -216,11 +256,15 @@ def lookup_preview(source: str, track_id: str, *, country: str = "KR") -> dict[s
     return None
 
 
-def _audio_from_url(url: str, suffix: str) -> np.ndarray:
-    """프리뷰 URL → 모노 배열. **오디오 파일은 이 함수를 벗어나지 않는다**(무보관 §1).
+def _audio_from_url(
+    url: str, suffix: str, *, want_stereo: bool = False
+) -> tuple[np.ndarray, np.ndarray | None]:
+    """프리뷰 URL → (모노 배열, 스테레오 2×N 또는 None). **오디오 파일은 이 함수를
+    벗어나지 않는다**(무보관 §1).
 
     다운로드·임시파일·삭제가 한 곳에만 있어야 무보관 불변식을 한 곳에서 보증한다 —
-    호출자가 늘 때마다 복사하면 언젠가 한 곳에서 삭제가 빠진다.
+    호출자가 늘 때마다 복사하면 언젠가 한 곳에서 삭제가 빠진다. 스테레오를 추가하면서도
+    **같은 임시파일 하나**를 두 디코드가 나눠 쓰게 해 이 성질을 유지한다.
     """
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
@@ -231,7 +275,8 @@ def _audio_from_url(url: str, suffix: str) -> np.ndarray:
     try:
         with os.fdopen(fd, "wb") as fh:
             fh.write(blob)
-        return _decode(tmp)
+        mono = _decode(tmp)
+        return mono, (_decode_stereo(tmp) if want_stereo else None)
     finally:
         try:
             os.unlink(tmp)  # 무보관 불변식 — 예외 경로에서도 반드시
@@ -247,7 +292,7 @@ def tags_from_preview(url: str, *, suffix: str = ".audio") -> dict[str, Any]:
     """
     from sonic_profile.tagging import extract_tags
 
-    return extract_tags(_audio_from_url(url, suffix), SR)
+    return extract_tags(_audio_from_url(url, suffix)[0], SR)
 
 
 def features_from_preview(
@@ -259,8 +304,8 @@ def features_from_preview(
     DSP 지표(§3)에 이어 리듬(§3.1.5)·태깅(§3.1.6)을 **같은 배열 위에서** 잰다.
     둘 중 하나가 실패해도 나머지는 낸다 — 결측은 0이 아니라 사유와 함께 비워둔다.
     """
-    y = _audio_from_url(url, suffix)
-    feats = extract(y, SR, low_hz=low_hz)
+    y, stereo = _audio_from_url(url, suffix, want_stereo=True)
+    feats = extract(y, SR, low_hz=low_hz, stereo=stereo)
     if rhythm:
         from sonic_profile.rhythm import extract_rhythm
 

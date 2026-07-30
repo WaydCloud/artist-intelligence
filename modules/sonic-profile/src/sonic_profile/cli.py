@@ -77,6 +77,53 @@ def _snapshot_paths(inputs: list[str]) -> list[Path]:
     return out
 
 
+def _alias_map(acts: list[dict[str, Any]]) -> dict[str, str]:
+    """워치리스트 별칭(casefold) → 정본 키. 코호트 키 해석용(RULES §1 정체성)."""
+    amap: dict[str, str] = {}
+    for act in acts:
+        key = str(act.get("key") or "")
+        if not key:
+            continue
+        for al in [key, *(str(a) for a in (act.get("aliases") or []))]:
+            amap[al.casefold()] = key
+    return amap
+
+
+def _merge_dup(a: dict[str, Any], b: dict[str, Any]) -> dict[str, Any]:
+    """코호트·워치리스트 양 경로로 이중 저장된 같은 관측을 한 레코드로(RULES §1).
+    워치리스트 레코드(정본 키)를 몸통으로, 차트 필드를 보존한다."""
+    chart = a if a.get("cohort") == "chart" else (b if b.get("cohort") == "chart" else None)
+    watch = a if a.get("cohort") == "watchlist" else (b if b.get("cohort") == "watchlist" else None)
+    if chart is None or watch is None:
+        return a  # 같은 역할의 중복(비정상 입력) — 먼저 온 것 유지
+    merged = dict(watch)
+    for f in ("chart_rank", "chart_market", "chart_platform", "chart_label"):
+        if chart.get(f) is not None:
+            merged[f] = chart[f]
+    if not merged.get("features") and chart.get("features"):
+        merged["features"] = chart["features"]
+    return merged
+
+
+def _dedupe(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """(source, track_id, observed_date) 기준 병합 — 멱등. fetch(저장 전)와
+    _load(과거 스냅샷 방어) 양쪽에서 쓴다(RULES §1 정체성)."""
+    index: dict[tuple[Any, Any, Any], int] = {}
+    out: list[dict[str, Any]] = []
+    for r in records:
+        tid = r.get("track_id")
+        if not tid:
+            out.append(r)
+            continue
+        ident = (r.get("source"), tid, r.get("observed_date"))
+        if ident not in index:
+            index[ident] = len(out)
+            out.append(r)
+        else:
+            out[index[ident]] = _merge_dup(out[index[ident]], r)
+    return out
+
+
 def _load(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
     records: list[dict[str, Any]] = []
     prov: dict[str, Any] = {}
@@ -85,7 +132,7 @@ def _load(paths: list[Path]) -> tuple[list[dict[str, Any]], dict[str, Any]]:
         if isinstance(doc, dict):
             records.extend(r for r in (doc.get("records") or []) if isinstance(r, dict))
             prov = prov or (doc.get("provenance") or {})
-    return records, prov
+    return _dedupe(records), prov
 
 
 def _cache_load(path: Path, engine_key: str) -> dict[str, Any]:
@@ -133,7 +180,13 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     # 엔진 설정이 값의 일부다 — 리듬·태깅이 켜지면 키가 바뀌어 과거 캐시가 무효화된다(RULES §2).
     engine_key = "|".join([
         f"{eng['engine']}{eng['engine_version']}", str(eng["sample_rate"]), str(eng["low_hz"]),
+        # 지표 집합 버전 — 지표를 늘렸는데 이게 빠지면 캐시가 적중해 **새 지표가 빠진
+        # 옛 레코드가 그대로 되살아난다**(D-031). 절단본 함정과 같은 구조다.
+        str(eng.get("feature_set", "-")),
         eng.get("beat_engine", "-"), eng.get("tagger", "-"),
+        # 리듬 파생 지표(grid_deviation 등)가 늘면 리듬 엔진 산출도 달라진다.
+        str(eng.get("rhythm_feature_set", "-")),
+        eng.get("mood_head", "-"), eng.get("valence_head", "-"),
         # 저장 라벨 수가 늘면 옛 캐시(잘린 라벨)는 무효다 — 안 그러면 다음 수집이
         # 캐시 적중으로 절단본을 다시 써 넣어 과소집계가 되살아난다(RULES §3.1.6.1).
         str(eng.get("tagger_top_k_instrument", "-")),
@@ -159,13 +212,20 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         time.sleep(args.delay)
         return feats
 
+    doc = json.loads(Path(args.watchlist).read_text(encoding="utf-8"))
+    acts = [a for a in (doc.get("artists") or []) if isinstance(a, dict) and a.get("key")]
+    amap = _alias_map(acts)
+
     # ── 코호트: 차트 트랙 (분포를 만들려면 모집단이 있어야 한다)
     if args.cohort:
         cdoc = json.loads(Path(args.cohort).read_text(encoding="utf-8"))
         for t in cdoc.get("tracks") or []:
             artist, title = str(t.get("artist") or ""), str(t.get("title") or "")
+            # 키는 정본으로 해석해 넣는다(RULES §1 정체성) — 아니면 시리즈에서
+            # 같은 팀이 차트 표기('키키')와 정본 키('KiiiKiii')로 쪼개진다.
             rec: dict[str, Any] = {
-                "key": artist,
+                "key": amap.get(artist.casefold(), artist),
+                "chart_label": artist,
                 "query": f"{artist} - {title}",
                 "observed_date": today,
                 "cohort": "chart",
@@ -194,8 +254,6 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         ok_c = sum(1 for r in records if r.get("features"))
         print(f"  코호트(차트): {ok_c}/{len(records)} 해석 · 캐시 적중 {cache_hits}")
 
-    doc = json.loads(Path(args.watchlist).read_text(encoding="utf-8"))
-    acts = [a for a in (doc.get("artists") or []) if isinstance(a, dict) and a.get("key")]
     for act in acts:
         key = str(act["key"])
         aliases = [str(a) for a in (act.get("aliases") or [])] or [key]
@@ -225,6 +283,9 @@ def cmd_fetch(args: argparse.Namespace) -> int:
             rec["unresolved"] = last
             print(f"  {key}: 미해석 ({last})")
         records.append(rec)
+
+    # 같은 트랙이 코호트·워치리스트 양 경로로 잡히면 한 레코드로(RULES §1 정체성).
+    records = _dedupe(records)
 
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -543,6 +604,168 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           classify_rhythm(prof, tie_gap=1.0)["tie"]
           and classify_rhythm(prof, tie_gap=1.0)["assigned"] == "four-on-floor")
     check("분류 결정성: 같은 프로파일 → 같은 배정", classify_rhythm(prof) == c_beat)
+
+    # ── D-031 신규 지표 (TESTS §6) ───────────────────────────────────────────
+    from sonic_profile.features import stereo_width
+    from sonic_profile.rhythm import (
+        bar_profile_contrast,
+        beat_grid_fit,
+        syncopation_ratio,
+    )
+
+    # §6.1 리듬 파생 — 저장된 프로파일에서 재계산되므로 오디오가 필요 없다
+    on_beat = [1.0 if i % 4 == 0 else 0.0 for i in range(16)]
+    off_beat = [0.0 if i % 4 == 0 else 1.0 for i in range(16)]
+    check("싱코페이션 하한: 정박만 → 0.0", syncopation_ratio(on_beat) == 0.0,
+          f"{syncopation_ratio(on_beat)}")
+    check("싱코페이션 상한: 정박 칸이 빔 → 1.0", syncopation_ratio(off_beat) == 1.0,
+          f"{syncopation_ratio(off_beat)}")
+    flat16 = [1.0 / 16] * 16
+    check("마디 대비 기준점: 완전 균일 → 정확히 1.0", bar_profile_contrast(flat16) == 1.0,
+          f"{bar_profile_contrast(flat16)}")
+    spike = [1.0] + [0.0] * 15
+    check("마디 대비 상한: 한 칸 집중 → bins(16)", abs(bar_profile_contrast(spike) - 16.0) < 1e-9,
+          f"{bar_profile_contrast(spike)}")
+    # 그리드 편차: 완벽 등간격은 ≈0, 지터를 키우면 단조 증가해야 한다
+    perfect = np.arange(32, dtype=np.float64) * 0.5
+    _, dev0 = beat_grid_fit(perfect)
+    devs = []
+    for sigma in (0.002, 0.010, 0.030):
+        jit = perfect + np.random.default_rng(7).normal(0, sigma, perfect.size)
+        devs.append(beat_grid_fit(jit)[1])
+    check("그리드 편차 하한: 완벽 등간격 → ≈0", dev0 < 1e-6, f"{dev0:.3e} ms")
+    check("그리드 편차 단조 증가: 지터 σ↑ → 잔차↑",
+          devs[0] < devs[1] < devs[2], " < ".join(f"{d:.1f}" for d in devs))
+
+    # §6.2 신규 DSP
+    quiet = extract(sine(1000) * 0.5)
+    loud = extract(sine(1000))
+    if isinstance(quiet.get("loudness_lufs"), float) and isinstance(loud.get("loudness_lufs"), float):
+        delta = quiet["loudness_lufs"] - loud["loudness_lufs"]
+        # K-weighting은 선형이라 진폭 절반 = 정확히 −6.02 LUFS. 구현 정오를 가르는 검사다.
+        check("라우드니스 선형성: 진폭 −6dB → −6 LUFS 이동", abs(delta + 6.02) < 0.05,
+              f"{delta:+.2f} LUFS")
+    else:
+        check("라우드니스 선형성: 진폭 −6dB → −6 LUFS 이동", False, "값이 나오지 않음")
+    check("스펙트럼 평탄도 하한: 순음 → ≈0", fhi["spectral_flatness"] < 0.01,
+          f"{fhi['spectral_flatness']}")
+    check("스펙트럼 평탄도: 잡음 > 순음", fn["spectral_flatness"] > fhi["spectral_flatness"],
+          f"{fn['spectral_flatness']} > {fhi['spectral_flatness']}")
+    mono_sig = sine(440)
+    other = sine(660)
+    check("스테레오 폭 하한: L=R → 0.0", stereo_width(np.stack([mono_sig, mono_sig])) == 0.0)
+    check("스테레오 폭 상한: L=−R → 1.0", stereo_width(np.stack([mono_sig, -mono_sig])) == 1.0)
+    mid_w = stereo_width(np.stack([mono_sig, other]))
+    check("스테레오 폭 중간값: 다른 채널 → (0,1)", mid_w is not None and 0.0 < mid_w < 1.0,
+          f"{mid_w}")
+    # 모노 소스는 0.0("좁다")이 아니라 None("정보 없음")이다 — 결측 ≠ 0(§0)
+    check("모노 소스 → None (0.0으로 채우지 않음)", stereo_width(mono_sig) is None)
+    # 🔴 무회귀: 스테레오를 넘겨도 모노 지표는 한 톨도 바뀌지 않아야 한다(RULES §2)
+    base = extract(clicks(128))
+    with_st = extract(clicks(128), stereo=np.stack([clicks(128), other]))
+    drift = {k for k in base if k != "stereo_width" and base[k] != with_st.get(k)}
+    check("🔴 모노 무회귀: stereo 인자가 기존 지표를 바꾸지 않는다", not drift, str(sorted(drift)))
+
+    # ── D-032 T0 축 묶음 (TESTS §7) ──────────────────────────────────────────
+    from sonic_profile.derived import derive_all, organic_ratio, profile_shape
+    from sonic_profile.features import (
+        _k_weight,
+        _loudness_range_lu,
+        production_qc,
+        stereo_detail,
+    )
+    from sonic_profile.rhythm import HOP as HOP_R
+    from sonic_profile.rhythm import ioi_entropy, rhythm_self_similarity, swing_ratio
+
+    # 파생(라벨) — 오디오 없이 도는 순수 함수
+    def ins(pairs: list[tuple[str, float]]) -> list[dict[str, Any]]:
+        return [{"label": k, "p": v} for k, v in pairs]
+
+    check("organic_ratio 상한: 유기음만 → 1.0",
+          organic_ratio(ins([("piano", 0.9), ("violin", 0.8)]))["organic_ratio"] == 1.0)
+    check("organic_ratio 하한: 전자음만 → 0.0",
+          organic_ratio(ins([("synthesizer", 0.9), ("drummachine", 0.5)]))["organic_ratio"] == 0.0)
+    mixed = organic_ratio(ins([("piano", 0.5), ("synthesizer", 0.5), ("bass", 0.9)]))
+    check("organic_ratio 모호 라벨은 분모에서 빠진다 (0.5)", mixed["organic_ratio"] == 0.5,
+          f"배제 질량 {mixed['organic_excluded_mass']}")
+    check("모호 라벨만 있으면 미해석 (0으로 채우지 않음)",
+          "organic_ratio" not in organic_ratio(ins([("bass", 0.9), ("guitar", 0.8)])))
+    flat_prof = [1.0 / 16] * 16
+    check("bar_profile_entropy: 완전 균일 → 1.0",
+          profile_shape(flat_prof)["bar_profile_entropy"] == 1.0)
+    check("bar_half_asymmetry: 앞 반마디에만 킥 → 1.0",
+          profile_shape([1.0] * 8 + [0.0] * 8)["bar_half_asymmetry"] == 1.0)
+    check("derive_all은 기존 키를 덮어쓰지 않는다",
+          "organic_ratio" not in derive_all({"instruments": ins([("piano", 1.0)]),
+                                             "organic_ratio": 0.123}))
+
+    # 라우드니스 레인지 — 일정 신호는 0, 크고 작은 구간이 섞이면 커야 한다
+    steady = sine(1000, 20.0)
+    varied = np.concatenate([sine(1000, 10.0) * 0.05, sine(1000, 10.0)]).astype(np.float32)
+    lra_s = _loudness_range_lu(_k_weight(steady, SR), SR)
+    lra_v = _loudness_range_lu(_k_weight(varied, SR), SR)
+    check("LRA 하한: 일정 진폭 → ≈0", lra_s < 0.2, f"{lra_s:.3f} LU")
+    check("LRA 단조성: 기복 있는 신호 > 일정 신호", lra_v > lra_s + 10, f"{lra_v:.1f} vs {lra_s:.1f} LU")
+
+    # 프로덕션 QC — "클리핑"이 아니라 0dBFS 초과다
+    qc = production_qc(sine(1000) * 3.0, SR, 1.5)
+    check("over_unity_ratio: 진폭 1.5 정현파는 상당 부분이 1.0 초과", qc["over_unity_ratio"] > 0.3,
+          f"{qc['over_unity_ratio']}")
+    check("over_unity_ratio: 정상 신호는 0", production_qc(sine(1000), SR, 0.5)["over_unity_ratio"] == 0.0)
+    check("silence_ratio: 무음 절반 → ≈0.5",
+          abs(production_qc(np.concatenate([sine(1000, 5.0), np.zeros(SR * 5, dtype=np.float32)]),
+                            SR, 0.5)["silence_ratio"] - 0.5) < 0.05)
+
+    # 스테레오 상세 — L=R이면 밴드별 폭이 전부 0이고 위상 상관은 1
+    same = np.stack([sine(440), sine(440)])
+    sd = stereo_detail(same, SR)
+    check("밴드별 스테레오 폭: L=R → 전 대역 0",
+          all(abs(sd.get(f"stereo_width_{b}", 0.0)) < 1e-6 for b in ("low", "mid", "high")))
+    check("위상 상관: L=R → 1.0", abs(sd.get("phase_correlation", 0.0) - 1.0) < 1e-6)
+    inv = stereo_detail(np.stack([sine(440), -sine(440)]), SR)
+    check("위상 상관: L=−R → −1.0", abs(inv.get("phase_correlation", 0.0) + 1.0) < 1e-6)
+
+    # 리듬 부가 축
+    reg = np.arange(0.0, 12.0, 0.5)
+    # `or`로 기본값을 주면 **0.0이 falsy라 기본값으로 바뀐다** — 하한 검사에서는 치명적이다
+    reg_e = ioi_entropy(reg)
+    check("ioi_entropy 하한: 완전 등간격 → 0 (미해석 아님)", reg_e == 0.0, f"{reg_e}")
+    beats_s = np.arange(0.0, 12.0, 0.5)
+    straight = np.sort(np.concatenate([beats_s, beats_s + 0.25]))
+    sw = swing_ratio(beats_s, straight)
+    check("swing_ratio: 정확히 중간에 앉은 온셋 → 0.5", sw is not None and abs(sw - 0.5) < 0.02,
+          f"{sw}")
+    swung = np.sort(np.concatenate([beats_s, beats_s + 1.0 / 3]))
+    sw2 = swing_ratio(beats_s, swung)
+    check("swing_ratio 단조성: 셔플 온셋 > 스트레이트", sw2 is not None and sw is not None and sw2 > sw,
+          f"{sw2} > {sw}")
+    # 같은 마디를 반복하면 자기유사도가 높아야 한다
+    # 마디당 프레임이 칸 수(16)와 같으면 접기 경계에서 밀려 자기유사도가 깎인다
+    # 임펄스를 칸 **안쪽**에 둔다 — 마디 경계에 놓으면 부동소수 오차로 앞 마디에 밀린다
+    # (TESTS §5가 기록한 격자 정렬 함정과 같은 것). 2·18·34·50 → 여전히 0·4·8·12번 칸.
+    one_bar = np.zeros(64, dtype=np.float64)
+    one_bar[[2, 18, 34, 50]] = 3.0
+    env_rep = np.tile(one_bar, 6)
+    db = np.arange(7, dtype=np.float64) * (64 * HOP_R / SR)
+    ss = rhythm_self_similarity(env_rep, SR, db)
+    check("마디 자기유사도: 같은 패턴 반복 → 높음", ss is not None and ss > 0.9, f"{ss}")
+
+    # ── 레코드 정체성·병합 (RULES §1) — 이중 저장이 분포를 이중 가중하던 결함의 가드
+    amap = _alias_map([{"key": "KiiiKiii", "aliases": ["키키"]}])
+    check("별칭 해석: 차트 표기 → 정본 키 (casefold)", amap.get("키키") == "KiiiKiii", f"{amap}")
+    chart_rec = {"key": "KiiiKiii", "chart_label": "키키", "cohort": "chart", "chart_rank": 8,
+                 "source": "apple", "track_id": "t1", "observed_date": "2026-07-29",
+                 "features": {"tempo_bpm": 120}}
+    watch_rec = {"key": "KiiiKiii", "cohort": "watchlist", "source": "apple", "track_id": "t1",
+                 "observed_date": "2026-07-29", "features": {"tempo_bpm": 120}}
+    other_day = {**watch_rec, "observed_date": "2026-07-28"}
+    merged = _dedupe([chart_rec, watch_rec, other_day])
+    check("병합: 같은 (source,track_id,date) 2건 → 1건 (다른 날은 유지)", len(merged) == 2,
+          f"{len(merged)}")
+    m = merged[0]
+    check("병합 결과: cohort=watchlist + 차트 필드 보존", m.get("cohort") == "watchlist"
+          and m.get("chart_rank") == 8 and m.get("chart_label") == "키키", f"{m.get('cohort')}·{m.get('chart_rank')}")
+    check("병합 멱등성: 재적용해도 불변", _dedupe(merged) == merged)
 
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0

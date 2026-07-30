@@ -314,6 +314,13 @@ interface Bucket {
   highlight?: number;
   muted?: boolean;
   members: BucketMember[];
+  /**
+   * 행이 무엇으로 정해졌는지(예: 규칙의 하한·상한 축). **보이는 텍스트로 렌더된다.**
+   *
+   * 예전에는 `title` 속성이라 포인터로만 닿았고, 눈에 보이는 표시가 없어 **거기 설명이
+   * 있다는 것 자체를 알 수 없었다**(DESIGN §7.6). 화면에 이미 있는 값을 되풀이하는
+   * hint는 넣지 않는다 — 곡 수는 오른쪽 숫자가, 동점 몫은 막대의 두 번째 색이 말한다.
+   */
   hint?: string;
 }
 
@@ -341,10 +348,8 @@ function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
         const hiW = b.total > 0 ? (hi / b.total) * w : 0;
         return (
           <details key={b.name} className="group rounded-sm">
-            <summary
-              className="flex cursor-pointer list-none items-center gap-2 rounded-sm py-0.5 text-xs hover:bg-[var(--hairline)]"
-              title={b.hint}
-            >
+            <summary className="cursor-pointer list-none rounded-sm py-0.5 text-xs hover:bg-[var(--hairline)]">
+              <span className="flex items-center gap-2">
               <span
                 className="w-3 shrink-0 text-center text-[var(--muted)] transition-transform duration-150 group-open:rotate-90"
                 aria-hidden
@@ -371,6 +376,14 @@ function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
                 )}
               </span>
               <span className="w-8 shrink-0 text-right tabular-nums text-[var(--muted)]">{b.total}</span>
+              </span>
+              {/* 행이 무엇으로 정해졌는지는 **보이는 자리**에 적는다. 라벨 아래 한 줄이라
+                  접힌 상태에서도 읽히고, 라벨 칸(w-32)에 맞춰 들여쓰면 어느 행의 것인지 붙는다. */}
+              {b.hint && (
+                <span className="mt-0.5 block pl-[calc(0.75rem+8rem+1rem)] text-[11px] leading-snug text-[var(--muted)]">
+                  {b.hint}
+                </span>
+              )}
             </summary>
             <ul className="mb-1 ml-5 mt-1 space-y-0.5 border-l pl-3 text-xs" style={{ borderColor: "var(--hairline)" }}>
               {b.members.map((m) => (
@@ -746,10 +759,9 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
         members: v.members.sort(
           (a, b) => parseFloat(b.detail) - parseFloat(a.detail) || a.name.localeCompare(b.name),
         ),
-        hint:
-          name === data.noMatchLabel
-            ? "어느 유형에도 충분히 가깝지 않음. '다른 유형'이 아니라 '해당 없음'"
-            : `${v.members.length}곡 (그중 동점 ${v.tie}곡)`,
+        // hint를 두지 않는다: 곡 수는 오른쪽 숫자가, 동점 몫은 막대의 두 번째 색과 범례가
+        // 이미 말하고, '해당 없음'의 뜻은 위 `Terms`가 보이는 텍스트로 설명한다.
+        // 화면에 있는 것을 한 번 더 적으면 정보가 아니라 잡음이 된다(DESIGN §7.6).
       }))
       .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
     return {

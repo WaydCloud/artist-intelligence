@@ -127,8 +127,8 @@ jobs:
       #
       # 대상 선별은 snapshot-schema의 required(`provenance` + `records`)와 정확히 맞춘다.
       # `provenance`만 보고 거르면 signal-series 문서(dates/series/roster)까지 걸려들어
-      # **엉뚱한 스키마로 검증하다 실패**한다. signal-series는 아직 JSON 스키마 패키지가
-      # 없어(문서 관례로만 존재) 이 게이트의 대상이 아니다.
+      # **엉뚱한 스키마로 검증하다 실패**한다. signal-series는 아래 별도 게이트가
+      # 자기 스키마(packages/signal-series)로 검증한다.
       - name: facts-only snapshot gate (§4)
         run: |
           uv run --project modules/fandom-pulse python - <<'PY'
@@ -148,6 +148,32 @@ jobs:
           print(f"snapshot gate: {checked} fixture(s) checked")
           if checked == 0:
               print("::error::snapshot gate matched 0 fixtures — filter is wrong or fixtures moved")
+              failed = True
+          sys.exit(1 if failed else 0)
+          PY
+      # signal-series 게이트: 모듈 간 시계열이 공유 계약(packages/signal-series)을 지키는지.
+      # D-030이 남긴 구멍 — series 픽스처가 어떤 계약으로도 검증되지 않던 것을 메운다.
+      # 대상은 구조로 식별한다: dates+series+roster+provenance 있고 records 없음(스냅샷 제외).
+      - name: signal-series contract gate
+        run: |
+          uv run --project modules/fandom-pulse python - <<'PY'
+          import glob, json, subprocess, sys
+          failed, checked = False, 0
+          for f in glob.glob("modules/**/tests/fixtures/*.json", recursive=True):
+              try:
+                  d = json.load(open(f, encoding="utf-8"))
+              except Exception:
+                  continue
+              keys = d.keys() if isinstance(d, dict) else set()
+              if not {"dates", "series", "roster", "provenance"} <= set(keys) or "records" in keys:
+                  continue
+              checked += 1
+              if subprocess.run([sys.executable, "scripts/validate_series.py", f]).returncode != 0:
+                  failed = True
+          # 0건이면 게이트가 통과해도 아무것도 검증하지 않은 것이다 — 조용한 통과를 막는다.
+          print(f"signal-series gate: {checked} fixture(s) checked")
+          if checked == 0:
+              print("::error::signal-series gate matched 0 fixtures — filter is wrong or fixtures moved")
               failed = True
           sys.exit(1 if failed else 0)
           PY

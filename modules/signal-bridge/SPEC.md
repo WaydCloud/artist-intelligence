@@ -18,7 +18,7 @@ D-010에서 "무베이스 신인의 출발점 = 소셜"을 fandom-pulse 사운�
 
 ## signal-series 데이터 계약 (정본 — 두 이미터·브리지 공유)
 
-각 소스 모듈의 `signals` 서브커맨드가 방출하고 브리지가 소비하는 **입력측 공유 계약**(report-schema의 시간축 짝, D-007 정신):
+각 소스 모듈의 `signals` 서브커맨드가 방출하고 브리지가 소비하는 **입력측 공유 계약**(report-schema의 시간축 짝, D-007 정신). **기계검증형은 [`packages/signal-series/signal-series.schema.json`](../../packages/signal-series/signal-series.schema.json)** — 검증은 `python scripts/validate_series.py <series.json>`, CI `data-contracts` 잡이 픽스처를 전수 검증한다. 이 서술과 스키마가 어긋나면 이 서술이 정본이고 스키마를 고친다:
 
 ```jsonc
 {

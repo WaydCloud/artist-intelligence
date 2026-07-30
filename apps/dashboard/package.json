@@ -10,6 +10,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "smoke:tabs": "node scripts/smoke-tabs.mjs",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {

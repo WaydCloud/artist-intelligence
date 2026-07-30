@@ -26,6 +26,10 @@ PYTHONPATH=modules/chart-history/src python -m chart_history analyze \
 # → output/report.json 이 생성되고 report-schema 를 통과해야 한다.
 ```
 
+- ⚠ **스모크의 `-o`를 `modules/chart-history/output/`로 두면 커밋된 라이브 산출을 덮는다.** 그 파일은 데일리가 라이브 스토어로 쓴 것이고(대시보드가 읽는 정본), 픽스처 산출로 덮으면 4국가 200엔트리로 축소된다(2026-07-30 실측: 5,171줄 → 196줄). 검증만 할 때는 `-o`를 임시 디렉터리로 줄 것.
+- **재시도 회귀**(§1 재시도 규칙): 해석 불가 호스트로 `collect --url https://kworb.invalid/nope.html` → stderr에 `attempt 1/3`~`3/3` 3줄 + `unavailable for ... after 3 attempts` 한 줄, **exit 1**(traceback 없음). 실측 2026-07-30 통과.
+
+
 ## 수용조건
 
 - [ ] **A. 핵심 흐름**: 유효 스냅샷 → `output/report.json` 생성 + 스키마 유효.

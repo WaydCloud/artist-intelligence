@@ -18,6 +18,10 @@ PYTHONPATH=modules/yt-pulse/src python -m yt_pulse analyze \
 #        fetch --channels packages/entity-master/yt_channels.json -o data/live/yt/<date>.json  (일일, ~12 units)
 ```
 
+- ⚠ **스모크의 `-o`를 `modules/yt-pulse/output/`로 두면 커밋된 라이브 산출을 덮는다**(실측 2026-07-30: 추적 팀 11 → 픽스처의 9). 검증만 할 때는 임시 디렉터리로.
+- **재시도 정책**(RULES §1): 4xx는 재시도 없이 즉시 종료(쿼터 보호), 5xx·네트워크 오류만 3회·지수 백오프. 네트워크를 타는 검증이라 스모크에는 넣지 않는다.
+
+
 ## 수용조건
 
 - [ ] **A. 핵심 흐름**: 유효 스냅샷 → `output/report.json` + 스키마 유효.

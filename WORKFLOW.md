@@ -26,6 +26,7 @@
 - [ ] `TESTS.md` 수용조건 통과
 - [ ] 모듈 CLI가 **스키마 유효 `report.json`** 산출 (smoke)
 - [ ] lint · typecheck · security 통과
+- [ ] **대시보드를 만졌으면 탭 스모크 통과**: `cd apps/dashboard && npm run smoke:tabs`(dev 실행 중). 전 탭 × 라이트/다크에서 콘솔 에러 0 · 렌더 확인 — lint·typecheck·schema-validate가 셋 다 통과하고도 대시보드 전체가 죽어 있던 사례(2026-07-30)를 막는 게이트다
 - [ ] 관련 문서(SPEC/RULES/DOMAIN 등) 갱신
 - [ ] **기준 원장**: 하중받는 지표·임계값이 `RULES.md`에 원장 형식(정의·도메인근거·튜닝·테스트·한계)으로 명시 · 임계값은 튜닝 노출(코드 은닉 금지) — [`AGENTS.md`](AGENTS.md) §2.1
 

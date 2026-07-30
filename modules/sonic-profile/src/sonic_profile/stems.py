@@ -13,6 +13,11 @@
 **순수 함수와 모델 의존부를 나눠 둔다** — 앞쪽(`halftime_snare_ratio`·
 `bass_glide_ratio`·`grid_adherence`·`vibrato_strength`)은 네트워크 0·모델 0으로
 `selftest_stems()`가 검증한다. rhythm.py가 쓰는 것과 같은 규율이다.
+
+⚠ **2026-07-30 채택 게이트 1차 결과: 통과 축 0**(RULES §3.8.4.1). `grid_adherence`
+기반 두 축은 f0 추정기의 격자를 재고 있어 **철회**됐고, `bass_glide_ratio`·
+`pitch_shift_proxy`는 **판별력 없음**으로 판정됐다. 코드는 남기되 어떤 축도
+검출 규칙으로 승격되지 않았다 — 구현했다고 채택되는 것이 아니다.
 """
 
 from __future__ import annotations
@@ -124,9 +129,12 @@ def grid_adherence(f0_hz: np.ndarray) -> float | None:
     정의: 유성 프레임 f0의 **격자 이탈(cents) 중앙 절대값**을 0~1로 역정규화.
     최대 이탈은 50센트(반음의 절반)이므로 `1 − median|dev| / 50`이다.
 
-    한 함수가 두 지표를 낸다 — 베이스의 `bass_note_stability`와 보컬의
-    `vocal_tuning_hardness`는 **같은 계산**이고 대상 스템만 다르다. 두 벌로
-    구현하면 한쪽만 고쳐지는 날이 온다(AGENTS §1).
+    🔴 **이 함수가 내던 두 축(`bass_note_stability`·`vocal_tuning_hardness`)은
+    철회됐다(RULES §3.8.4.1).** 함수 자체는 자기가 말하는 것을 정확히 계산하지만,
+    f0 추정기(pyin)의 주파수 격자가 값을 지배한다 — 기본 `resolution=0.1`(=10센트)
+    에서 122곡의 고유값이 6개뿐이었고, 해상도를 올리면 비용이 27배로 뛰면서도
+    값이 **수렴하지 않았다**(0.616 → 0.684 → 0.656). 방출은 멈췄고 함수와
+    selftest만 남긴다 — 안정적인 정의가 나오면 재사용한다.
     """
     st = _semitones(f0_hz)
     st = st[np.isfinite(st)]
@@ -226,10 +234,11 @@ def vibrato_strength(f0_hz: np.ndarray, frame_s: float) -> float | None:
 def pitch_shift_proxy(centroid_hz: float | None, f0_median_hz: float | None) -> float | None:
     """보컬 스펙트럼 중심 ÷ f0 중앙값.
 
-    🔺 **사전 등록 축이다 — 실측 검증 전 리포트 표면 금지**(RULES §3.8.4).
-    포먼트를 **직접 재는 것이 아니라 프록시**다. 피치를 올리며 포먼트를 같이
-    올리면(칩멍크 시프트) 이 비가 보존되고, 포먼트 보정 튜닝은 낮아진다는 가설에
-    기대고 있다. 판별력이 없으면 `meter_duple_bias` 선례대로 **해석을 버린다**.
+    🔴 **게이트에서 판별력 없음으로 판정됐다(2026-07-30, RULES §3.8.4.1).**
+    사전 등록한 가설은 "하이퍼팝 계보가 이 비에서 높게 나온다"였는데 정답지
+    3곡이 전부 코호트 **중앙 이하**(P37.5·P24.0·P11.5)였다 — 예측과 반대다.
+    측정은 건강하다(고유값 96/96). 값은 계속 내되 **해석을 붙이지 않는다**:
+    검출 규칙으로 승격하지 않으며 리포트 표면에도 올리지 않는다.
     """
     if not centroid_hz or not f0_median_hz or f0_median_hz <= 0:
         return None
@@ -388,7 +397,9 @@ def extract_stem_features(
             f0, frame_s, min_st_per_sec=min_st_per_sec, min_ms=min_ms
         )
         axes["bass_f0_range_st"] = f0_range_st(f0)
-        axes["bass_note_stability"] = grid_adherence(f0)
+        # `bass_note_stability`는 철회됐다(RULES §3.8.4.1) — pyin의 주파수 격자가
+        # 값을 지배해 123곡에서 고유값이 9개뿐이었고, 해상도를 올려도 값이 수렴하지
+        # 않았다. 방출하지 않는다: 레코드에 남아 있으면 언젠가 인용된다.
     except (StemsUnavailable, KeyError) as exc:
         axes["bass_unresolved"] = str(exc)
 
@@ -405,7 +416,7 @@ def extract_stem_features(
         ) if n else None
         f0v = _f0(vocals, sr_out, *VOCAL_F0_RANGE)
         frame_s = F0_HOP / float(sr_out)
-        axes["vocal_tuning_hardness"] = grid_adherence(f0v)
+        # `vocal_tuning_hardness`도 같은 이유로 철회(RULES §3.8.4.1).
         axes["vocal_vibrato_strength"] = vibrato_strength(f0v, frame_s)
         voiced = f0v[np.isfinite(f0v) & (f0v > 0)]
         cent = librosa.feature.spectral_centroid(y=vocals, sr=sr_out, hop_length=F0_HOP)[0]

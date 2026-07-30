@@ -2,6 +2,7 @@
 
 import { useMemo } from "react";
 import type {
+  ImpulseRulesTunableData,
   LeadLagTunableData,
   RhythmTunableData,
   TagsTunableData,
@@ -18,7 +19,141 @@ export function Tunable({ data, title }: { data: TunableData; title?: string }) 
   if (data.view === "leadlag") return <LeadLag data={data} title={title} />;
   if (data.view === "rhythm") return <Rhythm data={data} title={title} />;
   if (data.view === "tags") return <Tags data={data} title={title} />;
-  return <Whitespace data={data} title={title} />;
+  if (data.view === "impulse-rules") return <ImpulseRules data={data} title={title} />;
+  if (data.view === "whitespace") return <Whitespace data={data} title={title} />;
+  // 알 수 없는 view는 **그린다고 넘기지 않는다.** 예전엔 마지막 분기가 무조건
+  // Whitespace였고, genre-impulse가 새 view를 내자 `matrix.cols`에서 죽어
+  // **대시보드 전체가 언마운트**됐다(2026-07-30 실측) — 한 모듈의 신규 뷰가
+  // 다른 모듈의 탭까지 못 보게 만드는 구조였다. 모르면 모른다고 표시한다.
+  return <UnknownView view={(data as { view?: string }).view} />;
+}
+
+// impulse-rules — genre-impulse: 두 백분위 컷(P_low·P_high)을 움직이며 어느 곡이
+// 검출 규칙에 걸리는지 다시 계산한다. 규칙의 **형식**(어느 축이 하한/상한인가)은
+// 리포트가 싣고, **값**(컷)은 여기서 A&R이 돌린다 — 기준 원장 §2.1의 소유 분리.
+function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: string }) {
+  const lowKnob = data.knobs.find((k) => k.key === "lowPct") ?? data.knobs[0];
+  const highKnob = data.knobs.find((k) => k.key === "highPct") ?? data.knobs[1];
+  const scope = scopeOf("impulse-rules", title);
+  const [lowPct, setLowPct] = useKnob(scope, "lowPct", lowKnob?.default ?? data.lowPct);
+  const [highPct, setHighPct] = useKnob(scope, "highPct", highKnob?.default ?? data.highPct);
+
+  const buckets = useMemo<Bucket[]>(
+    () =>
+      data.rules.map((rule) => {
+        const members = data.tracks
+          .filter(
+            (t) =>
+              rule.lowAll.every((ax) => (t.pcts[ax] ?? Infinity) <= lowPct) &&
+              rule.highAny.some((ax) => (t.pcts[ax] ?? -Infinity) >= highPct),
+          )
+          .map((t) => ({
+            name: (t.watch ? "★ " : "") + t.name,
+            // 어느 축이 얼마로 걸렸는지 보여야 배정을 반박할 수 있다.
+            detail: data.axes.map((ax) => `${ax} P${t.pcts[ax]?.toFixed(0) ?? "-"}`).join(" · "),
+            flagged: t.watch,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name));
+        return {
+          name: rule.id,
+          total: members.length,
+          members,
+          hint: `하한 ${rule.lowAll.join("·")} ≤ P${lowPct} · 상한 ${rule.highAny.join(" 또는 ")} ≥ P${highPct}`,
+        };
+      }),
+    [data, lowPct, highPct],
+  );
+
+  const matched = buckets.reduce((n, b) => n + b.total, 0);
+
+  return (
+    <div>
+      <div className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2">
+        <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
+          <span>{lowKnob?.label ?? "하위 백분위 P_low"}</span>
+          <input
+            type="range"
+            min={lowKnob?.min ?? 0}
+            max={lowKnob?.max ?? 50}
+            step={lowKnob?.step ?? 1}
+            value={lowPct}
+            onChange={(e) => setLowPct(Number(e.target.value))}
+            className="accent-[var(--series)]"
+            aria-label={lowKnob?.label ?? "하위 백분위 P_low"}
+          />
+          <b className="w-9 tabular-nums text-[var(--ink)]">P{lowPct}</b>
+        </label>
+        <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
+          <span>{highKnob?.label ?? "상위 백분위 P_high"}</span>
+          <input
+            type="range"
+            min={highKnob?.min ?? 50}
+            max={highKnob?.max ?? 100}
+            step={highKnob?.step ?? 1}
+            value={highPct}
+            onChange={(e) => setHighPct(Number(e.target.value))}
+            className="accent-[var(--series)]"
+            aria-label={highKnob?.label ?? "상위 백분위 P_high"}
+          />
+          <b className="w-9 tabular-nums text-[var(--ink)]">P{highPct}</b>
+        </label>
+      </div>
+
+      <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
+        <span>
+          비교 모집단 <b className="text-[var(--ink)]">{data.tracks.length}</b>곡
+        </span>
+        <span>
+          이 컷에서 매치 <b className="text-[var(--ink)]">{matched}</b>곡
+        </span>
+        <span>
+          검출 규칙 <b className="text-[var(--ink)]">{data.rules.length}</b>건
+        </span>
+      </div>
+
+      <BucketRows
+        buckets={buckets}
+        empty="이 컷에서는 매치 없음. P_low를 올리거나 P_high를 낮추면 후보 표시"
+      />
+
+      <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
+        백분위는 <b>당일 코호트 안의 상대 위치</b>입니다 — 코호트 구성이 바뀌면 같은 곡도 값이
+        달라집니다. 규칙이 {data.rules.length}건뿐이라 여기 안 걸린 곡이 “해당 없음”을 뜻하지
+        않습니다.
+      </p>
+      {data.note && <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">{data.note}</p>}
+
+      <CriteriaActions
+        title={title ?? "검출 규칙 임계"}
+        summary={`매치 ${matched}곡 · 비교 모집단 ${data.tracks.length}곡 · 규칙 ${data.rules.length}건`}
+        items={
+          [
+            lowKnob && {
+              label: lowKnob.label,
+              from: `P${lowKnob.default}`,
+              to: `P${lowPct}`,
+              changed: lowPct !== lowKnob.default,
+            },
+            highKnob && {
+              label: highKnob.label,
+              from: `P${highKnob.default}`,
+              to: `P${highPct}`,
+              changed: highPct !== highKnob.default,
+            },
+          ].filter(Boolean) as CriteriaItem[]
+        }
+      />
+    </div>
+  );
+}
+
+function UnknownView({ view }: { view?: string }) {
+  return (
+    <p className="text-sm text-[var(--ink-secondary)]">
+      이 대시보드가 아직 모르는 뷰입니다{view ? ` (view=${view})` : ""}. 리포트 데이터는 그대로
+      있으며, 렌더러가 갱신되면 표시됩니다.
+    </p>
+  );
 }
 
 // 집계 막대는 접힌 요약이고, 펼치면 그 칸에 들어간 곡이 나온다.

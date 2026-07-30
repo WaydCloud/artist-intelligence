@@ -34,6 +34,13 @@ from sonic_profile.report import (
     now_iso,
 )
 from sonic_profile.rhythm import MIN_MATCH_DEFAULT, TIE_GAP_DEFAULT
+from sonic_profile.stems import (
+    BASS_GLIDE_MIN_MS_DEFAULT,
+    BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT,
+    HALFTIME_MIN_RATIO_DEFAULT,
+    SNARE_MIN_CONTRAST_DEFAULT,
+    StemOpts,
+)
 
 MODULE_VERSION = "0.1.0"
 
@@ -170,6 +177,16 @@ def cmd_fetch(args: argparse.Namespace) -> int:
     eng = {**engine_provenance(args.low_hz), **decoder_provenance()}
     if args.rhythm:
         eng.update(rhythm_provenance())
+    # 스템은 마디 격자 위에 얹히므로 리듬이 꺼져 있으면 낼 수 없다(RULES §3.8).
+    # 조용히 빈 값을 내지 않고 여기서 꺼 버린다 — 결측 사유가 레코드마다 반복되면
+    # "스템을 켰는데 왜 없나"를 사람이 100번 읽어야 한다.
+    if getattr(args, "stems", False) and not args.rhythm:
+        print("  !! --stems는 리듬 격자가 필요하다(--no-rhythm과 함께 쓸 수 없다) — 스템 없이 진행")
+        args.stems = False
+    if getattr(args, "stems", False):
+        from sonic_profile.stems import stem_provenance
+
+        eng.update(stem_provenance())
     if args.tags:
         try:
             ensure_models(model_dir(args.model_dir))
@@ -190,11 +207,21 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         # 저장 라벨 수가 늘면 옛 캐시(잘린 라벨)는 무효다 — 안 그러면 다음 수집이
         # 캐시 적중으로 절단본을 다시 써 넣어 과소집계가 되살아난다(RULES §3.1.6.1).
         str(eng.get("tagger_top_k_instrument", "-")),
+        # 스템 축(RULES §3.8). 스템을 켜면 키가 갈라져 비-스템 캐시를 재사용하지 않는다 —
+        # 안 그러면 캐시 적중으로 **스템 축이 빈 레코드**가 그대로 되살아난다.
+        str(eng.get("stem_set", "-")),
     ])
     cache_path = Path(args.cache) if args.cache else Path(args.output).parent / "cache.json"
     cache = _cache_load(cache_path, engine_key)
     cache_hits = 0
     records: list[dict[str, Any]] = []
+    # 하중받는 기준은 코드에 은닉하지 않는다(AGENTS §2.1) — CLI에서 받아 그대로 내려보낸다.
+    stem_opts: StemOpts | None = StemOpts(
+        min_ratio=args.halftime_min_ratio,
+        min_st_per_sec=args.bass_glide_min_st_per_sec,
+        min_ms=args.bass_glide_min_ms,
+        min_contrast=args.snare_min_contrast,
+    ) if getattr(args, "stems", False) else None
 
     def measure(cand: dict[str, Any]) -> dict[str, Any]:
         """캐시 우선. 미스일 때만 프리뷰를 내려받아 잰다(오디오는 즉시 폐기)."""
@@ -206,6 +233,7 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         feats = features_from_preview(
             cand["preview_url"], low_hz=args.low_hz, suffix=cand.get("suffix", ".audio"),
             rhythm=args.rhythm, tags=args.tags,
+            stems=getattr(args, "stems", False), stem_opts=stem_opts,
         )
         if cand.get("track_id"):
             cache[cid] = feats
@@ -767,6 +795,14 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           and m.get("chart_rank") == 8 and m.get("chart_label") == "키키", f"{m.get('cohort')}·{m.get('chart_rank')}")
     check("병합 멱등성: 재적용해도 불변", _dedupe(merged) == merged)
 
+    # ── 스템 분리 축 (TESTS §7.2.1) — 순수 함수만이라 모델도 네트워크도 필요 없다.
+    from sonic_profile.stems import selftest_stems
+
+    print("\n[스템 분리 축 · TESTS §7.2.1]")
+    stem_ran, stem_fails = selftest_stems()
+    fails.extend(f"stems:{n}" for n in stem_fails)
+    print(f"  스템 {stem_ran - len(stem_fails)}/{stem_ran}")
+
     print(f"\n{'all checks passed' if not fails else f'{len(fails)} check(s) FAILED: {fails}'}")
     return 1 if fails else 0
 
@@ -805,6 +841,22 @@ def main(argv: list[str] | None = None) -> int:
                      help="장르·악기 태깅 생략")
     p_f.add_argument("--model-dir", default=None,
                      help="태거 모델 경로 (기본 data/models — 없으면 내려받음)")
+    # ── 스템 분리 (RULES §3.8) — **opt-in**. 곡당 +6~7초(코호트 200곡이면 +20~25분)라
+    # TESTS §7.2.2 채택 게이트를 통과하기 전에 상시 비용을 지불하지 않는다.
+    p_f.add_argument("--stems", action="store_true",
+                     help="스템 분리 축(하프타임 스네어·슬라이딩 808·보컬 처리) 추가. "
+                          "곡당 +6~7초 · 엔진 키가 갈라져 콜드 실행이 된다")
+    # 임계값은 도메인 소유자(A&R) 소유다 — 코드에 은닉하지 않는다(AGENTS §2.1).
+    p_f.add_argument("--halftime-min-ratio", type=float, default=HALFTIME_MIN_RATIO_DEFAULT,
+                     help=f"하프타임 판정 비율 (기본 {HALFTIME_MIN_RATIO_DEFAULT} · 관습값)")
+    p_f.add_argument("--bass-glide-min-st-per-sec", type=float,
+                     default=BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT,
+                     help=f"글라이드 최소 기울기 세미톤/초 (기본 {BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT} · 관습값)")
+    p_f.add_argument("--bass-glide-min-ms", type=float, default=BASS_GLIDE_MIN_MS_DEFAULT,
+                     help=f"글라이드 최소 지속 ms (기본 {BASS_GLIDE_MIN_MS_DEFAULT} · 관습값)")
+    p_f.add_argument("--snare-min-contrast", type=float, default=SNARE_MIN_CONTRAST_DEFAULT,
+                     help=f"스네어 축 유효성 게이트 대비 (기본 {SNARE_MIN_CONTRAST_DEFAULT} — "
+                          "저역 기준선. 미만이면 스네어 축을 결측 처리)")
     p_f.add_argument("-o", "--output", required=True)
     p_f.set_defaults(func=cmd_fetch)
 

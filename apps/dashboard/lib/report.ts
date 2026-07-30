@@ -73,11 +73,27 @@ export interface TagsTunableData {
   knobs: Knob[];
   note?: string;
 }
+// impulse-rules: genre-impulse — per-track cohort percentiles + the rule's shape, so the
+// client can recompute which tracks match as the two percentile cuts move.
+// 곡별 백분위를 실어야 임계를 낮췄을 때 **새 곡이 나타날 수 있다** — 분포만 보내면
+// 컷 선은 움직여도 매치 목록은 얼어붙는다(2026-07-30 실측 결함).
+export interface ImpulseRulesTunableData {
+  view: "impulse-rules";
+  lowPct: number;
+  highPct: number;
+  axes: string[];
+  pools: Record<string, number[]>;
+  rules: { id: string; impulseId: string; lowAll: string[]; highAny: string[] }[];
+  tracks: { name: string; watch?: boolean; pcts: Record<string, number> }[];
+  knobs: Knob[];
+  note?: string;
+}
 export type TunableData =
   | WhitespaceTunableData
   | LeadLagTunableData
   | RhythmTunableData
-  | TagsTunableData;
+  | TagsTunableData
+  | ImpulseRulesTunableData;
 
 export interface Chart {
   type: "line" | "bar" | "heatmap" | "radar" | "tunable";

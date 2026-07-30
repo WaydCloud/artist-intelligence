@@ -1,0 +1,299 @@
+{
+  "id": "njs",
+  "name_ko": "뉴잭스윙 리바이벌",
+  "name_en": "New jack swing revival",
+  "version": "1.0.0",
+  "updated": "2026-07-30",
+  "case_type": "continuity-revival",
+  "origin": {
+    "region": "US",
+    "scene": "원 카탈로그 — Teddy Riley 계보(1987~93) / 리바이벌 트리거 — Bruno Mars"
+  },
+  "adoption_mode": {
+    "mode": "full",
+    "notes": "'연속 vs 리바이벌' 난점(핵심): 한국 측은 순수 리바이벌이 아니라 '연속+리바이벌 혼합형' — ① 1990~93 동시대 수입(현진영·양준일) ② 1996~ SMP(유영진)의 NJS 기반 ③ 2011 테디 라일리 직접 프로듀스(소녀시대 'The Boys'·RaNia)라는 끊긴 적 없는 계보 보유 → '죽은 장르의 부활'과 '잠복 관용구의 재전경화'가 섞임. 조작적 구분: 2011 이전 직접 이식=전사(연속) / 명시적 90s 레트로 '콘셉트'로 판매된 2016-10 이후=리바이벌. 단 SHINee '1 of 1'(2016-10)이 Finesse 트리거보다 앞서는 점은 이 조작적 구분으로도 완전히 해소 안 됨. 역전 구조: 한국 씬 도달(2016-10)이 미국 주류 도달(2018-01)보다 약 15개월 선행 — '한국이 항상 후행 수용자'라는 가정은 이 사례에서 기각, 리바이벌형에서는 한국 씬 도달이 발원지 트리거와 독립적일 수 있음",
+    "mode_transitions": []
+  },
+  "trajectory": [
+    {
+      "cell": "origin-scene-revival",
+      "date": "2016-11",
+      "date_precision": "month",
+      "evidence": "Bruno Mars 『24K Magic』 — 'Finesse' 원곡('NJS 재현 잼 세션' 산물). 전조: 2014-11 'Uptown Funk'(매우 낮음)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Finesse_(Bruno_Mars_song)"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "origin-viral",
+      "date": "2018-01",
+      "date_precision": "month",
+      "evidence": "'Finesse' 리믹스(Cardi B, 2018-01-04), 〈In Living Color〉 오마주 MV",
+      "sources": [
+        "https://www.billboard.com/music/pop/bruno-mars-cardi-b-finesse-remix-huge-win-8092641/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "origin-mainstream",
+      "date": "2018-01",
+      "date_precision": "month",
+      "evidence": "리믹스 Hot 100 35위→3위",
+      "sources": [
+        "https://www.billboard.com/pro/ed-sheeran-bruno-mars-cardi-b-justin-timberlake-hot-100-top-10/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "origin-institutional-recognition",
+      "date": "2018-06~2018-12",
+      "date_precision": "range",
+      "evidence": "Teddy Riley 할리우드 명예의 거리(2018-06), 아폴로 'Kings and Queens of New Jack Swing'(2018-12)",
+      "sources": [
+        "https://thesource.com/2018/06/27/teddy-riley-star-hollywood-walk-of-fame/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-pre-adoption",
+      "date": "2015-03~2016-10",
+      "date_precision": "range",
+      "evidence": "트리거 이전 이미 누적 — EXO 'Call Me Baby'(2015, Teddy Riley 작곡·프로듀싱 크레딧, 당대 비평이 NJS 편곡으로 서술), SHINee '1 of 1'(2016-10 타이틀). 2017-01 팬 비평이 'K-pop 내 NJS 부활, 서구에선 소강' 진단",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Call_Me_Baby",
+        "https://allcatsandmusic.wordpress.com/2017/01/08/new-jack-swing-in-k-pop/"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "cell": "kr-scene-reignition",
+      "date": "2018-04",
+      "date_precision": "month",
+      "evidence": "EXID 'Lady' — 명시적 90s NJS 콘셉트(90s 의상·캠코더 MV), Finesse 리믹스 3개월 후",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Lady_(EXID_song)"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-viral",
+      "date": "2019-09",
+      "date_precision": "month",
+      "evidence": "'온라인 탑골공원' — 90s 가요 스트리밍 동접 2만+, 뉴트로 열풍(한국화된 90s 가요의 바이럴)",
+      "sources": [
+        "https://www.ajunews.com/view/20190919090636722"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream-partial",
+      "date": "2016-10",
+      "date_precision": "month",
+      "evidence": "SHINee 『1 of 1』 Gaon 앨범 1위(팬덤 구매 기반 — 대중 청취 지표 아님)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/1_of_1_(Shinee_album)"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream",
+      "date": "2022-07",
+      "date_precision": "month",
+      "evidence": "NewJeans 'Attention'(장르 분류 NJS) 데뷔곡 서클 디지털 1위 — 격상: IZM 원출처 확보('1990년대 뉴 잭 스윙과 하우스 리듬을 현대적으로 믹싱', 정수민 2022-12)",
+      "sources": [
+        "http://archive.izm.co.kr/contentRead.asp?idx=31618&bigcateidx=19&subcateidx=20&view_tp=1"
+      ],
+      "certainty": "높음"
+    }
+  ],
+  "leadtimes": [
+    {
+      "from_cell": "origin-scene-revival",
+      "to_cell": "origin-mainstream",
+      "months": 14,
+      "note": "리믹스+피처링이라는 인위적 재점화 장치로 단축"
+    },
+    {
+      "from_cell": "origin-mainstream",
+      "to_cell": "kr-scene-reignition",
+      "months": 3,
+      "note": "리바이벌형의 한국 씬 반응은 매우 빠름"
+    },
+    {
+      "from_cell": "origin-mainstream",
+      "to_cell": "kr-mainstream",
+      "months": 54,
+      "note": "단 이 구간은 확산 리드타임이 아니라 '아이돌 팬덤 상품 → 대중 음원 상품' 전환 시간에 가까움"
+    },
+    {
+      "from_cell": "kr-mainstream-partial",
+      "to_cell": "origin-mainstream",
+      "months": 15,
+      "note": "역전 구조 — 한국 씬 도달(2016-10 SHINee)이 미국 주류 도달(2018-01)보다 약 15개월 선행. 리바이벌형에서는 한국 씬 도달이 발원지 트리거와 독립적일 수 있음을 모델 파라미터로 반영"
+    }
+  ],
+  "early_signals": [
+    {
+      "source_type": "broadcast-retro-signal",
+      "date": "2014-12~2015-01",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "무한도전 '토토가' — 90s 재소환의 방송가 신호",
+      "certainty": "매우 낮음"
+    },
+    {
+      "source_type": "kr-title-preemption",
+      "date": "2016-10",
+      "lead_months_vs_kr_mainstream": 69,
+      "evidence": "SHINee '1 of 1' — 대형 기획사의 NJS 타이틀 전면 배치(미국 트리거 이전)",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "fan-criticism-aggregation",
+      "date": "2017-01",
+      "lead_months_vs_kr_mainstream": 66,
+      "evidence": "해외 K-pop 비평이 'K-pop 내 NJS 증가 추세'를 이미 목록화 — 씬 레벨 관측이 주류화 5년 선행",
+      "sources": [
+        "https://allcatsandmusic.wordpress.com/2017/01/08/new-jack-swing-in-k-pop/"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "source_type": "overseas-chart",
+      "date": "2018-01",
+      "lead_months_vs_kr_mainstream": 54,
+      "evidence": "Finesse 리믹스 Hot 100 3위 — 글로벌 트리거 확정",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "institutional-recognition",
+      "date": "2018-06~2018-12",
+      "lead_months_vs_kr_mainstream": 49,
+      "evidence": "테디 라일리 제도적 재공인 — 장르 정통성 회복 신호",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "kr-retro-demand",
+      "date": "2019-09",
+      "lead_months_vs_kr_mainstream": 34,
+      "evidence": "온라인 탑골공원 — 한국 수요층이 90s 리듬에 열려 있다는 수요 측 신호",
+      "certainty": "높음"
+    }
+  ],
+  "element_borrowing": null,
+  "identity_formation": null,
+  "signature": {
+    "status": "pending-a2",
+    "predicted_axes": [
+      "NJS 드럼머신 스윙 골격",
+      "이지리스닝화 변형(NewJeans형) — 드럼머신 타격감 저하·에어리 보컬 결합(2022 이후 주류화의 실제 형태)"
+    ]
+  },
+  "peak_decline": {
+    "kr_peak": "2020-11~2022-07 — 집중 발매기(2020-11~2021-02: NCT U '90's Love'·Rain & 박진영·SHINee 『Don't Call Me』)를 거쳐 'Attention'(2022-07)에서 대중 정점",
+    "kr_decline": "2023 이후 신규 NJS 타이틀 감소, 축이 이지리스닝·UKG·Y2K로 이동(정량 근거 미수집). 2024-06 'Supernatural'은 잔향(Pharrell 정통성 카드로 차별화)",
+    "decline_certainty": "매우 낮음",
+    "origin_decoupled": true,
+    "residue": "미국은 2018-01 단발 스파이크 후 지속 장르로 정착 안 함(레트로 축은 디스코로 이동 — 매우 낮음), 한국은 이중 번역 구조(이미 한국화됐던 90s 댄스가요의 재소환)로 별도 사이클"
+  },
+  "chart_evidence": [
+    {
+      "chart": "billboard-hot100",
+      "artist": "Bobby Brown",
+      "title": "My Prerogative",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "1988-10-22",
+      "exit_date": "1989-04-01",
+      "peak_position": 1,
+      "peak_date": "1989-01-14",
+      "weeks_on_chart": 24,
+      "weeks_counted": 24
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Bruno Mars",
+      "title": "Finesse",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2018-01-13",
+      "exit_date": "2018-06-16",
+      "peak_position": 3,
+      "peak_date": "2018-01-20",
+      "weeks_on_chart": 23,
+      "weeks_counted": 23
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "EXID",
+      "title": "Lady",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Guy",
+      "title": "Groove Me",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "NCT U",
+      "title": "90's Love",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "NewJeans",
+      "title": "Attention",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "NewJeans",
+      "title": "Supernatural",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "SHINee",
+      "title": "1 of 1",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    }
+  ],
+  "limits": [
+    "'리바이벌 vs 연속' 구분이 핵심 난점 — SHINee '1 of 1'(2016-10)이 Finesse 트리거보다 앞서는 점은 조작적 구분으로도 완전히 해소 안 됨",
+    "장르 판정 출처 품질 편차 — EXO 'Call Me Baby' 등은 팬 비평 판정. 세븐틴·온앤오프·키(솔로)는 NJS 명시 근거 미확보로 제외(부재 증명 아님)",
+    "차트 지표 비대칭 — 2016~21 사례 다수가 앨범차트(팬덤 구매)로 '주류 도달' 증거력 약함. 디지털 기준 최초는 2022-07",
+    "'Uptown Funk'·토토가·미국 쇠퇴 시점 등은 월 단위 검증 못 함(매우 낮음 표기)",
+    "영어·한국어 소스 편중 — 일본 등 글로벌 허브 축 독립 검증 미수행"
+  ],
+  "casebook_ref": "CASE 7"
+}

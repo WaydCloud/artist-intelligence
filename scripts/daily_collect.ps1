@@ -183,10 +183,21 @@ $appleMarkets = @($cfg.apple_markets)
 $targetsA = @(Get-Targets "apple" $appleMarkets)
 if ($targetsA.Count -gt 0) {
   $okA = 0; $failedA = @()
+  # 2026-07-30 실측: 49개를 연달아 때리면 9개가 실패하고(kr 포함 — sonic 코호트의 소스다)
+  # 몇 초 뒤 재시도하면 전부 성공한다. 재시도는 collect-apple 안으로 들어갔고(--attempts),
+  # 여기서는 **소진됐을 때의 원인을 로그에 남긴다** — 이전엔 2>$null이 사유를 삼켜
+  # "FAILED (skipped)"만 남았고, 그래서 원인을 찾는 데 별도 재현이 필요했다.
+  $errFile = Join-Path $env:TEMP "ai_apple_err.txt"
   foreach ($cc in $targetsA) {
-    python -m chart_history collect-apple --storefront $cc --store "data/live/chart/apple/$cc" 2>$null | Out-Null
-    if ($?) { $okA++ } else { $failedA += $cc; Log "!! chart apple/$cc collect FAILED (skipped)" }
+    python -m chart_history collect-apple --storefront $cc --store "data/live/chart/apple/$cc" 2>$errFile | Out-Null
+    if ($LASTEXITCODE -eq 0) { $okA++ }
+    else {
+      $failedA += $cc
+      $why = (Get-Content $errFile -Tail 1 -ErrorAction SilentlyContinue)
+      Log "!! chart apple/$cc collect FAILED (skipped) -- $why"
+    }
   }
+  Remove-Item $errFile -ErrorAction SilentlyContinue
   Set-LegResult "apple" $failedA
   Log "apple charts: $okA ok, $($failedA.Count) failed of $($targetsA.Count) storefronts (official RSS)"
 }
@@ -345,6 +356,13 @@ if (Test-Path $sonicToday) {
   if ($LASTEXITCODE -eq 0) { Log "sonic series rebuilt" } else { Log "!! sonic series FAILED (exit $LASTEXITCODE)" }
   python -m sonic_profile analyze data/live/sonic --watchlist $wlPath -o modules/sonic-profile/output/ 2>$null | Out-Null
   if ($LASTEXITCODE -eq 0) { Log "sonic report written" } else { Log "!! sonic report FAILED (exit $LASTEXITCODE)" }
+}
+
+# 3.7) genre-impulse (D-035): impulse ledger x daily sonic cohort -> monitor report (offline, no cost)
+if (Test-Path $sonicToday) {
+  $env:PYTHONPATH = "modules/genre-impulse/src;modules/sonic-profile/src"
+  python -m genre_impulse analyze --sonic data/live/sonic --watchlist $wlPath -o modules/genre-impulse/output/ 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { Log "genre-impulse report written" } else { Log "!! genre-impulse FAILED (exit $LASTEXITCODE)" }
 }
 
 # chart: >=2 distinct dates -> real forward series; else Days-reconstruction fallback

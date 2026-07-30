@@ -1,0 +1,29 @@
+{
+ "note": "A2 오매칭 재시도 (US)",
+ "tracks": [
+  {
+   "artist": "100 gecs",
+   "title": "money machine",
+   "market": "hyperpop",
+   "platform": "origin"
+  },
+  {
+   "artist": "glaive",
+   "title": "astrid",
+   "market": "hyperpop",
+   "platform": "origin"
+  },
+  {
+   "artist": "Central Cee",
+   "title": "Doja",
+   "market": "drill",
+   "platform": "origin"
+  },
+  {
+   "artist": "Tatsuro Yamashita",
+   "title": "Ride on Time",
+   "market": "citypop",
+   "platform": "origin"
+  }
+ ]
+}

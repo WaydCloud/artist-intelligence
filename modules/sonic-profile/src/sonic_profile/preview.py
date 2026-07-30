@@ -21,6 +21,7 @@ from typing import Any
 import numpy as np
 
 from sonic_profile.features import SR, Unresolved, extract
+from sonic_profile.stems import StemOpts
 
 UA = "artist-intelligence/1.0 (research; sonic-profile)"
 ITUNES = "https://itunes.apple.com/search"
@@ -179,18 +180,22 @@ def _decode(path: str) -> np.ndarray:
         raise Unresolved(f"decode failed: {type(exc).__name__}") from exc
 
 
-def _decode_stereo(path: str) -> np.ndarray | None:
-    """오디오 파일 → **2×N 스테레오** float32 @ SR. 모노 소스·실패는 None.
+def _decode_stereo(path: str, rate: int = SR) -> np.ndarray | None:
+    """오디오 파일 → **2×N 스테레오** float32 @ `rate`. 모노 소스·실패는 None.
 
     **모노 경로(`_decode`)를 건드리지 않는 것이 이 함수의 존재 이유다**(D-031). width를
     얻자고 기존 로드를 스테레오로 바꾸면 `to_mono`와 리샘플의 **순서가 뒤바뀌어** 전 지표의
     부동소수 말단이 흔들릴 수 있다 — 과거 값과 비교 불가가 되는 위험(RULES §2)을 감수할
     이유가 없다. 디코드 한 번이 더 들지만 그 비용은 신경망 추론 옆에서 무시할 만하다.
+
+    `rate`는 스템 분리(RULES §3.8.1) 때문에 열어 둔 것이다 — htdemucs는 44.1kHz
+    학습이라 22050을 넣으면 분리 품질이 떨어진다. **기본값은 그대로 SR이므로 기존
+    호출부의 값은 한 비트도 바뀌지 않는다.**
     """
     try:
         import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
-        y, _ = librosa.load(path, sr=SR, mono=False)
+        y, _ = librosa.load(path, sr=rate, mono=False)
         arr = np.asarray(y, dtype=np.float32)
         if arr.ndim == 2 and arr.shape[0] >= 2:
             return arr[:2]
@@ -203,7 +208,7 @@ def _decode_stereo(path: str) -> np.ndarray | None:
 
         with av.open(path) as container:
             stream = container.streams.audio[0]
-            resampler = av.AudioResampler(format="flt", layout="stereo", rate=SR)
+            resampler = av.AudioResampler(format="flt", layout="stereo", rate=rate)
             chunks: list[np.ndarray] = []
             for frame in container.decode(stream):
                 for out in resampler.resample(frame):
@@ -257,14 +262,15 @@ def lookup_preview(source: str, track_id: str, *, country: str = "KR") -> dict[s
 
 
 def _audio_from_url(
-    url: str, suffix: str, *, want_stereo: bool = False
-) -> tuple[np.ndarray, np.ndarray | None]:
-    """프리뷰 URL → (모노 배열, 스테레오 2×N 또는 None). **오디오 파일은 이 함수를
-    벗어나지 않는다**(무보관 §1).
+    url: str, suffix: str, *, want_stereo: bool = False, stems_sr: int | None = None
+) -> tuple[np.ndarray, np.ndarray | None, np.ndarray | None]:
+    """프리뷰 URL → (모노, 스테레오 2×N 또는 None, 스템용 2×N@`stems_sr` 또는 None).
+    **오디오 파일은 이 함수를 벗어나지 않는다**(무보관 §1).
 
     다운로드·임시파일·삭제가 한 곳에만 있어야 무보관 불변식을 한 곳에서 보증한다 —
-    호출자가 늘 때마다 복사하면 언젠가 한 곳에서 삭제가 빠진다. 스테레오를 추가하면서도
-    **같은 임시파일 하나**를 두 디코드가 나눠 쓰게 해 이 성질을 유지한다.
+    호출자가 늘 때마다 복사하면 언젠가 한 곳에서 삭제가 빠진다. 스테레오에 이어
+    스템용 44.1kHz까지 추가하면서도 **같은 임시파일 하나**를 세 디코드가 나눠 쓰게
+    해 이 성질을 유지한다.
     """
     req = urllib.request.Request(url, headers={"User-Agent": UA})
     with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
@@ -276,7 +282,9 @@ def _audio_from_url(
         with os.fdopen(fd, "wb") as fh:
             fh.write(blob)
         mono = _decode(tmp)
-        return mono, (_decode_stereo(tmp) if want_stereo else None)
+        stereo = _decode_stereo(tmp) if want_stereo else None
+        stems_in = _decode_stereo(tmp, stems_sr) if stems_sr else None
+        return mono, stereo, stems_in
     finally:
         try:
             os.unlink(tmp)  # 무보관 불변식 — 예외 경로에서도 반드시
@@ -298,19 +306,28 @@ def tags_from_preview(url: str, *, suffix: str = ".audio") -> dict[str, Any]:
 def features_from_preview(
     url: str, *, low_hz: float, suffix: str = ".audio",
     rhythm: bool = True, tags: bool = True,
+    stems: bool = False, stem_opts: StemOpts | None = None,
 ) -> dict[str, Any]:
     """프리뷰 URL → 지표. 오디오는 이 함수를 벗어나지 않는다(무보관 §1).
 
     DSP 지표(§3)에 이어 리듬(§3.1.5)·태깅(§3.1.6)을 **같은 배열 위에서** 잰다.
     둘 중 하나가 실패해도 나머지는 낸다 — 결측은 0이 아니라 사유와 함께 비워둔다.
+
+    `stems`(RULES §3.8)는 **opt-in이다.** 곡당 6~7초가 더 들어 코호트 200곡이면
+    +20~25분인데, 그 비용은 TESTS §7.2.2 채택 게이트를 통과한 뒤에 지불한다.
     """
-    y, stereo = _audio_from_url(url, suffix, want_stereo=True)
+    from sonic_profile.stems import STEM_SR
+
+    y, stereo, stems_in = _audio_from_url(
+        url, suffix, want_stereo=True, stems_sr=STEM_SR if stems else None
+    )
     feats = extract(y, SR, low_hz=low_hz, stereo=stereo)
+    grid: dict[str, Any] = {}
     if rhythm:
         from sonic_profile.rhythm import extract_rhythm
 
         try:
-            feats.update(extract_rhythm(y, SR))
+            feats.update(extract_rhythm(y, SR, grid_out=grid))
         except Exception as exc:  # noqa: BLE001 — 리듬 실패가 지표를 죽이지 않는다
             feats["rhythm_unresolved"] = f"{type(exc).__name__}: {exc}"[:120]
         # RULES §3: tempo_bpm은 **적합값**이 정본이고 librosa 격자값은 과거 시리즈
@@ -321,6 +338,22 @@ def features_from_preview(
             feats["tempo_source"] = "beat_this-fit"
         else:
             feats["tempo_source"] = "librosa-grid"
+    if stems:
+        # 스템 축은 **리듬이 만든 마디 격자에 얹힌다**(RULES §3.8). 격자가 없으면
+        # 낼 수 없다 — 스템에서 비트를 다시 추적해 두 번째 격자를 만드는 것은 금지다.
+        from sonic_profile.stems import extract_stem_features
+
+        if stems_in is None:
+            feats["stems_unresolved"] = "no stereo 44.1kHz decode"
+        elif grid.get("downbeats") is None:
+            feats["stems_unresolved"] = "no bar grid (rhythm required)"
+        else:
+            try:
+                feats.update(extract_stem_features(
+                    stems_in, grid["downbeats"], **(stem_opts or {})
+                ))
+            except Exception as exc:  # noqa: BLE001 — 스템 실패가 지표를 죽이지 않는다
+                feats["stems_unresolved"] = f"{type(exc).__name__}: {exc}"[:120]
     if tags:
         from sonic_profile.tagging import extract_tags
 

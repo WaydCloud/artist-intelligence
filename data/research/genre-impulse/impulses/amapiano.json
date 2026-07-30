@@ -1,0 +1,294 @@
+{
+  "id": "amapiano",
+  "name_ko": "아마피아노",
+  "name_en": "Amapiano",
+  "version": "1.0.0",
+  "updated": "2026-07-30",
+  "case_type": "import",
+  "origin": {
+    "region": "SA",
+    "scene": "남아공 하우텡주(프리토리아·요하네스버그 타운십) — 콰이토·딥하우스·바카디 하우스 계보, log drum 시그니처"
+  },
+  "adoption_mode": {
+    "mode": "in-progress",
+    "notes": "미국 외 발원 경로(남아공→아프리카 대륙→글로벌 허브→한국). 한국 주류 미도달 진행형 — 미도달 자체가 데이터. 한국은 아마피아노를 독립 장르가 아니라 질감으로 부분 채용하는 단계(아프로 계열 여름송 패키지·유닛/솔로 B-side 배치). 타이틀곡 전면 채용 여부가 다음 관측 포인트",
+    "mode_transitions": []
+  },
+  "trajectory": [
+    {
+      "cell": "origin-scene",
+      "date": "2012~2016",
+      "date_precision": "range",
+      "evidence": "하우텡 2010년대 중반 첫 청취 보고(기원지 논쟁 존재·월 특정 불가). MFR Souls 명명, Kabza De Small·DJ Maphorisa 대중화",
+      "sources": [
+        "https://www.redbull.com/za-en/amapiano-history",
+        "https://en.wikipedia.org/wiki/Amapiano"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "cell": "origin-mainstream",
+      "date": "2019",
+      "date_precision": "year",
+      "evidence": "남아공 차트·라디오 장악. Scorpion Kings 결성, Kabza 2020 앨범 남아공 Apple Music 역대 최다 스트리밍",
+      "sources": [
+        "https://www.rollingstone.com/music/music-features/amapiano-genre-house-south-africa-1191523/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-viral",
+      "date": "2020-07~2021-10",
+      "date_precision": "range",
+      "evidence": "2020-07 'Amapiano blows up on TikTok' 보도(최초 플랫폼 신호) → 2021-10 Uncle Waffles 'Adiwele' 클립 48시간 3백만 뷰·Drake 리포스트(결정적)",
+      "sources": [
+        "https://www.pressreader.com/south-africa/the-star-south-africa-early-edition/20200716/282033329500482",
+        "https://www.kaya959.co.za/watch-drake-follows-uncle-waffles-as-the-people-are-burning-adiwele-video-hits-over-3-million-views/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-scene",
+      "date": "2021-02",
+      "date_precision": "month",
+      "evidence": "Focalistic × Davido 'Ke Star Remix' 나이지리아 iTunes 1위 — 아프로비츠 파이프라인 합류. 2022 Uncle Waffles 런던 매진·Beatport 장르 등재",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Ke_Star",
+        "https://www.news24.com/truelove/celebrity/uncle-waffles-rise-to-international-stardom-from-going-viral-in-soweto-to-sold-out-shows-in-europe-20221011"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-mainstream",
+      "date": "2023-10",
+      "date_precision": "month",
+      "evidence": "Tyla 'Water'(2023-07-28) 틱톡 챌린지 → Hot 100 #67 데뷔(2023-10) → 피크 #7(2024-01) → 초대 그래미 Best African Music Performance(2024-02)",
+      "sources": [
+        "https://www.billboard.com/music/rb-hip-hop/tyla-water-song-hit-global-billboard-cover-1235642263/",
+        "https://www.grammy.com/news/tyla-wins-first-best-african-music-performance-award-2024-grammys"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-underground",
+      "date": "2023-08~2023-10",
+      "date_precision": "range",
+      "evidence": "교차 검증으로 앞당김 — 이태원 케이크샵 DJ CO.KR '요즘은 남아공에서 시작한 아마피아노 장르를 자주 튼다' 인터뷰(2023-08-30, 얼루어) → GEMINI 《Love Sick》(2023-09-22), Kohway × Niaeh 'Run Away'(2023)",
+      "sources": [
+        "https://www.allurekorea.com/2023/08/30/behind/",
+        "https://envimedia.co/8-artists-in-the-korean-music-scene-who-tapped-into-afrobeats-in-2023/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-idol-bside",
+      "date": "2024-04",
+      "date_precision": "month",
+      "evidence": "SEVENTEEN 퍼포먼스팀 'Spell'(2024-04-29 수록, 명시적 아마피아노 — 보도자료 기반 국내 매체 일제 명시로 격상)",
+      "sources": [
+        "https://www.soompi.com/article/1661938wpp/watch-seventeens-performance-team-casts-an-alluring-spell-in-new-mv",
+        "https://plus.hankyung.com/apps/newsinside.view?aid=2024051751214"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream",
+      "date": "미도달",
+      "date_precision": "unreached",
+      "evidence": "2026-07 기준 명시적 아마피아노 곡의 국내 상위권 확인 불가. 경계 사례: KISS OF LIFE 'Sticky'(2024-07, 아프로비츠 골격+아마피아노 환기) Circle 주간 #3·멜론 TOP100 최고 #9(차트 구분 미상 — '주간' 단정 금지). Tyla 'Water' 국내 스포티파이 미진입",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Sticky_(Kiss_of_Life_song)",
+        "https://kworb.net/spotify/track/5aIVCx5tnk0ntmdiinnYvw.html"
+      ],
+      "certainty": "불가능한 수준",
+      "certainty_note": "해제 조건: 멜론 원자료 접근·전수 조사 시 재평가 — 부재 확인은 불완전(검색 가능 차트 기준, 전수 조사 아님)"
+    }
+  ],
+  "leadtimes": [
+    {
+      "from_cell": "origin-scene",
+      "to_cell": "origin-mainstream",
+      "months": 36,
+      "note": "약 3년(~2016 기준)"
+    },
+    {
+      "from_cell": "origin-mainstream",
+      "to_cell": "global-viral",
+      "months": 18,
+      "months_range": "12~24",
+      "note": "1~2년(2020-07 보도~2021-10 결정적)"
+    },
+    {
+      "from_cell": "global-viral",
+      "to_cell": "global-mainstream",
+      "months": 24,
+      "note": "약 2년(2021-10 → 2023-10)"
+    },
+    {
+      "from_cell": "global-viral",
+      "to_cell": "kr-underground",
+      "months": 24,
+      "note": "약 2년 — 한국 언더 씬은 바이럴 단계에서 이미 반응"
+    },
+    {
+      "from_cell": "global-mainstream",
+      "to_cell": "kr-idol-bside",
+      "months": 6,
+      "note": "한국 아이돌 시스템은 글로벌 주류 인증(빌보드·그래미) 후 약 6개월 내 반응"
+    },
+    {
+      "from_cell": "kr-idol-bside",
+      "to_cell": "kr-mainstream",
+      "months": null,
+      "note": "미완 — 27개월 경과, 미도달(2026-07 기준)"
+    }
+  ],
+  "early_signals": [
+    {
+      "source_type": "shortform-viral",
+      "date": "2020-07",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "남아공 언론의 틱톡 확산 보도 — 최초의 플랫폼 신호",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "overseas-chart",
+      "date": "2021-02",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "'Ke Star Remix' 나이지리아 1위 — 아프로비츠 파이프라인 합류(K-pop이 이미 차용 중이던 장르 → 전이 경로 예고)",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "shortform-viral",
+      "date": "2021-10",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "Uncle Waffles 바이럴 + Drake 코사인 — 서구 게이트키퍼 반응",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "platform-infra",
+      "date": "2022",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "Beatport 장르 신설·런던 매진 — 인프라 신호",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "kr-underground-adoption",
+      "date": "2023-09~2023-12",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "한국 R&B/힙합 씬 선행 채용 + 서울 클럽 셋 — 아이돌 채용 7개월 전 국내 선행 지표",
+      "sources": [
+        "https://envimedia.co/8-artists-in-the-korean-music-scene-who-tapped-into-afrobeats-in-2023/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "source_type": "overseas-chart",
+      "date": "2023-10",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "'Water' Hot 100 진입 — 이후 K-pop(B-side) 반영까지 6개월",
+      "certainty": "높음"
+    }
+  ],
+  "element_borrowing": null,
+  "identity_formation": null,
+  "signature": {
+    "status": "pending-a2",
+    "predicted_axes": [
+      "log drum 베이스 질감",
+      "셰이커 그루브",
+      "미드템포 바운스",
+      "6~8분 DJ 트랙 → 3분 보컬 팝 구조 압축(한국 수용형)"
+    ]
+  },
+  "peak_decline": {
+    "kr_peak": "미형성 — 수용 초기 단계(B-side 실험 2년차). 아프로비츠(Sticky #3)는 국내 주류가 통과시켰지만 아마피아노 고유 어법은 아직 필터를 못 넘음",
+    "origin_decoupled": true,
+    "residue": "글로벌은 2023-10~2024-02 정점 후 쇠퇴가 아닌 서브장르 분화·성숙기('아마피아노는 죽었다' 담론에도 스트리밍 성장세) — 한국 사이클은 아직 초기"
+  },
+  "chart_evidence": [
+    {
+      "chart": "billboard-hot100",
+      "artist": "Tyla",
+      "title": "Water",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2023-10-14",
+      "exit_date": "2024-04-27",
+      "peak_position": 7,
+      "peak_date": "2024-01-13",
+      "weeks_on_chart": 29,
+      "weeks_counted": 29
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "KAI",
+      "title": "Off And Away",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "KISS OF LIFE",
+      "title": "Sticky",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Kabza De Small",
+      "title": "Abalele",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "SEVENTEEN",
+      "title": "Spell",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Uncle Waffles",
+      "title": "Tanzania",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Young Stunna",
+      "title": "Adiwele",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    }
+  ],
+  "limits": [
+    "기원 시점은 남아공 내에서도 논쟁적(2012 vs 2016) — 월 특정 불가",
+    "'Sticky' 등 아프로비츠/아마피아노/알테 혼합 곡의 분류는 리뷰어마다 다름 — '명시'와 '환기'를 구분해 표기",
+    "'한국 주류 미도달'은 검색 가능 차트 기준 — 전수 조사 아님, 멜론 원자료 미조회",
+    "'Push Back'은 교차 검증에서 ENHYPEN 귀속 반증 — 신인 걸그룹 AtHeart 데뷔 EP 수록곡(아마피아노·아프로비트 귀속은 유효). Spell의 곡 단위 디지털 실적 미확인",
+    "서울 클럽 씬 시점(2023-10)은 SNS 단편 증거 — 과소측정 방향 편향"
+  ],
+  "casebook_ref": "CASE 2"
+}

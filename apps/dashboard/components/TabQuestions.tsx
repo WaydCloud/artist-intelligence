@@ -15,7 +15,11 @@ import type { TabQuestion } from "@/lib/report";
 function goTo(id: string) {
   const el = document.getElementById(id);
   if (!el) return;
-  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  // 부드러운 스크롤은 이 화면에서 가장 큰 모션이다. CSS의 `scroll-behavior`는 여기에
+  // 닿지 않는다 — `scrollIntoView`에 `behavior`를 명시하면 그 값이 CSS를 이긴다.
+  // 그래서 globals.css의 안전망과 별개로 여기서 한 번 더 묻는다(DESIGN §5).
+  const still = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches ?? false;
+  el.scrollIntoView({ behavior: still ? "auto" : "smooth", block: "start" });
   // 도착한 카드를 잠깐 표시해 준다 — 어디로 왔는지 모르면 앵커는 반쪽이다.
   el.setAttribute("data-landed", "true");
   window.setTimeout(() => el.removeAttribute("data-landed"), 1400);

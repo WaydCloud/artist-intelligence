@@ -106,6 +106,23 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* DESIGN §5 — `prefers-reduced-motion` 존중은 규칙이고, 규칙은 한 곳에서 집행한다.
+   `motion/react`를 쓰는 컴포넌트는 `useReducedMotion`으로 스스로 접지만 CSS 전환은
+   컴포넌트마다 흩어져 있어(실측 23곳) 하나만 빠뜨려도 조용히 남는다 — 남은 것을
+   눈으로 셀 수 없다는 점에서 §7.3~§7.6의 결함들과 같은 부류다.
+   시간만 0으로 만든다: 상태 변화 자체는 그대로 일어나고 걸리는 시간이 사라진다.
+   `0.01ms`는 0이 아니라서 `transitionend`에 매인 코드가 있어도 깨지지 않는다. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 /* 글래스 크롬 단일 정의 (DESIGN.md §4) — 카드·헤더 프레임 전용, 증거 레이어 위 직접 사용 금지 */
 @layer components {
   .glass-card {

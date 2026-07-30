@@ -176,6 +176,19 @@ interface Bucket {
 }
 
 function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
+  // 모션이 여기 있는 이유(DESIGN §5·§7.7): 노브를 돌리면 **곡이 칸 사이를 옮겨 다닌다**.
+  // 그것이 이 위젯의 전부인데, 폭이 즉시 갈아 끼워지면 얼마나 옮겨갔는지 보이지 않는다.
+  // 움직이는 것은 **막대 폭 하나**다. 곡 수 숫자는 즉시 바뀐다 — 지금 값이 무엇인지는
+  // 기다리게 만들 것이 아니고, 정확한 값은 언제나 숫자 쪽에 있다.
+  //
+  // 🔴 **행 재정렬은 애니메이션하지 않는다.** 칸이 곡 수로 정렬돼 있어 임계를 움직이면
+  // 순서가 자주 뒤집히는데, `layout` 위치 전환을 걸었더니 22px짜리 행 셋이 서로를 통과하며
+  // **이름과 숫자가 겹쳐 읽을 수 없는 더미**가 됐다(2026-07-30 실측: `33`과 `14`가 한 줄에
+  // 포개짐). 게다가 슬라이더는 **연속 입력**이라 드래그 중에는 전환이 끝나지 않는다 —
+  // 크로스헤어에 전환을 넣지 않는 것과 같은 이유다. 겹치는 순간 증거가 안 읽힌다.
+  //
+  // 남은 폭 전환은 CSS라 `useReducedMotion`을 부르지 않는다 — globals.css의 안전망이
+  // 전역에서 즉시 완료로 만든다(§5). 흩어진 전환을 컴포넌트마다 다시 묻지 않는 이유다.
   const maxCount = Math.max(1, ...buckets.map((b) => b.total));
   if (buckets.length === 0) return <p className="text-sm text-[var(--muted)]">{empty}</p>;
   return (
@@ -201,7 +214,7 @@ function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
               </span>
               <span className="relative h-4 flex-1">
                 <span
-                  className="absolute inset-y-0.5 left-0 rounded-sm"
+                  className="absolute inset-y-0.5 left-0 rounded-sm transition-[width] duration-150 ease-out"
                   style={{
                     width: `${w}%`,
                     background: b.muted ? "var(--baseline)" : "var(--series)",
@@ -210,7 +223,7 @@ function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
                 />
                 {hi > 0 && !b.muted && (
                   <span
-                    className="absolute inset-y-0.5 rounded-sm"
+                    className="absolute inset-y-0.5 rounded-sm transition-[left,width] duration-150 ease-out"
                     style={{ left: `${w - hiW}%`, width: `${hiW}%`, background: "var(--series2)" }}
                   />
                 )}

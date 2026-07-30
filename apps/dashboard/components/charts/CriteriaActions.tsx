@@ -4,6 +4,7 @@
 // 기준을 조정한 사람이 그 기준을 그대로 들고 나갈 수 있게만 한다.
 
 import { useCallback, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { currentUrl } from "@/lib/knobs";
 
 export interface CriteriaItem {
@@ -74,6 +75,7 @@ export function CriteriaActions({
   summary: string;
 }) {
   const [status, setStatus] = useState("");
+  const still = useReducedMotion();
 
   const say = useCallback((msg: string) => {
     setStatus(msg);
@@ -117,8 +119,25 @@ export function CriteriaActions({
       <span className="text-xs text-[var(--ink-secondary)]">
         {changedCount > 0 ? `기본값에서 ${changedCount}개 조정됨` : "기본 기준"}
       </span>
+      {/* 복사는 화면에 아무 흔적을 남기지 않는 동작이라, 이 한 줄이 유일한 결과다.
+          그래서 **도착했다는 사실**만 모션이 말한다(DESIGN §7.7) — 즉시 갈아 끼우면
+          같은 자리에 이미 있던 문구가 바뀐 것인지 새로 뜬 것인지 구별되지 않는다.
+          `role="status"`는 바깥에 고정한다: 안쪽이 교체돼도 낭독 대상은 이 자리다. */}
       <span role="status" aria-live="polite" className="text-xs text-[var(--good)]">
-        {status}
+        <AnimatePresence initial={false} mode="wait">
+          {status && (
+            <motion.span
+              key={status}
+              initial={still ? false : { opacity: 0, y: 2 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: still ? 0 : 0.15, ease: "easeOut" }}
+              className="inline-block"
+            >
+              {status}
+            </motion.span>
+          )}
+        </AnimatePresence>
       </span>
     </div>
   );

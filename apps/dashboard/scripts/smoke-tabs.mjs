@@ -13,6 +13,9 @@
 //   4) 차트 카드가 ChartBoundary 폴백으로 떨어진 것이 없음
 //   5) 카드 내용이 비어 있지 않음 (뷰 미구현 감지)
 //   6) <details>를 전부 펼친 뒤에도 1~5 유지 (접힌 안쪽에서 터지는 결함)
+//   7) 인터랙션이 기본 탑재됐는지 (DESIGN §7): 선 차트마다 크로스헤어 히트 타깃 ·
+//      포인터와 **키보드** 양쪽에서 툴팁이 열리고 떠나면 닫힘 · 툴팁에 **표면**이 있음 ·
+//      격자 칸과 요약 도형 마크의 툴팁
 //
 // 실행:
 //   node apps/dashboard/scripts/smoke-tabs.mjs                     # localhost:3100 (dev 실행 중)
@@ -142,6 +145,102 @@ function check(where, cond, msg) {
   return cond;
 }
 
+// --- 인터랙션 게이트 ------------------------------------------------------------
+// DESIGN §7은 "선·면에 크로스헤어+툴팁, 막대·점·셀에 마크별 툴팁"을 **기본 탑재**로
+// 요구한다. 요구가 문서에만 있으면 다음 차트에서 조용히 빠지므로 여기서 센다.
+//
+// **"떴는가"만 보지 않고 "표면이 있는가"까지 본다.** 2026-07-30 실측: visx의 `unstyled`
+// 플래그가 우리 `style`까지 버려서(`...(!unstyled && style)`) 툴팁이 배경도 테두리도 없는
+// **맨 텍스트로 플롯 선 위에 겹쳐** 그려졌다. DOM에는 떠 있었으므로 존재 검사만으로는
+// 통과했을 결함이고, 그때는 눈으로만 잡혔다.
+const TIP = ".visx-tooltip";
+
+async function tooltips(page) {
+  return page.evaluate((sel) => {
+    return [...document.querySelectorAll(sel)].map((d) => {
+      const cs = getComputedStyle(d);
+      return { text: d.innerText.trim(), bg: cs.backgroundColor, border: cs.borderTopWidth };
+    });
+  }, TIP);
+}
+// 표면이 실제로 칠해졌는지. 투명하면 뒤의 차트가 글자 사이로 비친다.
+const opaque = (bg) => !!bg && !/transparent|rgba\(\s*\d+,\s*\d+,\s*\d+,\s*0(\.0+)?\s*\)/.test(bg);
+
+async function checkTooltipSurface(page, where, what) {
+  const tips = await tooltips(page);
+  if (!check(where, tips.length > 0 && tips[0].text.length > 0, `${what}에 커서를 올려도 툴팁이 열리지 않습니다`))
+    return false;
+  check(where, opaque(tips[0].bg), `${what} 툴팁에 표면이 없습니다 (배경 ${tips[0].bg}) — 증거 위에 맨 텍스트가 겹칩니다`);
+  check(where, tips[0].border !== "0px", `${what} 툴팁에 테두리가 없습니다 (배경색만으로는 플롯과 경계가 서지 않습니다)`);
+  return true;
+}
+
+async function hoverCenter(page, locator) {
+  await locator.scrollIntoViewIfNeeded();
+  const b = await locator.boundingBox();
+  if (!b) return null;
+  await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+  await page.waitForTimeout(130);
+  return b;
+}
+
+async function checkInteraction(page, where) {
+  // ① 선 차트에는 예외 없이 크로스헤어 히트 타깃이 있어야 한다. 스몰 멀티플이면 패널마다.
+  const lines = page.locator('main [data-plot="line"]');
+  const nLines = await lines.count();
+  for (let i = 0; i < nLines; i++) {
+    const n = await lines.nth(i).locator('rect[role="slider"]').count();
+    if (!check(where, n === 1, `선 차트 ${i + 1}/${nLines}에 크로스헤어 히트 타깃이 없습니다 (히트 타깃 ${n}개)`))
+      return;
+  }
+
+  // ② 대표 1개로 포인터·키보드·표면을 본다(전부 같은 프리미티브라 하나가 서면 전부 선다).
+  if (nLines > 0) {
+    const rect = lines.first().locator('rect[role="slider"]');
+    const b = await hoverCenter(page, rect);
+    if (b) {
+      // 마크는 6px 원이었다. 히트 타깃이 그보다 크지 않으면 조준해야 잡힌다.
+      check(where, b.height >= 40, `선 차트 히트 타깃이 ${Math.round(b.height)}px로 얇습니다 (마크보다 크게)`);
+      await checkTooltipSurface(page, where, "선 차트");
+
+      // 포인터가 떠나면 닫힌다 — 남으면 다음 열을 가린 채로 화면에 붙는다.
+      await page.mouse.move(b.x + b.width / 2, b.y - 60);
+      await page.waitForTimeout(130);
+      check(where, (await tooltips(page)).length === 0, "포인터가 떠났는데 선 차트 툴팁이 남아 있습니다");
+
+      // 키보드로 같은 값에 닿는가. `<title>` 속성만 있던 예전 상태에서는 불가능했다.
+      await rect.focus();
+      await page.waitForTimeout(120);
+      const max = Number(await rect.getAttribute("aria-valuemax"));
+      const from = await rect.getAttribute("aria-valuenow");
+      await page.keyboard.press("ArrowRight");
+      await page.waitForTimeout(130);
+      const to = await rect.getAttribute("aria-valuenow");
+      if (max > 0) check(where, from !== to, `화살표로 지점이 이동하지 않습니다 (${from} → ${to})`);
+      check(where, ((await rect.getAttribute("aria-valuetext")) ?? "").length > 0, "aria-valuetext가 비어 스크린리더가 읽을 값이 없습니다");
+      await checkTooltipSurface(page, where, "선 차트(키보드)");
+      await page.keyboard.press("Escape");
+      await page.waitForTimeout(120);
+      check(where, (await tooltips(page)).length === 0, "Escape 후에도 선 차트 툴팁이 남아 있습니다");
+      await page.evaluate(() => document.activeElement?.blur());
+    }
+  }
+
+  // ③ 셀·마크 툴팁. 격자는 `<td>`, 요약 도형은 투명 히트 원이 받는다.
+  for (const [sel, hit, what] of [
+    ['main [data-plot="heatmap"]', "tbody td", "격자 칸"],
+    ['main [data-plot="radar"]', 'circle[role="button"]', "요약 도형 마크"],
+  ]) {
+    const plot = page.locator(sel).first();
+    if ((await plot.count()) === 0) continue;
+    const mark = plot.locator(hit).first();
+    if ((await mark.count()) === 0) continue;
+    if (await hoverCenter(page, mark)) await checkTooltipSurface(page, where, what);
+    await page.mouse.move(2, 2);
+    await page.waitForTimeout(100);
+  }
+}
+
 async function run() {
   await assertServer();
   const { chromium, from } = await loadChromium();
@@ -225,6 +324,10 @@ async function run() {
         check(where, r.title.length > 0, "리포트 제목이 렌더되지 않았습니다");
         check(where, r.fallbacks.length === 0, `차트 렌더 실패: ${r.fallbacks.join(", ")}`);
         check(where, r.emptyCards.length === 0, `내용 없는 카드: ${r.emptyCards.join(", ")}`);
+
+        // 인터랙션(DESIGN §7 기본 탑재) -- details를 펼치기 전에 본다. 펼치면 표가 늘어나
+        // 좌표가 밀리고, 여기서 검사하는 것은 접힘과 무관한 플롯 위의 동작이다.
+        await checkInteraction(page, where);
 
         // 2차: <details> 전부 펼친 뒤 -- 접힌 안쪽에서 터지는 결함을 잡는다
         if (r.details > 0) {

@@ -92,6 +92,8 @@ export function RadarChart({ data }: { data: RadarData }) {
   return (
     <div className="relative" ref={tip.containerRef}>
       <svg
+        // 인터랙션 게이트(`smoke-tabs.mjs`)의 표식 — 마크 툴팁이 빠졌는지 센다.
+        data-plot="radar"
         viewBox={`0 0 ${W} ${H}`}
         width="100%"
         style={{ height: "auto", maxWidth: 440, margin: "0 auto", display: "block", overflow: "visible" }}

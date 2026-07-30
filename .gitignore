@@ -41,3 +41,7 @@ Thumbs.db
 
 # 사전학습 모델 (런타임 페치, CC BY-NC-SA — 재배포 금지)
 data/models/
+
+# 조사용 분석 캐시 — 엔진 키가 바뀌면 통째로 무효화되는 파생물이라 커밋 대상이 아니다.
+# (관측 이력이 캐시에 얹혀 있으면 안 된다 — HANDOFF "트랙 원장 설계안" 참조)
+data/research/**/cache*.json

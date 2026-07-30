@@ -65,7 +65,8 @@ _SURFACED = [
     ("bar_profile_contrast", "마디 프로파일 대비", "×"),
     ("grid_deviation_ms", "그리드 편차", "ms"),
     # C층 구성물 지표(RULES §3.1.6.2). **`_UNIT_AXES`에는 넣지 않는다** — valence는 0~1이
-    # 아니고, danceability는 K-pop에서 천장에 붙어(중앙 0.998) 분포 축으로 쓸 수 없다.
+    # 아니고, danceability는 K-pop에서 천장에 붙어(중앙 0.995) 분포 축으로 쓸 수 없다.
+    # danceability는 여기 남아 정의·저장을 유지하되 **표면에서는 `_NO_MEDIAN_OR_RANK`가 뺀다**.
     ("danceability", "danceability", ""),
     ("valence", "정서가(valence)", ""),
     ("arousal", "각성도(arousal)", ""),
@@ -151,7 +152,20 @@ _UNIT_AXES = [
     # `syncopation_ratio`(분산 0.191)는 타일·히트맵에만 두고 이 목록에서는 뺀다.
     ("organic_ratio", "유기음 비율"),
 ]
-_ALL_AXES = [(f, la) for f, la, _ in _SURFACED]
+# 🔴 **원장이 "쓰지 말라"고 적은 축은 표면에서 뺀다**(RULES §3.7 실측: `danceability`는
+# 중앙 0.995 · p90부터 1.000에 붙어 **상위 절반이 구별되지 않는다** → "중앙값·순위 비교에
+# 쓰지 말 것"). 그런데 지표 타일과 순위 격자에 올라가 있었고, 리포트는 그것을 그려 놓고
+# **읽는 사람에게 쓰지 말라고 안내**하고 있었다 — 경고를 붙여 면피하는 형태다.
+# 도구는 자기가 무효라고 적은 주장을 렌더하지 않는다(DOMAIN §0: 판단 이전에 증거가 선다).
+#
+# 값은 그대로 저장된다(D-032 "저장은 후하게, 표면은 인색하게") — 스냅샷·시리즈에 남아
+# 있고 `_METRIC_DEFS`의 정의도 남긴다. 빠지는 것은 **중앙값 타일과 순위·비교 축**뿐이다.
+# 낮은 쪽 꼬리(실측 p10 0.300)는 유의미하지만 그것은 새 지표이고 사전 등록 대상이다.
+_NO_MEDIAN_OR_RANK: dict[str, str] = {
+    "danceability": "코호트 상위 절반이 천장(1.000)에 붙어 중앙값·순위로 곡을 가르지 못함",
+}
+
+_ALL_AXES = [(f, la) for f, la, _ in _SURFACED if f not in _NO_MEDIAN_OR_RANK]
 
 
 def _position_heatmap(
@@ -499,7 +513,7 @@ _METRIC_SECTIONS: dict[str, str] = {
     "마디 프로파일 대비": "rhythm",
     "마디 자기유사도": "rhythm",
     "그리드 편차": "rhythm",
-    "danceability": "rhythm",
+    # danceability는 타일을 만들지 않는다(`_NO_MEDIAN_OR_RANK`) — 배정할 자리도 없다.
     "정서가(valence)": "rhythm",
     "각성도(arousal)": "rhythm",
     # unit-trend·vintage-unit·fixed-cohort·fresh-trend가 그리는 0~1 축
@@ -1050,11 +1064,14 @@ def build_report(
             "label": "미해석",
             "value": n_un,
             "unit": "곡",
-            "hint": "프리뷰 없음·디코드 실패·과단축 — 0이 아니라 결측으로 집계 제외",
+            "hint": "프리뷰 없음·디코드 실패·과단축. 0이 아니라 결측으로 집계 제외",
             "section": _METRIC_SECTIONS["미해석"],
         },
     ]
     for field, label, unit in _SURFACED:
+        # 원장이 중앙값으로 쓰지 말라고 적은 축은 중앙값 타일을 만들지 않는다.
+        if field in _NO_MEDIAN_OR_RANK:
+            continue
         vs = _vals(resolved, field)
         if vs:
             m: dict[str, Any] = {
@@ -1165,16 +1182,16 @@ def build_report(
         )
     # ── 한계 병기(RULES §4 필수) — 빠지면 §5 위반
     insights.append(
-        "⚠ 30초 발췌 · **발췌 위치 비결정**(Apple이 어느 구간을 주는지 비공개) — "
+        "⚠ 30초 발췌 · **발췌 위치 비결정**(Apple이 어느 구간을 주는지 비공개). "
         "**곡 간 단일 비교 금지**. 허용되는 사용은 다수 곡의 **분포**와 같은 모집단의 **시계열**뿐입니다"
     )
     insights.append(
-        "⚠ 곡 구조(인트로/벌스/훅)·전곡 다이내믹 아크·드롭 타이밍은 30초로 측정 불가 — 범위 밖(SPEC §6)"
+        "⚠ 곡 구조(인트로/벌스/훅)·전곡 다이내믹 아크·드롭 타이밍은 30초로 측정 불가. 범위 밖(SPEC §6)"
     )
     insights.append(
         "다이내믹 여유(crest factor) = peak/RMS(dB). 낮을수록 압축이 강합니다. "
-        "TESTS §3 검증(2026-07-28) — 10곡 표본에서 프리뷰 RMS 스프레드 19.46dB로 **정규화 없음** 확인 "
-        "(US 스토어프론트·n=10·단일 시점 — Apple이 정책을 바꾸면 재검증 필요)"
+        "TESTS §3 검증(2026-07-28). 10곡 표본에서 프리뷰 RMS 스프레드 19.46dB로 **정규화 없음** 확인 "
+        "(US 스토어프론트·n=10·단일 시점. Apple이 정책을 바꾸면 재검증 필요)"
     )
     insights.append(
         "펄스 명료도 = 온셋 포락 자기상관의 주 피크. **danceability가 아니며** 춤 실력·인기·품질과 무관합니다(RULES §5)"
@@ -1201,19 +1218,19 @@ def build_report(
     if ages:
         n_fresh = sum(1 for a in ages if a <= new_days)
         insights.append(
-            f"관측 코호트는 **카탈로그 혼합**입니다 — 곡 나이 중앙값 {int(median(ages))}일, "
+            f"관측 코호트는 **카탈로그 혼합**입니다. 곡 나이 중앙값 {int(median(ages))}일, "
             f"발매 {new_days}일 이내 신곡은 관측 {len(ages)}건 중 {n_fresh}건입니다. "
-            "그래서 관측일 기준 `분포 추이`는 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있습니다 — "
+            "그래서 관측일 기준 `분포 추이`는 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있습니다. "
             "**발매 빈티지·고정 코호트·신곡만 뷰가 그 둘을 분리하려는 것**입니다"
         )
         insights.append(
-            "⚠ **발매 빈티지 뷰는 생존 편향이 있습니다** — 옛 분기 칸에 들어간 곡은 그 분기의 대표 "
+            "⚠ **발매 빈티지 뷰는 생존 편향이 있습니다**. 옛 분기 칸에 들어간 곡은 그 분기의 대표 "
             "표본이 아니라 **오늘까지 차트에 살아남은 곡**입니다. 따라서 '2021년 음악은 이랬다'가 "
             "아니라 '2021년 발매곡 중 지금도 들리는 것은 이렇다'로만 읽으십시오. 최근 분기로 갈수록 "
             "이 편향은 줄어듭니다"
         )
         insights.append(
-            f"⚠ 발매일은 유통사 표기(Apple)이며 **원곡 발매일이 아닐 수 있습니다** — 리마스터·재발매·"
+            f"⚠ 발매일은 유통사 표기(Apple)이며 **원곡 발매일이 아닐 수 있습니다**. 리마스터·재발매·"
             "지역판이 그날짜로 잡힙니다. 오래된 곡의 빈티지 배치는 그만큼 흔들립니다. "
             f"'신곡' 경계 {new_days}일·빈티지 칸 최소 표본 {VINTAGE_MIN_N}곡도 관습값이라 "
             "담당자가 정할 사안입니다"
@@ -1232,16 +1249,16 @@ def build_report(
         insights.append(
             f"⚠ 리듬 관측 {len(cls)}곡 중 **{n_tie}곡은 1위와 2위 차가 {tie_gap:g} 미만인 동점**이고 "
             f"**{n_none}곡은 정합도 {min_match:g} 미만이라 '해당 없음'**입니다. 템플릿이 서로 직교하지 않아 "
-            "(최악 쌍 상관 0.83) 동점 곡의 유형은 표본이 조금만 흔들려도 뒤집힙니다 — "
+            "(최악 쌍 상관 0.83) 동점 곡의 유형은 표본이 조금만 흔들려도 뒤집힙니다. "
             "**막대 높이를 곡 수 그대로 읽지 마시고 튜너로 기준을 움직여 확인하십시오**"
         )
         insights.append(
             f"기준값 {min_match:g}(배정 임계)·{tie_gap:g}(동점 폭)는 **엔지니어가 정한 관습값이며 "
-            "도메인 근거가 있는 값이 아닙니다** — 결과를 보기 전에 담당자가 정할 사안입니다. "
+            "도메인 근거가 있는 값이 아닙니다**. 결과를 보기 전에 담당자가 정할 사안입니다. "
             "리듬 기준 튜너에서 조정한 값은 되돌려 보낼 수 있습니다"
         )
         insights.append(
-            "⚠ 트랩·저지클럽의 특징인 하이햇 롤과 하프타임 스네어는 아직 측정하지 못합니다 — "
+            "⚠ 트랩·저지클럽의 특징인 하이햇 롤과 하프타임 스네어는 아직 측정하지 못합니다. "
             "믹스에서 스네어가 분리되지 않습니다(중역 대비 1.22 대 저역 1.71). 지금 내는 것은 "
             "정박·3+3+2·싱코페이션 여부까지입니다"
         )
@@ -1268,7 +1285,7 @@ def build_report(
             "확률은 서로 배타적이지 않습니다"
         )
         insights.append(
-            "저지클럽·뭄바톤·아마피아노는 이 태거의 라벨 목록에 없습니다 — 그 축은 리듬 패턴이 담당합니다"
+            "저지클럽·뭄바톤·아마피아노는 이 태거의 라벨 목록에 없습니다. 그 축은 리듬 패턴이 담당합니다"
         )
         if eng.get("attribution"):
             insights.append(f"장르·악기 모델 출처 {eng['attribution']} · {eng.get('tagger_license')}")
@@ -1276,14 +1293,20 @@ def build_report(
     if any((r.get("features") or {}).get("valence") is not None for r in resolved):
         insights.append(
             "⚠ 정서가·각성도(valence·arousal)는 **주석자들이 정의한 값**이지 곡의 물리적 성질이 "
-            f"아닙니다 — {eng.get('valence_head', 'deam')} 기준이며 학습 데이터는 **K-pop이 아닙니다**. "
+            f"아닙니다. {eng.get('valence_head', 'deam')} 기준이며 학습 데이터는 **K-pop이 아닙니다**. "
             "곡 간 단일 비교는 하지 마십시오(발췌 위치가 곡마다 다릅니다)"
         )
     if any((r.get("features") or {}).get("danceability") is not None for r in resolved):
+        # 예전에는 타일과 순위 격자에 올려 둔 채 "쓰지 마십시오"라고 안내했다. 무효라고
+        # 적은 주장을 그려 놓고 판단만 넘기는 형태여서, 렌더를 멈추고 그 사실을 적는다.
+        insights.append(
+            "danceability는 **지표 타일과 순위·비교 축에서 뺐습니다**. 차트 K-pop은 거의 전부 이 값이 "
+            "천장에 붙어(실측 중앙 0.995 · 상위 10%는 1.000) **코호트 안에서 곡을 가르지 못하기** "
+            "때문입니다. 값은 스냅샷에 그대로 남아 있습니다"
+        )
         insights.append(
             "⚠ danceability는 분류기가 낸 확률이며 **춤 실력·안무 품질·'춤추기 좋은 정도'의 판정이 "
-            "아닙니다**. 차트 K-pop은 거의 전부 이 값이 천장에 붙어(실측 중앙 0.998) **코호트 안에서 "
-            "곡을 가르지 못합니다** — 워치리스트 대 차트 비교 축으로 쓰지 마십시오"
+            "아닙니다**"
         )
     if any((r.get("features") or {}).get("moods") for r in resolved):
         insights.append(
@@ -1292,7 +1315,7 @@ def build_report(
         )
     if any((r.get("features") or {}).get("grid_deviation_ms") is not None for r in resolved):
         insights.append(
-            "⚠ 그리드 편차는 **상당 부분이 측정 잡음입니다** — 비트 추적이 0.02초 격자라 바닥이 "
+            "⚠ 그리드 편차는 **상당 부분이 측정 잡음입니다**. 비트 추적이 0.02초 격자라 바닥이 "
             "약 5.8ms인데 실측 중앙값이 8.19ms였습니다. 반대로 아주 큰 값은 그루브가 아니라 "
             "**템포 변화로 직선 맞춤이 실패한 것**입니다. 단독 해석하지 마십시오"
         )
@@ -1312,7 +1335,7 @@ def build_report(
         hit = sorted({str(r.get("key")) for r in resolved if r.get("key") in set(watchlist)})
         insights.append(
             f"워치리스트 커버리지 {len(hit)}/{len(watchlist)}"
-            + (f" — {', '.join(hit[:8])}" if hit else " — 관측 없음(무신호도 정보)")
+            + (f" · 잡힌 팀 {', '.join(hit[:8])}" if hit else " · 관측 없음(무신호도 정보)")
         )
 
     # ── R3·R5: 차트별 질문·정의를 한 표에서 붙인다. 표에 없는 id는 **조용히 넘기지 않는다** —
@@ -1406,7 +1429,7 @@ def build_report(
         "insights": insights,
         "recommendations": [
             "차트 진입 직후 트랙만 좁혀 관측하면 비용·법적 노출을 최소화하면서 트렌드를 볼 수 있습니다",
-            "지표 해석은 분포 대비 위치로 — 임계값이 필요하면 도메인 소유자가 근거를 보기 전에 정하십시오",
+            "지표 해석은 분포 대비 위치로. 임계값이 필요하면 도메인 소유자가 근거를 보기 전에 정하십시오",
         ],
     }
 

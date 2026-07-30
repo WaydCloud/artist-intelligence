@@ -205,6 +205,62 @@ def check_diction(text: str, where: str) -> list[str]:
     return [f"{where}: 금지 어법 {kind} — {text[:56]!r}" for kind in hits]
 
 
+# ── 카피 스타일 (DESIGN §6.1) ─────────────────────────────────────────────────
+#
+# §6.1은 "모듈이 생성하는 표시 문구(report.json의 title·insights·recommendations·note)도
+# 포함된다"고 명시하는데, 지금까지 어법 검사는 `inferences`에만 걸려 있었다. 규칙이 문서에만
+# 있으면 드리프트한다 — 2026-07-30 실측에서 화면에 뜨는 문구 **24개에 em dash**, **13개에
+# 대괄호 태그**가 남아 있었다(전부 게이트 통과 상태).
+#
+# 🔴 **기계 파싱 규약은 카피가 아니다**(§6.1 예외). signal-bridge의 프로필 라인은 ` — `를
+# **구분자**로 쓰고 대시보드가 그것으로 자른다(`ProfileCards.parseProfile`) — 여기를 카피로
+# 고치면 파서가 조용히 깨진다. 그래서 접두어로 가려낸다.
+_MACHINE_FORMAT_PREFIXES = ("[프로필] ",)
+_BRACKET_TAG = re.compile(r"^\s*\[[^\]]{1,12}\]\s")
+
+
+def check_copy(text: str, where: str) -> list[str]:
+    """화면에 그대로 찍히는 문구의 카피 규율(§6.1). 기계 파싱 규약은 면제한다."""
+    if any(text.startswith(p) for p in _MACHINE_FORMAT_PREFIXES):
+        return []
+    out: list[str] = []
+    if "—" in text:
+        out.append(f"{where}: em dash 금지(§6.1) — 문장을 나누거나 쉼표·마침표로: {text[:56]!r}")
+    if _BRACKET_TAG.match(text):
+        out.append(f"{where}: 머리의 [대괄호 태그] 금지(§6.1) — 제목이 아니라 색인이 된다: {text[:56]!r}")
+    return out
+
+
+def _copy_strings(rep: dict[str, Any], charts: list[dict[str, Any]]):
+    """검사 대상 = **화면에 문장으로 렌더되는** 필드. 차트 `data`의 라벨은 값이지 카피가
+    아니므로 넣지 않는다(축 이름은 리포트가 정하고 §7.5가 따로 본다)."""
+    for f in ("title", "subtitle"):
+        if isinstance(rep.get(f), str):
+            yield rep[f], f
+    for f in ("insights", "recommendations", "notAnswered"):
+        for i, s in enumerate(rep.get(f) or []):
+            if isinstance(s, str):
+                yield s, f"{f}[{i}]"
+    for i, s in enumerate(rep.get("sections") or []):
+        if isinstance(s, dict):
+            for f in ("label", "question", "note"):
+                if isinstance(s.get(f), str):
+                    yield s[f], f"sections[{i}].{f}"
+    summary = rep.get("summary")
+    for c in charts + ([summary] if isinstance(summary, dict) else []):
+        if not isinstance(c, dict):
+            continue
+        cid = str(c.get("id") or c.get("type") or "?")
+        for f in ("title", "question", "definition", "note"):
+            if isinstance(c.get(f), str):
+                yield c[f], f"{cid}.{f}"
+    for i, m in enumerate(rep.get("metrics") or []):
+        if isinstance(m, dict):
+            for f in ("label", "definition", "hint"):
+                if isinstance(m.get(f), str):
+                    yield m[f], f"metrics[{i}].{f}"
+
+
 def check_visualization_contract(rep: dict[str, Any], charts: list[dict[str, Any]]) -> list[str]:
     """R1~R8 중 **스키마가 볼 수 없는** 층: 앵커 정합성 · id 중복 · 추론 어법 · 채택 모듈 강제."""
     out: list[str] = []
@@ -289,6 +345,10 @@ def check_visualization_contract(rep: dict[str, Any], charts: list[dict[str, Any
         return out
 
     # ── 여기부터는 계약을 채택한 모듈에만 적용되는 하드 게이트 ──
+    # 카피 규율(§6.1)은 화면에 문장으로 찍히는 모든 필드에 건다. 채택 경계 안쪽인 이유는
+    # 나머지 R1~R8과 같다 — 탭이 완성될 때 함께 들어온다(D-042).
+    for text, where in _copy_strings(rep, charts):
+        out += check_copy(text, where)
     if not isinstance(summary, dict):
         out.append("R2: `summary`(진입 요약 하나)가 없다")
     elif not summary.get("id"):
@@ -385,6 +445,15 @@ _CASES: list[tuple[str, dict[str, Any], bool]] = [
 # 채택되던 날 리포트 층 20건 중 6건이 그렇게 빨개졌다. 이 표가 검사하는 것은
 # **"목록에 없으면 면제된다"는 규칙**이지 특정 모듈이 아니다.
 _UNADOPTED = "not-adopted-module"
+# 카피 케이스가 R1~R8에 걸려 실패하면 무엇을 재는지 알 수 없다 — 나머지를 갖춘 바닥판.
+_ADOPTED_OK: dict[str, Any] = {
+    "moduleId": "sonic-profile",
+    "summary": {"type": "radar", "id": "s", "question": "q", "data": {"axes": []}},
+    "questions": [{"q": "1", "chartId": "s"}, {"q": "2", "chartId": "s"}, {"q": "3", "chartId": "s"}],
+    "notAnswered": ["x"],
+    "reliability": {"sample": "n=1", "engine": "e"},
+    "charts": [{"type": "bar", "id": "a", "question": "q", "data": []}],
+}
 _REPORT_CASES: list[tuple[str, dict[str, Any], bool]] = [
     ("미채택 모듈은 R1~R8 면제", {"moduleId": _UNADOPTED, "charts": []}, True),
     ("끊긴 질문 앵커", {"moduleId": _UNADOPTED, "charts": [{"type": "bar", "id": "a", "data": []}],
@@ -406,6 +475,23 @@ _REPORT_CASES: list[tuple[str, dict[str, Any], bool]] = [
         {"text": "저역 축과 정합한다 — 표본 주의", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, False),
     ("추론 허용 어법", {"moduleId": _UNADOPTED, "charts": [], "inferences": [
         {"text": "저역이 높은 쪽과 정합하는 신호가 있다", "basis": "b", "sample": "n=1", "confidence": "low", "limits": "l"}]}, True),
+    # ── 카피 규율(§6.1). 채택 모듈에만 걸리므로 "미채택은 면제" 케이스를 함께 둔다.
+    ("카피: 미채택 모듈은 면제", {"moduleId": _UNADOPTED, "charts": [],
+                        "insights": ["소셜이 먼저다 — 표본 주의"]}, True),
+    ("카피: 인사이트 em dash", {**_ADOPTED_OK, "insights": ["소셜이 먼저다 — 표본 주의"]}, False),
+    ("카피: 추천 em dash", {**_ADOPTED_OK, "recommendations": ["같이 볼 것 — 과거 사례"]}, False),
+    ("카피: 구획 질문 em dash", {**_ADOPTED_OK,
+                          "sections": [{"id": "a", "label": "A", "question": "무엇인가 — 언제인가"}],
+                          "charts": [{"type": "bar", "id": "a", "question": "q", "section": "a", "data": []}]}, False),
+    ("카피: 차트 정의 em dash", {**_ADOPTED_OK,
+                         "charts": [{"type": "bar", "id": "a", "question": "q", "data": [],
+                                     "definition": "무엇을 잰다 — 주의"}]}, False),
+    ("카피: 지표 라벨 em dash", {**_ADOPTED_OK, "metrics": [{"label": "값 — 중앙값", "value": 1}]}, False),
+    ("카피: 머리의 대괄호 태그", {**_ADOPTED_OK, "insights": ["[정직성] 매치는 예측이 아니다"]}, False),
+    ("카피: 문장 안의 대괄호는 허용", {**_ADOPTED_OK, "insights": ["규칙 A[1]은 후보다"]}, True),
+    # 🔴 기계 파싱 규약은 카피가 아니다(§6.1 예외) — 여기를 고치면 대시보드 파서가 깨진다.
+    ("카피: 프로필 라인은 면제", {**_ADOPTED_OK,
+                        "insights": ["[프로필] KATSEYE — social-led(+11d) · 소셜 404건 → 후보"]}, True),
     ("채택 모듈: 요약·질문·신뢰도 누락", {"moduleId": "sonic-profile", "charts": []}, False),
     ("채택 모듈: 차트에 question 없음", {
         "moduleId": "sonic-profile",

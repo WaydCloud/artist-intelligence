@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import type {
   ImpulseRulesTunableData,
   LeadLagTunableData,
@@ -10,6 +10,7 @@ import type {
   WhitespaceTunableData,
 } from "@/lib/report";
 import { scopeOf, useKnob } from "@/lib/knobs";
+import { Terms } from "@/components/Definition";
 import { CriteriaActions, type CriteriaItem } from "./CriteriaActions";
 import { ChartTooltip, useChartTooltip } from "./ChartTooltip";
 
@@ -118,7 +119,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
       />
 
       <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
-        백분위는 <b>당일 코호트 안의 상대 위치</b>입니다 — 코호트 구성이 바뀌면 같은 곡도 값이
+        백분위는 <b>당일 코호트 안의 상대 위치</b>입니다. 코호트 구성이 바뀌면 같은 곡도 값이
         달라집니다. 규칙이 {data.rules.length}건뿐이라 여기 안 걸린 곡이 “해당 없음”을 뜻하지
         않습니다.
       </p>
@@ -144,6 +145,147 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
           ].filter(Boolean) as CriteriaItem[]
         }
       />
+    </div>
+  );
+}
+
+// 선행·지연 목록. 115행을 세로로 쏟던 자리다(스크롤 세 화면).
+//
+// 🔴 **"상위 N행"으로 자르지 않는다.** 이 목록은 선행 일수 내림차순이라 위쪽이 소셜 선행,
+// **아래쪽이 차트 선행 — 반례**다. 위에서 30행만 남기면 반례가 통째로 사라지고, 그것은
+// 이 탭의 요약이 "선행 수"가 아니라 **반례를 포함한 구성**인 이유를 지워 버린다.
+// 정보가 가장 적은 곳은 양 끝이 아니라 **가운데(0일 근처)**다. 그래서 가운데를 접고,
+// 접었다는 사실과 접힌 구간을 적는다(DESIGN §7.5 "자를 때는 자른다고 적는다").
+//
+// 이름으로 좁히는 한 줄을 위에 둔다(§7 "필터는 차트 위 한 줄"). 115팀에서 특정 팀을
+// 찾는 것은 스크롤이 아니라 검색의 일이고, 좁히는 동안에는 접지 않는다 —
+// 찾는 사람은 이미 목록을 좁혀 놓았다.
+const EDGE_ROWS = 15;
+
+interface LeadLagRow {
+  key: string;
+  lead: number | null;
+  posts: number;
+  censored: boolean;
+  weak: boolean;
+}
+
+function LeadLagList({
+  rows,
+  maxAbs,
+  minPosts,
+}: {
+  rows: LeadLagRow[];
+  maxAbs: number;
+  minPosts: number;
+}) {
+  const [query, setQuery] = useState("");
+  const [openMid, setOpenMid] = useState(false);
+
+  const needle = query.trim().toLowerCase();
+  const shown = needle ? rows.filter((r) => r.key.toLowerCase().includes(needle)) : rows;
+  // 좁히는 중이거나 펼친 상태면 접지 않는다. 접을 값이 없을 때도(양 끝 + 최소 1행) 접지 않는다.
+  const folding = !needle && !openMid && shown.length > EDGE_ROWS * 2 + 1;
+  const head = folding ? shown.slice(0, EDGE_ROWS) : shown;
+  const tail = folding ? shown.slice(-EDGE_ROWS) : [];
+  // 접힌 구간은 **접힌 행들의** 값으로 말한다. 보이는 경계 행(+26일 · -9일)을 적으면
+  // 화면에 있는 값을 감춰진 범위라고 말하는 셈이다.
+  const mid = folding ? shown.slice(EDGE_ROWS, shown.length - EDGE_ROWS) : [];
+  const fmtLead = (v: number) => `${v > 0 ? "+" : ""}${v}일`;
+
+  const row = (r: LeadLagRow) => {
+    const lead = r.lead ?? 0;
+    const w = (Math.abs(lead) / maxAbs) * 50;
+    // 판정 근거가 약한 행은 지우지 않고 흐리게 — 도구가 대신 결론내지 않는다
+    const held = r.weak || r.censored;
+    // 화면에 그대로 적을 짧은 사유. 자세한 뜻은 아래 캡션이 한 번 설명한다.
+    const why = [r.weak ? `표본 ${r.posts}건 < ${minPosts}건` : null, r.censored ? "좌측 절단" : null]
+      .filter(Boolean)
+      .join(" · ");
+    return (
+      <div key={r.key} className={`flex items-center gap-2 text-xs ${held ? "opacity-45" : ""}`}>
+        <div className="w-28 truncate text-right text-[var(--ink-secondary)]" title={r.key}>
+          {r.key}
+        </div>
+        <div className="relative h-4 flex-1">
+          <div className="absolute inset-y-0 left-1/2 w-px bg-[var(--baseline)]" />
+          <div
+            className="absolute inset-y-0.5 rounded-sm"
+            style={
+              lead >= 0
+                ? { left: "50%", width: `${w}%`, background: "var(--series)" }
+                : { right: "50%", width: `${w}%`, background: "var(--series2)" }
+            }
+          />
+        </div>
+        {/* `+127일`이 w-10에서 두 줄로 접혀 있었다 — 숫자 칸은 최댓값이 들어갈
+            만큼 잡고 줄바꿈을 막는다. 값이 접히면 읽는 사람이 두 값으로 센다. */}
+        <div className="w-12 shrink-0 whitespace-nowrap text-right tabular-nums text-[var(--muted)]">
+          {fmtLead(lead)}
+        </div>
+        {/* 사유를 그대로 적는다 — 툴팁도 `title`도 없다(위 주석 참고).
+            칸은 사유 두 개가 같이 들어갈 폭으로 잡는다. 좁게 잡아 잘라 두면
+            감춰진 것을 툴팁에서 잘린 텍스트로 옮긴 것일 뿐이다. */}
+        <div className="w-40 shrink-0 truncate text-[var(--muted)]">{why}</div>
+      </div>
+    );
+  };
+
+  return (
+    <div>
+      <div className="mb-2 flex flex-wrap items-baseline gap-x-3 gap-y-1 text-xs">
+        <label className="flex items-center gap-2">
+          <span className="text-[var(--ink-secondary)]">팀 이름으로 좁히기</span>
+          <input
+            type="search"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="이름 일부"
+            className="w-40 rounded border px-2 py-0.5 text-xs text-[var(--ink)] placeholder:text-[var(--muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-[var(--series)]"
+            style={{ borderColor: "var(--hairline)", background: "var(--plane)" }}
+          />
+        </label>
+        {/* 좁히면 위의 집계(선행·지연 수)와 목록의 수가 달라진다. 그 사실을 적지 않으면
+            좁힌 목록의 길이가 전체 수로 읽힌다. */}
+        <span className="tabular-nums text-[var(--muted)]">
+          {needle
+            ? `${shown.length}팀 표시 · 위 집계는 전체 ${rows.length}팀 기준`
+            : `${rows.length}팀 · 선행 일수 내림차순`}
+        </span>
+      </div>
+
+      {shown.length === 0 ? (
+        <p className="text-sm text-[var(--muted)]">이름에 “{query.trim()}”가 든 팀 없음</p>
+      ) : (
+        <div className="space-y-1">
+          {head.map(row)}
+          {folding && (
+            <button
+              type="button"
+              onClick={() => setOpenMid(true)}
+              aria-expanded={false}
+              className="flex w-full items-center gap-2 rounded-sm py-1 text-left text-xs text-[var(--muted)] transition-colors duration-150 ease-out hover:bg-[var(--hairline)] hover:text-[var(--ink-secondary)]"
+            >
+              <span className="w-28 shrink-0 text-right">가운데 {mid.length}팀</span>
+              <span className="flex-1 border-t border-dashed" style={{ borderColor: "var(--baseline)" }} />
+              <span className="shrink-0 tabular-nums">
+                {fmtLead(mid[0].lead ?? 0)} ~ {fmtLead(mid[mid.length - 1].lead ?? 0)} 접힘 · 펼치기
+              </span>
+            </button>
+          )}
+          {tail.map(row)}
+          {openMid && !needle && (
+            <button
+              type="button"
+              onClick={() => setOpenMid(false)}
+              aria-expanded
+              className="mt-1 rounded-sm px-1 py-0.5 text-xs text-[var(--muted)] transition-colors duration-150 ease-out hover:text-[var(--ink-secondary)]"
+            >
+              가운데 접기
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
@@ -304,8 +446,10 @@ function Tags({ data, title }: { data: TagsTunableData; title?: string }) {
       <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
         <span>관측 <b className="text-[var(--ink)]">{data.tracks.length}</b>곡</span>
         <span>이 임계에서 잡힌 악기 <b className="text-[var(--ink)]">{buckets.length + hidden}</b>종</span>
+        {/* `title`을 걷어냈다: 같은 설명이 아래 ⚠ 문장으로 **이미 화면에 있다**.
+            화면에 있는 것을 툴팁이 되풀이하면 정보는 0이고 장식만 남는다(DESIGN §7.6). */}
         {lowerBound > 0 && (
-          <span title="태깅 당시 상위 라벨만 저장돼 임계를 넘는 악기가 더 있어도 세지 못하는 곡">
+          <span>
             곡 수가 하한인 곡 <b className="text-[var(--ink)]">{lowerBound}</b>
           </span>
         )}
@@ -318,7 +462,7 @@ function Tags({ data, title }: { data: TagsTunableData; title?: string }) {
       )}
       {lowerBound > 0 && (
         <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
-          ⚠ {lowerBound}곡은 곡 수가 <b>하한</b>입니다 — 태깅 당시 상위 라벨만 저장돼, 임계를 넘는 악기가
+          ⚠ {lowerBound}곡은 곡 수가 <b>하한</b>입니다. 태깅 당시 상위 라벨만 저장돼, 임계를 넘는 악기가
           더 있어도 세지 못합니다. 임계를 올리면 이 수가 줄어듭니다.
         </p>
       )}
@@ -575,7 +719,8 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
         bucketOf(data.noMatchLabel).members.push({
           name: track.name,
           // 어디에 가장 가까웠는지는 남긴다 — 배정하지 않을 뿐 정보를 버리지는 않는다
-          detail: top ? `최고 ${top.name} ${top.score.toFixed(2)}` : "—",
+          // 빈 대시는 0으로도 읽힌다. 결측은 결측이라고 적는다(§0).
+          detail: top ? `최고 ${top.name} ${top.score.toFixed(2)}` : "정합도 없음",
         });
         continue;
       }
@@ -603,7 +748,7 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
         ),
         hint:
           name === data.noMatchLabel
-            ? "어느 유형에도 충분히 가깝지 않음 — '다른 유형'이 아니라 '해당 없음'"
+            ? "어느 유형에도 충분히 가깝지 않음. '다른 유형'이 아니라 '해당 없음'"
             : `${v.members.length}곡 (그중 동점 ${v.tie}곡)`,
       }))
       .sort((a, b) => b.total - a.total || a.name.localeCompare(b.name));
@@ -653,13 +798,26 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
       <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
         <span>관측 <b className="text-[var(--ink)]">{data.tracks.length}</b>곡</span>
         <span>유형 배정 <b className="text-[var(--ink)]">{assigned}</b></span>
-        <span title="정합도가 임계 미만 — '다른 유형'이 아니라 '해당 없음'">
+        <span>
           해당 없음 <b className="text-[var(--ink)]">{noMatch}</b>
         </span>
-        <span title="1위와 2위의 정합도 차가 동점 폭 미만 — 표본이 조금만 흔들려도 뒤집힌다">
+        <span>
           그중 동점 <b className="text-[var(--ink)]">{ties}</b>
         </span>
       </div>
+
+      {/* 두 라벨의 뜻은 `title` 속성에만 있었다. 보이는 표시가 없으면 거기 설명이 있다는
+          것 자체를 모르고, 키보드로는 닿을 방법도 없다(DESIGN §7.6). */}
+      <Terms
+        className="mb-4 -mt-2"
+        items={[
+          ["해당 없음", "정합도가 임계 미만인 곡. '다른 유형'이 아니라 '해당 없음'입니다."],
+          [
+            "그중 동점",
+            "1위와 2위의 정합도 차가 동점 폭 미만인 곡. 표본이 조금만 흔들려도 순서가 뒤집힙니다.",
+          ],
+        ]}
+      />
 
       <BucketRows buckets={buckets} empty="이 기준에서는 집계할 곡이 없음" />
 
@@ -667,7 +825,7 @@ function Rhythm({ data, title }: { data: RhythmTunableData; title?: string }) {
         <span className="inline-block h-3 w-3 rounded" style={{ background: "var(--series)" }} />
         <span>유형 배정</span>
         <span className="ml-2 inline-block h-3 w-3 rounded" style={{ background: "var(--series2)" }} />
-        <span>그중 동점(1·2위 근소차 — 뒤집힐 수 있음)</span>
+        <span>그중 동점(1·2위 근소차, 뒤집힐 수 있음)</span>
         <span
           className="ml-2 inline-block h-3 w-3 rounded"
           style={{ background: "var(--baseline)", opacity: 0.6 }}
@@ -850,7 +1008,7 @@ function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) 
       <div className="mb-4 flex flex-wrap gap-x-4 gap-y-1 text-xs tabular-nums text-[var(--ink-secondary)]">
         <span>소셜 선행 <b className="text-[var(--ink)]">{count("social-led")}</b></span>
         {data.evidence && (
-          <span title="표본 하한 통과 + 차트 온셋 비검열">
+          <span>
             그중 판정 가능 <b className="text-[var(--ink)]">{decidable}</b>
           </span>
         )}
@@ -860,52 +1018,23 @@ function LeadLag({ data, title }: { data: LeadLagTunableData; title?: string }) 
         <span>차트-온리 <b className="text-[var(--ink)]">{count("chart-only")}</b></span>
       </div>
 
+      {/* 여섯 라벨 중 뜻이 자명하지 않은 것만 적는다. '소셜 선행'·'동시'는 말 그대로이므로
+          되풀이하지 않는다(§1: 더하기 전에 뺄 것을 먼저). */}
+      <Terms
+        className="mb-4 -mt-2"
+        items={[
+          ...(data.evidence
+            ? ([["그중 판정 가능", "표본 하한을 넘고 차트 온셋이 좌측 절단도 아닌 팀."]] as [string, string][])
+            : []),
+          ["소셜-온리", "소셜 온셋만 잡힌 팀. 차트 온셋이 아직 없어 선행 일수를 낼 수 없습니다."],
+          ["차트-온리", "차트 온셋만 잡힌 팀. 수집한 소셜 표본에서 온셋 기준을 넘지 못했습니다."],
+        ]}
+      />
+
       {joined.length === 0 ? (
         <p className="text-sm text-[var(--muted)]">이 기준에서는 소셜·차트 상승 시작이 모두 잡힌 팀 없음</p>
       ) : (
-        <div className="space-y-1">
-          {joined.map((r) => {
-            const lead = r.lead ?? 0;
-            const w = (Math.abs(lead) / maxAbs) * 50;
-            // 판정 근거가 약한 행은 지우지 않고 흐리게 — 도구가 대신 결론내지 않는다
-            const held = r.weak || r.censored;
-            // 화면에 그대로 적을 짧은 사유. 자세한 뜻은 아래 캡션이 한 번 설명한다.
-            const why = [r.weak ? `표본 ${r.posts}건 < ${minPosts}건` : null, r.censored ? "좌측 절단" : null]
-              .filter(Boolean)
-              .join(" · ");
-            return (
-              <div
-                key={r.key}
-                className={`flex items-center gap-2 text-xs ${held ? "opacity-45" : ""}`}
-              >
-                <div className="w-28 truncate text-right text-[var(--ink-secondary)]" title={r.key}>
-                  {r.key}
-                </div>
-                <div className="relative h-4 flex-1">
-                  <div className="absolute inset-y-0 left-1/2 w-px bg-[var(--baseline)]" />
-                  <div
-                    className="absolute inset-y-0.5 rounded-sm"
-                    style={
-                      lead >= 0
-                        ? { left: "50%", width: `${w}%`, background: "var(--series)" }
-                        : { right: "50%", width: `${w}%`, background: "var(--series2)" }
-                    }
-                  />
-                </div>
-                {/* `+127일`이 w-10에서 두 줄로 접혀 있었다 — 숫자 칸은 최댓값이 들어갈
-                    만큼 잡고 줄바꿈을 막는다. 값이 접히면 읽는 사람이 두 값으로 센다. */}
-                <div className="w-12 shrink-0 whitespace-nowrap text-right tabular-nums text-[var(--muted)]">
-                  {lead > 0 ? "+" : ""}
-                  {lead}일
-                </div>
-                {/* 사유를 그대로 적는다 — 툴팁도 `title`도 없다(위 주석 참고).
-                    칸은 사유 두 개가 같이 들어갈 폭으로 잡는다. 좁게 잡아 잘라 두면
-                    감춰진 것을 툴팁에서 잘린 텍스트로 옮긴 것일 뿐이다. */}
-                <div className="w-40 shrink-0 truncate text-[var(--muted)]">{why}</div>
-              </div>
-            );
-          })}
-        </div>
+        <LeadLagList rows={joined} maxAbs={maxAbs} minPosts={minPosts} />
       )}
 
       <div className="mt-3 flex items-center gap-1.5 text-xs text-[var(--muted)]">

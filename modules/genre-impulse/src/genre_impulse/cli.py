@@ -30,7 +30,7 @@ RULES: list[dict[str, Any]] = [
         "impulse_id": "hyperpop",
         "low_all": ["organic_ratio"],
         "high_any": ["spectral_flatness", "over_unity_ratio"],
-        "basis": "A2.1 실측 2026-07-30 — Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1)",
+        "basis": "A2.1 실측 2026-07-30. Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1)",
     },
 ]
 
@@ -67,14 +67,14 @@ _SECTIONS: list[dict[str, str]] = [
     {
         "id": "matches",
         "label": "매치",
-        "question": "오늘 코호트에서 규칙에 걸린 곡은 무엇인가?",
+        "question": "오늘 규칙에 걸린 곡은 무엇인가?",
         "note": "백분위는 그날 코호트 안에서의 상대 위치다. 코호트가 바뀌면 같은 곡의 값도 바뀐다. "
         "걸렸다는 것은 요소가 닮았다는 뜻이며 도달이나 성공이 아니다.",
     },
     {
         "id": "tuner",
         "label": "기준",
-        "question": "기준을 움직이면 걸리는 곡이 어떻게 달라지나?",
+        "question": "기준을 움직이면 어느 곡이 달라지나?",
         "note": "컷 값은 A&R이 소유한다. 여기서 움직이는 것은 화면 안의 계산이고 원장은 바뀌지 않는다.",
     },
 ]
@@ -235,20 +235,20 @@ def _context_lines(impulse: dict[str, Any]) -> list[str]:
     """원장 문맥 인용 — 확실성 중간 이상만 표면에(RULES §1)."""
     lines: list[str] = []
     mode = impulse.get("adoption_mode", {}).get("mode", "?")
-    lines.append(f"[문맥] '{impulse.get('name_ko', impulse['id'])}' 수용 모드: {mode} (원장 {impulse.get('version')})")
+    lines.append(f"'{impulse.get('name_ko', impulse['id'])}' 수용 모드: {mode} (원장 {impulse.get('version')})")
     eb = impulse.get("element_borrowing")
     if isinstance(eb, dict):
         for t in eb.get("anchor_tracks", []):
             grade = str(t.get("certainty", ""))
             if grade in SURFACE_GRADES:
                 lines.append(
-                    f"[문맥] 과거 차용 앵커: {t.get('artist')} - {t.get('title')}"
+                    f"과거 차용 앵커: {t.get('artist')} - {t.get('title')}"
                     f" ({t.get('date')}, 확실성 {grade})"
                 )
     idf = impulse.get("identity_formation")
     if isinstance(idf, dict) and idf.get("occurred"):
         lines.append(
-            f"[문맥] 정체성화 전례: {idf.get('group')} '{idf.get('fandom_slang')}'"
+            f"정체성화 전례: {idf.get('group')} '{idf.get('fandom_slang')}'"
             f" (언론 공식화 {idf.get('press_formalization_date')})"
         )
     return lines
@@ -445,26 +445,26 @@ def build_report(
     by_id = {i["id"]: i for i in impulses}
 
     insights: list[str] = [
-        "[정직성] 유사 ≠ 도달 — 매치는 검토 후보이지 예측이 아니다. 판단은 A&R의 몫.",
-        f"[정직성] 검출 규칙 커버리지 {len(RULES)}/{len(impulses) or '?'} — 대부분의 임펄스는 아직 규칙이 없다(아래 관측 불가 표).",
-        "[정직성] 백분위는 당일 코호트 내 상대 위치다 — 코호트 구성이 바뀌면 같은 곡도 값이 달라진다.",
+        "유사는 도달이 아니다. 매치는 검토 후보이지 예측이 아니며 판단은 A&R의 몫이다.",
+        f"검출 규칙 커버리지 {len(RULES)}/{len(impulses) or '?'}. 대부분의 임펄스는 아직 규칙이 없다(아래 관측 불가 표).",
+        "백분위는 당일 코호트 내 상대 위치다. 코호트 구성이 바뀌면 같은 곡도 값이 달라진다.",
     ]
     for s in skipped:
-        insights.append(f"[원장 스킵] 스키마 위반: {s}")
+        insights.append(f"원장에서 건너뛴 항목(스키마 위반): {s}")
     # 곡별 백분위는 **격자가 보여준다**(match-axes). 예전에는 여기에 곡마다 한 줄씩
     # `organic_ratio P1.0 · over_unity_ratio P62.7 …`을 찍었는데, 저장 키가 그대로 나가는
     # 데다 같은 값을 두 번 말하는 열한 줄이었다. 규칙 귀속만 남긴다.
     for rule in RULES:
         hit = [m for m in matches if m["rule"] == rule["id"]]
         if hit:
-            insights.append(f"[매치] 규칙 {rule['id']} — {len(hit)}곡 (곡별 위치는 격자 참조)")
+            insights.append(f"규칙 {rule['id']}에 걸린 곡 {len(hit)}곡. 곡별 위치는 격자 참조")
     for rule in RULES:
         imp = by_id.get(rule["impulse_id"])
         if imp and any(m["rule"] == rule["id"] for m in matches):
             insights.extend(_context_lines(imp))
-        insights.append(f"[규칙 근거] {rule['id']}: {rule['basis']}")
+        insights.append(f"규칙 근거 {rule['id']}: {rule['basis']}")
     if not cohort:
-        insights.append("[입력] 코호트 0곡 — sonic 스냅샷이 비어 있어 매치를 계산하지 않았다.")
+        insights.append("코호트 0곡. sonic 스냅샷이 비어 있어 매치를 계산하지 않았다.")
 
     charts: list[dict[str, Any]] = []
     if matches:
@@ -584,8 +584,8 @@ def build_report(
         "media": [],
         "insights": insights,
         "recommendations": [
-            "매치 트랙은 요소 차용 관점의 청취 검토 후보다 — 과거 사례 문맥(모드·리드타임)과 함께 볼 것.",
-            "규칙이 없는 임펄스의 신호는 이 리포트에 없다 — 부재를 '신호 없음'으로 읽지 말 것.",
+            "매치 트랙은 요소 차용 관점의 청취 검토 후보다. 과거 사례 문맥(모드·리드타임)과 함께 볼 것.",
+            "규칙이 없는 임펄스의 신호는 이 리포트에 없다. 부재를 '신호 없음'으로 읽지 말 것.",
         ],
         **extra,
     }
@@ -677,8 +677,10 @@ def cmd_selftest(_args: argparse.Namespace) -> int:
         empty = build_report(impulses, skipped, [], "", LOW_PCT_DEFAULT, HIGH_PCT_DEFAULT, set())
         check("3 빈 코호트 graceful", any("코호트 0곡" in i for i in empty["insights"]))
 
+        # 문구가 아니라 **뜻**을 본다. 예전에는 "[원장 스킵]" 접두어를 문자열로 맞췄는데,
+        # 카피 규율(§6.1)로 태그를 걷어내자 기능은 그대로인 채 검사만 깨졌다.
         check("4 위반 레코드 스킵+보고", len(impulses) == 2 and any("broken" in s for s in skipped)
-              and any("[원장 스킵]" in i for i in rep["insights"]))
+              and any("건너뛴" in i and "스키마 위반" in i for i in rep["insights"]))
 
         low_grade_dir = tmp / "imp2"
         low_grade_dir.mkdir()
@@ -699,8 +701,18 @@ def cmd_selftest(_args: argparse.Namespace) -> int:
 
         blob = json.dumps(rep, ensure_ascii=False)
         check("11 단정 어휘 없음", not any(w in blob for w in FORBIDDEN))
-        check("12 커버리지 KPI", any("커버리지" in str(x.get("hint", "")) for x in rep["metrics"]))
-        check("13 정직성 인사이트", rep["insights"][0].startswith("[정직성]"))
+        # ⚠ 이 검사는 **이 세션 전부터 실패하고 있었다**(2026-07-30 확인): "커버리지"라는
+        # 낱말을 hint에서 찾는데 타일 문구가 '관측 가능한 임펄스 / 원장 N건 중'으로 바뀐 뒤
+        # 낱말이 사라졌다. 커버리지 KPI 자체는 화면에 그대로 있었으므로 **기능이 아니라
+        # 검사가 낡은 것**이다. 낱말이 아니라 분모가 붙은 KPI가 있는지를 본다.
+        check(
+            "12 커버리지 KPI",
+            any(
+                x.get("label") == "관측 가능한 임펄스" and "원장" in str(x.get("hint", ""))
+                for x in rep["metrics"]
+            ),
+        )
+        check("13 정직성 인사이트", "예측이 아니" in rep["insights"][0])
 
     print(f"selftest: {passed} passed · {failed} failed")
     return 0 if failed == 0 else 1

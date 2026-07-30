@@ -7,6 +7,7 @@
 - 소스: **YouTube Data API v3**(공식·무료 quota 10k units/day, ToS 최저 — D-002 1순위 레일). 키 `YOUTUBE_API_KEY`(User env).
 - **쿼터 규율**(DATA_SOURCES §3): `search.list`(100 units)는 **`resolve`에서만**(1회성·명시적) → 커밋 캐시 `packages/entity-master/yt_channels.json`. 일일 `fetch`는 `channels.list`·`playlistItems.list`·`videos.list`(~1 unit)만 = **~12 units/일**(워치리스트 9팀 기준).
 - **수집과 분석 분리**: `resolve`/`fetch`(라이브) ↔ `analyze`/`signals`(오프라인·결정적, 스모크). 스모크는 네트워크 금지.
+- **재시도는 일시적 실패에만**(2026-07-30 감사): `_get`은 **5xx와 네트워크 오류**(타임아웃·연결 끊김)만 3회·지수 백오프로 재시도하고, **4xx는 즉시 죽는다**. *도메인 근거*: yt 스냅샷이 하루 비면 velocity 시리즈에 되돌릴 수 없는 구멍이 남으므로 재시도가 필요하다. 그러나 4xx는 다시 보내도 같은 답이 오고, 특히 403 `quotaExceeded`는 재시도가 **쿼터를 더 태운다** — 되돌릴 수 없는 비용이라 재시도 대상에서 뺀다. 차트 레그(`chart_history` RULES §1)가 4xx까지 재시도하는 것과 다른 이유는 그쪽엔 쿼터가 없다는 점이다.
 - **facts-only만 저장**: 영상당 `artist(캐노니컬)·video_id·title·published_at·views·likes·comments·duration_s·type·subscribers`. **개인 데이터·댓글 원문·시청자 정보 없음** — 전부 공개 집계 지표(§4). 스냅샷은 snapshot-schema 계약 + PII 게이트.
 - **채널 캐시 = 정정 가능**: `resolve`는 검색 top-1 채널을 기록(`channel_title` 병기) — **오매칭 가능성 명시**, 사람이 캐시 파일에서 `channel_id` 교체 가능(사용자 소유, watchlist와 같은 규율).
 

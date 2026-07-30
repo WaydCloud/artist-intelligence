@@ -14,28 +14,41 @@
 
 from __future__ import annotations
 
+from fractions import Fraction
 from itertools import pairwise
 from typing import Any
 
 import numpy as np
 
-HOP = 256          # 16분음 해상도용 (130BPM 16분 ≈ 115ms ≈ 10프레임)
-BINS = 16          # 마디를 16분음 16칸으로
+# 격자·프레임 예산은 함께 정해진다 — 칸을 두 배로 쪼개면 프레임도 두 배로 쪼개야 한다.
+# 실측(RULES §3.1.5.2): HOP 256·32칸은 p95 BPM에서 칸당 4.3프레임으로 온셋 포락 평활
+# 폭에 먹힌다. HOP 128·32칸이 옛 HOP 256·16칸과 **같은 8.6프레임**이다.
+HOP = 128          # 32분음 해상도용 (5.8ms). ⚠ 256에서 내렸다 — 포락 파생 축 전부 값이 바뀐다
+BINS = 32          # 마디를 32분음 32칸으로 (D-038)
+TRIPLET_BINS = 24  # 트리플렛은 이진 격자에서 원리적으로 안 보인다(32/3 비정수) — 별개 격자
+LEGACY_BINS = 16   # 2026-07-30 이전 저장 형식. 32 → 16 접기로만 비교한다(올리지 않는다)
 KICK_BAND = (20.0, 120.0)
+HIHAT_MIN_HZ = 6000.0   # 하이햇 축(RULES §3.1.5.3) — 믹스 고역. 스템이 필요 없다
 MIN_DOWNBEATS = 3
 
-# RULES §3.1.5 템플릿 원장 — 16분 격자 위 킥 위치. **값은 도메인 소유자 소유.**
-# 이름은 격자와 맞아야 한다: 16분 16칸에서 8분음 n = 칸 2n이므로 8분 3+3+2 = 0·6·12다.
-# (2026-07-29 이전에는 두 tresillo의 이름과 근거가 서로 뒤바뀌어 있었다 — D-027.)
-TEMPLATES: dict[str, tuple[int, ...]] = {
-    "four-on-floor": (0, 4, 8, 12),
-    "backbeat(1·3)": (0, 8),
-    "tresillo(8분 3+3+2)": (0, 6, 12),
-    # 반마디 조각이라 관용 패턴이 아니다 — 마디 끝까지 이으면 dembow와 같은 벡터가 된다.
-    # 제거를 권고하되 값은 도메인 소유자 소유라 이름·근거만 바로잡고 남긴다(RULES §3.1.5 결함 ①).
-    "tresillo(16분·반마디)": (0, 3, 6),
-    "dembow": (0, 3, 6, 8, 11, 14),
-    "trap-synco": (0, 3, 6, 10),
+# RULES §3.1.5 템플릿 원장 — **마디 상대 위치(분수)**. **값은 도메인 소유자 소유.**
+#
+# 칸 번호가 아니라 분수인 이유(2026-07-30 형식 수정): 칸으로 적으면 격자를 바꿀 때마다
+# 원장을 손으로 다시 써야 하고 그 과정에서 이름과 근거가 어긋난다 — 실제로 2026-07-29
+# 이전 산출은 두 tresillo의 이름·근거가 뒤바뀐 채 저장돼 있었다(D-027). 분수는 격자와
+# 무관한 음악적 사실이고, 격자에 렌더하는 것은 `render_template`이 한다.
+TEMPLATES: dict[str, tuple[Fraction, ...]] = {
+    "four-on-floor": (Fraction(0), Fraction(1, 4), Fraction(1, 2), Fraction(3, 4)),
+    "backbeat(1·3)": (Fraction(0), Fraction(1, 2)),
+    "tresillo(8분 3+3+2)": (Fraction(0), Fraction(3, 8), Fraction(3, 4)),
+    # 🔴 `tresillo(16분·반마디)`(0, 3/16, 3/8)는 **제거됐다**(2026-07-30 승인, RULES §3.1.5
+    # 결함 ①). 관용 패턴이 아닌 반마디 조각이고 — 마디 끝까지 이으면 dembow와 같은 벡터가
+    # 된다 — `trap-synco`와의 상관이 16칸 0.832에서 **32칸 0.851로 더 나빠졌다**. 두 이름이
+    # 같은 것을 재고 있었다. 제거 후 최악 쌍은 0.683(four-on-floor ↔ backbeat, 정박 공유라
+    # 음악적으로 당연한 것)이다. 배정 5곡은 저장 프로파일에서 **재계산으로 자동 재배정**된다.
+    "dembow": (Fraction(0), Fraction(3, 16), Fraction(3, 8), Fraction(1, 2),
+               Fraction(11, 16), Fraction(7, 8)),
+    "trap-synco": (Fraction(0), Fraction(3, 16), Fraction(3, 8), Fraction(5, 8)),
 }
 
 # 하중받는 기준 — **관습 기본값이며 도메인 소유자(A&R)가 재조정한다**(RULES §3.1.5 원장).
@@ -47,7 +60,11 @@ NO_MATCH = "해당 없음"
 # 리듬 산출 집합의 버전 — 늘리면 올린다(캐시 키의 일부, cli.py `engine_key`).
 #   v2 = D-031 (grid_deviation_ms · syncopation_ratio · bar_profile_contrast)
 #   v3 = D-032 (스윙·IOI 엔트로피·어택·다운비트 강도·마디 자기유사도·템포그램비·밴드별 온셋)
-RHYTHM_FEATURE_SET = "v3"
+#   v4 = D-038 (마디 격자 32칸 + 트리플렛 24칸 · HOP 128 · 하이햇 축 · 반쪽 재현성)
+#        ⚠ HOP이 바뀌어 **포락 파생 축 전부**(onset_rate·swing·IOI·어택·자기유사도·
+#        대역별 온셋률)의 값이 v3과 다르다. 캐시가 적중하면 옛 값이 새 축과 섞이므로
+#        이 키를 올리는 것이 필수다(D-031 절단본 함정과 같은 구조).
+RHYTHM_FEATURE_SET = "v4"
 
 _A2B: Any = None
 
@@ -111,15 +128,29 @@ def bar_profile_contrast(profile: np.ndarray | list[float]) -> float:
     return float(p.max() / mean)
 
 
-def kick_envelope(y: np.ndarray, sr: int) -> np.ndarray:
-    """저역(20~120Hz) 온셋 포락 — 킥/808."""
+def band_onset_env(y: np.ndarray, sr: int, lo: float, hi: float | None) -> np.ndarray:
+    """대역 제한 온셋 포락 — **이 모듈의 모든 대역 축이 이 함수를 쓴다.**
+
+    킥(저역)·하이햇(고역)·스네어(중역, 스템)가 같은 방식으로 계산돼야 프로파일끼리
+    비교할 수 있다. 두 벌이 되면 대역만 다른 축이 조용히 다른 것을 재게 된다(AGENTS §1
+    — `stems.py`가 갖고 있던 사본을 이 함수로 합쳤다).
+    """
     import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 
     S = np.abs(librosa.stft(y, hop_length=HOP, n_fft=2048)) ** 2
     freqs = librosa.fft_frequencies(sr=sr, n_fft=2048)
-    rows = (freqs >= KICK_BAND[0]) & (freqs < KICK_BAND[1])
+    rows = freqs >= lo
+    if hi is not None:
+        rows &= freqs < hi
+    if not rows.any():
+        raise RhythmUnavailable(f"empty band {lo}~{hi}Hz at sr={sr}")
     return librosa.onset.onset_strength(S=librosa.power_to_db(S[rows] + 1e-10), sr=sr,
                                         hop_length=HOP)
+
+
+def kick_envelope(y: np.ndarray, sr: int) -> np.ndarray:
+    """저역(20~120Hz) 온셋 포락 — 킥/808."""
+    return band_onset_env(y, sr, *KICK_BAND)
 
 
 def bar_profile(env: np.ndarray, sr: int, downbeats: np.ndarray, bins: int = BINS) -> np.ndarray:
@@ -146,24 +177,131 @@ def bar_profile(env: np.ndarray, sr: int, downbeats: np.ndarray, bins: int = BIN
     return prof / total
 
 
+def render_template(positions: tuple[Fraction, ...], bins: int) -> np.ndarray | None:
+    """마디 상대 위치(분수) → `bins`칸 지시 벡터. **표현 불가면 None.**
+
+    위치×칸수가 정수가 아니면 그 템플릿은 그 격자에서 표현될 수 없다(예: 트리플렛 ⅓은
+    32칸에서 10.67칸). **반올림해 흘리지 않는다** — 앨리어싱된 템플릿과의 정합도는
+    음악이 아니라 반올림 오차를 재는 것이고, 그걸 조용히 내면 그 사실이 소실된다
+    (RULES §3.1.5.2).
+    """
+    t = np.zeros(bins, dtype=np.float64)
+    for pos in positions:
+        scaled = pos * bins
+        if scaled.denominator != 1:
+            return None
+        t[int(scaled) % bins] = 1.0
+    return t
+
+
+def fold_profile(profile: np.ndarray | list[float], bins: int) -> np.ndarray:
+    """세밀한 격자 → 거친 격자로 **정확히 접는다**(인접 칸 합, 무손실).
+
+    32칸은 16칸으로 접히지만 그 역은 없다 — 없는 정보를 만드는 것이다(RULES §3.1.5.2).
+    그래서 옛 레코드와 새 레코드를 함께 볼 때는 **내려 맞춘다.**
+    """
+    p = np.asarray(profile, dtype=np.float64)
+    if p.size == bins:
+        return p
+    if p.size < bins or p.size % bins:
+        raise RhythmUnavailable(f"cannot fold {p.size} bins into {bins}")
+    return p.reshape(bins, p.size // bins).sum(axis=1)
+
+
 def match_templates(profile: np.ndarray) -> dict[str, float]:
     """프로파일 × 명명 템플릿의 코사인 정합도(평균 제거 후).
 
     템플릿끼리 **직교하지 않는다** — 실측 최악 쌍이 0.83이다(RULES §3.1.5.1).
     따라서 최고 정합은 **판정이 아니라 순위**이고, 이 함수의 출력을 그대로
     `max()`에 넣으면 안 된다 — 임계·동점 처리는 `classify_rhythm`이 한다.
+
+    격자에서 표현 불가한 템플릿은 **결과에서 빠진다**(0점으로 넣지 않는다 — 0점은
+    "닮지 않았다"는 뜻이고 여기서 참인 것은 "재지 못했다"다, §0 결측 ≠ 0).
     """
     a = np.asarray(profile, dtype=np.float64)
     a = a - a.mean()
     na = float(np.linalg.norm(a))
     out: dict[str, float] = {}
     for name, positions in TEMPLATES.items():
-        t = np.zeros(len(a))
-        t[list(positions)] = 1.0
+        t = render_template(positions, len(a))
+        if t is None:
+            continue
         t = t - t.mean()
         nt = float(np.linalg.norm(t))
         out[name] = round(float(a @ t / (na * nt)) if na > 0 and nt > 0 else 0.0, 4)
     return out
+
+
+def unrenderable_templates(bins: int) -> list[str]:
+    """이 격자에서 표현할 수 없는 템플릿 이름 — 조용한 누락 금지(리포트가 병기한다)."""
+    return [n for n, pos in TEMPLATES.items() if render_template(pos, bins) is None]
+
+
+def hihat_roll_ratio(profile: np.ndarray | list[float]) -> float | None:
+    """32칸에서 **16분 격자에 없는 칸**(홀수 칸)의 점유율 — RULES §3.1.5.3.
+
+    16칸 격자에서는 이 값이 **정의상 0**이었다(32분 사건이 인접 16분 칸에 접혀
+    들어갔다). 그게 하이햇 롤을 못 보던 이유다.
+    """
+    p = np.asarray(profile, dtype=np.float64)
+    total = float(p.sum())
+    if p.size < BINS or p.size % 2 or total <= 0:
+        return None
+    return float(p[1::2].sum() / total)
+
+
+def hihat_triplet_bias(profile_triplet: np.ndarray | list[float]) -> float | None:
+    """24칸 트리플렛 격자에서 `E(트리플렛 전용) / (E(트리플렛 전용) + E(8분 이진))`.
+
+    24칸에서 8분음은 `i%3==0`(8칸), 8분 트리플렛은 `i%2==0`(12칸)이다. 둘의 교집합
+    (`i%6==0`)은 이진에 귀속시키고, **트리플렛 전용**은 `i%2==0 and i%3!=0`(8칸)이다.
+    0.5를 넘으면 3분할 우세 — 다만 0.5 근처는 "둘 다"가 아니라 **판별 불가**일 수 있다
+    (이진 위치의 누출, RULES §3.1.5.3 한계).
+    """
+    p = np.asarray(profile_triplet, dtype=np.float64)
+    if p.size != TRIPLET_BINS:
+        return None
+    idx = np.arange(p.size)
+    trip = float(p[(idx % 2 == 0) & (idx % 3 != 0)].sum())
+    binary = float(p[idx % 3 == 0].sum())
+    denom = trip + binary
+    if denom <= 1e-12:
+        return None
+    return float(trip / denom)
+
+
+def bar_profile_split_half(env: np.ndarray, sr: int, downbeats: np.ndarray,
+                           bins: int = BINS) -> float | None:
+    """**홀수 마디 프로파일 ↔ 짝수 마디 프로파일**의 상관 — RULES §3.8.4.4.
+
+    유효성 판정의 원리적 형식이다. 대비(max/mean)는 **한 번의 우연한 피크**로도
+    높아지지만, 반쪽끼리의 재현성은 그럴 수 없다 — 반복되는 형태는 모든 마디에 있고
+    표집 잡음은 반복되지 않는다.
+
+    ⚠ **2마디 루프는 낮게 나온다**(홀짝이 루프의 서로 다른 절반을 담는다) — 이건 결함이
+    아니라 이 축의 정의상 한계이며, `bar_half_asymmetry`와 함께 읽어야 한다.
+    """
+    d = np.asarray(downbeats, dtype=np.float64)
+    if d.size < MIN_DOWNBEATS + 1:      # 반쪽이 각 1마디면 재현성은 정의되지 않는다
+        return None
+    times = np.arange(len(env)) * HOP / sr
+    halves = [np.zeros(bins, dtype=np.float64), np.zeros(bins, dtype=np.float64)]
+    for i, (a, b) in enumerate(pairwise(d)):
+        if not (b > a):
+            continue
+        m = (times >= a) & (times < b)
+        if not m.any():
+            continue
+        idx = np.floor((times[m] - a) / (b - a) * bins).astype(int) % bins
+        np.add.at(halves[i % 2], idx, np.maximum(env[m], 0.0))
+    if any(h.sum() <= 0 for h in halves):
+        return None
+    x, y = (h / h.sum() for h in halves)
+    x, y = x - x.mean(), y - y.mean()
+    nx, ny = float(np.linalg.norm(x)), float(np.linalg.norm(y))
+    if nx <= 0 or ny <= 0:
+        return None
+    return float(x @ y / (nx * ny))
 
 
 def classify_rhythm(
@@ -406,6 +544,33 @@ def extract_rhythm(
     profile = bar_profile(env, sr, downbeats)
     cls = classify_rhythm(profile)
 
+    # 32칸 전용 축(RULES §3.1.5.2·§3.1.5.3) — 옛 16칸 레코드에는 **결측**이다(0이 아니다).
+    grid: dict[str, Any] = {"bar_profile_bins": BINS}
+    try:
+        grid["kick_bar_profile_triplet"] = [
+            round(float(v), 4) for v in bar_profile(env, sr, downbeats, TRIPLET_BINS)
+        ]
+    except RhythmUnavailable as exc:
+        grid["triplet_unresolved"] = str(exc)
+    try:
+        # 하이햇은 **믹스 고역**에서 잰다 — 6kHz 위는 마스킹이 약해 스템이 필요 없다
+        # (중역 스네어와 사정이 다르다, RULES §3.1.5.3).
+        hi_env = band_onset_env(y, sr, HIHAT_MIN_HZ, None)
+        hi_prof = bar_profile(hi_env, sr, downbeats, BINS)
+        hi_trip = bar_profile(hi_env, sr, downbeats, TRIPLET_BINS)
+        grid["hihat_bar_profile"] = [round(float(v), 4) for v in hi_prof]
+        grid["hihat_bar_profile_triplet"] = [round(float(v), 4) for v in hi_trip]
+        grid["hihat_bar_contrast"] = round(bar_profile_contrast(hi_prof), 4)
+        for k, v in (("hihat_roll_ratio", hihat_roll_ratio(hi_prof)),
+                     ("hihat_triplet_bias", hihat_triplet_bias(hi_trip))):
+            if v is not None:
+                grid[k] = round(v, 4)
+    except (RhythmUnavailable, ValueError) as exc:
+        grid["hihat_unresolved"] = f"{type(exc).__name__}: {exc}"[:120]
+    sh = bar_profile_split_half(env, sr, downbeats)
+    if sh is not None:
+        grid["bar_profile_split_half"] = round(sh, 4)
+
     # 리듬 축 묶음(RULES §3.7) — 이미 얻은 비트·다운비트·포락을 **재사용**한다.
     # 한 축이 실패해도 나머지는 낸다.
     extra: dict[str, Any] = {}
@@ -430,6 +595,7 @@ def extract_rhythm(
 
     return {
         **extra,
+        **grid,
         "tempo_bpm_fit": round(tempo, 2),
         # 적합 잔차 — 퀀타이즈된 그리드인가 연주인가(RULES §3.1.5). beat_this가 50fps
         # 격자라 ≈20ms 아래는 분해되지 않는다는 하한이 있다.
@@ -462,6 +628,7 @@ def rhythm_provenance() -> dict[str, Any]:
         "beat_dbn": False,
         "rhythm_hop": HOP,
         "rhythm_bins": BINS,
+        "rhythm_triplet_bins": TRIPLET_BINS,
         # 템플릿·임계는 **캐시 키가 아니다**(cli.py `engine_key` 참조). 저장된
         # kick_bar_profile에서 재계산되므로 값을 바꿔도 프리뷰를 다시 받지 않는다.
         "rhythm_templates": sorted(TEMPLATES),

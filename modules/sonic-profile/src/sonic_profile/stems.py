@@ -29,10 +29,11 @@ import numpy as np
 
 from sonic_profile.rhythm import (
     BINS,
-    HOP,
     RhythmUnavailable,
+    band_onset_env,
     bar_profile,
     bar_profile_contrast,
+    bar_profile_split_half,
 )
 
 # ── 엔진 · 대역 ──────────────────────────────────────────────────────────
@@ -64,7 +65,19 @@ VIBRATO_TOTAL_HZ = (0.5, 15.0)
 HALFTIME_MIN_RATIO_DEFAULT = 1.0
 BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT = 6.0
 BASS_GLIDE_MIN_MS_DEFAULT = 80.0
-SNARE_MIN_CONTRAST_DEFAULT = 1.71   # 저역 기준선. 미만이면 스네어 축을 결측 처리한다
+# 유효성 바닥 = **이 축 자신의 분포**의 p10 (RULES §3.8.4.3·§3.8.4.5).
+#   1.71  = 저역·믹스에서 **빌려 온 값** → 그 축 분포의 58백분위. 정답지 5곡 중 3곡을
+#           잃어 게이트가 판정 자체를 못 했다. **바닥을 다른 대역에서 빌려 오지 않는다.**
+#   1.33  = v3(16칸·HOP 256) 분포의 p10 (n=123).
+#   1.80  = v4(32칸·HOP 128) 분포의 p10 (1.8017, n=130) ← 현행
+# ⚠ **바닥은 `(HOP, bins)`의 함수다.** HOP을 반으로 줄이자 같은 곡의 대비가 올랐고
+# (Cookiee Kawaii 1.347 → 2.028) 1.33은 새 분포에서 하위 3%만 자르는 값이 됐다.
+# `rhythm_feature_set`이 바뀌면 §3.8.4.3의 형식을 처음부터 다시 밟는다 — 값만 옮기면
+# 1.71의 실수를 버전 축에서 되풀이하는 것이다.
+SNARE_MIN_CONTRAST_DEFAULT = 1.80
+# 🔺 사전 등록 축의 노브(RULES §3.8.4 `vocal_note_f0_spread`) — 관습값.
+VOCAL_NOTE_MIN_MS_DEFAULT = 120.0      # 이보다 짧은 구간은 "지속 노트"가 아니다
+VOCAL_NOTE_MAX_DRIFT_DEFAULT = 40.0    # 프레임 간 이 센트를 넘으면 음이 바뀐 것으로 끊는다
 
 _EPS = 1e-12
 _MODEL: Any = None
@@ -77,6 +90,8 @@ class StemOpts(TypedDict, total=False):
     min_st_per_sec: float
     min_ms: float
     min_contrast: float
+    note_min_ms: float
+    note_max_drift: float
 
 
 class StemsUnavailable(RuntimeError):
@@ -86,32 +101,50 @@ class StemsUnavailable(RuntimeError):
 # ─────────────────────────────────────────── 순수 함수 (모델·네트워크 0)
 
 
-def halftime_snare_ratio(profile: np.ndarray | list[float]) -> float | None:
-    """`p[8] / (p[4] + p[12])`.
+def _beat_slots(size: int) -> tuple[int, int, int] | None:
+    """프로파일 길이 → (2박, 3박, 4박) 칸 번호.
 
-    16칸 격자에서 정박은 0·4·8·12다. 백비트 스네어는 **4·12**(2·4박)에 서고
-    하프타임은 **8**(3박)에 선다. 분모가 0이면 **미해석**이다 — ∞를 큰 수로
-    채우면 "하프타임 확실"로 읽히지만 실제로는 백비트가 아예 없는 것뿐이다.
+    **칸 번호를 상수로 박아 두지 않는다**(2026-07-30 D-038): 격자가 16 → 32로
+    바뀌자 옛 상수 `4·8·12`가 조용히 다른 박을 가리켰다(32칸에서 그 위치는
+    16분음 1·2·3번째다). 박은 격자와 무관한 음악적 사실이므로 **비율로** 정의하고
+    격자에 맞춰 계산한다 — 템플릿 원장을 분수로 바꾼 것과 같은 이유다(rhythm.py).
+    """
+    if size < 4 or size % 4:
+        return None
+    q = size // 4
+    return q, 2 * q, 3 * q
+
+
+def halftime_snare_ratio(profile: np.ndarray | list[float]) -> float | None:
+    """`p[3박] / (p[2박] + p[4박])`.
+
+    백비트 스네어는 **2·4박**에 서고 하프타임은 **3박**에 선다. 분모가 0이면
+    **미해석**이다 — ∞를 큰 수로 채우면 "하프타임 확실"로 읽히지만 실제로는
+    백비트가 아예 없는 것뿐이다.
     """
     p = np.asarray(profile, dtype=np.float64)
-    if p.size < BINS:
+    slots = _beat_slots(p.size)
+    if slots is None:
         return None
-    denom = float(p[4] + p[12])
+    b2, b3, b4 = slots
+    denom = float(p[b2] + p[b4])
     if denom <= _EPS:
         return None
-    return float(p[8]) / denom
+    return float(p[b3]) / denom
 
 
 def snare_backbeat_ratio(profile: np.ndarray | list[float]) -> float | None:
-    """`p[4] + p[12]` — 합=1 정규화 벡터이므로 곧 백비트 점유율.
+    """`p[2박] + p[4박]` — 합=1 정규화 벡터이므로 곧 백비트 점유율.
 
     하프타임의 **대칭 축**이다. 이게 없으면 "하프타임이 아니다"와 "못 쟀다"가
     구별되지 않는다.
     """
     p = np.asarray(profile, dtype=np.float64)
-    if p.size < BINS:
+    slots = _beat_slots(p.size)
+    if slots is None:
         return None
-    return float(p[4] + p[12])
+    b2, _b3, b4 = slots
+    return float(p[b2] + p[b4])
 
 
 def _semitones(f0_hz: np.ndarray) -> np.ndarray:
@@ -204,6 +237,64 @@ def bass_glide_ratio(
     return float(counted) / float(n_voiced)
 
 
+def note_f0_spread(
+    f0_hz: np.ndarray,
+    frame_s: float,
+    *,
+    min_ms: float = VOCAL_NOTE_MIN_MS_DEFAULT,
+    max_drift_cents: float = VOCAL_NOTE_MAX_DRIFT_DEFAULT,
+) -> float | None:
+    """**지속 노트 안**의 f0 흔들림(센트) — RULES §3.8.4 `vocal_note_f0_spread`.
+
+    철회된 `grid_adherence` 계열(§3.8.4.1)이 죽은 이유는 **절대 격자 위치**를 재서
+    f0 추정기의 주파수 격자가 값을 지배했다는 것이다. 이 축은 격자를 안 본다:
+    유성 구간을 "한 음이 유지되는 동안"으로 자르고 **그 안의 표준편차**만 낸다.
+    구간 안의 상대 변화이므로 **격자 오프셋에 불변**이고, 격자 간격보다 작은
+    흔들림도 남는다(원리적으로 해상도 의존이 약하다 — TESTS §7.2.6이 실측한다).
+
+    집계는 **길이 가중 중앙값**이다: 긴 음이 더 많은 정보를 담고, 중앙값이라 한
+    구간의 추정 실패가 전체를 끌지 않는다.
+
+    🔺 사전 등록 축 — 검증 전 리포트 표면 금지. 비브라토와 혼동되므로
+    `vocal_vibrato_strength`와 함께 읽어야 한다.
+    """
+    st = _semitones(f0_hz)
+    if frame_s <= 0 or st.size < 2:
+        return None
+    min_frames = max(2, math.ceil((min_ms / 1000.0) / frame_s))
+    max_drift_st = max_drift_cents / 100.0
+
+    runs: list[tuple[int, float]] = []          # (길이, 센트 표준편차)
+    start = -1
+    for i in range(st.size):
+        cont = (
+            start >= 0
+            and np.isfinite(st[i])
+            and abs(st[i] - st[i - 1]) <= max_drift_st
+        )
+        if cont:
+            continue
+        if start >= 0 and i - start >= min_frames:
+            seg = st[start:i]
+            runs.append((seg.size, float(np.std(seg) * 100.0)))
+        start = i if np.isfinite(st[i]) else -1
+    if start >= 0 and st.size - start >= min_frames:
+        seg = st[start:]
+        runs.append((seg.size, float(np.std(seg) * 100.0)))
+    if not runs:
+        return None                              # 지속 노트가 없다(랩 구간) — 결측 ≠ 0
+
+    # 길이 가중 중앙값
+    runs.sort(key=lambda r: r[1])
+    total = sum(n for n, _ in runs)
+    acc = 0
+    for n, v in runs:
+        acc += n
+        if acc * 2 >= total:
+            return float(v)
+    return float(runs[-1][1])
+
+
 def vibrato_strength(f0_hz: np.ndarray, frame_s: float) -> float | None:
     """f0 궤적의 4~8Hz 변조 세기 0~1 (0.5~15Hz 총 전력 대비).
 
@@ -260,6 +351,35 @@ def apply_snare_gate(
         out[k] = None
     out["snare_axes_gated"] = True
     return out
+
+
+def regate_snare_axes(
+    features: dict[str, Any],
+    *,
+    min_contrast: float,
+    min_ratio: float = HALFTIME_MIN_RATIO_DEFAULT,
+) -> dict[str, Any]:
+    """**저장된 `snare_bar_profile`에서** 스네어 하위 축을 다시 판정한다 — 오디오 0.
+
+    게이트에 걸린 곡도 프로파일·대비는 저장돼 있으므로(`apply_snare_gate`는 하위
+    비율만 결측 처리한다) **임계를 바꿀 때 오디오를 다시 받을 필요가 없다** —
+    D-031 `syncopation_ratio` 소급과 같은 경로다(RULES §3.8.4.3 · TESTS §7.2.4).
+
+    프로파일이 없는 레코드는 **되살리지 않는다**(결측 ≠ 0, §0). 임계를 올렸을 때
+    하위 축이 다시 결측이 되는 방향도 같은 함수가 처리한다 — 멱등이다.
+    """
+    prof = features.get("snare_bar_profile")
+    contrast = features.get("snare_bar_contrast")
+    if not isinstance(prof, list) or not isinstance(contrast, (int, float)) or isinstance(contrast, bool):
+        return dict(features)
+
+    out = dict(features)
+    out.pop("snare_axes_gated", None)
+    out["halftime_snare_ratio"] = halftime_snare_ratio(prof)
+    out["snare_backbeat_ratio"] = snare_backbeat_ratio(prof)
+    ratio = out["halftime_snare_ratio"]
+    out["halftime_snare"] = None if ratio is None else bool(ratio >= min_ratio)
+    return apply_snare_gate(out, float(contrast), min_contrast=min_contrast)
 
 
 # ─────────────────────────────────────────── 모델 의존부 (분리 · 특징 추출)
@@ -319,22 +439,6 @@ def to_analysis(stem: np.ndarray, sr_in: int = STEM_SR, sr_out: int = 22050) -> 
     return np.asarray(librosa.resample(mono, orig_sr=sr_in, target_sr=sr_out), dtype=np.float32)
 
 
-def _band_onset_env(y: np.ndarray, sr: int, lo: float, hi: float | None) -> np.ndarray:
-    """대역 제한 온셋 포락 — `rhythm.kick_envelope`와 **같은 방식**, 대역만 다르다."""
-    import librosa  # type: ignore
-
-    S = np.abs(librosa.stft(y, hop_length=HOP, n_fft=2048)) ** 2
-    freqs = librosa.fft_frequencies(sr=sr, n_fft=2048)
-    rows = freqs >= lo
-    if hi is not None:
-        rows &= freqs < hi
-    if not rows.any():
-        raise StemsUnavailable(f"empty band {lo}~{hi}Hz at sr={sr}")
-    return librosa.onset.onset_strength(
-        S=librosa.power_to_db(S[rows] + 1e-10), sr=sr, hop_length=HOP
-    )
-
-
 def _f0(y: np.ndarray, sr: int, fmin: float, fmax: float) -> np.ndarray:
     import librosa  # type: ignore
 
@@ -352,6 +456,8 @@ def extract_stem_features(
     min_st_per_sec: float = BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT,
     min_ms: float = BASS_GLIDE_MIN_MS_DEFAULT,
     min_contrast: float = SNARE_MIN_CONTRAST_DEFAULT,
+    note_min_ms: float = VOCAL_NOTE_MIN_MS_DEFAULT,
+    note_max_drift: float = VOCAL_NOTE_MAX_DRIFT_DEFAULT,
     sr_out: int = 22050,
 ) -> dict[str, Any]:
     """스템 축 전부. 실패한 축은 **결측**으로 남기고 나머지를 계속 낸다(§0).
@@ -367,7 +473,7 @@ def extract_stem_features(
     # ── 드럼 스템: 하프타임 스네어 (RULES §3.8.2)
     try:
         drums = to_analysis(stems["drums"], sr_out=sr_out)
-        env = _band_onset_env(drums, sr_out, *SNARE_BAND)
+        env = band_onset_env(drums, sr_out, *SNARE_BAND)
         prof = bar_profile(env, sr_out, downbeats)
         contrast = bar_profile_contrast(prof)
         axes["snare_bar_profile"] = [round(float(v), 6) for v in prof]
@@ -378,8 +484,14 @@ def extract_stem_features(
             None if axes["halftime_snare_ratio"] is None
             else bool(axes["halftime_snare_ratio"] >= min_ratio)
         )
+        # 유효성 판정의 원리적 후보(RULES §3.8.4.4) — 게이트 **전에** 계산해야 한다.
+        # 게이트가 결측 처리한 곡에서도 "왜 떨어졌는지"를 볼 수 있어야 두 형식을
+        # 비교할 수 있다(대비 바닥 ↔ 재현성).
+        sh = bar_profile_split_half(env, sr_out, downbeats)
+        if sh is not None:
+            axes["snare_split_half"] = round(sh, 4)
         axes = apply_snare_gate(axes, contrast, min_contrast=min_contrast)
-        hi_env = _band_onset_env(drums, sr_out, HIHAT_MIN_HZ, None)
+        hi_env = band_onset_env(drums, sr_out, HIHAT_MIN_HZ, None)
         peaks = librosa.util.peak_pick(
             hi_env, pre_max=3, post_max=3, pre_avg=3, post_avg=5, delta=0.2, wait=2
         )
@@ -424,6 +536,10 @@ def extract_stem_features(
             float(np.median(cent)) if cent.size else None,
             float(np.median(voiced)) if voiced.size else None,
         )
+        # 🔺 사전 등록 — 철회된 `vocal_tuning_hardness`의 대체(RULES §3.8.4).
+        axes["vocal_note_f0_spread"] = note_f0_spread(
+            f0v, frame_s, min_ms=note_min_ms, max_drift_cents=note_max_drift
+        )
     except (StemsUnavailable, KeyError) as exc:
         axes["vocal_unresolved"] = str(exc)
 
@@ -454,22 +570,30 @@ def selftest_stems() -> tuple[int, list[str]]:
         if not ok:
             failures.append(name)
 
+    beats = _beat_slots(BINS)
+    assert beats is not None
+    B2, B3, B4 = beats            # 2박·3박·4박 — **칸 번호를 상수로 쓰지 않는다**(D-038)
+
     def prof(*bins_on: int) -> np.ndarray:
         p = np.zeros(BINS)
         for b in bins_on:
             p[b] = 1.0
         return p / p.sum()
 
-    # ── 하프타임 스네어
-    r_back = halftime_snare_ratio(prof(4, 12))
-    check("halftime 하한(백비트 4·12만)", r_back == 0.0, f"{r_back}")
-    r_half = halftime_snare_ratio(prof(8))
+    # ── 하프타임 스네어 (칸 번호는 격자에서 파생 — 16칸이든 32칸이든 같은 박을 가리킨다)
+    r_back = halftime_snare_ratio(prof(B2, B4))
+    check("halftime 하한(백비트 2·4박만)", r_back == 0.0, f"{r_back}")
+    r_half = halftime_snare_ratio(prof(B3))
     check("halftime 분모 0 → 미해석", r_half is None, f"{r_half}")
-    r_even = halftime_snare_ratio(prof(4, 8, 12))
-    check("halftime 기준점(4·8·12 균등)=0.5", r_even == 0.5, f"{r_even}")
-    b_back, b_half = snare_backbeat_ratio(prof(4, 12)), snare_backbeat_ratio(prof(8))
+    r_even = halftime_snare_ratio(prof(B2, B3, B4))
+    check("halftime 기준점(2·3·4박 균등)=0.5", r_even == 0.5, f"{r_even}")
+    b_back, b_half = snare_backbeat_ratio(prof(B2, B4)), snare_backbeat_ratio(prof(B3))
     check("backbeat 대칭(백비트 1.0 ↔ 하프타임 0.0)",
           b_back == 1.0 and b_half == 0.0, f"{b_back} / {b_half}")
+    # 격자 무관성 — 옛 16칸 레코드도 같은 박을 읽어야 한다(재게이트가 이것에 의존한다)
+    legacy = np.zeros(16); legacy[[4, 8, 12]] = 1.0
+    check("16칸 레코드도 같은 박을 읽는다(격자 무관)",
+          halftime_snare_ratio(legacy / legacy.sum()) == 0.5)
 
     # ── 유효성 게이트가 실제로 떨어뜨리는가
     axes = {"halftime_snare_ratio": 0.5, "snare_backbeat_ratio": 0.5}
@@ -479,6 +603,28 @@ def selftest_stems() -> tuple[int, list[str]]:
           gated["halftime_snare_ratio"] is None and gated["snare_backbeat_ratio"] is None
           and gated.get("snare_axes_gated") is True)
     check("유효성 게이트: 대비 충분하면 유지", kept["halftime_snare_ratio"] == 0.5)
+
+    # ── 재게이트(오디오 0 · TESTS §7.2.4) — 바닥을 고칠 때 오디오를 다시 받지 않는다
+    stored = {
+        "snare_bar_profile": [round(float(v), 6) for v in prof(B2, B3, B4)],
+        "snare_bar_contrast": 1.40,
+        "halftime_snare_ratio": None,       # 1.71 게이트에 걸려 결측이던 상태
+        "snare_backbeat_ratio": None,
+        "halftime_snare": None,
+        "snare_axes_gated": True,
+    }
+    loosened = regate_snare_axes(stored, min_contrast=1.33)
+    check("재게이트: 바닥을 내리면 저장 프로파일에서 되살아난다",
+          loosened["halftime_snare_ratio"] == 0.5 and "snare_axes_gated" not in loosened,
+          f"{loosened['halftime_snare_ratio']}")
+    check("재게이트 멱등", regate_snare_axes(loosened, min_contrast=1.33) == loosened)
+    tightened = regate_snare_axes(stored, min_contrast=1.71)
+    check("재게이트: 바닥을 올리면 결측(0이 아니다)",
+          tightened["halftime_snare_ratio"] is None
+          and tightened.get("snare_axes_gated") is True)
+    no_prof = regate_snare_axes({"snare_unresolved": "too few downbeats (1)"}, min_contrast=1.33)
+    check("재게이트: 프로파일 없으면 되살리지 않는다",
+          "halftime_snare_ratio" not in no_prof)
 
     # ── 슬라이딩 808
     frame_s = F0_HOP / 22050.0                       # ≈23.2ms
@@ -523,6 +669,25 @@ def selftest_stems() -> tuple[int, list[str]]:
           f"{v_on} vs {v_off}")
     # 완전 직선 f0는 변조가 **없는** 것이지 0이 아니다 — 결측으로 남아야 한다(§0).
     straight = np.full(t.size, 220.0) * 2 ** (np.linspace(0, 0.02, t.size) / 12.0)
+    # ── 🔺 vocal_note_f0_spread (사전 등록 · TESTS §7.2.6)
+    n_fr = int(1.0 / frame_s)                        # 1초 지속음(≈43프레임)
+    steady = np.full(n_fr, 220.0)
+    check("note_spread 하한(완전 고정 f0) = 0",
+          note_f0_spread(steady, frame_s) == 0.0, f"{note_f0_spread(steady, frame_s)}")
+    # ±50센트로 **천천히** 흔들리는 지속음(1주기/초 ≈ 1Hz). 빠른 비브라토는 프레임 간
+    # 변화가 `max_drift`를 넘어 구간이 끊긴다 — 그게 이 축의 한계이고 RULES에 적혀 있다.
+    wob = 220.0 * 2 ** (0.5 * np.sin(np.linspace(0, 2 * np.pi, n_fr)) / 12.0)
+    v_wob = note_f0_spread(wob, frame_s)
+    check("note_spread 상한(±50센트 흔들림) > 고정음", v_wob is not None and v_wob > 20.0, f"{v_wob}")
+    # 격자 오프셋 불변 — 철회된 grid_adherence가 못 하던 것. 전체를 37센트 올려도 같은 값
+    shifted = wob * 2 ** (0.37 / 12.0)
+    v_shift = note_f0_spread(shifted, frame_s)
+    check("note_spread: 절대 음높이를 37센트 옮겨도 값 불변 (격자 무관 — 철회 축과의 차이)",
+          v_shift is not None and v_wob is not None and abs(v_shift - v_wob) < 0.5,
+          f"{v_wob} vs {v_shift}")
+    check("note_spread: 지속 노트가 없으면 미해석 (랩 구간 · 0이 아니다)",
+          note_f0_spread(np.array([220.0, 440.0, 110.0, 330.0]), frame_s) is None)
+
     check("무변조 f0 → 미해석(0으로 채우지 않는다)",
           vibrato_strength(straight, frame_s) is None)
 

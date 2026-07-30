@@ -1,5 +1,5 @@
 {
-  "note": "genre-impulse A2 사운드 서명용 조사 코호트. market=케이스 슬러그, platform=역할(origin|kr). CASEBOOK-genre-impulse.md 대표곡에서 선정. rank 없음(차트 아님).",
+  "note": "genre-impulse A2 사운드 서명용 조사 코호트. market=케이스 슬러그, platform=역할(origin|kr). CASEBOOK-genre-impulse.md 대표곡에서 선정. rank 없음(차트 아님). 저지클럽 정답지는 2026-07-30에 5 → 20곡으로 확대(초안: docs/DRAFT-jersey-club-answer-sheet.md, 근거 VIBE 캐논, **A&R 확정 대기**). 판정 기준은 측정된 정답지의 60% 이상이 상위 20%, 최소 표본 10곡 — 확대 전에 고정했다.",
   "tracks": [
     {
       "artist": "Cookiee Kawaii",
@@ -570,6 +570,96 @@
       "title": "3RACHA",
       "market": "drill",
       "platform": "kr"
+    },
+    {
+      "artist": "DJ Tameil",
+      "title": "Ay Bay Bay",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Tim Dolla",
+      "title": "Swing Dat Shit",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Tim Dolla",
+      "title": "Falsetto",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Frosty",
+      "title": "Ride Dat Wave",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Sliink",
+      "title": "Official Number One (Patty Cake)",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Jayhood",
+      "title": "Heartbroken",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Jayhood",
+      "title": "Rock My Hips",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Lil Man",
+      "title": "Sexy Walk",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Lil Man",
+      "title": "I Like The Way She Move",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Ms. Porsh",
+      "title": "Can't Bounce Like Me",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Pure",
+      "title": "Let Ya Body Talk",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Chad B",
+      "title": "Hit It",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Bandmanrill",
+      "title": "Jiggy In Jersey",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "ZEDDY WILL",
+      "title": "Freak You",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Coi Leray",
+      "title": "Players (DJ Smallz 732 Remix)",
+      "market": "jersey-club",
+      "platform": "origin"
     }
   ]
 }

@@ -26,9 +26,22 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 from typing import Any
+
+
+def _load_stems() -> Any:
+    """재게이트 로직은 `sonic_profile.stems`의 것을 쓴다 — 스크립트가 게이트를 다시
+    구현하면 모듈이 내는 값과 게이트가 재는 값이 갈라진다(AGENTS §1)."""
+    try:
+        from sonic_profile import stems  # type: ignore[import-not-found]
+    except ImportError as exc:  # pragma: no cover - 실행 환경 안내
+        raise SystemExit(
+            "sonic_profile을 찾을 수 없습니다 — PYTHONPATH에 modules/sonic-profile/src를 추가하세요"
+        ) from exc
+    return stems
 
 
 def _load_percentile() -> Any:
@@ -49,14 +62,10 @@ def _load_percentile() -> Any:
 #   - drill 원형 3곡 = origin (슬라이딩 808)
 #   - hyperpop 계보 5곡 = aespa 계보(쇠맛) — RULES §2.1의 A2.1 정답지와 같은 집합
 GATES: list[dict[str, Any]] = [
-    {
-        "axis": "halftime_snare_ratio",
-        "case": "jersey-club",
-        "roles": ["origin"],
-        "expect_n": 5,
-        "need": 3,
-        "note": "저지클럽 하프타임 스네어 (RULES §3.8.2)",
-    },
+    # ⚠ 옛 5곡 행(`need: 3` 절대값)은 **뺐다.** 정답지가 20곡으로 늘어난 뒤 그 절대값을
+    # 그대로 두면 12곡 측정에서 3곡만 넘어도 통과가 되어 **기준이 60% → 25%로 조용히
+    # 완화된다**(실측에서 실제로 그렇게 PASS가 떴다). 같은 축의 판정이 두 개면 유리한
+    # 쪽이 인용되므로 행을 하나로 유지한다 — 아래 비율 기준 행이 정본이다.
     {
         "axis": "bass_glide_ratio",
         "case": "drill",
@@ -65,13 +74,17 @@ GATES: list[dict[str, Any]] = [
         "need": 2,
         "note": "드릴 슬라이딩 808 (RULES §3.8.3) — A2.1에서 축 공백이 실증된 케이스",
     },
+    # `vocal_tuning_hardness`는 **철회**됐다(RULES §3.8.4.1 — pyin 격자를 재고 있었다).
+    # 방출이 없으므로 영구히 unmeasured가 되는 행을 남기지 않고, **같은 슬롯**을 대체 축이
+    # 물려받는다: 같은 정답지(aespa 5곡)·같은 기준(3곡). 새 기준을 고르면 그게 곧
+    # "결과를 본 뒤 기준을 정하는" 경로다(TESTS §7.2.6).
     {
-        "axis": "vocal_tuning_hardness",
+        "axis": "vocal_note_f0_spread",
         "case": "hyperpop",
         "artists": ["aespa"],
         "expect_n": 5,
         "need": 3,
-        "note": "하이퍼팝 보컬 처리 (RULES §3.8.4) — 쇠맛 계보 5곡",
+        "note": "🔺 사전 등록 대체 축 (RULES §3.8.4) — 철회된 vocal_tuning_hardness의 슬롯 상속",
     },
     {
         "axis": "vocal_pitch_shift_proxy",
@@ -80,6 +93,37 @@ GATES: list[dict[str, Any]] = [
         "expect_n": 5,
         "need": 3,
         "note": "🔺 사전 등록 프록시 — 실패 시 해석을 버린다(meter_duple_bias 선례)",
+    },
+    # ── 하이햇 축 (D-038 · TESTS §7.3 · 사전 등록). 기준은 **비율**이다: 정답지 크기가
+    #    바뀌어도 같은 엄격도를 유지해야 한다(기존 5곡 중 3곡 = 60%).
+    {
+        "axis": "hihat_roll_ratio",
+        "case": "jersey-club",
+        "roles": ["origin"],
+        "expect_n": 20,
+        "need_frac": 0.60,
+        "min_measured": 10,
+        "note": "H1 하이햇 롤 (RULES §3.1.5.3) — 16칸에서는 정의상 0이던 축",
+    },
+    {
+        "axis": "hihat_triplet_bias",
+        "case": "drill",
+        "roles": ["origin"],
+        "expect_n": 3,
+        "need": 2,
+        "note": "H2 드릴 새 가설 (RULES §3.1.5.3) — ⚠ 트랩도 트리플렛 하이햇을 쓴다. "
+                "실패는 측정 결함이 아니라 케이스북 CASE 10 가설의 실측 지지다",
+    },
+    # 하프타임은 확대된 정답지로 다시 잰다(D-037의 판정은 5곡 기준이었다)
+    {
+        "axis": "halftime_snare_ratio",
+        "case": "jersey-club",
+        "roles": ["origin"],
+        "expect_n": 20,
+        "need_frac": 0.60,
+        "min_measured": 10,
+        "label": "halftime_snare_ratio (정답지 20곡)",
+        "note": "D-037 재실행 — 정답지 5 → 20곡(검정력 인상, 기준 비율은 60% 유지)",
     },
 ]
 
@@ -111,9 +155,60 @@ def _answers(recs: list[dict[str, Any]], gate: dict[str, Any]) -> list[dict[str,
     return out
 
 
-def run(snapshot: Path) -> dict[str, Any]:
+def _floor_derivation(recs: list[dict[str, Any]], floor: float) -> dict[str, Any]:
+    """유효성 바닥의 도출을 **판정과 같은 실행에서** 낸다 (RULES §3.8.4.3 형식 ③).
+
+    바닥이 문서에만 있으면 다음 코호트에서 검증되지 않는다. 축 자신의 분포와
+    **빌려 왔던 대역**(저역·믹스)을 나란히 내서, 옮겨 쓴 값이 왜 바닥이 아니었는지가
+    표에서 바로 보이게 한다.
+    """
+    import numpy as np
+
+    out: dict[str, Any] = {
+        "floor": floor,
+        "rule": "유효성 바닥 = 그 축 자신의 분포 p10 (RULES §3.8.4.3). 다른 대역에서 빌려 오지 않는다",
+        "method": "numpy.percentile (선형보간)",
+        "distributions": {},
+    }
+    for name, axis in (("snare_mid_stem", "snare_bar_contrast"),
+                       ("kick_low_mix", "bar_profile_contrast")):
+        pool = [v for r in recs if (v := _feat(r, axis)) is not None]
+        if not pool:
+            continue
+        a = np.asarray(pool, dtype=float)
+        out["distributions"][name] = {
+            "axis": axis,
+            "n": len(pool),
+            "min": round(float(a.min()), 4),
+            "p05": round(float(np.percentile(a, 5)), 4),
+            "p10": round(float(np.percentile(a, 10)), 4),
+            "p25": round(float(np.percentile(a, 25)), 4),
+            "median": round(float(np.percentile(a, 50)), 4),
+            "p90": round(float(np.percentile(a, 90)), 4),
+            "max": round(float(a.max()), 4),
+            # 현 바닥이 이 분포의 몇 백분위인지 — 한복판을 자르고 있으면 여기서 드러난다
+            "floor_percentile": round(100.0 * float((a < floor).mean()), 1),
+        }
+    return out
+
+
+def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
     _percentile = _load_percentile()
+    stems = _load_stems()
     recs = json.loads(snapshot.read_text(encoding="utf-8")).get("records") or []
+    # 스냅샷은 그때의 바닥으로 게이트된 상태다. 저장된 `snare_bar_profile`에서
+    # **오디오 없이** 다시 판정한다 — 안 하면 옛 바닥의 결측이 그대로 판정에 들어간다.
+    regated = 0
+    for r in recs:
+        f = r.get("features")
+        if not isinstance(f, dict):
+            continue
+        new = stems.regate_snare_axes(f, min_contrast=min_contrast)
+        if new != f:
+            regated += 1
+        r["features"] = new
+    print(f"  재게이트: 대비 바닥 {min_contrast} 적용 → {regated}/{len(recs)}레코드 변경 (오디오 0)",
+          file=sys.stderr)
     cohort = [r for r in recs if _is_cohort(r)]
     results = []
 
@@ -132,18 +227,25 @@ def run(snapshot: Path) -> dict[str, Any]:
             })
         scored = [x for x in rows if x["percentile"] is not None]
         hits = sum(1 for x in scored if x["percentile"] >= TOP_PCT)
+        # 기준이 비율이면 **측정된 표본**에서 계산한다 — 결측을 실패로 세면 "못 쟀다"가
+        # "못 가른다"로 뭉개진다(§0). 최소 표본은 별도 조건으로 둔다.
+        if gate.get("need_frac") is not None:
+            gate = {**gate, "need": max(1, math.ceil(gate["need_frac"] * len(scored)))}
         # **"못 쟀다"와 "못 가른다"를 뭉치면 원장에 거짓이 들어간다**(§0 결측 ≠ 0).
         # 특히 측정된 정답지가 기준(need)보다 적으면 판별력과 무관하게 산술적으로
         # 실패가 강제된다 — 그걸 "판별력 없음"으로 적으면 축을 억울하게 죽인다.
         # (2026-07-30 실측: 하프타임은 유효성 게이트가 정답지 5곡 중 3곡을
         #  떨어뜨려 2곡만 남았고, 기준 3을 넘을 방법이 원리적으로 없었다.)
-        if not scored or len(pool) < 10 or len(scored) < gate["need"]:
+        min_measured = gate.get("min_measured", gate["need"])
+        if not scored or len(pool) < 10 or len(scored) < min_measured:
             verdict = "unmeasured"
         else:
             verdict = "pass" if hits >= gate["need"] else "fail"
         results.append({
-            "axis": axis,
+            "axis": gate.get("label") or axis,
             "note": gate["note"],
+            "need_frac": gate.get("need_frac"),
+            "min_measured": min_measured,
             "cohort_n": len(pool),
             "answers_expected": gate["expect_n"],
             "answers_measured": len(scored),
@@ -164,7 +266,7 @@ def run(snapshot: Path) -> dict[str, Any]:
             results[-1]["verdict"] = "unmeasured"
             verdict = "unmeasured"
         flag = " ⚠양자화" if quantized else ""
-        print(f"  {verdict.upper():10s} {axis:26s} "
+        print(f"  {verdict.upper():10s} {(gate.get('label') or axis)[:32]:32s} "
               f"상위20% {hits}/{len(scored)} (기준 {gate['need']}) · 코호트 {len(pool)}곡 "
               f"· 고유값 {distinct}{flag}",
               file=sys.stderr)
@@ -174,6 +276,7 @@ def run(snapshot: Path) -> dict[str, Any]:
         "top_pct": TOP_PCT,
         "snapshot": str(snapshot),
         "cohort_records": len(cohort),
+        "snare_floor_derivation": _floor_derivation(recs, min_contrast),
         "results": results,
     }
 
@@ -182,9 +285,17 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="stem_gate", description="스템 축 채택 게이트 (TESTS §7.2.2)")
     ap.add_argument("--snapshot", required=True, help="코호트+정답지를 함께 잰 sonic 스냅샷")
     ap.add_argument("-o", "--out", help="판정 JSON 경로")
+    ap.add_argument(
+        "--snare-min-contrast", type=float, default=None,
+        help="스네어 축 유효성 바닥(RULES §3.8.4.3). 기본은 모듈 기본값 — 저장된 "
+             "프로파일에서 오디오 없이 재게이트한다",
+    )
     args = ap.parse_args(argv)
 
-    payload = run(Path(args.snapshot))
+    floor = args.snare_min_contrast
+    if floor is None:
+        floor = float(_load_stems().SNARE_MIN_CONTRAST_DEFAULT)
+    payload = run(Path(args.snapshot), min_contrast=floor)
     text = json.dumps(payload, ensure_ascii=False, indent=2)
     if args.out:
         Path(args.out).write_text(text + "\n", encoding="utf-8")

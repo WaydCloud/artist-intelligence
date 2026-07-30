@@ -1,0 +1,969 @@
+{
+  "note": "스템·격자 축 채택 게이트 코호트 v2 (D-038) — 당일 KR 차트 100곡 + 정답지(저지클럽 20곡 확대안·드릴·하이퍼팝). 격자 32칸·HOP 128·하이햇 축 포함.",
+  "tracks": [
+    {
+      "rank": 1,
+      "artist": "제니",
+      "title": "Less than a Lover",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 2,
+      "artist": "코르티스",
+      "title": "REDRED",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 3,
+      "artist": "Hearts2Hearts",
+      "title": "Lemon Tang",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 4,
+      "artist": "aespa",
+      "title": "LEMONADE",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 5,
+      "artist": "리센느",
+      "title": "LOVE ATTACK",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 6,
+      "artist": "리센느",
+      "title": "Pretty Girl",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 7,
+      "artist": "아일릿",
+      "title": "It's Me",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 8,
+      "artist": "리센느",
+      "title": "Deja Vu",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 9,
+      "artist": "에이티즈",
+      "title": "BAD",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 10,
+      "artist": "Hearts2Hearts",
+      "title": "RUDE!",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 11,
+      "artist": "코르티스",
+      "title": "ACAI",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 12,
+      "artist": "키키",
+      "title": "404 (New Era)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 13,
+      "artist": "한로로",
+      "title": "0+0",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 14,
+      "artist": "태연",
+      "title": "만찬가",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 15,
+      "artist": "한로로",
+      "title": "사랑하게 될 거야",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 16,
+      "artist": "NMIXX",
+      "title": "Heavy Serenade",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 17,
+      "artist": "볼빨간사춘기",
+      "title": "여름아 부탁해",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 18,
+      "artist": "뉴진스",
+      "title": "How Sweet",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 19,
+      "artist": "코르티스",
+      "title": "YOUNGCREATORCREW",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 20,
+      "artist": "아이오아이",
+      "title": "갑자기",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 21,
+      "artist": "나우아임영 & Royal 44",
+      "title": "KISS KISS KISS (Prod. by Hukky Shibaseki) [feat. SUNWOO]",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 22,
+      "artist": "Ariana Grande",
+      "title": "hate that i made you love me",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 23,
+      "artist": "리센느",
+      "title": "Pinball",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 24,
+      "artist": "리센느",
+      "title": "Runaway",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 25,
+      "artist": "뉴진스",
+      "title": "Attention",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 26,
+      "artist": "빈첸",
+      "title": "Flying High With U",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 27,
+      "artist": "한로로",
+      "title": "입춘",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 28,
+      "artist": "뉴진스",
+      "title": "Hype Boy",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 29,
+      "artist": "Justin Bieber",
+      "title": "Beauty and a Beat (feat. Nicki Minaj)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 30,
+      "artist": "검정치마",
+      "title": "한시 오분 (1:05)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 31,
+      "artist": "헤이즈",
+      "title": "And July (feat. DEAN & dj friz)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 32,
+      "artist": "양홍원",
+      "title": "Rose (feat. Skinny Brown & Homeboy)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 33,
+      "artist": "아일릿",
+      "title": "Magnetic",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 34,
+      "artist": "aespa",
+      "title": "Whiplash",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 35,
+      "artist": "코르티스",
+      "title": "FaSHioN",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 36,
+      "artist": "Hearts2Hearts",
+      "title": "FOCUS",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 37,
+      "artist": "OFFICIAL HIGE DANDISM",
+      "title": "Pretender",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 38,
+      "artist": "로제",
+      "title": "toxic till the end",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 39,
+      "artist": "Hearts2Hearts",
+      "title": "STYLE",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 40,
+      "artist": "검정치마",
+      "title": "Ling Ling",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 41,
+      "artist": "희대의, 씨잼 & 블랙넛",
+      "title": "잡아가세요",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 42,
+      "artist": "Post Malone & Swae Lee",
+      "title": "Sunflower (Spider-Man: Into the Spider-Verse)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 43,
+      "artist": "리도어",
+      "title": "영원은 그렇듯",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 44,
+      "artist": "fromis_9",
+      "title": "Vitamin ME",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 45,
+      "artist": "RIIZE",
+      "title": "Do your dance",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 46,
+      "artist": "aespa",
+      "title": "KISS N TELL",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 47,
+      "artist": "MEOVV",
+      "title": "DDI RO RI",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 48,
+      "artist": "검정치마",
+      "title": "EVERYTHING",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 49,
+      "artist": "코르티스",
+      "title": "GO!",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 50,
+      "artist": "에픽하이",
+      "title": "Love Love Love (feat. 융진)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 51,
+      "artist": "뉴진스",
+      "title": "Bubble Gum",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 52,
+      "artist": "검정치마",
+      "title": "Antifreeze",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 53,
+      "artist": "아일릿",
+      "title": "빌려온 고양이 (Do the Dance)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 54,
+      "artist": "코르티스",
+      "title": "TNT",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 55,
+      "artist": "백예린",
+      "title": "Antifreeze",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 56,
+      "artist": "aespa",
+      "title": "WDA (Whole Different Animal) [feat. G-DRAGON]",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 57,
+      "artist": "최유리",
+      "title": "생각을 멈추다 보면",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 58,
+      "artist": "WOODZ",
+      "title": "Drowning",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 59,
+      "artist": "코르티스",
+      "title": "JoyRide",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 60,
+      "artist": "Hearts2Hearts",
+      "title": "The Chase",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 61,
+      "artist": "넬",
+      "title": "기억을 걷는 시간",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 62,
+      "artist": "식케이 & 릴 모쉬핏",
+      "title": "LOV3 (feat. Bryan Chase & Okasian)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 63,
+      "artist": "뉴진스",
+      "title": "OMG",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 64,
+      "artist": "tuki.",
+      "title": "晩餐歌 - Bansanka",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 65,
+      "artist": "악뮤",
+      "title": "소문의 낙원",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 66,
+      "artist": "aespa",
+      "title": "Next Level",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 67,
+      "artist": "뉴진스",
+      "title": "Supernatural",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 68,
+      "artist": "희대의, 씨잼 & 블랙넛",
+      "title": "브레인워시",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 69,
+      "artist": "데이먼스 이어",
+      "title": "yours",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 70,
+      "artist": "M.Sasuke",
+      "title": "GG EZ",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 71,
+      "artist": "코르티스",
+      "title": "What You Want",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 72,
+      "artist": "한요한",
+      "title": "It's You (feat. NO:EL)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 73,
+      "artist": "릴러말즈",
+      "title": "Trip (feat. Hannah)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 74,
+      "artist": "보이넥스트도어",
+      "title": "VIRAL",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 75,
+      "artist": "하모",
+      "title": "아크라포빅",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 76,
+      "artist": "제니 & Dominic Fike",
+      "title": "Love Hangover",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 77,
+      "artist": "뉴진스",
+      "title": "New Jeans",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 78,
+      "artist": "카더가든",
+      "title": "그대 작은 나의 세상이 되어",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 79,
+      "artist": "wave to earth",
+      "title": "사랑으로",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 80,
+      "artist": "권오선",
+      "title": "U",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 81,
+      "artist": "Justin Bieber",
+      "title": "DAISIES",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 82,
+      "artist": "양홍원",
+      "title": "사계",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 83,
+      "artist": "최예나",
+      "title": "캐치 캐치",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 84,
+      "artist": "NCT WISH",
+      "title": "BOY MEETS GIRL",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 85,
+      "artist": "aespa",
+      "title": "Armageddon",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 86,
+      "artist": "뉴진스",
+      "title": "Cookie",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 87,
+      "artist": "아일릿",
+      "title": "Lucky Girl Syndrome",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 88,
+      "artist": "우원재",
+      "title": "시차 (feat. 로꼬 & 그레이)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 89,
+      "artist": "김하온",
+      "title": "Skrr (feat. 지젤)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 90,
+      "artist": "르세라핌",
+      "title": "BOOMPALA",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 91,
+      "artist": "임현정",
+      "title": "사랑은 봄비처럼...이별은 겨울비처럼",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 92,
+      "artist": "악뮤",
+      "title": "어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 93,
+      "artist": "Nerd Connection",
+      "title": "그대만 있다면 (영화 '여름날 우리')",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 94,
+      "artist": "한로로",
+      "title": "너와 나",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 95,
+      "artist": "잔나비",
+      "title": "주저하는 연인들을 위해",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 96,
+      "artist": "뉴진스",
+      "title": "Hurt",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 97,
+      "artist": "르세라핌, 아일릿 & KATSEYE",
+      "title": "ICONIC BY MISTAKE",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 98,
+      "artist": "Nerd Connection",
+      "title": "좋은 밤 좋은 꿈",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 99,
+      "artist": "Oasis",
+      "title": "Don't Look Back in Anger (Remastered)",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "rank": 100,
+      "artist": "Young K",
+      "title": "Shut The Door",
+      "market": "KR",
+      "platform": "apple"
+    },
+    {
+      "artist": "Cookiee Kawaii",
+      "title": "Vibe (If I Back It Up)",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Lil Uzi Vert",
+      "title": "Just Wanna Rock",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Drake",
+      "title": "Sticky",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "PinkPantheress",
+      "title": "Boy's a liar Pt. 2",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "UNIIQU3",
+      "title": "Microdosing",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "Ditto",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "OMG",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "NewJeans",
+      "title": "ETA",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "SEVENTEEN",
+      "title": "Super 손오공",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "LE SSERAFIM",
+      "title": "Eve, Psyche & the Bluebeard’s wife",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "BABYMONSTER",
+      "title": "BATTER UP",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "XUM",
+      "title": "DDALALA",
+      "market": "jersey-club",
+      "platform": "kr"
+    },
+    {
+      "artist": "100 gecs",
+      "title": "money machine",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "SOPHIE",
+      "title": "Immaterial",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "glaive",
+      "title": "astrid",
+      "market": "hyperpop",
+      "platform": "origin"
+    },
+    {
+      "artist": "aespa",
+      "title": "Savage",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Black Mamba",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "aespa",
+      "title": "Supernova",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "NMIXX",
+      "title": "O.O",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "tripleS",
+      "title": "Rising",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "TOMORROW X TOGETHER",
+      "title": "Frost",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "YENA",
+      "title": "Catch Catch",
+      "market": "hyperpop",
+      "platform": "kr"
+    },
+    {
+      "artist": "Pop Smoke",
+      "title": "Dior",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "Central Cee",
+      "title": "Doja",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "Headie One",
+      "title": "Ain't It Different",
+      "market": "drill",
+      "platform": "origin"
+    },
+    {
+      "artist": "창모",
+      "title": "Swoosh Flow",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "ENHYPEN",
+      "title": "Future Perfect (Pass the MIC)",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "STAYC",
+      "title": "I WANT U BABY",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "Stray Kids",
+      "title": "3RACHA",
+      "market": "drill",
+      "platform": "kr"
+    },
+    {
+      "artist": "DJ Tameil",
+      "title": "Ay Bay Bay",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Tim Dolla",
+      "title": "Swing Dat Shit",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Tim Dolla",
+      "title": "Falsetto",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Frosty",
+      "title": "Ride Dat Wave",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Sliink",
+      "title": "Official Number One (Patty Cake)",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Jayhood",
+      "title": "Heartbroken",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Jayhood",
+      "title": "Rock My Hips",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Lil Man",
+      "title": "Sexy Walk",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "DJ Lil Man",
+      "title": "I Like The Way She Move",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Ms. Porsh",
+      "title": "Can't Bounce Like Me",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Pure",
+      "title": "Let Ya Body Talk",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Chad B",
+      "title": "Hit It",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Bandmanrill",
+      "title": "Jiggy In Jersey",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "ZEDDY WILL",
+      "title": "Freak You",
+      "market": "jersey-club",
+      "platform": "origin"
+    },
+    {
+      "artist": "Coi Leray",
+      "title": "Players (DJ Smallz 732 Remix)",
+      "market": "jersey-club",
+      "platform": "origin"
+    }
+  ]
+}

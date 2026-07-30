@@ -145,10 +145,43 @@ def _extract_date(html: str) -> str | None:
     return f"{m.group(1)}-{m.group(2)}-{m.group(3)}" if m else None
 
 
-def _download_snapshot(url: str) -> tuple[str | None, str]:
-    req = urllib.request.Request(url, headers={"User-Agent": _UA})
-    with urllib.request.urlopen(req, timeout=30) as resp:  # trusted static host
-        html = resp.read().decode("utf-8", "replace")
+def _fetch_bytes(url: str, label: str, *, attempts: int, backoff: float, timeout: int = 30) -> bytes:
+    """HTTP GET을 **재시도와 함께**. 모든 수집 레그가 공유하는 하나의 재시도 지점이다.
+
+    *왜 있는가(2026-07-30 실측)*: 데일리가 Apple 49개 스토어프론트를 연달아 때리면
+    **9개가 실패**했다(kr 포함 — sonic 코호트의 소스다). 같은 요청을 몇 초 뒤에 다시
+    보내면 9개 전부 성공한다. 즉 소스가 죽은 것이 아니라 **연속 요청에 걸린 것**이고,
+    단발 요청은 그것을 "수집 실패"로 기록해 그날 그 시장을 통째로 비운다.
+    **차트는 소급 수집이 안 되므로 하루가 비면 영구히 없어진다.**
+
+    Apple만 고친 것은 운이었다 — Kworb 레그(spotify·youtube·shazam)도 같은 단발
+    요청이었고, 같은 위험을 지고 있었다. 그래서 재시도를 여기 한 곳에 두고 공유한다.
+
+    재시도는 **저빈도 접근 규율과 충돌하지 않는다**: 실패한 요청만, 지수 백오프로,
+    상한을 두고 다시 보낸다. 실패 사유는 매 시도마다 stderr에 남긴다 — 호출자(데일리)가
+    로그에 옮겨 적을 수 있어야 원인을 나중에 재현하지 않아도 된다.
+
+    실패 종류로 재시도를 가리지 않는다(4xx도 재시도한다): 오늘 복구된 9개의 실제 상태
+    코드를 우리는 모른다. **측정된 것보다 영리하게 굴지 않는다** — 상한이 있으니 비용은
+    유계다.
+    """
+    last: Exception | None = None
+    for i in range(max(1, attempts)):
+        if i:
+            time.sleep(backoff * (2 ** (i - 1)))
+        try:
+            req = urllib.request.Request(url, headers={"User-Agent": _UA})
+            with urllib.request.urlopen(req, timeout=timeout) as resp:  # trusted/official hosts only
+                return cast("bytes", resp.read())
+        except Exception as exc:  # noqa: BLE001 — 마지막 시도까지 실패하면 아래에서 올린다
+            last = exc
+            print(f"  ! {label} attempt {i + 1}/{attempts}: {type(exc).__name__}", file=sys.stderr)
+    raise RuntimeError(f"unavailable for {label} after {attempts} attempts: {last}")
+
+
+def _download_snapshot(url: str, *, attempts: int = 3, backoff: float = 2.0) -> tuple[str | None, str]:
+    raw = _fetch_bytes(url, url.rsplit("/", 1)[-1], attempts=attempts, backoff=backoff)
+    html = raw.decode("utf-8", "replace")
     return _extract_first_table(html), (_extract_date(html) or "unknown")
 
 
@@ -189,7 +222,12 @@ def _snapshot_doc(
 
 
 def cmd_fetch(args: argparse.Namespace) -> int:
-    table, date = _download_snapshot(args.url)
+    try:
+        table, date = _download_snapshot(args.url, attempts=args.attempts, backoff=args.backoff)
+    except RuntimeError as exc:
+        # traceback이 아니라 한 줄로 죽는다 — 호출자(데일리)가 로그에 옮겨 적을 수 있어야 한다.
+        print(str(exc), file=sys.stderr)
+        return 1
     if table is None:
         print("no <table> found at URL", file=sys.stderr)
         return 1
@@ -208,7 +246,11 @@ def cmd_fetch(args: argparse.Namespace) -> int:
 
 def cmd_collect(args: argparse.Namespace) -> int:
     """Fetch a chart and append it to a dated snapshot store (v3.2 accumulation)."""
-    table, date = _download_snapshot(args.url)
+    try:
+        table, date = _download_snapshot(args.url, attempts=args.attempts, backoff=args.backoff)
+    except RuntimeError as exc:
+        print(str(exc), file=sys.stderr)
+        return 1
     if table is None:
         print("no <table> found at URL", file=sys.stderr)
         return 1
@@ -246,30 +288,9 @@ def _rss_date(updated: str) -> str:
 
 
 def _fetch_apple_feed(url: str, sf: str, *, attempts: int, backoff: float) -> dict[str, Any]:
-    """Apple RSS를 **재시도와 함께** 가져온다.
-
-    *왜 필요한가(2026-07-30 실측)*: 데일리가 49개 스토어프론트를 연달아 때리면
-    **9개가 실패**했다(kr 포함 — sonic 코호트의 소스다). 같은 요청을 몇 초 뒤에
-    다시 보내면 9개 전부 성공한다. 즉 소스가 죽은 것이 아니라 **연속 요청에
-    걸린 것**이고, 단발 요청은 그것을 "수집 실패"로 기록해 그날 데이터를 통째로
-    비운다. 스토어프론트 하나가 비면 그 시장의 하루가 영구히 없어진다 —
-    차트는 소급 수집이 안 되기 때문이다.
-
-    재시도는 **저빈도 접근 규율과 충돌하지 않는다**: 실패한 요청만, 지수 백오프로,
-    상한을 두고 다시 보낸다.
-    """
-    last: Exception | None = None
-    for i in range(max(1, attempts)):
-        if i:
-            time.sleep(backoff * (2 ** (i - 1)))
-        try:
-            req = urllib.request.Request(url, headers={"User-Agent": _UA})
-            with urllib.request.urlopen(req, timeout=30) as resp:  # official Apple feed
-                return cast("dict[str, Any]", json.loads(resp.read().decode("utf-8"))["feed"])
-        except Exception as exc:  # noqa: BLE001 — 마지막 시도까지 실패하면 아래에서 올린다
-            last = exc
-            print(f"  ! {sf} attempt {i + 1}/{attempts}: {type(exc).__name__}", file=sys.stderr)
-    raise RuntimeError(f"apple feed unavailable for {sf} after {attempts} attempts: {last}")
+    """Apple RSS → feed 객체. 재시도 규율은 `_fetch_bytes`(공유 지점)에 있다."""
+    raw = _fetch_bytes(url, f"apple/{sf}", attempts=attempts, backoff=backoff)
+    return cast("dict[str, Any]", json.loads(raw.decode("utf-8"))["feed"])
 
 
 def cmd_collect_apple(args: argparse.Namespace) -> int:
@@ -567,6 +588,10 @@ def main(argv: list[str] | None = None) -> int:
     p_fetch.add_argument("-o", "--output", required=True, help="output .html path")
     p_fetch.add_argument("--chart-name", default=None, help="chart display name")
     p_fetch.add_argument("--country", default=None, help="market code for v2 cross-country (e.g. KR)")
+    p_fetch.add_argument("--attempts", type=int, default=3, help="실패 시 재시도 횟수 (기본 3)")
+    p_fetch.add_argument(
+        "--backoff", type=float, default=2.0, help="재시도 대기 초 (지수 백오프의 기준값, 기본 2.0)"
+    )
     p_fetch.set_defaults(func=cmd_fetch)
 
     p_collect = sub.add_parser("collect", help="append a dated snapshot to a store (v3.2 축적)")
@@ -578,6 +603,10 @@ def main(argv: list[str] | None = None) -> int:
         "--platform",
         default="spotify",
         help="차트 플랫폼 차원 (spotify|youtube|…, D-016 멀티플랫폼 온셋)",
+    )
+    p_collect.add_argument("--attempts", type=int, default=3, help="실패 시 재시도 횟수 (기본 3)")
+    p_collect.add_argument(
+        "--backoff", type=float, default=2.0, help="재시도 대기 초 (지수 백오프의 기준값, 기본 2.0)"
     )
     p_collect.set_defaults(func=cmd_collect)
 

@@ -4,49 +4,80 @@
   "top_pct": 80.0,
   "snapshot": "data\\research\\genre-impulse\\stem_gate_snapshot.json",
   "cohort_records": 100,
+  "snare_floor_derivation": {
+    "floor": 1.33,
+    "rule": "유효성 바닥 = 그 축 자신의 분포 p10 (RULES §3.8.4.3). 다른 대역에서 빌려 오지 않는다",
+    "method": "numpy.percentile (선형보간)",
+    "distributions": {
+      "snare_mid_stem": {
+        "axis": "snare_bar_contrast",
+        "n": 123,
+        "min": 1.0569,
+        "p05": 1.2667,
+        "p10": 1.325,
+        "p25": 1.4337,
+        "median": 1.6248,
+        "p90": 2.1121,
+        "max": 4.2244,
+        "floor_percentile": 12.2
+      },
+      "kick_low_mix": {
+        "axis": "bar_profile_contrast",
+        "n": 123,
+        "min": 1.222,
+        "p05": 1.2956,
+        "p10": 1.3552,
+        "p25": 1.4585,
+        "median": 1.635,
+        "p90": 2.1926,
+        "max": 3.003,
+        "floor_percentile": 7.3
+      }
+    }
+  },
   "results": [
     {
       "axis": "halftime_snare_ratio",
       "note": "저지클럽 하프타임 스네어 (RULES §3.8.2)",
-      "cohort_n": 44,
+      "cohort_n": 87,
       "answers_expected": 5,
-      "answers_measured": 2,
-      "hits_top20": 0,
+      "answers_measured": 5,
+      "hits_top20": 2,
       "need": 3,
-      "verdict": "unmeasured",
+      "verdict": "fail",
       "tracks": [
         {
           "track": "Drake - Sticky",
-          "value": 0.688715,
-          "percentile": 77.3,
+          "value": 0.6887163112179866,
+          "percentile": 88.5,
           "unresolved": null
         },
         {
           "track": "PinkPantheress - Boy's a liar Pt. 2",
-          "value": 0.568016,
-          "percentile": 77.3,
+          "value": 0.5680175671213923,
+          "percentile": 87.4,
           "unresolved": null
         },
         {
           "track": "Cookiee Kawaii - Vibe (If I Back It Up)",
-          "value": null,
-          "percentile": null,
+          "value": 0.505724874867863,
+          "percentile": 79.3,
           "unresolved": null
         },
         {
           "track": "Lil Uzi Vert - Just Wanna Rock",
-          "value": null,
-          "percentile": null,
+          "value": 0.47682715269763154,
+          "percentile": 66.7,
           "unresolved": null
         },
         {
           "track": "UNIIQU3 - Microdosing",
-          "value": null,
-          "percentile": null,
+          "value": 0.42995811342212537,
+          "percentile": 54.0,
           "unresolved": null
         }
       ],
-      "distinct_values": 44,
+      "distinct_values": 87,
       "quantized": false
     },
     {

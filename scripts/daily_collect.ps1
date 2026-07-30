@@ -167,14 +167,19 @@ if (Test-Path $chartRoot) {
 }
 
 # 1) free chart collect -- 3 platform rails (D-016): Kworb Spotify + Apple official RSS + Kworb YouTube
+# 2026-07-30 재시도 감사: 재시도는 collect/collect-apple 안(--attempts, 지수 백오프)에 있고,
+# 여기서는 **소진됐을 때의 원인을 로그에 남긴다**. 이전엔 2>$null이 사유를 삼켜 "FAILED (skipped)"만
+# 남았고, 원인을 찾으려면 별도 재현이 필요했다. $? 대신 $LASTEXITCODE를 보는 이유는 stderr를
+# 리다이렉트하면 PS 5.1이 종료코드 0에도 $?를 false로 만들기 때문이다(sonic 레그 주석과 같은 함정).
+$errFile = Join-Path $env:TEMP "ai_collect_err.txt"
 $env:PYTHONPATH = "modules/chart-history/src"
 $targetsM = @(Get-Targets "spotify" $markets)
 if ($targetsM.Count -gt 0) {
   $okM = 0; $failedM = @()
   foreach ($cc in $targetsM) {
     $ccU = $cc.ToUpper()
-    python -m chart_history collect --url "https://kworb.net/spotify/country/${cc}_daily.html" --store "data/live/chart/spotify/$cc" --country $ccU --platform spotify --chart-name "Spotify $ccU Daily" 2>$null | Out-Null
-    if ($?) { $okM++ } else { $failedM += $cc; Log "!! chart spotify/$cc collect FAILED (skipped)" }
+    python -m chart_history collect --url "https://kworb.net/spotify/country/${cc}_daily.html" --store "data/live/chart/spotify/$cc" --country $ccU --platform spotify --chart-name "Spotify $ccU Daily" 2>$errFile | Out-Null
+    if ($LASTEXITCODE -eq 0) { $okM++ } else { $failedM += $cc; Log "!! chart spotify/$cc collect FAILED (skipped) -- $(Get-Content $errFile -Tail 1 -ErrorAction SilentlyContinue)" }
   }
   Set-LegResult "spotify" $failedM
   Log "spotify charts: $okM ok, $($failedM.Count) failed of $($targetsM.Count) markets"
@@ -187,7 +192,6 @@ if ($targetsA.Count -gt 0) {
   # 몇 초 뒤 재시도하면 전부 성공한다. 재시도는 collect-apple 안으로 들어갔고(--attempts),
   # 여기서는 **소진됐을 때의 원인을 로그에 남긴다** — 이전엔 2>$null이 사유를 삼켜
   # "FAILED (skipped)"만 남았고, 그래서 원인을 찾는 데 별도 재현이 필요했다.
-  $errFile = Join-Path $env:TEMP "ai_apple_err.txt"
   foreach ($cc in $targetsA) {
     python -m chart_history collect-apple --storefront $cc --store "data/live/chart/apple/$cc" 2>$errFile | Out-Null
     if ($LASTEXITCODE -eq 0) { $okA++ }
@@ -197,7 +201,6 @@ if ($targetsA.Count -gt 0) {
       Log "!! chart apple/$cc collect FAILED (skipped) -- $why"
     }
   }
-  Remove-Item $errFile -ErrorAction SilentlyContinue
   Set-LegResult "apple" $failedA
   Log "apple charts: $okA ok, $($failedA.Count) failed of $($targetsA.Count) storefronts (official RSS)"
 }
@@ -207,8 +210,8 @@ if ($targetsY.Count -gt 0) {
   $okY = 0; $failedY = @()
   foreach ($cc in $targetsY) {
     $ccU = $cc.ToUpper()
-    python -m chart_history collect --url "https://kworb.net/youtube/insights/${cc}_daily.html" --store "data/live/chart/youtube/$cc" --country $ccU --platform youtube --chart-name "YouTube $ccU Daily" 2>$null | Out-Null
-    if ($?) { $okY++ } else { $failedY += $cc; Log "!! chart youtube/$cc collect FAILED (skipped)" }
+    python -m chart_history collect --url "https://kworb.net/youtube/insights/${cc}_daily.html" --store "data/live/chart/youtube/$cc" --country $ccU --platform youtube --chart-name "YouTube $ccU Daily" 2>$errFile | Out-Null
+    if ($LASTEXITCODE -eq 0) { $okY++ } else { $failedY += $cc; Log "!! chart youtube/$cc collect FAILED (skipped) -- $(Get-Content $errFile -Tail 1 -ErrorAction SilentlyContinue)" }
   }
   Set-LegResult "youtube" $failedY
   Log "youtube charts: $okY ok, $($failedY.Count) failed of $($targetsY.Count) markets"
@@ -222,8 +225,8 @@ if ($targetsS.Count -gt 0) {
   $okS = 0; $failedS = @()
   foreach ($cc in $targetsS) {
     $ccU = $cc.ToUpper()
-    python -m chart_history collect --url "https://kworb.net/charts/shazam/${cc}.html" --store "data/live/chart/shazam/$cc" --country $ccU --platform shazam --chart-name "Shazam $ccU Daily" 2>$null | Out-Null
-    if ($?) { $okS++ } else { $failedS += $cc; Log "!! chart shazam/$cc collect FAILED (skipped)" }
+    python -m chart_history collect --url "https://kworb.net/charts/shazam/${cc}.html" --store "data/live/chart/shazam/$cc" --country $ccU --platform shazam --chart-name "Shazam $ccU Daily" 2>$errFile | Out-Null
+    if ($LASTEXITCODE -eq 0) { $okS++ } else { $failedS += $cc; Log "!! chart shazam/$cc collect FAILED (skipped) -- $(Get-Content $errFile -Tail 1 -ErrorAction SilentlyContinue)" }
   }
   Set-LegResult "shazam" $failedS
   Log "shazam charts: $okS ok, $($failedS.Count) failed of $($targetsS.Count) markets (discovery lens)"
@@ -387,7 +390,36 @@ if ($?) { Log "dashboard reports.json refreshed" } else { Log "!! dashboard coll
 # 5) summary line: coverage + social-led / social-only counts to watch over time
 python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$null | ForEach-Object { Log $_ }
 
-# mark the day complete: later attempts today become no-ops, and the gap alarm anchors here
-Save-State $true
+# mark the day complete -- but NOT while a collect leg still has targets left to retry.
+#
+# 2026-07-30 감사에서 나온 결함: 여기서 Save-State $true 를 **무조건** 호출하고 있었다.
+# 그래서 Set-LegResult 가 legs=partial 로 남긴 pending 타깃이 실제로는 한 번도 재시도되지
+# 않았다 -- 2시간 뒤 다음 시도가 done=true 를 보고 "already completed, no-op" 으로 즉시
+# 나갔기 때문이다. 재개 기계장치(D-018)는 스크립트가 **중간에 죽은** 경우에만 동작하고
+# **부분 실패**에는 동작하지 않았다. 오늘 Apple 9개가 살아난 것은 재시도가 파이썬 안으로
+# 들어갔기 때문이고, 여기 밖에서는 여전히 새는 구조였다.
+#
+# 상한을 두는 이유: 진짜로 사라진 시장(코드 폐지 등)을 무한히 재시도하면 그 날짜는
+# 영원히 done 이 안 되고 GAP 경보가 매일 울린다. 4회 시도(=8시간) 뒤에는 결손을 결손으로
+# 확정하고 무엇이 비었는지 로그에 남긴다.
+# **무료 레그만** 하루를 열어둔다. 유료 소셜 태그 실패로 재시도를 걸면 실패한 태그마다
+# 하루 최대 4번까지 액터를 다시 돌리게 되고(일 상한 $dailyBudget 안이지만) 그건 돈에 관한
+# 결정이라 도메인 소유자 승인이 필요하다. 소셜 실패는 지금처럼 로그에만 남는다.
+$freeLegs = @("spotify", "apple", "youtube", "shazam")
+$stillPending = @($freeLegs | Where-Object { $pending.ContainsKey($_) -and @($pending[$_]).Count -gt 0 })
+$maxAttempts = 4
+if ($stillPending.Count -gt 0) {
+  $detail = (($stillPending | ForEach-Object { "$_=$(@($pending[$_]) -join '/')" }) -join ", ")
+  if ($attempt -lt $maxAttempts) {
+    Save-State $false
+    Log "!! day left INCOMPLETE on purpose (attempt $attempt/$maxAttempts) -- pending: $detail. The next scheduled attempt retries only these."
+  } else {
+    Save-State $true
+    Log "!! day marked complete WITH GAPS after $attempt attempts -- permanently missing for ${today}: $detail"
+  }
+} else {
+  Save-State $true
+}
+Remove-Item $errFile -ErrorAction SilentlyContinue
 if ($awake) { [Ai.Power]::SetThreadExecutionState([uint32]2147483648) | Out-Null }   # ES_CONTINUOUS -- release
 Log "=== daily_collect v2 done ($today) | attempt=$attempt ==="

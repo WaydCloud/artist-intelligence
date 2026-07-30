@@ -11,6 +11,8 @@ from __future__ import annotations
 import json
 import os
 import re
+import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -26,16 +28,43 @@ def _key() -> str:
     return key
 
 
+_ATTEMPTS = 3
+_BACKOFF = 2.0
+
+
 def _get(endpoint: str, params: dict[str, object], timeout: int = 30) -> dict[str, object]:
+    """API GET을 **일시적 실패에만** 재시도한다.
+
+    *왜(2026-07-30 감사)*: Apple 레그가 연속 요청 9건에서 일시 실패한 것이 확인돼
+    재시도가 들어갔는데, 이 레그도 같은 **단발 요청**이었다. yt 스냅샷이 하루 비면
+    velocity 계열에 구멍이 남고 그 하루는 되돌릴 수 없다.
+
+    **재시도 대상을 가린다**: 4xx는 다시 보내도 같은 답이 오고(키 오류·잘못된 요청),
+    특히 403 `quotaExceeded`는 재시도가 쿼터를 더 태운다. 그래서 5xx와 네트워크
+    오류(타임아웃·연결 끊김)만 다시 보낸다. 차트 레그(`chart_history._fetch_bytes`)가
+    4xx까지 재시도하는 것과 다른 이유는 그쪽은 **실패 코드가 미측정**이고 여기는
+    쿼터라는 되돌릴 수 없는 비용이 걸려 있다는 점이다.
+    """
     query = urllib.parse.urlencode({**params, "key": _key()})
     req = urllib.request.Request(f"{_API}/{endpoint}?{query}", headers={"User-Agent": _UA})
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as resp:  # official API host
-            data = json.load(resp)
-    except urllib.error.HTTPError as exc:
-        detail = exc.read().decode("utf-8", "replace")[:300]
-        raise SystemExit(f"YouTube API {exc.code} on {endpoint}: {detail}") from exc
-    return data if isinstance(data, dict) else {}
+    for i in range(_ATTEMPTS):
+        if i:
+            time.sleep(_BACKOFF * (2 ** (i - 1)))
+        try:
+            with urllib.request.urlopen(req, timeout=timeout) as resp:  # official API host
+                data = json.load(resp)
+        except urllib.error.HTTPError as exc:
+            detail = exc.read().decode("utf-8", "replace")[:300]
+            if exc.code < 500 or i == _ATTEMPTS - 1:
+                raise SystemExit(f"YouTube API {exc.code} on {endpoint}: {detail}") from exc
+            print(f"  ! {endpoint} attempt {i + 1}/{_ATTEMPTS}: HTTP {exc.code}", file=sys.stderr)
+        except (urllib.error.URLError, TimeoutError, OSError) as exc:
+            if i == _ATTEMPTS - 1:
+                raise SystemExit(f"YouTube API unreachable on {endpoint}: {exc}") from exc
+            print(f"  ! {endpoint} attempt {i + 1}/{_ATTEMPTS}: {type(exc).__name__}", file=sys.stderr)
+        else:
+            return data if isinstance(data, dict) else {}
+    return {}  # 도달 불가 (마지막 시도는 반드시 반환하거나 죽는다) — 타입 체커를 위한 것
 
 
 def _items(data: dict[str, object]) -> list[dict[str, object]]:

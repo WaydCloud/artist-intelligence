@@ -11,9 +11,12 @@ from datetime import UTC, date, datetime
 from statistics import median
 from typing import Any
 
+import numpy as np
+
 from sonic_profile.derived import derive_all
 from sonic_profile.rhythm import (
     BINS,
+    LEGACY_BINS,
     MIN_MATCH_DEFAULT,
     NO_MATCH,
     TEMPLATES,
@@ -21,11 +24,18 @@ from sonic_profile.rhythm import (
     RhythmUnavailable,
     bar_profile_contrast,
     classify_rhythm,
+    fold_profile,
+    render_template,
     syncopation_ratio,
+    unrenderable_templates,
 )
 from sonic_profile.tagging import TOP_K_INSTRUMENT
 
 MODULE_ID = "sonic-profile"
+
+# 리포트가 받아들이는 마디 격자 — 옛 16칸과 새 32칸(D-038). 한 값으로 묶어 두면
+# 격자를 바꾼 날 다른 쪽 레코드의 리듬 파생이 조용히 멈춘다.
+_GRIDS = (LEGACY_BINS, BINS)
 
 # 악기 검출 임계 — **A&R 소유**(RULES §3.1.6). 인자 기본값에 숨겨 두지 않는다.
 MIN_PROB_DEFAULT = 0.3
@@ -309,7 +319,9 @@ def backfill_derived(
         # 리듬 파생은 마디 프로파일이 있을 때만. 없다고 **다른 파생까지 막지 않는다** —
         # 리듬을 못 얻은 곡도 악기·스타일 라벨은 갖고 있다.
         prof = f.get("kick_bar_profile")
-        if (isinstance(prof, list) and len(prof) == BINS
+        # 격자 두 종(옛 16칸·새 32칸)을 모두 받는다 — 두 지표는 칸 수에 무관한 정의다
+        # (D-038). `== BINS`로 묶어 두면 격자를 바꾼 날 옛 레코드의 파생이 조용히 멈춘다.
+        if (isinstance(prof, list) and len(prof) in _GRIDS
                 and all(isinstance(v, (int, float)) for v in prof)):
             try:
                 if not isinstance(f.get("syncopation_ratio"), (int, float)):
@@ -336,7 +348,7 @@ def _rhythm_rows(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
     seen: set[str] = set()
     for r in records:
         prof = (r.get("features") or {}).get("kick_bar_profile")
-        if not isinstance(prof, list) or len(prof) != BINS:
+        if not isinstance(prof, list) or len(prof) not in _GRIDS:
             continue
         if not all(isinstance(v, (int, float)) for v in prof):
             continue
@@ -352,6 +364,7 @@ def _rhythm_rows(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
                 "cohort": str(r.get("cohort") or ""),
                 # 유형과 같은 근거(저장된 프로파일)에서 **재계산**한다 — 옛 스냅샷에도
                 # 소급 적용된다(D-031). 오디오가 없어도 되는 것이 이 두 지표의 요점이다.
+                "bins": len(vec),
                 "syncopation": round(syncopation_ratio(vec), 4),
                 "contrast": round(bar_profile_contrast(vec), 3),
             }
@@ -371,14 +384,31 @@ def _rhythm_tunable(
     """
     if not rows:
         return None
+    # **격자가 섞이면 내려 맞춘다**(RULES §3.1.5.2) — 32칸은 16칸으로 정확히 접히지만
+    # 그 역은 없다. 올려 맞추면 없는 정보를 만드는 것이고, 안 맞추면 클라이언트가 길이가
+    # 다른 벡터에 같은 템플릿을 곱한다.
+    bins = min(int(r.get("bins") or len(r["profile"])) for r in rows)
+    folded: list[dict[str, Any]] = []
+    for r in rows:
+        vec = [round(float(v), 4) for v in fold_profile(r["profile"], bins)]
+        folded.append({**r, "profile": vec, "bins": bins,
+                       "syncopation": round(syncopation_ratio(vec), 4),
+                       "contrast": round(bar_profile_contrast(vec), 3)})
+    # 템플릿은 원장의 **분수 위치**를 이 격자에 렌더한 것이다. 렌더 불가한 템플릿은
+    # 빠지며(반올림 금지), 무엇이 빠졌는지는 insights가 병기한다.
+    rendered: dict[str, list[int]] = {}
+    for name, pos in TEMPLATES.items():
+        vec_t = render_template(pos, bins)
+        if vec_t is not None:
+            rendered[name] = [int(i) for i in np.flatnonzero(vec_t)]
     return {
         "type": "tunable",
         "title": "리듬 패턴 구성 · 마디 안 킥 배치가 가장 가까운 유형 (판정 아닌 순위 · 펼치면 곡 목록)",
         "data": {
             "view": "rhythm",
-            "bins": BINS,
-            "templates": {name: list(pos) for name, pos in TEMPLATES.items()},
-            "tracks": rows,
+            "bins": bins,
+            "templates": rendered,
+            "tracks": folded,
             "noMatchLabel": NO_MATCH,
             "knobs": [
                 {
@@ -683,6 +713,24 @@ def build_report(
     insights.append(
         "펄스 명료도 = 온셋 포락 자기상관의 주 피크. **danceability가 아니며** 춤 실력·인기·품질과 무관합니다(RULES §5)"
     )
+    # 마디 격자가 섞였다는 사실을 숨기지 않는다 — 32칸 레코드가 16칸으로 접혀 표시되면
+    # 32분·트리플렛 축은 이 화면에 없다(RULES §3.1.5.2). 각주로 미루면 안 읽힌다.
+    grids = sorted({int(r.get("bins") or 0) for r in rhythm_rows} - {0})
+    if grids:
+        shown = min(grids)
+        if len(grids) > 1:
+            insights.append(
+                f"⚠ 마디 격자가 섞여 있습니다({'·'.join(f'{g}칸' for g in grids)}) — "
+                f"비교 가능한 **{shown}칸으로 내려 맞춰** 표시했습니다(올려 맞추면 없는 정보를 "
+                f"만드는 것입니다). 32분·트리플렛 축은 이 화면에 없습니다"
+            )
+        missing = unrenderable_templates(shown)
+        if missing:
+            insights.append(
+                f"⚠ {shown}칸 격자에서 표현할 수 없는 템플릿은 순위에서 **빠졌습니다**: "
+                f"{', '.join(missing)} (반올림해 넣으면 정합도가 음악이 아니라 반올림 오차를 "
+                f"재게 됩니다)"
+            )
     ages = [a for r in resolved if (a := _release_age_days(r)) is not None]
     if ages:
         n_fresh = sum(1 for a in ages if a <= new_days)

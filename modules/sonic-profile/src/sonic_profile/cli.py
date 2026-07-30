@@ -39,6 +39,8 @@ from sonic_profile.stems import (
     BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT,
     HALFTIME_MIN_RATIO_DEFAULT,
     SNARE_MIN_CONTRAST_DEFAULT,
+    VOCAL_NOTE_MAX_DRIFT_DEFAULT,
+    VOCAL_NOTE_MIN_MS_DEFAULT,
     StemOpts,
 )
 
@@ -221,6 +223,8 @@ def cmd_fetch(args: argparse.Namespace) -> int:
         min_st_per_sec=args.bass_glide_min_st_per_sec,
         min_ms=args.bass_glide_min_ms,
         min_contrast=args.snare_min_contrast,
+        note_min_ms=args.vocal_note_min_ms,
+        note_max_drift=args.vocal_note_max_drift,
     ) if getattr(args, "stems", False) else None
 
     def measure(cand: dict[str, Any]) -> dict[str, Any]:
@@ -557,10 +561,12 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     bars = np.arange(9) * 2.0                            # 2초짜리 마디 8개
     frames = int(bars[-1] * SR / R_HOP) + 8
     env = np.zeros(frames, dtype=np.float64)
+    # 정박 위치는 **칸 수에서 파생**시킨다 — 상수 (0,4,8,12)로 박아 두면 격자를 32칸으로
+    # 바꾼 순간 이 픽스처가 조용히 8분음 4개를 찍는다(D-038에서 실제로 걸렸다).
     for b in bars[:-1]:
-        for q in (0, 4, 8, 12):                          # 16분 격자의 정박 위치
+        for q in (0, BINS // 4, BINS // 2, 3 * BINS // 4):
             # 프레임 인덱스는 **반올림**해야 한다 — 잘라 넣으면 0.5초가 0.4993초가 되어
-            # 칸 경계에서 앞 칸으로 밀린다(4번 → 3번). 격자 정렬 픽스처의 함정.
+            # 칸 경계에서 앞 칸으로 밀린다. 격자 정렬 픽스처의 함정.
             env[round((b + 2.0 * q / BINS) * SR / R_HOP)] = 1.0
     prof = bar_profile(env, SR, bars)
     m = match_templates(prof)
@@ -575,26 +581,98 @@ def cmd_selftest(args: argparse.Namespace) -> int:
         check("다운비트 부족 → 미해석", True)
 
     # ── 템플릿 원장 무결성 · 임계 규약 (TESTS §5 · RULES §3.1.5)
-    from sonic_profile.rhythm import TEMPLATES, classify_rhythm
+    from fractions import Fraction
 
-    # 이름과 격자가 어긋나면 도메인 소유자가 원장을 읽고 조정할 수 없다(2026-07-29 결함, D-027)
-    check(
-        "8분 3+3+2 tresillo 위치 = (0,6,12) (16분 격자에서 8분음 n = 칸 2n)",
-        TEMPLATES.get("tresillo(8분 3+3+2)") == (0, 6, 12),
-        str(TEMPLATES.get("tresillo(8분 3+3+2)")),
+    from sonic_profile.rhythm import (
+        LEGACY_BINS,
+        TEMPLATES,
+        TRIPLET_BINS,
+        classify_rhythm,
+        fold_profile,
+        render_template,
+        unrenderable_templates,
     )
-    half = TEMPLATES.get("tresillo(16분·반마디)") or ()
-    tiled = tuple(sorted(set(half) | {p + 8 for p in half}))
+
+    # 원장은 **마디 상대 분수**다(D-038). 이름과 위치가 어긋나면 도메인 소유자가 원장을
+    # 읽고 조정할 수 없다(2026-07-29 결함, D-027). 격자 두 곳에서 같은 음악적 위치를
+    # 가리키는지 확인한다 — 이게 분수 정의의 요점이다.
+    tres8 = TEMPLATES.get("tresillo(8분 3+3+2)")
     check(
-        "16분 3+3+2를 마디 끝까지 이으면 dembow와 동일 (원장 결함 ① 고정)",
-        tiled == tuple(sorted(TEMPLATES.get("dembow") or ())),
+        "8분 3+3+2 tresillo = (0, ⅜, ¾) — 격자와 무관한 분수 정의",
+        tres8 == (Fraction(0), Fraction(3, 8), Fraction(3, 4)),
+        str(tres8),
+    )
+    r16 = render_template(tres8 or (), LEGACY_BINS)
+    r32 = render_template(tres8 or (), BINS)
+    check(
+        "같은 원장이 16칸 → 0·6·12 / 32칸 → 0·12·24로 렌더된다",
+        r16 is not None and r32 is not None
+        and list(np.flatnonzero(r16)) == [0, 6, 12]
+        and list(np.flatnonzero(r32)) == [0, 12, 24],
+    )
+    # 제거된 `tresillo(16분·반마디)`가 왜 관용 패턴이 아니었는지를 **고정**한다 —
+    # 근거가 코드에서 사라지면 누군가 다시 넣는다(RULES §3.1.5 결함 ①, 2026-07-30 제거).
+    half = (Fraction(0), Fraction(3, 16), Fraction(3, 8))
+    tiled = tuple(sorted(set(half) | {q + Fraction(1, 2) for q in half}))
+    check(
+        "16분 3+3+2를 마디 끝까지 이으면 dembow와 동일 → 반마디 조각은 원장에서 제거",
+        tiled == tuple(sorted(TEMPLATES.get("dembow") or ()))
+        and "tresillo(16분·반마디)" not in TEMPLATES,
         f"{tiled} vs {TEMPLATES.get('dembow')}",
     )
+    # 앨리어싱은 조용히 흘리지 않는다 — 트리플렛 위치는 이진 격자에서 표현 불가다
+    check(
+        "트리플렛 위치(⅓)는 32칸에서 렌더 불가 → None (반올림 금지)",
+        render_template((Fraction(1, 3),), BINS) is None
+        and render_template((Fraction(1, 3),), TRIPLET_BINS) is not None,
+    )
+    check("현 원장은 32칸에서 전부 렌더된다", unrenderable_templates(BINS) == [],
+          str(unrenderable_templates(BINS)))
+    # 32 → 16 접기 무손실 (TESTS §7.3)
+    folded = fold_profile(prof, LEGACY_BINS)
+    check("32 → 16 접기: 합 보존", abs(float(folded.sum()) - 1.0) < 1e-9)
+    check("32 → 16 접기 후에도 four-on-floor 최고 정합",
+          max(match_templates(folded), key=lambda k: match_templates(folded)[k])
+          == "four-on-floor")
+    try:
+        fold_profile(prof, 24)                          # 32는 24로 나뉘지 않는다
+        check("접기 불가 조합 → 미해석", False, "예외가 나지 않음")
+    except RhythmUnavailable:
+        check("접기 불가 조합 → 미해석 (반올림해 흘리지 않음)", True)
+
+    # ── 하이햇 축 · 반쪽 재현성 (TESTS §7.3·§7.2.5 · RULES §3.1.5.3·§3.8.4.4)
+    from sonic_profile.rhythm import (
+        bar_profile_split_half,
+        hihat_roll_ratio,
+        hihat_triplet_bias,
+    )
+
+    sixteenth = np.zeros(BINS)
+    sixteenth[::2] = 1.0                        # 16분 위치에만(32칸의 짝수 칸)
+    offgrid = np.zeros(BINS)
+    offgrid[1::2] = 1.0                         # 32분 위치에만(홀수 칸) — 16칸에선 안 보였다
+    check("hihat_roll 하한(16분만) = 0", hihat_roll_ratio(sixteenth / sixteenth.sum()) == 0.0)
+    check("hihat_roll 상한(32분만) = 1", hihat_roll_ratio(offgrid / offgrid.sum()) == 1.0)
+    check("hihat_roll: 16칸 프로파일은 미해석 (정의상 0이 아니다)",
+          hihat_roll_ratio(np.full(LEGACY_BINS, 1.0 / LEGACY_BINS)) is None)
+    tri = np.zeros(TRIPLET_BINS)
+    tri[::3] = 1.0                              # 8분 이진 위치
+    tri_only = np.zeros(TRIPLET_BINS)
+    for i in range(TRIPLET_BINS):
+        if i % 2 == 0 and i % 3:
+            tri_only[i] = 1.0                   # 트리플렛 전용
+    check("hihat_triplet_bias 하한(8분 이진만) = 0", hihat_triplet_bias(tri / tri.sum()) == 0.0)
+    check("hihat_triplet_bias 상한(트리플렛 전용만) = 1",
+          hihat_triplet_bias(tri_only / tri_only.sum()) == 1.0)
+    check("hihat_triplet_bias: 이진 격자 입력은 미해석",
+          hihat_triplet_bias(np.full(BINS, 1.0 / BINS)) is None)
+
+
     # 비직교성이 이 이상 올라가면 두 이름이 같은 것을 재고 있다는 뜻 → 원장 재검토 신호
-    def _unit(pos: tuple[int, ...]) -> np.ndarray:
-        t = np.zeros(BINS)
-        t[list(pos)] = 1.0
-        t = t - t.mean()
+    def _unit(pos: tuple[Fraction, ...]) -> np.ndarray:
+        rendered = render_template(pos, BINS)
+        assert rendered is not None
+        t = rendered - rendered.mean()
         return t / float(np.linalg.norm(t))
 
     names = list(TEMPLATES)
@@ -612,7 +690,7 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     # 정박의 반대 위상(2·6·10·14)으로는 부족하다 — four-on-floor와는 음이지만 trap-synco와
     # +0.33이라 argmax가 이름을 뱉는다. 임계가 막아야 하는 건 이 "다른 이름으로의 도피"다.
     inv = np.zeros(BINS)
-    inv[[1, 5, 9, 13]] = 1.0
+    inv[1 :: BINS // 4] = 1.0        # 어느 템플릿도 쓰지 않는 칸(격자에서 파생)
     c_inv = classify_rhythm(inv / inv.sum())
     check("전 템플릿 음의 상관 → 해당 없음 (argmax가 이름을 뱉지 않음)",
           c_inv["assigned"] is None and c_inv["top_score"] < 0,
@@ -767,16 +845,44 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     sw2 = swing_ratio(beats_s, swung)
     check("swing_ratio 단조성: 셔플 온셋 > 스트레이트", sw2 is not None and sw is not None and sw2 > sw,
           f"{sw2} > {sw}")
-    # 같은 마디를 반복하면 자기유사도가 높아야 한다
-    # 마디당 프레임이 칸 수(16)와 같으면 접기 경계에서 밀려 자기유사도가 깎인다
-    # 임펄스를 칸 **안쪽**에 둔다 — 마디 경계에 놓으면 부동소수 오차로 앞 마디에 밀린다
-    # (TESTS §5가 기록한 격자 정렬 함정과 같은 것). 2·18·34·50 → 여전히 0·4·8·12번 칸.
-    one_bar = np.zeros(64, dtype=np.float64)
-    one_bar[[2, 18, 34, 50]] = 3.0
+    # 같은 마디를 반복하면 자기유사도가 높아야 한다.
+    # ⚠ **픽스처의 해상도가 격자를 따라가야 한다**(D-038에서 실제로 걸렸다): 마디당
+    # 프레임을 64로 박아 두면 32칸에서 칸당 2프레임이 되고, 그러면 부동소수 경계 오차가
+    # 임펄스를 옆 칸으로 밀어 **코드가 아니라 픽스처 때문에** 자기유사도가 0.43으로
+    # 떨어진다. 실측이 정한 예산(칸당 ~10프레임, RULES §3.1.5.2)을 픽스처도 지킨다 —
+    # "불일치가 나오면 측정기를 먼저 의심하라"의 자기적용.
+    frames_per_bar = BINS * 8                       # 칸당 8프레임
+    step = frames_per_bar // 4
+    one_bar = np.zeros(frames_per_bar, dtype=np.float64)
+    # 임펄스를 칸 **안쪽**(칸 중앙)에 둔다 — 경계에 놓으면 앞 칸으로 밀린다
+    one_bar[[i * step + 4 for i in range(4)]] = 3.0
     env_rep = np.tile(one_bar, 6)
-    db = np.arange(7, dtype=np.float64) * (64 * HOP_R / SR)
+    db = np.arange(7, dtype=np.float64) * (frames_per_bar * HOP_R / SR)
     ss = rhythm_self_similarity(env_rep, SR, db)
     check("마디 자기유사도: 같은 패턴 반복 → 높음", ss is not None and ss > 0.9, f"{ss}")
+    # 반쪽 재현성: **대비는 속고 재현성은 안 속는다**가 이 축의 존재 이유다
+    sh_rep = bar_profile_split_half(env_rep, SR, db)
+    check("반쪽 재현성: 모든 마디 동일 → ≈1", sh_rep is not None and sh_rep > 0.99, f"{sh_rep}")
+    # 홀수 마디와 짝수 마디가 **서로 다른 자리**에 큰 피크를 갖는 포락: 접으면 대비가
+    # 높지만(피크 2개) 마디마다 형태가 다르다 — 대비는 "형태가 있다"고 말하고 재현성은
+    # "반복되지 않는다"고 말한다. 이 조합을 가르는 것이 §3.8.4.4의 존재 이유다.
+    alt = np.zeros(frames_per_bar * 6, dtype=np.float64)
+    for i in range(6):
+        alt[i * frames_per_bar + (4 if i % 2 == 0 else frames_per_bar // 2 + 4)] = 10.0
+    sh_alt = bar_profile_split_half(alt, SR, db)
+    c_alt = bar_profile_contrast(bar_profile(alt, SR, db))
+    check("대비는 속고 재현성은 안 속는다(마디마다 다른 자리: 대비 높음 · 재현성 ≈0)",
+          c_alt > 5.0 and sh_alt is not None and abs(sh_alt) < 0.2,
+          f"contrast={c_alt:.1f} split_half={sh_alt}")
+    # 한쪽 반에만 에너지가 있으면 **미해석**이다(결측 ≠ 0) — 0으로 채우면 "구조 없음"이
+    # 되지만 참인 것은 "비교할 짝이 없다"다
+    one_side = np.zeros(frames_per_bar * 6, dtype=np.float64)
+    one_side[4] = 10.0
+    check("반쪽 한 곳이 비면 미해석 (0이 아니다)",
+          bar_profile_split_half(one_side, SR, db) is None)
+    check("마디 2개 → 반쪽 재현성 미해석 (반쪽이 각 1마디)",
+          bar_profile_split_half(env_rep, SR, db[:3]) is None)
+
 
     # ── 레코드 정체성·병합 (RULES §1) — 이중 저장이 분포를 이중 가중하던 결함의 가드
     amap = _alias_map([{"key": "KiiiKiii", "aliases": ["키키"]}])
@@ -855,8 +961,14 @@ def main(argv: list[str] | None = None) -> int:
     p_f.add_argument("--bass-glide-min-ms", type=float, default=BASS_GLIDE_MIN_MS_DEFAULT,
                      help=f"글라이드 최소 지속 ms (기본 {BASS_GLIDE_MIN_MS_DEFAULT} · 관습값)")
     p_f.add_argument("--snare-min-contrast", type=float, default=SNARE_MIN_CONTRAST_DEFAULT,
-                     help=f"스네어 축 유효성 게이트 대비 (기본 {SNARE_MIN_CONTRAST_DEFAULT} — "
-                          "저역 기준선. 미만이면 스네어 축을 결측 처리)")
+                     help=f"스네어 축 유효성 게이트 대비 (기본 {SNARE_MIN_CONTRAST_DEFAULT} = "
+                          "이 축 분포의 p10, RULES §3.8.4.3. 미만이면 스네어 축을 결측 처리)")
+    p_f.add_argument("--vocal-note-min-ms", type=float, default=VOCAL_NOTE_MIN_MS_DEFAULT,
+                     help=f"지속 노트 최소 길이 ms (기본 {VOCAL_NOTE_MIN_MS_DEFAULT} — "
+                          "vocal_note_f0_spread, RULES §3.8.4)")
+    p_f.add_argument("--vocal-note-max-drift", type=float, default=VOCAL_NOTE_MAX_DRIFT_DEFAULT,
+                     help=f"지속 노트로 볼 프레임 간 최대 변화 센트 (기본 "
+                          f"{VOCAL_NOTE_MAX_DRIFT_DEFAULT} — 초과하면 음이 바뀐 것으로 끊는다)")
     p_f.add_argument("-o", "--output", required=True)
     p_f.set_defaults(func=cmd_fetch)
 

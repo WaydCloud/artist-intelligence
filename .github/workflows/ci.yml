@@ -107,6 +107,15 @@ jobs:
           sys.exit(1 if failed else 0)
           PY
 
+      # 스키마가 `"data": {}`라 차트 페이로드를 전혀 제약하지 않는다 — 2026-07-30에
+      # bar 키 오용(`label`)이 위 검증을 통과해 막대 11개가 이름 없이 그려졌다.
+      # 스키마 변경은 별도 승인이 전제(AGENTS §0)이므로, 그때까지 읽는 쪽의 기대를
+      # 이 게이트가 지킨다. selftest를 먼저 돌려 **게이트 자체가 살아 있는지** 본다.
+      - name: Chart data contract (bar/line/heatmap/tunable shape)
+        run: |
+          uv run python scripts/validate_report_data.py --selftest
+          uv run python scripts/validate_report_data.py
+
   data-contracts:
     name: data contracts (snapshot gate · entity schema)
     runs-on: ubuntu-latest

@@ -643,6 +643,9 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     # ── 하이햇 축 · 반쪽 재현성 (TESTS §7.3·§7.2.5 · RULES §3.1.5.3·§3.8.4.4)
     from sonic_profile.rhythm import (
         bar_profile_split_half,
+        bar_profile_split_half_2bar,
+        hihat_active_ratio,
+        hihat_roll_burst_ratio,
         hihat_roll_ratio,
         hihat_triplet_bias,
     )
@@ -655,6 +658,30 @@ def cmd_selftest(args: argparse.Namespace) -> int:
     check("hihat_roll 상한(32분만) = 1", hihat_roll_ratio(offgrid / offgrid.sum()) == 1.0)
     check("hihat_roll: 16칸 프로파일은 미해석 (정의상 0이 아니다)",
           hihat_roll_ratio(np.full(LEGACY_BINS, 1.0 / LEGACY_BINS)) is None)
+
+    # ── 롤의 연속성 축 (RULES §3.1.5.4 · 사전 등록. **정답지 검증 전 표면 금지**)
+    # 이 축의 존재 이유는 "점유율이 같아도 산발이면 낮고 몰리면 높다"이므로,
+    # 그 구별이 실제로 되는지를 먼저 재는 것이 채택 조건의 바닥이다.
+    burst3 = np.zeros(BINS)
+    burst3[:3] = 1.0                            # 32분 3연타 한 군데 = 롤의 최소 단위
+    check("burst 상한(연타 3칸만) = 1", hihat_roll_burst_ratio(burst3 / burst3.sum()) == 1.0)
+    check("burst 하한(16분 산발) = 0", hihat_roll_burst_ratio(sixteenth / sixteenth.sum()) == 0.0)
+    check("burst: 32분 산발(홀수 칸만)도 0 — 점유율은 같고 연속성만 다르다",
+          hihat_roll_burst_ratio(offgrid / offgrid.sum()) == 0.0
+          and hihat_roll_ratio(offgrid / offgrid.sum()) == 1.0)
+    pair2 = np.zeros(BINS)
+    pair2[:2] = 1.0                             # 2연타는 롤이 아니다(최소 단위 미만)
+    check("burst: 연타 2칸은 0 (3칸이 최소 단위)", hihat_roll_burst_ratio(pair2 / pair2.sum()) == 0.0)
+    wrap = np.zeros(BINS)
+    wrap[[BINS - 2, BINS - 1, 0]] = 1.0         # 마디선을 넘는 롤
+    check("burst: 마디선을 넘는 롤을 센다(순환)", hihat_roll_burst_ratio(wrap / wrap.sum()) == 1.0)
+    # 🔴 사전 명시한 최대 위험: 상시 하이햇은 전 칸 활성이라 1.0이 된다. 그건 롤이 아니고,
+    # 짝 축이 그 사실을 말한다 — 위험을 검사로 고정해 둔다.
+    flat = np.full(BINS, 1.0 / BINS)
+    check("burst: 상시 하이햇은 1.0이지만 active_ratio도 1.0 (짝 축이 판별 불가를 말한다)",
+          hihat_roll_burst_ratio(flat) == 1.0 and hihat_active_ratio(flat) == 1.0)
+    check("active_ratio: 16분만이면 0.5", hihat_active_ratio(sixteenth / sixteenth.sum()) == 0.5)
+    check("burst: 16칸 프로파일은 미해석", hihat_roll_burst_ratio(np.full(LEGACY_BINS, 1 / LEGACY_BINS)) is None)
     tri = np.zeros(TRIPLET_BINS)
     tri[::3] = 1.0                              # 8분 이진 위치
     tri_only = np.zeros(TRIPLET_BINS)
@@ -882,6 +909,21 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           bar_profile_split_half(one_side, SR, db) is None)
     check("마디 2개 → 반쪽 재현성 미해석 (반쪽이 각 1마디)",
           bar_profile_split_half(env_rep, SR, db[:3]) is None)
+
+    # ── 2마디 블록 분할 (RULES §3.1.5.4 ② · 사전 등록. 정답지 검증 전 표면 금지)
+    # 위 `alt`가 바로 **2마디 루프**다(마디마다 피크 자리가 번갈아 든다). 1마디 분할은
+    # 이것을 "구조 없음"으로 읽고(위 검사에서 ≈0), 그래서 D-142에서 정답지 2곡이
+    # 탈락했다. 2마디 블록은 두 반쪽이 같은 형태를 담으므로 살아나야 한다 —
+    # **그 차이가 이 정의의 전부**라 검사로 고정한다.
+    sh2_alt = bar_profile_split_half_2bar(alt, SR, db)
+    check("2마디 블록: 2마디 루프를 구조로 읽는다 (1마디 분할은 ≈0인 같은 신호)",
+          sh2_alt is not None and sh2_alt > 0.9,
+          f"1마디={sh_alt} 2마디={sh2_alt}")
+    sh2_rep = bar_profile_split_half_2bar(env_rep, SR, db)
+    check("2마디 블록: 모든 마디 동일해도 ≈1 (회귀 없음)",
+          sh2_rep is not None and sh2_rep > 0.99, f"{sh2_rep}")
+    check("2마디 블록: 마디 3개면 미해석 (블록 2개를 못 채운다 · 0이 아니다)",
+          bar_profile_split_half_2bar(alt, SR, db[:4]) is None)
 
 
     # ── 레코드 정체성·병합 (RULES §1) — 이중 저장이 분포를 이중 가중하던 결함의 가드

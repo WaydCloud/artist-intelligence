@@ -250,6 +250,57 @@ def hihat_roll_ratio(profile: np.ndarray | list[float]) -> float | None:
     return float(p[1::2].sum() / total)
 
 
+def hihat_active_ratio(profile: np.ndarray | list[float]) -> float | None:
+    """활성 칸(균등 기대치 이상) 비율 — `hihat_roll_burst_ratio`의 **자기 진단 짝**.
+
+    이 값이 높으면 하이햇이 상시로 깔린 곡이고, 그때 burst는 "롤"이 아니라
+    "쉬지 않는 하이햇"을 재고 있다. 단독 해석 대상이 아니다(RULES §3.1.5.4).
+    """
+    p = np.asarray(profile, dtype=np.float64)
+    total = float(p.sum())
+    if p.size < BINS or total <= 0:
+        return None
+    return float((p >= total / p.size).sum() / p.size)
+
+
+def hihat_roll_burst_ratio(profile: np.ndarray | list[float]) -> float | None:
+    """활성 칸이 **3칸 이상 연속**인 구간에 든 에너지의 비중 — RULES §3.1.5.4.
+
+    H1(`hihat_roll_ratio`)이 실패한 원인을 직접 겨눈다: 점유율은 **롤의 길이를
+    재지 않아** 산발 32분과 연타 3칸을 구별하지 못한다. 롤은 점유율이 아니라
+    **연속성**이다.
+
+    · 활성 = `p[i] >= 1/bins`(균등 기대치). 격자에서 도출된 상수이며 다른 축에서
+      빌려 온 임계가 아니다(D-037).
+    · 런은 **마디를 순환**해서 센다 — 롤이 마디선을 넘어 이어질 수 있다.
+
+    ⚠ 전 칸이 활성이면(상시 하이햇) 런이 마디 하나가 되어 1.0이 된다. 그건 롤이
+    아니므로 `hihat_active_ratio`와 **함께** 읽어야 한다.
+    """
+    p = np.asarray(profile, dtype=np.float64)
+    total = float(p.sum())
+    if p.size < BINS or total <= 0:
+        return None
+    active = p >= total / p.size
+    n = p.size
+    if active.all():
+        # 순환하면 런이 하나로 이어진다. 아래 일반 경로는 시작점을 찾지 못하므로 분기한다.
+        return 1.0
+    # 순환 런을 세려면 비활성 칸에서 시작해야 한다 — 그 지점부터 한 바퀴 돈다.
+    start = int(np.flatnonzero(~active)[0])
+    burst = 0.0
+    run: list[int] = []
+    for k in range(n + 1):
+        i = (start + k) % n
+        if k < n and active[i]:
+            run.append(i)
+            continue
+        if len(run) >= 3:
+            burst += float(p[run].sum())
+        run = []
+    return float(burst / total)
+
+
 def hihat_triplet_bias(profile_triplet: np.ndarray | list[float]) -> float | None:
     """24칸 트리플렛 격자에서 `E(트리플렛 전용) / (E(트리플렛 전용) + E(8분 이진))`.
 
@@ -270,6 +321,19 @@ def hihat_triplet_bias(profile_triplet: np.ndarray | list[float]) -> float | Non
     return float(trip / denom)
 
 
+def bar_profile_split_half_2bar(env: np.ndarray, sr: int, downbeats: np.ndarray,
+                                bins: int = BINS) -> float | None:
+    """마디를 **2개씩 묶은 블록**의 홀↔짝 재현성 — RULES §3.1.5.4 ②.
+
+    `bar_profile_split_half`는 홀짝 마디를 가르므로 **2마디 루프에서 실제 구조가
+    있어도 낮게 나온다**(D-142에서 정답지 2곡이 그렇게 탈락했다). 2마디 루프는
+    블록 안에서 완결되므로 두 반쪽이 같은 형태를 담는다.
+
+    마디 수요가 두 배다 — 블록 2개(=4마디)를 못 채우면 결측이다(0이 아니다).
+    """
+    return _split_half(env, sr, downbeats, bins, block=2)
+
+
 def bar_profile_split_half(env: np.ndarray, sr: int, downbeats: np.ndarray,
                            bins: int = BINS) -> float | None:
     """**홀수 마디 프로파일 ↔ 짝수 마디 프로파일**의 상관 — RULES §3.8.4.4.
@@ -280,9 +344,24 @@ def bar_profile_split_half(env: np.ndarray, sr: int, downbeats: np.ndarray,
 
     ⚠ **2마디 루프는 낮게 나온다**(홀짝이 루프의 서로 다른 절반을 담는다) — 이건 결함이
     아니라 이 축의 정의상 한계이며, `bar_half_asymmetry`와 함께 읽어야 한다.
+    그 한계를 겨눈 것이 `bar_profile_split_half_2bar`다(RULES §3.1.5.4 ②).
+    """
+    return _split_half(env, sr, downbeats, bins, block=1)
+
+
+def _split_half(env: np.ndarray, sr: int, downbeats: np.ndarray, bins: int,
+                *, block: int) -> float | None:
+    """반쪽 재현성의 공통 구현. `block`은 한 반쪽에 묶는 마디 수다.
+
+    두 변형을 각각 구현하지 않는 이유: 분할 단위만 다르고 나머지(포락 접기·정규화·
+    상관)가 같아서 따로 두면 한쪽만 고쳐지는 종류의 코드가 된다(AGENTS §1).
     """
     d = np.asarray(downbeats, dtype=np.float64)
-    if d.size < MIN_DOWNBEATS + 1:      # 반쪽이 각 1마디면 재현성은 정의되지 않는다
+    # 반쪽이 각 `block` 마디를 채우려면 마디가 2*block개 필요하고, 마디 n개에는
+    # 다운비트가 n+1개 있어야 한다. block=1이면 예전 조건(MIN_DOWNBEATS+1)보다
+    # 느슨해지지 않도록 둘 중 큰 쪽을 쓴다.
+    need = max(MIN_DOWNBEATS + 1, 2 * block + 1)
+    if d.size < need:
         return None
     times = np.arange(len(env)) * HOP / sr
     halves = [np.zeros(bins, dtype=np.float64), np.zeros(bins, dtype=np.float64)]
@@ -293,7 +372,7 @@ def bar_profile_split_half(env: np.ndarray, sr: int, downbeats: np.ndarray,
         if not m.any():
             continue
         idx = np.floor((times[m] - a) / (b - a) * bins).astype(int) % bins
-        np.add.at(halves[i % 2], idx, np.maximum(env[m], 0.0))
+        np.add.at(halves[(i // block) % 2], idx, np.maximum(env[m], 0.0))
     if any(h.sum() <= 0 for h in halves):
         return None
     x, y = (h / h.sum() for h in halves)
@@ -561,8 +640,12 @@ def extract_rhythm(
         grid["hihat_bar_profile"] = [round(float(v), 4) for v in hi_prof]
         grid["hihat_bar_profile_triplet"] = [round(float(v), 4) for v in hi_trip]
         grid["hihat_bar_contrast"] = round(bar_profile_contrast(hi_prof), 4)
+        # burst·active는 §3.1.5.4 사전 등록 축이다. 값은 저장하되 **리포트 표면 금지**
+        # (정답지 검증 전) — D-032 "저장은 후하게, 표면은 인색하게".
         for k, v in (("hihat_roll_ratio", hihat_roll_ratio(hi_prof)),
-                     ("hihat_triplet_bias", hihat_triplet_bias(hi_trip))):
+                     ("hihat_triplet_bias", hihat_triplet_bias(hi_trip)),
+                     ("hihat_roll_burst_ratio", hihat_roll_burst_ratio(hi_prof)),
+                     ("hihat_active_ratio", hihat_active_ratio(hi_prof))):
             if v is not None:
                 grid[k] = round(v, 4)
     except (RhythmUnavailable, ValueError) as exc:
@@ -570,6 +653,11 @@ def extract_rhythm(
     sh = bar_profile_split_half(env, sr, downbeats)
     if sh is not None:
         grid["bar_profile_split_half"] = round(sh, 4)
+    # 2마디 블록 분할도 함께 낸다 — 두 값을 같은 실행에서 나란히 얻어야 H4의 조건
+    # ②(정답지 보존)를 **같은 곡·같은 포락에서** 비교할 수 있다(§3.1.5.4 ②).
+    sh2 = bar_profile_split_half_2bar(env, sr, downbeats)
+    if sh2 is not None:
+        grid["bar_profile_split_half_2bar"] = round(sh2, 4)
 
     # 리듬 축 묶음(RULES §3.7) — 이미 얻은 비트·다운비트·포락을 **재사용**한다.
     # 한 축이 실패해도 나머지는 낸다.

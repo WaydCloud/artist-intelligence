@@ -5,46 +5,235 @@
   "version": "1.0.0",
   "updated": "2026-07-30",
   "case_type": "import",
-  "origin": { "region": "US/EU", "scene": "뭄바톤 — 미국 워싱턴 D.C.(2009-11, Dave Nada) / 트로피컬하우스 — 사운드클라우드 기반 유럽·호주 씬(2013, Thomas Jack·Kygo)" },
+  "origin": {
+    "region": "US/EU",
+    "scene": "뭄바톤 — 미국 워싱턴 D.C.(2009-11, Dave Nada) / 트로피컬하우스 — 사운드클라우드 기반 유럽·호주 씬(2013, Thomas Jack·Kygo)"
+  },
   "adoption_mode": {
     "mode": "full",
     "notes": "리듬 계열 장르의 씬→글로벌 팝 주류→K-pop 전면 채택(기간 소급 케이스, 회고적 재구성 — 생존 편향 존재). 스트리밍 전환기(사운드클라우드·유튜브)의 확산 사례 — 틱톡 이전 신호원 검증용. 원산지 클럽/페스티벌 맥락이 한국에서는 '여름 컴백' 시즌 문법으로 번역됨",
     "mode_transitions": []
   },
   "trajectory": [
-    { "cell": "origin-scene-moombahton", "date": "2009-11", "date_precision": "month", "evidence": "Dave Nada가 D.C. 하우스파티에서 Afrojack의 'Moombah' 리믹스를 108BPM으로 감속, 이후 에딧 제작·명명", "sources": ["https://en.wikipedia.org/wiki/Moombahton", "https://www.npr.org/transcripts/134661427"], "certainty": "높음" },
-    { "cell": "global-scene-moombahton", "date": "2010~2011", "date_precision": "range", "evidence": "Diplo/Mad Decent·Dillon Francis 계열로 EDM 씬 확산, NPR가 2011-03 'Born in D.C., Bred Worldwide' 보도", "sources": ["https://www.npr.org/transcripts/134661427", "https://washingtoncitypaper.com/article/221511/our-year-in-moombahton/"], "certainty": "높음" },
-    { "cell": "origin-scene-tropical", "date": "2013", "date_precision": "year", "evidence": "Thomas Jack이 용어 창안, 사운드클라우드 'Tropical House' 믹스 시리즈로 씬 형성", "sources": ["https://en.wikipedia.org/wiki/Thomas_Jack", "https://soundcloud.com/thomasjackmusic/thomas-jack-presents-tropical"], "certainty": "높음" },
-    { "cell": "global-viral", "date": "2013-12", "date_precision": "month", "evidence": "Kygo의 Ed Sheeran 'I See Fire' 리믹스가 사운드클라우드에서 국제적 주목", "sources": ["https://en.wikipedia.org/wiki/Kygo"], "certainty": "높음" },
-    { "cell": "global-mainstream", "date": "2014-12~2015-08", "date_precision": "range", "evidence": "Kygo 'Firestone'(2014-12) → Major Lazer 'Lean On'(2015-03 발매, 2015-08-29 Hot 100 4위, 20여 개국 1위)", "sources": ["https://en.wikipedia.org/wiki/Firestone_(song)", "https://en.wikipedia.org/wiki/Lean_On"], "certainty": "높음" },
-    { "cell": "global-mainstream-peak", "date": "2015-09~2016-08", "date_precision": "range", "evidence": "Bieber 'What Do You Mean?'(2015-09 Hot 100 1위)·'Sorry'(2015-10 발매, Hot 100 1위), Major Lazer 'Cold Water'(2016-07-22 발매, Hot 100 2위 데뷔)", "sources": ["https://en.wikipedia.org/wiki/What_Do_You_Mean%3F", "https://en.wikipedia.org/wiki/Sorry_(Justin_Bieber_song)", "https://www.billboard.com/pro/major-lazer-justin-bieber-mo-cold-water-hot-100-sia/"], "certainty": "높음" },
-    { "cell": "kr-first-adoption", "date": "2015-10", "date_precision": "month", "evidence": "교차 검증으로 7개월 앞당김 — f(x) '4 Walls'(2015-10-27, 트로피컬하우스+UK개러지+딥하우스, Billboard·Spin 서술) → BTS 'Save Me'(2016-05), 태연 'Why'(2016-06, LDN Noise), EXO 'Dancing King'(2016-09, SM Station). 단 '뭄바톤' 선행 사례는 별도 미발견(트로피컬/딥하우스 계열만)", "sources": ["https://en.wikipedia.org/wiki/4_Walls_(song)", "https://en.wikipedia.org/wiki/Why_(Taeyeon_song)"], "certainty": "높음" },
-    { "cell": "kr-mainstream", "date": "2016-10", "date_precision": "month", "evidence": "BTS '피 땀 눈물'(2016-10-10, 뭄바톤·트랩·트로피컬하우스) 가온 디지털 1위 — BTS 첫 디지털 1위, 타이틀 주류화 기점", "sources": ["https://en.wikipedia.org/wiki/Blood_Sweat_%26_Tears_(song)"], "certainty": "높음" },
-    { "cell": "kr-mainstream-peak", "date": "2017-04~2017-08", "date_precision": "range", "evidence": "Winner 'Really Really'(2017-04) 남자 아이돌 최초 가온 1억 스트리밍, EXO 'Ko Ko Bop'(2017-07-18) 가온 1위 4주, Red Velvet '빨간 맛'(2017-07) 등 여름 시장 석권", "sources": ["https://gulfnews.com/entertainment/music/k-pop-corner-winners-really-really-crosses-100-million-mark-1.60822975", "https://en.wikipedia.org/wiki/Ko_Ko_Bop", "https://en.wikipedia.org/wiki/Red_Flavor"], "certainty": "높음" },
-    { "cell": "kr-decline", "date": "2018", "date_precision": "year", "evidence": "2018-03 시점 평론이 '2017은 트로피컬하우스·EDM 지배, 2018은 아직 지배 트렌드 없음'으로 전환기 진단. 글로벌 씬도 2017~19 과포화·피로로 하락", "sources": ["https://thebiaslist.com/2018/03/25/tracking-k-pops-trends-from-2011-2017/", "https://weraveyou.com/2023/09/tropical-house-decline/"], "certainty": "중간" }
+    {
+      "cell": "origin-scene-moombahton",
+      "date": "2009-11",
+      "date_precision": "month",
+      "evidence": "Dave Nada가 D.C. 하우스파티에서 Afrojack의 'Moombah' 리믹스를 108BPM으로 감속, 이후 에딧 제작·명명",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Moombahton",
+        "https://www.npr.org/transcripts/134661427"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-scene-moombahton",
+      "date": "2010~2011",
+      "date_precision": "range",
+      "evidence": "Diplo/Mad Decent·Dillon Francis 계열로 EDM 씬 확산, NPR가 2011-03 'Born in D.C., Bred Worldwide' 보도",
+      "sources": [
+        "https://www.npr.org/transcripts/134661427",
+        "https://washingtoncitypaper.com/article/221511/our-year-in-moombahton/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "origin-scene-tropical",
+      "date": "2013",
+      "date_precision": "year",
+      "evidence": "Thomas Jack이 용어 창안, 사운드클라우드 'Tropical House' 믹스 시리즈로 씬 형성",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Thomas_Jack",
+        "https://soundcloud.com/thomasjackmusic/thomas-jack-presents-tropical"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-viral",
+      "date": "2013-12",
+      "date_precision": "month",
+      "evidence": "Kygo의 Ed Sheeran 'I See Fire' 리믹스가 사운드클라우드에서 국제적 주목",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Kygo"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-mainstream",
+      "date": "2014-12~2015-08",
+      "date_precision": "range",
+      "evidence": "Kygo 'Firestone'(2014-12) → Major Lazer 'Lean On'(2015-03 발매, 2015-08-29 Hot 100 4위, 20여 개국 1위)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Firestone_(song)",
+        "https://en.wikipedia.org/wiki/Lean_On"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-mainstream-peak",
+      "date": "2015-09~2016-08",
+      "date_precision": "range",
+      "evidence": "Bieber 'What Do You Mean?'(2015-09 Hot 100 1위)·'Sorry'(2015-10 발매, Hot 100 1위), Major Lazer 'Cold Water'(2016-07-22 발매, Hot 100 2위 데뷔)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/What_Do_You_Mean%3F",
+        "https://en.wikipedia.org/wiki/Sorry_(Justin_Bieber_song)",
+        "https://www.billboard.com/pro/major-lazer-justin-bieber-mo-cold-water-hot-100-sia/"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-first-adoption",
+      "date": "2015-10",
+      "date_precision": "month",
+      "evidence": "교차 검증으로 7개월 앞당김 — f(x) '4 Walls'(2015-10-27, 트로피컬하우스+UK개러지+딥하우스, Billboard·Spin 서술) → BTS 'Save Me'(2016-05), 태연 'Why'(2016-06, LDN Noise), EXO 'Dancing King'(2016-09, SM Station). 단 '뭄바톤' 선행 사례는 별도 미발견(트로피컬/딥하우스 계열만)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/4_Walls_(song)",
+        "https://en.wikipedia.org/wiki/Why_(Taeyeon_song)"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream",
+      "date": "2016-10",
+      "date_precision": "month",
+      "evidence": "BTS '피 땀 눈물'(2016-10-10, 뭄바톤·트랩·트로피컬하우스) 가온 디지털 1위 — BTS 첫 디지털 1위, 타이틀 주류화 기점",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Blood_Sweat_%26_Tears_(song)"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream-peak",
+      "date": "2017-04~2017-08",
+      "date_precision": "range",
+      "evidence": "Winner 'Really Really'(2017-04) 남자 아이돌 최초 가온 1억 스트리밍, EXO 'Ko Ko Bop'(2017-07-18) 가온 1위 4주, Red Velvet '빨간 맛'(2017-07) 등 여름 시장 석권",
+      "sources": [
+        "https://gulfnews.com/entertainment/music/k-pop-corner-winners-really-really-crosses-100-million-mark-1.60822975",
+        "https://en.wikipedia.org/wiki/Ko_Ko_Bop",
+        "https://en.wikipedia.org/wiki/Red_Flavor"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-decline",
+      "date": "2018",
+      "date_precision": "year",
+      "evidence": "2018-03 시점 평론이 '2017은 트로피컬하우스·EDM 지배, 2018은 아직 지배 트렌드 없음'으로 전환기 진단. 글로벌 씬도 2017~19 과포화·피로로 하락",
+      "sources": [
+        "https://thebiaslist.com/2018/03/25/tracking-k-pops-trends-from-2011-2017/",
+        "https://weraveyou.com/2023/09/tropical-house-decline/"
+      ],
+      "certainty": "중간"
+    }
   ],
   "leadtimes": [
-    { "from_cell": "origin-scene-moombahton", "to_cell": "global-scene-moombahton", "months": 12, "note": "약 1년" },
-    { "from_cell": "origin-scene-moombahton", "to_cell": "global-mainstream", "months": 69, "note": "약 5년 9개월('Lean On' 2015-08 기준)" },
-    { "from_cell": "origin-scene-tropical", "to_cell": "global-mainstream", "months": 24, "note": "약 2년(2015-09 'WDYM' 1위 기준) — 사운드클라우드가 씬→주류 구간을 크게 단축" },
-    { "from_cell": "global-mainstream-peak", "to_cell": "kr-first-title", "months": 8, "months_range": "8~9", "note": "글로벌 정점(2015-09~10) → 한국 첫 타이틀 수용(태연 'Why' 2016-06)" },
-    { "from_cell": "global-mainstream-peak", "to_cell": "kr-mainstream", "months": 12, "note": "글로벌 정점 → '피 땀 눈물' 가온 1위(2016-10)" },
-    { "from_cell": "global-mainstream-peak", "to_cell": "kr-mainstream-peak", "months": 21, "months_range": "21~22", "note": "글로벌 정점 → 한국 시장 포화·정점(2017 여름)" },
-    { "from_cell": "kr-first-adoption", "to_cell": "kr-mainstream-peak", "months": 13, "note": "2016-05/06 타이틀 수용 파동 기준 약 13개월(교차 검증으로 첫 수용 자체는 2015-10로 앞당겨짐 — 압축된 것은 '주류 1위 도달'까지의 시차)" },
-    { "from_cell": "kr-mainstream-peak", "to_cell": "kr-decline", "months": 10, "months_range": "9~12", "note": "한국 정점(2017 여름) → 쇠퇴 진단(2018 상반기)" }
+    {
+      "from_cell": "origin-scene-moombahton",
+      "to_cell": "global-scene-moombahton",
+      "months": 12,
+      "note": "약 1년"
+    },
+    {
+      "from_cell": "origin-scene-moombahton",
+      "to_cell": "global-mainstream",
+      "months": 69,
+      "note": "약 5년 9개월('Lean On' 2015-08 기준)"
+    },
+    {
+      "from_cell": "origin-scene-tropical",
+      "to_cell": "global-mainstream",
+      "months": 24,
+      "note": "약 2년(2015-09 'WDYM' 1위 기준) — 사운드클라우드가 씬→주류 구간을 크게 단축"
+    },
+    {
+      "from_cell": "global-mainstream-peak",
+      "to_cell": "kr-first-title",
+      "months": 8,
+      "months_range": "8~9",
+      "note": "글로벌 정점(2015-09~10) → 한국 첫 타이틀 수용(태연 'Why' 2016-06)"
+    },
+    {
+      "from_cell": "global-mainstream-peak",
+      "to_cell": "kr-mainstream",
+      "months": 12,
+      "note": "글로벌 정점 → '피 땀 눈물' 가온 1위(2016-10)"
+    },
+    {
+      "from_cell": "global-mainstream-peak",
+      "to_cell": "kr-mainstream-peak",
+      "months": 21,
+      "months_range": "21~22",
+      "note": "글로벌 정점 → 한국 시장 포화·정점(2017 여름)"
+    },
+    {
+      "from_cell": "kr-first-adoption",
+      "to_cell": "kr-mainstream-peak",
+      "months": 13,
+      "note": "2016-05/06 타이틀 수용 파동 기준 약 13개월(교차 검증으로 첫 수용 자체는 2015-10로 앞당겨짐 — 압축된 것은 '주류 1위 도달'까지의 시차)"
+    },
+    {
+      "from_cell": "kr-mainstream-peak",
+      "to_cell": "kr-decline",
+      "months": 10,
+      "months_range": "9~12",
+      "note": "한국 정점(2017 여름) → 쇠퇴 진단(2018 상반기)"
+    }
   ],
   "early_signals": [
-    { "source_type": "platform-viral", "date": "2013~2014", "lead_months_vs_kr_mainstream": null, "evidence": "사운드클라우드 믹스·리믹스 씬 — Thomas Jack 'Tropical House' 믹스 시리즈와 Kygo 리믹스의 폭발적 재생 수, 주류 차트보다 1~2년 선행", "sources": ["https://soundcloud.com/thomasjackmusic/thomas-jack-presents-tropical"], "certainty": "높음" },
-    { "source_type": "press-naming", "date": "2015-12", "lead_months_vs_kr_mainstream": 10, "evidence": "Billboard 연말 결산이 '트로피컬하우스의 해'로 명시 — 한국 주류화 10개월 전", "sources": ["https://www.billboard.com/articles/events/year-in-music-2015/6804537/justin-bieber-omi-kygo-lillywood-robin-schulz-mr-probs-tropical-house-hits-2015"], "certainty": "높음" },
-    { "source_type": "producer-credit", "date": "2016 상반기", "lead_months_vs_kr_mainstream": 4, "evidence": "해외 작곡가 크레딧 — 유럽·영미 송캠프 의존 구조상 LDN Noise 등 크레딧에 트로피컬 문법이 먼저 등장(태연 'Why' 2016-06, EXO 'Dancing King' 2016-09). 크레딧 모니터링은 타이틀 주류화 4개월+ 선행 신호", "certainty": "높음" },
-    { "source_type": "low-risk-slot", "date": "2016-05~2016-09", "lead_months_vs_kr_mainstream": 5, "evidence": "비정규·저위험 채널 실험 — SM Station(Dancing King), 후속곡/수록곡(BTS 'Save Me') 등 타이틀이 아닌 슬롯에서 먼저 테스트 — B-side 선행 지표의 원형", "certainty": "중간" },
-    { "source_type": "supplier-framing", "date": "2016-12", "lead_months_vs_kr_mainstream": -2, "evidence": "기획 단위 신호 — 장르 자체를 그룹 정체성으로 삼은 KARD의 데뷔 프로젝트: 기획사가 트렌드에 베팅했다는 강한 확증 신호(주류화 이후 후행)", "sources": ["https://www.billboard.com/music/music-news/kard-co-ed-pop-group-interview-7957735/"], "certainty": "중간" }
+    {
+      "source_type": "platform-viral",
+      "date": "2013~2014",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "사운드클라우드 믹스·리믹스 씬 — Thomas Jack 'Tropical House' 믹스 시리즈와 Kygo 리믹스의 폭발적 재생 수, 주류 차트보다 1~2년 선행",
+      "sources": [
+        "https://soundcloud.com/thomasjackmusic/thomas-jack-presents-tropical"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "source_type": "press-naming",
+      "date": "2015-12",
+      "lead_months_vs_kr_mainstream": 10,
+      "evidence": "Billboard 연말 결산이 '트로피컬하우스의 해'로 명시 — 한국 주류화 10개월 전",
+      "sources": [
+        "https://www.billboard.com/articles/events/year-in-music-2015/6804537/justin-bieber-omi-kygo-lillywood-robin-schulz-mr-probs-tropical-house-hits-2015"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "source_type": "producer-credit",
+      "date": "2016 상반기",
+      "lead_months_vs_kr_mainstream": 4,
+      "evidence": "해외 작곡가 크레딧 — 유럽·영미 송캠프 의존 구조상 LDN Noise 등 크레딧에 트로피컬 문법이 먼저 등장(태연 'Why' 2016-06, EXO 'Dancing King' 2016-09). 크레딧 모니터링은 타이틀 주류화 4개월+ 선행 신호",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "low-risk-slot",
+      "date": "2016-05~2016-09",
+      "lead_months_vs_kr_mainstream": 5,
+      "evidence": "비정규·저위험 채널 실험 — SM Station(Dancing King), 후속곡/수록곡(BTS 'Save Me') 등 타이틀이 아닌 슬롯에서 먼저 테스트 — B-side 선행 지표의 원형",
+      "certainty": "중간"
+    },
+    {
+      "source_type": "supplier-framing",
+      "date": "2016-12",
+      "lead_months_vs_kr_mainstream": -2,
+      "evidence": "기획 단위 신호 — 장르 자체를 그룹 정체성으로 삼은 KARD의 데뷔 프로젝트: 기획사가 트렌드에 베팅했다는 강한 확증 신호(주류화 이후 후행)",
+      "sources": [
+        "https://www.billboard.com/music/music-news/kard-co-ed-pop-group-interview-7957735/"
+      ],
+      "certainty": "중간"
+    }
   ],
   "element_borrowing": null,
   "identity_formation": null,
   "signature": {
     "status": "pending-a2",
-    "predicted_axes": ["뎀보우 그리드(더치하우스 108BPM 감속 계열 — 원 리듬 유무의 음향 검증 필요)", "트로피컬 신스 드롭(스틸드럼·마림바)", "걸그룹 청량 결합 변형 — 원형보다 BPM·명도 상승"]
+    "predicted_axes": [
+      "뎀보우 그리드(더치하우스 108BPM 감속 계열 — 원 리듬 유무의 음향 검증 필요)",
+      "트로피컬 신스 드롭(스틸드럼·마림바)",
+      "걸그룹 청량 결합 변형 — 원형보다 BPM·명도 상승"
+    ]
   },
   "peak_decline": {
     "kr_peak": "2017-04~2017-08 — Really Really(1억 스트리밍)·Ko Ko Bop(가온 1위 4주)·빨간 맛·마지막처럼 동시 상위권. 당대에 이미 피로감 비평 존재(2017-06) — 정점기 비평 피로는 쇠퇴 선행 지표",
@@ -53,6 +242,138 @@
     "origin_decoupled": false,
     "residue": "소멸이 아닌 어휘화 — 장르 '트렌드'는 죽었지만 뎀보우 리듬은 K-pop 기본 리듬 어휘로 상시 잔존"
   },
+  "chart_evidence": [
+    {
+      "chart": "billboard-hot100",
+      "artist": "Justin Bieber",
+      "title": "Sorry",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2015-11-14",
+      "exit_date": "2016-08-27",
+      "peak_position": 1,
+      "peak_date": "2016-01-23",
+      "weeks_on_chart": 42,
+      "weeks_counted": 42
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Major Lazer",
+      "title": "Cold Water",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2016-08-13",
+      "exit_date": "2017-02-11",
+      "peak_position": 2,
+      "peak_date": "2016-08-13",
+      "weeks_on_chart": 27,
+      "weeks_counted": 27
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Major Lazer",
+      "title": "Lean On",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2015-04-25",
+      "exit_date": "2016-03-19",
+      "peak_position": 4,
+      "peak_date": "2015-08-29",
+      "weeks_on_chart": 48,
+      "weeks_counted": 48
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Kygo",
+      "title": "Firestone",
+      "role": "origin",
+      "charted": true,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "entry_date": "2015-10-03",
+      "exit_date": "2015-10-03",
+      "peak_position": 92,
+      "peak_date": "2015-10-03",
+      "weeks_on_chart": 1,
+      "weeks_counted": 1
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "BLACKPINK",
+      "title": "As If It's Your Last",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "BTS",
+      "title": "피 땀 눈물",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "EXO",
+      "title": "Ko Ko Bop",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "KARD",
+      "title": "Hola Hola",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "Red Velvet",
+      "title": "Red Flavor",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "TAEYEON",
+      "title": "Why",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "WINNER",
+      "title": "REALLY REALLY",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    }
+  ],
   "limits": [
     "곡별 장르 표기가 위키피디아·평론 등 2차 문헌 의존 — 원 리듬(뎀보우 그리드 유무)의 음향 분석 검증 없음(A2에서 sonic-profile로 교차 검증할 지점)",
     "쇠퇴 시점 해상도 낮음 — '2018년 쇠퇴'는 평론 진단 기반, 차트 점유율 시계열로 정량화하지 않음",

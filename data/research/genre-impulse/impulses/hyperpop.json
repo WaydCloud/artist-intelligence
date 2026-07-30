@@ -5,45 +5,228 @@
   "version": "1.0.0",
   "updated": "2026-07-30",
   "case_type": "import",
-  "origin": { "region": "UK/US", "scene": "런던 PC Music(A. G. Cook, 2013)·SOPHIE 초기 협업 → 미국 온라인 씬(100 gecs·glaive·ericdoa)" },
+  "origin": {
+    "region": "UK/US",
+    "scene": "런던 PC Music(A. G. Cook, 2013)·SOPHIE 초기 협업 → 미국 온라인 씬(100 gecs·glaive·ericdoa)"
+  },
   "adoption_mode": {
     "mode": "element",
     "notes": "요소 차용 모드(D-033 보완⑤ 재분류) — 장르 전면 수용은 차단됐으나 요소(비트·질감·보컬 처리)가 이식돼 새로운 사운드 정체성의 재료가 됨: 요소 차용(2021 Savage 가온 2위) → 팬덤 은어('쇠맛') → 언론 공식화(2024-05) → 정체성화 완주. 전면 수용 차단 요인(가설): ① 소스 임펄스 자체의 반주류성(본국에서도 Hot 100 히트 없음, 빌보드 200 #59 상한) ② 보컬 문법 충돌(피치 파괴·보컬 익명화 vs 멤버 목소리 식별성·가창 과시) ③ 팬덤 경제 부적합(퀴어·DIY·안티상업 정체성 — 기업 포장 시 자기부정) ④ 임펄스 수명 < 제작 리드타임(도착 전에 소스가 죽은 케이스)",
     "mode_transitions": []
   },
   "trajectory": [
-    { "cell": "origin-scene", "date": "2013", "date_precision": "year", "evidence": "A. G. Cook의 PC Music 설립(런던), SOPHIE 초기 협업", "sources": ["https://en.wikipedia.org/wiki/Hyperpop"], "certainty": "높음" },
-    { "cell": "origin-scene-breakthrough", "date": "2019-05", "date_precision": "month", "evidence": "100 gecs 『1000 gecs』 인디 씬 폭발(임계 돌파)", "sources": ["https://en.wikipedia.org/wiki/1000_gecs"], "certainty": "높음" },
-    { "cell": "global-platform-codification", "date": "2019-08", "date_precision": "month", "evidence": "Spotify 에디터의 'hyperpop' 플레이리스트 생성 — 장르가 씬이 아니라 플랫폼 큐레이션에 의해 명명된 특이 케이스", "sources": ["https://en.wikipedia.org/wiki/Hyperpop"], "certainty": "높음" },
-    { "cell": "global-viral", "date": "2020~2021", "date_precision": "range", "evidence": "glaive(사운드클라우드 첫 업로드 2개월 만에 Interscope 계약)·ericdoa 틱톡 바이럴 — 단 이 시기 빌보드 차트인 확인 안 됨", "sources": ["https://billboard.com/articles/columns/pop/9595799/hyperpop-history-mainstream-crossover"], "certainty": "높음" },
-    { "cell": "global-mainstream-ceiling", "date": "2023-03", "date_precision": "month", "evidence": "주류 침투 상한 — 『10,000 gecs』 빌보드 200 최고 59위, 코어 아티스트의 Hot 100 히트 확인 안 됨(매우 낮음). '글로벌 주류 침투'의 실체가 플레이리스트·틱톡 지표였다", "sources": ["https://en.wikipedia.org/wiki/10,000_gecs"], "certainty": "중간" },
-    { "cell": "origin-scene-dissolution", "date": "2021-01~", "date_precision": "range", "evidence": "SOPHIE 사망(2021-01-30) → 2022년경 핵심 아티스트들의 라벨 거부, digicore·glitchcore로 파편화 — '기업이 포장·판매하는 순간 전복성을 잃는' 자기부정 구조", "sources": ["https://www.dazeddigital.com/music/article/55293/1/the-rise-and-fall-of-hyperpop-the-internets-most-confusing-music-genre"], "certainty": "중간" },
-    { "cell": "kr-element-title", "date": "2021-10", "date_precision": "month", "evidence": "aespa 'Savage' — 공식 장르는 트랩 댄스지만 '크런치 하이퍼팝 신스'(NME)·금속성 클랭 등 비평 귀속 다수. 가온 디지털 2위(🔄 2차 조사 정정 — 1위 표기는 오류)·K-pop Hot 100 2위·Global 200 39위 → 요소 차용은 차트 최상위권까지 감", "sources": ["https://en.wikipedia.org/wiki/Savage_(Aespa_song)", "https://www.nme.com/reviews/album/aespa-savage-review-3064971", "https://www.popmatters.com/aespa-savage-debut-ep-review"], "certainty": "매우 높음", "certainty_note": "독립 전문지 3곳 교차(NME·Paper·PopMatters) — 타이틀급 차용의 앵커" },
-    { "cell": "kr-bside-diffusion", "date": "2022~2026", "date_precision": "range", "evidence": "수록곡 확산기 — TXT 'Frost'(2022-05), tripleS 'Rising'(2023-02 타이틀), SEVENTEEN 'GAM3 BO1'(2023-10), aespa 'Hot Mess'(2024-07 일본 데뷔 싱글), NCT DREAM 'Best of Me'(2024-11), 최예나 'Catch Catch'(2026-03, Circle 7위) — 요소가 '실험'에서 '상비 팔레트'로", "sources": ["https://www.soompi.com/article/1839542wpp/7-k-pop-tracks-that-turn-it-up-with-a-hyperpop-inspired-beat"], "certainty": "중간" },
-    { "cell": "kr-identity-formalization", "date": "2024-05", "date_precision": "month", "evidence": "'쇠맛' 언론 표제 공식화('Supernova' 시점) — 요소 차용이 그룹 자산으로 전환 완료된 유일 확인 사례", "sources": ["https://www.hankyung.com/article/202405136448H", "https://www.hankookilbo.com/News/Read/A2024052716240002145"], "certainty": "높음" },
-    { "cell": "kr-mainstream", "date": "미도달", "date_precision": "unreached", "evidence": "전면 수용(하이퍼팝 타이틀의 상위권 진입) 사례 발견 못 함 — 수용은 (a) 메가 기획사의 요소 흡수(성공) (b) 수록곡 실험 (c) 언더 씬의 3층위에 그침. NMIXX 'O.O'(2022-02, 맥시멀 강제 접합) 가온 디지털 최고 81위 — 맥시멀리즘 강도를 높일수록 국내 성적이 꺾이는 신호(표본 1, 가설)", "sources": ["https://en.wikipedia.org/wiki/O.O_(song)"], "certainty": "매우 낮음", "certainty_note": "'정식 타이틀곡 차트인 부재'는 부정 명제라 전수 확인 불가 — 반례 발견 시 즉시 갱신" }
+    {
+      "cell": "origin-scene",
+      "date": "2013",
+      "date_precision": "year",
+      "evidence": "A. G. Cook의 PC Music 설립(런던), SOPHIE 초기 협업",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Hyperpop"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "origin-scene-breakthrough",
+      "date": "2019-05",
+      "date_precision": "month",
+      "evidence": "100 gecs 『1000 gecs』 인디 씬 폭발(임계 돌파)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/1000_gecs"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-platform-codification",
+      "date": "2019-08",
+      "date_precision": "month",
+      "evidence": "Spotify 에디터의 'hyperpop' 플레이리스트 생성 — 장르가 씬이 아니라 플랫폼 큐레이션에 의해 명명된 특이 케이스",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Hyperpop"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-viral",
+      "date": "2020~2021",
+      "date_precision": "range",
+      "evidence": "glaive(사운드클라우드 첫 업로드 2개월 만에 Interscope 계약)·ericdoa 틱톡 바이럴 — 단 이 시기 빌보드 차트인 확인 안 됨",
+      "sources": [
+        "https://billboard.com/articles/columns/pop/9595799/hyperpop-history-mainstream-crossover"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "global-mainstream-ceiling",
+      "date": "2023-03",
+      "date_precision": "month",
+      "evidence": "주류 침투 상한 — 『10,000 gecs』 빌보드 200 최고 59위, 코어 아티스트의 Hot 100 히트 확인 안 됨(매우 낮음). '글로벌 주류 침투'의 실체가 플레이리스트·틱톡 지표였다",
+      "sources": [
+        "https://en.wikipedia.org/wiki/10,000_gecs"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "cell": "origin-scene-dissolution",
+      "date": "2021-01~",
+      "date_precision": "range",
+      "evidence": "SOPHIE 사망(2021-01-30) → 2022년경 핵심 아티스트들의 라벨 거부, digicore·glitchcore로 파편화 — '기업이 포장·판매하는 순간 전복성을 잃는' 자기부정 구조",
+      "sources": [
+        "https://www.dazeddigital.com/music/article/55293/1/the-rise-and-fall-of-hyperpop-the-internets-most-confusing-music-genre"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "cell": "kr-element-title",
+      "date": "2021-10",
+      "date_precision": "month",
+      "evidence": "aespa 'Savage' — 공식 장르는 트랩 댄스지만 '크런치 하이퍼팝 신스'(NME)·금속성 클랭 등 비평 귀속 다수. 가온 디지털 2위(🔄 2차 조사 정정 — 1위 표기는 오류)·K-pop Hot 100 2위·Global 200 39위 → 요소 차용은 차트 최상위권까지 감",
+      "sources": [
+        "https://en.wikipedia.org/wiki/Savage_(Aespa_song)",
+        "https://www.nme.com/reviews/album/aespa-savage-review-3064971",
+        "https://www.popmatters.com/aespa-savage-debut-ep-review"
+      ],
+      "certainty": "매우 높음",
+      "certainty_note": "독립 전문지 3곳 교차(NME·Paper·PopMatters) — 타이틀급 차용의 앵커"
+    },
+    {
+      "cell": "kr-bside-diffusion",
+      "date": "2022~2026",
+      "date_precision": "range",
+      "evidence": "수록곡 확산기 — TXT 'Frost'(2022-05), tripleS 'Rising'(2023-02 타이틀), SEVENTEEN 'GAM3 BO1'(2023-10), aespa 'Hot Mess'(2024-07 일본 데뷔 싱글), NCT DREAM 'Best of Me'(2024-11), 최예나 'Catch Catch'(2026-03, Circle 7위) — 요소가 '실험'에서 '상비 팔레트'로",
+      "sources": [
+        "https://www.soompi.com/article/1839542wpp/7-k-pop-tracks-that-turn-it-up-with-a-hyperpop-inspired-beat"
+      ],
+      "certainty": "중간"
+    },
+    {
+      "cell": "kr-identity-formalization",
+      "date": "2024-05",
+      "date_precision": "month",
+      "evidence": "'쇠맛' 언론 표제 공식화('Supernova' 시점) — 요소 차용이 그룹 자산으로 전환 완료된 유일 확인 사례",
+      "sources": [
+        "https://www.hankyung.com/article/202405136448H",
+        "https://www.hankookilbo.com/News/Read/A2024052716240002145"
+      ],
+      "certainty": "높음"
+    },
+    {
+      "cell": "kr-mainstream",
+      "date": "미도달",
+      "date_precision": "unreached",
+      "evidence": "전면 수용(하이퍼팝 타이틀의 상위권 진입) 사례 발견 못 함 — 수용은 (a) 메가 기획사의 요소 흡수(성공) (b) 수록곡 실험 (c) 언더 씬의 3층위에 그침. NMIXX 'O.O'(2022-02, 맥시멀 강제 접합) 가온 디지털 최고 81위 — 맥시멀리즘 강도를 높일수록 국내 성적이 꺾이는 신호(표본 1, 가설)",
+      "sources": [
+        "https://en.wikipedia.org/wiki/O.O_(song)"
+      ],
+      "certainty": "매우 낮음",
+      "certainty_note": "'정식 타이틀곡 차트인 부재'는 부정 명제라 전수 확인 불가 — 반례 발견 시 즉시 갱신"
+    }
   ],
   "leadtimes": [
-    { "from_cell": "global-platform-codification", "to_cell": "kr-element-title", "months": 26, "note": "글로벌 코드화(2019-08 Spotify 플레이리스트) → 타이틀급 차용(2021-10 Savage) 약 2년 2개월" },
-    { "from_cell": "global-viral-peak", "to_cell": "kr-element-title", "months": 8, "note": "틱톡 정점(2021-02 SugarCrash!) 대비 약 8개월" },
-    { "from_cell": "kr-element-title", "to_cell": "kr-identity-formalization", "months": 31, "note": "요소 차용(2021-10) → 팬덤 은어('쇠맛') 형성 → 언론 표제 공식화(2024-05)" },
-    { "from_cell": "global-platform-codification", "to_cell": "kr-mainstream", "months": null, "note": "전면 수용 미도달 — 요소 차용 모드로 갈라짐" }
+    {
+      "from_cell": "global-platform-codification",
+      "to_cell": "kr-element-title",
+      "months": 26,
+      "note": "글로벌 코드화(2019-08 Spotify 플레이리스트) → 타이틀급 차용(2021-10 Savage) 약 2년 2개월"
+    },
+    {
+      "from_cell": "global-viral-peak",
+      "to_cell": "kr-element-title",
+      "months": 8,
+      "note": "틱톡 정점(2021-02 SugarCrash!) 대비 약 8개월"
+    },
+    {
+      "from_cell": "kr-element-title",
+      "to_cell": "kr-identity-formalization",
+      "months": 31,
+      "note": "요소 차용(2021-10) → 팬덤 은어('쇠맛') 형성 → 언론 표제 공식화(2024-05)"
+    },
+    {
+      "from_cell": "global-platform-codification",
+      "to_cell": "kr-mainstream",
+      "months": null,
+      "note": "전면 수용 미도달 — 요소 차용 모드로 갈라짐"
+    }
   ],
   "early_signals": [
-    { "source_type": "platform-infra", "date": "2019-08", "lead_months_vs_kr_mainstream": null, "evidence": "Spotify 'hyperpop' 플레이리스트 생성 — 플랫폼 큐레이션에 의한 장르 공인", "certainty": "높음" },
-    { "source_type": "shortform-viral", "date": "2020~2021", "lead_months_vs_kr_mainstream": null, "evidence": "glaive·ericdoa 틱톡 바이럴 — 단 빌보드 차트인 없는 바이럴('글로벌 성과'의 실체 분해 필요)", "certainty": "높음" },
-    { "source_type": "shortform-viral", "date": "2021-02", "lead_months_vs_kr_mainstream": null, "evidence": "SugarCrash! 틱톡 정점 — 타이틀급 차용(Savage) 8개월 전", "certainty": "중간" },
-    { "source_type": "kr-underground-adoption", "date": "시기 미상", "lead_months_vs_kr_mainstream": null, "evidence": "국내 씬 — kimj 사단·SYSTEM SEOUL 등 언더 국한(나무위키 — 확실성 낮음). 트리플에스 계열 근거 미확보(미검증)", "certainty": "낮음" }
+    {
+      "source_type": "platform-infra",
+      "date": "2019-08",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "Spotify 'hyperpop' 플레이리스트 생성 — 플랫폼 큐레이션에 의한 장르 공인",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "shortform-viral",
+      "date": "2020~2021",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "glaive·ericdoa 틱톡 바이럴 — 단 빌보드 차트인 없는 바이럴('글로벌 성과'의 실체 분해 필요)",
+      "certainty": "높음"
+    },
+    {
+      "source_type": "shortform-viral",
+      "date": "2021-02",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "SugarCrash! 틱톡 정점 — 타이틀급 차용(Savage) 8개월 전",
+      "certainty": "중간"
+    },
+    {
+      "source_type": "kr-underground-adoption",
+      "date": "시기 미상",
+      "lead_months_vs_kr_mainstream": null,
+      "evidence": "국내 씬 — kimj 사단·SYSTEM SEOUL 등 언더 국한(나무위키 — 확실성 낮음). 트리플에스 계열 근거 미확보(미검증)",
+      "certainty": "낮음"
+    }
   ],
   "element_borrowing": {
-    "elements": ["크런치/브래시 하이퍼팝 신스", "SOPHIE 계열 금속성 클랭", "글리치 SFX·게임 노이즈(인접 — '글리치 미학'까지)", "노골적 오토튠·헤비 보컬 처리"],
+    "elements": [
+      "크런치/브래시 하이퍼팝 신스",
+      "SOPHIE 계열 금속성 클랭",
+      "글리치 SFX·게임 노이즈(인접 — '글리치 미학'까지)",
+      "노골적 오토튠·헤비 보컬 처리"
+    ],
     "anchor_tracks": [
-      { "artist": "aespa", "title": "Savage", "date": "2021-10", "chart": "가온 디지털 2위·K-pop Hot 100 2위·Global 200 39위", "certainty": "매우 높음" },
-      { "artist": "TXT", "title": "Frost", "date": "2022-05", "chart": "수록곡", "certainty": "중간" },
-      { "artist": "tripleS", "title": "Rising", "date": "2023-02", "chart": "타이틀", "certainty": "중간" },
-      { "artist": "SEVENTEEN", "title": "GAM3 BO1", "date": "2023-10", "chart": "수록곡", "certainty": "중간" },
-      { "artist": "aespa", "title": "Hot Mess", "date": "2024-07", "chart": "일본 데뷔 싱글", "certainty": "중간" },
-      { "artist": "최예나", "title": "Catch Catch", "date": "2026-03", "chart": "Circle 7위(본인 최고)", "certainty": "중간" }
+      {
+        "artist": "aespa",
+        "title": "Savage",
+        "date": "2021-10",
+        "chart": "가온 디지털 2위·K-pop Hot 100 2위·Global 200 39위",
+        "certainty": "매우 높음"
+      },
+      {
+        "artist": "TXT",
+        "title": "Frost",
+        "date": "2022-05",
+        "chart": "수록곡",
+        "certainty": "중간"
+      },
+      {
+        "artist": "tripleS",
+        "title": "Rising",
+        "date": "2023-02",
+        "chart": "타이틀",
+        "certainty": "중간"
+      },
+      {
+        "artist": "SEVENTEEN",
+        "title": "GAM3 BO1",
+        "date": "2023-10",
+        "chart": "수록곡",
+        "certainty": "중간"
+      },
+      {
+        "artist": "aespa",
+        "title": "Hot Mess",
+        "date": "2024-07",
+        "chart": "일본 데뷔 싱글",
+        "certainty": "중간"
+      },
+      {
+        "artist": "최예나",
+        "title": "Catch Catch",
+        "date": "2026-03",
+        "chart": "Circle 7위(본인 최고)",
+        "certainty": "중간"
+      }
     ],
     "stage_reached": "identity"
   },
@@ -56,13 +239,139 @@
   },
   "signature": {
     "status": "pending-a2",
-    "predicted_axes": ["금속성 클랭 텍스처(SOPHIE 계열)", "크런치/과포화 신스", "보컬 프로세싱(노골적 오토튠·헤비 처리)"]
+    "predicted_axes": [
+      "금속성 클랭 텍스처(SOPHIE 계열)",
+      "크런치/과포화 신스",
+      "보컬 프로세싱(노골적 오토튠·헤비 처리)"
+    ]
   },
   "peak_decline": {
     "kr_peak": "요소 기준 — 2021-10 Savage(타이틀급 차용의 정점) 이후 2022~2026 수록곡 확산기: 요소가 '실험'에서 '상비 팔레트'로",
     "origin_decoupled": true,
     "residue": "원 씬은 2021~22 해체(도착 전에 소스가 죽은 케이스)됐으나 한국에서는 요소가 상비 팔레트화·'쇠맛' 정체성 자산으로 전환"
   },
+  "chart_evidence": [
+    {
+      "chart": "billboard-hot100",
+      "artist": "100 gecs",
+      "title": "money machine",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "NMIXX",
+      "title": "O.O",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "SOPHIE",
+      "title": "Immaterial",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "TOMORROW X TOGETHER",
+      "title": "Frost",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "YENA",
+      "title": "Catch Catch",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "aespa",
+      "title": "Savage",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "aespa",
+      "title": "Black Mamba",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "aespa",
+      "title": "Next Level",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "aespa",
+      "title": "Supernova",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "aespa",
+      "title": "Whiplash",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "glaive",
+      "title": "astrid",
+      "role": "origin",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    },
+    {
+      "chart": "billboard-hot100",
+      "artist": "tripleS",
+      "title": "Rising",
+      "role": "kr",
+      "charted": false,
+      "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)",
+      "certainty": "매우 높음",
+      "note": "전 이력(1958~) 조회에서 Hot 100 미검출. '영향이 없었다'가 아니라 '미국 주류 차트를 거치지 않았다'이며, 크레딧 표기가 크게 다르면 매칭이 놓쳤을 수 있다."
+    }
+  ],
   "limits": [
     "수록곡 하이퍼팝 목록이 Soompi 2026-05 회고 기사 하나에 편중 — 소급 귀속 위험(ITZY '24HRS'가 전형: 발매가 하이퍼팝 바이럴 이전)",
     "'Savage = 하이퍼팝 요소'는 비평 담론이지 공식 크레딧 아님 — 순환 논증 위험",

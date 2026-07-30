@@ -15,7 +15,61 @@
     "charts": { "type": "array", "items": { "$ref": "#/$defs/chart" } },
     "media": { "type": "array", "items": { "$ref": "#/$defs/media" } },
     "insights": { "type": "array", "items": { "type": "string" } },
-    "recommendations": { "type": "array", "items": { "type": "string" } }
+    "recommendations": { "type": "array", "items": { "type": "string" } },
+
+    "summary": {
+      "description": "진입 요약 하나(R2). **배열이 아니라 객체다** — 첫 화면에 도형 두 개를 놓을 수 없게 구조로 막는다. FM 데이터 허브에서 허브 전체가 비었을 때 유일하게 하중받던 요소가 맨 앞의 요약 도형 하나였다(docs/REFERENCE-fm-data-hub.md §2). 여기 실린 차트는 `charts`에 중복해 싣지 않는다.",
+      "$ref": "#/$defs/chart"
+    },
+    "sections": {
+      "description": "탭을 **질문 단위로** 가르는 구획(D-043). 대시보드는 한 번에 한 구획만 보여주고, 나머지는 구획 내비게이션 뒤에 둔다.\n\n왜 계약 층에 있나: '한 화면에 최대 3가지'는 렌더러의 취향이 아니라 **검사 가능한 규칙**이어야 한다. 구획당 차트 상한을 scripts/validate_report_data.py가 세므로, 차트를 하나 더 얹으려면 그것이 어느 질문에 답하는지를 먼저 답해야 한다. 구획을 선언하지 않은 리포트는 지금까지처럼 한 줄로 렌더된다.",
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "label"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$" },
+          "label": { "description": "구획 내비게이션에 찍히는 짧은 이름.", "type": "string", "minLength": 1 },
+          "question": {
+            "description": "이 구획이 답하는 질문 한 줄. 구획의 머리글이 라벨이 아니라 **질문**이어야 읽는 사람이 어디로 갈지 정할 수 있다.",
+            "type": "string",
+            "minLength": 1
+          },
+          "note": { "description": "그 구획 전체에 걸리는 읽기 주의. 차트 제목의 괄호로 밀어 넣지 않는다(DESIGN §6.1).", "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "questions": {
+      "description": "이 탭에서 답할 수 있는 질문(R1). FM의 최대 실패는 기능 부족이 아니라 자기 사용법을 못 가르친 것이고, 그 답이 이 배열이다. `chartId`는 같은 리포트의 `summary.id` 또는 `charts[].id`를 가리켜야 한다(끊긴 앵커는 scripts/validate_report_data.py가 잡는다). 4개를 넘기지 않는다 — 질문 목록이 길어지면 그 자체가 또 하나의 '무엇을 볼지 모르는 화면'이 된다.",
+      "type": "array",
+      "maxItems": 4,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["q", "chartId"],
+        "properties": {
+          "q": { "type": "string", "minLength": 1 },
+          "chartId": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "notAnswered": {
+      "description": "이 화면이 **답하지 않는** 질문(R7). 커버리지 정직 규율의 UI 형태 — 없는 것을 없다고 먼저 말한다. 한계 서술(`insights`)과 다르다: 여기 들어가는 것은 사용자가 물으러 왔을 수 있는 **질문**이다.",
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "reliability": {
+      "description": "리포트 전체의 기본 신뢰도(R8). 차트별 `reliability`가 이 값을 **필드 단위로 덮는다**(렌더러가 병합). 엔진 버전처럼 모듈 전체에 공통인 것을 여기 한 번만 싣기 위한 자리다 — 차트마다 베끼면 같은 문자열이 15번 실린다.",
+      "$ref": "#/$defs/reliability"
+    },
+    "inferences": {
+      "description": "자동 추론(R4 · D-039). 불변식이 금지하는 것은 **평결**이고 꼬리표 달린 추론은 평결이 아니다 — 출처가 명시된 해석이며 사람이 채택·기각할 대상이다. 그래서 `insights`(string[])와 **분리된 객체 배열**이다: 문자열에는 근거·표본·등급·한계를 실을 자리가 없고, 접두사로 때우면 검사기가 동반 4종을 검사할 수 없다. 표기 규약 정본은 DESIGN.md §6.2.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/inference" }
+    }
   },
   "$defs": {
     "metric": {
@@ -28,7 +82,56 @@
         "unit": { "type": "string" },
         "delta": { "type": "number" },
         "benchmark": { "type": "number" },
-        "hint": { "type": "string" }
+        "hint": { "type": "string" },
+        "definition": {
+          "description": "지표가 **무엇을 재는가**의 한 줄 정의(R5). 화면에서 인라인으로 펼쳐진다 — 원장(RULES.md)으로 보내는 링크가 아니다. FM에서 '코너킥이 크로스로 집계되는 것 같다'가 유일한 주의사항으로 남은 이유가 정의의 부재였다. `hint`(표본·주의)와 역할이 다르다.",
+          "type": "string",
+          "minLength": 1
+        },
+        "section": {
+          "description": "이 지표가 속한 구획 id. 지정하면 그 구획 안에서만 보인다 — 지표 13개를 첫 화면에 한꺼번에 쌓지 않기 위한 자리다.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
+      }
+    },
+
+    "reliability": {
+      "description": "이 화면을 **어디까지 믿을지**를 도구가 먼저 말하는 자리(R8). 각주가 아니라 카드의 1급 요소로 렌더된다 — 나중에 얹으면 각주가 되고 각주는 안 읽힌다. 책임소재 불변식(DOMAIN.md §0)의 UI 형태다.",
+      "type": "object",
+      "additionalProperties": false,
+      "minProperties": 1,
+      "properties": {
+        "sample": { "description": "표본 규모 서술. 예: `관측 305곡 · 미해석 9곡`", "type": "string", "minLength": 1 },
+        "accuracy": { "description": "정확도 상태. 재지 않았으면 `정확도 미측정`이라고 쓴다(빈 값으로 두지 않는다).", "type": "string", "minLength": 1 },
+        "missing": { "description": "결측 사유. 결측이 없으면 이 필드를 넣지 않는다 — `없음`을 채우면 신뢰도 라인이 잡음이 된다.", "type": "string", "minLength": 1 },
+        "engine": { "description": "산출 엔진·설정 버전. 바뀌면 과거 값과 비교할 수 없다는 사실을 화면이 들고 있게 한다.", "type": "string", "minLength": 1 }
+      }
+    },
+
+    "inference": {
+      "description": "추론 하나 + 동반 4종. **5필드 전부 필수다** — 하나라도 없으면 렌더하지 않는 것이 아니라 애초에 방출되지 않는다(DESIGN.md §6.2). 근거 없는 추론이 화면에 오르는 경로를 계약 층에서 끊는 것이 이 required의 목적이다.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["text", "basis", "sample", "confidence", "limits"],
+      "properties": {
+        "text": {
+          "description": "추론 문장. 허용 어법은 `~와 정합한다`·`~신호가 있다`·`~로 읽힌다`. 명령형·예측 단정·인과 단정은 scripts/validate_report_data.py가 잡는다.",
+          "type": "string",
+          "minLength": 1
+        },
+        "basis": { "description": "어느 축·어느 수치에서 나왔나. 배지를 누르면 이것이 펼쳐진다.", "type": "string", "minLength": 1 },
+        "sample": { "description": "표본 n(서술 허용 — `관측 102곡 중 22곡`처럼 분모가 필요할 때가 있다).", "type": "string", "minLength": 1 },
+        "confidence": {
+          "description": "확실성 등급. 표시 문구는 렌더러가 붙인다(계약은 기계값 — DESIGN.md §6.1 기계 파싱 규약 예외).",
+          "enum": ["low", "medium", "high"]
+        },
+        "limits": { "description": "이 추론이 **못 보는 것**. 여기가 비면 추론은 평결로 읽힌다.", "type": "string", "minLength": 1 },
+        "chartId": {
+          "description": "이 추론이 딛고 선 관측. 지정하면 그 차트 **아래**에 배치된다(§6.2 배치 규칙). 같은 리포트의 차트 id여야 한다.",
+          "type": "string",
+          "minLength": 1
+        }
       }
     },
 
@@ -40,12 +143,40 @@
       "properties": {
         "type": { "enum": ["line", "bar", "heatmap", "radar", "tunable"] },
         "title": { "type": "string" },
-        "data": {}
+        "data": {},
+        "id": {
+          "description": "이 차트의 안정된 식별자 — `questions[].chartId`·`inferences[].chartId`의 앵커 대상이고 DOM 앵커(`#<id>`)가 된다. 제목 문자열로 앵커를 잡으면 문구를 다듬는 순간 링크가 조용히 끊기므로 별도 필드로 둔다.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        },
+        "question": {
+          "description": "**이 차트로 답할 수 있는 질문** 한 줄(R3). 답할 질문이 없으면 그 차트를 뺀다 — 이 필드를 비워 두는 것이 아니다. FM의 실패 증언('다 멋져 보인다, 그런데 이걸로 뭘 어떻게 도울 수 있나')에 대한 직접 응답이다.",
+          "type": "string",
+          "minLength": 1
+        },
+        "definition": {
+          "description": "축·지표가 무엇을 재는가의 한 줄 정의(R5). 화면에서 인라인으로 펼쳐진다.",
+          "type": "string",
+          "minLength": 1
+        },
+        "reliability": {
+          "description": "이 차트의 신뢰도(R8). 리포트 최상위 `reliability`를 필드 단위로 덮는다 — 보통 `sample`·`missing`만 싣고 `engine`은 최상위에서 물려받는다.",
+          "$ref": "#/$defs/reliability"
+        },
+        "section": {
+          "description": "이 차트가 속한 구획 id(`sections[].id`). 구획을 선언한 리포트에서는 필수로 취급된다(검사기). 구획 하나가 담을 수 있는 차트 수에는 상한이 있다.",
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9-]*$"
+        }
       },
       "allOf": [
         {
           "if": { "required": ["type"], "properties": { "type": { "const": "bar" } } },
           "then": { "properties": { "data": { "$ref": "#/$defs/barData" } } }
+        },
+        {
+          "if": { "required": ["type"], "properties": { "type": { "const": "radar" } } },
+          "then": { "properties": { "data": { "$ref": "#/$defs/radarData" } } }
         },
         {
           "if": { "required": ["type"], "properties": { "type": { "const": "line" } } },
@@ -94,6 +225,46 @@
               "values": { "type": "array", "items": { "type": ["number", "null"] } }
             }
           }
+        }
+      }
+    },
+
+    "radarData": {
+      "description": "요약 도형(R2) — 축 N개의 **비교 위치**를 한 폴리곤으로. 절대값을 그리는 용도가 아니다: 스케일이 다른 축을 한 도형에 얹으면 큰 축이 도형을 지배하고 작은 축은 중심에 눌려 그림이 값이 아니라 스케일을 보여준다. 그래서 `value`는 공통 스케일(백분위 0~100 등)이고 무엇으로 정규화했는지는 `scaleNote`가 들고 있다.\n\n`value: null` = **관측 없음**이며 0이 아니다(R6). 0은 '분포의 최하위'라는 관측값이라, 결측을 0으로 그리면 도형이 '이 축에서 꼴찌'라고 거짓말한다. 렌더러는 null 축에서 폴리곤을 잇지 않고 `missingReason`을 표시한다.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["axes"],
+      "properties": {
+        "axes": {
+          "description": "축 3개 미만은 폴리곤이 되지 않고, 8개를 넘으면 라벨이 서로 부딪히며 도형이 '작은 요약'이기를 그친다.",
+          "type": "array",
+          "minItems": 3,
+          "maxItems": 8,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "value"],
+            "properties": {
+              "name": { "type": "string", "minLength": 1 },
+              "value": { "type": ["number", "null"] },
+              "definition": { "description": "이 축이 무엇을 재는가(R5) — 축 라벨에서 인라인으로 펼쳐진다.", "type": "string", "minLength": 1 },
+              "missingReason": { "description": "`value`가 null일 때 **왜** 없는지. 필수는 아니지만 없으면 화면이 '관측 없음'만 말하고 사유를 못 말한다(R6).", "type": "string", "minLength": 1 },
+              "sample": { "description": "이 축의 표본 n. 축마다 다를 수 있어 축 단위로 싣는다.", "type": "integer", "minimum": 0 },
+              "raw": { "description": "정규화 전 원값 — 툴팁이 백분위와 함께 보여준다(백분위만 주면 '무엇이 그 위치인지'를 알 수 없다).", "type": "number" },
+              "rawUnit": { "type": "string" }
+            }
+          }
+        },
+        "max": { "description": "축 스케일 상한. 기본 100(백분위).", "type": "number", "exclusiveMinimum": 0 },
+        "baseline": {
+          "description": "기준 링의 값 — 비교 대상이 도형 안에 그려진다(기제 ①). 백분위 축에서 50은 '코호트 중앙값'이다. **시리즈가 아니라 크롬**이라 범례를 요구하지 않는다.",
+          "type": "number"
+        },
+        "baselineLabel": { "type": "string", "minLength": 1 },
+        "scaleNote": {
+          "description": "`value`가 무엇으로 정규화된 값인지. 이것이 없으면 폴리곤은 판독 불가다.",
+          "type": "string",
+          "minLength": 1
         }
       }
     },

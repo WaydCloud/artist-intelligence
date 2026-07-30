@@ -173,44 +173,81 @@ async function run() {
     });
 
     await page.goto(`${PAGE}?theme=${theme}`, { waitUntil: "networkidle" });
-    const tabs = await page.locator('nav[role="tablist"] button[role="tab"]').all();
+    // 모듈 탭만 센다. 구획 내비게이션(D-043)도 tablist라 선택자가 넓으면 둘이 섞이고,
+    // 실제로 2026-07-30에 섞여서 존재하지 않는 탭을 기다리다 타임아웃으로 죽었다.
+    const tabs = await page.locator('nav[aria-label="모듈"] button[role="tab"]').all();
     check(theme, tabs.length > 0, "탭이 하나도 렌더되지 않았습니다 (reports.json 확인)");
     tabCount = Math.max(tabCount, tabs.length);
 
     for (let i = 0; i < tabs.length; i++) {
       const name = (await tabs[i].innerText()).trim();
-      const where = `${theme}/${name}`;
       const before = logs.length;
 
       await tabs[i].click();
-      await page.waitForTimeout(150);
+      await page.waitForTimeout(200);
 
-      // 1차: 접힌 상태
-      let r = await page.evaluate(probe);
-      check(where, r.bodyChars > 0, "body가 비었습니다 (React 트리 언마운트 의심)");
-      check(where, r.mainChars >= MIN_MAIN_CHARS, `main 내용이 ${r.mainChars}자뿐입니다 (기준 ${MIN_MAIN_CHARS}자)`);
-      check(where, r.title.length > 0, "리포트 제목이 렌더되지 않았습니다");
-      check(where, r.fallbacks.length === 0, `차트 렌더 실패: ${r.fallbacks.join(", ")}`);
-      check(where, r.emptyCards.length === 0, `내용 없는 카드: ${r.emptyCards.join(", ")}`);
+      // 🔴 **탭이 실제로 바뀌었는지**를 먼저 본다. `aria-selected`는 React가 상태로
+      // 그리는 값이라, true가 되려면 (a) 클라이언트 번들이 하이드레이션됐고 (b) 클릭이
+      // 상태를 바꿨어야 한다. 2026-07-30에 이 검사가 없어서 **하이드레이션이 통째로
+      // 실패한 페이지가 전 항목을 통과했다** — 서버 렌더 HTML은 멀쩡했고, 탭을 눌러도
+      // 아무 일이 없는 채로 첫 탭 내용만 12번 검사됐다. 화면이 그려진다는 것과
+      // 화면이 살아 있다는 것은 다른 얘기다.
+      const selected = await tabs[i].getAttribute("aria-selected");
+      check(
+        `${theme}/${name}`,
+        selected === "true",
+        `탭을 눌러도 선택되지 않았습니다 (aria-selected=${selected}) — 하이드레이션 실패 의심. ` +
+          `dev를 켠 채 build를 돌리면 .next가 프로덕션 산출물로 덮여 이 상태가 됩니다`,
+      );
+      // 여기서 죽었으면 아래 검사는 전부 첫 탭 내용을 다시 재는 것이라 의미가 없다.
+      if (selected !== "true") continue;
 
-      // 2차: <details> 전부 펼친 뒤 -- 접힌 안쪽에서 터지는 결함을 잡는다
-      if (r.details > 0) {
-        await page.evaluate(() => {
-          document.querySelectorAll("main details").forEach((d) => d.setAttribute("open", ""));
-        });
-        await page.waitForTimeout(150);
-        r = await page.evaluate(probe);
-        check(where, r.bodyChars > 0, "details 펼침 후 body가 비었습니다");
-        check(where, r.fallbacks.length === 0, `details 펼침 후 차트 렌더 실패: ${r.fallbacks.join(", ")}`);
+      // 구획(D-043)이 있으면 **구획마다** 검사한다. 한 번에 한 구획만 DOM에 있으므로
+      // 첫 구획만 보면 나머지 구획의 렌더 결함이 그대로 통과한다 -- 이 스모크가 존재하는
+      // 이유(정적 게이트가 못 보는 런타임 결함)를 스스로 반쯤 잃는 셈이다.
+      const secBtns = await page.locator('nav[aria-label="구획"] button[role="tab"]').all();
+      const steps = secBtns.length > 0 ? secBtns : [null];
+
+      for (const sec of steps) {
+        let where = `${theme}/${name}`;
+        if (sec) {
+          const label = (await sec.innerText()).trim().replace(/\s+/g, " ");
+          where = `${where}/${label}`;
+          await sec.click();
+          await page.waitForTimeout(260); // 구획 전환 모션(0.22s)이 끝난 뒤 측정
+        }
+        const secBefore = logs.length;
+
+        // 1차: 접힌 상태
+        let r = await page.evaluate(probe);
+        check(where, r.bodyChars > 0, "body가 비었습니다 (React 트리 언마운트 의심)");
+        check(where, r.mainChars >= MIN_MAIN_CHARS, `main 내용이 ${r.mainChars}자뿐입니다 (기준 ${MIN_MAIN_CHARS}자)`);
+        check(where, r.title.length > 0, "리포트 제목이 렌더되지 않았습니다");
+        check(where, r.fallbacks.length === 0, `차트 렌더 실패: ${r.fallbacks.join(", ")}`);
+        check(where, r.emptyCards.length === 0, `내용 없는 카드: ${r.emptyCards.join(", ")}`);
+
+        // 2차: <details> 전부 펼친 뒤 -- 접힌 안쪽에서 터지는 결함을 잡는다
+        if (r.details > 0) {
+          await page.evaluate(() => {
+            document.querySelectorAll("main details").forEach((d) => d.setAttribute("open", ""));
+          });
+          await page.waitForTimeout(150);
+          r = await page.evaluate(probe);
+          check(where, r.bodyChars > 0, "details 펼침 후 body가 비었습니다");
+          check(where, r.fallbacks.length === 0, `details 펼침 후 차트 렌더 실패: ${r.fallbacks.join(", ")}`);
+        }
+
+        const freshSec = logs.slice(secBefore);
+        check(where, freshSec.length === 0, `콘솔 에러 ${freshSec.length}건\n    ${freshSec.join("\n    ")}`);
+
+        console.log(
+          `  ${failures.some((f) => f.startsWith(`${where}:`)) ? "FAIL" : "ok  "} ${where.padEnd(34)} ` +
+            `카드 ${r.cards} · 접힘항목 ${r.details} · main ${r.mainChars}자`,
+        );
       }
 
       const fresh = logs.slice(before);
-      check(where, fresh.length === 0, `콘솔 에러 ${fresh.length}건\n    ${fresh.join("\n    ")}`);
-
-      console.log(
-        `  ${failures.some((f) => f.startsWith(`${where}:`)) ? "FAIL" : "ok  "} ${where.padEnd(28)} ` +
-          `카드 ${r.cards} · 접힘항목 ${r.details} · main ${r.mainChars}자`,
-      );
+      check(`${theme}/${name}`, fresh.length === 0, `콘솔 에러 ${fresh.length}건\n    ${fresh.join("\n    ")}`);
     }
 
     // 어느 탭에도 귀속되지 않는 로그(초기 로드 시점)도 놓치지 않는다

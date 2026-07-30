@@ -4,50 +4,57 @@
 > 과거 기록은 [`Handoffs/`](Handoffs/), 결정 이유는 [`docs/DECISIONS.md`](docs/DECISIONS.md).
 > 새 세션은 **이 파일 먼저** → `CLAUDE.md` → 관련 모듈 순으로 읽고 이어서 작업한다.
 
-## 🧭 다음 행선지 — **시각화 착수** (재개점)
+## 🧭 다음 행선지 — **남은 4탭에 복제** (재개점)
 
-> 도메인 소유자: *"새 세션에서 본격적으로 시각화."* 데이터 체계화 단계는 닫혔다.
-> 규칙 정본은 [`DESIGN.md`](DESIGN.md)(§6.2 AI추론 · §7 차트 스택 · §8 게이트) · 레퍼런스는 [`docs/REFERENCE-fm-data-hub.md`](docs/REFERENCE-fm-data-hub.md) · 결정은 D-039·D-040.
+> **완료: sonic-profile(R1~R8) · chart-history(R1~R8 + 구획)**. 남은 것은 **fandom-pulse · genre-impulse · signal-bridge · yt-pulse**.
+> 계약 = D-041 · 채택 경계 = D-042 · **구획 = D-043** · 형식 정본 = [`DESIGN.md`](DESIGN.md) §7.1~§7.4.
+> 요구사항 정본은 [`docs/REFERENCE-fm-data-hub.md`](docs/REFERENCE-fm-data-hub.md) §5.1.
 
-### 착수 전 확인 (딱 두 개)
+### chart-history에서 새로 굳은 것 (2026-07-30 도메인 소유자 지시 4건)
 
-1. 🔴 **`inferences` 리포트 계약 승인** — D-039(`AI추론` 태그)를 구현하려면 스키마에 객체 배열을 신설해야 한다. 현 `insights`는 `string[]`이라 태그·근거·불확실성을 실을 자리가 없고, 문자열 접두사로 때우는 것은 **D-036이 방금 닫은 그 구멍**이다. AGENTS §0에 따라 **별도 승인 + 대시보드 동시 갱신**이 전제. → 승인되면 D-036과 같은 방식(스키마 판별 분기 + 렌더러 동시 갱신 + 검사기 규칙 + selftest)으로 처리.
-2. **디자인 스킬 벤더링 승인**(선택) — 공식 [`frontend-design`](https://github.com/anthropics/skills/blob/main/skills/frontend-design) + [`emilkowalski/skills`](https://github.com/emilkowalski/skills) 모션 4종을 `.claude/skills/`에 넣을지. 외부 지시문을 레포에 들이므로 AGENTS §1 대상. **없어도 시각화는 시작할 수 있다**(`dataviz` 스킬은 번들이라 이미 사용 가능).
+| 지시 | 반영 |
+|---|---|
+| 한 채널에 최대 3가지 | `sections[]` 신설 + **구획당 차트 상한 3을 검사기가 센다**(D-043). chart-history 10차트 → 4구획 8차트(2/2/3/1) |
+| 아름다워야 한다, 의도 없는 배치는 짜침 | 진입부에서 **같은 카드 두 개를 나란히 놓지 않는다**. 질문 목록은 본문 텍스트, 카드는 도형에만(`DESIGN.md` §7.1.2) |
+| 억지로 쉬운 말을 쓰면 독이 된다 | `DESIGN.md` §6.1 규율 **교체**. 기준은 어휘 난이도가 아니라 **2차 해석 요구 여부**. `지리 지문`·`최광역`·`홈(KR)`·`화이트스페이스` 같은 별칭과 제목 속 `×`·`[태그]`·괄호 경고문을 걷어냈다 |
+| 모던·미니멀리즘·시네마틱 | 구획 내비게이션은 번호 + 이름 + 얇은 밑줄만(알약 탭 금지 — 모듈 탭과 층이 겹친다). 구획 머리글은 라벨이 아니라 **질문** |
 
-### 파일럿 권고 — sonic-profile 탭
+### 파일럿에서 굳은 것 (복제 대상)
 
-지표 24종·분포·튜너가 다 있어 **요구사항 8개를 한 화면에서 시험**할 수 있다. 여기서 형태가 잡히면 나머지 5탭에 복제한다.
+| 요구 | 구현 |
+|---|---|
+| R1 | `questions[]`(`{q, chartId}`) + `TabQuestions` 블록. 끊긴 앵커는 검사기가 잡는다 |
+| R2 | `summary` **단일 객체** + `RadarChart`. 배열이 아니라 객체라 도형 두 개를 낼 수 없다 |
+| R3 | `charts[].question` + 카드 제목 아래 한 줄. 채택 모듈은 없으면 CI가 멈춘다 |
+| R4 | `inferences[]`(5필드 required) + `InferenceBlock`(배지 → 근거 펼침, 관측 **아래** 배치) |
+| R5 | `definition`(차트·지표) + `Definition` 인라인 펼침 |
+| R6 | 결측에서 선·폴리곤을 **끊고** 마크는 **플롯 밖**에 둔다 + 개수 표기 |
+| R7 | `notAnswered[]` + 질문 블록 하단 |
+| R8 | `reliability`(최상위 ⊕ 차트별 병합) + `ReliabilityLine`을 **플롯 위**에 |
 
-### 요구사항 R1~R8 (FM 데이터 허브의 실패를 번역한 것 · 정본 REFERENCE §5.1)
+### 복제 순서 (탭 하나당)
 
-| # | 요구사항 | 검사 |
-|---|---|---|
-| **R1** | 각 탭 첫 화면이 **"이 탭에서 답할 수 있는 질문 3개"**를 명시 + 해당 패널로 앵커 | 탭 스모크에 질문 블록·링크 대상 검사 추가 |
-| **R2** | **진입은 요약 1개** — 첫 화면 스크롤 없는 영역에 차트 **1개**만 | 육안 + 스모크 |
-| **R3** | 차트마다 **"이 차트로 답할 수 있는 질문"** 한 줄. **없으면 그 차트를 뺀다** | 리포트 계약 필수화 검토 |
-| R4 | `AI추론` 태그 + 근거 열기 · 동반 4종 없으면 방출 거부 | 검사기 |
-| R5 | 지표 정의를 **인라인 펼침**(원장 링크가 아니라 화면에) | 타일·축 라벨 정의 필드 |
-| R6 | **결측을 0으로 그리지 않는다** — "관측 없음 + 사유" | 렌더 층 회귀 검사 |
-| R7 | 화면이 **못 답하는 질문을 명시** | 커버리지 표기를 전 탭으로 |
-| R8 | 신뢰도 라인을 카드마다 **1급 요소**(표본 n · 정확도 상태 · 결측 사유 · 엔진 버전) | **각주 금지** |
+1. **그 탭이 답하는 질문을 먼저 세어 본다.** chart-history는 넷이었고(플랫폼·규모·지리·신인) 그것이 그대로 구획이 됐다. 질문이 셋을 넘으면 구획을 나누고, 한 구획에 차트가 4개면 하나는 답이 겹치는 것이다.
+2. `report.py`에 `sections` · `summary` · `questions` · `notAnswered` · `reliability` · 차트 `id`/`section`/`question`/`definition`을 채운다. 문구는 **한 표에 모은다**(`_CHART_META` · `_SECTIONS`가 원형 — 계산 코드 사이에 흩으면 카피 검토가 불가능해진다).
+3. `scripts/validate_report_data.py`의 `ADOPTED_MODULES`에 모듈 id 한 줄 추가 → 그 순간부터 R1~R8이 하드 게이트.
+4. 게이트: `validate_report_data.py`(+`--selftest`) · `tsc` · `next lint` · `npm run smoke:tabs`(구획까지 돈다) · **라이트/다크 육안**.
 
-**R1·R3이 가장 무겁다.** FM의 최대 실패는 기능 부족이 아니라 **자기 사용법을 못 가르친 것**이고("거기 너무 많은 게 있어서 무엇을 봐야 할지 알 수 없었다"), 우리도 같은 위험 위에 있다("다 멋져 보인다, 그런데 이걸로 뭘 어떻게 도울 수 있나?").
+⚠ **눈으로만 잡히는 결함이 실제로 다섯 건 나왔다** — 전부 정적 게이트 4종과 탭 스모크를 **통과한 상태**에서였다:
 
-### 이식할 설계 원칙 (검증된 것만)
+1. 6시리즈 라인차트가 색 토큰을 순환해 서로 다른 두 축이 **같은 보라색**이었다 → 스몰 멀티플(§7.3)
+2. 요약 도형의 기준 링이 격자와 겹쳐 **비교 기준이 보이지 않았다** → 직접 라벨 + 겹치는 격자 제거(§7.2)
+3. 결측 마커를 y=0에 찍어 **실값 0.01과 구별되지 않았다** → 축 아래 밴드로(§7.4)
+4. `Spotify 밖` 막대가 **순위를 막대 길이로** 그렸다 → 순위 170이 순위 1보다 긴 막대. **순위는 크기가 아니라 순서**라 막대에 실을 값이 아니다. 그 차트는 결국 뺐다(답이 이웃 히트맵과 겹쳤다)
+5. 지표 타일이 긴 문자열 값을 **잘라서** 없는 값을 만들었다(`RESCENE - LO...`)
 
-1. **진입은 작은 요약 하나** — 독립 3근거가 일치한다. FM26에서 허브가 비었을 때 **작동하던 유일한 것이 General Performance Octagon**이었다(고장 상태에서 남은 하나가 하중받던 요소).
-2. **두 패널의 불일치가 진짜 산출물** — "미드필더는 태클을 많이 성공한다 **그러나** 볼을 되찾는 지역은 하프라인 아래다 → 전방 3인이 압박에 기여하지 않는다". **오늘 우리 게이트 판단이 전부 이 구조였다**(측정은 건강한데 정답지가 중앙 = 주장이 틀림). ⇒ 두 축을 나란히 놓아 불일치가 보이는 레이아웃.
-3. **비교 위치를 값의 기본 동반자로** — 절대값 단독 금지. 우리는 이미 **당일 코호트 백분위**를 쓰므로 이식이 아니라 노출 문제다.
-4. **부호를 뒤집는 맥락을 값 옆에** — "이 값이 낮은 것은 설정 때문일 수 있다"를 화면이 먼저 말한다(각주 아님).
+**탭마다, 구획마다 렌더를 실제로 볼 것.** 정적 게이트는 이 다섯 중 어느 것도 잡지 못했다.
 
-### 착수 순서 제안
+### 남은 시각화 작업 (파일럿 범위 밖 · 우선순위 순)
 
-1. `@visx/*` 저수준 패키지만 설치(`shape`·`scale`·`axis`·`tooltip`·`group`) + `motion`. **고수준 `@visx/xychart`는 쓰지 않는다.**
-2. sonic-profile 탭에 R1·R2·R3 적용 — 질문 3개 블록 + 요약 1개 + 차트별 질문 한 줄.
-3. 신뢰도 라인(R8) 컴포넌트 1개를 만들어 전 카드에 꽂는다.
-4. 라이트/다크 육안 + `npm run smoke:tabs` + 팔레트 검증기 + 안티패턴 대조(`DESIGN.md` §8 체크리스트).
-
-⚠ **시각화 단계의 고유 위험**: 잘 만든 차트는 그 자체로 **평결처럼 읽힌다**(AGENTS §5 압력). `DESIGN.md` §4 표면 위계가 방어선이고, **불확실성·표본·한계를 어디에 붙일지는 레이아웃 단계에서 정해야 한다** — 나중에 얹으면 각주가 되고 각주는 안 읽힌다.
+1. **선·면 크로스헤어 + 통합 툴팁** — `DESIGN.md` §7이 "기본 탑재"로 요구하는데 아직 없다. 현 라인차트는 점마다 `<title>`이라 히트 타깃이 6px이다(§7 "히트 타깃은 마크보다 크게" 미달). 프리미티브는 준비돼 있다: `components/charts/ChartTooltip.tsx`(visx 경계 계산만 빌리고 룩은 토큰으로 덮은 것)를 라인/히트맵에 꽂으면 된다.
+2. **막대·셀 툴팁** — 위와 같은 프리미티브로. 현재 `title` 속성.
+3. **모션** — `motion`은 설치됐고 추론 펼침에만 쓰인다. 상태 변화를 설명하는 곳에만 추가한다(공식 `frontend-design` 경고를 §7이 승계: 과한 애니메이션은 AI 생성처럼 읽힌다).
+4. **지표 타일 24개의 편집** — 어느 축을 표면에 남길지는 도메인 판단이다. 요약 도형이 6축을 들고 있으므로 타일은 참고 자료로 내려갔지만, 24개는 여전히 많다.
 
 ---
 
@@ -56,8 +63,10 @@
 - 프로젝트: `C:\Projects\artist-intelligence`. 로컬: Python 3.14.5 · Node 24 · **Windows(win32/AMD64)**.
 - **바닥 전제(D-006)**: **책임소재 불변식**(판단=책임질 인간·도구=증거에서 종료) + **기준 원장**(엔지니어=형식 / 도메인 소유자=값). 정본 `DOMAIN.md §0`·`AGENTS.md §2.1·§5`. **모든 신규 모듈 구속.**
 - **모듈 6종** 모두 핵심 흐름(`모듈 CLI → 스키마 유효 report.json → 대시보드`) 관통: chart-history v5 · fandom-pulse v3.1 · signal-bridge v2 · yt-pulse v1 · **sonic-profile v4** · genre-impulse v1.
-- **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(**D-036에서 차트 페이로드 제약 추가**) + PII 게이트 + `packages/entity-master`.
-- ✅ **git 정리 완료**: 열린 PR **0**. main = 머지 4건 반영 후 CI 5잡 success. 최근 세션 이력은 [`Handoffs/2026-07-30-gates-grid-and-visualization-prep.md`](Handoffs/2026-07-30-gates-grid-and-visualization-prep.md).
+- **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(**D-036** 차트 페이로드 제약 · **D-041** 시각화 필드 · **D-043** 구획) + PII 게이트 + `packages/entity-master`.
+- **시각화 계약 채택**: sonic-profile · chart-history **2/6**. 강제 경계는 `scripts/validate_report_data.py`의 `ADOPTED_MODULES`(D-042).
+- **디자인 스킬 벤더링 완료**: `.claude/skills/`에 `frontend-design` + 모션 4종(MIT · LICENSE 동봉). **아직 커밋되지 않았다**(미추적) — 외부 지시문을 레포에 들이는 것이라 커밋 여부는 확인 대상.
+- ✅ **git 정리 완료**: 열린 PR **0**. 최근 세션 이력은 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭 적용).
 
 ## 🔴 가동 중 — 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 
@@ -81,8 +90,8 @@
 
 | 항목 | 왜 |
 |---|---|
-| **`inferences` 리포트 계약** | D-039 구현 전제(AGENTS §0) |
-| **디자인 스킬 벤더링** | 외부 지시문을 레포에 들임(AGENTS §1) |
+| ~~**`inferences` 리포트 계약**~~ | ✅ 승인·구현 완료(D-041·D-042) |
+| ~~**디자인 스킬 벤더링**~~ | ✅ 승인·완료 — `.claude/skills/`에 `frontend-design` + 모션 4종(`animation-vocabulary`·`find-animation-opportunities`·`improve-animations`·`review-animations`). 둘 다 MIT, LICENSE 동봉 |
 | **유료 소셜 레그 재시도** | 재시도는 돈에 관한 결정이라 제외해 둠 |
 | **저지클럽 정답지 20곡 확정** | [초안](docs/DRAFT-jersey-club-answer-sheet.md) 확인 포인트 4건 — VIBE 캐논 단독 근거를 수용할지 |
 | **틱톡 워치리스트 v0** | [초안](docs/DRAFT-tiktok-watchlist-v0.md) 검토 포인트 8건 (D-035 ①, 월 상한 $15) |
@@ -150,12 +159,15 @@ PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python scripts/
 
 # ── 상태·게이트
 python scripts/validate_report_data.py [--selftest]   # 차트 데이터 계약(스키마가 못 보는 것)
-cd apps/dashboard && npm run smoke:tabs               # 전 탭 x 라이트/다크 (dev 실행 중일 때)
+cd apps/dashboard && npm run smoke:tabs               # 전 탭 x 구획 x 라이트/다크 (dev 실행 중일 때)
 python -m ruff check modules/ scripts/ · python -m pyright modules/<m>
 node apps/dashboard/scripts/collect-reports.mjs
 cd apps/dashboard && npm run dev -- --port 3100       # 3000은 다른 프로젝트가 점유 중
 #   ⚠ check-dev-off 가드가 3000에 걸리면 전면 우회(AI_ALLOW_BUILD=1) 대신
 #     $env:AI_DEV_PORTS='3100' 으로 검사 범위만 좁힐 것 (우리 dev 보호는 살린다)
+#   🔴 build는 **dev를 끄고** 돌린다. distDir를 갈아 끼우는 우회는 통하지 않는다
+#     (2026-07-30 실측: .next가 프로덕션 산출물로 덮여 dev가 하이드레이션 없는 HTML을
+#      내보냈다 — 화면은 그려지는데 탭이 안 눌리는 상태). 끝나면 dev 재시작 + .next 삭제.
 
 # ── 팔레트 검증기 (dataviz 스킬 · 색을 건드리면 필수)
 node "<dataviz skill>/scripts/validate_palette.js" "#6d28d9,#b45309,#0891b2" --mode light --surface "#ffffff"

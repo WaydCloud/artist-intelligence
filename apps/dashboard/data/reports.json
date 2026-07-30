@@ -1,91 +1,244 @@
 [
   {
     "moduleId": "chart-history",
-    "title": "차트 히스토리 · 멀티플랫폼 수평 뷰 (youtube·spotify·apple·shazam)",
-    "subtitle": "4개 플랫폼 병렬(위계 없음) · youtube 49시장 · spotify 50시장 · apple 49시장 · shazam 42시장 · 2026-07-30 · 24280곡",
-    "generatedAt": "2026-07-30T00:08:11Z",
+    "title": "차트 히스토리 · 4개 플랫폼",
+    "subtitle": "YouTube · Spotify · Apple · Shazam · 51개 시장 · 2026-07-30 · 24280곡",
+    "generatedAt": "2026-07-30T07:25:47Z",
+    "summary": {
+      "type": "radar",
+      "id": "lens-coverage",
+      "title": "플랫폼별로 잡히는 팀의 비율",
+      "question": "한 플랫폼만 보면 얼마나 놓치나?",
+      "definition": "네 플랫폼 전체에서 한 번이라도 잡힌 한국 원산지 팀을 100으로 두고, 각 플랫폼이 그중 몇 퍼센트를 잡았는지 나타낸 값. 도형이 고를수록 네 플랫폼이 같은 팀을 보고 있다는 뜻이다. 이 값은 커버리지이며 플랫폼의 우열이 아니다. 순위 범위와 수집 시장 수가 다르면 깊은 쪽이 더 많이 잡는 것이 당연하다.",
+      "data": {
+        "axes": [
+          {
+            "name": "YouTube",
+            "value": 28.9,
+            "sample": 11,
+            "raw": 11,
+            "rawUnit": "팀"
+          },
+          {
+            "name": "Spotify",
+            "value": 97.4,
+            "sample": 37,
+            "raw": 37,
+            "rawUnit": "팀"
+          },
+          {
+            "name": "Apple",
+            "value": 63.2,
+            "sample": 24,
+            "raw": 24,
+            "rawUnit": "팀"
+          },
+          {
+            "name": "Shazam",
+            "value": 78.9,
+            "sample": 30,
+            "raw": 30,
+            "rawUnit": "팀"
+          }
+        ],
+        "max": 100,
+        "scaleNote": "네 플랫폼 전체에서 잡힌 팀 대비 비율",
+        "baseline": 67.1,
+        "baselineLabel": "플랫폼 평균"
+      }
+    },
+    "sections": [
+      {
+        "id": "platforms",
+        "label": "플랫폼",
+        "question": "네 플랫폼이 같은 곡을 올리고 있나?",
+        "note": "플랫폼마다 집계 대상과 순위 범위가 다르다. 순위 숫자를 플랫폼끼리 비교할 수 없다. 이 구획이 답하는 것은 크기가 아니라 어디에 잡히는가다."
+      },
+      {
+        "id": "scale",
+        "label": "규모",
+        "question": "1위 곡은 실제로 얼마나 재생됐나?",
+        "note": "두 차트의 단위가 다르다. 조회수와 스트림은 서로 환산되지 않으므로 나란히 두고 크기를 견주지 않는다."
+      },
+      {
+        "id": "geography",
+        "label": "지리",
+        "question": "우리 팀들은 어느 나라 차트에 올랐나?",
+        "note": "원산지가 한국으로 확인된 팀만 본다. 숫자는 조사한 나라 집합 안에서의 값이며 세계 도달이 아니다."
+      },
+      {
+        "id": "rookies",
+        "label": "신인",
+        "question": "팬베이스 없는 신인은 어디에 닿았나?",
+        "note": "데뷔 연도가 확인된 팀만 코호트에 든다. 확인되지 않은 팀은 빠지므로 이 표는 하한이다."
+      }
+    ],
+    "questions": [
+      {
+        "q": "한 플랫폼만 봤다면 누가 화면에서 사라지나?",
+        "chartId": "roster-by-lens"
+      },
+      {
+        "q": "우리 팀들이 아직 오르지 못한 나라는 어디인가?",
+        "chartId": "market-gaps"
+      },
+      {
+        "q": "팬베이스가 얇은 신인은 어느 나라에 닿았나?",
+        "chartId": "rookie-markets"
+      },
+      {
+        "q": "한국 상위 10곡은 플랫폼마다 다른가?",
+        "chartId": "kr-top10-lenses"
+      }
+    ],
+    "notAnswered": [
+      "국내 코어 차트. 멜론과 써클차트는 아직 연결되지 않아 국내는 Spotify 한국 차트로 근사한다",
+      "왜 그 나라에서 올랐는지. 이 화면은 어디에 올랐는지까지만 다룬다",
+      "순위가 오르는 중인지 내리는 중인지. 하루치 스냅샷이라 방향을 알 수 없다",
+      "플랫폼 사이의 크기 비교. 집계 대상과 순위 범위가 달라 순위 숫자를 서로 견줄 수 없다",
+      "빌보드 순위. 데이터 원천이 유료 기업 거래용이라 수집 경로가 없다"
+    ],
+    "reliability": {
+      "sample": "4개 플랫폼 · 51개 시장 · 24280곡",
+      "accuracy": "차트 순위와 수치는 사실. 아티스트 원산지와 데뷔 연도는 커뮤니티 데이터라 불완전할 수 있음",
+      "missing": "원산지가 확인되지 않은 아티스트는 로스터 집계에서 제외",
+      "engine": "Kworb 집계값 · Apple 공식 RSS · 스냅샷 2026-07-30"
+    },
+    "inferences": [
+      {
+        "text": "YouTube만 보면 Spotify에서 잡히는 팀의 상당수가 화면에 없는 상태와 정합한다.",
+        "basis": "YouTube 11팀 · Spotify 37팀 · Apple 24팀 · Shazam 30팀 · 네 플랫폼 합집합 38팀",
+        "sample": "원산지가 확인된 로스터 팀 38팀",
+        "confidence": "high",
+        "limits": "플랫폼마다 순위 범위와 수집 시장 수가 달라 이 비율은 커버리지 차이를 포함한다. 우열이 아니며, 잡히지 않았다는 것이 그 나라에서 안 들린다는 뜻도 아니다.",
+        "chartId": "lens-coverage"
+      },
+      {
+        "text": "데뷔 3년 이내 팀 중에도 여러 나라 차트에 닿은 사례가 있는 것으로 읽힌다. 가장 넓은 쪽은 CORTIS이다.",
+        "basis": "CORTIS 10개국, ILLIT 8개국, BABYMONSTER 5개국, Hearts2Hearts 4개국",
+        "sample": "데뷔 연도가 확인된 신인 8팀",
+        "confidence": "medium",
+        "limits": "데뷔 연도가 확인되지 않은 팀은 코호트에서 빠지므로 이 수는 하한이다. 하루치 스냅샷이라 오름세인지 내림세인지 구분하지 않는다.",
+        "chartId": "rookie-markets"
+      },
+      {
+        "text": "진입 지도는 대부분이 빈 칸인 상태와 정합한다. 38팀 × 39개국 중 156칸에만 진입 기록이 있다.",
+        "basis": "채워진 칸 156/1482 (11%)",
+        "sample": "로스터 38팀 · 조사 39개국",
+        "confidence": "high",
+        "limits": "빈 칸은 그 나라 차트 상위에 없다는 뜻이지 그 나라에서 안 들린다는 뜻이 아니다. 차트 밖의 소비는 이 데이터로 보이지 않는다.",
+        "chartId": "market-gaps"
+      }
+    ],
     "metrics": [
       {
-        "label": "youtube 1위",
+        "label": "YouTube 1위",
         "value": "RESCENE - LOVE ATTACK",
         "unit": "KR",
-        "hint": "49시장 수집"
+        "hint": "49시장 수집",
+        "section": "platforms",
+        "definition": "그 플랫폼의 한국 차트 1위 곡. 플랫폼마다 집계 대상이 달라 서로 견주지 않는다."
       },
       {
-        "label": "spotify 1위",
+        "label": "Spotify 1위",
         "value": "CORTIS - REDRED",
         "unit": "KR",
-        "hint": "50시장 수집"
+        "hint": "50시장 수집",
+        "section": "platforms",
+        "definition": "그 플랫폼의 한국 차트 1위 곡. 플랫폼마다 집계 대상이 달라 서로 견주지 않는다."
       },
       {
-        "label": "apple 1위",
+        "label": "Apple 1위",
         "value": "제니 - Less than a Lover",
         "unit": "KR",
-        "hint": "49시장 수집"
+        "hint": "49시장 수집",
+        "section": "platforms",
+        "definition": "그 플랫폼의 한국 차트 1위 곡. 플랫폼마다 집계 대상이 달라 서로 견주지 않는다."
       },
       {
-        "label": "shazam 1위",
+        "label": "Shazam 1위",
         "value": "Tungevaag - Wicked Wonderland",
         "unit": "KR",
-        "hint": "42시장 수집"
+        "hint": "42시장 수집",
+        "section": "platforms",
+        "definition": "그 플랫폼의 한국 차트 1위 곡. 플랫폼마다 집계 대상이 달라 서로 견주지 않는다."
       },
       {
-        "label": "차트 플랫폼",
+        "label": "수집한 플랫폼",
         "value": 4,
         "unit": "플랫폼",
-        "hint": "youtube 49시장 · spotify 50시장 · apple 49시장 · shazam 42시장"
+        "hint": "YouTube 49시장 · Spotify 50시장 · Apple 49시장 · Shazam 42시장",
+        "section": "platforms",
+        "definition": "이번 실행에서 수집한 차트 플랫폼 수와 플랫폼별 시장 수."
       },
       {
-        "label": "Spotify 밖",
-        "value": 2103,
+        "label": "Spotify에 없는 팀",
+        "value": 2102,
         "unit": "팀",
-        "hint": "apple/youtube에서만 차트인 · 단일 플랫폼만 보면 놓치는 팀"
+        "hint": "Apple·YouTube·Shazam에만 오름 · 단일 플랫폼만 보면 놓치는 팀",
+        "section": "platforms",
+        "definition": "Spotify 차트에는 없고 다른 플랫폼에는 오른 팀 수."
       },
       {
-        "label": "조사 국가",
+        "label": "조사한 나라",
         "value": 49,
-        "unit": "개국"
+        "unit": "개국",
+        "section": "geography",
+        "definition": "이번 실행에서 차트를 수집한 나라 수. 세계 전체가 아니라 이 집합이 분모다."
       },
       {
-        "label": "최광역 곡",
+        "label": "가장 많은 나라에 오른 곡",
         "value": 19,
         "unit": "개국",
-        "hint": "BTS - SWIM"
+        "hint": "BTS - SWIM",
+        "section": "geography",
+        "definition": "가장 많은 나라 차트에 오른 곡과 그 나라 수."
       },
       {
-        "label": "최광역 팀",
+        "label": "가장 많은 나라에 오른 팀",
         "value": 19,
         "unit": "개국",
-        "hint": "BTS"
+        "hint": "BTS",
+        "section": "geography",
+        "definition": "가장 많은 나라 차트에 오른 팀과 그 나라 수."
       },
       {
-        "label": "BTS 최다 권역",
+        "label": "BTS가 가장 많이 오른 권역",
         "value": "중남미",
-        "hint": "7개국 · 37%"
+        "hint": "7개국 · 37%",
+        "section": "geography",
+        "definition": "그 팀이 가장 많이 오른 권역과 점유율. 권역 묶음은 조정 가능한 기준이다."
       },
       {
-        "label": "개척 시장",
+        "label": "한국 팀이 이미 오른 나라",
         "value": 12,
         "unit": "개국",
-        "hint": "기본 ≥2팀(조정가능)"
+        "hint": "기준 팀 수 ≥2팀, 조정 가능",
+        "section": "geography",
+        "definition": "Spotify 차트 기준으로 정해진 수 이상의 한국 팀이 이미 오른 나라. 검증된 시장으로 보는 기준선이며 값은 조정 가능하다."
       },
       {
-        "label": "BTS 미개척",
+        "label": "BTS가 아직 안 오른 나라",
         "value": 1,
         "unit": "개국",
-        "hint": "개척 시장(≥2팀) 중 미진입"
+        "hint": "이미 오른 나라(팀 수 ≥2팀) 중 미진입",
+        "section": "geography",
+        "definition": "그 팀이 아직 오르지 않은, 한국 팀이 이미 오른 나라의 수. Spotify 차트 기준이며 네 플랫폼을 합친 공백은 같은 구획의 진입 지도가 따로 보여준다."
       },
       {
-        "label": "신인 최광역",
+        "label": "신인 중 가장 넓게 오른 팀",
         "value": 10,
         "unit": "개국",
-        "hint": "CORTIS (2025)"
+        "hint": "CORTIS (2025)",
+        "section": "rookies",
+        "definition": "데뷔 3년 이내 팀 중 가장 많은 나라에 오른 팀."
       }
     ],
     "charts": [
       {
         "type": "heatmap",
-        "title": "홈(KR) Top 10 × 플랫폼 · 세 플랫폼의 일치와 차이 (숫자=해당 플랫폼 순위, 열 간 비교 금지)",
+        "id": "kr-top10-lenses",
+        "title": "한국 차트 상위 10곡, 플랫폼별 순위",
         "data": {
           "rows": [
             "CORTIS - REDRED",
@@ -112,10 +265,10 @@
             "KITSCHKRIEG - Gut Genug (mit Blumengarten & Shirin David)"
           ],
           "cols": [
-            "youtube",
-            "spotify",
-            "apple",
-            "shazam"
+            "YouTube",
+            "Spotify",
+            "Apple",
+            "Shazam"
           ],
           "cells": [
             [
@@ -199,7 +352,7 @@
             [
               null,
               170,
-              83,
+              81,
               5
             ],
             [
@@ -223,7 +376,7 @@
             [
               8,
               null,
-              18,
+              20,
               null
             ],
             [
@@ -251,11 +404,15 @@
               10
             ]
           ]
-        }
+        },
+        "section": "platforms",
+        "question": "지금 한국에서 가장 많이 소비되는 곡이 플랫폼마다 다른가?",
+        "definition": "각 플랫폼이 한국에서 집계한 순위. 숫자는 그 플랫폼 열 안에서만 의미가 있다. 빈 칸은 그 플랫폼 차트에 없다는 뜻이며 순위가 낮다는 뜻이 아니다."
       },
       {
         "type": "bar",
-        "title": "youtube · 홈(KR) 일간 조회 Top 10 (네이티브 수치)",
+        "id": "youtube-native",
+        "title": "YouTube 일간 조회수 상위 10곡",
         "data": [
           {
             "name": "RESCENE - LOVE ATTACK",
@@ -297,11 +454,15 @@
             "name": "Hearts2Hearts - RUDE!",
             "value": 549648
           }
-        ]
+        ],
+        "section": "scale",
+        "question": "YouTube에서 1위 곡은 아래 곡들과 얼마나 벌어져 있나?",
+        "definition": "Kworb가 집계한 일간 조회수. YouTube 공식 지표와 다를 수 있다. Spotify 스트림과는 단위가 달라 두 차트의 값을 견주지 않는다."
       },
       {
         "type": "bar",
-        "title": "spotify · 홈(KR) 일간 스트림 Top 10 (네이티브 수치)",
+        "id": "spotify-native",
+        "title": "Spotify 일간 스트림 상위 10곡",
         "data": [
           {
             "name": "CORTIS - REDRED",
@@ -343,36 +504,64 @@
             "name": "RESCENE - Deja Vu",
             "value": 49517
           }
-        ]
+        ],
+        "section": "scale",
+        "question": "Spotify에서 1위 곡은 아래 곡들과 얼마나 벌어져 있나?",
+        "definition": "Kworb가 집계한 일간 스트림. Spotify 공식 지표와 다를 수 있다. YouTube 조회수와는 단위가 달라 두 차트의 값을 견주지 않는다."
       },
       {
         "type": "heatmap",
-        "title": "아티스트 × 플랫폼 · 어디에 잡히는가 (숫자=최고순위, 플랫폼 간 비교 금지)",
+        "id": "roster-by-lens",
+        "title": "팀별로 어느 플랫폼에 잡히나",
         "data": {
           "rows": [
+            "KISS OF LIFE",
+            "MEOVV",
+            "KiiiKiii",
+            "BABYMONSTER",
             "CORTIS",
             "ILLIT",
             "RESCENE",
             "KATSEYE",
             "Hearts2Hearts",
-            "KiiiKiii",
-            "BABYMONSTER",
-            "MEOVV",
-            "KISS OF LIFE",
-            "Aitana",
-            "Ankara Echoes",
-            "Anuv Jain",
-            "Ariana Grande",
-            "Aya Nakamura",
-            "BLVCKHEART"
+            "JANNABI",
+            "Lim Young Woong",
+            "PSY",
+            "Brown Eyes",
+            "Jimin",
+            "Jin"
           ],
           "cols": [
-            "youtube",
-            "spotify",
-            "apple",
-            "shazam"
+            "YouTube",
+            "Spotify",
+            "Apple",
+            "Shazam"
           ],
           "cells": [
+            [
+              null,
+              null,
+              null,
+              80
+            ],
+            [
+              null,
+              140,
+              47,
+              null
+            ],
+            [
+              null,
+              17,
+              12,
+              91
+            ],
+            [
+              null,
+              27,
+              37,
+              17
+            ],
             [
               2,
               1,
@@ -405,124 +594,50 @@
             ],
             [
               null,
-              17,
-              12,
-              91
-            ],
-            [
+              31,
               null,
-              27,
-              34,
-              17
-            ],
-            [
-              null,
-              140,
-              44,
               null
             ],
             [
               null,
+              45,
               null,
+              null
+            ],
+            [
               null,
-              80
+              56,
+              null,
+              null
             ],
             [
-              3,
-              1,
-              1,
-              5
+              null,
+              57,
+              null,
+              null
             ],
             [
-              7,
-              76,
-              10,
-              1
+              null,
+              1,
+              null,
+              40
             ],
             [
-              14,
+              null,
               1,
-              2,
-              8
-            ],
-            [
-              9,
-              2,
-              1,
-              2
-            ],
-            [
-              4,
-              2,
-              1,
-              23
-            ],
-            [
-              5,
-              3,
-              1,
-              7
+              null,
+              70
             ]
           ]
-        }
-      },
-      {
-        "type": "bar",
-        "title": "Spotify 밖에서만 보이는 팀 · apple/youtube에서만 차트인 (값=해당 플랫폼 최고순위)",
-        "data": [
-          {
-            "name": "A2O (youtube)",
-            "value": 1
-          },
-          {
-            "name": "Anna Ternheim (shazam)",
-            "value": 1
-          },
-          {
-            "name": "Ari Lesmana (youtube)",
-            "value": 1
-          },
-          {
-            "name": "Cheb Rezki (shazam)",
-            "value": 1
-          },
-          {
-            "name": "Glen Hansard (apple)",
-            "value": 1
-          },
-          {
-            "name": "Magnus Ferrell (shazam)",
-            "value": 1
-          },
-          {
-            "name": "Nasr Mégri (youtube)",
-            "value": 1
-          },
-          {
-            "name": "Pierre La Voz (youtube)",
-            "value": 1
-          },
-          {
-            "name": "SOLEDAD (youtube)",
-            "value": 1
-          },
-          {
-            "name": "Siddharth Basrur (youtube)",
-            "value": 1
-          },
-          {
-            "name": "Tungevaag (shazam)",
-            "value": 1
-          },
-          {
-            "name": "马也Crabbit (youtube)",
-            "value": 1
-          }
-        ]
+        },
+        "section": "platforms",
+        "question": "한 플랫폼만 봤다면 누가 화면에서 사라지나?",
+        "definition": "숫자는 그 팀의 곡이 해당 플랫폼에서 가장 높이 오른 순위이고, 답은 **빈칸** 쪽에 있다. 빈칸만 있는 플랫폼을 빼고 수집했다면 그 팀은 통째로 화면에서 빠진다. 잡힌 플랫폼이 적은 팀을 위에 두고, 워치리스트 팀을 그보다 앞에 둔다. 플랫폼마다 순위 범위가 달라 열끼리 비교할 수 없다."
       },
       {
         "type": "tunable",
-        "title": "[KR 로스터] 3플랫폼 통합 진입 지도 · 미개척 시장 (빈칸=모든 플랫폼 미진입)",
+        "id": "market-gaps",
+        "title": "아직 진입하지 않은 시장",
         "data": {
           "view": "whitespace",
           "matrix": {
@@ -539,8 +654,8 @@
               "BABYMONSTER",
               "Hearts2Hearts",
               "YEONJUN",
-              "NewJeans",
               "NMIXX",
+              "NewJeans",
               "RESCENE",
               "TAEYEON",
               "Heize",
@@ -613,12 +728,12 @@
                 53,
                 26,
                 30,
-                74,
+                72,
                 23,
                 50,
                 8,
                 1,
-                3,
+                2,
                 null,
                 null,
                 null,
@@ -653,7 +768,7 @@
                 32,
                 100,
                 50,
-                30,
+                32,
                 null,
                 30,
                 null,
@@ -817,7 +932,7 @@
                 24,
                 21,
                 4,
-                3,
+                2,
                 197,
                 9,
                 null,
@@ -859,7 +974,7 @@
                 35,
                 3,
                 4,
-                67,
+                75,
                 69,
                 null,
                 25,
@@ -1022,8 +1137,8 @@
                 133,
                 null,
                 3,
-                33,
-                44,
+                38,
+                46,
                 null,
                 null,
                 null,
@@ -1101,10 +1216,10 @@
                 null
               ],
               [
-                200,
+                76,
                 null,
                 16,
-                90,
+                21,
                 null,
                 null,
                 null,
@@ -1142,10 +1257,10 @@
                 null
               ],
               [
-                76,
+                200,
                 null,
-                17,
-                21,
+                18,
+                91,
                 null,
                 null,
                 null,
@@ -1349,7 +1464,7 @@
               [
                 null,
                 null,
-                44,
+                47,
                 140,
                 null,
                 null,
@@ -2180,11 +2295,15 @@
           ],
           "topRows": 12,
           "note": "3플랫폼 통합 진입. 빈칸은 spotify·apple·youtube 어디에도 미진입. 숫자=혼합 최고순위(플랫폼 간 비교 금지), 기준값은 조정 가능"
-        }
+        },
+        "section": "geography",
+        "question": "어느 나라에 아직 어느 플랫폼으로도 오르지 못했나?",
+        "definition": "빈 칸은 Spotify·Apple·YouTube 어디에도 오르지 않았다는 뜻이다. 몇 팀이 오른 나라를 검증된 시장으로 볼지는 아래 슬라이더로 직접 조정한다. 빈칸은 진입 후보 신호이며 진출 지시가 아니다."
       },
       {
         "type": "heatmap",
-        "title": "[KR 로스터] 최광역 랭킹 · 15곡 × 27시장 (앵커 없음, 진입국가순)",
+        "id": "reach-ranking",
+        "title": "곡별 진입 국가 수",
         "data": {
           "rows": [
             "BTS - SWIM",
@@ -2669,11 +2788,15 @@
               null
             ]
           ]
-        }
+        },
+        "section": "geography",
+        "question": "가장 여러 나라 차트에 오른 곡은 무엇인가?",
+        "definition": "한 곡이 조사 대상 나라 중 몇 곳의 차트에 올랐는지로 정렬. 열은 그 곡들이 실제로 진입한 나라만 권역 순서로 배열한다. 곡 매칭은 아티스트와 제목 문자열 기준이라 표기가 다르면 누락될 수 있다."
       },
       {
         "type": "heatmap",
-        "title": "[KR 로스터] 지리 지문 · Top 10 아티스트 × 27시장 (곡 최고순위)",
+        "id": "artist-markets",
+        "title": "팀별 진입 국가와 순위",
         "data": {
           "rows": [
             "BTS",
@@ -3008,2011 +3131,15 @@
               null
             ]
           ]
-        }
-      },
-      {
-        "type": "tunable",
-        "title": "[KR 로스터] 미개척 지도 · 개척 시장 × 팀 (빈칸=미개척) · 기준 직접 조정",
-        "data": {
-          "view": "whitespace",
-          "matrix": {
-            "rows": [
-              "BTS",
-              "LE SSERAFIM",
-              "CORTIS",
-              "Jung Kook",
-              "ATEEZ",
-              "Jimin",
-              "Jin",
-              "ILLIT",
-              "aespa",
-              "BABYMONSTER",
-              "Hearts2Hearts",
-              "NMIXX",
-              "NewJeans",
-              "YEONJUN",
-              "AKMU",
-              "Brown Eyes",
-              "Epik High",
-              "HANRORO",
-              "HAON",
-              "Heize",
-              "I.O.I",
-              "JANNABI",
-              "KiiiKiii",
-              "Kim Na Young",
-              "Lim Young Woong",
-              "MEOVV",
-              "NELL",
-              "Nerd Connection",
-              "PSY",
-              "RESCENE",
-              "Redoor",
-              "Sung Si Kyung",
-              "TAEYEON",
-              "The Black Skirts",
-              "VINXEN",
-              "WOODZ",
-              "YENA"
-            ],
-            "cols": [
-              "HK",
-              "JP",
-              "KR",
-              "TW",
-              "ID",
-              "MY",
-              "PH",
-              "SG",
-              "TH",
-              "VN",
-              "IN",
-              "AT",
-              "BE",
-              "CH",
-              "CZ",
-              "DE",
-              "DK",
-              "ES",
-              "FI",
-              "FR",
-              "GB",
-              "GR",
-              "HU",
-              "IE",
-              "IT",
-              "NL",
-              "NO",
-              "PL",
-              "PT",
-              "RO",
-              "SE",
-              "CA",
-              "US",
-              "AR",
-              "BR",
-              "CL",
-              "CO",
-              "EC",
-              "MX",
-              "PE",
-              "AE",
-              "EG",
-              "IL",
-              "MA",
-              "SA",
-              "TR",
-              "ZA",
-              "AU",
-              "NZ"
-            ],
-            "cells": [
-              [
-                33,
-                81,
-                26,
-                30,
-                null,
-                41,
-                null,
-                15,
-                1,
-                7,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                65,
-                58,
-                null,
-                null,
-                null,
-                13,
-                33,
-                16,
-                10,
-                3,
-                20,
-                2,
-                47,
-                null,
-                null,
-                176,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                32,
-                165,
-                50,
-                34,
-                null,
-                68,
-                null,
-                21,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                119,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                165,
-                null,
-                120,
-                null,
-                175,
-                96,
-                null,
-                null,
-                175,
-                null,
-                null,
-                null,
-                null,
-                57,
-                null,
-                null,
-                null,
-                68,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                52,
-                127,
-                1,
-                20,
-                null,
-                44,
-                null,
-                27,
-                190,
-                40,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                190,
-                null,
-                null,
-                null,
-                111,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                72,
-                153,
-                20,
-                86,
-                null,
-                165,
-                null,
-                11,
-                null,
-                2,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                98,
-                94,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                44,
-                87,
-                8,
-                4,
-                null,
-                84,
-                null,
-                18,
-                177,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                62,
-                7,
-                16,
-                null,
-                null,
-                null,
-                13,
-                23,
-                null,
-                null,
-                null,
-                null,
-                null,
-                119,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                1,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                1,
-                14,
-                23,
-                2,
-                null,
-                null,
-                null,
-                1,
-                197,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                179,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                61,
-                7,
-                6,
-                29,
-                null,
-                null,
-                null,
-                72,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                198,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                57,
-                93,
-                5,
-                24,
-                null,
-                null,
-                null,
-                62,
-                47,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                68,
-                null,
-                null,
-                27,
-                null,
-                null,
-                null,
-                116,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                133,
-                null,
-                9,
-                59,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                173,
-                null,
-                25,
-                48,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                200,
-                null,
-                52,
-                169,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                82,
-                110,
-                120,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                33,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                57,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                28,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                11,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                74,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                69,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                12,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                31,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                17,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                63,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                45,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                null,
-                140,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                83,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                15,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                56,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                2,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                30,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                68,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                22,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                60,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                42,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                19,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ],
-              [
-                null,
-                null,
-                21,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null,
-                null
-              ]
-            ]
-          },
-          "knobs": [
-            {
-              "key": "market_min",
-              "label": "개척 시장 기준 (진입 팀 수 ≥)",
-              "default": 2,
-              "min": 1,
-              "max": 6,
-              "step": 1
-            }
-          ],
-          "topRows": 10,
-          "note": "개척 시장 = 로스터가 이 수 이상 진입한 검증된 시장. 빈칸 = 그 팀의 미개척(greenfield) 후보. 기준은 슬라이더로 직접 조정 가능. 후보 신호이지 진출 지시 아님"
-        }
+        },
+        "section": "geography",
+        "question": "이 팀은 어느 나라에서 특히 높이 오르나?",
+        "definition": "그 팀의 곡이 각 나라에서 오른 가장 높은 순위. 나라는 권역 순서로 배열한다. 빈 칸은 그 나라 차트에 없다는 뜻이다."
       },
       {
         "type": "heatmap",
-        "title": "[KR 로스터] 신인 지리 지문 · 데뷔 ≥2023 (7팀) × 시장 · 팬베이스 없이 어디에 닿는지",
+        "id": "rookie-markets",
+        "title": "데뷔 3년 이내 팀의 진입 국가",
         "data": {
           "rows": [
             "CORTIS (2025)",
@@ -5121,14 +3248,17 @@
               null
             ]
           ]
-        }
+        },
+        "section": "rookies",
+        "question": "팬베이스가 아직 얇은 팀은 어느 나라에 닿았나?",
+        "definition": "데뷔 3년 이내로 확인된 팀만. 데뷔 연도는 MusicBrainz가 검증한 Wikidata 링크에서만 가져오므로 연도가 확인되지 않은 팀은 이 표에 없다."
       }
     ],
     "media": [],
     "insights": [
       "apple 플랫폼은 소스가 수치 없이 **순위만** 제공. Top10 × 플랫폼 히트맵 참조. 플랫폼 간 위계는 없으며 집계 범위가 달라 순위·수치의 **열 간 비교 금지**.",
       "워치리스트 중 **Spotify 밖**에서만 차트인: 1팀 · KISS OF LIFE(#80 shazam). 단일 플랫폼만 수집했다면 '미진입'으로 놓쳤을 팀",
-      "플랫폼 교차: youtube 509팀 · spotify 2732팀 · apple 1066팀 · shazam 2992팀 · spotify-온리 1332팀 · 비-spotify-온리 2103팀. 순위는 플랫폼별 집계 범위가 달라 **절대값 비교 금지**. 이 뷰의 질문은 존재 여부",
+      "플랫폼 교차: youtube 509팀 · spotify 2732팀 · apple 1058팀 · shazam 2992팀 · spotify-온리 1334팀 · 비-spotify-온리 2102팀. 순위는 플랫폼별 집계 범위가 달라 **절대값 비교 금지**. 이 뷰의 질문은 존재 여부",
       "지리 뷰를 'KR 원산지 로스터'로 한정. 원(raw) 전 시장 union은 서구 팝이 지배하므로 K-pop 기획엔 로스터 스코프가 유효(확인된 로스터에 한함, 미확인 아티스트 제외).",
       "최광역(앵커 무관): BTS - SWIM, LE SSERAFIM - ICONIC BY MISTAKE (w/ ILLIT, KATSEYE), CORTIS - REDRED 등이 조사 49개국 중 최다 시장 진입.",
       "지리 지문 상위: BTS=중남미(19개국) · LE SSERAFIM=동아시아(14개국) · CORTIS=동아시아(10개국) · Jung Kook=동아시아(9개국) · 팀별 최다 권역 비교용(지문 히트맵 참조)",
@@ -53065,7 +51195,118 @@
     "moduleId": "sonic-profile",
     "title": "소닉 프로파일 · 30초 프리뷰 기반 소리 지표",
     "subtitle": "분포 안에서의 위치를 보는 증거 · 단일 곡 평결 아님",
-    "generatedAt": "2026-07-30T00:19:05Z",
+    "generatedAt": "2026-07-30T05:40:57Z",
+    "summary": {
+      "type": "radar",
+      "id": "summary-position",
+      "title": "요약 · 워치리스트가 차트 코호트 안에서 어디에 있나",
+      "question": "우리가 보는 팀의 소리는 지금 차트에 오른 곡들과 어느 축에서 다른가?",
+      "definition": "축마다 워치리스트 중앙값이 같은 날 차트 코호트 분포에서 몇 백분위인지 계산한 값. 기준선 50은 차트 코호트의 중앙값이므로, 선 밖은 코호트보다 높은 쪽, 선 안은 낮은 쪽. 원값이 아니라 위치를 그리는 이유는 축마다 값의 자릿수가 달라서.",
+      "data": {
+        "axes": [
+          {
+            "name": "펄스 명료도",
+            "value": 67,
+            "sample": 11,
+            "raw": 0.5914
+          },
+          {
+            "name": "저역 비율",
+            "value": 77.3,
+            "sample": 11,
+            "raw": 0.6374
+          },
+          {
+            "name": "타악 비율",
+            "value": 67,
+            "sample": 11,
+            "raw": 0.2871
+          },
+          {
+            "name": "스펙트럼 평탄도",
+            "value": 74.2,
+            "sample": 11,
+            "raw": 0.0254
+          },
+          {
+            "name": "스테레오 폭",
+            "value": 78.4,
+            "sample": 11,
+            "raw": 0.1525
+          },
+          {
+            "name": "유기음 비율",
+            "value": 24.7,
+            "sample": 11,
+            "raw": 0.3068
+          }
+        ],
+        "max": 100,
+        "baseline": 50,
+        "baselineLabel": "차트 코호트 중앙값",
+        "scaleNote": "차트 코호트 내 백분위"
+      },
+      "reliability": {
+        "sample": "워치리스트 11곡 · 비교 코호트 97곡"
+      }
+    },
+    "questions": [
+      {
+        "q": "우리가 보는 팀의 소리는 지금 차트에 오른 곡들과 어느 축에서 다른가?",
+        "chartId": "summary-position"
+      },
+      {
+        "q": "차트에 오르는 소리가 실제로 바뀌고 있나, 아니면 차트 구성만 바뀐 것인가?",
+        "chartId": "fixed-cohort"
+      },
+      {
+        "q": "이 코호트의 킥 배치는 어떤 리듬 유형에 가까운가?",
+        "chartId": "rhythm-mix"
+      },
+      {
+        "q": "지금 차트는 신곡 중심인가, 카탈로그 중심인가?",
+        "chartId": "age-hist"
+      }
+    ],
+    "notAnswered": [
+      "곡 구조(인트로·벌스·훅)와 드롭 타이밍. 30초 발췌로는 측정 범위 밖",
+      "곡 하나에 대한 평가. 발췌 구간이 곡마다 달라 곡 간 단일 비교가 성립하지 않음",
+      "하이햇 롤과 하프타임 스네어. 믹스에서 스네어가 분리되지 않아 아직 측정 못 함",
+      "장르·악기 태그가 얼마나 맞는지. 사람 라벨 대조 전이라 정확도 미측정",
+      "소리 지표와 차트 성적의 관계. 이 화면은 소리만 다루며 성적을 설명하지 않음"
+    ],
+    "reliability": {
+      "sample": "관측 305곡 · 미해석 9곡",
+      "accuracy": "템포·펄스 등 측정 지표는 엔진 검증 통과 · 장르·악기·정서 태그는 정확도 미측정",
+      "engine": "librosa 0.11.0 · 22050Hz · 저역 경계 150.0Hz",
+      "missing": "프리뷰 없음·디코드 실패·과단축 9곡 · 0이 아니라 결측으로 집계 제외"
+    },
+    "inferences": [
+      {
+        "text": "워치리스트의 위치는 축에 따라 갈린다. 5개 축은 차트 코호트보다 높은 쪽, 1개 축은 낮은 쪽에 있는 신호가 있다.",
+        "basis": "높은 쪽 펄스 명료도 67.0, 저역 비율 77.3, 타악 비율 67.0, 스펙트럼 평탄도 74.2, 스테레오 폭 78.4 · 낮은 쪽 유기음 비율 24.7 (기준 50 = 차트 코호트 중앙값, 근처로 보는 폭 15)",
+        "sample": "워치리스트 11곡 대비 차트 코호트",
+        "confidence": "low",
+        "limits": "발췌 구간이 곡마다 달라 같은 곡도 날마다 값이 흔들린다. 이 위치는 관측일 코호트 안에서만 성립하며 차트 성적과의 관계를 말하지 않는다.",
+        "chartId": "summary-position"
+      },
+      {
+        "text": "리듬 유형 막대는 곡 수를 그대로 읽기 어려운 상태와 정합한다. 관측 102곡 중 27곡이 동점이거나 해당 없음으로 떨어진다.",
+        "basis": "1위와 2위 차가 0.05 미만인 동점 22곡, 정합도 0.3 미만인 해당 없음 5곡. 템플릿끼리 직교하지 않아 최악 쌍 상관이 0.83",
+        "sample": "리듬 관측 102곡",
+        "confidence": "high",
+        "limits": "프로파일이 저역 킥만 접으므로 킥과 스네어의 합주로 정의되는 유형은 무엇을 재는지 불확실하다. 두 기준값은 관습값이며 튜너에서 움직여 확인할 수 있다.",
+        "chartId": "rhythm-mix"
+      },
+      {
+        "text": "관측 코호트는 신곡보다 카탈로그 쪽으로 기운 구성으로 읽힌다. 관측일 기준 추이에서 소리의 변화와 차트 구성의 변화가 섞여 보이는 상태와 정합한다.",
+        "basis": "곡 나이 중앙값 610일, 발매 90일 이내 신곡 83/303곡 (27%)",
+        "sample": "발매일이 확인된 관측 303건",
+        "confidence": "medium",
+        "limits": "발매일은 유통사 표기라 리마스터·재발매가 그 날짜로 잡힌다. 신곡 경계 90일도 관습값이다. 이 구성이 섞임을 걷어낸 뷰는 고정 코호트와 신곡만 추이다.",
+        "chartId": "age-hist"
+      }
+    ],
     "metrics": [
       {
         "label": "관측 트랙",
@@ -53083,138 +51324,161 @@
         "label": "템포 중앙값",
         "value": 114.97,
         "unit": "BPM",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "비트 시각에 직선을 맞춰 구한 분당 박 수. 고정 격자 방식이 아니라 130BPM 부근의 작은 차이도 남음."
       },
       {
         "label": "펄스 명료도 중앙값",
         "value": 0.557,
         "unit": "",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "온셋 포락 자기상관의 주 피크. 박이 규칙적으로 강하게 반복될수록 높음. danceability가 아님."
       },
       {
         "label": "온셋 밀도 중앙값",
         "value": 4.237,
         "unit": "회/초",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "초당 감지된 소리 시작점 수. 음이 촘촘한 편곡일수록 높음."
       },
       {
         "label": "저역 비율 중앙값",
         "value": 0.507,
         "unit": "",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "전체 에너지 중 저역(경계 아래) 비중. 킥·베이스가 두꺼울수록 높음."
       },
       {
         "label": "음색 밝기 중앙값",
         "value": 2367.3,
         "unit": "Hz",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "스펙트럼 무게중심 주파수. 높을수록 밝고 날카롭게 들리는 쪽."
       },
       {
         "label": "타악 비율 중앙값",
         "value": 0.252,
         "unit": "",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "하모닉·퍼커시브 분리 후 퍼커시브 성분 비중."
       },
       {
         "label": "다이내믹 여유(crest) 중앙값",
         "value": 10.38,
         "unit": "dB",
-        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 305곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "peak를 RMS로 나눈 값(dB). 낮을수록 압축이 강함. 프리뷰가 정규화되지 않았음을 전제로 함."
       },
       {
         "label": "라우드니스 중앙값",
         "value": -8.275,
         "unit": "LUFS",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "체감 음량(LUFS). crest와 같은 전제에 기대므로 그 전제가 무너지면 함께 무효."
       },
       {
         "label": "스펙트럼 평탄도 중앙값",
         "value": 0.015,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "스펙트럼이 잡음에 가까운 정도. 톤이 뚜렷하면 낮고 노이즈성이 강하면 높음."
       },
       {
         "label": "스테레오 폭 중앙값",
         "value": 0.11,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "좌우 채널 차이의 크기. 넓게 퍼진 믹스일수록 높음."
       },
       {
         "label": "싱코페이션 중앙값",
         "value": 0.701,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "센박이 아닌 자리에 놓인 킥의 비중."
       },
       {
         "label": "마디 프로파일 대비 중앙값",
         "value": 1.656,
         "unit": "×",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "마디 안에서 킥이 몰린 칸과 빈 칸의 대비. 낮으면 배치가 평평함."
       },
       {
         "label": "그리드 편차 중앙값",
         "value": 8.245,
         "unit": "ms",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "비트가 균일 격자에서 벗어난 정도(ms). 상당 부분이 측정 잡음이며 단독 해석 대상이 아님."
       },
       {
         "label": "danceability 중앙값",
         "value": 0.995,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "분류기가 낸 확률. 춤 실력·안무 품질의 판정이 아니고, 차트 K-pop에서 천장에 붙어 곡을 가르지 못함."
       },
       {
         "label": "정서가(valence) 중앙값",
         "value": 5.666,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "주석자들이 매긴 긍·부정 정서 값. 곡의 물리적 성질이 아니며 학습 데이터가 K-pop이 아님."
       },
       {
         "label": "각성도(arousal) 중앙값",
         "value": 5.604,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "주석자들이 매긴 각성 정도. 위와 같은 한계가 적용됨."
       },
       {
         "label": "유기음 비율 중앙값",
         "value": 0.398,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "합성음 대비 생악기·목소리 계열 성분의 비중 추정치."
       },
       {
         "label": "라우드니스 레인지 중앙값",
         "value": 2.435,
         "unit": "LU",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "구간별 음량 분포의 폭(LU). 좁으면 시종 같은 크기로 들리는 쪽."
       },
       {
         "label": "저역 스테레오 폭 중앙값",
         "value": 0.035,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "저역대에서의 좌우 차이. 보통 좁게 유지되는 값."
       },
       {
         "label": "위상 상관 중앙값",
         "value": 0.78,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "좌우 채널의 위상 일치도. 1에 가까우면 모노에 가까움."
       },
       {
         "label": "마디 자기유사도 중앙값",
         "value": 0.601,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "마디끼리 얼마나 같은 패턴을 반복하는가."
       },
       {
         "label": "어택 샤프니스 중앙값",
         "value": 1.148,
         "unit": "",
-        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)"
+        "hint": "관측 204곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+        "definition": "소리 시작점의 상승 급격함."
       }
     ],
     "charts": [
       {
         "type": "bar",
+        "id": "tempo-hist",
         "title": "템포 분포 (BPM)",
         "data": [
           {
@@ -53249,10 +51513,13 @@
             "name": "165–180",
             "value": 5
           }
-        ]
+        ],
+        "question": "이 코호트의 템포는 어느 구간에 모여 있나?",
+        "definition": "비트 시각에 직선을 맞춰 구한 BPM을 20BPM 폭으로 세운 것. 막대 높이는 곡 수."
       },
       {
         "type": "bar",
+        "id": "pulse-top",
         "title": "펄스 명료도 상위 · 아티스트 - 곡명 (박이 또렷한 순 · 춤 적합도 아님)",
         "data": [
           {
@@ -53315,10 +51582,13 @@
             "name": "아일릿 - Lucky Girl Syndrome",
             "value": 0.6621
           }
-        ]
+        ],
+        "question": "박이 가장 또렷하게 잡히는 곡은 무엇인가?",
+        "definition": "펄스 명료도는 온셋 포락 자기상관의 주 피크. 박이 규칙적으로 강하게 반복될수록 높음. 춤 적합도·인기·품질과 무관하며 danceability도 아님."
       },
       {
         "type": "tunable",
+        "id": "rhythm-mix",
         "title": "리듬 패턴 구성 · 마디 안 킥 배치가 가장 가까운 유형 (판정 아닌 순위 · 펼치면 곡 목록)",
         "data": {
           "view": "rhythm",
@@ -53338,11 +51608,6 @@
               0,
               6,
               12
-            ],
-            "tresillo(16분·반마디)": [
-              0,
-              3,
-              6
             ],
             "dembow": [
               0,
@@ -53381,6 +51646,7 @@
                 0.0593
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6637,
               "contrast": 1.895
             },
@@ -53405,6 +51671,7 @@
                 0.0569
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.5409,
               "contrast": 2.384
             },
@@ -53429,6 +51696,7 @@
                 0.0617
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7041,
               "contrast": 1.346
             },
@@ -53453,6 +51721,7 @@
                 0.0608
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6897,
               "contrast": 1.635
             },
@@ -53477,6 +51746,7 @@
                 0.0628
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6496,
               "contrast": 1.456
             },
@@ -53501,6 +51771,7 @@
                 0.0606
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.5992,
               "contrast": 1.824
             },
@@ -53525,6 +51796,7 @@
                 0.0503
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.7031,
               "contrast": 1.403
             },
@@ -53549,6 +51821,7 @@
                 0.0479
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.5796,
               "contrast": 2.152
             },
@@ -53573,6 +51846,7 @@
                 0.0399
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6883,
               "contrast": 2.512
             },
@@ -53597,6 +51871,7 @@
                 0.0396
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6265,
               "contrast": 1.843
             },
@@ -53621,6 +51896,7 @@
                 0.0534
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6686,
               "contrast": 1.598
             },
@@ -53645,6 +51921,7 @@
                 0.0544
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.5883,
               "contrast": 2.157
             },
@@ -53669,6 +51946,7 @@
                 0.0623
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7348,
               "contrast": 1.485
             },
@@ -53693,6 +51971,7 @@
                 0.0738
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7224,
               "contrast": 1.674
             },
@@ -53717,6 +51996,7 @@
                 0.0594
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7298,
               "contrast": 1.491
             },
@@ -53741,6 +52021,7 @@
                 0.0381
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6431,
               "contrast": 2.621
             },
@@ -53765,6 +52046,7 @@
                 0.0529
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7335,
               "contrast": 1.635
             },
@@ -53789,6 +52071,7 @@
                 0.0419
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.5717,
               "contrast": 1.731
             },
@@ -53813,6 +52096,7 @@
                 0.0474
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7529,
               "contrast": 1.461
             },
@@ -53837,6 +52121,7 @@
                 0.0557
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6988,
               "contrast": 1.778
             },
@@ -53861,6 +52146,7 @@
                 0.0528
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.701,
               "contrast": 1.424
             },
@@ -53885,6 +52171,7 @@
                 0.0534
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6914,
               "contrast": 2.13
             },
@@ -53909,6 +52196,7 @@
                 0.0639
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6122,
               "contrast": 1.661
             },
@@ -53933,6 +52221,7 @@
                 0.0673
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7439,
               "contrast": 1.554
             },
@@ -53957,6 +52246,7 @@
                 0.0532
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.742,
               "contrast": 1.608
             },
@@ -53981,6 +52271,7 @@
                 0.0579
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6315,
               "contrast": 1.8
             },
@@ -54005,6 +52296,7 @@
                 0.0624
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7108,
               "contrast": 1.387
             },
@@ -54029,6 +52321,7 @@
                 0.0524
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6652,
               "contrast": 1.403
             },
@@ -54053,6 +52346,7 @@
                 0.0595
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7421,
               "contrast": 1.362
             },
@@ -54077,6 +52371,7 @@
                 0.0561
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7034,
               "contrast": 1.291
             },
@@ -54101,6 +52396,7 @@
                 0.0357
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.693,
               "contrast": 2.117
             },
@@ -54125,6 +52421,7 @@
                 0.0787
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7375,
               "contrast": 1.538
             },
@@ -54149,6 +52446,7 @@
                 0.0463
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6453,
               "contrast": 1.669
             },
@@ -54173,6 +52471,7 @@
                 0.0414
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6703,
               "contrast": 1.646
             },
@@ -54197,6 +52496,7 @@
                 0.0547
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7501,
               "contrast": 1.792
             },
@@ -54221,6 +52521,7 @@
                 0.048
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6714,
               "contrast": 1.734
             },
@@ -54245,6 +52546,7 @@
                 0.0684
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7266,
               "contrast": 2.285
             },
@@ -54269,6 +52571,7 @@
                 0.0717
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7462,
               "contrast": 1.421
             },
@@ -54293,6 +52596,7 @@
                 0.0717
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7613,
               "contrast": 1.542
             },
@@ -54317,6 +52621,7 @@
                 0.0533
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6704,
               "contrast": 1.419
             },
@@ -54341,6 +52646,7 @@
                 0.0723
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7047,
               "contrast": 1.466
             },
@@ -54365,6 +52671,7 @@
                 0.0486
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7103,
               "contrast": 2
             },
@@ -54389,6 +52696,7 @@
                 0.0561
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7239,
               "contrast": 1.539
             },
@@ -54413,6 +52721,7 @@
                 0.0492
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6495,
               "contrast": 1.509
             },
@@ -54437,6 +52746,7 @@
                 0.076
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7262,
               "contrast": 1.381
             },
@@ -54461,6 +52771,7 @@
                 0.0271
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7335,
               "contrast": 2.947
             },
@@ -54485,6 +52796,7 @@
                 0.0463
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6888,
               "contrast": 1.742
             },
@@ -54509,6 +52821,7 @@
                 0.0883
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7276,
               "contrast": 2.133
             },
@@ -54533,6 +52846,7 @@
                 0.0582
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7061,
               "contrast": 1.576
             },
@@ -54557,6 +52871,7 @@
                 0.0627
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6126,
               "contrast": 2.198
             },
@@ -54581,6 +52896,7 @@
                 0.0554
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6609,
               "contrast": 1.494
             },
@@ -54605,6 +52921,7 @@
                 0.0439
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6359,
               "contrast": 1.637
             },
@@ -54629,6 +52946,7 @@
                 0.0551
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7444,
               "contrast": 1.328
             },
@@ -54653,6 +52971,7 @@
                 0.0887
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6947,
               "contrast": 2.294
             },
@@ -54677,6 +52996,7 @@
                 0.0649
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6887,
               "contrast": 1.432
             },
@@ -54701,6 +53021,7 @@
                 0.0466
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7263,
               "contrast": 1.547
             },
@@ -54725,6 +53046,7 @@
                 0.0658
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7304,
               "contrast": 1.467
             },
@@ -54749,6 +53071,7 @@
                 0.0433
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6231,
               "contrast": 2.165
             },
@@ -54773,6 +53096,7 @@
                 0.06
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7036,
               "contrast": 1.577
             },
@@ -54797,6 +53121,7 @@
                 0.057
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7002,
               "contrast": 2.136
             },
@@ -54821,6 +53146,7 @@
                 0.066
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.747,
               "contrast": 1.629
             },
@@ -54845,6 +53171,7 @@
                 0.0561
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7114,
               "contrast": 1.612
             },
@@ -54869,6 +53196,7 @@
                 0.1172
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7299,
               "contrast": 1.876
             },
@@ -54893,6 +53221,7 @@
                 0.0544
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.746,
               "contrast": 2.12
             },
@@ -54917,6 +53246,7 @@
                 0.0648
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7224,
               "contrast": 1.676
             },
@@ -54941,6 +53271,7 @@
                 0.0593
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7145,
               "contrast": 1.282
             },
@@ -54965,6 +53296,7 @@
                 0.0667
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6349,
               "contrast": 1.84
             },
@@ -54989,6 +53321,7 @@
                 0.054
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7074,
               "contrast": 1.41
             },
@@ -55013,6 +53346,7 @@
                 0.0558
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7039,
               "contrast": 1.448
             },
@@ -55037,6 +53371,7 @@
                 0.0514
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6549,
               "contrast": 1.6
             },
@@ -55061,6 +53396,7 @@
                 0.0662
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7529,
               "contrast": 1.547
             },
@@ -55085,6 +53421,7 @@
                 0.0811
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7727,
               "contrast": 1.749
             },
@@ -55109,6 +53446,7 @@
                 0.0571
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6049,
               "contrast": 1.768
             },
@@ -55133,6 +53471,7 @@
                 0.0596
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7185,
               "contrast": 1.651
             },
@@ -55157,6 +53496,7 @@
                 0.048
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6321,
               "contrast": 2.707
             },
@@ -55181,6 +53521,7 @@
                 0.0623
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6153,
               "contrast": 1.851
             },
@@ -55205,6 +53546,7 @@
                 0.0369
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6177,
               "contrast": 1.968
             },
@@ -55229,6 +53571,7 @@
                 0.0842
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7865,
               "contrast": 2.051
             },
@@ -55253,6 +53596,7 @@
                 0.0317
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6363,
               "contrast": 1.814
             },
@@ -55277,6 +53621,7 @@
                 0.0565
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6764,
               "contrast": 1.44
             },
@@ -55301,6 +53646,7 @@
                 0.0576
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7701,
               "contrast": 1.293
             },
@@ -55325,6 +53671,7 @@
                 0.0917
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7253,
               "contrast": 1.786
             },
@@ -55349,6 +53696,7 @@
                 0.0373
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6871,
               "contrast": 1.339
             },
@@ -55373,6 +53721,7 @@
                 0.0451
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6676,
               "contrast": 2.538
             },
@@ -55397,6 +53746,7 @@
                 0.0542
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7393,
               "contrast": 1.289
             },
@@ -55421,6 +53771,7 @@
                 0.03
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6853,
               "contrast": 3.003
             },
@@ -55445,6 +53796,7 @@
                 0.0508
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6106,
               "contrast": 1.669
             },
@@ -55469,6 +53821,7 @@
                 0.066
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6829,
               "contrast": 1.682
             },
@@ -55493,6 +53846,7 @@
                 0.0754
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7098,
               "contrast": 1.357
             },
@@ -55517,6 +53871,7 @@
                 0.0671
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7183,
               "contrast": 1.415
             },
@@ -55541,6 +53896,7 @@
                 0.0544
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7262,
               "contrast": 1.917
             },
@@ -55565,6 +53921,7 @@
                 0.0611
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6521,
               "contrast": 2.075
             },
@@ -55589,6 +53946,7 @@
                 0.059
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6956,
               "contrast": 1.509
             },
@@ -55613,6 +53971,7 @@
                 0.0418
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6016,
               "contrast": 2.296
             },
@@ -55637,6 +53996,7 @@
                 0.0703
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.7202,
               "contrast": 1.222
             },
@@ -55661,6 +54021,7 @@
                 0.0499
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.72,
               "contrast": 1.683
             },
@@ -55685,6 +54046,7 @@
                 0.0731
               ],
               "cohort": "chart",
+              "bins": 16,
               "syncopation": 0.6998,
               "contrast": 1.565
             },
@@ -55709,6 +54071,7 @@
                 0.0583
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6335,
               "contrast": 1.697
             },
@@ -55733,6 +54096,7 @@
                 0.0609
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.728,
               "contrast": 2.318
             },
@@ -55757,6 +54121,7 @@
                 0.0508
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6841,
               "contrast": 1.406
             },
@@ -55781,6 +54146,7 @@
                 0.0364
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.6386,
               "contrast": 2.475
             },
@@ -55805,6 +54171,7 @@
                 0.0519
               ],
               "cohort": "watchlist",
+              "bins": 16,
               "syncopation": 0.7546,
               "contrast": 2.12
             }
@@ -55829,10 +54196,13 @@
             }
           ],
           "note": "정합도 = 마디 킥 프로파일과 템플릿의 코사인(평균 제거). 템플릿끼리 직교하지 않아(최악 쌍 0.83) **1위는 순위이지 판정이 아니다**. 임계 미만은 '다른 유형'이 아니라 '해당 없음'이며, 동점 곡은 지우지 않고 표시만 한다. 기본값 0.30·0.05는 엔지니어가 정한 관습값이라 도메인 소유자가 결과를 보기 전에 정하는 편이 옳다"
-        }
+        },
+        "question": "이 코호트의 킥 배치는 어떤 리듬 유형에 가까운가?",
+        "definition": "마디를 16분음 격자로 나눠 저역 킥 배치를 접은 뒤 이름 붙은 유형과 코사인 정합도를 낸 것. 유형끼리 서로 겹치므로 가장 가까운 유형은 순위이지 판정이 아님. 정합도가 낮으면 '해당 없음'."
       },
       {
         "type": "tunable",
+        "id": "instrument-mix",
         "title": "악기 구성 · 검출 확률 임계 이상인 곡 수 (참고 · 정확도 미측정 · 펼치면 곡 목록)",
         "data": {
           "view": "tags",
@@ -60548,10 +58918,13 @@
             }
           ],
           "note": "확률은 **존재 가능성이지 비중이 아닙니다** — '기타 0.5'는 '기타가 절반'이 아니라 '있을 법함'입니다. 라벨끼리 배타적이지 않아 한 곡이 여러 칸에 들어갑니다. 정확도는 아직 사람 라벨로 재지 않았으므로 단독 근거로 쓰지 마십시오. 기본 임계 0.3은 엔지니어가 정한 관습값이라 담당자가 정할 사안입니다"
-        }
+        },
+        "question": "검출 임계를 어디에 두면 어떤 악기가 몇 곡에서 잡히나?",
+        "definition": "태거가 낸 악기별 확률이 임계를 넘는 곡 수. 확률은 서로 배타적이지 않아 한 곡이 여러 칸에 셈. 정확도 미측정이라 곡 수는 하한으로 읽을 값."
       },
       {
         "type": "bar",
+        "id": "style-mix",
         "title": "스타일 구성 · 1순위 라벨별 곡 수 (참고 · 정확도 미측정)",
         "data": [
           {
@@ -60602,10 +58975,13 @@
             "name": "Electronic---Bassline",
             "value": 2
           }
-        ]
+        ],
+        "question": "1순위 스타일 라벨은 무엇으로 쏠려 있나?",
+        "definition": "Discogs 택소노미 기준 확률 1순위 라벨별 곡 수. 저지클럽·뭄바톤·아마피아노는 이 라벨 목록에 없어 여기 나타나지 않음."
       },
       {
         "type": "line",
+        "id": "unit-trend",
         "title": "분포 추이 · 0~1 축 중앙값 (날짜가 쌓이며 채워짐)",
         "data": {
           "x": [
@@ -60663,10 +59039,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "관측일이 쌓이면서 코호트의 소리 분포가 움직이나?",
+        "definition": "날짜별 0~1 축 중앙값. x축이 관측일이라 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있음. 그 둘을 가르는 것이 아래 빈티지·고정 코호트·신곡만 뷰."
       },
       {
         "type": "line",
+        "id": "tempo-trend",
         "title": "분포 추이 · 템포 중앙값 (BPM)",
         "data": {
           "x": [
@@ -60684,10 +59063,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "코호트 템포 중앙값이 날짜에 따라 움직이나?",
+        "definition": "날짜별 템포 중앙값(BPM). 관측일 기준이라 차트 구성 변화가 섞여 있음."
       },
       {
         "type": "line",
+        "id": "vintage-unit",
         "title": "발매 빈티지별 분포 · 0~1 축 중앙값 (발매 분기 · 표본 3곡 이상)",
         "data": {
           "x": [
@@ -60801,10 +59183,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "발매 시기별로 소리 분포가 다른가?",
+        "definition": "x축이 관측일이 아니라 발매 분기이므로 차트 재편성에 흔들리지 않음. 대신 생존 편향이 있음: 옛 분기 칸의 곡은 그 분기의 대표 표본이 아니라 오늘까지 차트에 남은 곡."
       },
       {
         "type": "line",
+        "id": "vintage-tempo",
         "title": "발매 빈티지별 템포 · 중앙값 BPM (발매 분기 · 표본 3곡 이상)",
         "data": {
           "x": [
@@ -60838,10 +59223,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "발매 시기별 템포 중앙값이 다른가?",
+        "definition": "발매 분기별 템포 중앙값. 위 뷰와 같은 생존 편향이 적용됨."
       },
       {
         "type": "bar",
+        "id": "age-hist",
         "title": "곡 나이 분포 · 2026-07-30 관측 코호트 (관측일 − 발매일)",
         "data": [
           {
@@ -60864,10 +59252,13 @@
             "name": "3년 초과",
             "value": 36
           }
-        ]
+        ],
+        "question": "지금 차트는 얼마나 신곡 중심인가?",
+        "definition": "관측일에서 발매일을 뺀 곡 나이를 구간별로 센 것. 발매일은 유통사 표기라 리마스터·재발매가 그 날짜로 잡힐 수 있음."
       },
       {
         "type": "line",
+        "id": "age-trend",
         "title": "곡 나이 추이 · 관측 코호트의 나이 중앙값 (일)",
         "data": {
           "x": [
@@ -60885,10 +59276,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "차트가 신곡 쪽으로 움직이나, 카탈로그 쪽으로 움직이나?",
+        "definition": "날짜별 관측 코호트의 곡 나이 중앙값(일). 값이 내려가면 신곡 쪽."
       },
       {
         "type": "line",
+        "id": "fixed-cohort",
         "title": "고정 코호트 추이 · 2026-07-28 관측 101곡만 계속 추적",
         "data": {
           "x": [
@@ -60946,10 +59340,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "차트 구성 변화를 제거하면 같은 곡들의 소리 지표가 움직이나?",
+        "definition": "최초 관측일에 잡힌 곡 집합만 계속 따라간 중앙값. 집합이 날마다 바뀌지 않으므로 여기서 움직이는 값은 차트 재편성이 아니라 이 곡들의 이야기. 같은 곡의 값이 날마다 달라지는 것은 발췌 구간이 달라졌을 가능성을 포함함."
       },
       {
         "type": "line",
+        "id": "fresh-trend",
         "title": "신곡만 분포 추이 · 발매 90일 이내 (0~1 축 중앙값)",
         "data": {
           "x": [
@@ -61007,10 +59404,13 @@
               ]
             }
           ]
-        }
+        },
+        "question": "카탈로그 혼입을 걷어낸 신곡만 보면 분포가 다른가?",
+        "definition": "발매 90일 이내 곡만 남긴 날짜별 0~1 축 중앙값. 90일 경계는 관습값."
       },
       {
         "type": "heatmap",
+        "id": "watchlist-rank",
         "title": "분포 위치 · 워치리스트 트랙이 차트 97곡 중 몇 위인가 (1 = 가장 높음)",
         "data": {
           "rows": [
@@ -61316,10 +59716,16 @@
               54
             ]
           ]
+        },
+        "question": "워치리스트의 각 곡은 축마다 차트 코호트에서 몇 위인가?",
+        "definition": "곡 하나의 축별 값을 차트 코호트에 합쳐 내림차순으로 세운 순위(1이 가장 높음). 순위이므로 곡 사이의 간격은 표현하지 않음.",
+        "reliability": {
+          "sample": "워치리스트 11곡 · 비교 코호트 97곡"
         }
       },
       {
         "type": "bar",
+        "id": "cohort-compare",
         "title": "코호트 비교 · 워치리스트 vs 차트 중앙값 (0~1 축)",
         "data": [
           {
@@ -61370,7 +59776,12 @@
             "name": "유기음 비율 · 차트",
             "value": 0.4038
           }
-        ]
+        ],
+        "question": "두 코호트의 축별 중앙값은 각각 얼마인가?",
+        "definition": "요약 도형은 위치(백분위)를 보여주고 이 막대는 원값을 보여줌. 위치가 같아도 원값 차이는 클 수 있어 둘이 따로 필요함.",
+        "reliability": {
+          "sample": "워치리스트 11곡 · 비교 코호트 97곡"
+        }
       }
     ],
     "media": [],

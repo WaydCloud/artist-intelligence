@@ -386,12 +386,19 @@ def _wrap(
     charts: list[dict[str, object]],
     insights: list[str],
     recommendations: list[str],
+    extra: dict[str, object] | None = None,
 ) -> dict[str, object]:
+    """`extra`는 시각화 계약 필드(구획·요약·질문·신뢰도·추론 · D-041/D-043).
+
+    선택으로 둔 이유: 이 함수는 단일 스냅샷·모멘텀·크로스소스 등 여러 경로가 공유한다.
+    구획을 갖춘 경로만 채우고 나머지는 지금까지처럼 한 줄로 렌더된다.
+    """
     return {
         "moduleId": MODULE_ID,
         "title": f"차트 히스토리 · {name}",
         "subtitle": f"{source} · {snapshot_date} · {n}곡",
         "generatedAt": generated_at,
+        **(extra or {}),
         "metrics": metrics,
         "charts": charts,
         "media": [],
@@ -514,6 +521,391 @@ def _lens_track_ranks(
     return ranks, disp
 
 
+# ── 구획·문구 (D-043 · DESIGN §6.1·§7.1) ──────────────────────────────────────
+#
+# 이 모듈은 **네 개의 다른 질문**에 답한다. 지금까지는 넷이 한 페이지에 섞여 있어서
+# 차트 10개와 지표 13개가 한 줄로 쏟아졌고, 무엇을 먼저 볼지 화면이 말해 주지 못했다.
+# 구획은 그 넷을 갈라 한 번에 하나만 보이게 한다(구획당 차트 상한은 검사기가 센다).
+#
+# 문구를 한 표에 모으는 이유: 이것은 클라이언트 대면 카피이고(DESIGN §6.1), 계산 코드
+# 사이에 흩어 두면 검토가 불가능해진다. 제목에서 대괄호 태그·`×`·괄호 경고문을 걷어내고
+# 경고는 `definition`과 구획 `note`라는 제 자리로 보냈다.
+_SECTIONS: list[dict[str, str]] = [
+    {
+        "id": "platforms",
+        "label": "플랫폼",
+        "question": "네 플랫폼이 같은 곡을 올리고 있나?",
+        "note": "플랫폼마다 집계 대상과 순위 범위가 다르다. 순위 숫자를 플랫폼끼리 비교할 수 없다. "
+        "이 구획이 답하는 것은 크기가 아니라 어디에 잡히는가다.",
+    },
+    {
+        "id": "scale",
+        "label": "규모",
+        "question": "1위 곡은 실제로 얼마나 재생됐나?",
+        "note": "두 차트의 단위가 다르다. 조회수와 스트림은 서로 환산되지 않으므로 나란히 두고 크기를 견주지 않는다.",
+    },
+    {
+        "id": "geography",
+        "label": "지리",
+        "question": "우리 팀들은 어느 나라 차트에 올랐나?",
+        "note": "원산지가 한국으로 확인된 팀만 본다. 숫자는 조사한 나라 집합 안에서의 값이며 세계 도달이 아니다.",
+    },
+    {
+        "id": "rookies",
+        "label": "신인",
+        "question": "팬베이스 없는 신인은 어디에 닿았나?",
+        "note": "데뷔 연도가 확인된 팀만 코호트에 든다. 확인되지 않은 팀은 빠지므로 이 표는 하한이다.",
+    },
+]
+
+_CHART_META: dict[str, dict[str, str]] = {
+    "kr-top10-lenses": {
+        "section": "platforms",
+        "title": "한국 차트 상위 10곡, 플랫폼별 순위",
+        "question": "지금 한국에서 가장 많이 소비되는 곡이 플랫폼마다 다른가?",
+        "definition": "각 플랫폼이 한국에서 집계한 순위. 숫자는 그 플랫폼 열 안에서만 의미가 있다. "
+        "빈 칸은 그 플랫폼 차트에 없다는 뜻이며 순위가 낮다는 뜻이 아니다.",
+    },
+    "youtube-native": {
+        "section": "scale",
+        "title": "YouTube 일간 조회수 상위 10곡",
+        "question": "YouTube에서 1위 곡은 아래 곡들과 얼마나 벌어져 있나?",
+        "definition": "Kworb가 집계한 일간 조회수. YouTube 공식 지표와 다를 수 있다. "
+        "Spotify 스트림과는 단위가 달라 두 차트의 값을 견주지 않는다.",
+    },
+    "spotify-native": {
+        "section": "scale",
+        "title": "Spotify 일간 스트림 상위 10곡",
+        "question": "Spotify에서 1위 곡은 아래 곡들과 얼마나 벌어져 있나?",
+        "definition": "Kworb가 집계한 일간 스트림. Spotify 공식 지표와 다를 수 있다. "
+        "YouTube 조회수와는 단위가 달라 두 차트의 값을 견주지 않는다.",
+    },
+    "roster-by-lens": {
+        "section": "platforms",
+        "title": "팀별로 어느 플랫폼에 잡히나",
+        "question": "한 플랫폼만 봤다면 누가 화면에서 사라지나?",
+        "definition": "숫자는 그 팀의 곡이 해당 플랫폼에서 가장 높이 오른 순위이고, 답은 **빈칸** 쪽에 있다. "
+        "빈칸만 있는 플랫폼을 빼고 수집했다면 그 팀은 통째로 화면에서 빠진다. "
+        "잡힌 플랫폼이 적은 팀을 위에 두고, 워치리스트 팀을 그보다 앞에 둔다. "
+        "플랫폼마다 순위 범위가 달라 열끼리 비교할 수 없다.",
+    },
+    "reach-ranking": {
+        "section": "geography",
+        "title": "곡별 진입 국가 수",
+        "question": "가장 여러 나라 차트에 오른 곡은 무엇인가?",
+        "definition": "한 곡이 조사 대상 나라 중 몇 곳의 차트에 올랐는지로 정렬. 열은 그 곡들이 실제로 진입한 나라만 "
+        "권역 순서로 배열한다. 곡 매칭은 아티스트와 제목 문자열 기준이라 표기가 다르면 누락될 수 있다.",
+    },
+    "artist-markets": {
+        "section": "geography",
+        "title": "팀별 진입 국가와 순위",
+        "question": "이 팀은 어느 나라에서 특히 높이 오르나?",
+        "definition": "그 팀의 곡이 각 나라에서 오른 가장 높은 순위. 나라는 권역 순서로 배열한다. "
+        "빈 칸은 그 나라 차트에 없다는 뜻이다.",
+    },
+    "market-gaps": {
+        "section": "geography",
+        "title": "아직 진입하지 않은 시장",
+        "question": "어느 나라에 아직 어느 플랫폼으로도 오르지 못했나?",
+        "definition": "빈 칸은 Spotify·Apple·YouTube 어디에도 오르지 않았다는 뜻이다. "
+        "몇 팀이 오른 나라를 검증된 시장으로 볼지는 아래 슬라이더로 직접 조정한다. "
+        "빈칸은 진입 후보 신호이며 진출 지시가 아니다.",
+    },
+    "rookie-markets": {
+        "section": "rookies",
+        "title": "데뷔 3년 이내 팀의 진입 국가",
+        "question": "팬베이스가 아직 얇은 팀은 어느 나라에 닿았나?",
+        "definition": "데뷔 3년 이내로 확인된 팀만. 데뷔 연도는 MusicBrainz가 검증한 Wikidata 링크에서만 가져오므로 "
+        "연도가 확인되지 않은 팀은 이 표에 없다.",
+    },
+}
+
+# 지표를 구획에 나눠 넣는다. 지표 13개를 첫 화면에 한꺼번에 쌓지 않기 위한 것이고,
+# 각 지표는 자기 질문 옆에 있을 때만 읽힌다.
+_METRIC_SECTION_EXACT: dict[str, str] = {
+    "차트 플랫폼": "platforms",
+    "Spotify 밖": "platforms",
+    "조사 국가": "geography",
+    "최광역 곡": "geography",
+    "최광역 팀": "geography",
+    "개척 시장": "geography",
+    "신인 최광역": "rookies",
+}
+# 접미어 규칙 — 라벨에 아티스트 이름이 들어가는 지표(`BTS 최다 권역` 등).
+_METRIC_SECTION_SUFFIX: list[tuple[str, str]] = [
+    (" 1위", "platforms"),
+    (" 최다 권역", "geography"),
+    (" 미개척", "geography"),
+]
+
+# 플랫폼의 **정식 브랜드 표기**. 저장 키(`youtube`)를 그대로 화면에 찍으면 데이터 키가
+# 새어 나온 것처럼 읽히고, 본문은 한글인데 축은 소문자 영문이라 표기가 갈린다.
+_PLAT_DISPLAY: dict[str, str] = {
+    "youtube": "YouTube",
+    "spotify": "Spotify",
+    "apple": "Apple",
+    "shazam": "Shazam",
+    "melon": "Melon",
+}
+
+
+def plat_label(p: str) -> str:
+    return _PLAT_DISPLAY.get(p, p)
+
+
+# 지표 라벨 갈아 끼우기(DESIGN §6.1). `최광역`·`개척 시장`·`미개척`은 뜻을 한 번 더
+# 생각하게 만드는 별칭이라 가리키는 것을 그대로 쓴다. 접미어 규칙은 아티스트 이름이
+# 앞에 붙는 라벨(`BTS 미개척`)을 위한 것이다.
+_METRIC_RENAME_EXACT: dict[str, str] = {
+    "차트 플랫폼": "수집한 플랫폼",
+    "Spotify 밖": "Spotify에 없는 팀",
+    "조사 국가": "조사한 나라",
+    "최광역 곡": "가장 많은 나라에 오른 곡",
+    "최광역 팀": "가장 많은 나라에 오른 팀",
+    "개척 시장": "한국 팀이 이미 오른 나라",
+    "신인 최광역": "신인 중 가장 넓게 오른 팀",
+}
+_METRIC_RENAME_SUFFIX: list[tuple[str, str]] = [
+    (" 최다 권역", "가 가장 많이 오른 권역"),
+    (" 미개척", "가 아직 안 오른 나라"),
+]
+
+_METRIC_DEFS: dict[str, str] = {
+    "차트 플랫폼": "이번 실행에서 수집한 차트 플랫폼 수와 플랫폼별 시장 수.",
+    "Spotify 밖": "Spotify 차트에는 없고 다른 플랫폼에는 오른 팀 수.",
+    "조사 국가": "이번 실행에서 차트를 수집한 나라 수. 세계 전체가 아니라 이 집합이 분모다.",
+    "최광역 곡": "가장 많은 나라 차트에 오른 곡과 그 나라 수.",
+    "최광역 팀": "가장 많은 나라 차트에 오른 팀과 그 나라 수.",
+    # ⚠ 스코프를 반드시 적는다. 이 두 지표는 **Spotify 차트 기준**인데 같은 구획의
+    # `아직 진입하지 않은 시장`은 3플랫폼 통합 기준이라, 스코프를 밝히지 않으면 두 수가
+    # 어긋나 보인다(둘 다 옳고 세는 대상이 다르다).
+    "개척 시장": "Spotify 차트 기준으로 정해진 수 이상의 한국 팀이 이미 오른 나라. 검증된 시장으로 보는 기준선이며 값은 조정 가능하다.",
+    "신인 최광역": "데뷔 3년 이내 팀 중 가장 많은 나라에 오른 팀.",
+}
+
+
+def _lens_roster_acts(
+    parsed_list: list[dict[str, object]],
+    platforms: list[str],
+    aidx: dict[str, str],
+    roster: set[str] | None,
+) -> dict[str, set[str]]:
+    """플랫폼 → 그 플랫폼에서 잡힌 로스터 팀 집합."""
+    out: dict[str, set[str]] = {}
+    for parsed, plat in zip(parsed_list, platforms):
+        slot = out.setdefault(plat, set())
+        for e in _entries(parsed):
+            art = primary_artist(_s(e, "artist"))
+            canon = aidx.get(art.strip().lower()) or art
+            if roster is not None and canonical_artist(canon) not in roster:
+                continue
+            slot.add(canon)
+    return out
+
+
+def _summary_lens_shape(by_lens: dict[str, set[str]], plat_names: list[str]) -> dict[str, object]:
+    """진입 요약 하나(R2) — **네 렌즈가 같은 것을 보고 있지 않다**를 한 도형으로.
+
+    축 = 플랫폼, 값 = 네 플랫폼 전체에서 잡힌 팀을 100으로 뒀을 때 그 플랫폼이 잡은 비율.
+    도형이 정다각형에 가까우면 렌즈들이 같은 팀을 보고 있다는 뜻이고, 한쪽으로 찌그러지면
+    렌즈 하나만 보면 놓치는 팀이 있다는 뜻이다. 이 모듈의 주장이 그 찌그러짐이다.
+
+    ⚠ 이 값은 **커버리지**이지 플랫폼의 우열이 아니다. 순위 범위와 수집 시장 수가 달라
+    깊은 레일이 더 많이 잡는 것은 당연하다(RULES §1 위계 없음).
+    """
+    union = set().union(*by_lens.values()) if by_lens else set()
+    axes: list[dict[str, object]] = []
+    for p in plat_names:
+        caught = by_lens.get(p)
+        if caught is None:
+            axes.append({"name": plat_label(p), "value": None,
+                         "missingReason": "이번 실행에서 수집되지 않음", "sample": 0})
+            continue
+        axes.append({
+            "name": plat_label(p),
+            "value": round(100.0 * len(caught) / len(union), 1) if union else 0.0,
+            "sample": len(caught),
+            "raw": len(caught),
+            "rawUnit": "팀",
+        })
+    placed = [float(v) for a in axes if isinstance(v := a.get("value"), (int, float))]
+    shape: dict[str, object] = {
+        "type": "radar",
+        "id": "lens-coverage",
+        "title": "플랫폼별로 잡히는 팀의 비율",
+        "question": "한 플랫폼만 보면 얼마나 놓치나?",
+        "definition": "네 플랫폼 전체에서 한 번이라도 잡힌 한국 원산지 팀을 100으로 두고, 각 플랫폼이 그중 몇 "
+        "퍼센트를 잡았는지 나타낸 값. 도형이 고를수록 네 플랫폼이 같은 팀을 보고 있다는 뜻이다. "
+        "이 값은 커버리지이며 플랫폼의 우열이 아니다. 순위 범위와 수집 시장 수가 다르면 "
+        "깊은 쪽이 더 많이 잡는 것이 당연하다.",
+        "data": {
+            "axes": axes,
+            "max": 100,
+            "scaleNote": "네 플랫폼 전체에서 잡힌 팀 대비 비율",
+            **(
+                {"baseline": round(sum(placed) / len(placed), 1), "baselineLabel": "플랫폼 평균"}
+                if placed
+                else {}
+            ),
+        },
+    }
+    return shape
+
+
+def _chart_history_inferences(
+    *,
+    by_lens: dict[str, set[str]],
+    plat_names: list[str],
+    non_sp_unique: int,
+    act_mkt: dict[str, dict[str, int]],
+    rookie_reach: list[tuple[str, int]],
+) -> list[dict[str, object]]:
+    """태그된 자동 추론(R4 · D-039). 전부 관측에서 계산한다.
+
+    허용 어법은 "~와 정합한다"·"~신호가 있다"·"~로 읽힌다"뿐이고, 명령·예측·인과 단정과
+    em dash는 scripts/validate_report_data.py가 CI에서 잡는다.
+    """
+    out: list[dict[str, object]] = []
+    union = set().union(*by_lens.values()) if by_lens else set()
+
+    # ① 렌즈가 서로 다른 것을 본다 — 이 모듈의 주장. 최다·최소 렌즈의 간격을 그대로 근거로.
+    counts = [(p, len(by_lens.get(p) or set())) for p in plat_names if p in by_lens]
+    if union and len(counts) >= 2:
+        hi = max(counts, key=lambda kv: kv[1])
+        lo = min(counts, key=lambda kv: kv[1])
+        if hi[1] and lo[1] / hi[1] <= 0.7:
+            out.append({
+                "text": f"{plat_label(lo[0])}만 보면 {plat_label(hi[0])}에서 잡히는 팀의 상당수가 "
+                "화면에 없는 상태와 정합한다.",
+                "basis": " · ".join(f"{plat_label(p)} {n}팀" for p, n in counts)
+                + f" · 네 플랫폼 합집합 {len(union)}팀",
+                "sample": f"원산지가 확인된 로스터 팀 {len(union)}팀",
+                "confidence": "high",
+                "limits": "플랫폼마다 순위 범위와 수집 시장 수가 달라 이 비율은 커버리지 차이를 포함한다. "
+                "우열이 아니며, 잡히지 않았다는 것이 그 나라에서 안 들린다는 뜻도 아니다.",
+                "chartId": "lens-coverage",
+            })
+
+    # ② 단일 렌즈의 사각. **두 스코프를 함께 적는다** — 전체 차트 인구의 수(크지만 서구 팝을
+    # 포함)와 원산지가 확인된 로스터의 수(작지만 이 제품의 판단 대상)는 다른 이야기이고,
+    # 하나만 적으면 읽는 사람이 다른 쪽 크기로 오해한다.
+    if non_sp_unique > 0:
+        roster_blind = (union - (by_lens.get("spotify") or set())) if union else set()
+        out.append({
+            "text": "Spotify 한 곳만 수집했다면 다른 플랫폼에만 오른 팀이 화면에서 빠졌을 신호가 있다.",
+            "basis": f"전체 차트 인구 기준 {non_sp_unique}팀. 원산지가 확인된 한국 로스터 {len(union)}팀 "
+            f"중에서는 {len(roster_blind)}팀"
+            + (f" ({', '.join(sorted(roster_blind)[:4])})" if roster_blind else ""),
+            "sample": f"이번 실행에서 수집한 {len(plat_names)}개 플랫폼",
+            "confidence": "high",
+            "limits": "차트 진입 여부만 본 것이라 소비 규모를 말하지 않는다. 플랫폼별 순위 범위가 달라 "
+            "어느 쪽이 더 큰지도 이 값으로는 알 수 없다. 전체 인구 쪽 수치에는 서구 팝이 대부분이다.",
+            "chartId": "roster-by-lens",
+        })
+
+    # ③ 팬베이스가 얇은 팀도 일부 시장에 닿는가 — PRODUCT 1차 사용자가 신인이라 이 축이 핵심.
+    if rookie_reach:
+        top_name, top_n = rookie_reach[0]
+        if top_n >= 2:
+            spread = ", ".join(f"{a} {n}개국" for a, n in rookie_reach[:4])
+            out.append({
+                "text": f"데뷔 3년 이내 팀 중에도 여러 나라 차트에 닿은 사례가 있는 것으로 읽힌다. "
+                f"가장 넓은 쪽은 {top_name}이다.",
+                "basis": spread,
+                "sample": f"데뷔 연도가 확인된 신인 {len(rookie_reach)}팀",
+                "confidence": "medium",
+                "limits": "데뷔 연도가 확인되지 않은 팀은 코호트에서 빠지므로 이 수는 하한이다. "
+                "하루치 스냅샷이라 오름세인지 내림세인지 구분하지 않는다.",
+                "chartId": "rookie-markets",
+            })
+
+    # ④ 진입 지도의 공백 규모 — 화이트스페이스가 실제로 얼마나 비어 있는가.
+    if act_mkt:
+        mkts = {cc for v in act_mkt.values() for cc in v}
+        filled = sum(len(v) for v in act_mkt.values())
+        total = len(act_mkt) * len(mkts)
+        if total and filled / total <= 0.5:
+            out.append({
+                "text": f"진입 지도는 대부분이 빈 칸인 상태와 정합한다. {len(act_mkt)}팀 × {len(mkts)}개국 중 "
+                f"{filled}칸에만 진입 기록이 있다.",
+                "basis": f"채워진 칸 {filled}/{total} ({100.0 * filled / total:.0f}%)",
+                "sample": f"로스터 {len(act_mkt)}팀 · 조사 {len(mkts)}개국",
+                "confidence": "high",
+                "limits": "빈 칸은 그 나라 차트 상위에 없다는 뜻이지 그 나라에서 안 들린다는 뜻이 아니다. "
+                "차트 밖의 소비는 이 데이터로 보이지 않는다.",
+                "chartId": "market-gaps",
+            })
+    return out
+
+
+def _apply_section_meta(
+    metrics: list[dict[str, object]], charts: list[dict[str, object]]
+) -> list[dict[str, object]]:
+    """차트·지표에 구획과 문구를 붙이고, 구획에 배정되지 않은 차트는 **떨어낸다**.
+
+    떨어내는 쪽을 기본으로 둔 이유: 표에 없는 차트가 조용히 화면에 남으면 구획 상한이
+    의미를 잃는다. 새 차트를 추가하면 여기 한 줄을 적어야 하고, 그 한 줄이 "이 차트로
+    무엇을 답하나"를 답하게 만든다(R3).
+    """
+    for m in metrics:
+        label = str(m.get("label") or "")
+        sec = _METRIC_SECTION_EXACT.get(label)
+        if sec is None:
+            sec = next((s for suf, s in _METRIC_SECTION_SUFFIX if label.endswith(suf)), None)
+        if sec:
+            m["section"] = sec
+        base = label
+        for suf in (" 최다 권역", " 미개척"):
+            if label.endswith(suf):
+                base = suf.strip()
+        if base in _METRIC_DEFS:
+            m["definition"] = _METRIC_DEFS[base]
+        elif label.endswith(" 1위"):
+            m["definition"] = "그 플랫폼의 한국 차트 1위 곡. 플랫폼마다 집계 대상이 달라 서로 견주지 않는다."
+        elif label.endswith(" 최다 권역"):
+            m["definition"] = "그 팀이 가장 많이 오른 권역과 점유율. 권역 묶음은 조정 가능한 기준이다."
+        elif label.endswith(" 미개척"):
+            m["definition"] = (
+                "그 팀이 아직 오르지 않은, 한국 팀이 이미 오른 나라의 수. Spotify 차트 기준이며 "
+                "네 플랫폼을 합친 공백은 같은 구획의 진입 지도가 따로 보여준다."
+            )
+        else:
+            m["definition"] = _METRIC_DEFS.get(base, "")
+        if not m.get("definition"):
+            m.pop("definition", None)
+
+        # 라벨 갈아 끼우기는 **구획·정의를 다 붙인 뒤** 한다. 위 매칭이 원래 라벨을 쓰기 때문이다.
+        if label in _METRIC_RENAME_EXACT:
+            m["label"] = _METRIC_RENAME_EXACT[label]
+        else:
+            for suf, rep in _METRIC_RENAME_SUFFIX:
+                if label.endswith(suf):
+                    m["label"] = label[: -len(suf)] + rep
+                    break
+            else:
+                if label.endswith(" 1위"):
+                    m["label"] = f"{plat_label(label[:-3])} 1위"
+        # 힌트에서도 내부 어휘를 걷어낸다 — 타일에 늘 보이는 줄이라 제목만큼 눈에 띈다.
+        hint = str(m.get("hint") or "")
+        if hint:
+            hint = hint.replace("개척 시장(≥", "이미 오른 나라(팀 수 ≥").replace(
+                "기본 ≥", "기준 팀 수 ≥"
+            ).replace("(조정가능)", ", 조정 가능").replace(
+                "apple/youtube에서만 차트인", "Apple·YouTube·Shazam에만 오름"
+            )
+            for raw, disp in _PLAT_DISPLAY.items():
+                hint = hint.replace(f"{raw} ", f"{disp} ")
+            m["hint"] = hint
+
+    kept: list[dict[str, object]] = []
+    for c in charts:
+        meta = _CHART_META.get(str(c.get("id") or ""))
+        if meta:
+            c.update(meta)
+            kept.append(c)
+    return kept
+
+
 def _build_platform_parallel(
     parsed_list: list[dict[str, object]],
     platforms: list[str],
@@ -594,10 +986,11 @@ def _build_platform_parallel(
         charts.append(
             {
                 "type": "heatmap",
+                "id": "kr-top10-lenses",
                 "title": f"홈({scope or '전체'}) Top 10 × 플랫폼 · 세 플랫폼의 일치와 차이 (숫자=해당 플랫폼 순위, 열 간 비교 금지)",
                 "data": {
                     "rows": [lens_disp[k] for k in ordered_rows],
-                    "cols": [p for p in plat_names if p in lens_ranks],
+                    "cols": [plat_label(p) for p in plat_names if p in lens_ranks],
                     "cells": [
                         [lens_ranks[p].get(k) for p in plat_names if p in lens_ranks]
                         for k in ordered_rows
@@ -621,6 +1014,7 @@ def _build_platform_parallel(
             charts.append(
                 {
                     "type": "bar",
+                    "id": f"{p}-native",
                     "title": f"{p} · 홈({scope}) {unit} Top 10 (네이티브 수치)",
                     "data": [
                         {
@@ -638,7 +1032,9 @@ def _build_platform_parallel(
             "플랫폼 간 위계는 없으며 집계 범위가 달라 순위·수치의 **열 간 비교 금지**."
         )
 
-    _augment_cross_platform(metrics, charts, insights, parsed_list, platforms, entity_map, watch)
+    _augment_cross_platform(
+        metrics, charts, insights, parsed_list, platforms, entity_map, watch, geo_scope
+    )
 
     # ── 3렌즈 통합 진입 지도 (D-016 ①): 셀 = 어느 플랫폼이든 최고순위 ──
     # 화이트스페이스의 질문("어느 시장에 아직 없는가")은 플랫폼 불문 진입이 정답 —
@@ -668,6 +1064,7 @@ def _build_platform_parallel(
         charts.append(
             {
                 "type": "tunable",
+                "id": "market-gaps",
                 "title": f"[{(geo_scope or '전체').upper()} 로스터] 3플랫폼 통합 진입 지도 · 미개척 시장 (빈칸=모든 플랫폼 미진입)",
                 "data": {
                     "view": "whitespace",
@@ -705,10 +1102,81 @@ def _build_platform_parallel(
             "(top-200과 최다 시장으로 진입 지도가 가장 촘촘). 다른 플랫폼 시장이 넓어지면 확장 대상"
         )
 
-    plat_txt = " · ".join(f"{p} {len(markets_by_plat.get(p, set()))}시장" for p in plat_names)
+    # ── 구획 배치 (D-043) ────────────────────────────────────────────────────
+    #
+    # ⚠ spotify 전용 미개척 지도(`spotify-gaps`)는 화면에서 **뺀다**. 바로 위 통합 진입
+    # 지도(`market-gaps`)와 답하는 질문이 같은데("어느 시장에 아직 없는가"), 한 렌즈에서만
+    # 비어 있는 칸은 진짜 공백이 아니라 그 렌즈의 커버리지 한계일 수 있어 통합 쪽이
+    # 엄밀하게 우월하다. 데이터는 그대로 산출되며 표면에만 올리지 않는다(RULES §4.5 갱신).
+    charts = _apply_section_meta(metrics, charts)
+
+    by_lens = _lens_roster_acts(parsed_list, platforms, aidx, roster)
+    summary = _summary_lens_shape(by_lens, plat_names)
+
+    # 신인 코호트의 도달 폭 — 추론 ③의 근거. 지표에서 되읽지 않고 여기서 직접 센다.
+    # "Spotify 밖" 팀 수는 _augment_cross_platform이 지표로 이미 냈다. 같은 계산을
+    # 여기서 되풀이하면 두 수가 어긋날 수 있으므로 그 지표를 되읽는다.
+    non_sp_count = next(
+        (int(v) for m in metrics if m.get("label") == "Spotify 밖" and isinstance(v := m.get("value"), int)),
+        0,
+    )
+
+    rookie_reach: list[tuple[str, int]] = []
+    debut_map = _detail_by_canon(entity_map, "debut")
+    cutoff_year = int(latest_date[:4]) if latest_date[:4].isdigit() else 0
+    if cutoff_year:
+        acts_by_debut: dict[str, int] = {}
+        for canon, mkts_of in act_mkt.items():
+            dy = _debut_year(debut_map.get(canonical_artist(canon)))
+            if dy is not None and dy >= cutoff_year - ROOKIE_YEARS:
+                acts_by_debut[canon] = len(mkts_of)
+        rookie_reach = sorted(acts_by_debut.items(), key=lambda kv: (-kv[1], kv[0]))
+
+    have = {str(c.get("id")) for c in charts if c.get("id")} | {"lens-coverage"}
+    questions = [
+        q
+        for q in (
+            {"q": "한 플랫폼만 봤다면 누가 화면에서 사라지나?", "chartId": "roster-by-lens"},
+            {"q": "우리 팀들이 아직 오르지 못한 나라는 어디인가?", "chartId": "market-gaps"},
+            {"q": "팬베이스가 얇은 신인은 어느 나라에 닿았나?", "chartId": "rookie-markets"},
+            {"q": "한국 상위 10곡은 플랫폼마다 다른가?", "chartId": "kr-top10-lenses"},
+        )
+        if q["chartId"] in have
+    ]
+
+    all_markets = sorted({cc for v in markets_by_plat.values() for cc in v})
+    extra: dict[str, object] = {
+        "summary": summary,
+        "sections": [dict(s) for s in _SECTIONS if any(c.get("section") == s["id"] for c in charts)],
+        "questions": questions,
+        "notAnswered": [
+            "국내 코어 차트. 멜론과 써클차트는 아직 연결되지 않아 국내는 Spotify 한국 차트로 근사한다",
+            "왜 그 나라에서 올랐는지. 이 화면은 어디에 올랐는지까지만 다룬다",
+            "순위가 오르는 중인지 내리는 중인지. 하루치 스냅샷이라 방향을 알 수 없다",
+            "플랫폼 사이의 크기 비교. 집계 대상과 순위 범위가 달라 순위 숫자를 서로 견줄 수 없다",
+            "빌보드 순위. 데이터 원천이 유료 기업 거래용이라 수집 경로가 없다",
+        ],
+        "reliability": {
+            "sample": f"{len(plat_names)}개 플랫폼 · {len(all_markets)}개 시장 · "
+            f"{sum(len(_entries(p)) for p in parsed_list)}곡",
+            "accuracy": "차트 순위와 수치는 사실. 아티스트 원산지와 데뷔 연도는 커뮤니티 데이터라 불완전할 수 있음",
+            "missing": "원산지가 확인되지 않은 아티스트는 로스터 집계에서 제외",
+            "engine": f"Kworb 집계값 · Apple 공식 RSS · 스냅샷 {latest_date or '?'}",
+        },
+        "inferences": _chart_history_inferences(
+            by_lens=by_lens,
+            plat_names=plat_names,
+            non_sp_unique=non_sp_count,
+            act_mkt=act_mkt,
+            rookie_reach=rookie_reach,
+        ),
+    }
+
+    # 제목·부제에서 내부 용어를 걷어낸다(DESIGN §6.1). "수평 뷰"·"병렬(위계 없음)"은
+    # 우리끼리 쓰던 말이고, 위계가 없다는 사실은 이제 플랫폼 구획의 `note`가 말한다.
     return _wrap(
-        f"멀티플랫폼 수평 뷰 ({'·'.join(plat_names)})",
-        f"{len(plat_names)}개 플랫폼 병렬(위계 없음) · {plat_txt}",
+        f"{len(plat_names)}개 플랫폼",
+        " · ".join(plat_label(p) for p in plat_names) + f" · {len(all_markets)}개 시장",
         latest_date or "?",
         sum(len(_entries(p)) for p in parsed_list),
         generated_at,
@@ -716,6 +1184,7 @@ def _build_platform_parallel(
         charts,
         insights,
         _recos(),
+        extra,
     )
 
 
@@ -727,6 +1196,7 @@ def _augment_cross_platform(
     platforms: list[str],
     entity_map: dict[str, object] | None,
     watch: list[str] | None,
+    geo_scope: str | None = None,
 ) -> None:
     """아티스트 × 플랫폼 교차 — 어느 렌즈에 잡히는가(단일 렌즈 사각 표면화, RULES §1).
 
@@ -753,6 +1223,8 @@ def _augment_cross_platform(
             if plat not in slot or rank < slot[plat]:
                 slot[plat] = rank
 
+    # 막대 스코프용 로스터. None이면 스코프 없음(전 인구)이라 워치리스트만 앞세운다.
+    roster = _roster_canon(entity_map, geo_scope)
     non_sp_unique = {
         k: v for k, v in by_act.items() if len(v) == 1 and "spotify" not in v
     }
@@ -777,38 +1249,43 @@ def _augment_cross_platform(
         }
     )
 
-    # 히트맵 rows: 워치리스트 acts(신호 있는) 우선 → 다플랫폼 존재 → best rank (결정적)
+    # 히트맵 rows: 워치리스트 우선 → **잡힌 플랫폼이 적은 순** → best rank (결정적).
+    #
+    # 적은 순으로 뒤집은 이유: 이 뷰의 쓸모는 "어디에 잡히나"보다 **"어디에 안 잡히나"**에
+    # 있다. 많이 잡힌 팀을 위에 두면 빈칸이 아래로 밀려 사각지대가 화면 밖으로 나간다.
+    # 로스터 스코프가 있으면 그 팀들만 남긴다 — 전 인구를 섞으면 서구 팝이 행을 차지한다.
+    scope_acts = [
+        k for k in by_act if k in watch_set or roster is None or canonical_artist(k) in roster
+    ]
+
     def _row_key(k: str) -> tuple[int, int, int, str]:
         v = by_act[k]
-        return (0 if k in watch_set else 1, -len(v), min(v.values()), k)
+        return (0 if k in watch_set else 1, len(v), min(v.values()), k)
 
-    rows = sorted(by_act, key=_row_key)[:N_PLATFORM_ROWS]
+    rows = sorted(scope_acts or list(by_act), key=_row_key)[:N_PLATFORM_ROWS]
     charts.append(
         {
             "type": "heatmap",
+            "id": "roster-by-lens",
             "title": "아티스트 × 플랫폼 · 어디에 잡히는가 (숫자=최고순위, 플랫폼 간 비교 금지)",
             "data": {
                 "rows": rows,
-                "cols": plat_names,
+                "cols": [plat_label(p) for p in plat_names],
                 "cells": [[by_act[r].get(p) for p in plat_names] for r in rows],
             },
         }
     )
 
-    uniq_sorted = sorted(
-        non_sp_unique.items(), key=lambda kv: (min(kv[1].values()), kv[0])
-    )[:N_UNIQUE_BARS]
-    if uniq_sorted:
-        charts.append(
-            {
-                "type": "bar",
-                "title": "Spotify 밖에서만 보이는 팀 · apple/youtube에서만 차트인 (값=해당 플랫폼 최고순위)",
-                "data": [
-                    {"name": f"{k} ({next(iter(v))})", "value": min(v.values())}
-                    for k, v in uniq_sorted
-                ],
-            }
-        )
+    # ⚠ 여기 있던 "Spotify 밖에서만 보이는 팀" 막대는 **뺐다**(2026-07-30 육안 검사).
+    # 세 가지가 한꺼번에 틀려 있었다: ① 스코프가 전체 차트 인구라 K-pop과 무관한
+    # 아티스트가 표시됐고 ② 값이 **순위**인데 막대 길이로 그려 인코딩이 뒤집혔으며
+    # (순위 170이 순위 1보다 긴 막대가 된다 — 순위는 크기가 아니라 순서다)
+    # ③ 표시된 팀이 전부 1위라 막대 길이가 모두 같았다.
+    #
+    # 값을 "잡힌 플랫폼 수"로 고쳐 보니 이번엔 값이 1과 2 두 가지뿐이라 막대 길이가
+    # 숫자 이상을 말하지 못했다. 그리고 그 답은 **바로 위 히트맵의 빈칸이 이미 보여준다**.
+    # 답할 질문이 겹치면 차트를 뺀다(R3). 대신 히트맵을 잡힌 플랫폼이 **적은 순**으로
+    # 정렬해 사각지대 팀이 맨 위에 오게 했다. 수치는 지표 타일과 해석이 들고 있다.
 
     watch_blind = sorted(k for k in watch_set if k in non_sp_unique)
     if watch_blind:
@@ -1035,6 +1512,7 @@ def _augment_geography(
     charts.append(
         {
             "type": "heatmap",
+            "id": "reach-ranking",
             "title": f"{scope_tag}최광역 랭킹 · {len(union)}곡 × {len(union_cols)}시장 (앵커 없음, 진입국가순)",
             "data": {
                 "rows": [track_name[k] for k in union],
@@ -1061,6 +1539,7 @@ def _augment_geography(
     charts.append(
         {
             "type": "heatmap",
+            "id": "artist-markets",
             "title": f"{scope_tag}지리 지문 · Top {len(artists)} 아티스트 × {len(fp_cols)}시장 (곡 최고순위)",
             "data": {
                 "rows": artists,
@@ -1147,6 +1626,7 @@ def _whitespace_view(
     charts.append(
         {
             "type": "tunable",
+            "id": "spotify-gaps",
             "title": f"{scope_tag}미개척 지도 · 개척 시장 × 팀 (빈칸=미개척) · 기준 직접 조정",
             "data": {
                 "view": "whitespace",
@@ -1233,6 +1713,7 @@ def _cohort_view(
         charts.append(
             {
                 "type": "heatmap",
+                "id": "rookie-markets",
                 "title": f"{scope_tag}신인 지리 지문 · 데뷔 ≥{cutoff} ({len(rookies)}팀) × 시장 · 팬베이스 없이 어디에 닿는지",
                 "data": {
                     "rows": [f"{a} ({debut(a)})" for a in rookies],

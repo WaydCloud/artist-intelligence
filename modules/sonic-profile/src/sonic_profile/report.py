@@ -183,6 +183,7 @@ def _position_heatmap(
         return None
     return {
         "type": "heatmap",
+        "id": "watchlist-rank",
         "title": f"분포 위치 · 워치리스트 트랙이 차트 {len(cohort)}곡 중 몇 위인가 (1 = 가장 높음)",
         "data": {"rows": rows, "cols": [la for _, la in _ALL_AXES], "cells": cells},
     }
@@ -200,10 +201,209 @@ def _cohort_compare(focus: list[dict[str, Any]], cohort: list[dict[str, Any]]) -
         data.append({"name": f"{label} · 워치리스트", "value": round(median(f_v), 4)})
         data.append({"name": f"{label} · 차트", "value": round(median(c_v), 4)})
     return (
-        {"type": "bar", "title": "코호트 비교 · 워치리스트 vs 차트 중앙값 (0~1 축)", "data": data}
+        {"type": "bar", "id": "cohort-compare",
+         "title": "코호트 비교 · 워치리스트 vs 차트 중앙값 (0~1 축)", "data": data}
         if data
         else None
     )
+
+
+def _percentile_of(value: float, pool: list[float]) -> float:
+    """`value`가 `pool` 분포에서 몇 백분위인가 (0~100).
+
+    절대값은 판독 불가이고 **분포 안의 위치**가 판독 가능하다(REFERENCE §3 기제 ①).
+    이 모듈은 이미 그 축 위에 있으므로 새 지표를 만드는 것이 아니라 화면에 노출하는 것이다.
+    """
+    if not pool:
+        return 0.0
+    return round(100.0 * sum(1 for p in pool if p <= value) / len(pool), 1)
+
+
+def _summary_radar(
+    focus: list[dict[str, Any]], cohort: list[dict[str, Any]], *, min_n: int = 3
+) -> dict[str, Any]:
+    """진입 요약 하나(R2) — 워치리스트가 차트 코호트 분포에서 **어디에 있는가**.
+
+    한 도형이 두 기제를 동시에 만족한다: 기준 링(코호트 중앙값)과의 거리가 **비교 위치**이고,
+    어떤 축은 링 밖 어떤 축은 링 안인 그림이 **불일치**다. 불일치가 진짜 산출물이라는 것이
+    이식 대상 2번이다(REFERENCE §3 기제 ②).
+
+    ⚠ 원값이 아니라 백분위를 그리는 이유: 이 축들은 전부 0~1이지만 실측 중앙값이
+    스테레오 폭 0.11 · 평탄도 0.015 · 펄스 명료도 0.557로 자릿수가 다르다. 원값을 한
+    폴리곤에 얹으면 도형이 값이 아니라 **스케일**을 보여준다.
+
+    **표본이 얇은 축은 그리지 않는다** — 중앙값이 튀어 위치가 관측이 아니라 잡음이 된다.
+    결측은 0이 아니라 null이고 사유를 함께 싣는다(R6).
+    """
+    axes: list[dict[str, Any]] = []
+    for field, label in _UNIT_AXES:
+        f_v, c_v = _vals(focus, field), _vals(cohort, field)
+        if not f_v or not c_v:
+            why = (
+                "워치리스트 관측 없음" if not f_v else "비교할 차트 코호트 관측 없음"
+            )
+            axes.append({"name": label, "value": None, "missingReason": why, "sample": len(f_v)})
+            continue
+        if len(f_v) < min_n:
+            axes.append({
+                "name": label,
+                "value": None,
+                "missingReason": f"워치리스트 표본 {len(f_v)}곡 · 최소 {min_n}곡 미달로 위치를 내지 않음",
+                "sample": len(f_v),
+            })
+            continue
+        med = median(f_v)
+        axes.append({
+            "name": label,
+            "value": _percentile_of(med, c_v),
+            "sample": len(f_v),
+            "raw": round(med, 4),
+        })
+    return {
+        "type": "radar",
+        "id": "summary-position",
+        "title": "요약 · 워치리스트가 차트 코호트 안에서 어디에 있나",
+        "question": "우리가 보는 팀의 소리는 지금 차트에 오른 곡들과 어느 축에서 다른가?",
+        "definition": (
+            "축마다 워치리스트 중앙값이 같은 날 차트 코호트 분포에서 몇 백분위인지 계산한 값. "
+            "기준선 50은 차트 코호트의 중앙값이므로, 선 밖은 코호트보다 높은 쪽, 선 안은 낮은 쪽. "
+            "원값이 아니라 위치를 그리는 이유는 축마다 값의 자릿수가 달라서."
+        ),
+        "data": {
+            "axes": axes,
+            "max": 100,
+            "baseline": 50,
+            "baselineLabel": "차트 코호트 중앙값",
+            "scaleNote": "차트 코호트 내 백분위",
+        },
+    }
+
+
+# ── 차트별 문구(R3 질문 · R5 정의). 한 표에 모으는 이유: 문구는 클라이언트 대면 카피라
+# (DESIGN §6.1) 계산 코드 사이에 흩어 두면 검토가 불가능해진다. 키는 차트 id다.
+#
+# 🔴 R3의 규율은 "질문을 채운다"가 아니라 **"답할 질문이 없으면 그 차트를 뺀다"**다.
+# 여기 새 항목을 적을 때 질문이 억지로 나온다면 그것은 문구 문제가 아니라 그 차트가
+# 화면에 있을 이유가 없다는 신호다.
+_CHART_META: dict[str, dict[str, str]] = {
+    "tempo-hist": {
+        "question": "이 코호트의 템포는 어느 구간에 모여 있나?",
+        "definition": "비트 시각에 직선을 맞춰 구한 BPM을 20BPM 폭으로 세운 것. 막대 높이는 곡 수.",
+    },
+    "pulse-top": {
+        "question": "박이 가장 또렷하게 잡히는 곡은 무엇인가?",
+        "definition": (
+            "펄스 명료도는 온셋 포락 자기상관의 주 피크. 박이 규칙적으로 강하게 반복될수록 높음. "
+            "춤 적합도·인기·품질과 무관하며 danceability도 아님."
+        ),
+    },
+    "rhythm-mix": {
+        "question": "이 코호트의 킥 배치는 어떤 리듬 유형에 가까운가?",
+        "definition": (
+            "마디를 16분음 격자로 나눠 저역 킥 배치를 접은 뒤 이름 붙은 유형과 코사인 정합도를 낸 것. "
+            "유형끼리 서로 겹치므로 가장 가까운 유형은 순위이지 판정이 아님. 정합도가 낮으면 '해당 없음'."
+        ),
+    },
+    "instrument-mix": {
+        "question": "검출 임계를 어디에 두면 어떤 악기가 몇 곡에서 잡히나?",
+        "definition": (
+            "태거가 낸 악기별 확률이 임계를 넘는 곡 수. 확률은 서로 배타적이지 않아 한 곡이 여러 칸에 셈. "
+            "정확도 미측정이라 곡 수는 하한으로 읽을 값."
+        ),
+    },
+    "style-mix": {
+        "question": "1순위 스타일 라벨은 무엇으로 쏠려 있나?",
+        "definition": (
+            "Discogs 택소노미 기준 확률 1순위 라벨별 곡 수. 저지클럽·뭄바톤·아마피아노는 이 라벨 "
+            "목록에 없어 여기 나타나지 않음."
+        ),
+    },
+    "unit-trend": {
+        "question": "관측일이 쌓이면서 코호트의 소리 분포가 움직이나?",
+        "definition": (
+            "날짜별 0~1 축 중앙값. x축이 관측일이라 '소리가 변한 것'과 '차트 구성이 바뀐 것'이 섞여 있음. "
+            "그 둘을 가르는 것이 아래 빈티지·고정 코호트·신곡만 뷰."
+        ),
+    },
+    "tempo-trend": {
+        "question": "코호트 템포 중앙값이 날짜에 따라 움직이나?",
+        "definition": "날짜별 템포 중앙값(BPM). 관측일 기준이라 차트 구성 변화가 섞여 있음.",
+    },
+    "vintage-unit": {
+        "question": "발매 시기별로 소리 분포가 다른가?",
+        "definition": (
+            "x축이 관측일이 아니라 발매 분기이므로 차트 재편성에 흔들리지 않음. 대신 생존 편향이 있음: "
+            "옛 분기 칸의 곡은 그 분기의 대표 표본이 아니라 오늘까지 차트에 남은 곡."
+        ),
+    },
+    "vintage-tempo": {
+        "question": "발매 시기별 템포 중앙값이 다른가?",
+        "definition": "발매 분기별 템포 중앙값. 위 뷰와 같은 생존 편향이 적용됨.",
+    },
+    "age-hist": {
+        "question": "지금 차트는 얼마나 신곡 중심인가?",
+        "definition": (
+            "관측일에서 발매일을 뺀 곡 나이를 구간별로 센 것. 발매일은 유통사 표기라 리마스터·재발매가 "
+            "그 날짜로 잡힐 수 있음."
+        ),
+    },
+    "age-trend": {
+        "question": "차트가 신곡 쪽으로 움직이나, 카탈로그 쪽으로 움직이나?",
+        "definition": "날짜별 관측 코호트의 곡 나이 중앙값(일). 값이 내려가면 신곡 쪽.",
+    },
+    "fixed-cohort": {
+        "question": "차트 구성 변화를 제거하면 같은 곡들의 소리 지표가 움직이나?",
+        "definition": (
+            "최초 관측일에 잡힌 곡 집합만 계속 따라간 중앙값. 집합이 날마다 바뀌지 않으므로 "
+            "여기서 움직이는 값은 차트 재편성이 아니라 이 곡들의 이야기. 같은 곡의 값이 날마다 "
+            "달라지는 것은 발췌 구간이 달라졌을 가능성을 포함함."
+        ),
+    },
+    "fresh-trend": {
+        "question": "카탈로그 혼입을 걷어낸 신곡만 보면 분포가 다른가?",
+        "definition": "발매 90일 이내 곡만 남긴 날짜별 0~1 축 중앙값. 90일 경계는 관습값.",
+    },
+    "watchlist-rank": {
+        "question": "워치리스트의 각 곡은 축마다 차트 코호트에서 몇 위인가?",
+        "definition": (
+            "곡 하나의 축별 값을 차트 코호트에 합쳐 내림차순으로 세운 순위(1이 가장 높음). "
+            "순위이므로 곡 사이의 간격은 표현하지 않음."
+        ),
+    },
+    "cohort-compare": {
+        "question": "두 코호트의 축별 중앙값은 각각 얼마인가?",
+        "definition": (
+            "요약 도형은 위치(백분위)를 보여주고 이 막대는 원값을 보여줌. 위치가 같아도 원값 차이는 "
+            "클 수 있어 둘이 따로 필요함."
+        ),
+    },
+}
+
+# 지표 타일의 정의(R5). `hint`(표본·주의)와 역할이 다르다 — 여기는 **무엇을 재는가**다.
+_METRIC_DEFS: dict[str, str] = {
+    "템포": "비트 시각에 직선을 맞춰 구한 분당 박 수. 고정 격자 방식이 아니라 130BPM 부근의 작은 차이도 남음.",
+    "펄스 명료도": "온셋 포락 자기상관의 주 피크. 박이 규칙적으로 강하게 반복될수록 높음. danceability가 아님.",
+    "온셋 밀도": "초당 감지된 소리 시작점 수. 음이 촘촘한 편곡일수록 높음.",
+    "저역 비율": "전체 에너지 중 저역(경계 아래) 비중. 킥·베이스가 두꺼울수록 높음.",
+    "음색 밝기": "스펙트럼 무게중심 주파수. 높을수록 밝고 날카롭게 들리는 쪽.",
+    "타악 비율": "하모닉·퍼커시브 분리 후 퍼커시브 성분 비중.",
+    "다이내믹 여유(crest)": "peak를 RMS로 나눈 값(dB). 낮을수록 압축이 강함. 프리뷰가 정규화되지 않았음을 전제로 함.",
+    "라우드니스": "체감 음량(LUFS). crest와 같은 전제에 기대므로 그 전제가 무너지면 함께 무효.",
+    "스펙트럼 평탄도": "스펙트럼이 잡음에 가까운 정도. 톤이 뚜렷하면 낮고 노이즈성이 강하면 높음.",
+    "스테레오 폭": "좌우 채널 차이의 크기. 넓게 퍼진 믹스일수록 높음.",
+    "싱코페이션": "센박이 아닌 자리에 놓인 킥의 비중.",
+    "마디 프로파일 대비": "마디 안에서 킥이 몰린 칸과 빈 칸의 대비. 낮으면 배치가 평평함.",
+    "그리드 편차": "비트가 균일 격자에서 벗어난 정도(ms). 상당 부분이 측정 잡음이며 단독 해석 대상이 아님.",
+    "danceability": "분류기가 낸 확률. 춤 실력·안무 품질의 판정이 아니고, 차트 K-pop에서 천장에 붙어 곡을 가르지 못함.",
+    "정서가(valence)": "주석자들이 매긴 긍·부정 정서 값. 곡의 물리적 성질이 아니며 학습 데이터가 K-pop이 아님.",
+    "각성도(arousal)": "주석자들이 매긴 각성 정도. 위와 같은 한계가 적용됨.",
+    "유기음 비율": "합성음 대비 생악기·목소리 계열 성분의 비중 추정치.",
+    "라우드니스 레인지": "구간별 음량 분포의 폭(LU). 좁으면 시종 같은 크기로 들리는 쪽.",
+    "저역 스테레오 폭": "저역대에서의 좌우 차이. 보통 좁게 유지되는 값.",
+    "위상 상관": "좌우 채널의 위상 일치도. 1에 가까우면 모노에 가까움.",
+    "마디 자기유사도": "마디끼리 얼마나 같은 패턴을 반복하는가.",
+    "어택 샤프니스": "소리 시작점의 상승 급격함.",
+}
 
 
 def _as_date(value: Any) -> date | None:
@@ -245,6 +445,7 @@ def _median_series(
     axes: list[tuple[str, str]],
     title: str,
     *,
+    chart_id: str,
     key_of: Callable[[dict[str, Any]], str | None] = _observed_key,
     min_n: int = 1,
     dedup: bool = False,
@@ -283,15 +484,17 @@ def _median_series(
         if any(x is not None for x in vals):
             series.append({"name": label, "values": vals})
     return (
-        {"type": "line", "title": title, "data": {"x": dates, "series": series}} if series else None
+        {"type": "line", "id": chart_id, "title": title, "data": {"x": dates, "series": series}}
+        if series
+        else None
     )
 
 
-def _counts_chart(pairs: list[tuple[str, int]], title: str) -> dict[str, Any] | None:
+def _counts_chart(pairs: list[tuple[str, int]], title: str, *, chart_id: str) -> dict[str, Any] | None:
     if not pairs:
         return None
     data = [{"name": k, "value": v} for k, v in sorted(pairs, key=lambda kv: (-kv[1], kv[0]))]
-    return {"type": "bar", "title": title, "data": data}
+    return {"type": "bar", "id": chart_id, "title": title, "data": data}
 
 
 def backfill_derived(
@@ -403,6 +606,7 @@ def _rhythm_tunable(
             rendered[name] = [int(i) for i in np.flatnonzero(vec_t)]
     return {
         "type": "tunable",
+        "id": "rhythm-mix",
         "title": "리듬 패턴 구성 · 마디 안 킥 배치가 가장 가까운 유형 (판정 아닌 순위 · 펼치면 곡 목록)",
         "data": {
             "view": "rhythm",
@@ -487,6 +691,7 @@ def _instrument_tunable(
         return None
     return {
         "type": "tunable",
+        "id": "instrument-mix",
         "title": "악기 구성 · 검출 확률 임계 이상인 곡 수 (참고 · 정확도 미측정 · 펼치면 곡 목록)",
         "data": {
             "view": "tags",
@@ -517,7 +722,11 @@ def _style_mix(records: list[dict[str, Any]], top: int = 12) -> dict[str, Any] |
         st = (r.get("features") or {}).get("styles") or []
         if st and isinstance(st[0], dict):
             counts[str(st[0]["label"])] = counts.get(str(st[0]["label"]), 0) + 1
-    chart = _counts_chart(list(counts.items()), "스타일 구성 · 1순위 라벨별 곡 수 (참고 · 정확도 미측정)")
+    chart = _counts_chart(
+        list(counts.items()),
+        "스타일 구성 · 1순위 라벨별 곡 수 (참고 · 정확도 미측정)",
+        chart_id="style-mix",
+    )
     if chart:
         chart["data"] = chart["data"][:top]
     return chart
@@ -550,6 +759,7 @@ def _age_hist(records: list[dict[str, Any]]) -> dict[str, Any] | None:
         return None
     return {
         "type": "bar",
+        "id": "age-hist",
         "title": f"곡 나이 분포 · {latest} 관측 코호트 (관측일 − 발매일)",
         # 순서를 보존한다 — 나이 구간은 크기순이 아니라 시간순으로 읽어야 한다
         "data": [{"name": n, "value": counts[n]} for n, _, _ in buckets if counts[n]],
@@ -568,12 +778,139 @@ def _age_series(records: list[dict[str, Any]]) -> dict[str, Any] | None:
         return None
     return {
         "type": "line",
+        "id": "age-trend",
         "title": "곡 나이 추이 · 관측 코호트의 나이 중앙값 (일)",
         "data": {
             "x": dates,
             "series": [{"name": "나이 중앙값(일)", "values": [round(median(by_date[d]), 1) for d in dates]}],
         },
     }
+
+
+def _inferences(
+    *,
+    summary: dict[str, Any],
+    rhythm_rows: list[dict[str, Any]],
+    resolved: list[dict[str, Any]],
+    min_match: float,
+    tie_gap: float,
+    new_days: int,
+) -> list[dict[str, Any]]:
+    """태그된 자동 추론(R4 · D-039). **전부 관측에서 계산해 만든다.**
+
+    불변식이 금지하는 것은 **평결**이고, 꼬리표 달린 추론은 평결이 아니다 — 출처가 명시된
+    해석이며 사람이 채택·기각할 대상이다. 그래서 5필드(text + 동반 4종)가 전부 채워진
+    것만 낸다: 근거 없는 추론이 화면에 오르는 경로를 방출 층에서 끊는다.
+
+    ⚠ 어법(DESIGN §6.2): 명령형·예측 단정·인과 단정 금지, em dash 금지.
+    허용은 "~와 정합한다"·"~신호가 있다"·"~로 읽힌다"뿐이며
+    scripts/validate_report_data.py가 CI에서 검사한다.
+    """
+    out: list[dict[str, Any]] = []
+
+    # ① 요약 도형에서 코호트와 가장 크게 어긋난 축. **불일치가 진짜 산출물**이다(기제 ②).
+    placed = [a for a in summary["data"]["axes"] if isinstance(a.get("value"), (int, float))]
+    # 기준선에서 이 폭 안은 "코호트 중앙값 근처"로 본다 — 백분위 몇 점 차이를 방향으로
+    # 읽으면 표본 11곡에서 잡음이 결론이 된다.
+    band = 15.0
+    if placed:
+        hi = [a for a in placed if float(a["value"]) - 50.0 >= band]
+        lo = [a for a in placed if 50.0 - float(a["value"]) >= band]
+        far = max(placed, key=lambda a: abs(float(a["value"]) - 50.0))
+        # 한쪽으로만 쏠린 그림은 정보가 적다. **양쪽으로 갈린 그림이 불일치**이고 그게 산출물이다.
+        if hi and lo:
+            out.append({
+                "text": (
+                    f"워치리스트의 위치는 축에 따라 갈린다. {len(hi)}개 축은 차트 코호트보다 높은 쪽, "
+                    f"{len(lo)}개 축은 낮은 쪽에 있는 신호가 있다."
+                ),
+                "basis": (
+                    "높은 쪽 " + ", ".join(f"{a['name']} {a['value']}" for a in hi)
+                    + " · 낮은 쪽 " + ", ".join(f"{a['name']} {a['value']}" for a in lo)
+                    + f" (기준 50 = 차트 코호트 중앙값, 근처로 보는 폭 {band:g})"
+                ),
+                "sample": f"워치리스트 {far.get('sample', 0)}곡 대비 차트 코호트",
+                # 워치리스트 표본이 두 자리 수를 넘지 않는 동안은 등급을 올리지 않는다.
+                "confidence": "medium" if int(far.get("sample") or 0) >= 20 else "low",
+                "limits": (
+                    "발췌 구간이 곡마다 달라 같은 곡도 날마다 값이 흔들린다. 이 위치는 관측일 코호트 "
+                    "안에서만 성립하며 차트 성적과의 관계를 말하지 않는다."
+                ),
+                "chartId": "summary-position",
+            })
+        elif abs(float(far["value"]) - 50.0) >= band:
+            side = "높은" if float(far["value"]) > 50.0 else "낮은"
+            same = hi if side == "높은" else lo
+            out.append({
+                "text": (
+                    f"워치리스트는 {len(same)}개 축에서 차트 코호트보다 {side} 쪽에 몰려 있는 신호가 있다. "
+                    f"가장 크게 벌어진 축은 {far['name']}으로 읽힌다."
+                ),
+                "basis": (
+                    ", ".join(f"{a['name']} {a['value']}" for a in same)
+                    + f" (기준 50 = 차트 코호트 중앙값, 근처로 보는 폭 {band:g})"
+                    + f" · {far['name']} 워치리스트 중앙값 원값 {far.get('raw')}"
+                ),
+                "sample": f"워치리스트 {far.get('sample', 0)}곡 대비 차트 코호트",
+                "confidence": "medium" if int(far.get("sample") or 0) >= 20 else "low",
+                "limits": (
+                    "한 방향으로만 쏠린 그림은 축이 서로 독립이 아닐 가능성을 포함한다. 발췌 구간이 "
+                    "곡마다 달라 같은 곡도 날마다 값이 흔들리며, 차트 성적과의 관계를 말하지 않는다."
+                ),
+                "chartId": "summary-position",
+            })
+
+    # ② 리듬 유형 분포가 얼마나 단단한가. 동점·해당없음 비중을 그대로 근거로 쓴다.
+    if rhythm_rows:
+        cls = [classify_rhythm(x["profile"], min_match=min_match, tie_gap=tie_gap) for x in rhythm_rows]
+        n_tie = sum(1 for c in cls if c["tie"])
+        n_none = sum(1 for c in cls if c["assigned"] is None)
+        soft = n_tie + n_none
+        if cls and soft / len(cls) >= 0.2:
+            out.append({
+                "text": (
+                    f"리듬 유형 막대는 곡 수를 그대로 읽기 어려운 상태와 정합한다. 관측 {len(cls)}곡 중 "
+                    f"{soft}곡이 동점이거나 해당 없음으로 떨어진다."
+                ),
+                "basis": (
+                    f"1위와 2위 차가 {tie_gap:g} 미만인 동점 {n_tie}곡, 정합도 {min_match:g} 미만인 "
+                    f"해당 없음 {n_none}곡. 템플릿끼리 직교하지 않아 최악 쌍 상관이 0.83"
+                ),
+                "sample": f"리듬 관측 {len(cls)}곡",
+                "confidence": "high",
+                "limits": (
+                    "프로파일이 저역 킥만 접으므로 킥과 스네어의 합주로 정의되는 유형은 무엇을 재는지 "
+                    "불확실하다. 두 기준값은 관습값이며 튜너에서 움직여 확인할 수 있다."
+                ),
+                "chartId": "rhythm-mix",
+            })
+
+    # ③ 코호트가 신곡 중심인가 카탈로그 중심인가. 관측일 기준 추이의 해석 조건이 된다.
+    ages = [a for r in resolved if (a := _release_age_days(r)) is not None]
+    if ages:
+        n_fresh = sum(1 for a in ages if a <= new_days)
+        share = n_fresh / len(ages)
+        med_age = int(median(ages))
+        if share < 0.5:
+            out.append({
+                "text": (
+                    "관측 코호트는 신곡보다 카탈로그 쪽으로 기운 구성으로 읽힌다. 관측일 기준 추이에서 "
+                    "소리의 변화와 차트 구성의 변화가 섞여 보이는 상태와 정합한다."
+                ),
+                "basis": (
+                    f"곡 나이 중앙값 {med_age}일, 발매 {new_days}일 이내 신곡 {n_fresh}/{len(ages)}곡"
+                    f" ({share * 100:.0f}%)"
+                ),
+                "sample": f"발매일이 확인된 관측 {len(ages)}건",
+                "confidence": "medium",
+                "limits": (
+                    "발매일은 유통사 표기라 리마스터·재발매가 그 날짜로 잡힌다. 신곡 경계 90일도 "
+                    "관습값이다. 이 구성이 섞임을 걷어낸 뷰는 고정 코호트와 신곡만 추이다."
+                ),
+                "chartId": "age-hist",
+            })
+
+    return out
 
 
 def build_report(
@@ -606,26 +943,30 @@ def build_report(
     for field, label, unit in _SURFACED:
         vs = _vals(resolved, field)
         if vs:
-            metrics.append(
-                {
-                    "label": f"{label} 중앙값",
-                    "value": round(median(vs), 3),
-                    "unit": unit,
-                    "hint": f"관측 {len(vs)}곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
-                }
-            )
+            m: dict[str, Any] = {
+                "label": f"{label} 중앙값",
+                "value": round(median(vs), 3),
+                "unit": unit,
+                "hint": f"관측 {len(vs)}곡의 중앙값 · 분포 지표(단일 곡 비교 아님)",
+            }
+            # R5 — 정의가 화면에 없으면 해석이 조용히 틀린다.
+            if label in _METRIC_DEFS:
+                m["definition"] = _METRIC_DEFS[label]
+            metrics.append(m)
 
     charts: list[dict[str, Any]] = []
     tempos = _vals(resolved, "tempo_bpm")
     if tempos:
         charts.append(
-            {"type": "bar", "title": "템포 분포 (BPM)", "data": _hist(tempos, 60, 180, 8)}
+            {"type": "bar", "id": "tempo-hist", "title": "템포 분포 (BPM)",
+             "data": _hist(tempos, 60, 180, 8)}
         )
     pulsed = _labeled(resolved, "pulse_clarity")
     if pulsed:
         charts.append(
             {
                 "type": "bar",
+                "id": "pulse-top",
                 "title": "펄스 명료도 상위 · 아티스트 - 곡명 (박이 또렷한 순 · 춤 적합도 아님)",
                 "data": sorted(pulsed, key=lambda d: (-d["value"], d["name"]))[:15],
             }
@@ -662,17 +1003,21 @@ def build_report(
     fresh = [r for r in resolved if (a := _release_age_days(r)) is not None and a <= new_days]
 
     for view in (
-        _median_series(resolved, _UNIT_AXES, "분포 추이 · 0~1 축 중앙값 (날짜가 쌓이며 채워짐)"),
-        _median_series(resolved, [("tempo_bpm", "템포 중앙값")], "분포 추이 · 템포 중앙값 (BPM)"),
+        _median_series(resolved, _UNIT_AXES, "분포 추이 · 0~1 축 중앙값 (날짜가 쌓이며 채워짐)",
+                       chart_id="unit-trend"),
+        _median_series(resolved, [("tempo_bpm", "템포 중앙값")], "분포 추이 · 템포 중앙값 (BPM)",
+                       chart_id="tempo-trend"),
         # ① 발매 빈티지 — x축이 관측일이 아니라 발매 분기라 차트 재편성에 흔들리지 않는다
         _median_series(
             resolved, _UNIT_AXES,
             f"발매 빈티지별 분포 · 0~1 축 중앙값 (발매 분기 · 표본 {VINTAGE_MIN_N}곡 이상)",
+            chart_id="vintage-unit",
             key_of=_vintage_key, min_n=VINTAGE_MIN_N, dedup=True,
         ),
         _median_series(
             resolved, [("tempo_bpm", "템포 중앙값")],
             f"발매 빈티지별 템포 · 중앙값 BPM (발매 분기 · 표본 {VINTAGE_MIN_N}곡 이상)",
+            chart_id="vintage-tempo",
             key_of=_vintage_key, min_n=VINTAGE_MIN_N, dedup=True,
         ),
         # ② 곡 나이 — 지금 차트가 얼마나 신곡 중심인가, 그리고 그게 움직이는가
@@ -680,9 +1025,11 @@ def build_report(
         _age_series(resolved),
         # ③ 고정 코호트 — 같은 곡들만 따라가면 구성 변화가 제거된다
         _median_series(fixed, _UNIT_AXES,
-                       f"고정 코호트 추이 · {first_date} 관측 {len(fixed_ids)}곡만 계속 추적"),
+                       f"고정 코호트 추이 · {first_date} 관측 {len(fixed_ids)}곡만 계속 추적",
+                       chart_id="fixed-cohort"),
         # ④ 신곡만 — 카탈로그 혼입을 걷어낸 분포
-        _median_series(fresh, _UNIT_AXES, f"신곡만 분포 추이 · 발매 {new_days}일 이내 (0~1 축 중앙값)"),
+        _median_series(fresh, _UNIT_AXES, f"신곡만 분포 추이 · 발매 {new_days}일 이내 (0~1 축 중앙값)",
+                       chart_id="fresh-trend"),
         _position_heatmap(focus, cohort),
         _cohort_compare(focus, cohort),
     ):
@@ -849,11 +1196,75 @@ def build_report(
             + (f" — {', '.join(hit[:8])}" if hit else " — 관측 없음(무신호도 정보)")
         )
 
+    # ── R3·R5: 차트별 질문·정의를 한 표에서 붙인다. 표에 없는 id는 **조용히 넘기지 않는다** —
+    # 검사기(scripts/validate_report_data.py)가 question 없는 차트를 잡으므로 여기서 빠뜨리면
+    # CI가 멈춘다. 그게 의도다: 새 차트를 추가하면 "이 차트로 무엇을 답하나"를 답해야 한다.
+    for c in charts:
+        meta = _CHART_META.get(str(c.get("id") or ""))
+        if meta:
+            c.update(meta)
+
+    summary = _summary_radar(focus, cohort)
+
+    # ── R8: 리포트 전체 기본 신뢰도. 차트별로 다른 것만 그 차트가 덮는다.
+    reliability: dict[str, str] = {
+        "sample": f"관측 {n}곡 · 미해석 {n_un}곡",
+        "accuracy": (
+            "템포·펄스 등 측정 지표는 엔진 검증 통과 · 장르·악기·정서 태그는 정확도 미측정"
+            if any((r.get("features") or {}).get("styles") for r in resolved)
+            else "측정 지표만 수록 · 분류 태그 없음"
+        ),
+        "engine": (
+            f"{eng.get('engine')} {eng.get('engine_version')} · {eng.get('sample_rate')}Hz · "
+            f"저역 경계 {eng.get('low_hz')}Hz"
+        ),
+    }
+    if n_un:
+        reliability["missing"] = f"프리뷰 없음·디코드 실패·과단축 {n_un}곡 · 0이 아니라 결측으로 집계 제외"
+    # 워치리스트 뷰는 표본이 전혀 다른 층이라 최상위 표본을 물려받으면 오독된다.
+    for c in charts + [summary]:
+        if c.get("id") in {"watchlist-rank", "cohort-compare", "summary-position"}:
+            c.setdefault("reliability", {})["sample"] = (
+                f"워치리스트 {len(focus)}곡 · 비교 코호트 {len(cohort)}곡"
+            )
+
+    # ── R1: 이 탭에서 답할 수 있는 질문. 앵커가 실제로 존재하는 것만 남긴다 —
+    # 끊긴 링크는 R1이 고치려는 실패("무엇을 볼지 알 수 없다")를 그대로 되돌려 놓는다.
+    have = {str(c.get("id")) for c in charts + [summary] if c.get("id")}
+    questions = [
+        q
+        for q in (
+            {"q": "우리가 보는 팀의 소리는 지금 차트에 오른 곡들과 어느 축에서 다른가?", "chartId": "summary-position"},
+            {"q": "차트에 오르는 소리가 실제로 바뀌고 있나, 아니면 차트 구성만 바뀐 것인가?", "chartId": "fixed-cohort"},
+            {"q": "이 코호트의 킥 배치는 어떤 리듬 유형에 가까운가?", "chartId": "rhythm-mix"},
+            {"q": "지금 차트는 신곡 중심인가, 카탈로그 중심인가?", "chartId": "age-hist"},
+        )
+        if q["chartId"] in have
+    ]
+
+    # ── R7: 못 답하는 질문. 커버리지 정직 규율의 UI 형태다. 한계 서술(insights)과 다르다 —
+    # 여기 들어가는 것은 사용자가 물으러 왔을 수 있는 **질문**이다.
+    not_answered = [
+        "곡 구조(인트로·벌스·훅)와 드롭 타이밍. 30초 발췌로는 측정 범위 밖",
+        "곡 하나에 대한 평가. 발췌 구간이 곡마다 달라 곡 간 단일 비교가 성립하지 않음",
+        "하이햇 롤과 하프타임 스네어. 믹스에서 스네어가 분리되지 않아 아직 측정 못 함",
+        "장르·악기 태그가 얼마나 맞는지. 사람 라벨 대조 전이라 정확도 미측정",
+        "소리 지표와 차트 성적의 관계. 이 화면은 소리만 다루며 성적을 설명하지 않음",
+    ]
+
     return {
         "moduleId": MODULE_ID,
         "title": "소닉 프로파일 · 30초 프리뷰 기반 소리 지표",
         "subtitle": "분포 안에서의 위치를 보는 증거 · 단일 곡 평결 아님",
         "generatedAt": generated_at,
+        "summary": summary,
+        "questions": questions,
+        "notAnswered": not_answered,
+        "reliability": reliability,
+        "inferences": _inferences(
+            summary=summary, rhythm_rows=rhythm_rows, resolved=resolved,
+            min_match=min_match, tie_gap=tie_gap, new_days=new_days,
+        ),
         "metrics": metrics,
         "charts": charts,
         "media": [],

@@ -18,7 +18,7 @@
 from __future__ import annotations
 
 import math
-from typing import Any
+from typing import Any, TypedDict
 
 import numpy as np
 
@@ -63,6 +63,15 @@ SNARE_MIN_CONTRAST_DEFAULT = 1.71   # 저역 기준선. 미만이면 스네어 �
 
 _EPS = 1e-12
 _MODEL: Any = None
+
+
+class StemOpts(TypedDict, total=False):
+    """CLI가 내려보내는 하중받는 기준 묶음 — 이름을 타입으로 못박아 오타를 막는다."""
+
+    min_ratio: float
+    min_st_per_sec: float
+    min_ms: float
+    min_contrast: float
 
 
 class StemsUnavailable(RuntimeError):

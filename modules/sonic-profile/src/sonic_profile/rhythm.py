@@ -382,11 +382,22 @@ def _beat_tracker() -> Any:
     return _A2B
 
 
-def extract_rhythm(y: np.ndarray, sr: int) -> dict[str, Any]:
-    """오디오 배열 → 리듬 지표. 실패는 RhythmUnavailable로 올린다(0으로 채우지 않는다)."""
+def extract_rhythm(
+    y: np.ndarray, sr: int, *, grid_out: dict[str, Any] | None = None
+) -> dict[str, Any]:
+    """오디오 배열 → 리듬 지표. 실패는 RhythmUnavailable로 올린다(0으로 채우지 않는다).
+
+    `grid_out`을 주면 비트·다운비트 **시각 배열**을 거기 담아 돌려준다. 스템 축
+    (RULES §3.8)이 같은 마디 격자를 써야 하기 때문이다 — 스템에서 비트를 다시
+    추적하면 격자가 두 개가 되어 `snare_bar_profile`을 `kick_bar_profile`과
+    비교할 수 없다. **레코드에는 담기지 않는다**(지표가 아니라 중간 산물).
+    """
     beats, downbeats = _beat_tracker()(np.asarray(y, dtype=np.float32), sr)
     beats = np.asarray(beats, dtype=np.float64)
     downbeats = np.asarray(downbeats, dtype=np.float64)
+    if grid_out is not None:
+        grid_out["beats"] = beats
+        grid_out["downbeats"] = downbeats
 
     import librosa  # type: ignore  # 선택적 중량 의존성 (CI 타입체크 환경에 없음)
 

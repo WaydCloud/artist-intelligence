@@ -62,14 +62,10 @@ def _load_percentile() -> Any:
 #   - drill 원형 3곡 = origin (슬라이딩 808)
 #   - hyperpop 계보 5곡 = aespa 계보(쇠맛) — RULES §2.1의 A2.1 정답지와 같은 집합
 GATES: list[dict[str, Any]] = [
-    {
-        "axis": "halftime_snare_ratio",
-        "case": "jersey-club",
-        "roles": ["origin"],
-        "expect_n": 5,
-        "need": 3,
-        "note": "저지클럽 하프타임 스네어 (RULES §3.8.2)",
-    },
+    # ⚠ 옛 5곡 행(`need: 3` 절대값)은 **뺐다.** 정답지가 20곡으로 늘어난 뒤 그 절대값을
+    # 그대로 두면 12곡 측정에서 3곡만 넘어도 통과가 되어 **기준이 60% → 25%로 조용히
+    # 완화된다**(실측에서 실제로 그렇게 PASS가 떴다). 같은 축의 판정이 두 개면 유리한
+    # 쪽이 인용되므로 행을 하나로 유지한다 — 아래 비율 기준 행이 정본이다.
     {
         "axis": "bass_glide_ratio",
         "case": "drill",
@@ -78,13 +74,17 @@ GATES: list[dict[str, Any]] = [
         "need": 2,
         "note": "드릴 슬라이딩 808 (RULES §3.8.3) — A2.1에서 축 공백이 실증된 케이스",
     },
+    # `vocal_tuning_hardness`는 **철회**됐다(RULES §3.8.4.1 — pyin 격자를 재고 있었다).
+    # 방출이 없으므로 영구히 unmeasured가 되는 행을 남기지 않고, **같은 슬롯**을 대체 축이
+    # 물려받는다: 같은 정답지(aespa 5곡)·같은 기준(3곡). 새 기준을 고르면 그게 곧
+    # "결과를 본 뒤 기준을 정하는" 경로다(TESTS §7.2.6).
     {
-        "axis": "vocal_tuning_hardness",
+        "axis": "vocal_note_f0_spread",
         "case": "hyperpop",
         "artists": ["aespa"],
         "expect_n": 5,
         "need": 3,
-        "note": "하이퍼팝 보컬 처리 (RULES §3.8.4) — 쇠맛 계보 5곡",
+        "note": "🔺 사전 등록 대체 축 (RULES §3.8.4) — 철회된 vocal_tuning_hardness의 슬롯 상속",
     },
     {
         "axis": "vocal_pitch_shift_proxy",
@@ -122,7 +122,7 @@ GATES: list[dict[str, Any]] = [
         "expect_n": 20,
         "need_frac": 0.60,
         "min_measured": 10,
-        "label": "halftime_snare_ratio (확대 정답지)",
+        "label": "halftime_snare_ratio (정답지 20곡)",
         "note": "D-037 재실행 — 정답지 5 → 20곡(검정력 인상, 기준 비율은 60% 유지)",
     },
 ]

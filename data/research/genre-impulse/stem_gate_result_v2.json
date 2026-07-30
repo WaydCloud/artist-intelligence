@@ -1,0 +1,448 @@
+{
+  "gate": "sonic-profile stem axes (TESTS §7.2.2)",
+  "decision": "D-034 ③",
+  "top_pct": 80.0,
+  "snapshot": "data\\research\\genre-impulse\\stem_gate_snapshot_v2.json",
+  "cohort_records": 100,
+  "snare_floor_derivation": {
+    "floor": 1.8,
+    "rule": "유효성 바닥 = 그 축 자신의 분포 p10 (RULES §3.8.4.3). 다른 대역에서 빌려 오지 않는다",
+    "method": "numpy.percentile (선형보간)",
+    "distributions": {
+      "snare_mid_stem": {
+        "axis": "snare_bar_contrast",
+        "n": 130,
+        "min": 1.116,
+        "p05": 1.7425,
+        "p10": 1.8017,
+        "p25": 2.0903,
+        "median": 2.5398,
+        "p90": 3.455,
+        "max": 7.3349,
+        "floor_percentile": 10.0
+      },
+      "kick_low_mix": {
+        "axis": "bar_profile_contrast",
+        "n": 130,
+        "min": 1.38,
+        "p05": 1.5799,
+        "p10": 1.6319,
+        "p25": 1.8493,
+        "median": 2.1675,
+        "p90": 3.1347,
+        "max": 4.862,
+        "floor_percentile": 19.2
+      }
+    }
+  },
+  "results": [
+    {
+      "axis": "bass_glide_ratio",
+      "note": "드릴 슬라이딩 808 (RULES §3.8.3) — A2.1에서 축 공백이 실증된 케이스",
+      "need_frac": null,
+      "min_measured": 2,
+      "cohort_n": 97,
+      "answers_expected": 3,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 2,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "Pop Smoke - Dior",
+          "value": 0.104334,
+          "percentile": 63.9,
+          "unresolved": null
+        },
+        {
+          "track": "Headie One - Ain't It Different",
+          "value": 0.100815,
+          "percentile": 62.9,
+          "unresolved": null
+        },
+        {
+          "track": "Central Cee - Doja",
+          "value": 0.043922,
+          "percentile": 22.7,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 94,
+      "quantized": false
+    },
+    {
+      "axis": "vocal_note_f0_spread",
+      "note": "🔺 사전 등록 대체 축 (RULES §3.8.4) — 철회된 vocal_tuning_hardness의 슬롯 상속",
+      "need_frac": null,
+      "min_measured": 3,
+      "cohort_n": 96,
+      "answers_expected": 5,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 3,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "aespa - Savage",
+          "value": 16.155494,
+          "percentile": 69.8,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Black Mamba",
+          "value": 14.90712,
+          "percentile": 59.4,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Supernova",
+          "value": 13.333333,
+          "percentile": 47.9,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 92,
+      "quantized": false
+    },
+    {
+      "axis": "vocal_pitch_shift_proxy",
+      "note": "🔺 사전 등록 프록시 — 실패 시 해석을 버린다(meter_duple_bias 선례)",
+      "need_frac": null,
+      "min_measured": 3,
+      "cohort_n": 96,
+      "answers_expected": 5,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 3,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "aespa - Supernova",
+          "value": 8.619192,
+          "percentile": 37.5,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Savage",
+          "value": 8.049646,
+          "percentile": 25.0,
+          "unresolved": null
+        },
+        {
+          "track": "aespa - Black Mamba",
+          "value": 7.175049,
+          "percentile": 11.5,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 96,
+      "quantized": false
+    },
+    {
+      "axis": "hihat_roll_ratio",
+      "note": "H1 하이햇 롤 (RULES §3.1.5.3) — 16칸에서는 정의상 0이던 축",
+      "need_frac": 0.6,
+      "min_measured": 10,
+      "cohort_n": 97,
+      "answers_expected": 20,
+      "answers_measured": 12,
+      "hits_top20": 3,
+      "need": 8,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "DJ Jayhood - Heartbroken",
+          "value": 0.5721,
+          "percentile": 100.0,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Frosty - Ride Dat Wave",
+          "value": 0.4962,
+          "percentile": 86.6,
+          "unresolved": null
+        },
+        {
+          "track": "Lil Uzi Vert - Just Wanna Rock",
+          "value": 0.493,
+          "percentile": 84.5,
+          "unresolved": null
+        },
+        {
+          "track": "UNIIQU3 - Microdosing",
+          "value": 0.4757,
+          "percentile": 75.3,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Lil Man - Sexy Walk",
+          "value": 0.472,
+          "percentile": 73.2,
+          "unresolved": null
+        },
+        {
+          "track": "Bandmanrill - Jiggy In Jersey",
+          "value": 0.4573,
+          "percentile": 61.9,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Lil Man - I Like The Way She Move",
+          "value": 0.4272,
+          "percentile": 36.1,
+          "unresolved": null
+        },
+        {
+          "track": "Ms. Porsh - Can't Bounce Like Me",
+          "value": 0.4329,
+          "percentile": 36.1,
+          "unresolved": null
+        },
+        {
+          "track": "PinkPantheress - Boy's a liar Pt. 2",
+          "value": 0.4248,
+          "percentile": 33.0,
+          "unresolved": null
+        },
+        {
+          "track": "Coi Leray - Players (DJ Smallz 732 Remix)",
+          "value": 0.3894,
+          "percentile": 10.3,
+          "unresolved": null
+        },
+        {
+          "track": "Cookiee Kawaii - Vibe (If I Back It Up)",
+          "value": 0.3618,
+          "percentile": 6.2,
+          "unresolved": null
+        },
+        {
+          "track": "Drake - Sticky",
+          "value": 0.3684,
+          "percentile": 6.2,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Tameil - Ay Bay Bay",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Tim Dolla - Swing Dat Shit",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Tim Dolla - Falsetto",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Sliink - Official Number One (Patty Cake)",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Jayhood - Rock My Hips",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "Pure - Let Ya Body Talk",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "Chad B - Hit It",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "ZEDDY WILL - Freak You",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        }
+      ],
+      "distinct_values": 92,
+      "quantized": false
+    },
+    {
+      "axis": "hihat_triplet_bias",
+      "note": "H2 드릴 새 가설 (RULES §3.1.5.3) — ⚠ 트랩도 트리플렛 하이햇을 쓴다. 실패는 측정 결함이 아니라 케이스북 CASE 10 가설의 실측 지지다",
+      "need_frac": null,
+      "min_measured": 2,
+      "cohort_n": 97,
+      "answers_expected": 3,
+      "answers_measured": 3,
+      "hits_top20": 0,
+      "need": 2,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "Central Cee - Doja",
+          "value": 0.4756,
+          "percentile": 72.2,
+          "unresolved": null
+        },
+        {
+          "track": "Headie One - Ain't It Different",
+          "value": 0.4678,
+          "percentile": 66.0,
+          "unresolved": null
+        },
+        {
+          "track": "Pop Smoke - Dior",
+          "value": 0.4627,
+          "percentile": 58.8,
+          "unresolved": null
+        }
+      ],
+      "distinct_values": 96,
+      "quantized": false
+    },
+    {
+      "axis": "halftime_snare_ratio (정답지 20곡)",
+      "note": "D-037 재실행 — 정답지 5 → 20곡(검정력 인상, 기준 비율은 60% 유지)",
+      "need_frac": 0.6,
+      "min_measured": 10,
+      "cohort_n": 87,
+      "answers_expected": 20,
+      "answers_measured": 12,
+      "hits_top20": 6,
+      "need": 8,
+      "verdict": "fail",
+      "tracks": [
+        {
+          "track": "Drake - Sticky",
+          "value": 0.7543030121084761,
+          "percentile": 89.7,
+          "unresolved": null
+        },
+        {
+          "track": "Ms. Porsh - Can't Bounce Like Me",
+          "value": 0.6117758062613847,
+          "percentile": 89.7,
+          "unresolved": null
+        },
+        {
+          "track": "Bandmanrill - Jiggy In Jersey",
+          "value": 0.5909949847294717,
+          "percentile": 88.5,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Lil Man - Sexy Walk",
+          "value": 0.5822306024749345,
+          "percentile": 86.2,
+          "unresolved": null
+        },
+        {
+          "track": "PinkPantheress - Boy's a liar Pt. 2",
+          "value": 0.5696485086644821,
+          "percentile": 85.1,
+          "unresolved": null
+        },
+        {
+          "track": "Coi Leray - Players (DJ Smallz 732 Remix)",
+          "value": 0.5680351955684658,
+          "percentile": 85.1,
+          "unresolved": null
+        },
+        {
+          "track": "Cookiee Kawaii - Vibe (If I Back It Up)",
+          "value": 0.5067608136993539,
+          "percentile": 78.2,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Frosty - Ride Dat Wave",
+          "value": 0.5013903538210758,
+          "percentile": 78.2,
+          "unresolved": null
+        },
+        {
+          "track": "Lil Uzi Vert - Just Wanna Rock",
+          "value": 0.44516675584091314,
+          "percentile": 60.9,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Lil Man - I Like The Way She Move",
+          "value": 0.4194178741365328,
+          "percentile": 55.2,
+          "unresolved": null
+        },
+        {
+          "track": "UNIIQU3 - Microdosing",
+          "value": 0.40871960231089616,
+          "percentile": 48.3,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Jayhood - Heartbroken",
+          "value": 0.39026124646563837,
+          "percentile": 42.5,
+          "unresolved": null
+        },
+        {
+          "track": "DJ Tameil - Ay Bay Bay",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Tim Dolla - Swing Dat Shit",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Tim Dolla - Falsetto",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Sliink - Official Number One (Patty Cake)",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "DJ Jayhood - Rock My Hips",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "Pure - Let Ya Body Talk",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "Chad B - Hit It",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        },
+        {
+          "track": "ZEDDY WILL - Freak You",
+          "value": null,
+          "percentile": null,
+          "unresolved": "no verified preview (artist/title mismatch)"
+        }
+      ],
+      "distinct_values": 87,
+      "quantized": false
+    }
+  ]
+}

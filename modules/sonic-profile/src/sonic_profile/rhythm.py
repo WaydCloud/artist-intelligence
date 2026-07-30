@@ -301,6 +301,32 @@ def hihat_roll_burst_ratio(profile: np.ndarray | list[float]) -> float | None:
     return float(burst / total)
 
 
+def backfill_hihat_axes(features: dict[str, Any]) -> dict[str, Any]:
+    """**저장된 `hihat_bar_profile`에서** §3.1.5.4 축을 채운다 — 오디오 0.
+
+    burst·active는 32칸 프로파일만의 함수이므로, 축이 정의되기 전에 취득한
+    레코드도 **프리뷰를 다시 받지 않고** 소급할 수 있다 — D-031
+    `syncopation_ratio` 소급 · `stems.regate_snare_axes`와 같은 경로다.
+
+    · **프로파일이 없으면 되살리지 않는다**(결측 ≠ 0, §0).
+    · **이미 있는 값은 덮지 않는다** — 저장 프로파일은 4자리로 반올림돼 있어
+      재계산이 오디오 계산과 말단에서 갈린다(실측 101곡: 최대 2e-4 · 평균 2.2e-5).
+      섞어 쓰면 같은 축이 두 정밀도를 갖게 되므로, 소급은 **빈 칸만** 채운다.
+    · 멱등이다.
+    """
+    prof = features.get("hihat_bar_profile")
+    if not isinstance(prof, list) or len(prof) < BINS:
+        return dict(features)
+    out = dict(features)
+    for key, fn in (("hihat_roll_burst_ratio", hihat_roll_burst_ratio),
+                    ("hihat_active_ratio", hihat_active_ratio)):
+        if out.get(key) is None:
+            v = fn(prof)
+            if v is not None:
+                out[key] = round(v, 4)
+    return out
+
+
 def hihat_triplet_bias(profile_triplet: np.ndarray | list[float]) -> float | None:
     """24칸 트리플렛 격자에서 `E(트리플렛 전용) / (E(트리플렛 전용) + E(8분 이진))`.
 

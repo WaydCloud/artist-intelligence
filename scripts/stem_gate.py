@@ -44,6 +44,18 @@ def _load_stems() -> Any:
     return stems
 
 
+def _load_rhythm() -> Any:
+    """§3.1.5.4 축의 소급도 모듈 함수를 쓴다 — 스크립트가 다시 구현하면 게이트가 재는
+    값과 모듈이 내는 값이 갈라진다(AGENTS §1)."""
+    try:
+        from sonic_profile import rhythm  # type: ignore[import-not-found]
+    except ImportError as exc:  # pragma: no cover - 실행 환경 안내
+        raise SystemExit(
+            "sonic_profile을 찾을 수 없습니다 — PYTHONPATH에 modules/sonic-profile/src를 추가하세요"
+        ) from exc
+    return rhythm
+
+
 def _load_percentile() -> Any:
     """백분위는 genre-impulse의 것을 그대로 쓴다 — 두 벌이 되면 게이트가 재는 백분위와
     모니터가 쓰는 백분위가 갈라진다(AGENTS §1)."""
@@ -104,6 +116,20 @@ GATES: list[dict[str, Any]] = [
         "need_frac": 0.60,
         "min_measured": 10,
         "note": "H1 하이햇 롤 (RULES §3.1.5.3) — 16칸에서는 정의상 0이던 축",
+    },
+    # ── H3: 롤의 **연속성** 축 (RULES §3.1.5.4 · TESTS §7.4 · 사전 등록).
+    #    기준·정답지·최소 표본은 **H1 행과 글자 그대로 같다** — 잣대를 바꾸면
+    #    "새 정의가 나은가"를 답할 수 없고 잣대를 낮춘 것이 된다(RULES §3.1.5.4).
+    {
+        "axis": "hihat_roll_burst_ratio",
+        "case": "jersey-club",
+        "roles": ["origin"],
+        "expect_n": 20,
+        "need_frac": 0.60,
+        "min_measured": 10,
+        "note": "H3 롤의 연속성 (RULES §3.1.5.4) — H1이 못 가른 '산발 vs 연타'를 겨눈다. "
+                "짝 축 hihat_active_ratio가 높은 곡은 롤이 아니라 상시 하이햇이다",
+        "companion": "hihat_active_ratio",
     },
     {
         "axis": "hihat_triplet_bias",
@@ -192,6 +218,73 @@ def _floor_derivation(recs: list[dict[str, Any]], floor: float) -> dict[str, Any
     return out
 
 
+def _split_half_gate(cohort: list[dict[str, Any]],
+                     answers: list[dict[str, Any]]) -> dict[str, Any]:
+    """H4 — 2마디 블록 분할이 1마디 분할을 대체할 수 있는가 (RULES §3.1.5.4 ② · TESTS §7.2.5-a).
+
+    **채택 조건은 D-142가 세웠던 두 개 그대로다** — 잣대를 바꾸면 "새 분할이 나은가"를
+    답할 수 없다:
+
+      ① 분리 실패를 잡는다 — 대비(`bar_profile_contrast`)가 p5 미만인 곡에서 재현성이
+         나머지보다 **낮고**, 두 축의 상관이 **양(+)** 방향으로 일치한다.
+      ② 정답지를 하나도 안 버린다 — 재현성 **자기 분포 p10**을 바닥으로 두었을 때
+         정답지 탈락이 **0**이다(1마디 분할은 여기서 2곡을 버렸다).
+
+    ①만 통과하고 ②가 깨지면 **채택하지 않는다**. 탈락했던 2곡만 살아나는 것도 통과가
+    아니다 — 조건 ②는 "0곡"이지 "이전보다 적음"이 아니다.
+
+    두 분할을 **같은 코호트·같은 바닥 규칙·같은 정답지**로 나란히 낸다. 한쪽만 재면
+    비교가 성립하지 않고, 바닥을 따로 고르면 그 선택이 곧 판정이 된다.
+    """
+    import numpy as np
+
+    contrast_axis = "bar_profile_contrast"   # `_2bar`와 같은 저역 믹스 포락에서 나온 대비
+    out: dict[str, Any] = {
+        "gate": "H4 — 2마디 블록 분할 (RULES §3.1.5.4 ②)",
+        "conditions": "① 분리 실패 검출(대비 p5 미만 곡의 재현성이 낮다) · ② 정답지 탈락 0",
+        "contrast_axis": contrast_axis,
+        "axes": {},
+    }
+    for axis in ("bar_profile_split_half", "bar_profile_split_half_2bar"):
+        paired = [(c, v) for r in cohort
+                  if (c := _feat(r, contrast_axis)) is not None
+                  and (v := _feat(r, axis)) is not None]
+        ans = [(str(r.get("chart_label") or r.get("key")), v)
+               for r in answers if (v := _feat(r, axis)) is not None]
+        block: dict[str, Any] = {"cohort_n": len(paired), "answers_measured": len(ans)}
+        # 코호트가 이 축을 아직 안 실었으면 **판정 불가**다 — 0으로 세지 않는다(§0).
+        if len(paired) < 10 or len(ans) < 10:
+            block["verdict"] = "unmeasured"
+            block["why"] = ("코호트 또는 정답지 표본 부족 — 32칸 격자(v4) 콜드 실행 전 스냅샷에는 "
+                            "이 축이 없다. 결측이지 0이 아니다")
+            out["axes"][axis] = block
+            continue
+        cs = np.asarray([c for c, _ in paired], dtype=float)
+        vs = np.asarray([v for _, v in paired], dtype=float)
+        p5 = float(np.percentile(cs, 5))
+        low, rest = vs[cs < p5], vs[cs >= p5]
+        floor = float(np.percentile(vs, 10))
+        dropped = [t for t, v in ans if v < floor]
+        cond1 = bool(low.size and rest.size
+                     and float(np.median(low)) < float(np.median(rest))
+                     and float(np.corrcoef(cs, vs)[0, 1]) > 0)
+        cond2 = not dropped
+        block.update({
+            "contrast_p5": round(p5, 4),
+            "low_contrast_n": int(low.size),
+            "median_split_low": round(float(np.median(low)), 4) if low.size else None,
+            "median_split_rest": round(float(np.median(rest)), 4) if rest.size else None,
+            "pearson_r": round(float(np.corrcoef(cs, vs)[0, 1]), 4),
+            "floor_p10": round(floor, 4),
+            "answers_dropped": dropped,
+            "cond1_catches_separation_failure": cond1,
+            "cond2_keeps_all_answers": cond2,
+            "verdict": "pass" if (cond1 and cond2) else "fail",
+        })
+        out["axes"][axis] = block
+    return out
+
+
 def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
     _percentile = _load_percentile()
     stems = _load_stems()
@@ -209,6 +302,21 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
         r["features"] = new
     print(f"  재게이트: 대비 바닥 {min_contrast} 적용 → {regated}/{len(recs)}레코드 변경 (오디오 0)",
           file=sys.stderr)
+    # 하이햇 §3.1.5.4 축(burst·active)은 축이 정의되기 **전에** 취득한 스냅샷에는 없다.
+    # 그러나 둘 다 저장된 32칸 프로파일만의 함수이므로 오디오 없이 소급된다 —
+    # 그래야 H3이 **H1과 같은 코호트·같은 정답지**에서 판정된다(잣대 동일성의 전제).
+    rhythm = _load_rhythm()
+    filled = 0
+    for r in recs:
+        f = r.get("features")
+        if not isinstance(f, dict):
+            continue
+        new = rhythm.backfill_hihat_axes(f)
+        if new != f:
+            filled += 1
+        r["features"] = new
+    print(f"  하이햇 소급: 저장 프로파일에서 burst·active 채움 → {filled}/{len(recs)}레코드 (오디오 0)",
+          file=sys.stderr)
     cohort = [r for r in recs if _is_cohort(r)]
     results = []
 
@@ -216,15 +324,28 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
         axis = gate["axis"]
         pool = [v for r in cohort if (v := _feat(r, axis)) is not None]
         answers = _answers(recs, gate)
+        # 짝 축(자기 진단)이 있으면 **함께 낸다**. 판정을 거르지는 않는다 — 사전 등록한
+        # 통과 기준에 짝 축 조건이 없으므로, 그것으로 표본을 솎으면 결과를 본 뒤 잣대를
+        # 바꾸는 것이 된다(RULES §3.1.5.4 · AGENTS §2.1). 해석에만 쓴다.
+        companion = gate.get("companion")
+        comp_pool = ([v for r in cohort if (v := _feat(r, companion)) is not None]
+                     if companion else [])
         rows = []
         for r in answers:
             v = _feat(r, axis)
-            rows.append({
+            row = {
                 "track": f"{r.get('chart_label') or r.get('key')} - {str(r.get('query', '')).split(' - ')[-1]}",
                 "value": v,
                 "percentile": _percentile(pool, v) if v is not None else None,
                 "unresolved": r.get("unresolved") or r.get("stems_unresolved"),
-            })
+            }
+            if companion:
+                cv = _feat(r, companion)
+                row["companion_value"] = cv
+                row["companion_percentile"] = (
+                    _percentile(comp_pool, cv) if cv is not None and comp_pool else None
+                )
+            rows.append(row)
         scored = [x for x in rows if x["percentile"] is not None]
         hits = sum(1 for x in scored if x["percentile"] >= TOP_PCT)
         # 기준이 비율이면 **측정된 표본**에서 계산한다 — 결측을 실패로 세면 "못 쟀다"가
@@ -254,6 +375,26 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
             "verdict": verdict,
             "tracks": sorted(rows, key=lambda x: -(x["percentile"] or -1)),
         })
+        if companion and comp_pool:
+            import numpy as np
+
+            a = np.asarray(comp_pool, dtype=float)
+            results[-1]["companion"] = {
+                "axis": companion,
+                "n": len(comp_pool),
+                "rule": "경계값은 **첫 코호트 분포**에서 도출한다(RULES §3.1.5.4 · D-037 순서). "
+                        "판정을 거르는 데 쓰지 않는다 — 해석용 진단이다",
+                "p50": round(float(np.percentile(a, 50)), 4),
+                "p90": round(float(np.percentile(a, 90)), 4),
+                "max": round(float(a.max()), 4),
+                # 짝 축이 코호트 상위 10%면 그 곡의 burst는 "롤"이 아니라 상시 하이햇을
+                # 재고 있을 수 있다 — 몇 곡이 그 구역에 있는지를 센다
+                "answers_in_saturation_zone": sum(
+                    1 for x in rows
+                    if x.get("companion_percentile") is not None
+                    and x["companion_percentile"] >= 90.0
+                ),
+            }
         # 축이 실제로 무엇을 재는지 — 고유값 수가 표본 수보다 훨씬 적으면 그 축은
         # 음악이 아니라 **측정기의 격자**를 재고 있다(D-031 `grid_deviation_ms` 선례).
         distinct = len({round(v, 6) for v in pool})
@@ -270,6 +411,19 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
               f"상위20% {hits}/{len(scored)} (기준 {gate['need']}) · 코호트 {len(pool)}곡 "
               f"· 고유값 {distinct}{flag}",
               file=sys.stderr)
+
+    # H4 — 정답지는 저지클럽 원형(H1·H3과 같은 집합). 코호트도 같다.
+    h4 = _split_half_gate(cohort, _answers(recs, {"case": "jersey-club", "roles": ["origin"]}))
+    for axis, blk in h4["axes"].items():
+        if blk["verdict"] == "unmeasured":
+            print(f"  UNMEASURED {axis[:32]:32s} {blk['why']}", file=sys.stderr)
+        else:
+            print(f"  {blk['verdict'].upper():10s} {axis[:32]:32s} "
+                  f"①분리검출 {blk['cond1_catches_separation_failure']} "
+                  f"(하위 {blk['median_split_low']} vs 나머지 {blk['median_split_rest']} · r={blk['pearson_r']}) "
+                  f"· ②정답지 탈락 {len(blk['answers_dropped'])}곡 (바닥 p10={blk['floor_p10']})",
+                  file=sys.stderr)
+
     return {
         "gate": "sonic-profile stem axes (TESTS §7.2.2)",
         "decision": "D-034 ③",
@@ -278,6 +432,9 @@ def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
         "cohort_records": len(cohort),
         "snare_floor_derivation": _floor_derivation(recs, min_contrast),
         "results": results,
+        # H4는 "정답지가 코호트 극단인가"가 아니라 "이 분할이 유효성 판정자가 되는가"를
+        # 묻는다 — 형식이 다르므로 GATES 표가 아니라 별도 블록으로 낸다.
+        "split_half_h4": h4,
     }
 
 

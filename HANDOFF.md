@@ -9,9 +9,14 @@
 > **A2 본편이 닫혔다**(2026-07-31 · [`Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md`](Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md)). 동시대(2021-10 앵커) US·KR 두 프레임 위에서 규칙 미확정 임펄스 전부 실측 → **genre-impulse v1.2 규칙 3종**(hyperpop + 신규 ukg-origin-shuffle·moombahton-kr-tropical) · 커버리지 3/10. amapiano는 정답지 7/7인데 **베이스라인 20%라 등재 철회**(정답지가 극단이어도 그 극단이 붐비면 규칙이 아니다 — RULES §2.2).
 > 시각화는 계속 닫혀 있다(D-041~D-048 · 정본 [`DESIGN.md`](DESIGN.md) §7).
 
-⏳ **1순위 — 콜드 실행 실측**: **오늘(07-31) 09:00 daily가 v4 첫 실행이다**(07-30 실행은 v4 커밋 12:34보다 먼저 돌아 v3였다 — 원인 확정됨). 스냅샷에 하이햇 축 6종·`bar_profile_bins`가 채워지면 **사전 등록한 H3·H4 게이트를 돌린다**(RULES §3.1.5.4). 기준은 이미 적혀 있다 — 결과를 보고 고치지 않는다.
+> **H3이 닫혔다**(2026-07-31 · [`Handoffs/2026-07-31-h3-verdict-and-h4-gate.md`](Handoffs/2026-07-31-h3-verdict-and-h4-gate.md) · D-049). 🔴 **실패(3/12 = 25% · 기준 60%) → 하이햇 축 확장을 여기서 멈춘다. 세 번째 정의를 만들지 않는다.** 결론은 "통설이 틀렸다"가 아니라 **관측 한계의 진술**이다: 저지클럽의 하이햇 서명은 30초 발췌·믹스 고역·마디 평균 온셋 포락으로는 잡히지 않는다.
+> **콜드 실행을 기다리지 않고 났다** — burst·active는 저장된 32칸 프로파일만의 함수라 소급된다(`rhythm.backfill_hihat_axes`). 덕분에 H3은 **H1이 판정된 바로 그 스냅샷**(코호트·정답지 동일)에서 돌았고, 그게 "새 정의가 나은가"에 대한 더 옳은 비교다.
 
-그다음 대기 목록 우선 후보: **빌보드 궤적 → 임펄스 원장** · **저지클럽 정답지 미해석 8곡 대체**(v4 재취득에서도 그 8곡만 iTunes 부재로 남았다 — H3 표본을 채우는 일) · **케이스별 동시대 앵커 확장**(easy-listening은 2021 앵커가 동시대가 아니라 판정 유보 — US는 `billboard_ingest`로 즉시, KR은 Wayback 커버리지가 병목).
+⏳ **1순위 — 09:00 콜드 실행 뒤 H4 판정**: 남은 것은 **H4 하나**다(`bar_profile_split_half_2bar`). 이것만은 소급이 안 된다 — 마디별 포락이 필요한데 저장되는 것은 평균 프로파일뿐이다. **정답지 12곡은 이미 있고 코호트만 비어 있다.** 게이트는 **이미 서 있다**(`scripts/stem_gate.py`의 `split_half_h4` — 지금 돌리면 사유와 함께 `unmeasured`를 낸다). 스냅샷이 차면 **코드 변경 없이 같은 명령**이 판정을 낸다.
+- 넘어야 할 선: ① 분리 실패 검출 ② **정답지 탈락 0곡**. 같은 대역 1마디 기준선은 ①만족·②**1곡 탈락**으로 fail이다 — 2마디가 넘어야 할 선은 "1곡보다 적음"이 아니라 **0곡**이다(조건 ②는 절대값).
+- H3 복제는 **재도전이 아니라 확인**이다. 결과가 갈리면 적을 것은 "통과했다"가 아니라 "판정이 코호트에 의존한다"이며 그것은 축의 약점이다(RULES §3.1.5.4에 결과보다 먼저 적어 뒀다).
+
+그다음 대기 목록 우선 후보: **빌보드 궤적 → 임펄스 원장** · **저지클럽 정답지 미해석 8곡 대체**(v4 재취득에서도 그 8곡만 iTunes 부재로 남았다 — H1·H3 둘 다 같은 12곡에서 판정됐다) · **케이스별 동시대 앵커 확장**(easy-listening은 2021 앵커가 동시대가 아니라 판정 유보 — US는 `billboard_ingest`로 즉시, KR은 Wayback 커버리지가 병목).
 
 ### 탭별 구획 (지금 화면의 모양)
 
@@ -138,7 +143,7 @@
 
 ## 대기 목록 (시각화와 병행 가능 — 전부 "행"만 늘린다)
 
-1. **sonic 축 후속** — ✅ ①② **사전 등록 완료**(2026-07-30 · RULES §3.1.5.4 · TESTS §7.4·§7.2.5-a): `hihat_roll_burst_ratio`(+짝 축 `hihat_active_ratio`) · `bar_profile_split_half_2bar`. 구현·합성 검사까지 끝났고 **저장은 하되 표면은 금지**다. ⏳ **남은 것은 콜드 실행(07-31 09:00) 뒤의 게이트 실측**(H3 · H4). ③ 저지클럽 정답지 **미해석 8곡 대체 후보**는 그대로 열려 있고, 표본이 얇으면 H3은 **판정 불가**이지 실패가 아니다(둘을 미리 갈라 뒀다).
+1. **sonic 축 후속** — ✅ ① **H3 판정 완료**(2026-07-31 · D-049): 🔴 **실패 → 하이햇 축 확장 종료.** 표본 부족이 아니라 실제 실패다(측정 12곡 ≥ 최소 10 · 포화 없음 · 실패 형태는 **코호트 54.6%가 0.0인 바닥 뭉침**). ⏳ ② **H4만 남았다** — 게이트는 서 있고 코호트만 대기. ③ 저지클럽 정답지 **미해석 8곡 대체 후보**는 그대로 열려 있다(H1·H3이 같은 12곡에서 판정됐으므로 표본을 채우면 **복제의 검정력**이 오른다 — 판정을 뒤집는 경로가 아니다).
 2. ~~**A2 본편**~~ ✅ **완료**(2026-07-31): 동시대 두 프레임(US 빌보드 · KR = Wayback 멜론, 신규 `scripts/melon_wayback_ingest.py`) 위 백분위 실측(`scripts/a2_signature_compare.py` · `a2_signature_compare.json`) → 규칙 2종 등재 + amapiano 철회 + 원장 10건 measured. **후속**: 케이스별 동시대 앵커 확장(easy-listening 2023 등).
 3. **빌보드 궤적 → 임펄스 원장**: `chart_evidence` 22건을 `trajectory` 셀에 연결(확실성 등급 부여가 도메인 판단이라 분리).
 4. **멜론 복구**: 대화형 세션에서 `/mcp` 재연결 → 4콜 → `convert-melon`이면 4번째 렌즈 복귀. 화이트리스트 회신 대기.
@@ -182,10 +187,14 @@ python scripts/a2_signature_compare.py \
   -o data/research/genre-impulse/a2_signature_compare.json
 # KR 동시대 코호트 목록(네트워크 = Wayback만): python scripts/melon_wayback_ingest.py cohort 2021-10-02 -o <out>
 
-# ── 스템·격자 축 채택 게이트 (오디오 0 — 저장 프로파일에서 재게이트)
+# ── 스템·격자 축 채택 게이트 (오디오 0 — 저장 프로파일에서 재게이트 + 하이햇 축 소급)
+#   H1·H3(하이햇)·H4(2마디 분할)가 한 실행에서 나온다. H4는 코호트에 축이 차야 판정된다
+#   (그 전에는 사유와 함께 unmeasured — 09:00 콜드 실행 뒤 같은 명령을 그대로 돌린다).
 PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python scripts/stem_gate.py \
   --snapshot data/research/genre-impulse/stem_gate_snapshot_v2.json \
   -o data/research/genre-impulse/stem_gate_result_v2.json
+#   ⚠ 결과 파일은 스냅샷 하나당 하나로 유지한다. 축을 추가하면 **같은 파일에 행이 는다** —
+#     v3를 새로 만들면 같은 축의 판정이 두 개가 되고 유리한 쪽이 인용된다(GATES의 옛 절대값 행 선례).
 
 # ── 상태·게이트
 python scripts/validate_report_data.py [--selftest]   # 차트 데이터 계약(스키마가 못 보는 것)

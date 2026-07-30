@@ -682,6 +682,22 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           hihat_roll_burst_ratio(flat) == 1.0 and hihat_active_ratio(flat) == 1.0)
     check("active_ratio: 16분만이면 0.5", hihat_active_ratio(sixteenth / sixteenth.sum()) == 0.5)
     check("burst: 16칸 프로파일은 미해석", hihat_roll_burst_ratio(np.full(LEGACY_BINS, 1 / LEGACY_BINS)) is None)
+
+    # ── 소급(오디오 0) — 축이 정의되기 전 스냅샷도 저장 프로파일에서 채운다.
+    #    게이트가 H1과 **같은 코호트**에서 돌 수 있는 근거이므로 검사로 고정한다.
+    from sonic_profile.rhythm import backfill_hihat_axes
+
+    stored_prof = [round(float(v), 4) for v in (burst3 / burst3.sum())]
+    backfilled = backfill_hihat_axes({"hihat_bar_profile": stored_prof})
+    check("소급: 저장 프로파일에서 burst·active를 채운다",
+          backfilled["hihat_roll_burst_ratio"] == 1.0
+          and backfilled["hihat_active_ratio"] == round(3 / BINS, 4))
+    check("소급: 프로파일이 없으면 되살리지 않는다 (결측 ≠ 0)",
+          backfill_hihat_axes({"tempo_bpm": 120.0}) == {"tempo_bpm": 120.0})
+    check("소급: 이미 있는 값을 덮지 않는다 (오디오 계산이 정밀도에서 앞선다)",
+          backfill_hihat_axes({"hihat_bar_profile": stored_prof,
+                               "hihat_roll_burst_ratio": 0.5})["hihat_roll_burst_ratio"] == 0.5)
+    check("소급: 멱등", backfill_hihat_axes(backfilled) == backfilled)
     tri = np.zeros(TRIPLET_BINS)
     tri[::3] = 1.0                              # 8분 이진 위치
     tri_only = np.zeros(TRIPLET_BINS)

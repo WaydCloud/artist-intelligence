@@ -64,7 +64,11 @@ VIBRATO_TOTAL_HZ = (0.5, 15.0)
 HALFTIME_MIN_RATIO_DEFAULT = 1.0
 BASS_GLIDE_MIN_ST_PER_SEC_DEFAULT = 6.0
 BASS_GLIDE_MIN_MS_DEFAULT = 80.0
-SNARE_MIN_CONTRAST_DEFAULT = 1.71   # 저역 기준선. 미만이면 스네어 축을 결측 처리한다
+# 유효성 바닥 = **이 축 자신의 분포**의 p10(1.325 → 1.33, n=123 · RULES §3.8.4.3).
+# ⚠ 1차 게이트는 여기에 1.71(저역·믹스 기준선)을 옮겨 썼다 — 중역·스템 축 분포의
+# 약 58백분위라 "깨진 측정을 떨어뜨리는 바닥"이 아니라 한복판을 자르는 컷이었고,
+# 정답지 5곡 중 3곡을 잃었다. **바닥은 다른 대역에서 빌려 오지 않는다.**
+SNARE_MIN_CONTRAST_DEFAULT = 1.33
 
 _EPS = 1e-12
 _MODEL: Any = None
@@ -260,6 +264,35 @@ def apply_snare_gate(
         out[k] = None
     out["snare_axes_gated"] = True
     return out
+
+
+def regate_snare_axes(
+    features: dict[str, Any],
+    *,
+    min_contrast: float,
+    min_ratio: float = HALFTIME_MIN_RATIO_DEFAULT,
+) -> dict[str, Any]:
+    """**저장된 `snare_bar_profile`에서** 스네어 하위 축을 다시 판정한다 — 오디오 0.
+
+    게이트에 걸린 곡도 프로파일·대비는 저장돼 있으므로(`apply_snare_gate`는 하위
+    비율만 결측 처리한다) **임계를 바꿀 때 오디오를 다시 받을 필요가 없다** —
+    D-031 `syncopation_ratio` 소급과 같은 경로다(RULES §3.8.4.3 · TESTS §7.2.4).
+
+    프로파일이 없는 레코드는 **되살리지 않는다**(결측 ≠ 0, §0). 임계를 올렸을 때
+    하위 축이 다시 결측이 되는 방향도 같은 함수가 처리한다 — 멱등이다.
+    """
+    prof = features.get("snare_bar_profile")
+    contrast = features.get("snare_bar_contrast")
+    if not isinstance(prof, list) or not isinstance(contrast, (int, float)) or isinstance(contrast, bool):
+        return dict(features)
+
+    out = dict(features)
+    out.pop("snare_axes_gated", None)
+    out["halftime_snare_ratio"] = halftime_snare_ratio(prof)
+    out["snare_backbeat_ratio"] = snare_backbeat_ratio(prof)
+    ratio = out["halftime_snare_ratio"]
+    out["halftime_snare"] = None if ratio is None else bool(ratio >= min_ratio)
+    return apply_snare_gate(out, float(contrast), min_contrast=min_contrast)
 
 
 # ─────────────────────────────────────────── 모델 의존부 (분리 · 특징 추출)
@@ -479,6 +512,28 @@ def selftest_stems() -> tuple[int, list[str]]:
           gated["halftime_snare_ratio"] is None and gated["snare_backbeat_ratio"] is None
           and gated.get("snare_axes_gated") is True)
     check("유효성 게이트: 대비 충분하면 유지", kept["halftime_snare_ratio"] == 0.5)
+
+    # ── 재게이트(오디오 0 · TESTS §7.2.4) — 바닥을 고칠 때 오디오를 다시 받지 않는다
+    stored = {
+        "snare_bar_profile": [round(float(v), 6) for v in prof(4, 8, 12)],
+        "snare_bar_contrast": 1.40,
+        "halftime_snare_ratio": None,       # 1.71 게이트에 걸려 결측이던 상태
+        "snare_backbeat_ratio": None,
+        "halftime_snare": None,
+        "snare_axes_gated": True,
+    }
+    loosened = regate_snare_axes(stored, min_contrast=1.33)
+    check("재게이트: 바닥을 내리면 저장 프로파일에서 되살아난다",
+          loosened["halftime_snare_ratio"] == 0.5 and "snare_axes_gated" not in loosened,
+          f"{loosened['halftime_snare_ratio']}")
+    check("재게이트 멱등", regate_snare_axes(loosened, min_contrast=1.33) == loosened)
+    tightened = regate_snare_axes(stored, min_contrast=1.71)
+    check("재게이트: 바닥을 올리면 결측(0이 아니다)",
+          tightened["halftime_snare_ratio"] is None
+          and tightened.get("snare_axes_gated") is True)
+    no_prof = regate_snare_axes({"snare_unresolved": "too few downbeats (1)"}, min_contrast=1.33)
+    check("재게이트: 프로파일 없으면 되살리지 않는다",
+          "halftime_snare_ratio" not in no_prof)
 
     # ── 슬라이딩 808
     frame_s = F0_HOP / 22050.0                       # ≈23.2ms

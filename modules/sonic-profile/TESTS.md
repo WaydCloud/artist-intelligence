@@ -296,16 +296,42 @@ C층 지표는 값이 그럴듯한 범위로 나오기 때문에 **일반 테스
 
 ### 7.2.3 분리 품질 회귀 (스템이 실제로 마스킹을 풀었는가)
 
-2026-07-29 실측(분리 전 중역 대비 1.17~1.41 → 분리 후 1.56~2.38)이 기준선이다. **같은 3곡으로 재현**해 분리 후 대비가 저역 기준선 **1.71을 2곡 이상에서 넘는지** 확인한다. 못 넘으면 스템 도입의 전제가 무너진 것이므로 **비용(+20~25분/일)을 지불할 근거가 없다** — 이 회귀는 모델·버전을 바꿀 때마다 돌린다(§6.4 붕괴 가드와 같은 성격).
+2026-07-29 실측(분리 전 중역 대비 1.17~1.41 → 분리 후 1.56~2.38)이 기준선이다. **같은 3곡으로 재현**해 분리 후 대비가 3곡 중 2곡 이상에서 **분리 전 값보다 오르는지** 확인한다. 못 오르면 스템 도입의 전제가 무너진 것이므로 **비용(+20~25분/일)을 지불할 근거가 없다** — 이 회귀는 모델·버전을 바꿀 때마다 돌린다(§6.4 붕괴 가드와 같은 성격).
+
+⚠ **판정 기준을 "저역 기준선 1.71을 넘는지"로 쓰지 않는다**(2026-07-30 정정, RULES §3.8.4.3). 이 회귀가 재는 것은 **같은 곡의 전·후 변화**이므로 다른 대역의 절대값을 컷으로 쓸 이유가 없다. 코호트 규모 확인은 별개로 끝났다(n=123에서 중역 중앙 1.62 ≈ 저역 1.64, RULES §3.8.4.2) — **분포끼리 비교**가 그 주장의 올바른 형식이다.
+
+### 7.2.4 유효성 바닥 재도출 · 재게이트 (오디오 0)
+
+`snare_bar_profile`이 게이트에 걸린 곡에도 저장되므로 **임계를 바꿔 재판정하는 데 오디오가 필요 없다**(D-031 `syncopation_ratio` 소급과 같은 경로).
+
+| 검사 | 방법 | 기대 |
+|---|---|---|
+| 재게이트 항등 | `regate_snare_axes(f, min_contrast=…)`를 같은 임계로 2회 | 2회차 = 1회차 (멱등) |
+| 바닥 완화 | 임계를 대비 미만으로 내림 | 결측이던 `halftime_snare_ratio`가 저장 프로파일에서 되살아남 · `snare_axes_gated` 사라짐 |
+| 바닥 강화 | 임계를 대비 초과로 올림 | 하위 축이 **결측**(0이 아님, §0) |
+| 프로파일 결측 | `snare_bar_profile` 없는 레코드 | 되살리지 않는다(추측 금지) |
+| 도출 재현 | `python scripts/stem_gate.py --snapshot …` | 판정 JSON에 `floor_derivation`(백분위 표 + 현 바닥의 백분위)이 함께 실린다 |
+
+앞 4항은 `selftest_stems()`에 편입(네트워크 0·모델 0).
 
 ## 8. 재현 레시피
 
 ```bash
-# 스모크(네트워크 0) — 합성 픽스처로 전 구간 관통
-PYTHONPATH=modules/sonic-profile/src python -m sonic_profile analyze \
-  modules/sonic-profile/tests/fixtures/synthetic -o modules/sonic-profile/output/
-PYTHONPATH=modules/sonic-profile/src python -m sonic_profile validate \
-  modules/sonic-profile/output/report.json
+# 스모크(네트워크 0) — 저장된 스냅샷으로 전 구간 관통
+# ⚠ 2026-07-30 정정: `tests/fixtures/synthetic`은 **존재하지 않는다**(커밋된 적 없음).
+#   그 경로를 적어 둔 동안 이 스모크는 FileNotFoundError로 죽고 있었다. 스모크의
+#   입력은 저장된 스냅샷(`data/live/sonic`)이며 오디오·네트워크가 필요 없다.
+# ⚠ `-o modules/sonic-profile/output/`은 **커밋된 라이브 산출을 덮는다.**
+#   검증만 할 때는 임시 디렉터리로 낼 것(HANDOFF §A 함정).
+PYTHONPATH=modules/sonic-profile/src python -m sonic_profile analyze data/live/sonic \
+  --watchlist packages/entity-master/watchlist.json -o "$TMP/"
+PYTHONPATH=modules/sonic-profile/src python -m sonic_profile validate "$TMP/report.json"
+python scripts/validate_report_data.py "$TMP/report.json"   # 차트 데이터 계약(D-036)
+
+# 스템 축 채택 게이트 재실행 (오디오 0 — 저장 프로파일에서 재게이트, §7.2.4)
+PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python scripts/stem_gate.py \
+  --snapshot data/research/genre-impulse/stem_gate_snapshot.json \
+  -o data/research/genre-impulse/stem_gate_result.json
 
 # 라이브 1회(워치리스트 대상, 오디오 무보관)
 PYTHONPATH=modules/sonic-profile/src python -m sonic_profile fetch \

@@ -31,6 +31,18 @@ from pathlib import Path
 from typing import Any
 
 
+def _load_stems() -> Any:
+    """재게이트 로직은 `sonic_profile.stems`의 것을 쓴다 — 스크립트가 게이트를 다시
+    구현하면 모듈이 내는 값과 게이트가 재는 값이 갈라진다(AGENTS §1)."""
+    try:
+        from sonic_profile import stems  # type: ignore[import-not-found]
+    except ImportError as exc:  # pragma: no cover - 실행 환경 안내
+        raise SystemExit(
+            "sonic_profile을 찾을 수 없습니다 — PYTHONPATH에 modules/sonic-profile/src를 추가하세요"
+        ) from exc
+    return stems
+
+
 def _load_percentile() -> Any:
     """백분위는 genre-impulse의 것을 그대로 쓴다 — 두 벌이 되면 게이트가 재는 백분위와
     모니터가 쓰는 백분위가 갈라진다(AGENTS §1)."""
@@ -111,9 +123,60 @@ def _answers(recs: list[dict[str, Any]], gate: dict[str, Any]) -> list[dict[str,
     return out
 
 
-def run(snapshot: Path) -> dict[str, Any]:
+def _floor_derivation(recs: list[dict[str, Any]], floor: float) -> dict[str, Any]:
+    """유효성 바닥의 도출을 **판정과 같은 실행에서** 낸다 (RULES §3.8.4.3 형식 ③).
+
+    바닥이 문서에만 있으면 다음 코호트에서 검증되지 않는다. 축 자신의 분포와
+    **빌려 왔던 대역**(저역·믹스)을 나란히 내서, 옮겨 쓴 값이 왜 바닥이 아니었는지가
+    표에서 바로 보이게 한다.
+    """
+    import numpy as np
+
+    out: dict[str, Any] = {
+        "floor": floor,
+        "rule": "유효성 바닥 = 그 축 자신의 분포 p10 (RULES §3.8.4.3). 다른 대역에서 빌려 오지 않는다",
+        "method": "numpy.percentile (선형보간)",
+        "distributions": {},
+    }
+    for name, axis in (("snare_mid_stem", "snare_bar_contrast"),
+                       ("kick_low_mix", "bar_profile_contrast")):
+        pool = [v for r in recs if (v := _feat(r, axis)) is not None]
+        if not pool:
+            continue
+        a = np.asarray(pool, dtype=float)
+        out["distributions"][name] = {
+            "axis": axis,
+            "n": len(pool),
+            "min": round(float(a.min()), 4),
+            "p05": round(float(np.percentile(a, 5)), 4),
+            "p10": round(float(np.percentile(a, 10)), 4),
+            "p25": round(float(np.percentile(a, 25)), 4),
+            "median": round(float(np.percentile(a, 50)), 4),
+            "p90": round(float(np.percentile(a, 90)), 4),
+            "max": round(float(a.max()), 4),
+            # 현 바닥이 이 분포의 몇 백분위인지 — 한복판을 자르고 있으면 여기서 드러난다
+            "floor_percentile": round(100.0 * float((a < floor).mean()), 1),
+        }
+    return out
+
+
+def run(snapshot: Path, *, min_contrast: float) -> dict[str, Any]:
     _percentile = _load_percentile()
+    stems = _load_stems()
     recs = json.loads(snapshot.read_text(encoding="utf-8")).get("records") or []
+    # 스냅샷은 그때의 바닥으로 게이트된 상태다. 저장된 `snare_bar_profile`에서
+    # **오디오 없이** 다시 판정한다 — 안 하면 옛 바닥의 결측이 그대로 판정에 들어간다.
+    regated = 0
+    for r in recs:
+        f = r.get("features")
+        if not isinstance(f, dict):
+            continue
+        new = stems.regate_snare_axes(f, min_contrast=min_contrast)
+        if new != f:
+            regated += 1
+        r["features"] = new
+    print(f"  재게이트: 대비 바닥 {min_contrast} 적용 → {regated}/{len(recs)}레코드 변경 (오디오 0)",
+          file=sys.stderr)
     cohort = [r for r in recs if _is_cohort(r)]
     results = []
 
@@ -174,6 +237,7 @@ def run(snapshot: Path) -> dict[str, Any]:
         "top_pct": TOP_PCT,
         "snapshot": str(snapshot),
         "cohort_records": len(cohort),
+        "snare_floor_derivation": _floor_derivation(recs, min_contrast),
         "results": results,
     }
 
@@ -182,9 +246,17 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(prog="stem_gate", description="스템 축 채택 게이트 (TESTS §7.2.2)")
     ap.add_argument("--snapshot", required=True, help="코호트+정답지를 함께 잰 sonic 스냅샷")
     ap.add_argument("-o", "--out", help="판정 JSON 경로")
+    ap.add_argument(
+        "--snare-min-contrast", type=float, default=None,
+        help="스네어 축 유효성 바닥(RULES §3.8.4.3). 기본은 모듈 기본값 — 저장된 "
+             "프로파일에서 오디오 없이 재게이트한다",
+    )
     args = ap.parse_args(argv)
 
-    payload = run(Path(args.snapshot))
+    floor = args.snare_min_contrast
+    if floor is None:
+        floor = float(_load_stems().SNARE_MIN_CONTRAST_DEFAULT)
+    payload = run(Path(args.snapshot), min_contrast=floor)
     text = json.dumps(payload, ensure_ascii=False, indent=2)
     if args.out:
         Path(args.out).write_text(text + "\n", encoding="utf-8")

@@ -146,6 +146,13 @@
           "certainty_note": {
             "type": "string",
             "description": "불가능한 수준일 때 해제 조건 필수 기재"
+          },
+          "chart_evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "이 셀에 붙는 chart_evidence 행의 참조 키 ('{chart}|{artist}|{title}'). **사람이 확정한 링크만 들어온다** — 차트인은 시장 도달의 사실이지 셀 배정이 아니므로 자동 배정하지 않는다(뉴진스 Hot 100 = 미국 도달이지 한국 주류화가 아니다). 후보 대조는 scripts/impulse_trajectory_link.py가 내고 값은 도메인 소유자가 정한다(AGENTS §2.1). 없으면 '아직 대조되지 않았다'는 뜻이지 '근거가 없다'가 아니다."
           }
         }
       }

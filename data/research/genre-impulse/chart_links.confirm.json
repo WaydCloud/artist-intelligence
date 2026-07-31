@@ -1,0 +1,281 @@
+{
+  "_note": "confirm을 true로 바꾼 쌍만 --apply가 원장에 쓴다. 후보에 없는 쌍을 직접 추가해도 된다(cell·ref만 맞으면 된다). 지우는 것은 confirm을 false로.",
+  "links": {
+    "amapiano": [
+      {
+        "ref": "billboard-hot100|Tyla|Water",
+        "cell": "global-mainstream",
+        "confirm": false,
+        "_곡": "Tyla - Water",
+        "_진입": "2023-10-14",
+        "_셀날짜": "2023-10",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Tyla|Water",
+        "cell": "kr-mainstream",
+        "confirm": false,
+        "_곡": "Tyla - Water",
+        "_진입": "2023-10-14",
+        "_셀날짜": "미도달",
+        "_날짜": "대조 불가",
+        "_시장불일치": true
+      }
+    ],
+    "drill": [
+      {
+        "ref": "billboard-hot100|Pop Smoke|Dior",
+        "cell": "origin-mainstream-us",
+        "confirm": false,
+        "_곡": "Pop Smoke - Dior",
+        "_진입": "2020-02-29",
+        "_셀날짜": "2019~2020",
+        "_날짜": "포함",
+        "_시장불일치": false
+      }
+    ],
+    "easy-listening": [
+      {
+        "ref": "billboard-hot100|FIFTY FIFTY|Cupid",
+        "cell": "global-mainstream",
+        "confirm": false,
+        "_곡": "FIFTY FIFTY - Cupid",
+        "_진입": "2023-04-01",
+        "_셀날짜": "2023-02",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|ILLIT|Magnetic",
+        "cell": "kr-saturation",
+        "confirm": false,
+        "_곡": "ILLIT - Magnetic",
+        "_진입": "2024-04-20",
+        "_셀날짜": "2024-03",
+        "_날짜": "셀이 이름",
+        "_시장불일치": true
+      }
+    ],
+    "jersey-club": [
+      {
+        "ref": "billboard-hot100|Drake|Sticky",
+        "cell": "origin-mainstream",
+        "confirm": false,
+        "_곡": "Drake - Sticky",
+        "_진입": "2022-07-02",
+        "_셀날짜": "2022-06",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Lil Uzi Vert|Just Wanna Rock",
+        "cell": "origin-viral-2nd",
+        "confirm": false,
+        "_곡": "Lil Uzi Vert - Just Wanna Rock",
+        "_진입": "2022-10-29",
+        "_셀날짜": "2022-09~2022-11",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Lil Uzi Vert|Just Wanna Rock",
+        "cell": "origin-mainstream",
+        "confirm": false,
+        "_곡": "Lil Uzi Vert - Just Wanna Rock",
+        "_진입": "2022-10-29",
+        "_셀날짜": "2022-06",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|NewJeans|OMG",
+        "cell": "kr-viral",
+        "confirm": false,
+        "_곡": "NewJeans - OMG",
+        "_진입": "2023-01-28",
+        "_셀날짜": "2022-12~2023-01",
+        "_날짜": "포함",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|NewJeans|Ditto",
+        "cell": "kr-viral",
+        "confirm": false,
+        "_곡": "NewJeans - Ditto",
+        "_진입": "2023-01-21",
+        "_셀날짜": "2022-12~2023-01",
+        "_날짜": "포함",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|NewJeans|Ditto",
+        "cell": "kr-mainstream",
+        "confirm": false,
+        "_곡": "NewJeans - Ditto",
+        "_진입": "2023-01-21",
+        "_셀날짜": "2022-12",
+        "_날짜": "셀이 이름",
+        "_시장불일치": true
+      }
+    ],
+    "moombahton-tropical": [
+      {
+        "ref": "billboard-hot100|Justin Bieber|Sorry",
+        "cell": "global-mainstream-peak",
+        "confirm": false,
+        "_곡": "Justin Bieber - Sorry",
+        "_진입": "2015-11-14",
+        "_셀날짜": "2015-09~2016-08",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Major Lazer|Cold Water",
+        "cell": "global-mainstream-peak",
+        "confirm": false,
+        "_곡": "Major Lazer - Cold Water",
+        "_진입": "2016-08-13",
+        "_셀날짜": "2015-09~2016-08",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Major Lazer|Lean On",
+        "cell": "global-mainstream",
+        "confirm": false,
+        "_곡": "Major Lazer - Lean On",
+        "_진입": "2015-04-25",
+        "_셀날짜": "2014-12~2015-08",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Kygo|Firestone",
+        "cell": "global-mainstream",
+        "confirm": false,
+        "_곡": "Kygo - Firestone",
+        "_진입": "2015-10-03",
+        "_셀날짜": "2014-12~2015-08",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      }
+    ],
+    "njs": [
+      {
+        "ref": "billboard-hot100|Bruno Mars|Finesse",
+        "cell": "origin-scene-revival",
+        "confirm": false,
+        "_곡": "Bruno Mars - Finesse",
+        "_진입": "2018-01-13",
+        "_셀날짜": "2016-11",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Bruno Mars|Finesse",
+        "cell": "origin-viral",
+        "confirm": false,
+        "_곡": "Bruno Mars - Finesse",
+        "_진입": "2018-01-13",
+        "_셀날짜": "2018-01",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Bruno Mars|Finesse",
+        "cell": "kr-scene-reignition",
+        "confirm": false,
+        "_곡": "Bruno Mars - Finesse",
+        "_진입": "2018-01-13",
+        "_셀날짜": "2018-04",
+        "_날짜": "셀이 늦음",
+        "_시장불일치": true
+      }
+    ],
+    "reggaeton-dembow": [
+      {
+        "ref": "billboard-hot100|Luis Fonsi|Despacito",
+        "cell": "global-mainstream",
+        "confirm": false,
+        "_곡": "Luis Fonsi - Despacito",
+        "_진입": "2017-02-04",
+        "_셀날짜": "2017-05",
+        "_날짜": "셀이 늦음",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Luis Fonsi|Despacito",
+        "cell": "kr-viral",
+        "confirm": false,
+        "_곡": "Luis Fonsi - Despacito",
+        "_진입": "2017-02-04",
+        "_셀날짜": "2017 중반",
+        "_날짜": "대조 불가",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|J Balvin|Mi Gente",
+        "cell": "global-streaming-dominance",
+        "confirm": false,
+        "_곡": "J Balvin - Mi Gente",
+        "_진입": "2017-07-22",
+        "_셀날짜": "2017-06~2020-12",
+        "_날짜": "포함",
+        "_시장불일치": false
+      },
+      {
+        "ref": "billboard-hot100|Daddy Yankee|Gasolina",
+        "cell": "origin-mainstream",
+        "confirm": false,
+        "_곡": "Daddy Yankee - Gasolina",
+        "_진입": "2004-11-13",
+        "_셀날짜": "2004-07",
+        "_날짜": "셀이 이름",
+        "_시장불일치": false
+      }
+    ],
+    "ukg-dnb": [
+      {
+        "ref": "billboard-hot100|Jung Kook|Seven",
+        "cell": "kr-explicit-release",
+        "confirm": false,
+        "_곡": "Jung Kook - Seven",
+        "_진입": "2023-07-29",
+        "_셀날짜": "2023-07",
+        "_날짜": "포함",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|Jung Kook|Seven",
+        "cell": "kr-mainstream",
+        "confirm": false,
+        "_곡": "Jung Kook - Seven",
+        "_진입": "2023-07-29",
+        "_셀날짜": "2023-07",
+        "_날짜": "포함",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|NewJeans|Super Shy",
+        "cell": "kr-explicit-release",
+        "confirm": false,
+        "_곡": "NewJeans - Super Shy",
+        "_진입": "2023-07-22",
+        "_셀날짜": "2023-07",
+        "_날짜": "포함",
+        "_시장불일치": true
+      },
+      {
+        "ref": "billboard-hot100|NewJeans|Super Shy",
+        "cell": "kr-mainstream",
+        "confirm": false,
+        "_곡": "NewJeans - Super Shy",
+        "_진입": "2023-07-22",
+        "_셀날짜": "2023-07",
+        "_날짜": "포함",
+        "_시장불일치": true
+      }
+    ]
+  }
+}

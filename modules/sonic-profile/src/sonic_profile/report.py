@@ -1203,7 +1203,7 @@ def build_report(
         shown = min(grids)
         if len(grids) > 1:
             insights.append(
-                f"⚠ 마디 격자가 섞여 있습니다({'·'.join(f'{g}칸' for g in grids)}) — "
+                f"⚠ 마디 격자가 섞여 있습니다({'·'.join(f'{g}칸' for g in grids)}). "
                 f"비교 가능한 **{shown}칸으로 내려 맞춰** 표시했습니다(올려 맞추면 없는 정보를 "
                 f"만드는 것입니다). 32분·트리플렛 축은 이 화면에 없습니다"
             )

@@ -12,7 +12,8 @@
 > **H3이 닫혔다**(2026-07-31 · [`Handoffs/2026-07-31-h3-verdict-and-h4-gate.md`](Handoffs/2026-07-31-h3-verdict-and-h4-gate.md) · D-049). 🔴 **실패(3/12 = 25% · 기준 60%) → 하이햇 축 확장을 여기서 멈춘다. 세 번째 정의를 만들지 않는다.** 결론은 "통설이 틀렸다"가 아니라 **관측 한계의 진술**이다: 저지클럽의 하이햇 서명은 30초 발췌·믹스 고역·마디 평균 온셋 포락으로는 잡히지 않는다.
 > **콜드 실행을 기다리지 않고 났다** — burst·active는 저장된 32칸 프로파일만의 함수라 소급된다(`rhythm.backfill_hihat_axes`). 덕분에 H3은 **H1이 판정된 바로 그 스냅샷**(코호트·정답지 동일)에서 돌았고, 그게 "새 정의가 나은가"에 대한 더 옳은 비교다.
 
-⏳ **1순위 — 09:00 콜드 실행 뒤 H4 판정**: 남은 것은 **H4 하나**다(`bar_profile_split_half_2bar`). 이것만은 소급이 안 된다 — 마디별 포락이 필요한데 저장되는 것은 평균 프로파일뿐이다. **정답지 12곡은 이미 있고 코호트만 비어 있다.** 게이트는 **이미 서 있다**(`scripts/stem_gate.py`의 `split_half_h4` — 지금 돌리면 사유와 함께 `unmeasured`를 낸다). 스냅샷이 차면 **코드 변경 없이 같은 명령**이 판정을 낸다.
+⏳ **1순위 — 09:00 콜드 실행 뒤 H4 판정**: 남은 것은 **H4 하나**다(`bar_profile_split_half_2bar`). 이것만은 소급이 안 된다 — 마디별 포락이 필요한데 저장되는 것은 평균 프로파일뿐이다. **정답지 12곡은 이미 있고 코호트만 비어 있다.** 게이트는 **이미 서 있다**(`scripts/stem_gate.py`의 `split_half_h4` — 지금 돌리면 사유와 함께 `unmeasured`를 낸다). 조립도 **스크립트가 됐다**(`scripts/gate_snapshot.py` — 그전까지 재현 명령이 없었다). 두 명령이면 판정이 난다: `gate_snapshot` → `stem_gate`.
+- 🔴 새 코호트의 판정은 **별도 결과 파일**로 낸다(정본은 `stem_gate_result_v2.json`). H3은 그 파일에서 **복제(확인)**이지 재도전이 아니다 — 갈리면 "통과했다"가 아니라 "판정이 코호트에 의존한다"를 적는다(RULES §3.1.5.4에 결과보다 먼저 적어 뒀다).
 - 넘어야 할 선: ① 분리 실패 검출 ② **정답지 탈락 0곡**. 같은 대역 1마디 기준선은 ①만족·②**1곡 탈락**으로 fail이다 — 2마디가 넘어야 할 선은 "1곡보다 적음"이 아니라 **0곡**이다(조건 ②는 절대값).
 - H3 복제는 **재도전이 아니라 확인**이다. 결과가 갈리면 적을 것은 "통과했다"가 아니라 "판정이 코호트에 의존한다"이며 그것은 축의 약점이다(RULES §3.1.5.4에 결과보다 먼저 적어 뒀다).
 
@@ -186,6 +187,14 @@ python scripts/a2_signature_compare.py \
   --cohort-kr data/research/genre-impulse/cohort_kr_features_2021-10-02.json \
   -o data/research/genre-impulse/a2_signature_compare.json
 # KR 동시대 코호트 목록(네트워크 = Wayback만): python scripts/melon_wayback_ingest.py cohort 2021-10-02 -o <out>
+
+# ── 게이트 모집단 조립 (네트워크 0) — daily는 차트 코호트만 잰다. 정답지는 연구 취득분에 있다
+#   🔴 엔진 지문(rhythm_feature_set·HOP·격자)이 어긋나면 **거부한다** — 다른 조건의 값을 한
+#      분포에 넣으면 백분위가 음악이 아니라 측정 조건 차이를 잰다(D-037/D-038).
+python scripts/gate_snapshot.py \
+  --cohort data/live/sonic/<날짜>.json \
+  --answers data/research/genre-impulse/signature_v4_merged.json \
+  -o data/research/genre-impulse/stem_gate_snapshot_<날짜>.json
 
 # ── 스템·격자 축 채택 게이트 (오디오 0 — 저장 프로파일에서 재게이트 + 하이햇 축 소급)
 #   H1·H3(하이햇)·H4(2마디 분할)가 한 실행에서 나온다. H4는 코호트에 축이 차야 판정된다

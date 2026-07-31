@@ -21,8 +21,8 @@ export function KpiTile({ m }: { m: Metric }) {
         <span
           className={
             typeof m.value === "number"
-              ? "truncate text-2xl font-semibold tracking-tight text-[var(--ink)]"
-              : "text-base font-semibold leading-snug tracking-tight text-[var(--ink)]"
+              ? "truncate text-2xl font-black tracking-tight text-[var(--ink)]"
+              : "text-base font-extrabold leading-snug tracking-tight text-[var(--ink)]"
           }
         >
           {fmt(m.value)}

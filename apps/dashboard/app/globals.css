@@ -66,7 +66,11 @@
   --glass-border: rgba(16, 16, 20, 0.1);
   --glass-sheen: rgba(255, 255, 255, 0.65);
   --shadow: rgba(16, 16, 20, 0.06);
-  --metal: linear-gradient(115deg, #3f4247 0%, #82888f 30%, #43464b 52%, #9aa0a7 74%, #4c4f54 100%);
+  /* 라이트 메탈 — 정거장 전부가 `--plane`(#f4f4f6) 위에서 3:1을 넘도록 다시 잡았다(2026-07-31).
+     예전 밝은 정거장 #9aa0a7은 2.44:1이라 기준 미달이었는데, 워드마크가 굵을 때는 획이 넓어
+     눈으로 버티다가 굵기를 100으로 내리자 그 구간이 실제로 사라졌다(DESIGN §2.1).
+     현재 가장 밝은 정거장 #7d838b = 3.48:1 (흰 배경에서도 3.83:1). 값을 건드리면 다시 잰다. */
+  --metal: linear-gradient(115deg, #33363b 0%, #6f757c 30%, #3a3d42 52%, #7d838b 74%, #40434a 100%);
   --glow: radial-gradient(60rem 30rem at 50% -12%, rgba(109, 40, 217, 0.09), transparent 70%);
   --vignette: radial-gradient(120% 90% at 50% 50%, transparent 55%, rgba(16, 16, 20, 0.06) 100%);
   /* 필름 그레인: 흑백 fractal noise SVG 타일. 불투명도는 --grain-opacity로만 조절(≤ 0.08). */
@@ -104,6 +108,20 @@ body {
   color: var(--ink);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
+}
+
+/* DESIGN §2.1 — 본문 굵기는 여기서 한 번만 정한다. 중간 굵기(500·600)는 쓰지 않고
+   강조는 800·900으로 건너뛴다: 중간 굵기는 본문과의 차이가 작아 강조인지가 안 읽히고,
+   그래서 강조를 늘려도 화면이 균질해지기만 한다.
+   ⚠ 12px 미만에는 300을 쓰지 않는다(얇아져 읽히지 않는다) — `.text-micro`가 그 자리다. */
+body {
+  font-weight: 300;
+}
+
+@layer components {
+  .text-micro {
+    font-weight: 400;
+  }
 }
 
 /* DESIGN §5 — `prefers-reduced-motion` 존중은 규칙이고, 규칙은 한 곳에서 집행한다.

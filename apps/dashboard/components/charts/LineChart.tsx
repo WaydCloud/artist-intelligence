@@ -100,7 +100,7 @@ function ColumnBody({ col }: { col: Column }) {
           <span className="min-w-0 flex-1 truncate text-[var(--ink-secondary)]">{r.name}</span>
           <span
             className={`shrink-0 tabular-nums ${
-              r.missing ? "text-[var(--muted)]" : "font-medium text-[var(--ink)]"
+              r.missing ? "text-[var(--muted)]" : "font-extrabold text-[var(--ink)]"
             }`}
           >
             {r.text}
@@ -525,11 +525,11 @@ export function LineChart({ data }: { data: LineData }) {
           <table className="w-full border-collapse text-left">
             <thead>
               <tr className="border-b border-[var(--hairline)] text-[var(--muted)]">
-                <th scope="col" className="py-1 pr-3 font-medium">
+                <th scope="col" className="py-1 pr-3 font-extrabold">
                   지점
                 </th>
                 {series.map((s) => (
-                  <th key={s.name} scope="col" className="py-1 pr-3 text-right font-medium">
+                  <th key={s.name} scope="col" className="py-1 pr-3 text-right font-extrabold">
                     {s.name}
                   </th>
                 ))}
@@ -538,7 +538,7 @@ export function LineChart({ data }: { data: LineData }) {
             <tbody>
               {xs.map((lbl, i) => (
                 <tr key={lbl} className="border-b border-[var(--hairline)]">
-                  <th scope="row" className="py-1 pr-3 font-normal text-[var(--ink-secondary)]">
+                  <th scope="row" className="py-1 pr-3 font-light text-[var(--ink-secondary)]">
                     {lbl}
                   </th>
                   {series.map((s) => {

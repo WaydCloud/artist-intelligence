@@ -257,7 +257,7 @@ export function RadarChart({ data }: { data: RadarData }) {
         {tip.datum && (
           <>
             {/* 값이 앞, 라벨이 뒤 — 읽는 사람은 축을 이미 알고 숫자를 원한다 */}
-            <div className="font-medium tabular-nums text-[var(--ink)]">{tip.datum.body[0]}</div>
+            <div className="font-extrabold tabular-nums text-[var(--ink)]">{tip.datum.body[0]}</div>
             <div className="mt-0.5 text-[var(--ink-secondary)]">{tip.datum.name}</div>
             {tip.datum.body.slice(1).map((l) => (
               <div key={l} className="tabular-nums text-[var(--muted)]">
@@ -284,10 +284,10 @@ export function RadarChart({ data }: { data: RadarData }) {
         <table className="mt-2 w-full border-collapse text-left">
           <thead>
             <tr className="border-b border-[var(--hairline)] text-[var(--muted)]">
-              <th className="py-1 pr-3 font-medium">축</th>
-              <th className="py-1 pr-3 text-right font-medium">값</th>
-              <th className="py-1 pr-3 text-right font-medium">원값</th>
-              <th className="py-1 text-right font-medium">표본</th>
+              <th className="py-1 pr-3 font-extrabold">축</th>
+              <th className="py-1 pr-3 text-right font-extrabold">값</th>
+              <th className="py-1 pr-3 text-right font-extrabold">원값</th>
+              <th className="py-1 text-right font-extrabold">표본</th>
             </tr>
           </thead>
           <tbody>

@@ -119,10 +119,19 @@ _METRIC_META: dict[str, dict[str, str]] = {
         "section": "leadlag",
         "definition": "소셜 온셋이 차트 온셋보다 앞선 팀의 수. 시간 순서이며 인과가 아니다.",
     },
+    # 두 관문을 따로 센다. RULES §3.1이 "검열은 시간이 풀고 소표본은 기준값 문제라 두 축을
+    # 섞어 보고하지 않는다"고 적어 두었는데, 지표가 최종 통과 수 하나뿐이면 읽는 사람은
+    # 65에서 1로 줄어든 것만 보고 **무엇이 걸러 냈는지**를 알 수 없다.
+    "표본 충족 선행": {
+        "section": "leadlag",
+        "label": "표본을 채운 선행",
+        "definition": "소셜 선행 중 소셜 표본이 기준을 채운 팀의 수. 차트 온셋의 좌측 절단은 "
+        "아직 거르지 않은 단계다. 이 관문은 기준값이 정하는 것이라 시간이 지나도 저절로 풀리지 않는다.",
+    },
     "판정 가능 선행": {
         "section": "leadlag",
         "definition": "소셜 선행 중 표본이 기준 이상이고 차트 온셋이 좌측 절단되지 않은 팀의 수. "
-        "나머지는 판단을 보류한다.",
+        "나머지는 판단을 보류한다. 앞의 표본 관문과 달리 절단은 수집이 쌓이면 풀린다.",
     },
     "중앙값 선행": {
         "section": "leadlag",
@@ -783,6 +792,12 @@ def build_report(
         {"label": "추적 아티스트", "value": len(rows), "unit": "팀", "hint": "두 신호 합집합"},
         {"label": "조인(양측 신호)", "value": len(joined), "unit": "팀", "hint": "소셜·차트 온셋 모두 존재"},
         {"label": "소셜 선행", "value": len(led), "unit": "팀", "hint": "소셜 버즈가 차트 진입보다 먼저"},
+        {
+            "label": "표본 충족 선행",
+            "value": sum(1 for r in led if r["posts"] >= min_posts),
+            "unit": "팀",
+            "hint": f"소셜 선행 중 누적 게시 ≥{min_posts}건 (좌측 절단은 아직 거르지 않음)",
+        },
         {
             "label": "판정 가능 선행",
             "value": sum(1 for r in led if r["posts"] >= min_posts and not r.get("censored")),

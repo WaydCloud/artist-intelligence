@@ -3,15 +3,15 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Report } from "@/lib/report";
-import { useTheme } from "@/lib/useTheme";
+import { useTheme } from "@/components/ThemeProvider";
 import { BrandBackdrop } from "@/components/BrandBackdrop";
 import { ReportView } from "@/components/ReportView";
-import { ThemeToggle } from "@/components/ThemeToggle";
+import { ThemeButton } from "@/components/ThemeButton";
 
 export function Dashboard({ reports }: { reports: Report[] }) {
-  // 테마 처리는 LABS와 **한 벌**을 쓴다(lib/useTheme). 두 벌이면 한쪽에서 고른 테마가
-  // 다른 쪽으로 안 넘어간다.
-  const [theme, setTheme] = useTheme();
+  // 테마는 루트가 감싼 공급자 하나에서 온다. 표면마다 각자 부르던 구조는 네 표면 중
+  // 둘에서 조용히 끊겼다(ThemeProvider 주석).
+  const [theme] = useTheme();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
@@ -37,16 +37,16 @@ export function Dashboard({ reports }: { reports: Report[] }) {
           <div>
             <Link
               href="/"
-              className="metal-text font-display text-[10px] font-medium uppercase tracking-[0.3em]"
+              className="font-display text-xs font-extralight uppercase tracking-[0.3em] text-[var(--ink)]"
             >
               WaydCloud
             </Link>
-            <div className="font-display text-sm font-medium tracking-wide text-[var(--ink)]">
+            <div className="font-display text-sm font-extrabold tracking-wide text-[var(--ink)]">
               Artist Intelligence
-              <span className="ml-2 text-xs font-normal tracking-normal text-[var(--muted)]">리포트 대시보드</span>
+              <span className="ml-2 text-xs font-light tracking-normal text-[var(--muted)]">리포트 대시보드</span>
             </div>
           </div>
-          <ThemeToggle theme={theme} onToggle={() => setTheme(dark ? "light" : "dark")} />
+          <ThemeButton />
         </div>
       </header>
 
@@ -88,7 +88,7 @@ export function Dashboard({ reports }: { reports: Report[] }) {
       )}
 
       <footer className="relative mx-auto max-w-5xl border-t border-[var(--hairline)] px-5 py-10 text-xs leading-relaxed text-[var(--muted)]">
-        모든 지표는 <strong className="font-medium">참고용 신호</strong>. 예측이나 단정이 아니며, 판단은 사람의 몫.
+        모든 지표는 <strong className="font-extrabold">참고용 신호</strong>. 예측이나 단정이 아니며, 판단은 사람의 몫.
       </footer>
     </div>
   );

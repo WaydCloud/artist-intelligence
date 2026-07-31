@@ -36,7 +36,7 @@ export function ChartCard({
       className="glass-card scroll-mt-24 p-5 transition-[border-color] duration-300 ease-out data-[landed=true]:border-[var(--series)]"
     >
       {/* 제목은 바운더리 밖에 둔다 — 플롯이 죽어도 어느 카드가 비었는지는 보여야 한다. */}
-      {chart.title && <h2 className="font-display text-sm font-medium tracking-wide">{chart.title}</h2>}
+      {chart.title && <h2 className="font-display text-sm font-extrabold tracking-wide">{chart.title}</h2>}
 
       {/* R3 — 이 차트로 답할 수 있는 질문. 답할 질문이 없으면 차트를 뺀다(계약이 강제). */}
       {chart.question && (

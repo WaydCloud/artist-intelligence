@@ -23,7 +23,7 @@ function fmtStamp(iso: string): string {
 function emphasize(text: string) {
   return text.split(/\*\*(.+?)\*\*/g).map((part, i) =>
     i % 2 === 1 ? (
-      <strong key={i} className="font-medium text-[var(--ink)]">
+      <strong key={i} className="font-extrabold text-[var(--ink)]">
         {part}
       </strong>
     ) : (
@@ -35,7 +35,7 @@ function emphasize(text: string) {
 function List({ title, items, marker }: { title: string; items: string[]; marker: string }) {
   return (
     <div>
-      <h2 className="mb-2 font-display text-sm font-medium tracking-wide">{title}</h2>
+      <h2 className="mb-2 font-display text-sm font-extrabold tracking-wide">{title}</h2>
       <ul className="space-y-2">
         {items.map((t, i) => (
           <li key={i} className="flex gap-2 text-sm leading-relaxed text-[var(--ink-secondary)]">
@@ -97,7 +97,7 @@ export function ReportView({
   return (
     <main className="mx-auto max-w-5xl space-y-6 px-5 py-6">
       <section>
-        <h1 className="font-display text-xl font-semibold tracking-wide">{report.title}</h1>
+        <h1 className="font-display text-xl font-extrabold tracking-wide">{report.title}</h1>
         {report.subtitle && <p className="mt-1 break-words text-sm text-[var(--ink-secondary)]">{report.subtitle}</p>}
         <p className="mt-0.5 text-xs tabular-nums text-[var(--muted)]">{fmtStamp(report.generatedAt)} 생성</p>
         {related.length > 0 && onSelectModule && (
@@ -166,7 +166,7 @@ export function ReportView({
               보고 있는지는 이름이 아니라 답하려는 질문으로 정해진다. */}
           {activeSection?.question && (
             <header className="pt-3">
-              <h2 className="max-w-[24ch] font-display text-2xl font-semibold leading-snug tracking-tight text-[var(--ink)] sm:text-[1.75rem]">
+              <h2 className="max-w-[24ch] font-display text-2xl font-extrabold leading-snug tracking-tight text-[var(--ink)] sm:text-[1.75rem]">
                 {activeSection.question}
               </h2>
               {activeSection.note && (

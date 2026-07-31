@@ -38,11 +38,11 @@ function InferenceItem({ inf }: { inf: Inference }) {
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          className="shrink-0 rounded border border-[var(--border)] px-1.5 py-0.5 text-[10px] tracking-wide text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:border-[var(--baseline)] hover:text-[var(--ink)]"
+          className="text-micro shrink-0 rounded border border-[var(--border)] px-1.5 py-0.5 text-[10px] tracking-wide text-[var(--ink-secondary)] transition-colors duration-150 ease-out hover:border-[var(--baseline)] hover:text-[var(--ink)]"
         >
           AI추론 {open ? "▴" : "▾"}
         </button>
-        <span className="shrink-0 text-[10px] tabular-nums text-[var(--muted)]">{GRADE[inf.confidence]}</span>
+        <span className="text-micro shrink-0 text-[10px] tabular-nums text-[var(--muted)]">{GRADE[inf.confidence]}</span>
         <p className="min-w-0 max-w-[68ch] text-sm leading-relaxed text-[var(--ink-secondary)]">{inf.text}</p>
       </div>
 
@@ -80,7 +80,7 @@ export function InferenceBlock({ items, nested = false }: { items: Inference[]; 
   if (shown.length === 0) return null;
   return (
     <section className={nested ? "mt-4 border-t border-[var(--hairline)] pt-4" : "glass-card p-5"}>
-      <h2 className="mb-1 font-display text-sm font-medium tracking-wide">해석</h2>
+      <h2 className="mb-1 font-display text-sm font-extrabold tracking-wide">해석</h2>
       <p className="mb-3 text-xs text-[var(--muted)]">
         자동으로 붙인 해석. 관측이 아니며 채택·기각은 읽는 사람의 몫. 배지를 누르면 근거가 열림
       </p>

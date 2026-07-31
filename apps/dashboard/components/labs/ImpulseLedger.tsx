@@ -1,7 +1,6 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useTheme } from "@/lib/useTheme";
 import {
   ADOPTION_MODE_KO,
   CASE_TYPE_KO,
@@ -136,7 +135,7 @@ function CaseView({ imp }: { imp: Impulse }) {
     <div className="space-y-6">
       <header className="space-y-2">
         <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
-          <h2 className="font-display text-lg font-medium tracking-[0.06em] text-[var(--ink)]">
+          <h2 className="font-display text-lg font-extrabold tracking-[0.06em] text-[var(--ink)]">
             {imp.nameKo}
           </h2>
           {imp.nameEn ? <span className="text-sm text-[var(--muted)]">{imp.nameEn}</span> : null}
@@ -237,8 +236,6 @@ function CaseView({ imp }: { imp: Impulse }) {
 }
 
 export function ImpulseLedger({ data }: { data: LabsData }) {
-  // 리포트 대시보드와 같은 테마 훅. LABS만 OS 설정을 따르면 두 표면을 오갈 때 색이 튄다.
-  useTheme();
   const [active, setActive] = useState(0);
   const impulses = data.impulses;
   if (impulses.length === 0) {

@@ -52,7 +52,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
                 <th
                   key={c}
                   scope="col"
-                  className="whitespace-nowrap px-2 pb-1 text-center text-xs font-normal text-[var(--muted)]"
+                  className="whitespace-nowrap px-2 pb-1 text-center text-xs font-light text-[var(--muted)]"
                 >
                   {c}
                 </th>
@@ -62,7 +62,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
           <tbody>
             {data.rows.map((row, ri) => (
               <tr key={ri}>
-                <th scope="row" className="pr-3 text-left font-normal">
+                <th scope="row" className="pr-3 text-left font-light">
                   <div className="max-w-[200px] truncate text-xs text-[var(--ink-secondary)]" title={row}>
                     {row}
                   </div>
@@ -129,7 +129,7 @@ export function Heatmap({ data, dark }: { data: HeatmapData; dark: boolean }) {
         {tip.datum && (
           <>
             <div
-              className={`font-medium tabular-nums ${
+              className={`font-extrabold tabular-nums ${
                 tip.datum.missing ? "text-[var(--muted)]" : "text-[var(--ink)]"
               }`}
             >

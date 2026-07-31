@@ -78,7 +78,7 @@ export function TabQuestions({
     <section className="py-1">
       {qs.length > 0 && (
         <>
-          <h2 className="font-display text-sm font-medium tracking-wide text-[var(--ink)]">
+          <h2 className="font-display text-sm font-extrabold tracking-wide text-[var(--ink)]">
             이 화면에서 답할 수 있는 질문
           </h2>
           <ol className="mt-3 space-y-2">
@@ -107,7 +107,7 @@ export function TabQuestions({
           FM에서 "찾을 수 없다"로 남은 질문들(시간대·세트피스·압박)이 이 자리의 근거다. */}
       {no.length > 0 && (
         <div className={qs.length > 0 ? "mt-4 border-t border-[var(--hairline)] pt-3" : ""}>
-          <h3 className="text-xs font-medium tracking-wide text-[var(--muted)]">이 화면이 답하지 않는 것</h3>
+          <h3 className="text-xs font-extrabold tracking-wide text-[var(--muted)]">이 화면이 답하지 않는 것</h3>
           <ul className="mt-2 space-y-1">
             {no.map((t, i) => (
               <li key={i} className="flex max-w-[68ch] gap-2 text-xs leading-relaxed text-[var(--muted)]">

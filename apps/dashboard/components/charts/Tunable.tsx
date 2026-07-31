@@ -134,7 +134,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
       />
 
       <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">
-        백분위는 <b>당일 코호트 안의 상대 위치</b>입니다. 코호트 구성이 바뀌면 같은 곡도 값이
+        백분위는 <b className="font-extrabold">당일 코호트 안의 상대 위치</b>입니다. 코호트 구성이 바뀌면 같은 곡도 값이
         달라집니다. 규칙이 {data.rules.length}건뿐이라 여기 안 걸린 곡이 “해당 없음”을 뜻하지
         않습니다.
       </p>
@@ -490,7 +490,7 @@ function Tags({ data, title }: { data: TagsTunableData; title?: string }) {
       )}
       {lowerBound > 0 && (
         <p className="mt-2 text-xs leading-relaxed text-[var(--muted)]">
-          ⚠ {lowerBound}곡은 곡 수가 <b>하한</b>입니다. 태깅 당시 상위 라벨만 저장돼, 임계를 넘는 악기가
+          ⚠ {lowerBound}곡은 곡 수가 <b className="font-extrabold">하한</b>입니다. 태깅 당시 상위 라벨만 저장돼, 임계를 넘는 악기가
           더 있어도 세지 못합니다. 임계를 올리면 이 수가 줄어듭니다.
         </p>
       )}
@@ -576,7 +576,7 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
           className="accent-[var(--series)]"
           aria-label={knob?.label ?? "기준"}
         />
-        <span className="tabular-nums font-medium">{threshold}팀+</span>
+        <span className="tabular-nums font-extrabold">{threshold}팀+</span>
         <span className="text-[var(--muted)]">
           개척 시장 <b className="tabular-nums text-[var(--ink)]">{provenIdx.length}</b>개국
           {rowIdx.length ? ` · ${matrix.rows[rowIdx[0]]} 미개척 ${topGap}개국` : ""}
@@ -595,7 +595,7 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
                   <th
                     key={j}
                     scope="col"
-                    className="px-2 pb-1 text-center text-xs font-normal text-[var(--muted)]"
+                    className="px-2 pb-1 text-center text-xs font-light text-[var(--muted)]"
                   >
                     {matrix.cols[j]}
                   </th>
@@ -605,7 +605,7 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
             <tbody>
               {rowIdx.map((i) => (
                 <tr key={i}>
-                  <th scope="row" className="pr-3 text-left font-normal">
+                  <th scope="row" className="pr-3 text-left font-light">
                     <div
                       className="max-w-[160px] truncate text-xs text-[var(--ink-secondary)]"
                       title={matrix.rows[i]}
@@ -652,7 +652,7 @@ function Whitespace({ data, title }: { data: WhitespaceTunableData; title?: stri
         {tip.datum && (
           <>
             <div
-              className={`font-medium ${tip.datum.gap ? "text-[var(--good)]" : "text-[var(--ink)]"}`}
+              className={`font-extrabold ${tip.datum.gap ? "text-[var(--good)]" : "text-[var(--ink)]"}`}
             >
               {tip.datum.text}
             </div>

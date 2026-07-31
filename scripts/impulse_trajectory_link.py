@@ -167,21 +167,36 @@ def report(records: list[tuple[Path, dict[str, Any]]]) -> str:
         unmatched += len(orphan)
         if not charted:
             continue
-        lines += [f"## {rec['id']} (차트 사실 {len(charted)}건 · 후보 {len(cands)}쌍)", "",
-                  "| 곡 | 진입 | 셀 | 셀 날짜 | 날짜 | 시장 |", "|---|---|---|---|---|---|"]
+        # 확정된 링크는 원장이 정본이다. 대조표가 후보만 보이면 이 문서를 여는 사람이
+        # **무엇이 결정됐는지** 알 수 없다.
+        confirmed = {(c.get("cell"), r)
+                     for c in rec.get("trajectory") or []
+                     for r in c.get("chart_evidence_refs") or []}
+        n_ok = len([c for c in cands if (c["cell"], c["ref"]) in confirmed])
+        lines += [f"## {rec['id']} (차트 사실 {len(charted)}건 · 후보 {len(cands)}쌍 · 확정 {n_ok}쌍)", "",
+                  "| 곡 | 진입 | 셀 | 셀 날짜 | 날짜 | 시장 | 확정 |",
+                  "|---|---|---|---|---|---|---|"]
         for c in cands:
             d = c["date"]
             rel = d["relation"] if d["months"] in (0, None) else f"{d['relation']} {d['months']}개월"
             mk = "🔴 불일치" if c["market"]["mismatch"] else "ok"
             flagged += bool(c["market"]["mismatch"])
+            ok = "✅" if (c["cell"], c["ref"]) in confirmed else ""
             lines.append(f"| {c['artist']} - {_core_title(c['title'])} | {c['entry_date']} | "
-                         f"`{c['cell']}` | {c['cell_date']} | {rel} | {mk} |")
+                         f"`{c['cell']}` | {c['cell_date']} | {rel} | {mk} | {ok} |")
         for e in orphan:
             lines.append(f"| {e['artist']} - {_core_title(e['title'])} | {e.get('entry_date')} | "
-                         f"**후보 없음** | | | |")
+                         f"**후보 없음** | | | | |")
         lines.append("")
+    total_confirmed = sum(
+        len(c.get("chart_evidence_refs") or [])
+        for _, rec in records for c in rec.get("trajectory") or []
+    )
     lines += ["## 요약", "",
               f"- 차트 사실 **{total}건** · 원장이 언급하지 않아 후보가 없는 것 **{unmatched}건**",
+              (f"- **확정된 링크 {total_confirmed}쌍.** 확정 근거는 쌍마다 "
+               "`data/research/genre-impulse/chart_links.confirm.json`의 `_결정근거`에 있다. "
+               "`confirm`을 false로 되돌리고 `--apply`를 다시 돌리면 지워진다"),
               (f"- 🔴 시장 불일치 후보 **{flagged}쌍** — 미국 차트 사실이 한국/일본 시장 셀에 걸린 것. "
                "**막지 않았다**: 시점이 겹치는 것이 우연이 아닐 수 있고, 그 판단은 도메인 몫이다."),
               ("- ⚠ 날짜 차이가 곧 오류는 아니다. 실측 예: njs `origin-scene-revival`(2016-11)이 "

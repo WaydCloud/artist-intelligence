@@ -86,7 +86,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Tyla|Water"
+          ]
         },
         {
           "cell": "kr-underground",
@@ -570,7 +572,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Pop Smoke|Dior"
+          ]
         },
         {
           "cell": "origin-mainstream-uk",
@@ -846,7 +850,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|FIFTY FIFTY|Cupid"
+          ]
         },
         {
           "cell": "kr-industry-standardization",
@@ -1423,7 +1429,10 @@
           ],
           "certainty": "매우 높음",
           "certaintyNote": "빌보드 차트 원기록",
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Drake|Sticky",
+            "billboard-hot100|Lil Uzi Vert|Just Wanna Rock"
+          ]
         },
         {
           "cell": "kr-underground",
@@ -1706,7 +1715,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Major Lazer|Lean On"
+          ]
         },
         {
           "cell": "global-mainstream-peak",
@@ -1720,7 +1731,10 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Justin Bieber|Sorry",
+            "billboard-hot100|Major Lazer|Cold Water"
+          ]
         },
         {
           "cell": "kr-first-adoption",
@@ -1967,7 +1981,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Bruno Mars|Finesse"
+          ]
         },
         {
           "cell": "origin-mainstream",
@@ -2239,7 +2255,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Daddy Yankee|Gasolina"
+          ]
         },
         {
           "cell": "global-mainstream",
@@ -2251,7 +2269,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Luis Fonsi|Despacito"
+          ]
         },
         {
           "cell": "global-streaming-dominance",
@@ -2580,7 +2600,9 @@
           ],
           "certainty": "높음",
           "certaintyNote": null,
-          "chartEvidenceRefs": []
+          "chartEvidenceRefs": [
+            "billboard-hot100|Jung Kook|Seven"
+          ]
         },
         {
           "cell": "kr-media-recognition",

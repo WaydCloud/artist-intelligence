@@ -5,12 +5,13 @@
       {
         "ref": "billboard-hot100|Tyla|Water",
         "cell": "global-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Tyla - Water",
         "_진입": "2023-10-14",
         "_셀날짜": "2023-10",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 자기 근거로 이 차트를 인용한다(Hot 100 #67 데뷔 → 피크 #7). 피크 7위 일치"
       },
       {
         "ref": "billboard-hot100|Tyla|Water",
@@ -20,31 +21,34 @@
         "_진입": "2023-10-14",
         "_셀날짜": "미도달",
         "_날짜": "대조 불가",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀 주장은 '국내 상위권 확인 불가'다. 미국 차트 진입은 그 주장의 근거가 아니다"
       }
     ],
     "drill": [
       {
         "ref": "billboard-hot100|Pop Smoke|Dior",
         "cell": "origin-mainstream-us",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Pop Smoke - Dior",
         "_진입": "2020-02-29",
         "_셀날짜": "2019~2020",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Dior Hot 100 22위'를 근거로 든다. 우리 데이터도 22위로 일치"
       }
     ],
     "easy-listening": [
       {
         "ref": "billboard-hot100|FIFTY FIFTY|Cupid",
         "cell": "global-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "FIFTY FIFTY - Cupid",
         "_진입": "2023-04-01",
         "_셀날짜": "2023-02",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 '최고 #17'을 근거로 든다. 우리 데이터도 17위로 일치"
       },
       {
         "ref": "billboard-hot100|ILLIT|Magnetic",
@@ -54,19 +58,21 @@
         "_진입": "2024-04-20",
         "_셀날짜": "2024-03",
         "_날짜": "셀이 이름",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀 주장은 '문법 복제 논쟁'이라는 국내 담론이다. 미국 차트 진입이 논쟁을 증거하지 않는다"
       }
     ],
     "jersey-club": [
       {
         "ref": "billboard-hot100|Drake|Sticky",
         "cell": "origin-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Drake - Sticky",
         "_진입": "2022-07-02",
         "_셀날짜": "2022-06",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Sticky Hot 100 톱20'을 근거로 든다. 실제 피크는 6위로 원장 기술보다 높다"
       },
       {
         "ref": "billboard-hot100|Lil Uzi Vert|Just Wanna Rock",
@@ -76,17 +82,19 @@
         "_진입": "2022-10-29",
         "_셀날짜": "2022-09~2022-11",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀 주장은 안무 챌린지·리믹스 포맷 확산이다. 차트 진입은 같은 곡의 다른 사실이고 그 사실은 origin-mainstream 셀이 이미 근거로 삼았다"
       },
       {
         "ref": "billboard-hot100|Lil Uzi Vert|Just Wanna Rock",
         "cell": "origin-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Lil Uzi Vert - Just Wanna Rock",
         "_진입": "2022-10-29",
         "_셀날짜": "2022-06",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Just Wanna Rock Hot 100 10위'를 근거로 든다. 일치"
       },
       {
         "ref": "billboard-hot100|NewJeans|OMG",
@@ -96,7 +104,8 @@
         "_진입": "2023-01-28",
         "_셀날짜": "2022-12~2023-01",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀 주장은 국내 틱톡 챌린지이고 셀 스스로 '국내 수치 미확보'라고 적었다. 미국 차트로 메울 수 없다"
       },
       {
         "ref": "billboard-hot100|NewJeans|Ditto",
@@ -106,7 +115,8 @@
         "_진입": "2023-01-21",
         "_셀날짜": "2022-12~2023-01",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "위와 같다"
       },
       {
         "ref": "billboard-hot100|NewJeans|Ditto",
@@ -116,39 +126,43 @@
         "_진입": "2023-01-21",
         "_셀날짜": "2022-12",
         "_날짜": "셀이 이름",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "🔴 문서화된 함정 그대로다. 셀은 멜론·써클을 근거로 든다. 미국 차트 진입은 한국 주류화가 아니라 미국 도달이다"
       }
     ],
     "moombahton-tropical": [
       {
         "ref": "billboard-hot100|Justin Bieber|Sorry",
         "cell": "global-mainstream-peak",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Justin Bieber - Sorry",
         "_진입": "2015-11-14",
         "_셀날짜": "2015-09~2016-08",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Sorry Hot 100 1위'를 근거로 든다. 일치"
       },
       {
         "ref": "billboard-hot100|Major Lazer|Cold Water",
         "cell": "global-mainstream-peak",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Major Lazer - Cold Water",
         "_진입": "2016-08-13",
         "_셀날짜": "2015-09~2016-08",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Cold Water Hot 100 2위 데뷔'를 근거로 든다. 일치"
       },
       {
         "ref": "billboard-hot100|Major Lazer|Lean On",
         "cell": "global-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Major Lazer - Lean On",
         "_진입": "2015-04-25",
         "_셀날짜": "2014-12~2015-08",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Lean On Hot 100 4위'를 근거로 든다. 일치"
       },
       {
         "ref": "billboard-hot100|Kygo|Firestone",
@@ -158,7 +172,8 @@
         "_진입": "2015-10-03",
         "_셀날짜": "2014-12~2015-08",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀은 Firestone을 발매일로만 인용하고 차트 성적을 근거로 들지 않는다. 게다가 진입(2015-10)이 셀 구간(~2015-08) 밖이라 붙이면 셀의 날짜 주장이 흐려진다"
       }
     ],
     "njs": [
@@ -170,17 +185,19 @@
         "_진입": "2018-01-13",
         "_셀날짜": "2016-11",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 말하는 것은 2016-11 앨범 수록곡이고 이 차트 사실은 2018-01 리믹스 싱글이다. 다른 사건이며 둘 다 정확하다"
       },
       {
         "ref": "billboard-hot100|Bruno Mars|Finesse",
         "cell": "origin-viral",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Bruno Mars - Finesse",
         "_진입": "2018-01-13",
         "_셀날짜": "2018-01",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 말하는 사건은 2018-01 리믹스이고 이 차트 진입(2018-01-13)이 바로 그것이다"
       },
       {
         "ref": "billboard-hot100|Bruno Mars|Finesse",
@@ -190,19 +207,21 @@
         "_진입": "2018-01-13",
         "_셀날짜": "2018-04",
         "_날짜": "셀이 늦음",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀 주장은 EXID 'Lady'라는 한국 씬 사건이다. 미국 차트가 증거하지 않는다"
       }
     ],
     "reggaeton-dembow": [
       {
         "ref": "billboard-hot100|Luis Fonsi|Despacito",
         "cell": "global-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Luis Fonsi - Despacito",
         "_진입": "2017-02-04",
         "_셀날짜": "2017-05",
         "_날짜": "셀이 늦음",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Hot 100 1위 16주'를 근거로 든다. 피크 1위 일치. 진입일(2017-02)이 셀 날짜(2017-05)보다 이른 것은 원곡 진입과 리믹스 정점의 차이이며 셀 날짜 재검토 대상"
       },
       {
         "ref": "billboard-hot100|Luis Fonsi|Despacito",
@@ -212,7 +231,8 @@
         "_진입": "2017-02-04",
         "_셀날짜": "2017 중반",
         "_날짜": "대조 불가",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀은 가온 국제차트 7위를 근거로 든다. 미국 차트가 아니다"
       },
       {
         "ref": "billboard-hot100|J Balvin|Mi Gente",
@@ -222,17 +242,19 @@
         "_진입": "2017-07-22",
         "_셀날짜": "2017-06~2020-12",
         "_날짜": "포함",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀 주장은 'Spotify 글로벌 1위'다. Hot 100 진입은 다른 차트이고 그 주장을 뒷받침하지 않는다"
       },
       {
         "ref": "billboard-hot100|Daddy Yankee|Gasolina",
         "cell": "origin-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Daddy Yankee - Gasolina",
         "_진입": "2004-11-13",
         "_셀날짜": "2004-07",
         "_날짜": "셀이 이름",
-        "_시장불일치": false
+        "_시장불일치": false,
+        "_결정근거": "셀이 'Gasolina Hot 100 #32'를 근거로 든다. 일치"
       }
     ],
     "ukg-dnb": [
@@ -244,17 +266,19 @@
         "_진입": "2023-07-29",
         "_셀날짜": "2023-07",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀 주장은 '명시적 UKG 귀속'이고 근거는 프로듀서 인터뷰다. 차트 성적은 장르 귀속을 증거하지 않는다"
       },
       {
         "ref": "billboard-hot100|Jung Kook|Seven",
         "cell": "kr-mainstream",
-        "confirm": false,
+        "confirm": true,
         "_곡": "Jung Kook - Seven",
         "_진입": "2023-07-29",
         "_셀날짜": "2023-07",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "🔴 시장 불일치 표시가 붙었으나 **셀이 스스로 'Hot 100 1위 데뷔'를 근거로 인용한다**. 표시는 자동 배정을 막으려는 것이고 여기서는 셀 본인이 그 차트를 근거로 삼았다. 피크 1위 일치"
       },
       {
         "ref": "billboard-hot100|NewJeans|Super Shy",
@@ -264,7 +288,8 @@
         "_진입": "2023-07-22",
         "_셀날짜": "2023-07",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "위와 같다"
       },
       {
         "ref": "billboard-hot100|NewJeans|Super Shy",
@@ -274,8 +299,10 @@
         "_진입": "2023-07-22",
         "_셀날짜": "2023-07",
         "_날짜": "포함",
-        "_시장불일치": true
+        "_시장불일치": true,
+        "_결정근거": "셀은 Super Shy를 'Circle·멜론 1위'로 든다. 그 셀의 Hot 100 인용은 Seven에 대한 것이지 Super Shy가 아니다"
       }
     ]
-  }
+  },
+  "_결정": "2026-07-31 위임 결정(D-051 → D-053). 기준: 그 곡이 언급됐는가가 아니라 이 차트 사실이 그 셀의 주장을 뒷받침하는가. 각 행의 _결정근거 참조. 되돌리려면 confirm을 false로 바꾸고 --apply를 다시 돌린다"
 }

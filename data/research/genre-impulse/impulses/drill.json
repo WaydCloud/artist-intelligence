@@ -43,7 +43,10 @@
       "sources": [
         "https://www.billboard.com/pro/pop-smoke-new-lp-chart-billboard-hot-100/"
       ],
-      "certainty": "높음"
+      "certainty": "높음",
+      "chart_evidence_refs": [
+        "billboard-hot100|Pop Smoke|Dior"
+      ]
     },
     {
       "cell": "origin-mainstream-uk",

@@ -3,27 +3,18 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import type { Report } from "@/lib/report";
+import { useTheme } from "@/lib/useTheme";
 import { BrandBackdrop } from "@/components/BrandBackdrop";
 import { ReportView } from "@/components/ReportView";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function Dashboard({ reports }: { reports: Report[] }) {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  // 테마 처리는 LABS와 **한 벌**을 쓴다(lib/useTheme). 두 벌이면 한쪽에서 고른 테마가
+  // 다른 쪽으로 안 넘어간다.
+  const [theme, setTheme] = useTheme();
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    const forced = new URLSearchParams(window.location.search).get("theme");
-    const stored = localStorage.getItem("theme");
-    const initial =
-      forced === "dark" || forced === "light"
-        ? forced
-        : stored === "dark" || stored === "light"
-          ? stored
-          : window.matchMedia("(prefers-color-scheme: dark)").matches
-            ? "dark"
-            : "light";
-    setTheme(initial);
-
     // deep-link a report by moduleId in the hash (#fandom-pulse) — shareable links
     const hash = decodeURIComponent(window.location.hash.replace("#", ""));
     const idx = reports.findIndex((r) => r.moduleId === hash);
@@ -34,11 +25,6 @@ export function Dashboard({ reports }: { reports: Report[] }) {
     setActive(i);
     window.history.replaceState(null, "", `#${reports[i].moduleId}`);
   }
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-  }, [theme]);
 
   const report = reports[active];
   const dark = theme === "dark";

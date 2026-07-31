@@ -1,0 +1,2745 @@
+{
+  "impulses": [
+    {
+      "id": "amapiano",
+      "nameKo": "아마피아노",
+      "nameEn": "Amapiano",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "in-progress",
+        "notes": "미국 외 발원 경로(남아공→아프리카 대륙→글로벌 허브→한국). 한국 주류 미도달 진행형 — 미도달 자체가 데이터. 한국은 아마피아노를 독립 장르가 아니라 질감으로 부분 채용하는 단계(아프로 계열 여름송 패키지·유닛/솔로 B-side 배치). 타이틀곡 전면 채용 여부가 다음 관측 포인트",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "SA",
+        "scene": "남아공 하우텡주(프리토리아·요하네스버그 타운십) — 콰이토·딥하우스·바카디 하우스 계보, log drum 시그니처"
+      },
+      "limits": [
+        "기원 시점은 남아공 내에서도 논쟁적(2012 vs 2016) — 월 특정 불가",
+        "'Sticky' 등 아프로비츠/아마피아노/알테 혼합 곡의 분류는 리뷰어마다 다름 — '명시'와 '환기'를 구분해 표기",
+        "'한국 주류 미도달'은 검색 가능 차트 기준 — 전수 조사 아님, 멜론 원자료 미조회",
+        "'Push Back'은 교차 검증에서 ENHYPEN 귀속 반증 — 신인 걸그룹 AtHeart 데뷔 EP 수록곡(아마피아노·아프로비트 귀속은 유효). Spell의 곡 단위 디지털 실적 미확인",
+        "서울 클럽 씬 시점(2023-10)은 SNS 단편 증거 — 과소측정 방향 편향"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene",
+          "date": "2012~2016",
+          "datePrecision": "range",
+          "evidence": "하우텡 2010년대 중반 첫 청취 보고(기원지 논쟁 존재·월 특정 불가). MFR Souls 명명, Kabza De Small·DJ Maphorisa 대중화",
+          "sources": [
+            "https://www.redbull.com/za-en/amapiano-history",
+            "https://en.wikipedia.org/wiki/Amapiano"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream",
+          "date": "2019",
+          "datePrecision": "year",
+          "evidence": "남아공 차트·라디오 장악. Scorpion Kings 결성, Kabza 2020 앨범 남아공 Apple Music 역대 최다 스트리밍",
+          "sources": [
+            "https://www.rollingstone.com/music/music-features/amapiano-genre-house-south-africa-1191523/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral",
+          "date": "2020-07~2021-10",
+          "datePrecision": "range",
+          "evidence": "2020-07 'Amapiano blows up on TikTok' 보도(최초 플랫폼 신호) → 2021-10 Uncle Waffles 'Adiwele' 클립 48시간 3백만 뷰·Drake 리포스트(결정적)",
+          "sources": [
+            "https://www.pressreader.com/south-africa/the-star-south-africa-early-edition/20200716/282033329500482",
+            "https://www.kaya959.co.za/watch-drake-follows-uncle-waffles-as-the-people-are-burning-adiwele-video-hits-over-3-million-views/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-scene",
+          "date": "2021-02",
+          "datePrecision": "month",
+          "evidence": "Focalistic × Davido 'Ke Star Remix' 나이지리아 iTunes 1위 — 아프로비츠 파이프라인 합류. 2022 Uncle Waffles 런던 매진·Beatport 장르 등재",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Ke_Star",
+            "https://www.news24.com/truelove/celebrity/uncle-waffles-rise-to-international-stardom-from-going-viral-in-soweto-to-sold-out-shows-in-europe-20221011"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2023-10",
+          "datePrecision": "month",
+          "evidence": "Tyla 'Water'(2023-07-28) 틱톡 챌린지 → Hot 100 #67 데뷔(2023-10) → 피크 #7(2024-01) → 초대 그래미 Best African Music Performance(2024-02)",
+          "sources": [
+            "https://www.billboard.com/music/rb-hip-hop/tyla-water-song-hit-global-billboard-cover-1235642263/",
+            "https://www.grammy.com/news/tyla-wins-first-best-african-music-performance-award-2024-grammys"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-underground",
+          "date": "2023-08~2023-10",
+          "datePrecision": "range",
+          "evidence": "교차 검증으로 앞당김 — 이태원 케이크샵 DJ CO.KR '요즘은 남아공에서 시작한 아마피아노 장르를 자주 튼다' 인터뷰(2023-08-30, 얼루어) → GEMINI 《Love Sick》(2023-09-22), Kohway × Niaeh 'Run Away'(2023)",
+          "sources": [
+            "https://www.allurekorea.com/2023/08/30/behind/",
+            "https://envimedia.co/8-artists-in-the-korean-music-scene-who-tapped-into-afrobeats-in-2023/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-idol-bside",
+          "date": "2024-04",
+          "datePrecision": "month",
+          "evidence": "SEVENTEEN 퍼포먼스팀 'Spell'(2024-04-29 수록, 명시적 아마피아노 — 보도자료 기반 국내 매체 일제 명시로 격상)",
+          "sources": [
+            "https://www.soompi.com/article/1661938wpp/watch-seventeens-performance-team-casts-an-alluring-spell-in-new-mv",
+            "https://plus.hankyung.com/apps/newsinside.view?aid=2024051751214"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "미도달",
+          "datePrecision": "unreached",
+          "evidence": "2026-07 기준 명시적 아마피아노 곡의 국내 상위권 확인 불가. 경계 사례: KISS OF LIFE 'Sticky'(2024-07, 아프로비츠 골격+아마피아노 환기) Circle 주간 #3·멜론 TOP100 최고 #9(차트 구분 미상 — '주간' 단정 금지). Tyla 'Water' 국내 스포티파이 미진입",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Sticky_(Kiss_of_Life_song)",
+            "https://kworb.net/spotify/track/5aIVCx5tnk0ntmdiinnYvw.html"
+          ],
+          "certainty": "불가능한 수준",
+          "certaintyNote": "해제 조건: 멜론 원자료 접근·전수 조사 시 재평가 — 부재 확인은 불완전(검색 가능 차트 기준, 전수 조사 아님)",
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Tyla|Water",
+          "chart": "billboard-hot100",
+          "artist": "Tyla",
+          "title": "Water",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2023-10-14",
+          "peakPosition": 7,
+          "weeksOnChart": 29,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|KAI|Off And Away",
+          "chart": "billboard-hot100",
+          "artist": "KAI",
+          "title": "Off And Away",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|KISS OF LIFE|Sticky",
+          "chart": "billboard-hot100",
+          "artist": "KISS OF LIFE",
+          "title": "Sticky",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Kabza De Small|Abalele",
+          "chart": "billboard-hot100",
+          "artist": "Kabza De Small",
+          "title": "Abalele",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SEVENTEEN|Spell",
+          "chart": "billboard-hot100",
+          "artist": "SEVENTEEN",
+          "title": "Spell",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Uncle Waffles|Tanzania",
+          "chart": "billboard-hot100",
+          "artist": "Uncle Waffles",
+          "title": "Tanzania",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Young Stunna|Adiwele",
+          "chart": "billboard-hot100",
+          "artist": "Young Stunna",
+          "title": "Adiwele",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "citypop",
+      "nameKo": "시티팝 리바이벌",
+      "nameEn": "City pop revival",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "algorithmic-excavation",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "특이 경로 — 알고리즘 발굴: 살아있는 씬의 수출이 아니라 유튜브 추천이 30년 묵은 죽은 카탈로그를 되살린 사후(死後) 확산. 구조적 특이점 3: ① 확산 단위가 아티스트/씬이 아닌 카탈로그 ② 비공식 업로드가 정본(권리자 워너뮤직재팬은 4년 후행) ③ 한국 수용이 순수 다운스트림이 아니라 자생 뉴트로 흐름과의 병행 합류. 확산 종착지가 씬 형성이 아닌 아이돌 콘셉트 풀 편입",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "JP",
+        "scene": "일본 1970s 말~1980s 도쿄 버블기 팝/AOR 카탈로그"
+      },
+      "limits": [
+        "장르 정의 모호성(최대 한계) — '시티팝'은 당대 일본에서도 사후 소급된 무드/시대 태그이며 한국에선 마케팅 라벨로 과확장: 셀 판정이 분류 기준에 따라 ±1년 이상 흔들림('Square'는 인접 표기, 'Boat'도 R&B 시각 유력)",
+        "조회수 원자료 유실 — 원 바이럴 영상 저작권 삭제(2019, 2021)로 시계열 소실, 스파이크 시점은 제3자 사후 분석 의존",
+        "유빈·선미의 가온 주간 피크 미확인 · Saint Pepsi 발매 월은 교차 검증으로 확정(2013-05-31)됐으나 잔여 세부 미확인",
+        "인과 vs 병행 — 한국 초기 채용이 유튜브 바이럴의 결과인지 자생 뉴트로와의 동시 발생인지 제작 의사결정 수준 검증 불가: 병행 합류 가설 채택(반박 가능)",
+        "한국 내 유튜브/커뮤니티 정량 신호 미확보 — 미디어 보도 시점(2019-07)을 대리 지표로 사용"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-catalog",
+          "date": "1984~1985",
+          "datePrecision": "range",
+          "evidence": "'Plastic Love' 1984 녹음/1985-03 싱글 — 오리콘 86위·약 1만 장, 당대엔 비히트",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Plastic_Love"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-niche-scene",
+          "date": "2013-05",
+          "datePrecision": "month",
+          "evidence": "✅ 교차 검증 확정 — Saint Pepsi 『Hit Vibes』(2013-05-31, KEATS//COLLECTIVE) 퓨처펑크 분기, Macross 82-99 『ネオ東京』(2013-11) 시티팝 샘플링 관습화",
+          "sources": [
+            "https://saintpepsi.bandcamp.com/album/hit-vibes",
+            "https://future-funk.fandom.com/wiki/History"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral-trigger",
+          "date": "2017-07",
+          "datePrecision": "month",
+          "evidence": "'Plastic Lover' 계정의 8분 리믹스판 업로드(2017-07-05, 삭제 전 5,500만+ 뷰)",
+          "sources": [
+            "https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral",
+          "date": "2018-03~2018-04",
+          "datePrecision": "range",
+          "evidence": "알고리즘 바이럴 임계 — 조회 급증 구간 2018-03-17~04-05로 추적('알고리즘이 작동한 시기')",
+          "sources": [
+            "https://pages.vassar.edu/musicalurbanism/2019/06/05/the-curious-case-of-mariya-takeuchis-plastic-love-guest-blog-by-thomas-calkins/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2019-05",
+          "datePrecision": "month",
+          "evidence": "상업 주류화(리이슈) — Light in the Attic 『Pacific Breeze』(2019-05-03) + 워너 공식 쇼트 MV(2019-05-18)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Pacific_Breeze:_Japanese_City_Pop,_AOR_and_Boogie_1976%E2%80%931986"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral-2nd",
+          "date": "2020-10~2020-12",
+          "datePrecision": "range",
+          "evidence": "마츠바라 미키 '真夜中のドア'(1979) — Rainych 커버(2020-10-29) 기점 틱톡 확산",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Mayonaka_no_Door"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-reinstitution",
+          "date": "2020-11~2021-11",
+          "datePrecision": "range",
+          "evidence": "일본 역수입 주류(권리자 공인) — 공식 스트리밍(2020-11) → 바이닐 재발매 오리콘 5위(2021-11), 37년 만의 톱10",
+          "sources": [
+            "https://kotaku.com/decades-later-mariya-takeuchi-s-plastic-love-is-a-top-1848081072"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-underground",
+          "date": "2017-11",
+          "datePrecision": "month",
+          "evidence": "죠지 'Boat'(2017-11-17) — 시티팝 무드 R&B(분류는 사후 부여 성격), 바이럴 임계 이전의 자생 신호",
+          "sources": [
+            "https://www.melon.com/album/detail.htm?albumId=10111920"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-idol-concept",
+          "date": "2018-06",
+          "datePrecision": "month",
+          "evidence": "유빈 '숙녀'(2018-06-05, 앨범 '도시여자') — '80s 신스 시티팝' 명시. ✅ 교차 검증: 가온 주간 디지털 톱100 미진입(Domestic Digital 96위 피크) → 콘셉트 선행 신호로는 유효하나 상업 성과 사례로는 사용 금지",
+          "sources": [
+            "https://www.allkpop.com/article/2018/05/check-out-the-tracklist-for-yubins-1st-solo-album-city-woman",
+            "https://en.wikipedia.org/wiki/Kim_Yu-bin"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-scene-institutionalization",
+          "date": "2018-08",
+          "datePrecision": "month",
+          "evidence": "네이버 온스테이지 '디깅클럽서울' — 죠지의 김현철 '오랜만에'(1989) 리메이크 등",
+          "sources": [
+            "https://music.bugs.co.kr/album/20194534"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-viral",
+          "date": "2019-07",
+          "datePrecision": "month",
+          "evidence": "담론 폭발 — 주류 미디어 '시티팝 열풍' 보도 집중, 플랫폼 기획전",
+          "sources": [
+            "https://www.asiae.co.kr/article/2019070122453693202"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2019-12~2020-06",
+          "datePrecision": "range",
+          "evidence": "백예린 'Square (2017)'(2019-12) 멜론 1위 — 시티팝 '인접'; 선미 '보라빛 밤'(2020-06) 시티팝 표방 상위권 석권",
+          "sources": [
+            "https://www.sedaily.com/NewsVIew/1Z488EBI9N"
+          ],
+          "certainty": "중간",
+          "certaintyNote": "차트 높음/분류 낮음 — 'Square'는 인접 표기",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-decline",
+          "date": "2021~2022",
+          "datePrecision": "range",
+          "evidence": "레트로 담론이 8090 뉴트로→Y2K로 이동, 시티팝은 여름 시즌 관습으로 잔존",
+          "sources": [
+            "https://www.wkorea.com/2021/08/04/retro-guide-vol-1/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Mariya Takeuchi|Plastic Love",
+          "chart": "billboard-hot100",
+          "artist": "Mariya Takeuchi",
+          "title": "Plastic Love",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Miki Matsubara|Mayonaka no Door / Stay With Me",
+          "chart": "billboard-hot100",
+          "artist": "Miki Matsubara",
+          "title": "Mayonaka no Door / Stay With Me",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SUNMI|pporappippam",
+          "chart": "billboard-hot100",
+          "artist": "SUNMI",
+          "title": "pporappippam",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Tatsuro Yamashita|Ride on Time",
+          "chart": "billboard-hot100",
+          "artist": "Tatsuro Yamashita",
+          "title": "Ride on Time",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|YUBIN|Lady",
+          "chart": "billboard-hot100",
+          "artist": "YUBIN",
+          "title": "Lady",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Yerin Baek|Square (2017)",
+          "chart": "billboard-hot100",
+          "artist": "Yerin Baek",
+          "title": "Square (2017)",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|george|Boat",
+          "chart": "billboard-hot100",
+          "artist": "george",
+          "title": "Boat",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|유키카|네온",
+          "chart": "billboard-hot100",
+          "artist": "유키카",
+          "title": "네온",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "drill",
+      "nameKo": "드릴",
+      "nameEn": "Drill",
+      "version": "1.0.0",
+      "updated": "2026-07-30",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "element",
+        "notes": "요소 차용 모드(D-033 보완⑤ 재분류) — 씬 정착·주류 차단형: 언더→SMTM(주류 미디어)까지 두 층은 뚫었고, 음원차트 대중·정체성화 층에서 멈춤. 하이퍼팝과 달리 미국·영국 싱글차트 정상급까지 실제로 갔다('임펄스 강도 부족'으로 설명 불가한 더 순도 높은 사례 — 임펄스 강도는 도달의 필요조건도 충분조건도 아니다). '주류 차단' 판정은 Future Perfect 확인 후 '디지털 차트·정체성화 층 차단'으로 정밀화. 차단 요인(가설): ① 서사 진정성의 번역 불가(드릴의 상품은 비트가 아니라 갱 폭력의 실화성 — 빼면 이미 트랩으로 공급되던 '어두운 808 비트'로 환원) ② 주류 차트의 장르 필터(SMTM11에서 노출[드릴 래퍼]과 차트 히트[비드릴 곡]가 분리) ③ 아이돌 시스템 리스크 부적합 ④ 선점 장르(싱잉랩·이모힙합)의 대체 효과",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "US/UK",
+        "scene": "시카고 드릴(2012~, Chief Keef) → UK 드릴(2012~15 브릭스턴 발원, 2015~ 본격화) → 뉴욕(브루클린) 드릴(2019~20, Pop Smoke가 UK 프로듀서 808Melo 수입)"
+      },
+      "limits": [
+        "부정 명제('타이틀/차트인 부재')는 전수 검증 불가 — 반례 발견 시 즉시 갱신(Future Perfect 발견으로 실제 한 번 뒤집힘)",
+        "드릴 귀속 다수가 출처 1개(Hypebeast KR 또는 팬위키) 의존",
+        "국내 차트 원자료 미접근(멜론 MCP 미인증) — 2차 출처·커뮤니티 집계 포함(창모 공식 주간 피크 미확정)",
+        "프랑스·호주 드릴 확산, UK 드릴 검열 논란은 통설 인용(URL 미확보 — 매우 낮음)",
+        "슬라이딩 808 등 스템 단위 판정 불가 — A2 오디오 분석·스템 분리와 직결되는 공백"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene-chicago",
+          "date": "2012",
+          "datePrecision": "year",
+          "evidence": "시카고 드릴(Chief Keef)",
+          "sources": [
+            "https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-uk",
+          "date": "2012~2015",
+          "datePrecision": "range",
+          "evidence": "UK 드릴 — 브릭스턴 발원(2012~15), 2015~ 본격화",
+          "sources": [
+            "https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream-us",
+          "date": "2019~2020",
+          "datePrecision": "range",
+          "evidence": "브루클린 드릴 — Pop Smoke 'Dior' Hot 100 22위·'For the Night' 6위, 유작 앨범 빌보드 200 1위, 2020년 Hot 100 진입곡 수 전체 4위",
+          "sources": [
+            "https://www.billboard.com/pro/pop-smoke-new-lp-chart-billboard-hot-100/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream-uk",
+          "date": "2020~",
+          "datePrecision": "range",
+          "evidence": "UK 주류 정상 — Headie One 『Edna』 UK 앨범 1위, Central Cee UK 2위",
+          "sources": [
+            "https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-diffusion",
+          "date": "2020년대",
+          "datePrecision": "range",
+          "evidence": "프랑스·호주 확산 — 통설 인용, 출처 미확보",
+          "sources": [],
+          "certainty": "매우 낮음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-hiphop-scene",
+          "date": "2020~2022",
+          "datePrecision": "range",
+          "evidence": "힙합 씬 실질 수용 — 창모 'Swoosh Flow'(🔄 교차 검증 정정: 창모×Paul Blanco 합작 믹스테이프 『BIPOLAR』(2020-06-03) 수록, 드릴 귀속 확인. 차트는 실시간 TOP100 최고 관측 66위, 공식 주간 피크 미확정)·'Beretta', 릴러말즈 'Selfish', Silkybois 'Bomaye'(유튜브 ~200만), Blase SMTM10 부상",
+          "sources": [
+            "https://www.topstarnews.net/news/articleView.html?idxno=801622",
+            "https://brunch.co.kr/@bbeans/34",
+            "https://ktvz.com/entertainment/cnn-style/2022/05/06/youve-heard-of-k-pop-now-its-time-for-k-drill/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-media-mainstream",
+          "date": "2022",
+          "datePrecision": "year",
+          "evidence": "SMTM11(2022)이 드릴 유행 정면 흡수 — 블라세·노윤하·칸·플리키뱅 등의 발판. 단 차트 층위 단절: 같은 SMTM11 안에서도 멜론 최상위(4위)는 이영지 'NOT SORRY' 등 비드릴 멜로딕 곡",
+          "sources": [
+            "https://namu.wiki/w/SHOW%20ME%20THE%20MONEY%2011"
+          ],
+          "certainty": "낮음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-idol-title",
+          "date": "2022-07",
+          "datePrecision": "month",
+          "evidence": "🔴 2차 조사에서 뒤집힘 — 명시적 드릴 타이틀곡 실존: ENHYPEN 'Future Perfect (Pass the MIC)'(2022-07, 시카고 드릴 명시·음악방송 3회 1위·앨범 빌보드 200 6위). 제작진 증언 확보: '드릴은 잘 알려지지 않은 장르라 기획 단계부터 고민'(BELIFT). 단 국내 디지털 차트 유의미 진입은 미확인이고 1회 실험 후 시그니처화하지 않음",
+          "sources": [
+            "https://magazine.weverse.io/article/view/612?lang=en",
+            "https://en.wikipedia.org/wiki/Manifesto:_Day_1"
+          ],
+          "certainty": "매우 높음",
+          "certaintyNote": "제작진 1차 증언(Weverse Magazine) — 아이돌 드릴 타이틀 첫 명시 사례",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "미도달",
+          "datePrecision": "unreached",
+          "evidence": "디지털 차트 대중 층 차단 — 창모 정규 2집은 한국힙합어워즈 4관왕이나 수록곡 최고 멜론 80위권(커뮤니티 집계 — 확실성 낮음). BABYMONSTER 'Batter Up'(2023)의 드릴 귀속은 2차 조사에서 기각 쪽(위키·NME·Bias List 전부 힙합/트랩 기술)",
+          "sources": [],
+          "certainty": "매우 낮음",
+          "certaintyNote": "부정 명제('차트인 부재')는 전수 검증 불가 — 반례 발견 시 즉시 갱신(실제로 아이돌 타이틀 층은 Future Perfect 발견으로 한 번 뒤집혔음)",
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Pop Smoke|Dior",
+          "chart": "billboard-hot100",
+          "artist": "Pop Smoke",
+          "title": "Dior",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2020-02-29",
+          "peakPosition": 22,
+          "weeksOnChart": 21,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Central Cee|Doja",
+          "chart": "billboard-hot100",
+          "artist": "Central Cee",
+          "title": "Doja",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|ENHYPEN|Future Perfect (Pass the MIC)",
+          "chart": "billboard-hot100",
+          "artist": "ENHYPEN",
+          "title": "Future Perfect (Pass the MIC)",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Headie One|Ain't It Different",
+          "chart": "billboard-hot100",
+          "artist": "Headie One",
+          "title": "Ain't It Different",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|STAYC|I WANT U BABY",
+          "chart": "billboard-hot100",
+          "artist": "STAYC",
+          "title": "I WANT U BABY",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Stray Kids|3RACHA",
+          "chart": "billboard-hot100",
+          "artist": "Stray Kids",
+          "title": "3RACHA",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|창모|Swoosh Flow",
+          "chart": "billboard-hot100",
+          "artist": "창모",
+          "title": "Swoosh Flow",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "easy-listening",
+      "nameKo": "이지리스닝",
+      "nameEn": "Easy listening (K-pop frame)",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "hybrid-endogenous",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "역방향 대조군 — 확산 방향이 한국 주류 → 글로벌. '이지리스닝' 프레임 자체가 서구에 대응물이 없는 한국 담론의 산물. 재료 층위의 글로벌 선행자는 PinkPantheress(2021-10, 경량·짧은 러닝타임·속삭임 보컬 문법), 2기(『Get Up』 2023)에는 Erika de Casier가 6곡 중 4곡 공동작곡. 공식·프레임 층위는 한국 — 250은 국내 언더 전자음악·『뽕』 출신, 시티팝·뉴트로·Y2K 국내 선행 흐름 위에서 작업",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "KR",
+        "scene": "혼성 내생 — 프레임과 공식은 내생(250 등 국내 언더 전자음악·국내 담론), 프로덕션 재료(UKG·저지/볼티모어 클럽·브레이크비트·리퀴드 DnB)는 영·미 클럽 언더그라운드산 부분 수입"
+      },
+      "limits": [
+        "'이지리스닝'은 장르가 아니라 사후 명명된 마케팅/평론 프레임 — 실체는 이질적(UKG·저지클럽·디스코팝·어쿠스틱 힙합·발라드). 임펄스 정의는 '맥시멀리즘 대비 저부하'라는 상대 위치로 해야 함",
+        "명명 기점은 교차 검증으로 해소 — 기점=어도어 데뷔 소개문(2022-07), 언론 최초 확인=디스패치 2022-08-08",
+        "원형을 아이브로 잡으면 내생성 강화, 뉴진스로 잡으면 해외 재료 의존 커짐 — '혼성 내생' 판정은 이 민감도 반영",
+        "'차트 상위 이지리스닝 비중' 정량은 곡 단위 분류 기준 선행 필요(분류 기준 자체가 원장 등재 대상)",
+        "TWS·아일릿 일본 성과 등 일부 미검증(매우 낮음 표기)",
+        "A2 본편(2026-07-31): 2021-10 앵커 코호트는 이 케이스(2023 주류화)의 동시대가 아니라 판정 유보 — 수용형 8곡 전 축 중앙은 비교 시점 오류일 수 있다. 2023 앵커 코호트 확보 후 재측(CASEBOOK §A2 본편)"
+      ],
+      "trajectory": [
+        {
+          "cell": "overseas-underground-material",
+          "date": "2021-10",
+          "datePrecision": "month",
+          "evidence": "해외 언더 선행(재료) — PinkPantheress 『To Hell with It』",
+          "sources": [
+            "https://en.wikipedia.org/wiki/To_Hell_with_It"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-underground",
+          "date": "2022-03",
+          "datePrecision": "month",
+          "evidence": "250 『뽕』 발매·국내 전자음악 씬(추정)",
+          "sources": [
+            "https://www.nylon.com/entertainment/newjeans-producer-250-kpop-trot-ppong-album"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream-entry",
+          "date": "2022-04",
+          "datePrecision": "month",
+          "evidence": "아이브 'LOVE DIVE' 멜론 1위, MAMA·MMA 올해의 노래 — 주류 진입(원형)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Love_Dive_(song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2022-07",
+          "datePrecision": "month",
+          "evidence": "뉴진스 데뷔 'Attention' 즉시 차트 석권 — 주류 확립",
+          "sources": [
+            "https://biz.heraldcorp.com/article/3289333"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-supplier-naming",
+          "date": "2022-07",
+          "datePrecision": "month",
+          "evidence": "담론 프레임화(명명) — 교차 검증으로 반증·앞당김: 어도어의 뉴진스 데뷔(2022-07-22) 공식 소개문('세련된 이지리스닝 팝')이 기점. 디스패치가 2022-08-08 이미 '2022년 유행 음악인 이지리스닝 팝' 지칭, 일반 언론 확산은 2023",
+          "sources": [
+            "https://www.dispatch.co.kr/2212299",
+            "https://www.bntnews.co.kr/article/view/bnt202209160060"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-chart-dominance",
+          "date": "2022-12",
+          "datePrecision": "month",
+          "evidence": "'Ditto' PAK(2022-12-26), 멜론 주간 1위 14주(사상 최장)",
+          "sources": [
+            "https://www.soompi.com/article/1569746wpp/newjeans-ditto-becomes-1st-song-in-melon-history-to-chart-at-no-1-for-10-consecutive-weeks"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2023-02",
+          "datePrecision": "month",
+          "evidence": "'OMG' Hot 100 #74; FIFTY FIFTY 'Cupid'(2023-02-24) 최고 #17 — 중소기획사발 글로벌 증명",
+          "sources": [
+            "https://www.billboard.com/music/chart-beat/fifty-fifty-cupid-hot-100-debut-1235293747/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-industry-standardization",
+          "date": "2023-05~2023-09",
+          "datePrecision": "range",
+          "evidence": "보이넥스트도어 데뷔(2023-05), RIIZE 'Get A Guitar'(2023-09) — 보이그룹까지 공식화",
+          "sources": [
+            "https://www.imaeil.com/page/view/2023100909594244883"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-saturation",
+          "date": "2024-03",
+          "datePrecision": "month",
+          "evidence": "문법 복제 논쟁(포화) — 아일릿 'Magnetic' 뉴진스 유사성 논란",
+          "sources": [
+            "https://www.allkpop.com/article/2024/05/music-industry-experts-discuss-whether-illit-is-a-copy-of-newjeans"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "jp-export",
+          "date": "2024-06",
+          "datePrecision": "month",
+          "evidence": "'Supernatural' 오리콘 데일리 1위 — 일본 역수출",
+          "sources": [
+            "https://www.nocutnews.co.kr/news/6165356"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-reversal",
+          "date": "2024-05~2024-10",
+          "datePrecision": "range",
+          "evidence": "반전(맥시멀 회귀) — 에스파 'Supernova'·'Armageddon'·'Whiplash' 3연속 히트",
+          "sources": [
+            "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-decline-discourse",
+          "date": "2025-03",
+          "datePrecision": "month",
+          "evidence": "쇠퇴 담론 공식화 — NMIXX 『Fe3O4: FORWARD』 호평, '어려운 노래 뜨나' 평론",
+          "sources": [
+            "https://www.sisain.co.kr/news/articleView.html?idxno=55418"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|FIFTY FIFTY|Cupid",
+          "chart": "billboard-hot100",
+          "artist": "FIFTY FIFTY",
+          "title": "Cupid",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-04-01",
+          "peakPosition": 17,
+          "weeksOnChart": 25,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|ILLIT|Magnetic",
+          "chart": "billboard-hot100",
+          "artist": "ILLIT",
+          "title": "Magnetic",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2024-04-20",
+          "peakPosition": 91,
+          "weeksOnChart": 1,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|IVE|LOVE DIVE",
+          "chart": "billboard-hot100",
+          "artist": "IVE",
+          "title": "LOVE DIVE",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|IVE|After LIKE",
+          "chart": "billboard-hot100",
+          "artist": "IVE",
+          "title": "After LIKE",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Hype Boy",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Hype Boy",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|PinkPantheress|Pain",
+          "chart": "billboard-hot100",
+          "artist": "PinkPantheress",
+          "title": "Pain",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|RIIZE|Get A Guitar",
+          "chart": "billboard-hot100",
+          "artist": "RIIZE",
+          "title": "Get A Guitar",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|TWS|plot twist",
+          "chart": "billboard-hot100",
+          "artist": "TWS",
+          "title": "plot twist",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|비비|밤양갱",
+          "chart": "billboard-hot100",
+          "artist": "비비",
+          "title": "밤양갱",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "hyperpop",
+      "nameKo": "하이퍼팝",
+      "nameEn": "Hyperpop",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "element",
+        "notes": "요소 차용 모드(D-033 보완⑤ 재분류) — 장르 전면 수용은 차단됐으나 요소(비트·질감·보컬 처리)가 이식돼 새로운 사운드 정체성의 재료가 됨: 요소 차용(2021 Savage 가온 2위) → 팬덤 은어('쇠맛') → 언론 공식화(2024-05) → 정체성화 완주. 전면 수용 차단 요인(가설): ① 소스 임펄스 자체의 반주류성(본국에서도 Hot 100 히트 없음, 빌보드 200 #59 상한) ② 보컬 문법 충돌(피치 파괴·보컬 익명화 vs 멤버 목소리 식별성·가창 과시) ③ 팬덤 경제 부적합(퀴어·DIY·안티상업 정체성 — 기업 포장 시 자기부정) ④ 임펄스 수명 < 제작 리드타임(도착 전에 소스가 죽은 케이스)",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "UK/US",
+        "scene": "런던 PC Music(A. G. Cook, 2013)·SOPHIE 초기 협업 → 미국 온라인 씬(100 gecs·glaive·ericdoa)"
+      },
+      "limits": [
+        "수록곡 하이퍼팝 목록이 Soompi 2026-05 회고 기사 하나에 편중 — 소급 귀속 위험(ITZY '24HRS'가 전형: 발매가 하이퍼팝 바이럴 이전)",
+        "'Savage = 하이퍼팝 요소'는 비평 담론이지 공식 크레딧 아님 — 순환 논증 위험",
+        "국내 차트 원자료 미접근(멜론 MCP 미인증) — 2차 출처·커뮤니티 집계 포함",
+        "슬라이딩 808 등 스템 단위 판정 불가(전부 비평 텍스트 의존) — A2 오디오 분석·스템 분리와 직결되는 공백",
+        "정체성화 성공 표본 1건(aespa) — H4·H5는 반증 가능성 열어둘 것",
+        "부정 명제('타이틀 차트인 부재')는 전수 검증 불가 — 반례 발견 시 즉시 갱신"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene",
+          "date": "2013",
+          "datePrecision": "year",
+          "evidence": "A. G. Cook의 PC Music 설립(런던), SOPHIE 초기 협업",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Hyperpop"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-breakthrough",
+          "date": "2019-05",
+          "datePrecision": "month",
+          "evidence": "100 gecs 『1000 gecs』 인디 씬 폭발(임계 돌파)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/1000_gecs"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-platform-codification",
+          "date": "2019-08",
+          "datePrecision": "month",
+          "evidence": "Spotify 에디터의 'hyperpop' 플레이리스트 생성 — 장르가 씬이 아니라 플랫폼 큐레이션에 의해 명명된 특이 케이스",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Hyperpop"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral",
+          "date": "2020~2021",
+          "datePrecision": "range",
+          "evidence": "glaive(사운드클라우드 첫 업로드 2개월 만에 Interscope 계약)·ericdoa 틱톡 바이럴 — 단 이 시기 빌보드 차트인 확인 안 됨",
+          "sources": [
+            "https://billboard.com/articles/columns/pop/9595799/hyperpop-history-mainstream-crossover"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream-ceiling",
+          "date": "2023-03",
+          "datePrecision": "month",
+          "evidence": "주류 침투 상한 — 『10,000 gecs』 빌보드 200 최고 59위, 코어 아티스트의 Hot 100 히트 확인 안 됨(매우 낮음). '글로벌 주류 침투'의 실체가 플레이리스트·틱톡 지표였다",
+          "sources": [
+            "https://en.wikipedia.org/wiki/10,000_gecs"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-dissolution",
+          "date": "2021-01~",
+          "datePrecision": "range",
+          "evidence": "SOPHIE 사망(2021-01-30) → 2022년경 핵심 아티스트들의 라벨 거부, digicore·glitchcore로 파편화 — '기업이 포장·판매하는 순간 전복성을 잃는' 자기부정 구조",
+          "sources": [
+            "https://www.dazeddigital.com/music/article/55293/1/the-rise-and-fall-of-hyperpop-the-internets-most-confusing-music-genre"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-element-title",
+          "date": "2021-10",
+          "datePrecision": "month",
+          "evidence": "aespa 'Savage' — 공식 장르는 트랩 댄스지만 '크런치 하이퍼팝 신스'(NME)·금속성 클랭 등 비평 귀속 다수. 가온 디지털 2위(🔄 2차 조사 정정 — 1위 표기는 오류)·K-pop Hot 100 2위·Global 200 39위 → 요소 차용은 차트 최상위권까지 감",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Savage_(Aespa_song)",
+            "https://www.nme.com/reviews/album/aespa-savage-review-3064971",
+            "https://www.popmatters.com/aespa-savage-debut-ep-review"
+          ],
+          "certainty": "매우 높음",
+          "certaintyNote": "독립 전문지 3곳 교차(NME·Paper·PopMatters) — 타이틀급 차용의 앵커",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-bside-diffusion",
+          "date": "2022~2026",
+          "datePrecision": "range",
+          "evidence": "수록곡 확산기 — TXT 'Frost'(2022-05), tripleS 'Rising'(2023-02 타이틀), SEVENTEEN 'GAM3 BO1'(2023-10), aespa 'Hot Mess'(2024-07 일본 데뷔 싱글), NCT DREAM 'Best of Me'(2024-11), 최예나 'Catch Catch'(2026-03, Circle 7위) — 요소가 '실험'에서 '상비 팔레트'로",
+          "sources": [
+            "https://www.soompi.com/article/1839542wpp/7-k-pop-tracks-that-turn-it-up-with-a-hyperpop-inspired-beat"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-identity-formalization",
+          "date": "2024-05",
+          "datePrecision": "month",
+          "evidence": "'쇠맛' 언론 표제 공식화('Supernova' 시점) — 요소 차용이 그룹 자산으로 전환 완료된 유일 확인 사례",
+          "sources": [
+            "https://www.hankyung.com/article/202405136448H",
+            "https://www.hankookilbo.com/News/Read/A2024052716240002145"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "미도달",
+          "datePrecision": "unreached",
+          "evidence": "전면 수용(하이퍼팝 타이틀의 상위권 진입) 사례 발견 못 함 — 수용은 (a) 메가 기획사의 요소 흡수(성공) (b) 수록곡 실험 (c) 언더 씬의 3층위에 그침. NMIXX 'O.O'(2022-02, 맥시멀 강제 접합) 가온 디지털 최고 81위 — 맥시멀리즘 강도를 높일수록 국내 성적이 꺾이는 신호(표본 1, 가설)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/O.O_(song)"
+          ],
+          "certainty": "매우 낮음",
+          "certaintyNote": "'정식 타이틀곡 차트인 부재'는 부정 명제라 전수 확인 불가 — 반례 발견 시 즉시 갱신",
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|100 gecs|money machine",
+          "chart": "billboard-hot100",
+          "artist": "100 gecs",
+          "title": "money machine",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NMIXX|O.O",
+          "chart": "billboard-hot100",
+          "artist": "NMIXX",
+          "title": "O.O",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SOPHIE|Immaterial",
+          "chart": "billboard-hot100",
+          "artist": "SOPHIE",
+          "title": "Immaterial",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|TOMORROW X TOGETHER|Frost",
+          "chart": "billboard-hot100",
+          "artist": "TOMORROW X TOGETHER",
+          "title": "Frost",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|YENA|Catch Catch",
+          "chart": "billboard-hot100",
+          "artist": "YENA",
+          "title": "Catch Catch",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|aespa|Savage",
+          "chart": "billboard-hot100",
+          "artist": "aespa",
+          "title": "Savage",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|aespa|Black Mamba",
+          "chart": "billboard-hot100",
+          "artist": "aespa",
+          "title": "Black Mamba",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|aespa|Next Level",
+          "chart": "billboard-hot100",
+          "artist": "aespa",
+          "title": "Next Level",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|aespa|Supernova",
+          "chart": "billboard-hot100",
+          "artist": "aespa",
+          "title": "Supernova",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|aespa|Whiplash",
+          "chart": "billboard-hot100",
+          "artist": "aespa",
+          "title": "Whiplash",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|glaive|astrid",
+          "chart": "billboard-hot100",
+          "artist": "glaive",
+          "title": "astrid",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|tripleS|Rising",
+          "chart": "billboard-hot100",
+          "artist": "tripleS",
+          "title": "Rising",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "jersey-club",
+      "nameKo": "저지클럽/볼티모어클럽",
+      "nameEn": "Jersey club / Baltimore club",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "앵커 사례 — 발원지 바이럴·빌보드 주류를 거쳐 한국 타이틀 문법으로 전면 수용. 도메인 소유자 증언 중 '빌보드 먼저'는 검증(2022-06/10 → 한국 2022-12), '2021 국내 강세'는 확인 실패(실질 확산 2022 하반기~2023 — 도메인 소유자 인터뷰로 실체 확인 필요)",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "US",
+        "scene": "Newark(저지클럽)·Baltimore(볼티모어클럽) 클럽 씬"
+      },
+      "limits": [
+        "'2021 국내 강세' 증언 확인 실패 — 도메인 소유자 인터뷰 필요(차트 밖 씬 관측 가능성)",
+        "국내 틱톡 사용량·클럽 셋 정량 아카이브 부재 — 모니터 설계의 최대 갭",
+        "EK·수퍼비 발매월 나무위키 단독 — 근거 사용 금지",
+        "'Smoke' 장르 귀속 매우 낮음(벅스 공식 표기는 랩/힙합)",
+        "당시 국내 A&R 내부 인지 시점은 공개 자료로 재구성 불가",
+        "A2 본편(2026-07-31): tempo_bpm이 사전 고정 기준 통과(10/12=83% 상위 20% ≥ 60%) — 단독 규칙은 과검출이라 H3(하이햇 롤 길이 재정의) 실측과 결합해 규칙화. kick_density·bar_half_asymmetry는 판별력 없음. 클럽 원형 8곡 iTunes 부재로 미해석(대체 후보 A&R 대기)"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene",
+          "date": "1999~2002",
+          "datePrecision": "range",
+          "evidence": "DJ Tameil, Dat Butt EP(2001), Brick Bandits 결성, 'Brick City club' 명명(2002)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Jersey_club",
+            "https://www.thefader.com/2014/06/12/the-skys-the-limit-an-oral-history-of-jersey-club"
+          ],
+          "certainty": "매우 높음",
+          "certaintyNote": "씬 당사자 오럴 히스토리 1차급 + 위키 교차",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-online",
+          "date": "2010~2014",
+          "datePrecision": "range",
+          "evidence": "사운드클라우드 재부상, Cashmere Cat 등 리듬 차용 — '씬 음악'에서 '리듬 템플릿'으로 분리",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Jersey_club"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-viral",
+          "date": "2020-02",
+          "datePrecision": "month",
+          "evidence": "Cookiee Kawaii 'Vibe'(발매 2019-03-29) 틱톡 바이럴 5,000만+ — 발매→바이럴 11개월 잠복",
+          "sources": [
+            "https://audiomack.com/cookieekawaii/song/vibe-if-i-back-it-up",
+            "https://www.rollingstone.com/music/music-features/cookiee-kawaii-vibe-tiktok-1043766/"
+          ],
+          "certainty": "매우 높음",
+          "certaintyNote": "발매 원기록 + Rolling Stone 교차",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-viral-2nd",
+          "date": "2022-09~2022-11",
+          "datePrecision": "range",
+          "evidence": "'Just Wanna Rock' 안무 챌린지 + DJ Smallz 732 리믹스 포맷 확산 — 한국 주류 3개월 전 마지막 경보",
+          "sources": [
+            "https://knowyourmeme.com/memes/lil-uzi-vert-just-wanna-rock-dance"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream",
+          "date": "2022-06",
+          "datePrecision": "month",
+          "evidence": "Drake Honestly, Nevermind 빌보드 200 1위(2022-06-17)·'Sticky' Hot 100 톱20 → Lil Uzi Vert 'Just Wanna Rock'(2022-10) Hot 100 10위",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Honestly,_Nevermind",
+            "https://en.wikipedia.org/wiki/Just_Wanna_Rock"
+          ],
+          "certainty": "매우 높음",
+          "certaintyNote": "빌보드 차트 원기록",
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-underground",
+          "date": "2020-09",
+          "datePrecision": "month",
+          "evidence": "XUM 'DDALALA'(2020-09-24) — '저지클럽 기반' 공식 명시, 단 고립 사례(무실적·해체). 연속 흐름은 2022 하반기(EK·수퍼비 등은 나무위키 단독이라 근거 사용 금지)",
+          "sources": [
+            "https://kstationtv.com/2020/09/30/xum-attention-is-on-girls/?lang=en"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-viral",
+          "date": "2022-12~2023-01",
+          "datePrecision": "range",
+          "evidence": "'Ditto'·'OMG' 챌린지(창빈 발 2023-01), 국내 틱톡 사용량 수치는 미확보",
+          "sources": [
+            "https://www.koreaboo.com/news/stray-kids-newjeans-changbin-omg-omma-viral-trend-challenge-tiktok/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2022-12",
+          "datePrecision": "month",
+          "evidence": "NewJeans 'Ditto'(2022-12-19, 볼티모어클럽) 멜론 주간 14주 1위·써클 13주 1위·2023 써클 연간 1위",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Ditto_(song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": "멜론 원기록 미접근·2차 인용 — 원자료 대조 시 매우 높음 승격 가능",
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|PinkPantheress|Boy's a liar Pt. 2",
+          "chart": "billboard-hot100",
+          "artist": "PinkPantheress",
+          "title": "Boy's a liar Pt. 2",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2023-02-18",
+          "peakPosition": 3,
+          "weeksOnChart": 22,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Drake|Sticky",
+          "chart": "billboard-hot100",
+          "artist": "Drake",
+          "title": "Sticky",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2022-07-02",
+          "peakPosition": 6,
+          "weeksOnChart": 13,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Lil Uzi Vert|Just Wanna Rock",
+          "chart": "billboard-hot100",
+          "artist": "Lil Uzi Vert",
+          "title": "Just Wanna Rock",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2022-10-29",
+          "peakPosition": 10,
+          "weeksOnChart": 32,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|OMG",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "OMG",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-01-28",
+          "peakPosition": 74,
+          "weeksOnChart": 6,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|ETA",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "ETA",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-08-05",
+          "peakPosition": 81,
+          "weeksOnChart": 1,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Ditto",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Ditto",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-01-21",
+          "peakPosition": 82,
+          "weeksOnChart": 5,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|BABYMONSTER|BATTER UP",
+          "chart": "billboard-hot100",
+          "artist": "BABYMONSTER",
+          "title": "BATTER UP",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Cookiee Kawaii|Vibe (If I Back It Up)",
+          "chart": "billboard-hot100",
+          "artist": "Cookiee Kawaii",
+          "title": "Vibe (If I Back It Up)",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|LE SSERAFIM|Eve, Psyche & the Bluebeard’s wife",
+          "chart": "billboard-hot100",
+          "artist": "LE SSERAFIM",
+          "title": "Eve, Psyche & the Bluebeard’s wife",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SEVENTEEN|Super 손오공",
+          "chart": "billboard-hot100",
+          "artist": "SEVENTEEN",
+          "title": "Super 손오공",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|UNIIQU3|Microdosing",
+          "chart": "billboard-hot100",
+          "artist": "UNIIQU3",
+          "title": "Microdosing",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|XUM|DDALALA",
+          "chart": "billboard-hot100",
+          "artist": "XUM",
+          "title": "DDALALA",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "moombahton-tropical",
+      "nameKo": "뭄바톤·트로피컬하우스",
+      "nameEn": "Moombahton / Tropical house",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "리듬 계열 장르의 씬→글로벌 팝 주류→K-pop 전면 채택(기간 소급 케이스, 회고적 재구성 — 생존 편향 존재). 스트리밍 전환기(사운드클라우드·유튜브)의 확산 사례 — 틱톡 이전 신호원 검증용. 원산지 클럽/페스티벌 맥락이 한국에서는 '여름 컴백' 시즌 문법으로 번역됨",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "US/EU",
+        "scene": "뭄바톤 — 미국 워싱턴 D.C.(2009-11, Dave Nada) / 트로피컬하우스 — 사운드클라우드 기반 유럽·호주 씬(2013, Thomas Jack·Kygo)"
+      },
+      "limits": [
+        "곡별 장르 표기가 위키피디아·평론 등 2차 문헌 의존 — 원 리듬(뎀보우 그리드 유무)의 음향 분석 검증 없음(A2에서 sonic-profile로 교차 검증할 지점)",
+        "쇠퇴 시점 해상도 낮음 — '2018년 쇠퇴'는 평론 진단 기반, 차트 점유율 시계열로 정량화하지 않음",
+        "당시 멜론 주간 차트 원자료 미접근 — 정점기 성적 일부는 2차 집계 인용",
+        "소급 재구성 고유 한계 — '당시 관측 가능했던 신호'는 사후 지식으로 선별된 것, 조기 신호의 예측력 주장은 이 케이스 하나로 일반화 불가"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene-moombahton",
+          "date": "2009-11",
+          "datePrecision": "month",
+          "evidence": "Dave Nada가 D.C. 하우스파티에서 Afrojack의 'Moombah' 리믹스를 108BPM으로 감속, 이후 에딧 제작·명명",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Moombahton",
+            "https://www.npr.org/transcripts/134661427"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-scene-moombahton",
+          "date": "2010~2011",
+          "datePrecision": "range",
+          "evidence": "Diplo/Mad Decent·Dillon Francis 계열로 EDM 씬 확산, NPR가 2011-03 'Born in D.C., Bred Worldwide' 보도",
+          "sources": [
+            "https://www.npr.org/transcripts/134661427",
+            "https://washingtoncitypaper.com/article/221511/our-year-in-moombahton/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-tropical",
+          "date": "2013",
+          "datePrecision": "year",
+          "evidence": "Thomas Jack이 용어 창안, 사운드클라우드 'Tropical House' 믹스 시리즈로 씬 형성",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Thomas_Jack",
+            "https://soundcloud.com/thomasjackmusic/thomas-jack-presents-tropical"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral",
+          "date": "2013-12",
+          "datePrecision": "month",
+          "evidence": "Kygo의 Ed Sheeran 'I See Fire' 리믹스가 사운드클라우드에서 국제적 주목",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Kygo"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2014-12~2015-08",
+          "datePrecision": "range",
+          "evidence": "Kygo 'Firestone'(2014-12) → Major Lazer 'Lean On'(2015-03 발매, 2015-08-29 Hot 100 4위, 20여 개국 1위)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Firestone_(song)",
+            "https://en.wikipedia.org/wiki/Lean_On"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream-peak",
+          "date": "2015-09~2016-08",
+          "datePrecision": "range",
+          "evidence": "Bieber 'What Do You Mean?'(2015-09 Hot 100 1위)·'Sorry'(2015-10 발매, Hot 100 1위), Major Lazer 'Cold Water'(2016-07-22 발매, Hot 100 2위 데뷔)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/What_Do_You_Mean%3F",
+            "https://en.wikipedia.org/wiki/Sorry_(Justin_Bieber_song)",
+            "https://www.billboard.com/pro/major-lazer-justin-bieber-mo-cold-water-hot-100-sia/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-first-adoption",
+          "date": "2015-10",
+          "datePrecision": "month",
+          "evidence": "교차 검증으로 7개월 앞당김 — f(x) '4 Walls'(2015-10-27, 트로피컬하우스+UK개러지+딥하우스, Billboard·Spin 서술) → BTS 'Save Me'(2016-05), 태연 'Why'(2016-06, LDN Noise), EXO 'Dancing King'(2016-09, SM Station). 단 '뭄바톤' 선행 사례는 별도 미발견(트로피컬/딥하우스 계열만)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/4_Walls_(song)",
+            "https://en.wikipedia.org/wiki/Why_(Taeyeon_song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2016-10",
+          "datePrecision": "month",
+          "evidence": "BTS '피 땀 눈물'(2016-10-10, 뭄바톤·트랩·트로피컬하우스) 가온 디지털 1위 — BTS 첫 디지털 1위, 타이틀 주류화 기점",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Blood_Sweat_%26_Tears_(song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream-peak",
+          "date": "2017-04~2017-08",
+          "datePrecision": "range",
+          "evidence": "Winner 'Really Really'(2017-04) 남자 아이돌 최초 가온 1억 스트리밍, EXO 'Ko Ko Bop'(2017-07-18) 가온 1위 4주, Red Velvet '빨간 맛'(2017-07) 등 여름 시장 석권",
+          "sources": [
+            "https://gulfnews.com/entertainment/music/k-pop-corner-winners-really-really-crosses-100-million-mark-1.60822975",
+            "https://en.wikipedia.org/wiki/Ko_Ko_Bop",
+            "https://en.wikipedia.org/wiki/Red_Flavor"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-decline",
+          "date": "2018",
+          "datePrecision": "year",
+          "evidence": "2018-03 시점 평론이 '2017은 트로피컬하우스·EDM 지배, 2018은 아직 지배 트렌드 없음'으로 전환기 진단. 글로벌 씬도 2017~19 과포화·피로로 하락",
+          "sources": [
+            "https://thebiaslist.com/2018/03/25/tracking-k-pops-trends-from-2011-2017/",
+            "https://weraveyou.com/2023/09/tropical-house-decline/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Justin Bieber|Sorry",
+          "chart": "billboard-hot100",
+          "artist": "Justin Bieber",
+          "title": "Sorry",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2015-11-14",
+          "peakPosition": 1,
+          "weeksOnChart": 42,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Major Lazer|Cold Water",
+          "chart": "billboard-hot100",
+          "artist": "Major Lazer",
+          "title": "Cold Water",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2016-08-13",
+          "peakPosition": 2,
+          "weeksOnChart": 27,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Major Lazer|Lean On",
+          "chart": "billboard-hot100",
+          "artist": "Major Lazer",
+          "title": "Lean On",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2015-04-25",
+          "peakPosition": 4,
+          "weeksOnChart": 48,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Kygo|Firestone",
+          "chart": "billboard-hot100",
+          "artist": "Kygo",
+          "title": "Firestone",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2015-10-03",
+          "peakPosition": 92,
+          "weeksOnChart": 1,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|BLACKPINK|As If It's Your Last",
+          "chart": "billboard-hot100",
+          "artist": "BLACKPINK",
+          "title": "As If It's Your Last",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|BTS|피 땀 눈물",
+          "chart": "billboard-hot100",
+          "artist": "BTS",
+          "title": "피 땀 눈물",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|EXO|Ko Ko Bop",
+          "chart": "billboard-hot100",
+          "artist": "EXO",
+          "title": "Ko Ko Bop",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|KARD|Hola Hola",
+          "chart": "billboard-hot100",
+          "artist": "KARD",
+          "title": "Hola Hola",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Red Velvet|Red Flavor",
+          "chart": "billboard-hot100",
+          "artist": "Red Velvet",
+          "title": "Red Flavor",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|TAEYEON|Why",
+          "chart": "billboard-hot100",
+          "artist": "TAEYEON",
+          "title": "Why",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|WINNER|REALLY REALLY",
+          "chart": "billboard-hot100",
+          "artist": "WINNER",
+          "title": "REALLY REALLY",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "njs",
+      "nameKo": "뉴잭스윙 리바이벌",
+      "nameEn": "New jack swing revival",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "continuity-revival",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "'연속 vs 리바이벌' 난점(핵심): 한국 측은 순수 리바이벌이 아니라 '연속+리바이벌 혼합형' — ① 1990~93 동시대 수입(현진영·양준일) ② 1996~ SMP(유영진)의 NJS 기반 ③ 2011 테디 라일리 직접 프로듀스(소녀시대 'The Boys'·RaNia)라는 끊긴 적 없는 계보 보유 → '죽은 장르의 부활'과 '잠복 관용구의 재전경화'가 섞임. 조작적 구분: 2011 이전 직접 이식=전사(연속) / 명시적 90s 레트로 '콘셉트'로 판매된 2016-10 이후=리바이벌. 단 SHINee '1 of 1'(2016-10)이 Finesse 트리거보다 앞서는 점은 이 조작적 구분으로도 완전히 해소 안 됨. 역전 구조: 한국 씬 도달(2016-10)이 미국 주류 도달(2018-01)보다 약 15개월 선행 — '한국이 항상 후행 수용자'라는 가정은 이 사례에서 기각, 리바이벌형에서는 한국 씬 도달이 발원지 트리거와 독립적일 수 있음",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "US",
+        "scene": "원 카탈로그 — Teddy Riley 계보(1987~93) / 리바이벌 트리거 — Bruno Mars"
+      },
+      "limits": [
+        "'리바이벌 vs 연속' 구분이 핵심 난점 — SHINee '1 of 1'(2016-10)이 Finesse 트리거보다 앞서는 점은 조작적 구분으로도 완전히 해소 안 됨",
+        "장르 판정 출처 품질 편차 — EXO 'Call Me Baby' 등은 팬 비평 판정. 세븐틴·온앤오프·키(솔로)는 NJS 명시 근거 미확보로 제외(부재 증명 아님)",
+        "차트 지표 비대칭 — 2016~21 사례 다수가 앨범차트(팬덤 구매)로 '주류 도달' 증거력 약함. 디지털 기준 최초는 2022-07",
+        "'Uptown Funk'·토토가·미국 쇠퇴 시점 등은 월 단위 검증 못 함(매우 낮음 표기)",
+        "영어·한국어 소스 편중 — 일본 등 글로벌 허브 축 독립 검증 미수행"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene-revival",
+          "date": "2016-11",
+          "datePrecision": "month",
+          "evidence": "Bruno Mars 『24K Magic』 — 'Finesse' 원곡('NJS 재현 잼 세션' 산물). 전조: 2014-11 'Uptown Funk'(매우 낮음)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Finesse_(Bruno_Mars_song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-viral",
+          "date": "2018-01",
+          "datePrecision": "month",
+          "evidence": "'Finesse' 리믹스(Cardi B, 2018-01-04), 〈In Living Color〉 오마주 MV",
+          "sources": [
+            "https://www.billboard.com/music/pop/bruno-mars-cardi-b-finesse-remix-huge-win-8092641/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream",
+          "date": "2018-01",
+          "datePrecision": "month",
+          "evidence": "리믹스 Hot 100 35위→3위",
+          "sources": [
+            "https://www.billboard.com/pro/ed-sheeran-bruno-mars-cardi-b-justin-timberlake-hot-100-top-10/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-institutional-recognition",
+          "date": "2018-06~2018-12",
+          "datePrecision": "range",
+          "evidence": "Teddy Riley 할리우드 명예의 거리(2018-06), 아폴로 'Kings and Queens of New Jack Swing'(2018-12)",
+          "sources": [
+            "https://thesource.com/2018/06/27/teddy-riley-star-hollywood-walk-of-fame/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-pre-adoption",
+          "date": "2015-03~2016-10",
+          "datePrecision": "range",
+          "evidence": "트리거 이전 이미 누적 — EXO 'Call Me Baby'(2015, Teddy Riley 작곡·프로듀싱 크레딧, 당대 비평이 NJS 편곡으로 서술), SHINee '1 of 1'(2016-10 타이틀). 2017-01 팬 비평이 'K-pop 내 NJS 부활, 서구에선 소강' 진단",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Call_Me_Baby",
+            "https://allcatsandmusic.wordpress.com/2017/01/08/new-jack-swing-in-k-pop/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-scene-reignition",
+          "date": "2018-04",
+          "datePrecision": "month",
+          "evidence": "EXID 'Lady' — 명시적 90s NJS 콘셉트(90s 의상·캠코더 MV), Finesse 리믹스 3개월 후",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Lady_(EXID_song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-viral",
+          "date": "2019-09",
+          "datePrecision": "month",
+          "evidence": "'온라인 탑골공원' — 90s 가요 스트리밍 동접 2만+, 뉴트로 열풍(한국화된 90s 가요의 바이럴)",
+          "sources": [
+            "https://www.ajunews.com/view/20190919090636722"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream-partial",
+          "date": "2016-10",
+          "datePrecision": "month",
+          "evidence": "SHINee 『1 of 1』 Gaon 앨범 1위(팬덤 구매 기반 — 대중 청취 지표 아님)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/1_of_1_(Shinee_album)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2022-07",
+          "datePrecision": "month",
+          "evidence": "NewJeans 'Attention'(장르 분류 NJS) 데뷔곡 서클 디지털 1위 — 격상: IZM 원출처 확보('1990년대 뉴 잭 스윙과 하우스 리듬을 현대적으로 믹싱', 정수민 2022-12)",
+          "sources": [
+            "http://archive.izm.co.kr/contentRead.asp?idx=31618&bigcateidx=19&subcateidx=20&view_tp=1"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Bobby Brown|My Prerogative",
+          "chart": "billboard-hot100",
+          "artist": "Bobby Brown",
+          "title": "My Prerogative",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "1988-10-22",
+          "peakPosition": 1,
+          "weeksOnChart": 24,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Bruno Mars|Finesse",
+          "chart": "billboard-hot100",
+          "artist": "Bruno Mars",
+          "title": "Finesse",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2018-01-13",
+          "peakPosition": 3,
+          "weeksOnChart": 23,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|EXID|Lady",
+          "chart": "billboard-hot100",
+          "artist": "EXID",
+          "title": "Lady",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Guy|Groove Me",
+          "chart": "billboard-hot100",
+          "artist": "Guy",
+          "title": "Groove Me",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NCT U|90's Love",
+          "chart": "billboard-hot100",
+          "artist": "NCT U",
+          "title": "90's Love",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Attention",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Attention",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Supernatural",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Supernatural",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SHINee|1 of 1",
+          "chart": "billboard-hot100",
+          "artist": "SHINee",
+          "title": "1 of 1",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "reggaeton-dembow",
+      "nameKo": "레게톤/뎀보우",
+      "nameEn": "Reggaeton / Dembow",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "element",
+        "notes": "부분 수용 판정 — 글로벌 메가트렌드(빌보드 16주 1위, Spotify 3년 연속 최다 스트리밍)가 한국에서는 수출 전략 중심의 부분 수용에 그침: '글로벌 신호 강도 ≠ 한국 주류 도달'의 캘리브레이션 데이터. K-pop 유입 벡터가 레게톤 직수입이 아니라 뭄바톤 경유(EDM 필터)가 지배적. 부분 삽입 구조(코러스·드롭 한정)·스페인어 토큰화·수출 도구화가 수용 형태",
+        "mode_transitions": [
+          {
+            "from": "element",
+            "to": "full",
+            "date": "2022-10",
+            "evidence": "LE SSERAFIM 'ANTIFRAGILE'(써클 디지털 2위) — 라틴 '콘셉트' 탈각, 퍼포먼스 팝 리듬 어휘로 흡수돼 국내 히트와 양립한 첫 형태. 전환 진행 중(명시 귀속 타이틀 1위는 미도달, 최고 #2)"
+          }
+        ]
+      },
+      "origin": {
+        "region": "LATAM",
+        "scene": "자메이카(리딤 원형) → 파나마(스페인어화) → 푸에르토리코(레게톤 성립)"
+      },
+      "limits": [
+        "한국 첫 도달(2016-12) 하한 미확정 — 2013~16 B-side 전수조사 안 함",
+        "장르 귀속이 영문 위키/매체 의존 — dembow 템플릿 오디오 검증(리듬 매칭)이 후속 과제",
+        "가온/써클 수치 2차 인용 — 원 차트 대조 미실시",
+        "댄스홀 vs 레게톤 경계에 따라 '정점 미도달' 판정이 달라짐 — 본 레코드는 레게톤 협의 정의 채택",
+        "부정 주장('미발생'·'미도달')은 탐색 실패일 수 있음 — 매우 낮음~불가능한 수준 등급 취급"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-scene-jamaica",
+          "date": "1989~1990",
+          "datePrecision": "range",
+          "evidence": "Steely & Clevie 리딤('Poco Man Jam' 1989) → Shabba Ranks 'Dem Bow'(1990)로 명명",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Dembow_beat"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-panama",
+          "date": "1990~1991",
+          "datePrecision": "range",
+          "evidence": "El General 등 스패니시 레게 씬의 리메이크",
+          "sources": [
+            "https://daily.redbullmusicacademy.com/2013/07/dembow-a-loop-history/"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-scene-pr",
+          "date": "1992-07",
+          "datePrecision": "month",
+          "evidence": "DJ Playero 『Playero 37』 — Daddy Yankee 데뷔, 방송 금지 속 카세트 유통",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Playero_37"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream",
+          "date": "2004-07",
+          "datePrecision": "month",
+          "evidence": "『Barrio Fino』 레게톤 앨범 최초 빌보드 Top Latin 1위, 'Gasolina' Hot 100 #32",
+          "sources": [
+            "https://www.billboard.com/music/latin/daddy-yankee-on-gasolina-barrio-fino-reggaeton-10-years-later-i-knew-it-was-a-home-6207108/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2017-05",
+          "datePrecision": "month",
+          "evidence": "글로벌 주류 정점 2차 — 'Despacito'(리믹스) Hot 100 1위 16주 연속",
+          "sources": [
+            "https://www.billboard.com/pro/luis-fonsi-daddy-yankee-despacito-justin-bieber-number-one/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-streaming-dominance",
+          "date": "2017-06~2020-12",
+          "datePrecision": "range",
+          "evidence": "'Mi Gente' 라틴곡 최초 Spotify 글로벌 1위(2017-06); Bad Bunny 2020~22 3년 연속 최다 스트리밍",
+          "sources": [
+            "https://www.billboard.com/pro/bad-bunny-spotify-most-streamed-artist-2020/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-first-adoption",
+          "date": "2016-12",
+          "datePrecision": "month",
+          "evidence": "KARD 'Oh NaNa'(2016-12-13) — 레게톤/뭄바톤, 수출형 기획(K-pop 첫 채용)",
+          "sources": [
+            "https://www.koreatimes.co.kr/entertainment/k-pop/20260710/why-is-coed-k-pop-group-kard-ending-its-journey"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-viral",
+          "date": "2017 중반",
+          "datePrecision": "year",
+          "evidence": "외래곡 소비(추정) — 'Despacito' 가온 국제차트 최고 7위, 1위 미도달(2017 국제 주간 1위 목록에 라틴곡 부재)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/List_of_number-one_international_songs_of_2017_(South_Korea)"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream-entry",
+          "date": "2018-05",
+          "datePrecision": "month",
+          "evidence": "(여자)아이들 'LATATA'(moombahton/reggae/trap-pop) 가온 디지털 12위",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Latata"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-near-peak",
+          "date": "2022-10",
+          "datePrecision": "month",
+          "evidence": "LE SSERAFIM 'ANTIFRAGILE'(팝/레게톤) 써클 디지털 2위 — 레게톤 귀속 타이틀의 국내 최고 확인 성적",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Antifragile_(song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "미도달",
+          "datePrecision": "unreached",
+          "evidence": "레게톤/뎀보우 명시 타이틀의 디지털 1위 확인 안 됨. 인접 사례: 선미 '가시나'(2017-08, 댄스홀 — 뎀보우 사촌 리듬) 가온 1위",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Gashina"
+          ],
+          "certainty": "불가능한 수준",
+          "certaintyNote": "해제 조건: 가온·써클/멜론 원자료 전수 대조 시 재평가 — 전수조사 아님",
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Luis Fonsi|Despacito",
+          "chart": "billboard-hot100",
+          "artist": "Luis Fonsi",
+          "title": "Despacito",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2017-02-04",
+          "peakPosition": 1,
+          "weeksOnChart": 52,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|J Balvin|Mi Gente",
+          "chart": "billboard-hot100",
+          "artist": "J Balvin",
+          "title": "Mi Gente",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2017-07-22",
+          "peakPosition": 3,
+          "weeksOnChart": 30,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Daddy Yankee|Gasolina",
+          "chart": "billboard-hot100",
+          "artist": "Daddy Yankee",
+          "title": "Gasolina",
+          "role": "origin",
+          "charted": true,
+          "entryDate": "2004-11-13",
+          "peakPosition": 32,
+          "weeksOnChart": 20,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|(G)I-DLE|LATATA",
+          "chart": "billboard-hot100",
+          "artist": "(G)I-DLE",
+          "title": "LATATA",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|CHUNG HA|PLAY",
+          "chart": "billboard-hot100",
+          "artist": "CHUNG HA",
+          "title": "PLAY",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|KARD|Oh NaNa",
+          "chart": "billboard-hot100",
+          "artist": "KARD",
+          "title": "Oh NaNa",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|LE SSERAFIM|ANTIFRAGILE",
+          "chart": "billboard-hot100",
+          "artist": "LE SSERAFIM",
+          "title": "ANTIFRAGILE",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SUNMI|Gashina",
+          "chart": "billboard-hot100",
+          "artist": "SUNMI",
+          "title": "Gashina",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|SUPER JUNIOR|Lo Siento",
+          "chart": "billboard-hot100",
+          "artist": "SUPER JUNIOR",
+          "title": "Lo Siento",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Shabba Ranks|Dem Bow",
+          "chart": "billboard-hot100",
+          "artist": "Shabba Ranks",
+          "title": "Dem Bow",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    },
+    {
+      "id": "ukg-dnb",
+      "nameKo": "UK개러지·드럼앤베이스 리바이벌",
+      "nameEn": "UK garage / Drum and bass revival",
+      "version": "1.1.0",
+      "updated": "2026-07-31",
+      "caseType": "import",
+      "adoptionMode": {
+        "mode": "full",
+        "notes": "성공 사례(미국 외 발원 경로). 한국 수용이 미국 검증 후행이 아니라 거의 병렬 — 뉴진스 프로듀서진(250·FRNK)이 2022년부터 인접 클럽 장르를 선제 도입",
+        "mode_transitions": []
+      },
+      "origin": {
+        "region": "UK",
+        "scene": "UKG/2-step — 1990s 후반 런던 · DnB/정글 — 1990s 초 UK 레이브 씬의 2020년대 리바이벌. 미국은 발원지가 아니라 글로벌 검증 허브로 기능"
+      },
+      "limits": [
+        "UKG·저지클럽·볼티모어·퓨처개러지가 리뷰마다 혼용 — Wikipedia·전문지 표기 우선 채택",
+        "틱톡 바이럴 '첫 도달'은 스니펫 게시일·보도일로 근사",
+        "서울 클럽/언더 DJ 씬의 UKG 수용 미조사 — 씬 셀을 프로듀서 크레딧으로 대체(과소측정 위험)",
+        "뉴진스 채용이 PinkPantheress 경로의 '수용'인지 병렬적 독자 기획인지 인터뷰 증거 부족 — 리드타임 해석 주의",
+        "쇠퇴 시점(2025)은 정황 종합 추정"
+      ],
+      "trajectory": [
+        {
+          "cell": "origin-mainstream-reentry",
+          "date": "2019-06",
+          "datePrecision": "month",
+          "evidence": "AJ Tracey 'Ladbroke Grove'(Conducta 프로듀스, UKG) → 2019-10 UK 3위 피크 — 리바이벌 신호탄",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Ladbroke_Grove_(song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-viral",
+          "date": "2021-03",
+          "datePrecision": "month",
+          "evidence": "PinkPantheress 'Break It Off'(DnB) 틱톡 스니펫(2021-03-17) 바이럴",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Break_It_Off_(PinkPantheress_song)"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "origin-mainstream-newgen",
+          "date": "2021-08~2022-11",
+          "datePrecision": "range",
+          "evidence": "'Just for Me'(2-step) 틱톡 UK 여름 브레이크아웃(2021-08); venbee×goddard. 'messy in heaven'(DnB) 2022-11 UK 3위",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Just_for_Me",
+            "https://en.wikipedia.org/wiki/Messy_in_Heaven"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-viral",
+          "date": "2021-10",
+          "datePrecision": "month",
+          "evidence": "미국 바이럴 1차 — 'Just for Me' 미국 틱톡·NPR 조명. 2차는 2023-01~02 'Boy's a liar Pt. 2' 틱톡 확산",
+          "sources": [
+            "https://www.npr.org/2021/10/15/1046460096/pinkpantheress-reimagines-garage-music-for-a-new-generation"
+          ],
+          "certainty": "중간",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "global-mainstream",
+          "date": "2023-02",
+          "datePrecision": "month",
+          "evidence": "'Boy's a liar Pt. 2'(w/ Ice Spice) Hot 100 14위 데뷔(2023-02) → 3위 피크(2023-03)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Boy%27s_a_Liar_Pt._2"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-adjacent-adoption",
+          "date": "2022-07~2022-12",
+          "datePrecision": "range",
+          "evidence": "NewJeans 데뷔(250·FRNK) → 'Ditto'(2022-12, 볼티모어 클럽 — UKG '인접') Circle 1위",
+          "sources": [
+            "https://www.koreatimes.co.kr/entertainment/k-pop/20260725/how-newjeans-stole-londons-underground"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-explicit-release",
+          "date": "2023-07",
+          "datePrecision": "month",
+          "evidence": "NewJeans 'New Jeans'(UKG/정글)·'Super Shy'(리퀴드 DnB+2-step), Jung Kook 'Seven'(2023-07-14, UKG 팝 — Forbes 프로듀서 인터뷰로 귀속 격상)",
+          "sources": [
+            "https://en.wikipedia.org/wiki/Super_Shy",
+            "https://en.wikipedia.org/wiki/Seven_(Jung_Kook_song)",
+            "https://www.forbes.com/sites/hughmcintyre/2023/07/28/the-producers-behind-jung-kooks-seven-share-the-behind-the-scenes-story-of-the-no-1-smash/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-mainstream",
+          "date": "2023-07",
+          "datePrecision": "month",
+          "evidence": "'Super Shy' Circle·멜론 1위(7주 연속); 'Seven' 멜론 1위·Hot 100 1위 데뷔",
+          "sources": [
+            "https://www.billboard.com/music/chart-beat/jung-kook-latto-seven-number-one-debut-hot-100-jason-aldean-1235377400/"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        },
+        {
+          "cell": "kr-media-recognition",
+          "date": "2023-08",
+          "datePrecision": "month",
+          "evidence": "SBS '별 게 다 있는 2023년 케이팝: UK 개러지, 저지 클럽, 파벨라 펑크…'(2023-08-13)",
+          "sources": [
+            "https://premium.sbs.co.kr/article/2YLj6YfACUy"
+          ],
+          "certainty": "높음",
+          "certaintyNote": null,
+          "chartEvidenceRefs": []
+        }
+      ],
+      "chartEvidence": [
+        {
+          "ref": "billboard-hot100|Jung Kook|Seven",
+          "chart": "billboard-hot100",
+          "artist": "Jung Kook",
+          "title": "Seven",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-07-29",
+          "peakPosition": 1,
+          "weeksOnChart": 15,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Super Shy",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Super Shy",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-07-22",
+          "peakPosition": 48,
+          "weeksOnChart": 8,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|Cool With You",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "Cool With You",
+          "role": "kr",
+          "charted": true,
+          "entryDate": "2023-08-05",
+          "peakPosition": 93,
+          "weeksOnChart": 1,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|AJ Tracey|Ladbroke Grove",
+          "chart": "billboard-hot100",
+          "artist": "AJ Tracey",
+          "title": "Ladbroke Grove",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Chase & Status|Baddadan",
+          "chart": "billboard-hot100",
+          "artist": "Chase & Status",
+          "title": "Baddadan",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|New Jeans",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "New Jeans",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|NewJeans|ASAP",
+          "chart": "billboard-hot100",
+          "artist": "NewJeans",
+          "title": "ASAP",
+          "role": "kr",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|Nia Archives|Forbidden Feelingz",
+          "chart": "billboard-hot100",
+          "artist": "Nia Archives",
+          "title": "Forbidden Feelingz",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|PinkPantheress|Just for me",
+          "chart": "billboard-hot100",
+          "artist": "PinkPantheress",
+          "title": "Just for me",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|PinkPantheress|Break It Off",
+          "chart": "billboard-hot100",
+          "artist": "PinkPantheress",
+          "title": "Break It Off",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        },
+        {
+          "ref": "billboard-hot100|venbee|messy in heaven",
+          "chart": "billboard-hot100",
+          "artist": "venbee",
+          "title": "messy in heaven",
+          "role": "origin",
+          "charted": false,
+          "entryDate": null,
+          "peakPosition": null,
+          "weeksOnChart": null,
+          "certainty": "매우 높음",
+          "source": "github.com/mhollingshead/billboard-hot-100 (D-035 ② · 3자 대조 스모크 통과)"
+        }
+      ]
+    }
+  ]
+}

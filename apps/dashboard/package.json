@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "collect": "node scripts/collect-reports.mjs",
+    "collect": "node scripts/collect-reports.mjs && node scripts/collect-labs.mjs",
     "predev": "npm run collect",
     "prebuild": "node scripts/check-dev-off.mjs && npm run collect",
     "dev": "next dev",

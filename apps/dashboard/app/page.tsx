@@ -8,6 +8,12 @@ const sections = [
     description: "차트·팬덤·소셜 신호를 모은 리포트 대시보드",
   },
   {
+    href: "/labs",
+    // 측정이 아니라 가설을 싣는 표면. 리포트 대시보드와 갈라 두는 것이 이 구획의 목적이다.
+    title: "Labs",
+    description: "장르 확산 경로의 가설 원장. 측정이 아니라 추정",
+  },
+  {
     href: "/utilities",
     title: "Utilities",
     description: "보조 도구 모음 (준비 중)",

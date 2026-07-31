@@ -261,25 +261,51 @@ else {
     } else { Log "!! allocator FAILED -- fallback to full tag list (budget guard caps)" }
   }
   $env:PYTHONPATH = "modules/fandom-pulse/src"
-  $spent = 0.0; $okT = 0; $failT = 0; $skipT = 0
+  # 🔴 시도 원장 (D-054). 예산은 **시도**로 세야 한다 -- 액터가 돌면 실패해도 돈이 나가는데
+  # 예전 셈법은 성공만 셌다. 그 상태로 재시도를 켜면 실패 태그가 하루 4번 다시 돌아
+  # 문서가 적어 둔 "일 상한 안"이 거짓이 된다. 성공은 파일이 증거이지만 실패는 증거를
+  # 남기지 않으므로, 실행을 넘어 살아남는 원장을 따로 둔다.
+  $attemptsPath = Join-Path $live "social\attempts_$today.json"
+  $attempts = @{}
+  if (Test-Path $attemptsPath) {
+    try {
+      $prevA = Get-Content $attemptsPath -Raw -Encoding utf8 | ConvertFrom-Json
+      foreach ($p in $prevA.PSObject.Properties) { $attempts[$p.Name] = [int]$p.Value }
+    } catch { Log "!! social attempts ledger unreadable -- starting fresh (예산이 과소 계상될 수 있다)" }
+  }
+  function Save-Attempts { ($attempts | ConvertTo-Json -Depth 3) | Set-Content -Path $attemptsPath -Encoding utf8 }
+  # 오늘 이미 쓴 돈 = 시도 총합. 성공/실패를 가리지 않는다.
+  $spent = 0.0
+  foreach ($v in $attempts.Values) { $spent += ($perTagUsd * [int]$v) }
+  $okT = 0; $failT = 0; $skipT = 0; $failedTags = @()
   foreach ($tag in $fetchTags) {
     $out = "data/live/social/${today}_${tag}.json"
-    # Already fetched today by an earlier attempt (kept or quarantined): the money is spent,
-    # so count it against the budget but never buy the same tag twice (D-018).
+    # Already fetched today (kept or quarantined): never buy the same tag twice (D-018).
+    # 지출은 위에서 시도 원장으로 이미 계상됐다 -- 여기서 또 더하면 이중 계상이 된다.
     if ((Test-Path $out) -or (Test-Path (Join-Path $live "quarantine\${today}_${tag}.json"))) {
-      $spent += $perTagUsd; $skipT++; continue
+      $skipT++; continue
     }
-    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent cap `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped"; break }
+    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped (재시도 포함 누적)"; break }
+    # 시도를 **먼저** 기록한다. 여기서 스크립트가 죽어도 돈은 이미 나갔을 수 있다.
+    $attempts[$tag] = [int]$attempts[$tag] + 1
+    Save-Attempts
+    $spent += $perTagUsd
     python -m fandom_pulse fetch --hashtag $tag --results-type reels --max-items $perTagItems --max-usd $perTagUsd -o $out
     if ($?) {
-      $spent += $perTagUsd; $okT++
+      $okT++
       # PII gate: REJECT -> quarantine (never joins the pipeline)
       python scripts/validate_snapshot.py $out | Out-Null
       if (-not $?) { Move-Item $out (Join-Path $live "quarantine") -Force; Log "!! PII gate REJECT: $out -> quarantine" }
-    } else { $failT++; Log "!! social fetch FAILED: #$tag" }
+    } else { $failT++; $failedTags += $tag; Log "!! social fetch FAILED: #$tag (시도 $($attempts[$tag])회)" }
   }
-  Log "social fetched: $okT tags ok, $failT failed, $skipT already collected today (not re-paid) | est spend cap <= `$$spent (per-run Apify cap enforced)"
-  if ($failT -eq 0) { $legs["social"] = "ok"; Save-State $false }
+  Log "social fetched: $okT tags ok, $failT failed, $skipT already collected today (not re-paid) | 오늘 시도 누적 `$$spent / `$$dailyBudget (실패 포함)"
+  if ($failT -eq 0) {
+    $legs["social"] = "ok"; $pending.Remove("social"); Save-State $false
+  } else {
+    # 유료 레그도 하루를 열어 둔다 (D-054 · 도메인 소유자 승인). 다음 시도는 실패한 태그만
+    # 다시 산다 -- 성공한 태그는 파일이 있어 건너뛰고, 예산은 시도 원장이 누적으로 막는다.
+    $legs["social"] = "partial"; $pending["social"] = @($failedTags); Save-State $false
+  }
 }
 
 # 3) rebuild forward signal-series (watchlist attribution, D-013)
@@ -402,11 +428,13 @@ python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$nul
 # 상한을 두는 이유: 진짜로 사라진 시장(코드 폐지 등)을 무한히 재시도하면 그 날짜는
 # 영원히 done 이 안 되고 GAP 경보가 매일 울린다. 4회 시도(=8시간) 뒤에는 결손을 결손으로
 # 확정하고 무엇이 비었는지 로그에 남긴다.
-# **무료 레그만** 하루를 열어둔다. 유료 소셜 태그 실패로 재시도를 걸면 실패한 태그마다
-# 하루 최대 4번까지 액터를 다시 돌리게 되고(일 상한 $dailyBudget 안이지만) 그건 돈에 관한
-# 결정이라 도메인 소유자 승인이 필요하다. 소셜 실패는 지금처럼 로그에만 남는다.
-$freeLegs = @("spotify", "apple", "youtube", "shazam")
-$stillPending = @($freeLegs | Where-Object { $pending.ContainsKey($_) -and @($pending[$_]).Count -gt 0 })
+# 2026-07-31 (D-054 · 도메인 소유자 승인): **유료 소셜도 하루를 열어 둔다.**
+# 예전에는 무료 레그만 열어 뒀는데, 그 이유는 실패 태그를 하루 최대 4번 다시 사는 것이
+# 돈에 관한 결정이기 때문이었다. 승인과 함께 **셈법의 구멍을 먼저 막았다**: 예산을
+# 성공이 아니라 **시도**로 세고(액터가 돌면 실패해도 돈이 나간다) 그 원장을 실행 너머로
+# 유지한다. 그래서 재시도를 켜도 하루 총액은 여전히 $dailyBudget 에서 멈춘다.
+$retryLegs = @("spotify", "apple", "youtube", "shazam", "social")
+$stillPending = @($retryLegs | Where-Object { $pending.ContainsKey($_) -and @($pending[$_]).Count -gt 0 })
 $maxAttempts = 4
 if ($stillPending.Count -gt 0) {
   $detail = (($stillPending | ForEach-Object { "$_=$(@($pending[$_]) -join '/')" }) -join ", ")

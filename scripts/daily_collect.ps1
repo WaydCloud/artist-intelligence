@@ -1,6 +1,9 @@
 # daily_collect.ps1 -- forward experiment daily collector, v2 (D-013 wide collection).
 # ASCII-only on purpose: Windows PowerShell 5.1 misreads UTF-8-without-BOM scripts,
 # which corrupts parsing (a non-ASCII comment can break the next line). Keep it ASCII.
+# 2026-08-01: the rule bites hardest in Log strings -- non-ASCII there is not a risk but a
+# certainty. The 08-01 spend line shipped as mojibake, so the one audit trail that exists
+# for a paid leg was unreadable on the first day it actually ran. Log strings stay ASCII.
 #
 # Config-driven (config/collect.json): chart markets (free Kworb), social hashtags
 # (genre tags + watchlist act tags, paid Apify with per-tag USD cap), daily budget
@@ -45,6 +48,15 @@ $legs = @{}
 $pending = @{}
 $attempt = 1
 $startedAt = (Get-Date -Format s)
+# 🔴 파생 단계(머지·시리즈·리포트)의 실패도 하루를 열어 둔다 (2026-08-01 실측).
+# 그날까지 완주 판정은 **수집 레그만** 봤다. 그래서 08-01 실행에서 `social merge FAILED`가
+# 로그에 찍혔는데도 하루가 done 으로 닫혔고, 산 데이터($3)가 리포트에 들어가지 못한 채
+# 재시도도 돌지 않았다. 파생은 네트워크도 돈도 쓰지 않으므로 다시 돌리는 값이 싸다 --
+# 열어 두지 않을 이유가 없었고, 닫아 두는 쪽의 값이 "오늘 수집이 조용히 증발"이었다.
+$deriveFails = @()
+function Set-Derive([string]$name, [bool]$ok, [string]$okMsg, [string]$failMsg) {
+  if ($ok) { Log $okMsg } else { $script:deriveFails += $name; Log "!! $failMsg" }
+}
 if (Test-Path $statePath) {
   try {
     $prev = Get-Content $statePath -Raw -Encoding utf8 | ConvertFrom-Json
@@ -235,7 +247,7 @@ if ($targetsS.Count -gt 0) {
 # 1.5) live chart-history report -- latest snapshot per platform/market, 3-platform cross view (D-016)
 $homeMarket = "KR"; if ($cfg.home_market) { $homeMarket = ([string]$cfg.home_market).ToUpper() }
 python -m chart_history analyze data/live/chart --latest --entities packages/entity-master/entities.json --watchlist $wlPath --geo-scope $homeMarket -o modules/chart-history/output/
-if ($?) { Log "chart-history live report written (3-platform cross view, home=$homeMarket)" } else { Log "!! chart-history analyze FAILED" }
+Set-Derive "chart-report" $? "chart-history live report written (3-platform cross view, home=$homeMarket)" "chart-history analyze FAILED"
 
 # 2) paid social fetch per tag (capped) -- PAUSE / end-date / dry-run / budget guards
 $pausePath = Join-Path $live "PAUSE"
@@ -265,15 +277,30 @@ else {
   # 예전 셈법은 성공만 셌다. 그 상태로 재시도를 켜면 실패 태그가 하루 4번 다시 돌아
   # 문서가 적어 둔 "일 상한 안"이 거짓이 된다. 성공은 파일이 증거이지만 실패는 증거를
   # 남기지 않으므로, 실행을 넘어 살아남는 원장을 따로 둔다.
-  $attemptsPath = Join-Path $live "social\attempts_$today.json"
+  # 🔴 원장은 **스냅샷 디렉터리 밖**에 둔다 (2026-08-01 실측). 처음에는
+  # `data/live/social/attempts_<date>.json` 이었는데, 그 디렉터리는 merge_social.py 가
+  # `*.json` 으로 훑는 자리다 -- 원장이 스냅샷인 척 끼어들어 **머지가 통째로 죽었다**.
+  # 스냅샷 디렉터리에는 스냅샷만 있어야 한다. 원장은 재개 상태와 같은 성격이므로 state 로.
+  $attemptsPath = Join-Path $live "state\social_attempts_$today.json"
   $attempts = @{}
-  if (Test-Path $attemptsPath) {
+  # 옛 자리에 남아 있으면 그대로 이어받는다 -- 여기서 못 읽으면 그날 지출이 0으로 리셋되고
+  # 재시도가 이미 산 태그를 다시 산다. 자리를 옮기는 변경에서 가장 비싼 실수가 그것이다.
+  $legacyPath = Join-Path $live "social\attempts_$today.json"
+  foreach ($p in @($attemptsPath, $legacyPath)) {
+    if (-not (Test-Path $p)) { continue }
     try {
-      $prevA = Get-Content $attemptsPath -Raw -Encoding utf8 | ConvertFrom-Json
-      foreach ($p in $prevA.PSObject.Properties) { $attempts[$p.Name] = [int]$p.Value }
-    } catch { Log "!! social attempts ledger unreadable -- starting fresh (예산이 과소 계상될 수 있다)" }
+      # BOM 유무와 무관하게 읽는다 -- 예전 Set-Content -Encoding utf8 이 BOM을 붙였다.
+      $prevA = [System.IO.File]::ReadAllText($p) | ConvertFrom-Json
+      foreach ($q in $prevA.PSObject.Properties) { $attempts[$q.Name] = [int]$q.Value }
+      break
+    } catch { Log "!! social attempts ledger unreadable ($p) -- starting fresh (spend may be under-counted)" }
   }
-  function Save-Attempts { ($attempts | ConvertTo-Json -Depth 3) | Set-Content -Path $attemptsPath -Encoding utf8 }
+  # 🔴 BOM 없이 쓴다. Windows PowerShell 5.1 의 `Set-Content -Encoding utf8` 은 BOM을 붙이고,
+  # 파이썬 `json.loads` 는 BOM이 있는 utf-8 을 거부한다(utf-8-sig 가 아니면).
+  function Save-Attempts {
+    [System.IO.File]::WriteAllText($attemptsPath, ($attempts | ConvertTo-Json -Depth 3),
+      (New-Object System.Text.UTF8Encoding($false)))
+  }
   # 오늘 이미 쓴 돈 = 시도 총합. 성공/실패를 가리지 않는다.
   $spent = 0.0
   foreach ($v in $attempts.Values) { $spent += ($perTagUsd * [int]$v) }
@@ -285,7 +312,7 @@ else {
     if ((Test-Path $out) -or (Test-Path (Join-Path $live "quarantine\${today}_${tag}.json"))) {
       $skipT++; continue
     }
-    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped (재시도 포함 누적)"; break }
+    if (($spent + $perTagUsd) -gt $dailyBudget) { Log "budget stop: spent `$$spent + `$$perTagUsd would exceed `$$dailyBudget -- remaining tags skipped (cumulative, retries included)"; break }
     # 시도를 **먼저** 기록한다. 여기서 스크립트가 죽어도 돈은 이미 나갔을 수 있다.
     $attempts[$tag] = [int]$attempts[$tag] + 1
     Save-Attempts
@@ -296,9 +323,9 @@ else {
       # PII gate: REJECT -> quarantine (never joins the pipeline)
       python scripts/validate_snapshot.py $out | Out-Null
       if (-not $?) { Move-Item $out (Join-Path $live "quarantine") -Force; Log "!! PII gate REJECT: $out -> quarantine" }
-    } else { $failT++; $failedTags += $tag; Log "!! social fetch FAILED: #$tag (시도 $($attempts[$tag])회)" }
+    } else { $failT++; $failedTags += $tag; Log "!! social fetch FAILED: #$tag (attempt $($attempts[$tag]) of today)" }
   }
-  Log "social fetched: $okT tags ok, $failT failed, $skipT already collected today (not re-paid) | 오늘 시도 누적 `$$spent / `$$dailyBudget (실패 포함)"
+  Log "social fetched: $okT tags ok, $failT failed, $skipT already collected today (not re-paid) | attempts today `$$spent / `$$dailyBudget (failures included)"
   if ($failT -eq 0) {
     $legs["social"] = "ok"; $pending.Remove("social"); Save-State $false
   } else {
@@ -310,10 +337,10 @@ else {
 
 # 3) rebuild forward signal-series (watchlist attribution, D-013)
 python scripts/merge_social.py data/live/social data/live/social_merged.json
-if ($?) { Log "social merged+deduped" } else { Log "!! social merge FAILED" }
+Set-Derive "social-merge" $? "social merged+deduped" "social merge FAILED"
 $env:PYTHONPATH = "modules/fandom-pulse/src"
 python -m fandom_pulse signals data/live/social_merged.json --entities packages/entity-master/entities.json --watchlist packages/entity-master/watchlist.json -o data/live/social_series.json
-if ($?) { Log "social series rebuilt (sound+hashtag attribution)" } else { Log "!! social series FAILED" }
+Set-Derive "social-series" $? "social series rebuilt (sound+hashtag attribution)" "social series FAILED"
 
 # 3.5) free YouTube rail (official API, ~12 units/day) -- D-014
 $ytCache = Join-Path $repo "packages\entity-master\yt_channels.json"
@@ -337,7 +364,7 @@ if (Test-Path $ytCache) {
     python -m yt_pulse signals data/live/yt -o data/live/yt_series.json
     if ($?) { $ytSeries = "data/live/yt_series.json"; Log "yt fetched + series rebuilt (official channels)" } else { Log "!! yt series FAILED" }
     python -m yt_pulse analyze data/live/yt -o modules/yt-pulse/output/
-    if ($?) { Log "yt report written" } else { Log "!! yt report FAILED" }
+    Set-Derive "yt-report" $? "yt report written" "yt report FAILED"
   }
 } else { Log "yt SKIPPED (no channel cache -- run yt_pulse resolve once)" }
 
@@ -382,16 +409,16 @@ else {
 if (Test-Path $sonicToday) {
   $env:PYTHONPATH = "modules/sonic-profile/src"
   python -m sonic_profile signals data/live/sonic -o data/live/sonic_series.json 2>$null | Out-Null
-  if ($LASTEXITCODE -eq 0) { Log "sonic series rebuilt" } else { Log "!! sonic series FAILED (exit $LASTEXITCODE)" }
+  Set-Derive "sonic-series" ($LASTEXITCODE -eq 0) "sonic series rebuilt" "sonic series FAILED (exit $LASTEXITCODE)"
   python -m sonic_profile analyze data/live/sonic --watchlist $wlPath -o modules/sonic-profile/output/ 2>$null | Out-Null
-  if ($LASTEXITCODE -eq 0) { Log "sonic report written" } else { Log "!! sonic report FAILED (exit $LASTEXITCODE)" }
+  Set-Derive "sonic-report" ($LASTEXITCODE -eq 0) "sonic report written" "sonic report FAILED (exit $LASTEXITCODE)"
 }
 
 # 3.7) genre-impulse (D-035): impulse ledger x daily sonic cohort -> monitor report (offline, no cost)
 if (Test-Path $sonicToday) {
   $env:PYTHONPATH = "modules/genre-impulse/src;modules/sonic-profile/src"
   python -m genre_impulse analyze --sonic data/live/sonic --watchlist $wlPath -o modules/genre-impulse/output/ 2>$null | Out-Null
-  if ($LASTEXITCODE -eq 0) { Log "genre-impulse report written" } else { Log "!! genre-impulse FAILED (exit $LASTEXITCODE)" }
+  Set-Derive "genre-impulse" ($LASTEXITCODE -eq 0) "genre-impulse report written" "genre-impulse FAILED (exit $LASTEXITCODE)"
 }
 
 # chart: >=2 distinct dates -> real forward series; else Days-reconstruction fallback
@@ -409,9 +436,9 @@ if ($dates.Count -ge 2) {
 $env:PYTHONPATH = "modules/signal-bridge/src"
 $ytArg = @(); if ($ytSeries) { $ytArg = @("--youtube", $ytSeries) }
 python -m signal_bridge analyze --social data/live/social_series.json --chart data/live/chart_series.json --theta-rank 200 --focus-social --watchlist packages/entity-master/watchlist.json @ytArg -o modules/signal-bridge/output/
-if ($?) { Log "bridge report written (forward, watchlist profile)" } else { Log "!! bridge FAILED" }
+Set-Derive "bridge" $? "bridge report written (forward, watchlist profile)" "bridge FAILED"
 node apps/dashboard/scripts/collect-reports.mjs
-if ($?) { Log "dashboard reports.json refreshed" } else { Log "!! dashboard collect FAILED" }
+Set-Derive "dashboard" $? "dashboard reports.json refreshed" "dashboard collect FAILED"
 
 # 5) summary line: coverage + social-led / social-only counts to watch over time
 python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$null | ForEach-Object { Log $_ }
@@ -433,11 +460,16 @@ python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$nul
 # 돈에 관한 결정이기 때문이었다. 승인과 함께 **셈법의 구멍을 먼저 막았다**: 예산을
 # 성공이 아니라 **시도**로 세고(액터가 돌면 실패해도 돈이 나간다) 그 원장을 실행 너머로
 # 유지한다. 그래서 재시도를 켜도 하루 총액은 여전히 $dailyBudget 에서 멈춘다.
+# 2026-08-01: derive steps count too. Until today only collect legs could hold the day open,
+# so the 08-01 run logged "social merge FAILED" and still closed done -- the tags bought that
+# morning ($3) never reached a report and no retry ever looked at them. Deriving is free and
+# idempotent, so holding the day open for it costs a re-run and buys back the day's data.
 $retryLegs = @("spotify", "apple", "youtube", "shazam", "social")
 $stillPending = @($retryLegs | Where-Object { $pending.ContainsKey($_) -and @($pending[$_]).Count -gt 0 })
 $maxAttempts = 4
-if ($stillPending.Count -gt 0) {
-  $detail = (($stillPending | ForEach-Object { "$_=$(@($pending[$_]) -join '/')" }) -join ", ")
+if ($stillPending.Count -gt 0 -or $deriveFails.Count -gt 0) {
+  $detail = ((@($stillPending | ForEach-Object { "$_=$(@($pending[$_]) -join '/')" }) +
+              @($deriveFails | ForEach-Object { "derive:$_" })) -join ", ")
   if ($attempt -lt $maxAttempts) {
     Save-State $false
     Log "!! day left INCOMPLETE on purpose (attempt $attempt/$maxAttempts) -- pending: $detail. The next scheduled attempt retries only these."

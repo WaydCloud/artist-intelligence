@@ -1,8 +1,8 @@
 {
   "moduleId": "yt-pulse",
   "title": "YT 펄스 · 워치리스트 공식 채널",
-  "subtitle": "YouTube Data API v3 (official) · 수집 2026-07-31",
-  "generatedAt": "2026-07-31T00:17:58Z",
+  "subtitle": "YouTube Data API v3 (official) · 수집 2026-08-01",
+  "generatedAt": "2026-08-01T01:00:36Z",
   "metrics": [
     {
       "label": "추적 팀",
@@ -14,7 +14,7 @@
     },
     {
       "label": "수집한 영상",
-      "value": 193,
+      "value": 215,
       "unit": "개",
       "hint": "채널당 최근 업로드 창",
       "section": "reach",
@@ -22,14 +22,14 @@
     },
     {
       "label": "조회 합",
-      "value": 127663992,
+      "value": 143082061,
       "unit": "views",
       "section": "reach",
       "definition": "수집한 영상의 조회수를 모두 더한 값. 공개 집계 수치이며 인기의 총점이 아니다."
     },
     {
       "label": "가장 빠른 영상의 일 조회",
-      "value": 2838922,
+      "value": 4370279,
       "unit": "views/일",
       "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)",
       "section": "fresh",
@@ -37,7 +37,7 @@
     },
     {
       "label": "새 영상",
-      "value": 181,
+      "value": 185,
       "unit": "개",
       "hint": "최근 14일 내 업로드(캠페인 활성)",
       "section": "fresh",
@@ -51,47 +51,47 @@
       "data": [
         {
           "name": "KATSEYE",
-          "value": 63037524
+          "value": 71047922
         },
         {
           "name": "CORTIS",
-          "value": 19155093
+          "value": 20580864
         },
         {
           "name": "ILLIT",
-          "value": 16097863
+          "value": 17450954
         },
         {
           "name": "BABYMONSTER",
-          "value": 12011933
+          "value": 12311728
         },
         {
           "name": "Hearts2Hearts",
-          "value": 7365683
+          "value": 9943964
         },
         {
           "name": "RESCENE",
-          "value": 5459482
+          "value": 6295593
         },
         {
           "name": "KISS OF LIFE",
-          "value": 2169857
+          "value": 2654098
         },
         {
           "name": "MEOVV",
-          "value": 1213837
+          "value": 1307041
         },
         {
           "name": "izna",
-          "value": 606151
+          "value": 688805
         },
         {
           "name": "KiiiKiii",
-          "value": 391576
+          "value": 626693
         },
         {
           "name": "KEYVEATZ",
-          "value": 154993
+          "value": 174399
         }
       ],
       "section": "reach",
@@ -103,48 +103,48 @@
       "type": "bar",
       "id": "fresh-by-act",
       "reliability": {
-        "sample": "최근 14일 · 영상 181개 / 193개"
+        "sample": "최근 14일 · 영상 185개 / 215개"
       },
       "data": [
         {
           "name": "ILLIT",
-          "value": 25
+          "value": 27
         },
         {
           "name": "Hearts2Hearts",
-          "value": 21
+          "value": 24
         },
         {
           "name": "KEYVEATZ",
-          "value": 21
-        },
-        {
-          "name": "CORTIS",
-          "value": 18
+          "value": 22
         },
         {
           "name": "KISS OF LIFE",
-          "value": 18
+          "value": 20
         },
         {
           "name": "RESCENE",
           "value": 18
         },
         {
-          "name": "KiiiKiii",
-          "value": 15
+          "name": "CORTIS",
+          "value": 17
+        },
+        {
+          "name": "KATSEYE",
+          "value": 16
         },
         {
           "name": "izna",
           "value": 14
         },
         {
-          "name": "KATSEYE",
-          "value": 13
+          "name": "KiiiKiii",
+          "value": 11
         },
         {
           "name": "BABYMONSTER",
-          "value": 11
+          "value": 9
         },
         {
           "name": "MEOVV",
@@ -159,11 +159,11 @@
   ],
   "media": [],
   "insights": [
-    "신작: KISS OF LIFE · 'KISS OF LIFE (키스오브라이프) 'SWEAT' Music Video Teaser 2' (1일 전, 조회 56,841, +56,841/일) · 캠페인 활성 신호(참고)",
-    "신작: KEYVEATZ · 'Turn the #OXY up with #fromis_9 #SONGHAYOUNG' (1일 전, 조회 3,870, +3,870/일) · 캠페인 활성 신호(참고)",
-    "신작: KiiiKiii · 'KiiiKiii 키키 'Candy Pink Magic Hole Flip Phone (나 어떡해)' Stop Motion' (1일 전, 조회 12,788, +12,788/일) · 캠페인 활성 신호(참고)",
-    "신작: KEYVEATZ · '엠카 외모쳌 2탄' (1일 전, 조회 3,151, +3,151/일) · 캠페인 활성 신호(참고)",
-    "신작: KiiiKiii · 'KiiiKiii 키키 'Candy Pink Magic Hole Flip Phone (나 어떡해)' Stop Motion' (1일 전, 조회 88,767, +88,767/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'oh, press record!! ❤️‍🩹 #KATSEYE' (1일 전, 조회 638,349, +638,349/일) · 캠페인 활성 신호(참고)",
+    "신작: CORTIS · 'COER! see you soon at the 2026 Lollapalooza Aftershow 🤘 #CORTIS #코르티스' (1일 전, 조회 115,619, +115,619/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'KATSEYE - Animal (on the dance floor)' (1일 전, 조회 1,417,439, +1,417,439/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'KATSEYE - Animal (behind the closed doors)' (1일 전, 조회 350,387, +350,387/일) · 캠페인 활성 신호(참고)",
+    "신작: RESCENE · '까엉TV 가 왔다 🤍🤍' (1일 전, 조회 540,811, +540,811/일) · 캠페인 활성 신호(참고)",
     "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
     "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
     "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"
@@ -180,40 +180,40 @@
     "question": "지금 가장 빠르게 조회를 모으는 팀은 어디인가?",
     "definition": "팀의 영상 중 평균 일 조회가 가장 높은 한 편의 값(조회수 ÷ 공개 후 지난 날, 상위 8팀). 수명 전체 평균이라 갓 올라온 영상의 초반 화력은 낮게, 오래된 영상은 평탄하게 잡힌다. 채널 규모가 크면 같은 반응에서도 값이 커진다.",
     "reliability": {
-      "sample": "팀 11팀 · 영상 193개"
+      "sample": "팀 11팀 · 영상 215개"
     },
     "data": [
       {
         "name": "KATSEYE",
-        "value": 2838922
+        "value": 4370279
       },
       {
         "name": "CORTIS",
-        "value": 1932701
-      },
-      {
-        "name": "ILLIT",
-        "value": 640244
+        "value": 1178257
       },
       {
         "name": "Hearts2Hearts",
-        "value": 378228
+        "value": 942763
       },
       {
-        "name": "BABYMONSTER",
-        "value": 340377
-      },
-      {
-        "name": "KISS OF LIFE",
-        "value": 232588
+        "name": "ILLIT",
+        "value": 604058
       },
       {
         "name": "RESCENE",
-        "value": 211509
+        "value": 540811
+      },
+      {
+        "name": "BABYMONSTER",
+        "value": 302184
+      },
+      {
+        "name": "KISS OF LIFE",
+        "value": 218676
       },
       {
         "name": "KiiiKiii",
-        "value": 88767
+        "value": 144558
       }
     ]
   },
@@ -239,16 +239,16 @@
     "광고가 붙은 조회인지. 유기적 조회와 구분하지 않는다"
   ],
   "reliability": {
-    "sample": "팀 11팀 · 영상 193개 · 기준일 2026-07-31",
+    "sample": "팀 11팀 · 영상 215개 · 기준일 2026-08-01",
     "accuracy": "조회·구독은 API가 돌려준 공개 집계값. 평균 일 조회는 수명 평균 근사이며 정확도 미측정",
     "missing": "팀 공식 채널만 본다. 레이블 채널 업로드와 채널이 확인되지 않은 팀은 이 표본에 없다",
-    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-07-31T00:17:58Z"
+    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-08-01T00:16:21Z"
   },
   "inferences": [
     {
-      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 12배다.",
-      "basis": "1위 KATSEYE 2,838,922/일 · 중앙값 232,588/일 · 팀 11팀",
-      "sample": "팀 11팀 · 영상 193개",
+      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 14배다.",
+      "basis": "1위 KATSEYE 4,370,279/일 · 중앙값 302,184/일 · 팀 11팀",
+      "sample": "팀 11팀 · 영상 215개",
       "confidence": "medium",
       "limits": "구독자 규모가 큰 채널은 같은 반응에서도 값이 커진다. 이 값은 화력의 분포이지 완성도의 순위가 아니다.",
       "chartId": "velocity-by-act"

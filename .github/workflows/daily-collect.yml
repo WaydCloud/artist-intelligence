@@ -19,11 +19,30 @@ on:
   #    우리에게 영구 결손이다. 어정쩡한 분으로 피한다.
   # 네 번은 daily_collect.ps1 의 `$maxAttempts = 4` 와 짝이다 — 4회를 넘으면 스크립트가
   # 결손을 결손으로 확정하고 무엇이 비었는지 로그에 적는다. 여기서 5번째를 돌려도 no-op다.
+  #
+  # 🔴 크론은 **언제나 UTC**다 — 아래 `tzutil` 로 러너를 KST로 맞춰도 이 표는 UTC로 읽힌다.
+  #    러너의 시계만 KST가 되고(그래서 `$today` 가 로컬과 같은 날짜를 쓴다), 발화 시각은
+  #    여전히 UTC 기준이다. 둘을 헷갈리면 하루 어긋난 날짜로 스냅샷이 찍힌다.
   schedule:
+    # ── 상시 (전환 후의 정본)
     - cron: "17 0 * * *" # 09:17 KST — 1차
     - cron: "17 2 * * *" # 11:17 KST — 재시도(실패 타깃만)
     - cron: "17 4 * * *" # 13:17 KST — 재시도
     - cron: "17 6 * * *" # 15:17 KST — 재시도
+    # ── 🔴 병행 운전 기간 **한정**. 전환일에 이 한 줄을 지운다.
+    #
+    # 왜 필요한가: 로컬은 09:00에 돌고 마지막 레그가 `state/<날짜>`를 1층에 올린다
+    # (`done=true`). 러너가 09:17에 그것을 복원하면 스크립트가 재개 상태를 보고
+    # **매일 no-op으로 나간다** — 17분 뒤에 도는 한 언제나 그렇다. 즉 위 네 줄만으로는
+    # **대조할 것이 아예 생기지 않는다**(2026-08-01 세 번의 실행이 전부 그랬다).
+    # 로컬보다 먼저 돌아야 러너가 실제로 수집한다.
+    #
+    # 🔴 전환일에 **반드시 지운다.** 병행 기간에는 러너가 아무것도 쓰지 않으므로 이 시각에
+    #    받은 것이 한 발행 주기 뒤처져 있어도 버려진다. 그러나 전환 후에는 러너가 1층에
+    #    쓰므로, 소스가 아직 갱신되지 않은 시각에 받으면 **어제 보드를 오늘 날짜로 박제한다**
+    #    — 1층은 재취득 불가라 되돌릴 수 없다. 로컬이 09:00에 성공해 온 것이 우리가 아는
+    #    유일한 안전 시각이다.
+    - cron: "17 23 * * *" # 08:17 KST (다음 날) — 병행 대조 전용
   workflow_dispatch:
 
 # 🔴 겹쳐 돌지 않게 막는다. 앞 시도가 아직 도는데 다음 크론이 뜨면 두 프로세스가 같은
@@ -82,6 +101,28 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+
+      # 🔴 러너 시계를 KST로 맞춘다. **날짜가 데이터의 키다.**
+      #
+      # `daily_collect.ps1` 의 `$today` 는 `Get-Date` 이고, 그 값이 스냅샷 파일명·재개
+      # 상태(`run_<날짜>.json`)·유료 시도 원장·백업 아카이브 키를 전부 정한다. 러너는
+      # 기본이 UTC라 그 날짜가 로컬(KST)과 다른 날을 가리킬 수 있다.
+      #
+      # 지금 상시 크론(00:17~06:17 UTC)에서는 두 날짜가 **우연히** 같다. 하지만 병행 대조용
+      # 슬롯(23:17 UTC)은 KST로 다음 날 08:17이라, 시계를 안 맞추면 러너가 **하루 전 날짜로**
+      # 스냅샷을 찍는다 -- 그러면 1층의 날짜 축이 어긋나고 시리즈가 조용히 틀어진다.
+      # 우연에 기대지 않고 명시한다.
+      #
+      # 실패하면 죽는다. 시계가 틀린 채 수집하면 결과물이 "틀린 것"이 아니라
+      # **"그럴듯한데 하루 밀린 것"** 이 되고, 그건 나중에 못 알아본다.
+      - name: Set runner clock to KST (date is the data key)
+        shell: powershell
+        run: |
+          tzutil /s "Korea Standard Time"
+          if ($LASTEXITCODE -ne 0) { throw "tzutil failed ($LASTEXITCODE) -- refusing to collect on an unknown clock" }
+          $tz = (Get-TimeZone).Id
+          Write-Output "runner clock: $tz | now=$(Get-Date -Format 'yyyy-MM-dd HH:mm') | collection date will be $(Get-Date -Format 'yyyy-MM-dd')"
+          if ($tz -ne "Korea Standard Time") { throw "timezone did not take effect (got '$tz')" }
 
       # 🔴 중단 레버. `data/live/PAUSE`는 **러너에 오지 않는다** — 그 파일은 gitignore인
       #    data/live 안에 있고 백업의 _EXCLUDED("가드 파일")라 복원되지도 않는다. 즉 이전과

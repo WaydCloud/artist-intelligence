@@ -11,22 +11,17 @@
 > 📄 이번 세션 이력 = **[`Handoffs/2026-08-01-collector-migration.md`](Handoffs/2026-08-01-collector-migration.md)** · 결정 = **[`docs/DECISIONS.md`](docs/DECISIONS.md) D-059** · 판단 자료 = **[`docs/DRAFT-saas-platform.md`](docs/DRAFT-saas-platform.md) §2.2**.
 > 그 앞(같은 날 오후) = [`Handoffs/2026-08-01-backup-live-and-ip-verdict.md`](Handoffs/2026-08-01-backup-live-and-ip-verdict.md) · D-058. 그 앞(오전) = [`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md) · D-054 ⑥.
 
-### 🔴 다음 세션이 처음 할 일 — **㉯ 시크릿을 넣고 ㉰ 손수 한 번 돌린다**
+### 🔴 다음 세션이 처음 할 일 — **하루가 열려 있을 때 러너를 한 번 돌린다**
 
-> 결정 넷은 받았다(D-059 ①~④: 파생 전부 러너 · 이전이 멜론보다 먼저 · `windows-latest` · `09:17`+4회).
-> `.github/workflows/daily-collect.yml`과 `requirements-daily.txt`가 섰고, **아직 한 번도 돌지 않았다.**
+> 결정 넷은 받았다(D-059 ①~④). 워크플로가 섰고 **시크릿 넷도 등록됐다**(도메인 소유자 승인). 첫 실행도 했다(run `30683288722` · 3분 27초).
+> **다만 그 실행은 수집을 하지 않았다** — 오늘(08-01)이 로컬에서 이미 완주라 스크립트가 재개 상태를 보고 `no-op`으로 나갔다.
 
-**㉯ 시크릿 넷** — 🔴 **도메인 소유자 승인 사항**(PUBLIC 레포에 유료 키를 두는 결정). 값은 이 PC의 User 환경변수에 이미 있다.
+✅ **확인된 것**: 복원 경로가 러너에서 실제로 돈다 — **1,627파일 / 54아카이브 / 14.33MB**(로컬과 동일) · `verify OK 54/54/54` · 파이썬 3.14.6.
+⏳ **아직 안 재진 것**: 수집·파생 레그 · 콜드 캐시 비용(모델 ~500MB) · sonic 레그가 러너에서 도는지.
 
-```bash
-gh secret set SUPABASE_URL          # 러너 부트스트랩(1층 복원)에 필수 — 없으면 첫 스텝에서 죽는다
-gh secret set SUPABASE_SERVICE_KEY
-gh secret set APIFY_TOKEN           # 유료 소셜 (병행 기간에는 AI_DRYRUN=1이라 안 쓴다)
-gh secret set YOUTUBE_API_KEY
-```
-
-**㉰ 손수 한 번**(`gh workflow run daily-collect.yml`) — 이 시점의 러너는 **무료·읽기 전용**이다: 유료 레그 꺼짐(`AI_DRYRUN` 미설정=1) · 1층에 **아무것도 쓰지 않음** · `main`에 **아무것도 밀지 않음**. 즉 잘못 돌아도 잃을 것이 없다. 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**.
+**다음 실행**(`gh workflow run daily-collect.yml`) — **하루가 열려 있는 시각에** 돌려야 뜻이 있다. 로컬 09:00 완주 전이면 러너가 실제로 수집한다. 지금 모드는 **무료·읽기 전용**(`RUNNER_MODE` 미설정): 유료 레그 꺼짐 · 1층에 안 씀 · `main`에 안 밀음.
 - 🔺 콜드 캐시라 처음엔 ~500MB를 받는다(beat_this 체크포인트 81MB + essentia ONNX). **이 두 호스트는 ip-probe가 재지 않은 표면이다**(D-059 ⑩) — 막히면 sonic 레그만 죽고 나머지는 돈다.
+- 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**과 preflight의 `MODE = ...` 줄.
 
 **㉱ 병행 운전** — 로컬 Task Scheduler를 그대로 두고 하루를 대조한다. 러너가 만든 `report.json`과 로컬 것을 나란히 놓는다.
 - 🔑 **병행 기간에 러너가 1층에 쓰지 않는 것은 돈 때문이 아니라 저장소 때문이다**(D-059 ⑤). 로컬과 러너가 같은 버킷의 **같은 키**(`state/<날짜>` · `logs/daily`)를 쓰므로 나중에 올린 쪽이 앞의 것을 지운다 — 대조하려고 켠 병행 운전이 대조 대상을 오염시킨다.
@@ -35,9 +30,11 @@ gh secret set YOUTUBE_API_KEY
 
 | 레버 (저장소 변수) | 켜면 | 기본 |
 |---|---|---|
-| `AI_DRYRUN=0` | 유료 소셜 **+ 1층 쓰기**를 동시에 연다 | 꺼짐 |
-| `PUSH_REPORTS=1` | 3층(`report.json`)을 `main`에 되민다 | 꺼짐 |
-| `PAUSE=1` | 즉시 정지 | 꺼짐 |
+| `RUNNER_MODE=live` | 유료 소셜 **+ 1층 쓰기**를 동시에 연다 | 꺼짐 |
+| `PUSH_REPORTS=on` | 3층(`report.json`)을 `main`에 되민다 | 꺼짐 |
+| `PAUSE=`(아무 값) | 즉시 정지 | 꺼짐 |
+
+- 🔴 켜는 값이 `1`이 아닌 이유: **GitHub 표현식의 `==`는 숫자로 캐스팅한다.** `vars.X == '0'`은 **미설정일 때 참**이라 첫 실행에서 가드가 열린 쪽으로 실패했다(D-059 ⑪ · 피해 0). 켜는 조건은 숫자로 읽힐 수 없는 문자열만 쓴다. 멈추는 레버는 반대로 **비어 있지 않은 아무 값에나** 선다.
 
 - 🔴 `data/live/PAUSE`는 **러너에 오지 않는다**(백업 제외 항목). 러너 몫의 중단 레버는 변수 `PAUSE`이고, 완전 정지는 Actions 탭에서 워크플로 Disable이다.
 - 해제: `schtasks /Delete /TN "AI-daily-collect" /F`
@@ -59,6 +56,14 @@ gh secret set YOUTUBE_API_KEY
 - 재현: `PYTHONIOENCODING=cp1252`에서 `print('한글')` → `UnicodeEncodeError` · exit 1. 짝을 걸면 exit 0.
 - 고친 방식은 D-058 ⑤와 같다 — **사람이 지키지 않아도 되게.** 짝을 스크립트 **맨 위로** 올려 모든 레그보다 먼저 한 번 걸고, 아래 어느 레그도 다시 묻지 않는다.
 - **배운 것**: 로컬에서 초록인 것은 "맞다"가 아니라 **"이 환경에서 맞다"**이다. 실행 환경이 바뀌는 변경에서는 육안·실행으로 안 보인다 — **환경 가정을 목록으로 훑어야** 보인다.
+
+### 🔴 그리고 첫 실행이 서른넷째 건을 냈다 — **가드가 열린 쪽으로 실패했다**
+
+**`vars.AI_DRYRUN == '0'`이 변수를 설정하지 않았을 때 참이었다.** GitHub 표현식의 `==`는 피연산자를 **숫자로 캐스팅**한다 — 미설정은 `''` → 0, `'0'` → 0. "미설정=꺼짐"으로 설계한 기본값이 정확히 반대로 돌아 **유료 + 1층 쓰기 모드로 실행됐다**(run `30683288722`).
+- **피해 0** — 오늘이 로컬에서 이미 닫혀 있어 스크립트가 `no-op`으로 나갔다(수집 0회 · $0). **닫혀 있지 않았다면 "읽기 전용 시험"이 $3을 쓰고 1층에 썼다.**
+- 고친 것 둘: **켜는 조건은 숫자로 캐스팅될 수 없는 문자열**(`RUNNER_MODE == 'live'`) · **멈추는 레버는 반대 방향으로 안전하게**(`PAUSE != ''` — 비어 있지 않은 아무 값에나 선다).
+- 🔺 이것이 보인 유일한 자리는 스텝 로그의 `AI_DRYRUN: 0` 한 줄 — **읽을 이유가 없는 자리다.** 그래서 preflight가 이제 **값이 아니라 결과를 말로** 찍는다(`MODE = LIVE -- paid social WILL run ...`).
+- **배운 것**: 설정 언어의 비교 연산자가 우리 언어와 같은 뜻이라고 가정하지 않는다. **기본값의 방향은 주석이 아니라 실행 로그로 확인해야 한다.**
 
 **그리고 중단 레버가 이전과 함께 조용히 죽을 뻔했다.** `data/live/PAUSE`는 gitignore 안에 있고 백업 제외 항목이라 **러너에 오지 않는다.** 문서가 적어 둔 레버가 이전 다음 날부터 아무 일도 하지 않게 된다.
 - 🔺 일반화: **이전은 코드를 옮기는 일이 아니라 코드가 딛고 서 있던 것들을 옮기는 일이다.** 옮겨지지 않는 것(로컬 파일 · 대화형 인증 · 콘솔 코드페이지)이 조용히 빠진다. 이번에 셋 다 나왔다.
@@ -282,11 +287,13 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts\register_task.ps1 [-
 
 # ── 러너 (D-059 · .github/workflows/daily-collect.yml)
 gh secret set SUPABASE_URL   # 넷 다 필요 (SUPABASE_SERVICE_KEY · APIFY_TOKEN · YOUTUBE_API_KEY)
-gh workflow run daily-collect.yml     # 손수 1회. 기본은 무료·읽기 전용이라 잘못 돌아도 잃을 것이 없다
-gh run watch                          # 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**
-gh variable set AI_DRYRUN --body 0    # 🔴 전환일에만. 유료 + 1층 쓰기를 동시에 연다
-gh variable set PUSH_REPORTS --body 1 #    3층을 main 에 되민다
-gh variable set PAUSE --body 1        #    즉시 정지 (data/live/PAUSE 는 러너에 안 간다)
+gh workflow run daily-collect.yml       # 손수 1회. 기본은 무료·읽기 전용이라 잃을 것이 없다
+gh run watch                            # 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**
+gh variable set RUNNER_MODE --body live # 🔴 전환일에만. 유료 + 1층 쓰기를 동시에 연다
+gh variable set PUSH_REPORTS --body on  #    3층을 main 에 되민다
+gh variable set PAUSE --body stop       #    즉시 정지 (data/live/PAUSE 는 러너에 안 간다)
+#   🔴 켜는 값이 1이 아닌 이유: GitHub 표현식의 `==` 는 숫자로 캐스팅한다.
+#     `vars.X == '0'` 은 **미설정일 때 참**이라 첫 실행에서 가드가 열린 쪽으로 실패했다(D-059 ⑪).
 
 # ── sonic-profile  (콘솔이 cp949라 PYTHONIOENCODING=utf-8 필요)
 PYTHONPATH=modules/sonic-profile/src python -m sonic_profile selftest       # 네트워크 0

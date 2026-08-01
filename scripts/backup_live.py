@@ -15,6 +15,8 @@
 
     python scripts/backup_live.py --init-bucket  # 최초 1회 — 비공개 버킷 생성(멱등)
     python scripts/backup_live.py                # 증분 업로드
+    python scripts/backup_live.py --restore --live <dir>   # 되돌리기(러너 부트스트랩·재난 복구)
+    #   기본값은 **덮어쓰지 않는다**. 살아 있는 트리 위에 얹으려면 --force.
     python scripts/backup_live.py --dry-run      # 네트워크 0 -- 무엇이 오를지만 본다
     python scripts/backup_live.py --verify       # 원격 목록 x 매니페스트 x 로컬 대조
     python scripts/backup_live.py --verify --deep  # 위 + 아카이브 재빌드해 해시까지 대조
@@ -157,6 +159,34 @@ def _archive(files: list[Path], root: Path) -> bytes:
 # ─────────────────────────────────────────────────────────── 매니페스트
 
 
+def _extract(blob: bytes, root: Path, *, force: bool) -> tuple[int, int]:
+    """아카이브를 `root` 아래로 푼다 → `(쓴 것, 건너뛴 것)`.
+
+    🔴 기본값은 **덮어쓰지 않는 것**이다. 러너 부트스트랩(빈 디스크)에서는 차이가 없지만,
+    사람이 살아 있는 `data/live` 위에 복원을 돌리는 순간 기본값이 파괴적이면 그날의 관측을
+    어제 것으로 되돌린다. 덮어쓰려면 `--force`를 명시해야 한다.
+
+    `filter="data"`로 푼다 — 아카이브 안의 절대경로·`..`이 root 밖에 쓰는 것을 막는다.
+    우리가 만든 아카이브만 다루지만, 신뢰의 근거를 "우리 것이니까"에 두지 않는다.
+    """
+    written = skipped = 0
+    with tarfile.open(fileobj=io.BytesIO(blob), mode="r:gz") as tar:
+        for member in tar.getmembers():
+            if not member.isfile():
+                continue
+            dest = root / member.name
+            if dest.exists() and not force:
+                skipped += 1
+                continue
+            src = tar.extractfile(member)
+            if src is None:
+                continue
+            dest.parent.mkdir(parents=True, exist_ok=True)
+            dest.write_bytes(src.read())
+            written += 1
+    return written, skipped
+
+
 def _manifest_load(path: Path) -> dict[str, dict[str, object]]:
     if not path.is_file():
         return {}
@@ -243,6 +273,11 @@ class Remote:
             url, data=body, headers=self._headers({"Content-Type": "application/json"}), method="POST"
         )
         self._call(req)
+
+    def download(self, key: str) -> bytes:
+        url = f"{self.base}/storage/v1/object/{urllib.parse.quote(self.bucket)}/{urllib.parse.quote(key)}"
+        req = urllib.request.Request(url, headers=self._headers(), method="GET")
+        return self._call(req)
 
     def upload(self, key: str, payload: bytes) -> None:
         url = f"{self.base}/storage/v1/object/{urllib.parse.quote(self.bucket)}/{urllib.parse.quote(key)}"
@@ -413,6 +448,76 @@ def cmd_upload(live: Path, prefix: str, bucket_arg: str | None, dry_run: bool) -
     return 0
 
 
+def cmd_restore(live: Path, prefix: str, bucket_arg: str | None, force: bool, dry_run: bool) -> int:
+    """원격 1층을 `live`로 되돌린다. 러너 부트스트랩이자 재난 복구 경로다.
+
+    🔑 **매니페스트도 함께 재구성한다.** 안 그러면 복원 직후의 첫 업로드가 54객체를 전부
+    다시 올린다 -- 러너에서는 그게 매 실행 반복이 된다. 받은 바이트의 해시를 그대로 쓰므로
+    매니페스트는 "우리가 올렸다고 믿는 것"이 아니라 **"원격에 실제로 있는 것"**이 된다.
+
+    🔴 받은 아카이브는 **풀기 전에 해시를 본다.** 손상된 것을 풀어 1층 위에 얹으면
+    백업이 복구가 아니라 오염이 된다.
+    """
+    url, key, bucket = _config(bucket_arg)
+    remote = Remote(url, key, bucket)
+
+    listed: dict[str, int] = {}
+    for kind in (*_LAYER1, "logs"):
+        listed.update(remote.list(f"{prefix}/{kind}" if prefix else kind))
+    if not listed:
+        _say(f"!! nothing to restore -- no objects under '{prefix}/' in bucket {bucket}")
+        return 1
+
+    if dry_run:
+        total = sum(v for v in listed.values() if v > 0)
+        _say(f"would restore {len(listed)} object(s) {total / 1e6:.2f}MB into {live}")
+        for k in sorted(listed):
+            _say(f"  {k}  {listed[k]:,}B")
+        return 0
+
+    live.mkdir(parents=True, exist_ok=True)
+    manifest: dict[str, dict[str, object]] = {}
+    written = skipped = failed = 0
+    got_bytes = 0
+    for key_name in sorted(listed):
+        try:
+            blob = remote.download(key_name)
+        except RuntimeError as exc:
+            failed += 1
+            _say(f"!! download FAILED {key_name} -- {exc}")
+            continue
+        size = listed[key_name]
+        if size > 0 and len(blob) != size:
+            failed += 1
+            _say(f"!! size mismatch on {key_name}: listed {size}B, got {len(blob)}B -- not extracted")
+            continue
+        try:
+            w, s = _extract(blob, live, force=force)
+        except (tarfile.TarError, OSError) as exc:
+            failed += 1
+            _say(f"!! extract FAILED {key_name} -- {type(exc).__name__}: {exc}")
+            continue
+        written += w
+        skipped += s
+        got_bytes += len(blob)
+        manifest[key_name] = {
+            "sha256": hashlib.sha256(blob).hexdigest(),
+            "size": len(blob),
+            "files": w + s,
+            "uploadedAt": "(restored)",
+        }
+    _manifest_save(live / _MANIFEST_REL, manifest, bucket, prefix)
+    mode = "overwriting" if force else "keeping local files"
+    _say(
+        f"restored {written} file(s) from {len(manifest)} archive(s) {got_bytes / 1e6:.2f}MB "
+        f"into {live} ({mode}); {skipped} already present"
+    )
+    if failed:
+        _say(f"!! restore incomplete -- {failed} archive(s) failed")
+        return 1
+    return 0
+
+
 def cmd_verify(live: Path, prefix: str, bucket_arg: str | None, deep: bool) -> int:
     url, key, bucket = _config(bucket_arg)
     remote = Remote(url, key, bucket)
@@ -568,6 +673,27 @@ def cmd_selftest() -> int:
         check(rc == 0, "dry-run with a matching manifest must succeed")
         check("would upload 0 object(s)" in buf2.getvalue(), f"unchanged content must upload nothing, got {buf2.getvalue()!r}")
 
+        # --- 복원(_extract) — 백업이 하는 주장의 나머지 절반 ---
+        arch = _archive(_groups(live)[("chart", "2026-07-19")], live)
+        fresh = Path(td) / "bootstrap"          # 러너의 새 디스크
+        w, s = _extract(arch, fresh, force=False)
+        check((w, s) == (2, 0), f"bootstrap into an empty dir must write everything, got {(w, s)}")
+        check(
+            (fresh / "chart/apple/us/2026-07-19.html").read_bytes()
+            == (live / "chart/apple/us/2026-07-19.html").read_bytes(),
+            "bootstrap must restore byte-for-byte",
+        )
+        # 🔴 살아 있는 트리 위에서는 기본값이 **안 덮어쓰는 것**이다. 오늘의 관측을
+        # 어제 것으로 되돌리는 일이 기본 동작이면 복원이 복구가 아니라 사고가 된다.
+        victim = fresh / "chart/apple/us/2026-07-19.html"
+        victim.write_bytes(b"<html>TODAY</html>")
+        w2, s2 = _extract(arch, fresh, force=False)
+        check((w2, s2) == (0, 2), f"existing files must be kept by default, got {(w2, s2)}")
+        check(victim.read_bytes() == b"<html>TODAY</html>", "default restore must not clobber a live file")
+        w3, _ = _extract(arch, fresh, force=True)
+        check(w3 == 2, "--force must overwrite")
+        check(victim.read_bytes() != b"<html>TODAY</html>", "--force must actually replace the file")
+
     for f in fails:
         _say(f"!! selftest: {f}")
     _say(f"selftest: {'FAILED' if fails else 'ok'} ({len(fails)} finding(s))")
@@ -584,6 +710,8 @@ def main(argv: list[str]) -> int:
     ap.add_argument("--deep", action="store_true", help="with --verify: rebuild archives and compare hashes")
     ap.add_argument("--selftest", action="store_true", help="offline checks, no network")
     ap.add_argument("--init-bucket", action="store_true", help="one-time: create the bucket, always private")
+    ap.add_argument("--restore", action="store_true", help="pull layer-1 back down (runner bootstrap / recovery)")
+    ap.add_argument("--force", action="store_true", help="with --restore: overwrite local files that already exist")
     args = ap.parse_args(argv)
 
     if args.selftest:
@@ -591,13 +719,17 @@ def main(argv: list[str]) -> int:
     if args.init_bucket:
         return cmd_init_bucket(args.bucket)
     live = Path(args.live)
+    prefix = args.prefix.strip("/")
+    dry = args.dry_run or os.environ.get("AI_DRYRUN", "") == "1"
+    # 🔴 복원은 **없는 디렉터리에서 시작하는 것이 정상 경로**다(러너의 새 디스크). 아래
+    # 존재 확인보다 먼저 갈라야 하며, 여기서 막으면 부트스트랩이 첫 줄에서 죽는다.
+    if args.restore:
+        return cmd_restore(live, prefix, args.bucket, args.force, dry)
     if not live.is_dir():
         _say(f"!! live root not found: {live}")
         return 2
-    prefix = args.prefix.strip("/")
     if args.verify:
         return cmd_verify(live, prefix, args.bucket, args.deep)
-    dry = args.dry_run or os.environ.get("AI_DRYRUN", "") == "1"
     return cmd_upload(live, prefix, args.bucket, dry)
 
 

@@ -1,0 +1,1293 @@
+{
+  "provenance": {
+    "generator": "scripts/canon_ingest.py",
+    "generatedAt": "2026-08-01T10:56:39+00:00",
+    "prereg": "docs/DRAFT-answer-sheet-corpus.md",
+    "weights": {
+      "매우 높음": 2.0,
+      "높음": 1.0,
+      "중간": 0.5,
+      "낮음": 0.0,
+      "매우 낮음": 0.0,
+      "불가능한 수준": 0.0
+    },
+    "cutoff": 2.0,
+    "min_measured": 10,
+    "status": "A&R 확정 대기 — 어떤 게이트도 이 산출을 읽지 않는다",
+    "source_count": 5
+  },
+  "summary": {
+    "drill": {
+      "candidates": 11,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
+    "jersey-club": {
+      "candidates": 29,
+      "passes": 8,
+      "by_era": {
+        "~2010": 1,
+        "미상": 7
+      },
+      "by_artist": {
+        "DJ Frosty": 1,
+        "Blaqstarr": 1,
+        "DJ Big O": 1,
+        "DJ Flawless, DJ Jayhood and Nook": 1,
+        "DJ Frosty and DJ Fade": 1
+      },
+      "min_measured_ok": false,
+      "top_artist_share": 0.125
+    },
+    "ukg-dnb": {
+      "candidates": 39,
+      "passes": 10,
+      "by_era": {
+        "미상": 10
+      },
+      "by_artist": {
+        "DJ Narrows": 1,
+        "3rd Core": 1,
+        "Antonio": 1,
+        "George Morel": 1,
+        "Groove Control": 1
+      },
+      "min_measured_ok": true,
+      "top_artist_share": 0.1
+    }
+  },
+  "candidates": [
+    {
+      "key": "chiefkeef|i dont like",
+      "case": "drill",
+      "artist": "Chief Keef",
+      "title": "I Don't Like",
+      "years": [
+        "2012"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "chiefkeef|faneto",
+      "case": "drill",
+      "artist": "Chief Keef",
+      "title": "Faneto",
+      "years": [
+        "2014"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "fbgduck|slide",
+      "case": "drill",
+      "artist": "FBG Duck",
+      "title": "Slide",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "famousdex|2 times",
+      "case": "drill",
+      "artist": "Famous Dex",
+      "title": "2 Times",
+      "years": [
+        "2015"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kinglouieandbowoo|gumbo mobsters",
+      "case": "drill",
+      "artist": "King Louie and Bo$$ Woo",
+      "title": "Gumbo Mobsters",
+      "years": [
+        "2011"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "lacaponeandrondonumbanine|play for keeps",
+      "case": "drill",
+      "artist": "L'A Capone and RondoNumbaNine",
+      "title": "Play for Keeps",
+      "years": [
+        "2013"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "lildurk|dis aint what u want",
+      "case": "drill",
+      "artist": "Lil Durk",
+      "title": "Dis Ain't What U Want",
+      "years": [
+        "2013"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "lilherbandlilbibby|kill shit",
+      "case": "drill",
+      "artist": "Lil Herb and Lil Bibby",
+      "title": "Kill Shit",
+      "years": [
+        "2012"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "polog|battle cry",
+      "case": "drill",
+      "artist": "Polo G",
+      "title": "Battle Cry",
+      "years": [
+        "2019"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "shady|go in",
+      "case": "drill",
+      "artist": "Shady",
+      "title": "Go In",
+      "years": [
+        "2011"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "youngpappy|killa",
+      "case": "drill",
+      "artist": "Young Pappy",
+      "title": "Killa",
+      "years": [
+        "2014"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djfrosty|ride dat wave",
+      "case": "jersey-club",
+      "artist": "DJ Frosty",
+      "title": "Ride Dat Wave",
+      "years": [
+        "2009"
+      ],
+      "score": 3.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        },
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "blaqstarr|feel it in the air",
+      "case": "jersey-club",
+      "artist": "Blaqstarr",
+      "title": "Feel It In The Air",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "djbigo|salt shaker",
+      "case": "jersey-club",
+      "artist": "DJ Big O",
+      "title": "Salt Shaker",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "djflawlessdjjayhoodandnook|shake dat donk",
+      "case": "jersey-club",
+      "artist": "DJ Flawless, DJ Jayhood and Nook",
+      "title": "Shake Dat Donk",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "djfrostyanddjfade|tip toe",
+      "case": "jersey-club",
+      "artist": "DJ Frosty and DJ Fade",
+      "title": "Tip Toe",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "djjayhood|back it up",
+      "case": "jersey-club",
+      "artist": "DJ Jayhood",
+      "title": "Back It Up",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "misstony|how u wanna carry it",
+      "case": "jersey-club",
+      "artist": "Miss Tony",
+      "title": "How U Wanna Carry It",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "rodlee|dance my pain away",
+      "case": "jersey-club",
+      "artist": "Rod Lee",
+      "title": "Dance My Pain Away",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "okayplayer-djguide-2022",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "badbunny|where she goes",
+      "case": "jersey-club",
+      "artist": "Bad Bunny",
+      "title": "Where She Goes",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bandmanrill|jiggy in jersey",
+      "case": "jersey-club",
+      "artist": "Bandmanrill",
+      "title": "Jiggy In Jersey",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "chadb|hit it",
+      "case": "jersey-club",
+      "artist": "Chad B",
+      "title": "Hit It",
+      "years": [
+        "2010"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ciara|level up",
+      "case": "jersey-club",
+      "artist": "Ciara",
+      "title": "Level Up",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "coileray|players remix",
+      "case": "jersey-club",
+      "artist": "Coi Leray",
+      "title": "Players (DJ Smallz 732 Remix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djjayhood|heartbroken",
+      "case": "jersey-club",
+      "artist": "DJ Jayhood",
+      "title": "Heartbroken",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djjayhood|rock my hips",
+      "case": "jersey-club",
+      "artist": "DJ Jayhood",
+      "title": "Rock My Hips",
+      "years": [
+        "2010"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djlilman|sexy walk",
+      "case": "jersey-club",
+      "artist": "DJ Lil Man",
+      "title": "Sexy Walk",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djlilman|i like the way she move",
+      "case": "jersey-club",
+      "artist": "DJ Lil Man",
+      "title": "I Like The Way She Move",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djsliink|official number one",
+      "case": "jersey-club",
+      "artist": "DJ Sliink",
+      "title": "Official Number One (Patty Cake)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djtameil|ay bay bay",
+      "case": "jersey-club",
+      "artist": "DJ Tameil",
+      "title": "Ay Bay Bay",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djtimdolla|swing dat sh t",
+      "case": "jersey-club",
+      "artist": "DJ Tim Dolla",
+      "title": "Swing Dat Sh*t",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djtimdolla|falsetto",
+      "case": "jersey-club",
+      "artist": "DJ Tim Dolla",
+      "title": "Falsetto",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "icespice|deli",
+      "case": "jersey-club",
+      "artist": "Ice Spice",
+      "title": "Deli",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "liluzivert|just wanna rock",
+      "case": "jersey-club",
+      "artist": "Lil Uzi Vert",
+      "title": "Just Wanna Rock",
+      "years": [
+        "2022"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "msporsh|cant bounce like me",
+      "case": "jersey-club",
+      "artist": "Ms. Porsh",
+      "title": "Can't Bounce Like Me",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "nickiminaj|everybody",
+      "case": "jersey-club",
+      "artist": "Nicki Minaj",
+      "title": "Everybody",
+      "years": [
+        "2023"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "pure|body talk",
+      "case": "jersey-club",
+      "artist": "Pure",
+      "title": "Body Talk",
+      "years": [
+        "2010"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sjayy|not like us remix",
+      "case": "jersey-club",
+      "artist": "SJAYY",
+      "title": "Not Like Us (Jersey Club Remix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "unicorn151djkswift|tote it remix remix",
+      "case": "jersey-club",
+      "artist": "Unicorn151 & DJ K-Swift",
+      "title": "Tote It Remix",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "zeddywill|freak you",
+      "case": "jersey-club",
+      "artist": "ZEDDY WILL",
+      "title": "Freak You",
+      "years": [
+        "2023"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djnarrows|saved soul",
+      "case": "ukg-dnb",
+      "artist": "DJ Narrows",
+      "title": "Saved Soul",
+      "years": [],
+      "score": 3.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        },
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "3rdcore|mindless broken mix",
+      "case": "ukg-dnb",
+      "artist": "3rd Core",
+      "title": "Mindless & Broken (MJ Cole Mix)",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "antonio|ill take you there",
+      "case": "ukg-dnb",
+      "artist": "Antonio",
+      "title": "I'll Take You There",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "georgemorel|lets groove",
+      "case": "ukg-dnb",
+      "artist": "George Morel",
+      "title": "Let's Groove",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "groovecontrol|beautiful mix",
+      "case": "ukg-dnb",
+      "artist": "Groove Control",
+      "title": "Beautiful (Tuff N Jam Vocal Mix)",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "nca|lessons in love remix",
+      "case": "ukg-dnb",
+      "artist": "NCA",
+      "title": "Lessons In Love (Steve Gurley Remix)",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "ripproductions|jump to it",
+      "case": "ukg-dnb",
+      "artist": "RIP Productions",
+      "title": "Jump To It",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "stricklydubz|realise",
+      "case": "ukg-dnb",
+      "artist": "Strickly Dubz",
+      "title": "Realise",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "thesamplechoir|feeling lonely",
+      "case": "ukg-dnb",
+      "artist": "The Sample Choir",
+      "title": "Feeling Lonely",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "wookie|flex",
+      "case": "ukg-dnb",
+      "artist": "Wookie",
+      "title": "Flex",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "dmy-djez-ukg",
+          "certainty": "매우 높음"
+        }
+      ]
+    },
+    {
+      "key": "agentx|decoy",
+      "case": "ukg-dnb",
+      "artist": "Agent X",
+      "title": "Decoy",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "antonio|hypefunk",
+      "case": "ukg-dnb",
+      "artist": "Antonio",
+      "title": "Hypefunk",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bumpandflex|long time coming",
+      "case": "ukg-dnb",
+      "artist": "Bump and Flex",
+      "title": "Long Time Coming",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "burgaboy|wheres my mans dem at",
+      "case": "ukg-dnb",
+      "artist": "Burgaboy",
+      "title": "Where's My Mans Dem At",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "cleptomaniacs|all i do dub",
+      "case": "ukg-dnb",
+      "artist": "Cleptomaniacs",
+      "title": "All I Do (Dancehall Dub)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "colours|hold on",
+      "case": "ukg-dnb",
+      "artist": "Colours",
+      "title": "Hold On",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "djluckmcneat|masterblaster 2000",
+      "case": "ukg-dnb",
+      "artist": "DJ Luck & MC Neat",
+      "title": "Masterblaster 2000",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dexplicit|bullacake",
+      "case": "ukg-dnb",
+      "artist": "Dexplicit",
+      "title": "Bullacake",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "double99|rip groove",
+      "case": "ukg-dnb",
+      "artist": "Double 99",
+      "title": "RIP Groove",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "elb|2000",
+      "case": "ukg-dnb",
+      "artist": "El B",
+      "title": "2000",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "fun|its the way 99",
+      "case": "ukg-dnb",
+      "artist": "F.U.N",
+      "title": "It's The Way 99",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "indo|r u sleeping mix",
+      "case": "ukg-dnb",
+      "artist": "Indo",
+      "title": "R U Sleeping (Todd Edwards Mix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "keleleroc|my love mix",
+      "case": "ukg-dnb",
+      "artist": "Kele Le Roc",
+      "title": "My Love (10 Below Mix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mjcole|sincere",
+      "case": "ukg-dnb",
+      "artist": "MJ Cole",
+      "title": "Sincere",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "markruffryder|joy mix",
+      "case": "ukg-dnb",
+      "artist": "Mark 'Ruff' Ryder",
+      "title": "Joy (Original Mix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "masterstepz|melody",
+      "case": "ukg-dnb",
+      "artist": "Masterstepz",
+      "title": "Melody",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "reachspin|hyper mix",
+      "case": "ukg-dnb",
+      "artist": "Reach & Spin",
+      "title": "Hyper! (Instrumental Mix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "restlessnatives|i wanna know",
+      "case": "ukg-dnb",
+      "artist": "Restless Natives",
+      "title": "I Wanna Know",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "roydavisjr|gabriel",
+      "case": "ukg-dnb",
+      "artist": "Roy Davis Jr",
+      "title": "Gabriel",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sia|little man remix",
+      "case": "ukg-dnb",
+      "artist": "Sia",
+      "title": "Little Man (Exemen Remix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sparkskie|fly bi",
+      "case": "ukg-dnb",
+      "artist": "Sparks & Kie",
+      "title": "Fly Bi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sticky|golly gosh",
+      "case": "ukg-dnb",
+      "artist": "Sticky",
+      "title": "Golly Gosh",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sunship|check one two",
+      "case": "ukg-dnb",
+      "artist": "Sunship",
+      "title": "Check One Two",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sunship|try me out",
+      "case": "ukg-dnb",
+      "artist": "Sunship",
+      "title": "Try Me Out",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tnt|transmission",
+      "case": "ukg-dnb",
+      "artist": "TNT",
+      "title": "Transmission",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "thestreets|has it come to this",
+      "case": "ukg-dnb",
+      "artist": "The Streets",
+      "title": "Has It Come To This",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tinamoore|never letting you go mix",
+      "case": "ukg-dnb",
+      "artist": "Tina Moore",
+      "title": "Never Letting You Go (Artful Dodger Mix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "wookie|whats going on",
+      "case": "ukg-dnb",
+      "artist": "Wookie",
+      "title": "What's Going On",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "zedbias|neighbourhood",
+      "case": "ukg-dnb",
+      "artist": "Zed Bias",
+      "title": "Neighbourhood",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "billboard-ukg-2016",
+          "certainty": "높음"
+        }
+      ]
+    }
+  ]
+}

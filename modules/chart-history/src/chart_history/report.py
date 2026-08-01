@@ -534,7 +534,8 @@ _SECTIONS: list[dict[str, str]] = [
     {
         "id": "platforms",
         "label": "플랫폼",
-        "question": "네 플랫폼이 같은 곡을 올리고 있나?",
+        # 수를 적지 않는다 -- 이 표는 상수라 렌즈가 늘어도 따라오지 못한다(멜론 복귀 실측).
+        "question": "플랫폼마다 같은 곡을 올리고 있나?",
         "note": "플랫폼마다 집계 대상과 순위 범위가 다르다. 순위 숫자를 플랫폼끼리 비교할 수 없다. "
         "이 구획이 답하는 것은 크기가 아니라 어디에 잡히는가다.",
     },
@@ -653,6 +654,21 @@ def plat_label(p: str) -> str:
     return _PLAT_DISPLAY.get(p, p)
 
 
+# 🔴 렌즈의 수는 **데이터가 정한다.** 문구가 "네 플랫폼"이라고 박아 두면 렌즈를 하나
+# 늘리거나 하루 수집이 비는 순간 화면이 조용히 거짓말을 한다 -- 실제로 2026-08-01에
+# 멜론이 4번째 렌즈로 돌아오자(D-017 복귀) 다섯인 화면이 "네 플랫폼"이라고 적고 있었다.
+# 정적 게이트도 스모크도 이것을 못 잡는다(숫자가 문장 안에 있으므로).
+#
+# 관형사만 갈아 끼운다("네 플랫폼" -> "다섯 플랫폼"). 여섯을 넘으면 아라비아 숫자로
+# 떨어뜨린다 -- 우리말 관형사가 그 위로는 자연스럽지 않고, 그때는 세는 것보다 읽는 것이
+# 중요해진다.
+_KO_COUNT: dict[int, str] = {1: "한", 2: "두", 3: "세", 4: "네", 5: "다섯", 6: "여섯"}
+
+
+def lens_count_word(n: int) -> str:
+    return _KO_COUNT.get(n, str(n))
+
+
 # 지표 라벨 갈아 끼우기(DESIGN §6.1). `최광역`·`개척 시장`·`미개척`은 뜻을 한 번 더
 # 생각하게 만드는 별칭이라 가리키는 것을 그대로 쓴다. 접미어 규칙은 아티스트 이름이
 # 앞에 붙는 라벨(`BTS 미개척`)을 위한 것이다.
@@ -706,7 +722,7 @@ def _lens_roster_acts(
 def _summary_lens_shape(by_lens: dict[str, set[str]], plat_names: list[str]) -> dict[str, object]:
     """진입 요약 하나(R2) — **네 렌즈가 같은 것을 보고 있지 않다**를 한 도형으로.
 
-    축 = 플랫폼, 값 = 네 플랫폼 전체에서 잡힌 팀을 100으로 뒀을 때 그 플랫폼이 잡은 비율.
+    축 = 플랫폼, 값 = 전체 플랫폼에서 잡힌 팀을 100으로 뒀을 때 그 플랫폼이 잡은 비율.
     도형이 정다각형에 가까우면 렌즈들이 같은 팀을 보고 있다는 뜻이고, 한쪽으로 찌그러지면
     렌즈 하나만 보면 놓치는 팀이 있다는 뜻이다. 이 모듈의 주장이 그 찌그러짐이다.
 
@@ -729,19 +745,21 @@ def _summary_lens_shape(by_lens: dict[str, set[str]], plat_names: list[str]) -> 
             "rawUnit": "팀",
         })
     placed = [float(v) for a in axes if isinstance(v := a.get("value"), (int, float))]
+    # 문구가 세는 것은 **축의 수**(= 이 실행이 아는 렌즈)이지 상수가 아니다.
+    lens = lens_count_word(len(axes))
     shape: dict[str, object] = {
         "type": "radar",
         "id": "lens-coverage",
         "title": "플랫폼별로 잡히는 팀의 비율",
         "question": "한 플랫폼만 보면 얼마나 놓치나?",
-        "definition": "네 플랫폼 전체에서 한 번이라도 잡힌 한국 원산지 팀을 100으로 두고, 각 플랫폼이 그중 몇 "
-        "퍼센트를 잡았는지 나타낸 값. 도형이 고를수록 네 플랫폼이 같은 팀을 보고 있다는 뜻이다. "
-        "이 값은 커버리지이며 플랫폼의 우열이 아니다. 순위 범위와 수집 시장 수가 다르면 "
-        "깊은 쪽이 더 많이 잡는 것이 당연하다.",
+        "definition": f"{lens} 플랫폼 전체에서 한 번이라도 잡힌 한국 원산지 팀을 100으로 두고, "
+        f"각 플랫폼이 그중 몇 퍼센트를 잡았는지 나타낸 값. 도형이 고를수록 {lens} 플랫폼이 "
+        "같은 팀을 보고 있다는 뜻이다. 이 값은 커버리지이며 플랫폼의 우열이 아니다. "
+        "순위 범위와 수집 시장 수가 다르면 깊은 쪽이 더 많이 잡는 것이 당연하다.",
         "data": {
             "axes": axes,
             "max": 100,
-            "scaleNote": "네 플랫폼 전체에서 잡힌 팀 대비 비율",
+            "scaleNote": f"{lens} 플랫폼 전체에서 잡힌 팀 대비 비율",
             **(
                 {"baseline": round(sum(placed) / len(placed), 1), "baselineLabel": "플랫폼 평균"}
                 if placed
@@ -778,7 +796,7 @@ def _chart_history_inferences(
                 "text": f"{plat_label(lo[0])}만 보면 {plat_label(hi[0])}에서 잡히는 팀의 상당수가 "
                 "화면에 없는 상태와 정합한다.",
                 "basis": " · ".join(f"{plat_label(p)} {n}팀" for p, n in counts)
-                + f" · 네 플랫폼 합집합 {len(union)}팀",
+                + f" · {lens_count_word(len(plat_names))} 플랫폼 합집합 {len(union)}팀",
                 "sample": f"원산지가 확인된 로스터 팀 {len(union)}팀",
                 "confidence": "high",
                 "limits": "플랫폼마다 순위 범위와 수집 시장 수가 달라 이 비율은 커버리지 차이를 포함한다. "
@@ -867,7 +885,7 @@ def _apply_section_meta(
         elif label.endswith(" 미개척"):
             m["definition"] = (
                 "그 팀이 아직 오르지 않은, 한국 팀이 이미 오른 나라의 수. Spotify 차트 기준이며 "
-                "네 플랫폼을 합친 공백은 같은 구획의 진입 지도가 따로 보여준다."
+                "플랫폼 전체를 합친 공백은 같은 구획의 진입 지도가 따로 보여준다."
             )
         else:
             m["definition"] = _METRIC_DEFS.get(base, "")
@@ -888,11 +906,11 @@ def _apply_section_meta(
         # 힌트에서도 내부 어휘를 걷어낸다 — 타일에 늘 보이는 줄이라 제목만큼 눈에 띈다.
         hint = str(m.get("hint") or "")
         if hint:
+            # `apple/youtube에서만 차트인` 치환은 **지웠다** — 힌트를 만드는 쪽이 이제
+            # 실제 렌즈 목록에서 이름을 뽑는다. 여기서 다시 이름을 적으면 두 곳이 갈라진다.
             hint = hint.replace("개척 시장(≥", "이미 오른 나라(팀 수 ≥").replace(
                 "기본 ≥", "기준 팀 수 ≥"
-            ).replace("(조정가능)", ", 조정 가능").replace(
-                "apple/youtube에서만 차트인", "Apple·YouTube·Shazam에만 오름"
-            )
+            ).replace("(조정가능)", ", 조정 가능")
             for raw, disp in _PLAT_DISPLAY.items():
                 hint = hint.replace(f"{raw} ", f"{disp} ")
             m["hint"] = hint
@@ -1150,7 +1168,19 @@ def _build_platform_parallel(
         "sections": [dict(s) for s in _SECTIONS if any(c.get("section") == s["id"] for c in charts)],
         "questions": questions,
         "notAnswered": [
-            "국내 코어 차트. 멜론과 써클차트는 아직 연결되지 않아 국내는 Spotify 한국 차트로 근사한다",
+            # 🔴 이 줄은 **화면이 싣고 있는 것과 대조돼야** 한다. 멜론이 4번째 렌즈로 돌아온
+            # 뒤에도 "멜론은 아직 연결되지 않아"라고 적혀 있었다 -- 바로 옆 타일이
+            # `Melon 1위`를 싣고 있는데도. 게이트도 스모크도 이것을 못 잡는다(문장이 참인지는
+            # 데이터를 봐야 안다). 그래서 상수로 두지 않고 **이번 실행이 아는 렌즈에서** 만든다.
+            # 멜론은 세션-보조 수집이라 어떤 날은 정말로 없다(D-017) -- 그때는 옛 문장이 맞다.
+            (
+                "국내 코어 차트 중 써클차트. 멜론은 공식 MCP로 연결됐지만(KR 1시장 · 순위만) "
+                "써클차트는 제휴 전이라 수집 경로가 없다. 멜론은 세션-보조 수집이라 "
+                "수집일이 불연속일 수 있다"
+                if "melon" in plat_names
+                else "국내 코어 차트. 멜론과 써클차트는 아직 연결되지 않아 국내는 "
+                "Spotify 한국 차트로 근사한다"
+            ),
             "왜 그 나라에서 올랐는지. 이 화면은 어디에 올랐는지까지만 다룬다",
             "순위가 오르는 중인지 내리는 중인지. 하루치 스냅샷이라 방향을 알 수 없다",
             "플랫폼 사이의 크기 비교. 집계 대상과 순위 범위가 달라 순위 숫자를 서로 견줄 수 없다",
@@ -1240,12 +1270,17 @@ def _augment_cross_platform(
             ),
         }
     )
+    # 🔴 힌트가 플랫폼 이름을 **손으로 나열하지 않는다.** 값은 "spotify가 아닌 렌즈 하나에만
+    # 오른 팀"이라 렌즈가 늘면 세는 대상이 늘어나는데, 문구는 `apple/youtube`로 박혀 있었다
+    # (표기 치환이 Shazam 을 끼워 넣어 셋처럼 보였을 뿐 Melon 은 어디에도 없었다).
+    # 값과 문구가 같은 목록에서 나와야 갈라지지 않는다.
+    non_sp_plats = [plat_label(p) for p in plat_names if p != "spotify"]
     metrics.append(
         {
             "label": "Spotify 밖",
             "value": len(non_sp_unique),
             "unit": "팀",
-            "hint": "apple/youtube에서만 차트인 · 단일 플랫폼만 보면 놓치는 팀",
+            "hint": f"{'·'.join(non_sp_plats)} 중 한 곳에만 차트인 · 단일 플랫폼만 보면 놓치는 팀",
         }
     )
 
@@ -1580,7 +1615,13 @@ def _augment_geography(
     if fingerprints:
         insights.append("지리 지문 상위: " + " · ".join(fingerprints) + " · 팀별 최다 권역 비교용(지문 히트맵 참조)")
     insights.append("도달 국가 수는 조사한 국가 집합 기준. 세계 절대 도달 아님")
-    insights.append("Spotify 단일 플랫폼 기준. 국내 차트(Melon/Circle) 미반영, 국내는 Spotify-KR로 근사")
+    # 이 뷰만 Spotify 단일 레일이다. Melon은 KR 1시장이라 **나라 사이 비교에 쓸 수 없고**,
+    # 써클차트는 연결되지 않았다. 예전 문구("국내 차트 미반영")는 렌즈가 아예 없다는 뜻으로
+    # 읽혀, 같은 리포트가 Melon 1위를 싣기 시작한 뒤로는 화면끼리 어긋났다.
+    insights.append(
+        "이 지리 뷰만 Spotify 단일 레일 기준. Melon은 KR 1시장이라 나라 사이 비교에 쓰지 않고, "
+        "써클차트는 연결되지 않았다"
+    )
     insights.append("지리 신호는 기획 참고용. 타겟 결정은 담당자의 몫")
 
     # ── 뷰 3·4: 화이트스페이스(기획) + 신인 코호트 (로스터 스코프 전용) ──

@@ -6,19 +6,24 @@
 
 ## 🧭 다음 행선지 (재개점)
 
-# 🔵 백업 착수 대기 — Supabase OAuth 하나가 막고 있다 (2026-08-01)
+# 🟢 1층 백업이 **돌기 시작했다** — 다음은 IP 시험 (2026-08-01)
 
-> 📄 이번 세션 이력 = **[`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md)** · 결정 = **[`docs/DECISIONS.md`](docs/DECISIONS.md) D-054 ⑥** · 실측 = **[`docs/DRAFT-saas-platform.md`](docs/DRAFT-saas-platform.md) §2.2.1**.
+> 📄 이번 세션 이력 = **[`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md)** · 결정 = **[`docs/DECISIONS.md`](docs/DECISIONS.md) D-054 ⑥ · D-058** · 실측 = **[`docs/DRAFT-saas-platform.md`](docs/DRAFT-saas-platform.md) §2.2.1**.
 
 ### 🔴 다음 세션이 처음 할 일
 
-1. **Supabase를 붙인다.** 세션 시작 시 ① 프로젝트 MCP 서버 **신뢰 프롬프트 승인** ② `/mcp` → supabase → **Authenticate**(브라우저 OAuth · PAT 불필요). 붙으면 **프로젝트 ref**를 받아 `.mcp.json` URL에 범위를 좁힌다. ⚠ `read_only=true`라 **버킷 생성은 MCP로 안 된다** — 최초 세팅은 대시보드에서(일회성이고 그게 이 플래그를 끄지 않는 길이다).
-2. **백업 스크립트(1단계).** `scripts/backup_live.py` — 1층(관측 원본)만 골라 날짜별 압축 후 증분 업로드, 이미 올린 날은 건너뛴다(멱등). `--verify`로 원격 목록과 로컬 매니페스트 대조 — **올렸다고 믿었는데 비어 있는** 상태를 만들지 않는다. daily 마지막 레그로 붙이고 실패하면 하루를 연다(이번에 고친 방식 그대로).
-   - 올린다: `chart/` · `social/` · `sonic/` · `yt/` · `plans/` · `state/`(재개 상태 + **시도 원장**) · `logs/daily.log`(유료 지출 감사).
-   - 올리지 않는다: `*_series.json` · `social_merged.json` · `data/models/` — 전부 2층이거나 다시 받는다.
-   - 규모: 첫 업로드 **15.3MB**, 이후 **하루 1.2MB**.
-   - ⚠ **차트 원본과 유료 소셜 스냅샷이 3자 서비스 비공개 버킷으로 나간다.** 재배포는 아니지만 외부 전송이라 승인이 필요한 건 같다.
-3. **IP 시험(2단계 · 반나절).** 버리는 워크플로 하나로 러너에서 Kworb 한 장 · Apple RSS 한 장 · iTunes 프리뷰 하나 · Apify 호출 하나를 때려 상태코드만 본다. **10분짜리가 이전 결정 전체를 가른다.** 막히면 GitHub Actions는 후보에서 빠지고 Modal(D-003)로 간다.
+1. **✅ 백업은 끝났다 — 이제 매일 자동으로 돈다** (D-058 · 도메인 소유자 승인 완료).
+   - 프로젝트 ref `aakcsjgnrvyklvspuqgj` · 버킷 `live-raw`(비공개) · **54객체 14.33MB 업로드(16초)** · `--verify --deep` 54/54/54 · **재실행 0객체(1초)**.
+   - 🔑 **원격 왕복 복원까지 검증했다**: `chart`·`social`(유료)·`state`(돈 원장)를 실제로 내려받아 해시 일치 + **105파일 바이트 단위 복원 확인**. "올렸다"가 아니라 "되돌릴 수 있다"를 실측한 것이다.
+   - daily 마지막 레그로 붙어 있고 09:00 실행에서 자동으로 돈다(변경 없으면 1초). 실패하면 하루를 연다.
+   - 🔴 `data/live`에 목록 어디에도 없는 항목이 생기면 스크립트가 이름을 부른다(`_unclassified`). 그걸 보면 **1층인지 2층인지 판정하고 목록에 사유와 함께 적는다** — 침묵시키지 않는다.
+   - 🔺 이 Supabase 프로젝트는 **다른 용도와 공유된다**(기존 비공개 버킷 `Wayd Cloud`). 파일 상한 50MB, 최대 아카이브 1.26MB.
+2. **정기 점검은 `--verify` 하나다.** `python scripts/backup_live.py --verify`(원격 목록을 실제로 받아 대조 · `--deep`은 해시까지). 매니페스트만 보면 이 스크립트의 유일한 실패 양식("올렸다고 믿었는데 비어 있는 것")을 절대 못 잡는다.
+   - 올린다: `chart/` · `social/` · `sonic/` · `yt/` · `plans/` · `state/`(재개 상태 + **시도 원장**) · `logs/daily.log`(유료 지출 감사). 올리지 않는다: `*_series.json` · `social_merged.json` · `melon_raw/` · `data/models/` — 전부 2층이거나 다시 받는다. `quarantine/`은 PII REJECT라 **내보내지 않는 것이 요건**이다.
+3. **IP 시험 — 도구는 다 만들었다. 남은 것은 푸시 한 번과 `Run workflow` 한 번이다.** `scripts/ip_probe.py`(로컬·러너 공용) + `.github/workflows/ip-probe.yml`(**workflow_dispatch 전용** · push/schedule 없음 · 저장 0 · 과금 0). 브랜치를 올린 뒤 Actions에서 `ip-probe`를 `ubuntu-latest`로 한 번, 필요하면 `windows-latest`로 한 번 돌린다. **10분짜리가 이전 결정 전체를 가른다** — 막히면 GitHub Actions는 후보에서 빠지고 Modal(D-003)로 간다.
+   - ✅ **로컬 기준선은 이미 쟀다**(2026-08-01 · 이 PC): **8/8 도달 · 차단 0**. `kworb spotify-kr 200/83.6KB` · `kworb youtube-kr 200` · `kworb shazam-kr 200` · `apple rss-kr 200` · `itunes search 200` · `itunes preview-cdn 206`(1바이트만 받는다) · `apify users-me 200` · `youtube videos-list 200`. **러너 결과를 이 표와 나란히 놓고 읽는다** — 러너에서 하나라도 200이 아니면 그것이 답이다.
+   - 러너 쪽 `apify`·`youtube` 항목은 **리포지터리 시크릿 두 개**(`APIFY_TOKEN`·`YOUTUBE_API_KEY`)가 있어야 잰다. 없으면 `skip`으로 표시되며 **통과가 아니다.** 다만 실제 쟁점인 무료 스크레이프 3종(Kworb)은 키 없이도 재진다.
+   - 결정이 나면 `ip_probe.py`와 워크플로는 지워도 된다(버리는 시험).
 4. **🟢 멜론 4번째 렌즈 복귀**(대기 목록 4번) — MCP가 **이번에 붙었다**(도구 18종). 렌즈를 늘리면 차트 커버리지·좌측 절단·시장 수가 전부 움직이므로 한 세션짜리로 잡는다.
 5. **두 번째 서사를 만들 때 프리미티브를 뽑는다.** 지금은 하나뿐이라 일부러 일반화하지 않았다(§1: 더하기 전에 뺄 것을 먼저).
 6. 결정 4(저작권)는 **급함이 줄었다** — 공개 데모는 지금과 같은 회색이다. 온디맨드·유료화가 서면 다시 1순위. 🔺 리드타임이 길어 그때는 먼저 걸어야 한다.
@@ -36,9 +41,12 @@
 
 ### ✅ 이번에 닫힌 것
 
+- **1층 백업 스크립트**(D-058) — `scripts/backup_live.py` + daily 마지막 레그. 게이트 전부 통과, **아직 아무것도 전송되지 않았다**(설정이 없으면 나가지 않는다).
+  - 🔴 **만들면서 어제 고친 결함을 다시 만들었다** — 출력에 em dash를 써서 cp949 콘솔에서 `UnicodeEncodeError`로 죽었다. D-054 ⑥이 로그 한 줄에서 겪은 그것이다. 머리말에 "ASCII로"라고 적어 두는 것으로는 안 된다 → 출력이 전부 `_say()`를 지나 **함수가 집행한다**. 원격 오류 본문처럼 우리가 고를 수 없는 문자열도 같은 문을 지난다.
 - **서사가 이름을 부른다** — signal-bridge가 두 관문 통과 팀을 `gate-passed` 차트로 싣는다. 판정은 `_gate_passed()` 한 곳에서 나와 지표·교차표·차트 셋이 못 갈라진다. 스키마 무변경.
 - **노브 라벨의 표기 누출** — 모듈이 `하한/상한으로 볼 백분위`로 싣는다. 원장 표에 화면 표기 열 추가.
 - 🔴 **오늘 09:00 수집이 조용히 깨져 있던 것을 발견해 복구했다**(D-054 ⑥ · 아래 별도 절).
+  - ✅ **그 수정이 실측으로 확인됐다**(08-01 `daily.log`): 시도 3이 `!! social merge FAILED` → `day left INCOMPLETE on purpose (attempt 3/4) -- pending: derive:social-merge`로 하루를 열었고, **시도 4가 `social merged+deduped`로 복구**했다. 그날 산 $3이 리포트에 들어갔다. 감사 줄 ②가 실제로 떴다.
 
 ### 🔴 이번에도 육안으로만 잡힌 것 (서른한째 건)
 
@@ -259,8 +267,17 @@ PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python scripts/
 #   ⚠ 결과 파일은 스냅샷 하나당 하나로 유지한다. 축을 추가하면 **같은 파일에 행이 는다** —
 #     v3를 새로 만들면 같은 축의 판정이 두 개가 되고 유리한 쪽이 인용된다(GATES의 옛 절대값 행 선례).
 
+# ── 1층 백업 (D-058) — 설정이 없으면 아무것도 나가지 않는다
+python scripts/backup_live.py --selftest    # 네트워크 0 (복원 왕복 · 결정성 · 미분류 검출)
+python scripts/backup_live.py --dry-run     # 네트워크 0 — 무엇이 오를지만 본다
+python scripts/backup_live.py               # 증분 업로드 (SUPABASE_URL/SUPABASE_SERVICE_KEY 필요)
+python scripts/backup_live.py --verify      # 🔴 올린 뒤 반드시 — 매니페스트를 믿지 않고 원격을 본다
+#   --verify --deep 은 아카이브를 재빌드해 해시까지 대조한다(느리다).
+#   중단 레버는 유료 레그와 같다: data/live/PAUSE
+
 # ── 상태·게이트
-python scripts/validate_report_data.py [--selftest]   # 차트 데이터 계약(스키마가 못 보는 것)
+#   ⚠ 콘솔이 cp949라 한글을 찍는 게이트는 PYTHONIOENCODING=utf-8 이 필요하다
+PYTHONIOENCODING=utf-8 python scripts/validate_report_data.py [--selftest]   # 차트 데이터 계약(스키마가 못 보는 것)
 cd apps/dashboard && npm run smoke:tabs               # 전 탭 x 구획 x 라이트/다크 (dev 실행 중일 때)
 python -m ruff check modules/ scripts/ · python -m pyright modules/<m>
 node apps/dashboard/scripts/collect-reports.mjs

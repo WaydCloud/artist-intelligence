@@ -443,6 +443,23 @@ Set-Derive "dashboard" $? "dashboard reports.json refreshed" "dashboard collect 
 # 5) summary line: coverage + social-led / social-only counts to watch over time
 python scripts/bridge_summary.py modules/signal-bridge/output/report.json 2>$null | ForEach-Object { Log $_ }
 
+# 6) backup -- layer-1 originals (chart HTML, paid social snapshots, sonic features, spend
+#    ledger) to a private object-storage bucket. Free, offline-deterministic, incremental:
+#    a day whose content did not change is skipped, so the daily cost is ~1.2MB.
+#
+#    Not configured = not enabled. data/live leaves this machine only after the owner sets
+#    the two secrets, and that act IS the approval -- the script never guesses a target.
+#    Once configured, a backup failure holds the day open like any derive step: "believed
+#    uploaded but empty" is the one failure a backup cannot afford, and the retry is free.
+#    Run `python scripts/backup_live.py --verify` to cross-check the remote against the
+#    manifest (it does not trust the manifest alone).
+if ($env:SUPABASE_URL -and $env:SUPABASE_SERVICE_KEY) {
+  python scripts/backup_live.py 2>$null | ForEach-Object { Log $_ }
+  Set-Derive "backup" ($LASTEXITCODE -eq 0) "backup leg ok" "backup FAILED (exit $LASTEXITCODE) -- layer-1 originals are NOT safe"
+} else {
+  Log "backup skipped -- SUPABASE_URL / SUPABASE_SERVICE_KEY not set (nothing left this machine)"
+}
+
 # mark the day complete -- but NOT while a collect leg still has targets left to retry.
 #
 # 2026-07-30 감사에서 나온 결함: 여기서 Save-State $true 를 **무조건** 호출하고 있었다.

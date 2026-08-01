@@ -87,7 +87,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
     <div>
       <div className="mb-3 flex flex-wrap items-center gap-x-6 gap-y-2">
         <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
-          <span>{lowKnob?.label ?? "하위 백분위 P_low"}</span>
+          <span>{lowKnob?.label ?? "하한으로 볼 백분위"}</span>
           <input
             type="range"
             min={lowKnob?.min ?? 0}
@@ -96,12 +96,12 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
             value={lowPct}
             onChange={(e) => setLowPct(Number(e.target.value))}
             className="accent-[var(--series)]"
-            aria-label={lowKnob?.label ?? "하위 백분위 P_low"}
+            aria-label={lowKnob?.label ?? "하한으로 볼 백분위"}
           />
           <b className="w-9 tabular-nums text-[var(--ink)]">P{lowPct}</b>
         </label>
         <label className="flex items-center gap-2 text-xs text-[var(--ink-secondary)]">
-          <span>{highKnob?.label ?? "상위 백분위 P_high"}</span>
+          <span>{highKnob?.label ?? "상한으로 볼 백분위"}</span>
           <input
             type="range"
             min={highKnob?.min ?? 50}
@@ -110,7 +110,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
             value={highPct}
             onChange={(e) => setHighPct(Number(e.target.value))}
             className="accent-[var(--series)]"
-            aria-label={highKnob?.label ?? "상위 백분위 P_high"}
+            aria-label={highKnob?.label ?? "상한으로 볼 백분위"}
           />
           <b className="w-9 tabular-nums text-[var(--ink)]">P{highPct}</b>
         </label>
@@ -130,7 +130,7 @@ function ImpulseRules({ data, title }: { data: ImpulseRulesTunableData; title?: 
 
       <BucketRows
         buckets={buckets}
-        empty="이 컷에서는 매치 없음. P_low를 올리거나 P_high를 낮추면 후보 표시"
+        empty="이 컷에서는 매치 없음. 하한을 올리거나 상한을 낮추면 후보 표시"
       />
 
       <p className="mt-3 text-xs leading-relaxed text-[var(--muted)]">

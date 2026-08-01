@@ -50,6 +50,14 @@ function barValue(data: BarData, name: string, where: string): number {
   return data.find((d) => d.name === name)?.value ?? fail(`막대 없음: ${where} · ${name}`);
 }
 
+/** 있을 수도 없을 수도 있는 차트. 없는 것이 **정상 상태**일 때만 쓴다(예: 통과 0팀). */
+function optionalBarChart(r: Report, id: string): BarData | null {
+  const all = r.summary ? [r.summary, ...r.charts] : r.charts;
+  const c = all.find((x) => x.id === id);
+  if (!c) return null;
+  return c.type === "bar" ? c.data : fail(`차트가 bar가 아님: ${r.moduleId} · ${id} = ${c.type}`);
+}
+
 /** 동반 4종이 다 있는 추론만 서사에 오른다(DESIGN §6.2 — 없으면 렌더하지 않는다). */
 function inference(r: Report, chartId: string): Inference {
   const found = (r.inferences ?? []).filter((i) => i.chartId === chartId);
@@ -166,6 +174,18 @@ export function buildLandingStory(): LandingStory {
     .slice(0, 5)
     .map((d) => ({ name: d.name, value: d.value }));
 
+  // 마지막 단계에서 이름을 부르기 위한 조달구. 이 이름은 오래도록 **인사이트 문장 안에만**
+  // 있었고, 문장은 파싱하지 않기 때문에(위 머리말) 서사가 자기 결론의 주인공을 못 불렀다.
+  // 이제 모듈이 `gate-passed` 막대로 싣는다(signal-bridge RULES §3.1).
+  // 통과 0팀이면 모듈이 이 차트를 만들지 않는다 — 그것은 결함이 아니라 그 날의 사실이고,
+  // 그때 서사는 이름 없이 수로만 닫는다.
+  const passed = optionalBarChart(bridge, "gate-passed");
+  if (survivors > 0 && !passed) fail(`통과 ${survivors}팀인데 'gate-passed' 차트가 없다`);
+  if (passed && passed.length > survivors)
+    fail(`'gate-passed' 팀 수(${passed.length})가 통과 수(${survivors})보다 많다`);
+  // 이름은 셋까지만 부른다. 서사의 마지막 줄이지 목록이 아니다 — 전부는 탭이 들고 있다.
+  const named = (passed ?? []).slice(0, 3);
+
   // 🔴 두 관문을 한 단계에 몰지 않는다. 원장(signal-bridge RULES §3.1)이 "소표본은 기준값이
   // 정하는 문제이고 검열은 시간이 푸는 문제라 두 축을 섞어 보고하지 않는다"고 정해 두었는데,
   // 65에서 1로 한 번에 줄이면 **무엇이 걸러 냈는지**가 그림에서 사라진다.
@@ -217,7 +237,15 @@ export function buildLandingStory(): LandingStory {
       id: "censor",
       kicker: "절단",
       headline: `수집 첫날에 이미 차트에 있던 팀을 빼면 ${survivors}팀`,
-      body: "차트에 처음 보인 날이 수집을 시작한 날과 같으면 그날 올라온 것인지 이미 있었던 것인지 알 수 없다. 앞의 관문과 달리 이건 시간이 푼다. 수집이 쌓이면 이 줄은 다시 늘어난다.",
+      body:
+        "차트에 처음 보인 날이 수집을 시작한 날과 같으면 그날 올라온 것인지 이미 있었던 것인지 알 수 없다. 앞의 관문과 달리 이건 시간이 푼다. 수집이 쌓이면 이 줄은 다시 늘어난다." +
+        // 이름은 결론이 아니라 **여기까지 온 것이 누구인지**다. 남은 한 팀을 끝까지 익명으로
+        // 두면 다섯 단계를 좁혀 온 서사가 수 하나로 끝난다.
+        (named.length
+          ? ` 여기까지 남은 팀: ${named.map((p) => `${p.name} ${p.value}일`).join(" · ")}${
+              (passed?.length ?? 0) > named.length ? " 외" : ""
+            }.`
+          : ""),
       focus: "narrowed",
       live: survivors,
       count: survivors,

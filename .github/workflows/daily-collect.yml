@@ -53,21 +53,27 @@ jobs:
       #    잡 전체에 건다. 인코딩은 실행 환경이 정할 값이 아니다.
       PYTHONIOENCODING: utf-8
       PYTHONUTF8: "1"
-      # 🔴 유료 레그 스위치. **기본은 꺼짐**(1 = dry-run). 병행 운전 기간에 로컬 Task
-      #    Scheduler와 러너가 같은 태그를 각자 사면 하루 $3이 $6이 된다 — 시도 원장이 두
-      #    곳에서 따로 세기 때문에 스크립트의 예산 가드로는 못 막는다.
-      #    켜는 것은 코드 변경이 아니라 저장소 변수 하나다:
-      #      Settings > Secrets and variables > Actions > Variables > AI_DRYRUN = 0
-      #    그 변수를 끄는 날이 곧 로컬 크론을 해제하는 날이다(둘은 같은 결정이다).
-      #    값이 정확히 "0"일 때만 켜진다 — 미설정·오타·빈값은 전부 꺼짐으로 떨어진다.
-      AI_DRYRUN: ${{ vars.AI_DRYRUN == '0' && '0' || '1' }}
-      # 🔴 같은 변수가 **1층에 쓰는지**도 가른다. 병행 운전 중에는 러너가 읽기만 한다.
-      #    이유: 로컬과 러너가 같은 버킷의 같은 키를 쓴다. `state/<날짜>.tar.gz`와
-      #    `logs/daily.tar.gz`는 키가 하나뿐이라 **나중에 올린 쪽이 앞의 것을 지운다** —
-      #    로컬이 done=true 로 닫은 상태를 러너가 덮거나(그 반대거나), 유료 지출 감사
-      #    로그가 반쪽만 남는다. 대조하려고 켠 병행 운전이 대조 대상을 오염시킨다.
-      #    그래서 병행 기간의 러너는 **복원만 하고 아무것도 올리지 않는다.**
-      LIVE_MODE: ${{ vars.AI_DRYRUN == '0' && '1' || '0' }}
+      # 🔴 전환 레버. 저장소 변수 `RUNNER_MODE`가 **정확히 `live`일 때만** 열린다:
+      #      · 유료 소셜 레그 (하루 $3)
+      #      · 1층(Supabase)에 쓰기
+      #    둘은 같은 결정이라 스위치도 하나다 — 그리고 그날이 로컬 크론을 해제하는 날이다.
+      #      Settings > Secrets and variables > Actions > Variables > RUNNER_MODE = live
+      #
+      #    🔴 왜 `AI_DRYRUN == '0'`이 아니라 문자열 `live`인가 — **첫 실행에서 가드가
+      #    열린 쪽으로 실패했다.** GitHub 표현식의 `==`는 피연산자를 **숫자로 캐스팅**한다:
+      #    미설정 변수는 `''` → 0 이고 `'0'` → 0 이라, `vars.AI_DRYRUN == '0'`이 **변수를
+      #    설정하지 않았을 때 참**이 된다. 즉 "미설정=꺼짐"으로 짠 기본값이 정확히 반대로
+      #    돌았다(run 30683288722: 변수 없이 AI_DRYRUN=0 · LIVE_MODE=1로 실행). 그날 하루가
+      #    이미 닫혀 있어 no-op으로 빠져나간 덕에 돈은 나가지 않았다.
+      #    `live`는 숫자로 캐스팅되지 않아(NaN) 빈 문자열과 절대 같아지지 않는다.
+      #    🔺 **이 표현식에서 `== '0'`·`== '00'`·`== ''` 류를 쓰지 않는다.** 켜는 조건은
+      #      숫자로 읽힐 수 없는 문자열이어야 한다.
+      AI_DRYRUN: ${{ vars.RUNNER_MODE == 'live' && '0' || '1' }}
+      # 러너가 1층에 **쓰는지**. 병행 운전 중에는 읽기만 한다 — 로컬과 러너가 같은 버킷의
+      # 같은 키를 쓰기 때문이다. `state/<날짜>.tar.gz`와 `logs/daily.tar.gz`는 키가 하나뿐이라
+      # **나중에 올린 쪽이 앞의 것을 지운다**: 로컬이 done=true로 닫은 상태를 러너가 덮거나,
+      # 유료 지출 감사 로그가 반쪽만 남는다. 대조하려고 켠 병행 운전이 대조 대상을 오염시킨다.
+      LIVE_MODE: ${{ vars.RUNNER_MODE == 'live' && '1' || '0' }}
       APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
       YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
@@ -82,9 +88,13 @@ jobs:
       #    함께 문서에 적힌 중단 레버가 조용히 죽는다. 러너 몫의 레버를 여기 둔다.
       #      멈춤:  Settings > Variables > PAUSE = 1   (다음 크론부터 즉시 · 커밋 불필요)
       #      완전 정지: Actions 탭에서 이 워크플로 Disable
-      #    유료만 끄려면 PAUSE가 아니라 AI_DRYRUN을 1로 되돌린다(무료 차트는 계속 쌓인다).
+      #    유료만 끄려면 PAUSE가 아니라 RUNNER_MODE를 `live` 아닌 값으로 되돌린다
+      #    (무료 차트는 계속 쌓인다).
+      #    🔑 **비어 있지 않은 아무 값에나 선다**(`!= ''`). 켜는 레버는 정확한 문자열을
+      #      요구하지만(위 RUNNER_MODE 주석) **멈추는 레버는 반대 방향으로 안전해야 한다** —
+      #      `== '1'`로 두면 `PAUSE=stop`이나 `PAUSE=yes`가 조용히 무시된다.
       - name: Stop lever (repository variable PAUSE)
-        if: vars.PAUSE == '1'
+        if: vars.PAUSE != ''
         shell: bash
         run: |
           echo "::error::PAUSE=1 -- collection stopped by the repository variable. \
@@ -107,6 +117,18 @@ jobs:
             exit 1
           fi
           echo "secrets present: 4/4"
+
+          # 🔴 해석된 모드를 **말로** 찍는다. 첫 실행에서 표현식 하나가 조용히 반대로
+          #    돌았고(위 RUNNER_MODE 주석), 그것이 보인 유일한 자리가 스텝 로그의
+          #    `AI_DRYRUN: 0` 한 줄이었다 -- 읽을 이유가 없는 자리다. 값이 아니라 **결과**를
+          #    적으면 다음번엔 요약만 봐도 걸린다.
+          if [ "$LIVE_MODE" = "1" ]; then
+            echo "::warning::MODE = LIVE -- paid social WILL run (up to \$3/day) and layer-1 WILL be written."
+            echo "  local Task Scheduler must be OFF, or today is billed twice and the layer-1 keys collide."
+          else
+            echo "MODE = read-only (parallel-run). No paid fetch, nothing written to layer 1."
+          fi
+          echo "  RUNNER_MODE=${{ vars.RUNNER_MODE || '(unset)' }} -> AI_DRYRUN=${AI_DRYRUN} LIVE_MODE=${LIVE_MODE}"
 
       - uses: actions/setup-python@v5
         with:
@@ -193,8 +215,8 @@ jobs:
           #    호출조차 하지 않게 한다. 스크립트가 이미 그렇게 설계돼 있다 — 설정이 없으면
           #    아무것도 이 기계를 떠나지 않고 로그에 "backup skipped"만 남는다(D-058).
           #    새 플래그를 만들지 않고 있는 계약을 쓴다.
-          SUPABASE_URL: ${{ vars.AI_DRYRUN == '0' && secrets.SUPABASE_URL || '' }}
-          SUPABASE_SERVICE_KEY: ${{ vars.AI_DRYRUN == '0' && secrets.SUPABASE_SERVICE_KEY || '' }}
+          SUPABASE_URL: ${{ vars.RUNNER_MODE == 'live' && secrets.SUPABASE_URL || '' }}
+          SUPABASE_SERVICE_KEY: ${{ vars.RUNNER_MODE == 'live' && secrets.SUPABASE_SERVICE_KEY || '' }}
         run: .\scripts\daily_collect.ps1
 
       # ─────────────────────────────────────────────── ㉰ 1층을 올린다 (안전망)
@@ -244,9 +266,10 @@ jobs:
 
       # 되밀기도 **기본은 꺼짐**이다. 병행 운전 기간에는 로컬도 같은 리포트를 만들고,
       # 둘이 각자 main 에 쓰면 충돌이 일상이 된다. 켜는 것은 저장소 변수 하나:
-      #   Settings > Variables > PUSH_REPORTS = 1   (AI_DRYRUN=0 과 같은 날 켠다)
+      #   Settings > Variables > PUSH_REPORTS = on   (RUNNER_MODE=live 와 같은 날 켠다)
+      # 값이 `on`인 이유는 RUNNER_MODE와 같다 — 숫자로 캐스팅되는 값은 미설정과 구별되지 않는다.
       - name: Push reports (layer 3)
-        if: vars.PUSH_REPORTS == '1'
+        if: vars.PUSH_REPORTS == 'on'
         shell: bash
         run: |
           git config user.name "artist-intelligence bot"

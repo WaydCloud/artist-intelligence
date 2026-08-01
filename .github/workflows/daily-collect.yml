@@ -1,0 +1,280 @@
+name: daily-collect
+
+# 전향 실증 일일 수집 — 이 PC(Task Scheduler `AI-daily-collect`)에서 GitHub 러너로 이전.
+# 결정 근거는 docs/DECISIONS.md D-059, 실측·판단 자료는 docs/DRAFT-saas-platform.md §2.2.
+#
+# 🔑 이 워크플로가 지키는 것 하나: **거른 날은 영구 결손이다.** 차트와 소셜은 "오늘"만
+#    서빙하므로 놓친 날짜는 나중에 살 수도 받을 수도 없다. 아래 설계는 전부 그 한 문장에서
+#    나온다 — 어정쩡한 분(minute)에 걸고, 2시간 간격으로 네 번 시도하고, 겹쳐 돌지 않게 막고,
+#    실패해도 마지막에 1층을 올린다.
+#
+# 러너는 매 실행 **빈 디스크로 태어난다.** data/live 는 gitignore라 체크아웃에 없다. 그래서
+# 순서가 `복원 → 수집 → 백업`이고, 복원이 실패하면 **수집을 시작하지 않는다**(아래 이유).
+
+on:
+  # ⏰ UTC다. KST = UTC+9 → 00:17 UTC = 09:17 KST.
+  #
+  # 🔴 정각(`0 0 * * *`)을 쓰지 않는다. 예약 워크플로는 GitHub 큐 부하에 밀려 **건너뛴다**
+  #    (지연이 아니라 스킵이다). 전 세계가 정각에 몰리므로 정각이 최악 슬롯이고, 스킵된 날은
+  #    우리에게 영구 결손이다. 어정쩡한 분으로 피한다.
+  # 네 번은 daily_collect.ps1 의 `$maxAttempts = 4` 와 짝이다 — 4회를 넘으면 스크립트가
+  # 결손을 결손으로 확정하고 무엇이 비었는지 로그에 적는다. 여기서 5번째를 돌려도 no-op다.
+  schedule:
+    - cron: "17 0 * * *" # 09:17 KST — 1차
+    - cron: "17 2 * * *" # 11:17 KST — 재시도(실패 타깃만)
+    - cron: "17 4 * * *" # 13:17 KST — 재시도
+    - cron: "17 6 * * *" # 15:17 KST — 재시도
+  workflow_dispatch:
+
+# 🔴 겹쳐 돌지 않게 막는다. 앞 시도가 아직 도는데 다음 크론이 뜨면 두 프로세스가 같은
+#    유료 태그를 각자 사고, 시도 원장(data/live/state/social_attempts_<date>.json)이 서로를
+#    못 보므로 하루 상한 $3이 조용히 두 배가 된다. `cancel-in-progress: false` 여야 한다 —
+#    돌던 시도를 죽이면 이미 낸 돈이 스냅샷 없이 사라진다.
+concurrency:
+  group: daily-collect
+  cancel-in-progress: false
+
+# 3층(report.json)을 되밀 때만 필요하다. 되밀기가 꺼져 있어도(기본) 권한을 좁게 유지한다.
+permissions:
+  contents: write
+
+jobs:
+  collect:
+    name: collect · derive · back up (windows)
+    runs-on: windows-latest
+    # 콜드 캐시(sonic 프리뷰 ~200건 재취득 + 모델 내려받기)를 견디는 값. 정상은 훨씬 짧다.
+    timeout-minutes: 180
+
+    env:
+      # 🔴 러너의 코드페이지는 cp949가 아니다. 모듈 CLI 43줄이 한글을 stdout으로 찍고,
+      #    그 print는 코드페이지가 인코딩 못 하는 순간 UnicodeEncodeError로 **레그를 죽인다**
+      #    (로컬에서는 콘솔이 cp949라 우연히 되던 것이다). daily_collect.ps1 맨 위에서도
+      #    같은 짝을 걸지만, 그 스크립트를 거치지 않는 스텝(복원·백업·계약 게이트)도 있으므로
+      #    잡 전체에 건다. 인코딩은 실행 환경이 정할 값이 아니다.
+      PYTHONIOENCODING: utf-8
+      PYTHONUTF8: "1"
+      # 🔴 유료 레그 스위치. **기본은 꺼짐**(1 = dry-run). 병행 운전 기간에 로컬 Task
+      #    Scheduler와 러너가 같은 태그를 각자 사면 하루 $3이 $6이 된다 — 시도 원장이 두
+      #    곳에서 따로 세기 때문에 스크립트의 예산 가드로는 못 막는다.
+      #    켜는 것은 코드 변경이 아니라 저장소 변수 하나다:
+      #      Settings > Secrets and variables > Actions > Variables > AI_DRYRUN = 0
+      #    그 변수를 끄는 날이 곧 로컬 크론을 해제하는 날이다(둘은 같은 결정이다).
+      #    값이 정확히 "0"일 때만 켜진다 — 미설정·오타·빈값은 전부 꺼짐으로 떨어진다.
+      AI_DRYRUN: ${{ vars.AI_DRYRUN == '0' && '0' || '1' }}
+      # 🔴 같은 변수가 **1층에 쓰는지**도 가른다. 병행 운전 중에는 러너가 읽기만 한다.
+      #    이유: 로컬과 러너가 같은 버킷의 같은 키를 쓴다. `state/<날짜>.tar.gz`와
+      #    `logs/daily.tar.gz`는 키가 하나뿐이라 **나중에 올린 쪽이 앞의 것을 지운다** —
+      #    로컬이 done=true 로 닫은 상태를 러너가 덮거나(그 반대거나), 유료 지출 감사
+      #    로그가 반쪽만 남는다. 대조하려고 켠 병행 운전이 대조 대상을 오염시킨다.
+      #    그래서 병행 기간의 러너는 **복원만 하고 아무것도 올리지 않는다.**
+      LIVE_MODE: ${{ vars.AI_DRYRUN == '0' && '1' || '0' }}
+      APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
+      YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+      BACKUP_BUCKET: ${{ vars.BACKUP_BUCKET || 'live-raw' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # 🔴 중단 레버. `data/live/PAUSE`는 **러너에 오지 않는다** — 그 파일은 gitignore인
+      #    data/live 안에 있고 백업의 _EXCLUDED("가드 파일")라 복원되지도 않는다. 즉 이전과
+      #    함께 문서에 적힌 중단 레버가 조용히 죽는다. 러너 몫의 레버를 여기 둔다.
+      #      멈춤:  Settings > Variables > PAUSE = 1   (다음 크론부터 즉시 · 커밋 불필요)
+      #      완전 정지: Actions 탭에서 이 워크플로 Disable
+      #    유료만 끄려면 PAUSE가 아니라 AI_DRYRUN을 1로 되돌린다(무료 차트는 계속 쌓인다).
+      - name: Stop lever (repository variable PAUSE)
+        if: vars.PAUSE == '1'
+        shell: bash
+        run: |
+          echo "::error::PAUSE=1 -- collection stopped by the repository variable. \
+          Today's charts and social will be permanently missing if this stays set."
+          exit 1
+
+      # 🔴 시크릿이 없으면 **여기서 죽는다.** 없이 진행하면 러너는 빈 data/live 로 시작해
+      #    "오늘 하루치만 있는" 시리즈를 만들고, 그것이 리포트가 되어 커밋된다 — 즉 실패가
+      #    빨간 X가 아니라 **그럴듯한 산출물**로 나타난다. 이 프로젝트가 반복해 맞은 실패
+      #    양식이 정확히 그것이다(조용한 결손). 30분 쓰기 전에 첫 스텝에서 끝낸다.
+      - name: Preflight — required secrets
+        shell: bash
+        run: |
+          missing=()
+          for k in SUPABASE_URL SUPABASE_SERVICE_KEY APIFY_TOKEN YOUTUBE_API_KEY; do
+            [ -n "${!k}" ] || missing+=("$k")
+          done
+          if [ ${#missing[@]} -gt 0 ]; then
+            echo "::error::missing repository secret(s): ${missing[*]} -- see .env.example"
+            exit 1
+          fi
+          echo "secrets present: 4/4"
+
+      - uses: actions/setup-python@v5
+        with:
+          # 로컬과 같은 마이너 버전. 특징 값에 닿는 것은 아래 라이브러리 핀이지만,
+          # 파이썬 마이너가 다르면 그 핀들이 서로 다른 휠로 풀린다.
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-daily.txt
+
+      - uses: actions/setup-node@v4
+        # collect-reports.mjs 전용(노드 빌트인만 쓴다 — npm ci 불필요).
+        with: { node-version: 20 }
+
+      - name: Install runtime deps
+        shell: bash
+        run: python -m pip install --disable-pip-version-check -r requirements-daily.txt
+
+      # 두 캐시는 **관측이 아니라 자산**이다(재취득 가능·불변). 1층 백업에 넣지 않는 이유이고,
+      # 여기서 캐시하는 이유이기도 하다. 콜드일 때 합쳐 ~500MB를 외부에서 받는다:
+      #   · beat_this 체크포인트 final0 81MB  ← cloud.cp.jku.at
+      #   · essentia ONNX 태거 모델           ← essentia.upf.edu
+      # ⚠ 이 두 호스트는 ip-probe(PR #8)가 재지 않은 표면이다. 캐시가 콜드인 날 여기서
+      #   막히면 sonic 레그만 죽고(리듬·태그 결측) 나머지는 돈다 — 하루는 열린 채 재시도된다.
+      - name: Cache — model weights (essentia ONNX)
+        uses: actions/cache@v4
+        with:
+          path: data/models
+          key: essentia-models-v1
+      - name: Cache — beat_this checkpoint (torch hub)
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/torch
+          # 체크포인트 이름(final0)을 키에 넣지 않는다 -- gitleaks가 `key:` 뒤의 영숫자
+          # 혼합 토큰을 generic-api-key(엔트로피 3.68)로 읽어 secret scan이 적색이 된다.
+          # 캐시 키는 임의값이므로 이름을 바꾸는 쪽이 스캐너를 잠재우는 것보다 싸다.
+          key: beat-this-checkpoint-v-one
+
+      # ─────────────────────────────────────────────── ㉮ 부트스트랩: 1층을 되돌린다
+      #
+      # 결정 1(D-059)에 따라 파생 3종을 러너에서 돌린다. 그런데 셋 다 **1층 전체**를 읽는다
+      # (chart_history signals = 전 날짜 x 전 시장 · merge_social = 전체 glob · sonic_profile
+      # signals = 전 스냅샷). 그래서 러너가 복원하는 것은 "오늘 것"이 아니라 **전 이력**이다.
+      # 실측 1,627파일 32초 · 14.33MB(D-058).
+      #
+      # 🔑 restore 는 매니페스트도 원격에서 재구성한다 — 그래서 뒤이은 백업이 54객체를
+      #    통째로 다시 올리지 않고 증분으로 돈다(러너에서는 그 차이가 매 실행 반복된다).
+      # 🔴 덮어쓰지 않는다(--force 없음). 러너 디스크는 비어 있으니 차이가 없지만, 기본값이
+      #    파괴적이면 사람이 같은 명령을 살아 있는 트리에 돌리는 날 그날 관측이 사라진다.
+      - name: Restore layer-1 (runner bootstrap)
+        shell: bash
+        run: python scripts/backup_live.py --restore
+
+      # 복원이 실제로 이력을 가져왔는지 **눈이 아니라 수로** 확인한다. restore 는 원격이
+      # 텅 비었을 때만 실패하고, "일부만 왔다"는 초록으로 끝난다. 차트 날짜가 하나뿐인
+      # 트리로 signals 를 돌리면 시계열이 아니라 하루짜리 스냅샷이 리포트가 된다.
+      - name: Verify the restored tree has history
+        shell: bash
+        run: |
+          python - <<'PY'
+          import pathlib, sys
+          live = pathlib.Path("data/live")
+          dates = {p.stem for p in live.glob("chart/**/*.html")}
+          sonic = list(live.glob("sonic/*.json"))
+          print(f"restored: chart dates={len(dates)} sonic snapshots={len(sonic)}")
+          if len(dates) < 2:
+              print("::error::restored tree has <2 chart dates -- signals would build a "
+                    "one-day series and ship it as a report. Refusing to collect.")
+              sys.exit(1)
+          PY
+
+      # ─────────────────────────────────────────────── ㉯ 수집 (재작성 0)
+      #
+      # 🔑 `shell: powershell` = Windows PowerShell 5.1. `pwsh`(Core 7)가 아니다.
+      #    daily_collect.ps1 은 5.1 의 함정들을 정면으로 상대하며 쓰였다(UTF-8-without-BOM
+      #    파싱 · 네이티브 stderr 리다이렉트가 $? 를 뒤집는 것 · Set-Content 의 BOM). 그
+      #    전제를 바꾸면 "재작성 0"이 거짓이 된다 — 결정 3(windows-latest)이 산 것이 바로
+      #    이 파일을 손대지 않는 것이다.
+      # 스크립트는 실패해도 0으로 끝난다(레그별로 하루를 열어 두는 것이 설계다). 그래서
+      # 이 스텝의 초록은 "다 됐다"가 아니라 "돌긴 돌았다"이고, 판정은 아래 요약이 한다.
+      - name: Run daily collector
+        shell: powershell
+        env:
+          # 🔑 병행 운전 중에는 이 둘을 **빈 값으로 덮어** 스크립트의 백업 레그(6단계)를
+          #    호출조차 하지 않게 한다. 스크립트가 이미 그렇게 설계돼 있다 — 설정이 없으면
+          #    아무것도 이 기계를 떠나지 않고 로그에 "backup skipped"만 남는다(D-058).
+          #    새 플래그를 만들지 않고 있는 계약을 쓴다.
+          SUPABASE_URL: ${{ vars.AI_DRYRUN == '0' && secrets.SUPABASE_URL || '' }}
+          SUPABASE_SERVICE_KEY: ${{ vars.AI_DRYRUN == '0' && secrets.SUPABASE_SERVICE_KEY || '' }}
+        run: .\scripts\daily_collect.ps1
+
+      # ─────────────────────────────────────────────── ㉰ 1층을 올린다 (안전망)
+      #
+      # 스크립트 안에도 백업 레그가 있다(6단계). 여기 또 두는 이유: **러너는 휘발성이다.**
+      # 스크립트가 중간에 죽으면 로컬에서는 파일이 디스크에 남아 다음 시도가 이어받지만,
+      # 러너에서는 그 순간 오늘 산 것($3)과 시도 원장이 통째로 사라진다. 업로드는 증분이라
+      # 두 번 돌아도 0객체 1초로 끝난다 — 안 도는 쪽의 값만 비싸다.
+      - name: Back up layer-1 (safety net)
+        if: always() && env.LIVE_MODE == '1'
+        shell: bash
+        run: python scripts/backup_live.py
+
+      # 🔴 매니페스트를 믿지 않고 원격을 본다. "올렸다고 믿는데 비어 있다"가 백업이 감당
+      #    못 하는 유일한 실패이고, 그것은 초록 로그와 함께 온다.
+      - name: Verify the remote (do not trust the manifest)
+        if: always() && env.LIVE_MODE == '1'
+        shell: bash
+        run: python scripts/backup_live.py --verify
+
+      # ─────────────────────────────────────────────── ㉱ 3층: 계약을 먼저, 되밀기는 그다음
+      #
+      # 러너가 만든 report.json 을 되밀기 전에 **여기서** 계약을 검증한다. GITHUB_TOKEN 으로
+      # 민 커밋은 워크플로를 다시 트리거하지 않으므로(재귀 방지) ci.yml 이 이 커밋을 보지
+      # 못한다 — 게이트를 여기 두지 않으면 계약 위반이 아무에게도 안 걸린 채 대시보드로 간다.
+      - name: Report contract gate (schema · chart data)
+        shell: bash
+        run: |
+          python - <<'PY'
+          import glob, json, sys
+          from jsonschema import Draft202012Validator
+          v = Draft202012Validator(json.load(open("packages/report-schema/report.schema.json")))
+          files = glob.glob("modules/**/output/report.json", recursive=True)
+          if not files:
+              print("::error::no report.json produced -- the collector never reached the report step")
+              sys.exit(1)
+          bad = 0
+          for f in files:
+              errs = sorted(v.iter_errors(json.load(open(f, encoding="utf-8"))), key=lambda e: e.path)
+              for e in errs:
+                  print(f"::error file={f}::{list(e.path)}: {e.message}")
+              bad += bool(errs)
+          print(f"validated {len(files)} report(s)")
+          sys.exit(1 if bad else 0)
+          PY
+          python scripts/validate_report_data.py
+
+      # 되밀기도 **기본은 꺼짐**이다. 병행 운전 기간에는 로컬도 같은 리포트를 만들고,
+      # 둘이 각자 main 에 쓰면 충돌이 일상이 된다. 켜는 것은 저장소 변수 하나:
+      #   Settings > Variables > PUSH_REPORTS = 1   (AI_DRYRUN=0 과 같은 날 켠다)
+      - name: Push reports (layer 3)
+        if: vars.PUSH_REPORTS == '1'
+        shell: bash
+        run: |
+          git config user.name "artist-intelligence bot"
+          git config user.email "noreply@github.com"
+          git add modules/*/output/report.json apps/dashboard/data/reports.json
+          if git diff --cached --quiet; then
+            echo "no report change today -- nothing to push"
+            exit 0
+          fi
+          git commit -m "data: 일일 수집 $(date -u +%Y-%m-%d) (자동)"
+          # 사람이 그사이 밀었을 수 있다. 우리 변경은 생성물이라 언제나 재생성 가능하므로
+          # rebase 로 얹고, 그래도 안 되면 조용히 포기한다(다음 시도가 다시 만든다).
+          git pull --rebase --autostash origin main && git push origin HEAD:main
+
+      # ─────────────────────────────────────────────── 읽을 것: 종료 상태가 아니라 로그
+      #
+      # 세 줄을 본다(HANDOFF "로그에서 볼 것"): ① attempt n/4 ② day left INCOMPLETE on
+      # purpose ③ 실패 사유. 셋 다 없으면 전부 1회에 성공한 것이다.
+      - name: Summary
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo "## daily-collect — $(date -u +%Y-%m-%dT%H:%MZ) (AI_DRYRUN=${AI_DRYRUN})"
+            echo '```'
+            tail -n 60 data/live/logs/daily.log 2>/dev/null || echo "(no log -- the collector never started)"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"
+          if grep -q "!!" data/live/logs/daily.log 2>/dev/null; then
+            echo "::warning::the log contains '!!' lines -- read the summary, the day may be held open"
+          fi

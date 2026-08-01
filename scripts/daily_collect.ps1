@@ -29,6 +29,21 @@ $repo = Split-Path -Parent $scriptDir
 if (-not (Test-Path (Join-Path $repo "AGENTS.md"))) { $repo = (Get-Location).Path }   # fallback to CWD
 Set-Location $repo
 
+# --- 출력 인코딩: 여기서 한 번, 모든 레그보다 먼저 ---
+# 이 두 줄은 **짝**이다. PYTHONIOENCODING은 파이썬이 UTF-8로 '쓰게' 만들 뿐이고, 그 stdout을
+# 텍스트로 '읽는' 쪽은 PowerShell이라 [Console]::OutputEncoding을 따른다. 하나만 맞추면
+# UTF-8 바이트를 콘솔 코드페이지로 읽어 로그의 한글이 깨진다(실측 2026-07-29: SUMMARY 줄
+# '소셜' -> '?뚯뀥', 바이트 ec 86 8c -> 3f eb 9a af. 복구 불가).
+#
+# 2026-08-01: 이 짝이 원래 sonic 레그(3.6) 안에 있었다. 그 앞 레그들(chart analyze / social
+# merge / yt)도 한글을 찍는데(모듈 CLI 43줄) 로컬 콘솔이 cp949라 인코딩이 되어 안 보였다.
+# 러너는 코드페이지가 cp949가 아니므로 같은 print가 UnicodeEncodeError로 **레그를 죽인다** --
+# 이전 첫날 chart-history 라이브 리포트부터 터졌을 자리다. 코드페이지에 의존하지 않도록
+# 맨 위로 올린다. 규율은 "여기서 한 번"이고, 아래 어느 레그도 다시 묻지 않는다.
+$env:PYTHONIOENCODING = "utf-8"
+$env:PYTHONUTF8 = "1"
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }   # 콘솔 없는 호스트에서 던질 수 있다
+
 $live = Join-Path $repo "data\live"
 $logDir = Join-Path $live "logs"
 New-Item -ItemType Directory -Force -Path $logDir, (Join-Path $live "social"), (Join-Path $live "chart"), (Join-Path $live "quarantine") | Out-Null
@@ -385,13 +400,7 @@ $cohortPath = "data/live/sonic/cohort.json"
 $cohortArg = @()
 $cohortMarket = "kr"; if ($cfg.sonic_cohort_market) { $cohortMarket = [string]$cfg.sonic_cohort_market }
 $cohortTop = 100; if ($cfg.sonic_cohort_top) { $cohortTop = [int]$cfg.sonic_cohort_top }
-$env:PYTHONIOENCODING = "utf-8"   # track titles are Korean; console codepage must not decide
-# 위 줄과 **짝**이어야 한다. PYTHONIOENCODING은 파이썬이 UTF-8로 '쓰게' 만들 뿐이고,
-# 파이썬 stdout을 텍스트로 '읽는' 쪽은 PowerShell이라 [Console]::OutputEncoding을 따른다.
-# 스케줄러는 콘솔 없이 돌아 이 값이 시스템 ANSI(한국어 Windows=cp949)로 떨어지므로,
-# 짝을 맞추지 않으면 UTF-8 바이트를 cp949로 읽어 로그의 한글이 깨진다
-# (실측 2026-07-29: SUMMARY 줄 '소셜' → '?뚯뀥', 바이트 ec 86 8c → 3f eb 9a af. 복구 불가).
-[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+# 인코딩 짝은 스크립트 맨 위에서 이미 한 번 걸렸다(레그마다 다시 걸지 않는다).
 if ($legs["sonic"] -eq "ok") { Log "resume: sonic leg already complete -- skipped" }
 elseif (Test-Path $sonicToday) { Log "resume: sonic snapshot $today already fetched -- skipped" }
 else {

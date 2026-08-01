@@ -694,6 +694,30 @@ def cmd_selftest() -> int:
         check(w3 == 2, "--force must overwrite")
         check(victim.read_bytes() != b"<html>TODAY</html>", "--force must actually replace the file")
 
+    # 🔴 AI_DRYRUN 은 **보내는 경로만** 마르게 한다. 복원은 받는 쪽이라 해당하지 않는데,
+    # 한동안 업로드용 `dry` 를 그대로 물려받아 러너 부트스트랩이 아무것도 받지 않고
+    # 초록으로 끝났다(run 30683659462). 그 조합은 네트워크 없이 재현되지 않으므로
+    # 여기서 **디스패치만** 가로채 인자를 본다 -- 게이트를 실행으로 옮기는 자리다.
+    seen: list[tuple[str, bool]] = []
+    real_restore, real_upload = cmd_restore, cmd_upload
+    globals()["cmd_restore"] = lambda _l, _p, _b, _f, dry: (seen.append(("restore", dry)), 0)[1]
+    globals()["cmd_upload"] = lambda _l, _p, _b, dry: (seen.append(("upload", dry)), 0)[1]
+    prev_env = os.environ.get("AI_DRYRUN")
+    try:
+        os.environ["AI_DRYRUN"] = "1"
+        main(["--restore"])
+        main(["--restore", "--dry-run"])
+        main([])
+    finally:
+        globals()["cmd_restore"], globals()["cmd_upload"] = real_restore, real_upload
+        if prev_env is None:
+            os.environ.pop("AI_DRYRUN", None)
+        else:
+            os.environ["AI_DRYRUN"] = prev_env
+    check(seen[0] == ("restore", False), f"AI_DRYRUN must NOT dry the restore, got {seen[0]}")
+    check(seen[1] == ("restore", True), f"explicit --dry-run must still dry the restore, got {seen[1]}")
+    check(seen[2] == ("upload", True), f"AI_DRYRUN must dry the upload, got {seen[2]}")
+
     for f in fails:
         _say(f"!! selftest: {f}")
     _say(f"selftest: {'FAILED' if fails else 'ok'} ({len(fails)} finding(s))")
@@ -720,11 +744,22 @@ def main(argv: list[str]) -> int:
         return cmd_init_bucket(args.bucket)
     live = Path(args.live)
     prefix = args.prefix.strip("/")
+    # 보내는 경로(업로드)만 환경 가드를 존중한다. AI_DRYRUN 이 막는 것은 **돈과 바깥으로
+    # 나가는 쓰기**다.
     dry = args.dry_run or os.environ.get("AI_DRYRUN", "") == "1"
     # 🔴 복원은 **없는 디렉터리에서 시작하는 것이 정상 경로**다(러너의 새 디스크). 아래
     # 존재 확인보다 먼저 갈라야 하며, 여기서 막으면 부트스트랩이 첫 줄에서 죽는다.
+    #
+    # 🔴 그리고 복원은 `AI_DRYRUN` 을 보지 않는다 -- **명시적 `--dry-run` 만** 존중한다.
+    # 복원은 받는 쪽이다. 이 가드가 막으려는 것(지출·외부 전송)에 해당하지 않는데,
+    # `--restore` 가 나중에 붙으면서(D-058 ⑩) 업로드용 `dry` 를 그대로 물려받았다.
+    # 결과: 러너의 병행 운전 모드(AI_DRYRUN=1)에서 부트스트랩이 **아무것도 받지 않고
+    # 목록만 찍고 초록으로 끝났다**(run 30683659462). 뒤이은 트리 게이트가 chart dates=0
+    # 으로 잡아 세웠기에 망정이지, 그 게이트가 없었으면 "오늘 하루치만 있는" 리포트가
+    # 나갔다 -- 이 워크플로가 막으려던 바로 그 실패다.
+    # 🔺 가드의 이름이 넓다고 적용 범위까지 넓히지 않는다. 무엇을 막는 가드인지가 범위다.
     if args.restore:
-        return cmd_restore(live, prefix, args.bucket, args.force, dry)
+        return cmd_restore(live, prefix, args.bucket, args.force, args.dry_run)
     if not live.is_dir():
         _say(f"!! live root not found: {live}")
         return 2

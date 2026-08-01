@@ -1,0 +1,50 @@
+# 일일 수집 러너의 런타임 의존성 (.github/workflows/daily-collect.yml 이 이것만 설치한다).
+#
+# 🔴 버전을 고정하는 이유는 "재현성" 일반론이 아니라 **엔진 지문**이다.
+#    sonic-profile 레코드는 `engine_version`(= librosa 버전)·`sample_rate`·`hop`을 함께 싣고,
+#    게이트(scripts/gate_snapshot.py)는 지문이 어긋난 값을 한 분포에 넣기를 **거부한다**
+#    (D-037·D-038). 러너가 다른 버전으로 특징을 재면 그날 값은 음악이 아니라 **측정 조건
+#    차이**를 재고, 백분위가 조용히 그것을 반영한다. 디코더(av)·리샘플러(soxr)·수치
+#    스택(numpy/scipy)도 같은 이유로 여기 있다 — 지문에 안 실릴 뿐 값은 바꾼다.
+#
+#    값은 2026-08-01 로컬 실측(Windows/AMD64 · Python 3.14.5 · `pip freeze`)이다.
+#    올릴 때는 **로컬을 먼저 올리고 같은 값을 여기 반영한다.** 반대로 하면 러너가 먼저
+#    다른 자로 재고, 그 하루는 되돌릴 수 없다(1층은 재취득 불가).
+#
+# 여기 없는 것: ruff·pyright(CI 게이트 전용 · ci.yml이 uvx로 자기 버전을 핀한다) ·
+# demucs(스템 축은 D-049/D-050에서 판정 종료 · daily 경로가 부르지 않는다).
+
+# torch CPU 휠. PyPI의 Windows torch는 이미 CPU 빌드지만, 인덱스를 명시해 두면
+# 리눅스로 옮기더라도 CUDA 휠(2GB+)을 잘못 끌어오지 않는다.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+# ── 계약 검증 (모든 모듈)
+jsonschema==4.26.0
+
+# ── 수치 스택
+numpy==2.4.6
+scipy==1.18.0
+
+# ── 오디오 특징 (sonic-profile) — 값에 직접 닿는다
+librosa==0.11.0
+numba==0.66.0
+llvmlite==0.48.0
+soundfile==0.14.0
+soxr==1.1.0
+audioread==3.1.0
+pooch==1.9.0
+lazy-loader==0.5
+standard-aifc==3.13.0
+av==18.0.0
+
+# ── 비트 추적 (rhythm.py `_beat_tracker`). 없으면 RhythmUnavailable로 리듬 축이 통째로
+#    빈다 — 죽지는 않지만 그날 스냅샷은 리듬 지표가 없는 반쪽이 된다.
+#    체크포인트(final0 · 81MB)는 런타임에 cloud.cp.jku.at 에서 받아 ~/.cache/torch 에 눕는다.
+torch==2.13.0
+torchaudio==2.11.0
+beat-this==1.1.0
+rotary-embedding-torch==0.9.1
+
+# ── 악기·장르 태거 (tagging.py). ONNX 모델은 런타임에 essentia.upf.edu 에서
+#    data/models/ 로 받는다(CC BY-NC-SA · 재배포 금지라 gitignore).
+onnxruntime==1.28.0

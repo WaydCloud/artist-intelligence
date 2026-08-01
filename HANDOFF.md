@@ -6,45 +6,62 @@
 
 ## 🧭 다음 행선지 (재개점)
 
-# 🔵 수집 이전 — **막던 것 둘이 닫혔고, 남은 것은 설계 판단이다** (2026-08-01 오후)
+# 🔵 수집 이전 — **워크플로는 다 섰다. 남은 것은 시크릿 넷과 첫 실행이다** (2026-08-01 저녁)
 
-> 📄 이번 세션 이력 = **[`Handoffs/2026-08-01-backup-live-and-ip-verdict.md`](Handoffs/2026-08-01-backup-live-and-ip-verdict.md)** · 결정 = **[`docs/DECISIONS.md`](docs/DECISIONS.md) D-058** · 실측 = **[`docs/DRAFT-saas-platform.md`](docs/DRAFT-saas-platform.md) §2.2.1**.
-> 그 앞(같은 날 오전) = [`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md) · D-054 ⑥.
+> 📄 이번 세션 이력 = **[`Handoffs/2026-08-01-collector-migration.md`](Handoffs/2026-08-01-collector-migration.md)** · 결정 = **[`docs/DECISIONS.md`](docs/DECISIONS.md) D-059** · 판단 자료 = **[`docs/DRAFT-saas-platform.md`](docs/DRAFT-saas-platform.md) §2.2**.
+> 그 앞(같은 날 오후) = [`Handoffs/2026-08-01-backup-live-and-ip-verdict.md`](Handoffs/2026-08-01-backup-live-and-ip-verdict.md) · D-058. 그 앞(오전) = [`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md) · D-054 ⑥.
 
-### 🔴 다음 세션이 처음 할 일 — **결정 넷을 받고 이전에 착수한다**
+### 🔴 다음 세션이 처음 할 일 — **㉯ 시크릿을 넣고 ㉰ 손수 한 번 돌린다**
 
-> 이전 도구는 다 섰다(백업·복원·IP 판정). **더 만들기 전에 아래 넷을 정한다** — 안 정하고 짜면 러너 설계가 나중에 통째로 바뀐다.
+> 결정 넷은 받았다(D-059 ①~④: 파생 전부 러너 · 이전이 멜론보다 먼저 · `windows-latest` · `09:17`+4회).
+> `.github/workflows/daily-collect.yml`과 `requirements-daily.txt`가 섰고, **아직 한 번도 돌지 않았다.**
 
-| # | 열린 결정 | 내용 | 엔지니어 권고 |
-|---|---|---|---|
-| 1 | **파생을 러너에서 돌릴 것인가** | 🔴 파생 3종이 **1층 전체를 읽는다**(`chart_history signals` 전 날짜×전 시장 · `merge_social` 전체 glob · `sonic_profile signals` 전 스냅샷). 즉 러너는 "오늘 것"이 아니라 **전 이력**을 복원해야 한다. 지금 **32초**지만 하루 ~1.2MB씩 선형 증가 → 1년 ~450MB 왕복/일 | **㉠ 전부 러너로 시작하고 아플 때 옮긴다.** 32초를 1년 뒤 문제로 미리 최적화하는 것은 오버핏이고, 그때는 데이터가 실제로 어떻게 자랐는지 보고 정하는 편이 낫다. 대안 ㉡증분 시리즈 ㉢2층 Postgres(=`AGENTS.md` §3·D-003을 되짚는 **별도 결정**) |
-| 2 | **멜론 vs 이전, 무엇이 먼저** | 멜론 MCP는 대화형 인증이라 **헤드리스 불가**. 복귀시키면 옮길 수 없는 레그를 하나 안고 간다(§2.2.1 ⑤) | **이전 먼저.** 이전이 서면 멜론 레그 하나만 예외로 두면 되지만, 반대 순서면 이전 설계에 예외를 안고 들어간다 |
-| 3 | **러너 OS** | `windows-latest` = 재작성 0(keep-awake만 무의미) · `ubuntu` = PS 스크립트를 **다시 쓰는 일** | **`windows-latest`.** PUBLIC 레포라 분(minute)이 **무제한 무료**여서 2배 가중이 비용이 아니다 |
-| 4 | **크론 시각** | 예약 워크플로는 부하에 밀리고 건너뛴다. 차트·소셜은 "오늘"만 서빙하므로 **거른 날은 영구 결손** | 정각은 최악 슬롯 → **`09:17` 같은 어정쩡한 분** + 재시도를 별도 스케줄로 중복 |
+**㉯ 시크릿 넷** — 🔴 **도메인 소유자 승인 사항**(PUBLIC 레포에 유료 키를 두는 결정). 값은 이 PC의 User 환경변수에 이미 있다.
 
-착수 순서(넷이 정해진 뒤): **㉮ 러너 부트스트랩**(`backup_live.py --restore` 한 줄 — 이미 동작한다) → **㉯ 시크릿 두 줄**(`APIFY_TOKEN`·`YOUTUBE_API_KEY`) → **㉰ 워크플로**(dispatch로 먼저 손수 한 번 → 초록이면 schedule) → **㉱ Task Scheduler와 병행 운전**하며 하루 대조 → **㉲ 로컬 크론 해제**.
-- 🔴 **병행 운전 기간에 유료 레그가 두 번 돌지 않게 한다.** 시도 원장이 두 곳에서 따로 세면 하루 $6이 나간다 — 러너 워크플로에 `AI_DRYRUN=1`을 걸거나 유료 레그를 한쪽에서만 켠다.
+```bash
+gh secret set SUPABASE_URL          # 러너 부트스트랩(1층 복원)에 필수 — 없으면 첫 스텝에서 죽는다
+gh secret set SUPABASE_SERVICE_KEY
+gh secret set APIFY_TOKEN           # 유료 소셜 (병행 기간에는 AI_DRYRUN=1이라 안 쓴다)
+gh secret set YOUTUBE_API_KEY
+```
+
+**㉰ 손수 한 번**(`gh workflow run daily-collect.yml`) — 이 시점의 러너는 **무료·읽기 전용**이다: 유료 레그 꺼짐(`AI_DRYRUN` 미설정=1) · 1층에 **아무것도 쓰지 않음** · `main`에 **아무것도 밀지 않음**. 즉 잘못 돌아도 잃을 것이 없다. 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**.
+- 🔺 콜드 캐시라 처음엔 ~500MB를 받는다(beat_this 체크포인트 81MB + essentia ONNX). **이 두 호스트는 ip-probe가 재지 않은 표면이다**(D-059 ⑩) — 막히면 sonic 레그만 죽고 나머지는 돈다.
+
+**㉱ 병행 운전** — 로컬 Task Scheduler를 그대로 두고 하루를 대조한다. 러너가 만든 `report.json`과 로컬 것을 나란히 놓는다.
+- 🔑 **병행 기간에 러너가 1층에 쓰지 않는 것은 돈 때문이 아니라 저장소 때문이다**(D-059 ⑤). 로컬과 러너가 같은 버킷의 **같은 키**(`state/<날짜>` · `logs/daily`)를 쓰므로 나중에 올린 쪽이 앞의 것을 지운다 — 대조하려고 켠 병행 운전이 대조 대상을 오염시킨다.
+
+**㉲ 전환** — 저장소 변수 둘을 켜고 **같은 날** 로컬 크론을 해제한다. 순서가 어긋나면 하루 $6이 나가거나 하루가 통째로 빈다.
+
+| 레버 (저장소 변수) | 켜면 | 기본 |
+|---|---|---|
+| `AI_DRYRUN=0` | 유료 소셜 **+ 1층 쓰기**를 동시에 연다 | 꺼짐 |
+| `PUSH_REPORTS=1` | 3층(`report.json`)을 `main`에 되민다 | 꺼짐 |
+| `PAUSE=1` | 즉시 정지 | 꺼짐 |
+
+- 🔴 `data/live/PAUSE`는 **러너에 오지 않는다**(백업 제외 항목). 러너 몫의 중단 레버는 변수 `PAUSE`이고, 완전 정지는 Actions 탭에서 워크플로 Disable이다.
+- 해제: `schtasks /Delete /TN "AI-daily-collect" /F`
 
 - 🔴 **Modal(modal.com)은 지금 당기지 않는다.** `§4` 순서 **4번(온디맨드 분석)**이 제자리이며 결정 2가 이미 그것을 선택했다. 그리고 **IP 차단 대안으로는 못 쓴다** — Modal도 데이터센터 IP고 실행마다 클라우드가 바뀐다(§2.2.1 ② 정정).
   - 🔺 **미리 막아 둔 유혹**: "GPU가 싸지면 daily에 `--stems`를 켜 스템 축을 라이브에서 재자" — **안 된다.** H1은 3/12로 판정이 끝났고(D-049), D-050 ⑥이 그 경로를 **모집단을 바꾸는 것**으로 금지했다.
 
 ### ✅ 이번 세션에 닫힌 것
 
-1. **1층 백업이 돌기 시작했다**(D-058 · PR #7 · 도메인 소유자 승인). ref `aakcsjgnrvyklvspuqgj` · 버킷 `live-raw`(비공개) · **54객체 14.33MB / 16초** · `--verify --deep` 54/54/54 · 재실행 **0객체 / 1초**. daily 마지막 레그로 09:00에 자동으로 돌고, 실패하면 하루를 연다.
-   - 🔴 `data/live`에 목록 어디에도 없는 항목이 생기면 스크립트가 이름을 부른다(`_unclassified`). **1층인지 2층인지 판정해 사유와 함께 목록에 적는다** — 침묵시키지 않는다.
-   - 🔺 이 Supabase 프로젝트는 **다른 용도와 공유된다**(기존 비공개 버킷 `Wayd Cloud`). 파일 상한 50MB, 최대 아카이브 1.26MB.
-2. **되돌리기**(D-058 ⑩ · PR #9). 빈 디렉터리로 **1,627파일 / 32초**, 원본과 **바이트 차이 0**, 복원 뒤 `--dry-run` **0객체** · `--verify` 54/54/54. **기본값은 덮어쓰지 않는다**(살아 있는 트리 보호) — `--force`를 명시해야 한다.
-3. **IP 판정 초록불**(PR #8 · run `30681004949`). 러너 **6/6 도달 · 차단 0**, 🔑 **바이트 수가 로컬 기준선과 정확히 일치**(kworb spotify `83,642B` 등). **200만으로는 부족하다** — 지오 변형·소프트 차단도 200으로 온다. 러너가 **더 빠르다**(862ms vs 1,421ms).
-   - ⚠ `apify`·`youtube`는 시크릿 미설정으로 **skip**(통과 아님). 둘은 인증 API라 지오 차단 대상이 아니고, 쟁점이던 스크레이프 190회 표면은 전부 통과했다. **이전할 때 어차피 필요하므로 그때 한 번에 넣는다**(지금 넣으면 PUBLIC 레포에서 유료 키 노출면만 넓힌다).
-   - `ip_probe.py`와 `.github/workflows/ip-probe.yml`은 목적을 다했으니 **지워도 된다**.
+1. **결정 넷을 받았다**(D-059 ①~④ · 전부 엔지니어 권고안). 파생 3종을 **전부 러너에서** · **이전이 멜론보다 먼저** · **`windows-latest`**(재작성 0) · **`09:17` + 2시간 간격 4회**(정각은 스킵되는 최악 슬롯).
+2. **워크플로가 섰다** — `.github/workflows/daily-collect.yml`(15스텝) + `requirements-daily.txt`. 순서는 **복원 → 수집 → 백업**이고, 러너는 매 실행 빈 디스크로 태어나므로 **1층 전 이력을 먼저 되돌린다**(`backup_live.py --restore` · 실측 1,627파일 32초).
+   - **게이트를 앞에 세 개 뒀다**: 시크릿 4/4 확인 · 복원된 트리에 **차트 날짜가 2개 이상인지**(하루짜리 시리즈가 리포트로 나가는 것을 막는다) · 되밀기 직전 스키마+`validate_report_data.py`. 🔑 셋 다 "실패가 빨간 X가 아니라 **그럴듯한 산출물**로 나타나는 것"을 막는 자리다.
+3. **의존성을 고정했다 — 재현성이 아니라 엔진 지문 때문**(D-059 ⑨). 러너가 다른 librosa로 재면 그날 값은 음악이 아니라 **측정 조건 차이**를 재고 게이트가 그것을 거부한다(D-037·D-038). 올릴 때는 **로컬을 먼저** 올린다.
+4. **`ip_probe.py`·`ip-probe.yml` 삭제**(목적 완수 · 판정은 D-058 세션 기록과 §2.2.1에 남는다).
 
-### 🔴 이번에도 육안·실행으로만 잡힌 것 (서른두째 건)
+### 🔴 이번엔 실행이 아니라 **환경 가정을 훑어서** 잡혔다 (서른셋째 건)
 
-**어제 고친 결함을 하루 만에 다시 만들었다.** 출력에 em dash를 써서 cp949 콘솔에서 `UnicodeEncodeError`로 레그가 통째로 죽었다 — D-054 ⑥이 유료 지출 로그 한 줄에서 겪은 그것이다. `daily_collect.ps1` 머리말에 "ASCII-only on purpose"가 **적혀 있는데도** 그랬다.
-- → 출력이 전부 `_say()`를 지나고 **함수가 집행한다**. 원격이 돌려주는 오류 본문처럼 **우리가 고를 수 없는 문자열**도 같은 문을 지난다.
-- **배운 것**: 반복되는 결함은 규율을 더 크게 적어서가 아니라 **사람이 지키지 않아도 되게** 만들어야 멈춘다.
+**모듈 CLI 43줄이 한글을 stdout으로 찍는데, 인코딩 짝이 스크립트 중간(sonic 레그)에서야 걸리고 있었다.** 로컬 콘솔이 cp949라 그 앞의 레그들도 **우연히** 되던 것이다. 러너의 ANSI 코드페이지는 cp949가 아니므로 같은 `print`가 `UnicodeEncodeError`로 레그를 죽인다 — **이전 첫날 `chart-history` 라이브 리포트부터 터졌을 자리다.**
+- 재현: `PYTHONIOENCODING=cp1252`에서 `print('한글')` → `UnicodeEncodeError` · exit 1. 짝을 걸면 exit 0.
+- 고친 방식은 D-058 ⑤와 같다 — **사람이 지키지 않아도 되게.** 짝을 스크립트 **맨 위로** 올려 모든 레그보다 먼저 한 번 걸고, 아래 어느 레그도 다시 묻지 않는다.
+- **배운 것**: 로컬에서 초록인 것은 "맞다"가 아니라 **"이 환경에서 맞다"**이다. 실행 환경이 바뀌는 변경에서는 육안·실행으로 안 보인다 — **환경 가정을 목록으로 훑어야** 보인다.
 
-**그리고 원격 API가 코드와 본문이 어긋났다.** 없는 버킷에 Supabase는 `HTTP 400`을 주면서 본문에 `"statusCode":"404"`를 싣는다 — 상태코드만 보면 "없다"가 "요청이 틀렸다"로 읽혀 **생성 경로가 영영 안 돈다.** 🔺 **원격 API는 둘 중 하나만 믿으면 안 된다.**
+**그리고 중단 레버가 이전과 함께 조용히 죽을 뻔했다.** `data/live/PAUSE`는 gitignore 안에 있고 백업 제외 항목이라 **러너에 오지 않는다.** 문서가 적어 둔 레버가 이전 다음 날부터 아무 일도 하지 않게 된다.
+- 🔺 일반화: **이전은 코드를 옮기는 일이 아니라 코드가 딛고 서 있던 것들을 옮기는 일이다.** 옮겨지지 않는 것(로컬 파일 · 대화형 인증 · 콘솔 코드페이지)이 조용히 빠진다. 이번에 셋 다 나왔다.
 
 ### 그다음 (이전과 병행 가능)
 
@@ -164,14 +181,17 @@
 - **공유 계약**: `snapshot-schema` · `signal-series` · `report-schema`(**D-036** 차트 페이로드 제약 · **D-041** 시각화 필드 · **D-043** 구획) + PII 게이트 + `packages/entity-master`.
 - **시각화 계약 채택**: **6/6 완료**(D-044). 강제 경계는 `scripts/validate_report_data.py`의 `ADOPTED_MODULES`(D-042) — 새 모듈은 여기 한 줄로 계약에 들어온다.
 - **디자인 스킬 벤더링 완료**: `.claude/skills/`에 `frontend-design` + 모션 4종(MIT · LICENSE 동봉). ✅ **커밋됐다**(13파일, `bd83e87`) — "미추적이라 커밋 여부가 확인 대상"이라고 적혀 있었지만 그 커밋에 이미 들어가 있었다. 결정할 것이 남아 있지 않다.
-- ✅ **git 정리 완료**: 열린 PR **0**(2026-08-01 세션 종료 기준 · PR #7·#8·#9 머지). 최근 세션 이력은 [`Handoffs/2026-08-01-backup-live-and-ip-verdict.md`](Handoffs/2026-08-01-backup-live-and-ip-verdict.md)(1층 백업·되돌리기·IP 판정), 그 앞이 [`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md)(수집기 4중 결함 복구·이전 실측), 그 앞이 [`Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md`](Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md)(A2 본편·규칙 2종 등재·amapiano 철회), 그 앞이 [`Handoffs/2026-07-30-preregistered-roll-continuity.md`](Handoffs/2026-07-30-preregistered-roll-continuity.md)(롤 연속성·2마디 블록 사전 등록), 그 앞이 [`Handoffs/2026-07-30-delegated-display-decisions.md`](Handoffs/2026-07-30-delegated-display-decisions.md)(표시 결정 3건 + 카피 게이트), 그 앞이 [`Handoffs/2026-07-30-sonic-profile-sections.md`](Handoffs/2026-07-30-sonic-profile-sections.md)(구획 여섯 + 앵커 게이트), 그 앞이 [`Handoffs/2026-07-30-motion-discipline.md`](Handoffs/2026-07-30-motion-discipline.md)(모션 규율 + reduced-motion 안전망), 그 앞이 [`Handoffs/2026-07-30-interaction-crosshair-tooltip.md`](Handoffs/2026-07-30-interaction-crosshair-tooltip.md)(인터랙션 + 스모크 게이트), 그 앞이 [`Handoffs/2026-07-30-visualization-six-tabs.md`](Handoffs/2026-07-30-visualization-six-tabs.md)(6/6 채택 · 값의 방향), 그 앞이 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭).
+- ✅ **git 정리 완료**: 열린 PR **0**(2026-08-01 오후 기준 · PR #7·#8·#9·#10 머지). 최근 세션 이력은 [`Handoffs/2026-08-01-collector-migration.md`](Handoffs/2026-08-01-collector-migration.md)(결정 넷·러너 워크플로·옮겨지지 않는 것 셋), 그 앞이 [`Handoffs/2026-08-01-backup-live-and-ip-verdict.md`](Handoffs/2026-08-01-backup-live-and-ip-verdict.md)(1층 백업·되돌리기·IP 판정), 그 앞이 [`Handoffs/2026-08-01-gate-passed-and-collector-recovery.md`](Handoffs/2026-08-01-gate-passed-and-collector-recovery.md)(수집기 4중 결함 복구·이전 실측), 그 앞이 [`Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md`](Handoffs/2026-07-31-a2-main-contemporaneous-cohorts.md)(A2 본편·규칙 2종 등재·amapiano 철회), 그 앞이 [`Handoffs/2026-07-30-preregistered-roll-continuity.md`](Handoffs/2026-07-30-preregistered-roll-continuity.md)(롤 연속성·2마디 블록 사전 등록), 그 앞이 [`Handoffs/2026-07-30-delegated-display-decisions.md`](Handoffs/2026-07-30-delegated-display-decisions.md)(표시 결정 3건 + 카피 게이트), 그 앞이 [`Handoffs/2026-07-30-sonic-profile-sections.md`](Handoffs/2026-07-30-sonic-profile-sections.md)(구획 여섯 + 앵커 게이트), 그 앞이 [`Handoffs/2026-07-30-motion-discipline.md`](Handoffs/2026-07-30-motion-discipline.md)(모션 규율 + reduced-motion 안전망), 그 앞이 [`Handoffs/2026-07-30-interaction-crosshair-tooltip.md`](Handoffs/2026-07-30-interaction-crosshair-tooltip.md)(인터랙션 + 스모크 게이트), 그 앞이 [`Handoffs/2026-07-30-visualization-six-tabs.md`](Handoffs/2026-07-30-visualization-six-tabs.md)(6/6 채택 · 값의 방향), 그 앞이 [`Handoffs/2026-07-30-visualization-pilot-and-chart-history.md`](Handoffs/2026-07-30-visualization-pilot-and-chart-history.md)(시각화 착수 → 두 탭).
 - **프리미티브 일반화**(D-044 딸린 결과): `Heatmap`이 순위 전용에서 벗어나 값의 방향을 payload로 받는다(`scale: "rank" | "value"` + 범례 문구). `palette.seqColor`가 그 공통 램프다. chart-history의 순위 격자 4종은 기본값이라 무회귀.
 - **인터랙션 프리미티브**(D-045): `ChartTooltip.tsx`가 `show`(마크 기준)와 `showAt`(좌표 기준 — 크로스헤어처럼 스냅된 위치)을 낸다. 🔴 `unstyled`를 쓰지 않는다(우리 `style`까지 버린다). 라인차트는 표 뷰까지 갖췄고, 격자는 `<th scope>`로 표 의미가 서 있다.
 - **모션 규율**(D-046 · §7.7): 쓰는 곳 넷 · 기각 여섯. `prefers-reduced-motion`은 **`globals.css` 전역 규칙 하나**가 집행한다 — CSS 전환은 컴포넌트에서 다시 묻지 않는다. CSS 밖의 예외 둘만 호출부에서 묻는다: `motion/react`의 JS 애니메이션(`useReducedMotion`) · `scrollIntoView({behavior})`(명시값이 CSS를 이긴다).
 
 ## 🔴 가동 중 — 전향 실증 자동 수집 (매일 09:00 + 2시간 간격 재시도)
 
+> ⏳ **이전 중이다**(D-059). 러너 워크플로가 섰지만 아직 안 돌았고, **지금 실제로 도는 것은 아래 로컬 Task Scheduler뿐이다.** 둘을 동시에 "가동 중"으로 두는 기간이 병행 운전이며, 그때 러너는 **읽기만 한다**.
+
 - **Task Scheduler `AI-daily-collect`** → `scripts/daily_collect.ps1`. 설정 정본은 [`scripts/register_task.ps1`](scripts/register_task.ps1)(멱등).
+- **러너**(예정) → [`.github/workflows/daily-collect.yml`](.github/workflows/daily-collect.yml) · 09:17 KST + 2시간 간격 4회. **같은 `daily_collect.ps1`을 그대로 돌린다**(`shell: powershell` = 5.1).
 - **8단계**: spotify · apple · youtube · shazam(무료) → social(유료 $3/일) → yt → sonic(프리뷰·무보관) → genre-impulse.
 - **재개 가능**(D-018): `data/live/state/run_<date>.json`. 완주일 재실행 = no-op. 🔴 **2026-08-01부터 파생 단계(머지·시리즈·리포트) 실패도 하루를 연다**(D-054 ⑥) — 그전까지는 수집 레그만 봐서 파생이 죽어도 done으로 닫혔다. 유료 시도 원장은 `data/live/state/social_attempts_<date>.json`(옛 자리 `social/attempts_*`도 계속 읽는다). **가드**: PAUSE 파일 · `experiment_end=2026-08-19` · `AI_DRYRUN=1`. 중단: `schtasks /Delete /TN "AI-daily-collect" /F`.
 - ⚠ **다음 sonic 레그(07-31 09:00)가 콜드 실행이다** — `RHYTHM_FEATURE_SET` v4(D-038: HOP 128 · 32칸 격자)로 캐시가 무효화됐다. 프리뷰 ~200건 재취득(무료). **정상 동작이며 이 실행이 32칸 격자와 하이햇 축을 라이브 스냅샷에 채운다.**
@@ -259,6 +279,14 @@
 # ── 전체 daily 1회 (재개 가능·멱등, 완주일이면 no-op)
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\daily_collect.ps1
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts\register_task.ps1 [-WhatIf]
+
+# ── 러너 (D-059 · .github/workflows/daily-collect.yml)
+gh secret set SUPABASE_URL   # 넷 다 필요 (SUPABASE_SERVICE_KEY · APIFY_TOKEN · YOUTUBE_API_KEY)
+gh workflow run daily-collect.yml     # 손수 1회. 기본은 무료·읽기 전용이라 잘못 돌아도 잃을 것이 없다
+gh run watch                          # 볼 것은 종료 상태가 아니라 **스텝 요약의 로그 60줄**
+gh variable set AI_DRYRUN --body 0    # 🔴 전환일에만. 유료 + 1층 쓰기를 동시에 연다
+gh variable set PUSH_REPORTS --body 1 #    3층을 main 에 되민다
+gh variable set PAUSE --body 1        #    즉시 정지 (data/live/PAUSE 는 러너에 안 간다)
 
 # ── sonic-profile  (콘솔이 cp949라 PYTHONIOENCODING=utf-8 필요)
 PYTHONPATH=modules/sonic-profile/src python -m sonic_profile selftest       # 네트워크 0

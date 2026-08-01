@@ -2,7 +2,7 @@
   "moduleId": "signal-bridge",
   "title": "시그널 브리지 · 소셜 → 차트 선행신호",
   "subtitle": "소셜(fandom-pulse) × 차트(chart-history) × YT(yt-pulse) 선행/지연 · 두 신호가 다 있는 팀 131팀 · 차트 51시장 · 소셜 2026-01-21..2026-07-31 / 차트 2026-07-17..2026-08-01",
-  "generatedAt": "2026-08-01T01:00:48Z",
+  "generatedAt": "2026-08-01T05:48:24Z",
   "metrics": [
     {
       "label": "추적 아티스트",
@@ -496,16 +496,16 @@
           "value": 43
         },
         {
-          "name": "TWS",
-          "value": 32
-        },
-        {
           "name": "BOYNEXTDOOR",
           "value": 28
         },
         {
           "name": "Rym",
           "value": 26
+        },
+        {
+          "name": "TWS",
+          "value": 24
         },
         {
           "name": "Ariana Grande",
@@ -2422,7 +2422,7 @@
               25,
               30,
               59,
-              63,
+              7,
               33,
               34,
               34,
@@ -2434,7 +2434,7 @@
               34,
               33,
               47,
-              47
+              10
             ]
           },
           "AND2BLE": {
@@ -6475,7 +6475,7 @@
               157,
               149,
               52,
-              null,
+              28,
               146,
               143,
               74,
@@ -6487,7 +6487,7 @@
               54,
               57,
               54,
-              66
+              30
             ]
           },
           "BOYNEXTDOOR": {
@@ -6606,7 +6606,7 @@
               114,
               135,
               null,
-              null,
+              59,
               150,
               152,
               169,
@@ -18893,7 +18893,7 @@
               3,
               4,
               6,
-              6,
+              4,
               5,
               5,
               5,
@@ -19399,7 +19399,7 @@
               122,
               125,
               null,
-              null,
+              20,
               109,
               108,
               105,
@@ -19411,7 +19411,7 @@
               124,
               123,
               149,
-              149
+              22
             ]
           },
           "IZ*ONE": {
@@ -31727,7 +31727,7 @@
               2,
               2,
               2,
-              3,
+              1,
               2,
               2,
               2,
@@ -31739,7 +31739,7 @@
               2,
               2,
               4,
-              3
+              1
             ]
           },
           "RIIZE": {
@@ -37688,7 +37688,7 @@
               null,
               null,
               null,
-              null,
+              55,
               null,
               null,
               null,
@@ -37700,7 +37700,7 @@
               62,
               62,
               62,
-              62
+              50
             ]
           },
           "Takey": {
@@ -41258,7 +41258,7 @@
               15,
               16,
               65,
-              71,
+              8,
               22,
               22,
               20,
@@ -41270,7 +41270,7 @@
               21,
               21,
               76,
-              71
+              7
             ]
           },
           "YEONJUN": {
@@ -42716,7 +42716,7 @@
               4,
               4,
               4,
-              5
+              4
             ]
           },
           "ahh": {
@@ -54736,19 +54736,19 @@
     "소셜-온리 304팀(KEYVEATZ, Destiny Rogers, ENHYPEN, GOT7, Juicy J 등) · 차트 진입 전 소셜 활성. 조사 우선순위 후보이며 진출 지시 아님",
     "온셋(상승 시작) 기준: 소셜 = 일간 게시수 ≥ 1, 차트 = 순위 ≤ 200. 기준값은 담당자가 조정 가능",
     "판정 근거 교차(소셜 선행 66팀): 소표본(<20건)·검열 43팀 · 소표본·비검열 11팀 · 충분표본·검열 11팀 · 충분표본·비검열 1팀 · 양쪽 통과: izna(+160d·153건). 검열 = 차트 온셋이 수집 개시일과 같아 '그날 진입'과 '이미 있었음'을 구분 못함(축적되면 풀림). 소표본은 시간이 풀지 않는 기준값 문제다. 두 축은 성격이 다르다",
-    "플랫폼 온셋 순서(수집 개시 이후 온셋만·집계 제외 1732팀 제외): apple 선행 4팀 · shazam 선행 1팀 · spotify 선행 56팀 · spotify+youtube 선행 2팀 · youtube 선행 14팀 · 동시 선행 8팀 · 예: ADÉLA(spotify 2026-07-24 → apple 2026-07-26 → shazam 2026-07-30), Adam Ďurica(spotify 2026-07-18 → shazam 2026-07-31), Alex Velea(apple 2026-07-26 → shazam 2026-07-30). 시차는 시간 순서일 뿐 인과 아님.",
+    "플랫폼 온셋 순서(수집 개시 이후 온셋만·집계 제외 1745팀 제외): apple 선행 5팀 · shazam 선행 1팀 · spotify 선행 56팀 · spotify+youtube 선행 2팀 · youtube 선행 14팀 · 동시 선행 8팀 · 예: ADÉLA(spotify 2026-07-24 → apple 2026-07-26 → shazam 2026-07-30), Adam Ďurica(spotify 2026-07-18 → shazam 2026-07-31), Alex Velea(apple 2026-07-26 → shazam 2026-07-30). 시차는 시간 순서일 뿐 인과 아님.",
     "[프로필] KATSEYE — social-led(+11d) · 소셜 463건·참여 1094.3k · 드라이버: KATSEYE - Animal, ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, #katseye, #캣츠아이 · 차트 최고 #1·44시장(AE,AR,AT,AU,BE…)·apple+shazam+spotify+youtube · YT 구독 12400.0k·'so, hinterland, are you ' +4370.3k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
-    "[프로필] CORTIS — social-led(+68d) · 소셜 453건·참여 1256.5k · 드라이버: CORTIS - REDRED, CORTIS - ACAI, #cortis, #코르티스 · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+shazam+spotify+youtube · YT 구독 6100.0k·'need a pick me up? #CORT' +1932.7k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
-    "[프로필] ILLIT — social-led(+59d) · 소셜 324건·참여 1048.8k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #1·10시장(FI,GLOBAL,HK,JP,KR…)·apple+shazam+spotify+youtube · YT 구독 5950.0k·'ICONIC BY CUTENESS...🎀' +2240.9k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
-    "[프로필] Hearts2Hearts — social-led(+177d) · 소셜 314건·참여 856.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #hearts2hearts, #하츠투하츠 · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+shazam+spotify+youtube · YT 구독 3390.0k·'would you hold my hand? ' +942.8k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
-    "[프로필] RESCENE — social-led(+17d) · 소셜 306건·참여 925.8k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #1·2시장(JP,KR)·apple+shazam+spotify+youtube · YT 구독 882.0k·'까엉TV 가 왔다 🤍🤍' +540.8k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] CORTIS — social-led(+68d) · 소셜 453건·참여 1256.5k · 드라이버: CORTIS - REDRED, CORTIS - ACAI, #cortis, #코르티스 · 차트 최고 #1·12시장(AE,GLOBAL,HK,ID,JP…)·apple+melon+shazam+spotify+youtube · YT 구독 6100.0k·'need a pick me up? #CORT' +1932.7k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] ILLIT — social-led(+59d) · 소셜 324건·참여 1048.8k · 드라이버: ILLIT, LE SSERAFIM, KATSEYE - ICONIC BY MISTAKE, ILLIT - It's Me, #illit, #아일릿 · 차트 최고 #1·10시장(FI,GLOBAL,HK,JP,KR…)·apple+melon+shazam+spotify+youtube · YT 구독 5950.0k·'ICONIC BY CUTENESS...🎀' +2240.9k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] Hearts2Hearts — social-led(+177d) · 소셜 314건·참여 856.0k · 드라이버: Hearts2Hearts - Lemon Tang, Hearts2Hearts - RUDE!, #hearts2hearts, #하츠투하츠 · 차트 최고 #2·5시장(HK,ID,KR,SG,TW)·apple+melon+shazam+spotify+youtube · YT 구독 3390.0k·'would you hold my hand? ' +942.8k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] RESCENE — social-led(+17d) · 소셜 306건·참여 925.8k · 드라이버: RESCENE - Pretty Girl, RESCENE - LOVE ATTACK, #리센느, #rescene · 차트 최고 #1·2시장(JP,KR)·apple+melon+shazam+spotify+youtube · YT 구독 882.0k·'까엉TV 가 왔다 🤍🤍' +540.8k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
     "[프로필] BABYMONSTER — social-led(+43d) · 소셜 262건·참여 625.7k · 드라이버: BABYMONSTER - I LIKE IT, BABYMONSTER - SUGAR HONEY ICE TEA, #babymonster, #베이비몬스터 · 차트 최고 #5·9시장(EC,HK,ID,KR,MY…)·apple+shazam+spotify+youtube · YT 구독 12800.0k·'And you love like that 💞' +1043.8k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
     "[프로필] MEOVV — social-led(+43d) · 소셜 240건·참여 738.1k · 드라이버: MEOVV - Hit 'Em, MEOVV - DDI RO RI, #meovv, #미야오 · 차트 최고 #41·2시장(KR,TW)·apple+spotify · YT 구독 1440.0k·'˗ˏˋ호랑이의 심장을 가져라!ˎˊ˗ 강인한 ' +87.6k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
     "[프로필] KISS OF LIFE — social-led(+112d) · 소셜 172건·참여 1134.3k · 드라이버: KISS OF LIFE - Who is she, KISS OF LIFE - Sticky, #kissoflife, #키스오브라이프 · 차트 최고 #80·1시장(TW)·shazam · YT 구독 2110.0k·'Don't let them see you S' +306.3k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
-    "[프로필] KiiiKiii — social-led(+127d) · 소셜 156건·참여 1150.5k · 드라이버: KiiiKiii - 404 (New Era), KiiiKiii - Delulu, #키키, #kiiikiii · 차트 최고 #12·1시장(KR)·apple+shazam+spotify · YT 구독 521.0k·'KiiiKiii 키키 'Candy Pink ' +144.6k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
+    "[프로필] KiiiKiii — social-led(+127d) · 소셜 156건·참여 1150.5k · 드라이버: KiiiKiii - 404 (New Era), KiiiKiii - Delulu, #키키, #kiiikiii · 차트 최고 #12·1시장(KR)·apple+melon+shazam+spotify · YT 구독 521.0k·'KiiiKiii 키키 'Candy Pink ' +144.6k/일 · ⓘ 차트온셋 좌측절단(수집 개시일과 동일 — 선행 일수는 창 산물일 수 있음) → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
     "[프로필] izna — social-led(+160d) · 소셜 153건·참여 3964.1k · 드라이버: izna - METRONOME, izna - DRIP, #izna, #이즈나 · 차트 최고 #179·1시장(KR) · YT 구독 2030.0k·'새코미 𝘭𝘦𝘵'𝘴 𝘨𝘰 🌊💙 #izna #이' +62.7k/일 → 선행 후보 · 재현성과 드라이버(사운드/챌린지) 확인 대상",
     "[프로필] KEYVEATZ — social-only · 소셜 147건·참여 2927.1k · 드라이버: Keyveatz - OXY, Keyveatz - OXY (Preview), #keyveatz, #키비츠 · 차트 미진입 · YT 구독 279.0k·'Keyveatz (키비츠) ’SUCK IT ' +16.7k/일 → 조사·모니터 우선순위 후보 · 차트 진입 여부 관측 중",
-    "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 6007곡은 제외. 선행 분석의 대상은 **버즈가 있는 아티스트**"
+    "차트 상위에 있으나 이 해시태그 소셜 버즈가 없는 6032곡은 제외. 선행 분석의 대상은 **버즈가 있는 아티스트**"
   ],
   "recommendations": [
     "라이브 다일 collect를 축적(fandom-pulse fetch #tag 매일 + chart-history collect 매일)하면 합성 샘플을 실데이터로 대체하면 선행 여부 실증 가능. 이것이 본선",

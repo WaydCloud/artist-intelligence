@@ -1,5 +1,7 @@
-#!/usr/bin/env python
 """외부 캐논 목록 → 정답지 후보 코퍼스 (사전 등록: docs/DRAFT-answer-sheet-corpus.md).
+
+(셔뱅을 쓰지 않는다 — `scripts/`의 관행이고, Windows는 실행 비트를 추적하지 않아
+셔뱅만 붙이면 로컬 ruff는 통과하고 리눅스 CI만 `EXE001`로 죽는다.)
 
 수집(웹)은 세션이 하고 이 스크립트는 **오프라인·결정적**으로 정규화·채점만 한다
 (`chart-history convert-melon`과 같은 분업 — 네트워크 0).

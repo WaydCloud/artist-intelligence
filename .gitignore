@@ -35,6 +35,15 @@ out/
 *.tsbuildinfo
 next-env.d.ts
 
+# --- 에이전트 스킬 (npx skills) ---
+# 실물은 `.agents/skills/`에 두고 커밋한다(벤더링 관행 · LICENSE 동봉).
+# `.claude/skills/` 아래 같은 이름은 설치기가 만든 **심링크**라 커밋하지 않는다 —
+# 이 저장소는 core.symlinks=false이고 기존 심링크가 0개다. 커밋하면 Windows 체크아웃에서
+# 경로 문자열이 든 일반 파일로 풀려 스킬이 조용히 사라진다. 클론 뒤 `npx skills add`가
+# 이 심링크만 다시 만든다(내용은 이미 저장소에 있다).
+.claude/skills/supabase
+.claude/skills/supabase-postgres-best-practices
+
 # --- OS ---
 .DS_Store
 Thumbs.db

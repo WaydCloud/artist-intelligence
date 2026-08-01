@@ -10,11 +10,17 @@ import type { BarData } from "@/lib/report";
 export function BarChart({ data }: { data: BarData }) {
   if (data.length === 0) return <p className="text-sm text-[var(--muted)]">데이터 없음</p>;
   const max = Math.max(1, ...data.map((d) => d.value));
+  // 🔴 **행이 하나면 막대를 그리지 않는다**(2026-08-01 육안 검사). 이 차트의 길이는 언제나
+  // *보이는 것 중 최댓값* 기준이라, 행이 하나면 그 하나가 자동으로 폭 100%가 된다 —
+  // 게이지가 가득 찬 것처럼 읽히는데 실제로 비교한 대상은 자기 자신뿐이다. 길이가 없는
+  // 비교를 주장하는 것이라 값을 지우는 것이 아니라 **없는 비교를 지운다**(DESIGN §1·§7.5).
+  // 이름과 값은 이미 텍스트로 있으므로 잃는 정보는 0이다.
+  const compare = data.length > 1;
   return (
     <div className="space-y-2.5">
       {data.map((d, i) => (
         <div key={i}>
-          <div className="mb-1 flex items-baseline justify-between gap-3">
+          <div className={`flex items-baseline justify-between gap-3 ${compare ? "mb-1" : ""}`}>
             <span className="truncate text-xs text-[var(--ink-secondary)]" title={d.name}>
               {d.name}
             </span>
@@ -22,15 +28,17 @@ export function BarChart({ data }: { data: BarData }) {
               {d.value.toLocaleString("en-US")}
             </span>
           </div>
-          <div
-            className="h-1.5 rounded-full"
-            style={{ background: "color-mix(in srgb, var(--hairline) 55%, transparent)" }}
-          >
+          {compare && (
             <div
-              className="h-1.5 rounded-full transition-[width] duration-300 ease-out"
-              style={{ width: `${Math.max(1, (d.value / max) * 100)}%`, background: "var(--series)" }}
-            />
-          </div>
+              className="h-1.5 rounded-full"
+              style={{ background: "color-mix(in srgb, var(--hairline) 55%, transparent)" }}
+            >
+              <div
+                className="h-1.5 rounded-full transition-[width] duration-300 ease-out"
+                style={{ width: `${Math.max(1, (d.value / max) * 100)}%`, background: "var(--series)" }}
+              />
+            </div>
+          )}
         </div>
       ))}
     </div>

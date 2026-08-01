@@ -17,6 +17,10 @@
     "melon": {
       "type": "http",
       "url": "https://mcp.melon.com/mcp"
+    },
+    "supabase": {
+      "type": "http",
+      "url": "https://mcp.supabase.com/mcp?project_ref=aakcsjgnrvyklvspuqgj&read_only=true&features=database,docs,storage"
     }
   }
 }

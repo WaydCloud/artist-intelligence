@@ -82,6 +82,21 @@ _CHART_META: dict[str, dict[str, str]] = {
         "definition": "차트 온셋이 소셜 온셋보다 앞선 팀과 그 간격(일). **선행이 항상 성립하지 않는다는 "
         "반례**이며, 이 목록이 옆의 선행 목록과 같은 크기라면 선행은 규칙이 아니라 절반의 사례다.",
     },
+    # 두 관문을 통과한 팀은 §3.1 교차 요약의 마지막 칸이고, 지금까지 **문장 안에만** 있었다.
+    # 문장은 사람이 읽으라고 쓴 것이라 계약이 아니고, 읽는 표면(랜딩 서사)이 그 이름을 쓰려면
+    # 문자열을 파싱해야 했다 — 파싱하는 순간 문구를 다듬을 때마다 그 표면이 조용히 틀린다.
+    # 수(`판정 가능 선행`)는 지표가 이미 들고 있으므로 여기서 더하는 것은 **이름**뿐이다.
+    "gate-passed": {
+        "section": "leadlag",
+        "title": "두 관문을 함께 통과한 팀 · 며칠 먼저",
+        "question": "표본과 절단을 함께 통과한 팀은 누구인가?",
+        # 정의는 **행이 하나일 때도 참이어야 한다.** "막대 길이는 선행 일수"라고 적었더니
+        # 통과 1팀인 날에는 화면에 막대가 없어(대시보드가 비교 없는 길이를 그리지 않는다)
+        # 정의가 없는 것을 가리켰다. 값이 무엇인지로 적으면 두 경우 다 선다.
+        "definition": "소셜 선행 중 소셜 표본이 기준을 채우고 차트 온셋이 좌측 절단도 아닌 팀. 값은 "
+        "선행 일수다. 통과는 선행이 사실이라는 판정이 아니라 **판단에 필요한 증거가 갖춰졌다는** "
+        "뜻이며, 여기 없는 팀도 지운 것이 아니라 옆 목록에 근거와 함께 남아 있다.",
+    },
     "lead-example": {
         "section": "example",
         "title": "한 팀에서 본 두 신호",
@@ -564,6 +579,18 @@ def _new_entry_alerts(rows: list[dict[str, Any]], chart: dict[str, Any]) -> list
     ]
 
 
+def _gate_passed(led: list[dict[str, Any]], min_posts: int) -> list[dict[str, Any]]:
+    """두 관문(표본 하한 · 비검열)을 함께 통과한 `social-led` 행, 선행 일수 내림차순.
+
+    **한 곳에서만 판정한다.** 교차 요약 문장(`_evidence_crosstab`)과 `gate-passed` 차트가
+    각자 같은 조건을 적으면 한쪽만 고쳐질 때 화면의 두 자리가 다른 팀을 말하게 된다.
+    지표 `판정 가능 선행`의 수도 같은 조건이라 셋이 어긋나면 안 된다.
+    """
+    passed = [r for r in led if r["posts"] >= min_posts and not r.get("censored")]
+    passed.sort(key=lambda r: (-r["lead_days"], r["key"]))
+    return passed
+
+
 def _evidence_crosstab(joined: list[dict[str, Any]], min_posts: int) -> str | None:
     """표본 × 검열 교차표 (RULES §3.1) — 헤드라인 숫자 하나로 뭉개지 않는다."""
     led = [r for r in joined if r["class"] == "social-led"]
@@ -572,8 +599,7 @@ def _evidence_crosstab(joined: list[dict[str, Any]], min_posts: int) -> str | No
     cell = {(s, c): 0 for s in (False, True) for c in (False, True)}
     for r in led:
         cell[(r["posts"] >= min_posts, bool(r.get("censored")))] += 1
-    clean = [r for r in led if r["posts"] >= min_posts and not r.get("censored")]
-    clean.sort(key=lambda r: (-r["lead_days"], r["key"]))
+    clean = _gate_passed(led, min_posts)
     ex = (
         " · 양쪽 통과: "
         + ", ".join(f"{r['key']}(+{r['lead_days']}d·{r['posts']}건)" for r in clean[:5])
@@ -872,6 +898,25 @@ def build_report(
                 "data": [
                     {"name": r["key"], "value": abs(r["lead_days"] or 0)} for r in lag_sorted[:TOP_ROWS]
                 ],
+            }
+        )
+
+    # 두 관문을 통과한 팀 — 지표는 수를, 이 차트는 **이름**을 싣는다(RULES §3.1).
+    # 통과 0팀이면 차트를 만들지 않는다. 빈 막대 카드는 "통과한 팀이 없다"가 아니라
+    # "그릴 것이 없다"로 읽히고, 그 사실은 지표(`판정 가능 선행` 0)와 교차 요약이 이미 말한다.
+    passed = _gate_passed(led, min_posts)
+    if passed:
+        charts.append(
+            {
+                "type": "bar",
+                "id": "gate-passed",
+                "reliability": {
+                    "sample": _capped(len(passed), "두 관문 통과")
+                    + f" · 소셜 선행 {len(led)}팀 중 · 표본 하한 {min_posts}건",
+                    "missing": "표본이 하한에 못 미치거나 차트 온셋이 좌측 절단인 팀은 여기 없다. "
+                    "지운 것이 아니라 선행 목록에 사유와 함께 남아 있다",
+                },
+                "data": [{"name": r["key"], "value": r["lead_days"]} for r in passed[:TOP_ROWS]],
             }
         )
 

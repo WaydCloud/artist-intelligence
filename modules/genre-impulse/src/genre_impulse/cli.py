@@ -614,10 +614,13 @@ def build_report(
                     for r in RULES
                 ],
                 "tracks": tunable_tracks,
+                # 라벨에 원장의 기호(P_low·P_high)를 쓰지 않는다 — 문서에서만 통하는 표기이며
+                # 화면에서는 저장 키를 찍은 것과 같은 종류의 누출이다(DESIGN §6.1·§7.5).
+                # 규칙의 형식이 "하한 축 ≤ 컷"·"상한 축 ≥ 컷"이라 말이 그대로 그 뜻을 낸다.
                 "knobs": [
-                    {"key": "lowPct", "label": "하위 백분위 P_low", "default": low_pct,
+                    {"key": "lowPct", "label": "하한으로 볼 백분위", "default": low_pct,
                      "min": 0, "max": 50, "step": 1},
-                    {"key": "highPct", "label": "상위 백분위 P_high", "default": high_pct,
+                    {"key": "highPct", "label": "상한으로 볼 백분위", "default": high_pct,
                      "min": 50, "max": 100, "step": 1},
                 ],
                 "note": "유사 ≠ 도달. 매치는 후속 검토 후보이지 판정이 아니다.",

@@ -305,6 +305,22 @@ jobs:
           PY
           python scripts/validate_report_data.py
 
+      # 🔑 병행 운전의 대조 대상. 러너는 1층에도 main 에도 쓰지 않으므로, 아티팩트로
+      #    남기지 않으면 **만든 리포트가 실행과 함께 사라진다** -- 로그 요약줄만 남아
+      #    "몇 팀"까지만 견줄 수 있고 차트 페이로드는 못 본다(2026-08-02 첫 대조가 그랬다).
+      #    1층 백업이 아니라 워크플로 아티팩트다(저장소 안 · 7일 뒤 소멸).
+      #    전환 후에는 되밀기가 정본이 되므로 이 스텝은 지워도 된다.
+      - name: Upload reports for side-by-side (parallel-run only)
+        if: always() && env.LIVE_MODE != '1'
+        uses: actions/upload-artifact@v4
+        with:
+          name: runner-reports
+          path: |
+            modules/*/output/report.json
+            apps/dashboard/data/reports.json
+            data/live/logs/daily.log
+          retention-days: 7
+
       # 되밀기도 **기본은 꺼짐**이다. 병행 운전 기간에는 로컬도 같은 리포트를 만들고,
       # 둘이 각자 main 에 쓰면 충돌이 일상이 된다. 켜는 것은 저장소 변수 하나:
       #   Settings > Variables > PUSH_REPORTS = on   (RUNNER_MODE=live 와 같은 날 켠다)

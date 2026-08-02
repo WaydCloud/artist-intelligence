@@ -401,8 +401,13 @@ function BucketRows({ buckets, empty }: { buckets: Bucket[]; empty: string }) {
               )}
             </summary>
             <ul className="mb-1 ml-5 mt-1 space-y-0.5 border-l pl-3 text-xs" style={{ borderColor: "var(--hairline)" }}>
-              {b.members.map((m) => (
-                <li key={m.name} className="flex items-baseline gap-2">
+              {/* 🔴 표시 이름을 키로 쓰지 않는다. 라벨은 **읽으라고** 있는 것이지 식별자가
+                  아니다 — 서로 다른 두 녹음이 같은 `아티스트 - 곡`으로 표시될 수 있고
+                  (2026-08-02 코호트: `Hearts2Hearts - RUDE!`·`Keyveatz - Key Beats`가 각각
+                  두 건, 값은 서로 다르다), 그러면 React 키가 충돌해 **행이 조용히 사라지거나
+                  겹친다**. 코호트가 매일 바뀌므로 이건 언제든 다시 온다. */}
+              {b.members.map((m, mi) => (
+                <li key={`${m.name}#${mi}`} className="flex items-baseline gap-2">
                   <span className="truncate text-[var(--ink-secondary)]" title={m.name}>
                     {m.name}
                   </span>

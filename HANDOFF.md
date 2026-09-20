@@ -116,10 +116,15 @@
 
 ## 🔴 배포에서 나온 것 (결함 41 · 42)
 
-**41. 공개 페이지의 링크가 전부 404였다.** `out/`을 그대로 올리면 `artist-intelligence.html`이 `/artist-intelligence`로 열리지 않는데, 페이지 자신의 링크가 `href="/artist-intelligence"`다. 홈에서 **무엇을 눌러도 404**였고, 첫 배포 직후 실측으로 잡았다.
-- 고침: `apps/dashboard/public/vercel.json`에 `cleanUrls`. `public/`은 빌드가 `out/`으로 복사하므로 배포 루트에서 읽히고 저장소에 남는다.
-- 배포 후 실측: `/` · `/artist-intelligence` · `/labs` · `/utilities` 전부 200.
-- 🔺 **빌드가 통과한 것과 올라간 것이 동작하는 것은 다르다.** `smoke:tabs` 12/12는 dev 서버에서 돈 것이고, 정적 호스트의 라우팅은 거기 없다.
+**41. 공개 페이지가 전 경로 404였다. 그리고 원인을 두 번 틀리게 짚었다.**
+- 처음 본 것: `out/`을 올리면 `artist-intelligence.html`이 `/artist-intelligence`로 안 열린다. `cleanUrls`를 넣어 고쳤고 200이 떴다.
+- 🔴 **그런데 몇 분 뒤 다시 전부 404가 됐다.** 진짜 원인은 따로 있었다. **이 프로젝트는 GitHub 연동이 걸려 있었다**(별칭 `artist-intelligence-git-main-*`가 증거). Root Directory가 `.`이고 빌드 설정이 없어서 **main에 push할 때마다 저장소 루트가 그대로 정적 호스팅**됐고, 루트에는 `index.html`이 없으니 404다. 내 수동 업로드를 내 다음 push가 덮어쓴 것이다.
+- 고침: 루트 [`vercel.json`](vercel.json)에 빌드 지정(`buildCommand`·`outputDirectory`·`cleanUrls`). Root Directory는 `.`로 둔다. `collect-reports.mjs`가 자기 파일 기준으로 repoRoot를 잡아 `modules/*/output`을 읽으므로 대시보드만 떼면 리포트를 못 찾는다.
+- 실측: 빌드 시간이 **3초(정적 업로드) → 56초(실제 Next 빌드)**로 바뀌었고 네 경로 전부 200, 라이브에서 `24380곡`·`5175건`·`230팀`·`관측 3280곡` 확인.
+- 🔺 **배운 것 둘.** ㉠ 빌드가 통과한 것과 올라간 것이 동작하는 것은 다르다. `smoke:tabs` 12/12는 dev 서버에서 돈 것이고 정적 호스트의 라우팅은 거기 없다. ㉡ **처음 잡은 원인이 증상을 없애도 진짜 원인이 아닐 수 있다.** `cleanUrls`로 200이 떴기 때문에 나는 고쳤다고 판단했다. 다시 404가 나지 않았으면 git 연동을 끝까지 몰랐을 것이다.
+
+**41-1. 같은 스크립트가 PowerShell 5.1에서 파싱되지 않았다.** `refresh_and_deploy.ps1`이 UTF-8 BOM 없이 한글을 담고 있었다. 5.1은 BOM이 없으면 파일을 **cp949로 읽고**, UTF-8 한글 3바이트가 cp949 2바이트로 어긋나면서 남은 바이트가 뒤따르는 따옴표를 삼킨다. 파서가 L112에서 "문자열 종결자 없음"을 냈다. BOM을 붙이니 통과.
+- 🔴 **`scripts/daily_collect.ps1`도 BOM 없이 한글을 담고 있다.** 지금은 우연히 파싱된다. **한글을 한 글자 더하거나 빼는 순간 깨질 수 있다.** D-058 ⑥ · 결함 33과 같은 자리다. 고치지 않았다 — 매일 도는 프로덕션 잡이라 별도 판단을 받는다.
 
 **42. 배포 중 `out`이라는 프로젝트가 실수로 하나 생겼다.** `vercel deploy`가 `out/.vercel/project.json`을 덮어써서 새 프로젝트를 만들었다(`prj_nbXYj9Y7delQzrGL41oVgeaBuCW1` · `out-gamma-teal.vercel.app`).
 - ⚠ **지우지 않았다.** 프로젝트 삭제는 비가역이고 사용자 계정이라 판단을 받는다. 내용은 이번 정적 빌드 1건뿐이다.
@@ -131,3 +136,4 @@
 - **`data/live/social_merged.json`의 `provenance.note`.** 스냅샷 스키마가 `additionalProperties: false`라 `validate_snapshot.py`가 INVALID를 낸다. CI는 픽스처만 검사해서 빨개지지 않는다. **범위 밖이라 안 고쳤다.**
 - **`data/live/sonic/2026-09-21.json`.** 지금 쓰면 09:00 정기 실행이 "이미 받음"으로 sonic 레그를 건너뛰어 **어제 차트 코호트로 오늘을 잰다.**
 - **Vercel `out` 프로젝트**(결함 42). 지울지는 사용자 판단.
+- **`scripts/daily_collect.ps1`의 BOM 부재**(결함 41-1). 지금 도는 프로덕션 잡이라 건드리지 않았다.

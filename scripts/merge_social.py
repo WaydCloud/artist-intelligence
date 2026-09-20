@@ -37,6 +37,7 @@ def main(argv: list[str]) -> int:
     best: dict[tuple[str, str, tuple[str, ...]], dict[str, object]] = {}
     prov: dict[str, object] = {}
     tags: set[str] = set()
+    fetched: list[str] = []
     raw = 0
     for f in files:
         doc = json.loads(f.read_text(encoding="utf-8"))
@@ -46,6 +47,8 @@ def main(argv: list[str]) -> int:
             if isinstance(p, dict):
                 if not prov:
                     prov = p
+                if isinstance(p.get("fetched_at"), str) and p["fetched_at"]:
+                    fetched.append(str(p["fetched_at"]))
                 params = p.get("params")
                 if isinstance(params, dict) and isinstance(params.get("hashtag"), str):
                     tags.add(params["hashtag"])
@@ -58,7 +61,16 @@ def main(argv: list[str]) -> int:
                 best[fp] = rec
     merged = sorted(best.values(), key=lambda r: (str(r.get("timestamp") or ""), _fingerprint(r)))
     tag_list = sorted(tags)
-    prov_out = {**prov, "note": f"merged+deduped from {len(files)} daily snapshot(s) (forward)"}
+    # The merged doc inherits the FIRST snapshot's provenance, so its fetch time would name a
+    # day months before the newest post it carries. Anything that prints provenance then states
+    # a collection date the corpus outgrew. The merged artifact's fetch time is the latest one.
+    span = f" {min(fetched)[:10]}..{max(fetched)[:10]}" if fetched else ""
+    prov_out = {
+        **prov,
+        "note": f"merged+deduped from {len(files)} daily snapshot(s) (forward){span}",
+    }
+    if fetched:
+        prov_out["fetched_at"] = max(fetched)
     if tag_list:  # 다중 태그 수집(D-013) — 시리즈 라벨·프로버넌스에 소스 태그 전파
         params = prov_out.get("params")
         prov_out["params"] = {

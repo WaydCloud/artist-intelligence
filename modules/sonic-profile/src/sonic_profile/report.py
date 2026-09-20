@@ -913,6 +913,39 @@ def _age_series(records: list[dict[str, Any]]) -> dict[str, Any] | None:
     }
 
 
+def _preview_source_note(resolved: list[dict[str, Any]]) -> str:
+    """Where the previews came from, when they did not all come from the same place.
+
+    Two things move the numbers without the music moving. Crossing Apple storefronts is safe
+    while the trackId holds (measured 2026-09-21: identical previewUrl, all metrics within
+    0.000%) but can land on a different release, which moved metrics 8.8 to 86.9%. Crossing
+    providers is never safe: Apple and Deezer answer with different recordings of the same
+    song, and the watchlist medians for pulse clarity split by up to 48.4% depending on which
+    one answered that day (measured over 2026-07..09).
+
+    So the mix goes on screen. A step in a series has to be attributable to where the audio
+    came from rather than read as the sound changing (D-037 · D-038). Silent on the ordinary
+    day, when one source served everything.
+    """
+    seen: dict[str, int] = {}
+    for r in resolved:
+        src = str(r.get("source") or "").strip()
+        if not src:
+            continue
+        mkt = str(r.get("preview_market") or "").strip()
+        if src == "apple":
+            # Records written before the storefront walk carry no market. Say so rather than
+            # filling in the home store, which would assert something nobody recorded.
+            label = f"apple/{mkt}" if mkt and mkt != "-" else "apple(스토어 미기록)"
+        else:
+            label = src
+        seen[label] = seen.get(label, 0) + 1
+    if len(seen) < 2:
+        return ""
+    parts = " · ".join(f"{k} {v}곡" for k, v in sorted(seen.items(), key=lambda kv: -kv[1]))
+    return f" · 프리뷰 출처 {parts}"
+
+
 def _inferences(
     *,
     summary: dict[str, Any],
@@ -1373,7 +1406,7 @@ def build_report(
         ),
         "engine": (
             f"{eng.get('engine')} {eng.get('engine_version')} · {eng.get('sample_rate')}Hz · "
-            f"저역 경계 {eng.get('low_hz')}Hz"
+            f"저역 경계 {eng.get('low_hz')}Hz{_preview_source_note(resolved)}"
         ),
     }
     if n_un:
@@ -1399,6 +1432,17 @@ def build_report(
         if q["chartId"] in have
     ]
 
+    # Inferences obey the same anchor rule as questions. A chart can vanish when the day's
+    # data cannot build it, and then the link points at nothing. Drop the anchor, keep the
+    # evidence: the observation stays true without a chart to jump to.
+    inferences = _inferences(
+        summary=summary, rhythm_rows=rhythm_rows, resolved=resolved,
+        min_match=min_match, tie_gap=tie_gap, new_days=new_days,
+    )
+    for inf in inferences:
+        if inf.get("chartId") and str(inf["chartId"]) not in have:
+            inf.pop("chartId")
+
     # ── R7: 못 답하는 질문. 커버리지 정직 규율의 UI 형태다. 한계 서술(insights)과 다르다 —
     # 여기 들어가는 것은 사용자가 물으러 왔을 수 있는 **질문**이다.
     not_answered = [
@@ -1419,10 +1463,7 @@ def build_report(
         "questions": questions,
         "notAnswered": not_answered,
         "reliability": reliability,
-        "inferences": _inferences(
-            summary=summary, rhythm_rows=rhythm_rows, resolved=resolved,
-            min_match=min_match, tie_gap=tie_gap, new_days=new_days,
-        ),
+        "inferences": inferences,
         "metrics": metrics,
         "charts": charts,
         "media": [],

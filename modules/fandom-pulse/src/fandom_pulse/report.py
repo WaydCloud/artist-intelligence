@@ -274,7 +274,7 @@ def _fandom_inferences(
             f"{', '.join(ranked[:5])} 등 {len(outside)}팀이다.",
             "basis": f"곡 라벨로 잡힌 {len(artist_posts)}팀 중 {len(outside)}팀이 사전에 없음 · "
             + " · ".join(f"{a} {artist_posts[a]}건" for a in ranked[:5]),
-            "sample": f"#{tag} 공개 게시물 {n}건 · 곡 라벨로 귀속된 {attributed}건",
+            "sample": f"{_tag_label(tag)} 공개 게시물 {n}건 · 곡 라벨로 귀속된 {attributed}건",
             "confidence": grade,
             "limits": "사전은 차트 수집에서 만든 목록이라 '사전에 없다'가 '차트에 없다'는 뜻이 아니다. "
             "표기가 다르면 같은 팀이 다른 이름으로 세어지고, 공개 표본이라 편향이 있다.",
@@ -339,11 +339,39 @@ def _questions(have: set[str]) -> list[dict[str, str]]:
     return kept
 
 
+def _tag_list(tag: str) -> list[str]:
+    """A snapshot can merge several hashtags. The label then holds a comma separated list."""
+    return [t for t in (p.strip().lstrip("#") for p in (tag or "").split(",")) if t]
+
+
+def _tag_label(tag: str) -> str:
+    """One tag reads as `#izna`. Many tags must not read as one `#a,b,c` that nobody typed.
+
+    The count is what the reader needs in a title. The names stay in the reliability line,
+    which is where provenance belongs.
+    """
+    tags = _tag_list(tag)
+    if not tags:
+        return "해시태그"
+    if len(tags) == 1:
+        return f"#{tags[0]}"
+    return f"해시태그 {len(tags)}종"
+
+
+def _tag_roster(tag: str) -> str:
+    """Names behind the count, short enough to read. Long lists stop at four and say so."""
+    tags = _tag_list(tag)
+    if len(tags) <= 1:
+        return ""
+    shown = " · ".join(f"#{t}" for t in tags[:4])
+    return f"({shown} 외 {len(tags) - 4}종)" if len(tags) > 4 else f"({shown})"
+
+
 def _reliability(tag: str, n: int, source: str, fetched: str, days: list[str]) -> dict[str, str]:
     """R8 — 화면 전체의 기본 신뢰도. 차트별 값이 이것을 필드 단위로 덮는다."""
     window = f" · {days[0]}~{days[-1]}" if days else ""
     return {
-        "sample": f"#{tag} 공개 게시물 {n}건{window}",
+        "sample": f"{_tag_label(tag)}{_tag_roster(tag)} 공개 게시물 {n}건{window}",
         "accuracy": "좋아요·댓글은 수집 시점의 공개 표시값. 귀속과 분류의 정확도는 미측정",
         "missing": "태그를 붙이지 않았거나 이번 수집에 들어오지 않은 게시물은 이 표본에 없다",
         "engine": f"{source} · 스냅샷 {fetched}",
@@ -354,7 +382,7 @@ def _not_answered() -> list[str]:
     """R7 — 이 화면이 **답하지 않는** 질문. 한계 서술(insights)과 다르다."""
     return [
         "이 곡이 차트에 오를지. 이 화면은 게시량과 반응까지만 다룬다",
-        "틱톡·유튜브 쇼츠의 확산. 이 화면이 보는 표면은 인스타그램 해시태그 하나뿐이다",
+        "틱톡·유튜브 쇼츠의 확산. 이 화면이 보는 표면은 인스타그램 해시태그뿐이다",
         "게시물을 올린 쪽이 팬인지 홍보인지. 공개 게시물에서 계정 성격을 구분하지 않는다",
         "실제로 얼마나 들었는지. 게시수와 좋아요는 재생이나 판매가 아니다",
         "태그를 붙이지 않은 확산. 태그가 없으면 이 표본에 들어오지 않는다",
@@ -537,7 +565,7 @@ def build_report(
         )
 
     # Insights — signals with explicit limits (증폭 원칙: 신호 제시, 단정 금지 — §0/§5)
-    insights.append(f"#{tag} 공개 게시물 {n}건 기준 · 총 참여 {sum(eng):,}(좋아요+댓글).")
+    insights.append(f"{_tag_label(tag)} 공개 게시물 {n}건 기준 · 총 참여 {sum(eng):,}(좋아요+댓글).")
     insights.append(
         f"중앙값 좋아요 {int(median(likes)):,} · 댓글 {int(median(comments)):,} "
         "· 평균 대신 중앙값 사용(바이럴 1건에 덜 흔들림)"
@@ -573,7 +601,9 @@ def build_report(
     if sections:
         extra["sections"] = sections
 
-    return _wrap(tag, source, fetched, n, generated_at, metrics, charts, insights, _recos(), extra)
+    return _wrap(
+        tag, source, fetched, n, generated_at, metrics, charts, insights, _recos(), extra, days
+    )
 
 
 def build_signal_series(
@@ -681,15 +711,20 @@ def _wrap(
     insights: list[str],
     recommendations: list[str],
     extra: dict[str, object] | None = None,
+    days: list[str] | None = None,
 ) -> dict[str, object]:
     # 부제에서 기계 문자열을 걷어낸다(DESIGN §6.1). 액터 id와 초 단위 타임스탬프는 읽는
     # 사람의 판단을 바꾸지 않는다 — 정확한 출처는 신뢰도 라인의 `engine`이 그대로 들고 있다.
     where = source.split(" / ")[0].strip() or source
     when = fetched[:10] if len(fetched) >= 10 and fetched[4] == "-" else fetched
+    # A merged corpus carries the FIRST snapshot's fetch time, so `수집 <날짜>` understates a
+    # corpus built over months. What the reader needs is the span the posts cover. Fall back
+    # to the fetch date only when no post dates survived.
+    covers = f"게시 {days[0]}~{days[-1]}" if days and len(days) > 1 else f"수집 {when}"
     return {
         "moduleId": MODULE_ID,
-        "title": f"팬덤 펄스 · #{tag}",
-        "subtitle": f"{where} 공개 해시태그 · 수집 {when} · {n}건",
+        "title": f"팬덤 펄스 · {_tag_label(tag)}",
+        "subtitle": f"{where} 공개 해시태그 · {covers} · {n}건",
         "generatedAt": generated_at,
         "metrics": metrics,
         "charts": charts,

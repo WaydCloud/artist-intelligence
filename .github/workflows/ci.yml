@@ -116,6 +116,13 @@ jobs:
           uv run python scripts/validate_report_data.py --selftest
           uv run python scripts/validate_report_data.py
 
+      # The coverage gate (D-061) reads layer 1, and CI has no `data/live`. So CI only
+      # checks that the gate itself still works. The real verdict is the runner's job.
+      # Without this step a broken gate merges quietly, and the next time collection
+      # goes silent nobody is told.
+      - name: Coverage gate selftest (게이트가 살아 있는가)
+        run: uv run python scripts/validate_coverage.py --selftest
+
   data-contracts:
     name: data contracts (snapshot gate · entity schema)
     runs-on: ubuntu-latest

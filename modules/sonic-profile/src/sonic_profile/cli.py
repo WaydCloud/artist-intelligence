@@ -959,6 +959,57 @@ def cmd_selftest(args: argparse.Namespace) -> int:
           and m.get("chart_rank") == 8 and m.get("chart_label") == "키키", f"{m.get('cohort')}·{m.get('chart_rank')}")
     check("병합 멱등성: 재적용해도 불변", _dedupe(merged) == merged)
 
+    # Storefront fallback (regression, network 0). The home store going quiet used to take the
+    # whole chart cohort with it, because this path had no fallback and read "no results" as
+    # "no preview". Intercept the HTTP layer so the walk is checked without a network call.
+    import sonic_profile.preview as _pv
+
+    _asked: list[str] = []
+
+    def _fake_get(url: str, **_kw: object) -> dict[str, Any]:
+        _asked.append(url)
+        if "country=KR" in url:
+            return {"resultCount": 0, "results": []}
+        return {"results": [{"trackId": 1, "artistName": "KiiiKiii", "trackName": "Pop Off",
+                             "releaseDate": "2026-08-10T00:00:00Z", "previewUrl": "https://x/p.m4a"}]}
+
+    _real_get = _pv._get_json
+    try:
+        _pv._get_json = _fake_get  # type: ignore[assignment]
+        _cands = _pv.track_candidates("KiiiKiii", "Pop Off", country="KR")
+        check("스토어프런트 폴백: KR이 0을 주면 다음 스토어로 넘어간다", len(_cands) == 1,
+              f"후보 {len(_cands)}건 · 질의 {len(_asked)}회")
+        check("스토어프런트 폴백: 어느 스토어가 풀었는지 기록에 남는다",
+              bool(_cands) and _cands[0].get("preview_market") == "US",
+              f"{_cands[0].get('preview_market') if _cands else '-'}")
+        _asked.clear()
+        _home = _pv.track_candidates("KiiiKiii", "Pop Off", country="US")
+        check("스토어프런트 폴백: 홈이 답하면 다른 스토어를 묻지 않는다",
+              len(_home) == 1 and len(_asked) == 1, f"질의 {len(_asked)}회")
+        check("스토어프런트 순서: 홈이 맨 앞 · 중복 없음",
+              _pv.storefronts("US") == ["US", "GB"], f"{_pv.storefronts('US')}")
+    finally:
+        _pv._get_json = _real_get  # type: ignore[assignment]
+
+    # Broken anchors (regression). A chart is built from the day's data, so it can be absent
+    # while the inference that points at it still fires. The link then goes nowhere and the
+    # report data contract rejects it. Build the exact shape that produced it: release dates
+    # on an older date only, so the age histogram cannot be built for the latest cohort.
+    _feat = {"tempo_bpm": 120.0, "pulse_clarity": 0.5, "low_end_ratio": 0.4,
+             "brightness_hz": 2000.0, "spectral_flatness": 0.1, "dynamic_range_db": 8.0}
+    _anchor_recs = [
+        {"key": "A", "cohort": "chart", "source": "apple", "track_id": "old1",
+         "observed_date": "2026-09-01", "release_date": "2020-01-01", "features": dict(_feat)},
+        {"key": "A", "cohort": "chart", "source": "apple", "track_id": "new1",
+         "observed_date": "2026-09-20", "features": dict(_feat)},
+    ]
+    _rep = build_report(_anchor_recs, generated_at="2026-09-20T00:00:00Z", provenance={})
+    _ids = {str(c.get("id")) for c in _rep.get("charts", []) if c.get("id")}
+    _ids |= {str((_rep.get("summary") or {}).get("id") or "")}
+    _dead = [str(i.get("chartId")) for i in _rep.get("inferences", [])
+             if i.get("chartId") and str(i["chartId"]) not in _ids]
+    check("끊긴 앵커: 차트가 없는 chartId를 추론이 들고 나가지 않는다", not _dead, f"{_dead}")
+
     # ── 스템 분리 축 (TESTS §7.2.1) — 순수 함수만이라 모델도 네트워크도 필요 없다.
     from sonic_profile.stems import selftest_stems
 

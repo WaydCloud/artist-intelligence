@@ -14,6 +14,8 @@ import json
 import os
 import re
 import tempfile
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 from typing import Any
@@ -28,6 +30,20 @@ ITUNES = "https://itunes.apple.com/search"
 DEEZER = "https://api.deezer.com/search"
 _TIMEOUT = 25
 
+# Storefronts to try when the home one answers with nothing. Measured 2026-09-21: the iTunes
+# Search API returned 0 results for every term under `country=KR` while US/GB/JP/DE/TW/SG
+# answered normally, and the chart cohort went from 65 resolved tracks a day to 8 for 16 days.
+# The /lookup endpoint kept working for KR, so `lookup_preview` needs no fallback: it asks for
+# one recording by id and gets it. Only search lost the storefront.
+#
+# Crossing storefronts is safe for the numbers: when the trackId matches, `previewUrl` is the
+# same string and all 9 metrics come back identical to 0.000% (measured, 5/5 tracks). What is
+# NOT safe is landing on a different trackId, which is a different release and moved metrics by
+# 8.8 to 86.9% (3/3). So every record says which storefront resolved it and the report counts
+# them: a series step must be attributable to the store, not read as the music changing.
+STOREFRONT_FALLBACK = ("US", "GB")
+_RETRY_STATUS = (403, 429, 500, 502, 503)
+
 
 def _norm(s: str) -> str:
     return re.sub(r"[^0-9a-z가-힣]", "", (s or "").casefold())
@@ -39,10 +55,22 @@ def _artist_ok(found: str, aliases: list[str]) -> bool:
     return bool(f) and any(_norm(a) == f for a in aliases)
 
 
-def _get_json(url: str) -> dict[str, Any]:
+def _get_json(url: str, *, tries: int = 3) -> dict[str, Any]:
+    """One GET, with backoff on the throttling codes.
+
+    The search API answers 403 under a burst. Without this the caller reads an exception as
+    "this track has no preview" and writes 미해석, so a rate limit would look like missing music.
+    """
     req = urllib.request.Request(url, headers={"User-Agent": UA})
-    with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
-        return json.loads(r.read().decode("utf-8", "replace"))
+    for attempt in range(tries):
+        try:
+            with urllib.request.urlopen(req, timeout=_TIMEOUT) as r:
+                return json.loads(r.read().decode("utf-8", "replace"))
+        except urllib.error.HTTPError as exc:
+            if exc.code not in _RETRY_STATUS or attempt == tries - 1:
+                raise
+            time.sleep(2.0 * (attempt + 1))
+    raise RuntimeError("unreachable")
 
 
 def _apple(term: str, aliases: list[str], country: str, limit: int) -> list[dict[str, Any]]:
@@ -53,6 +81,7 @@ def _apple(term: str, aliases: list[str], country: str, limit: int) -> list[dict
             out.append(
                 {
                     "source": "apple",
+                    "preview_market": country.upper(),
                     "track_id": str(item.get("trackId") or ""),
                     "artist": item.get("artistName"),
                     "title": item.get("trackName"),
@@ -73,6 +102,7 @@ def _deezer(term: str, aliases: list[str], limit: int) -> list[dict[str, Any]]:
             out.append(
                 {
                     "source": "deezer",
+                    "preview_market": "-",
                     "track_id": str(item.get("id") or ""),
                     "artist": artist,
                     "title": item.get("title"),
@@ -84,16 +114,35 @@ def _deezer(term: str, aliases: list[str], limit: int) -> list[dict[str, Any]]:
     return out
 
 
+def storefronts(country: str, fallbacks: tuple[str, ...] | None = None) -> list[str]:
+    """Home storefront first, then the fallbacks, with no repeats."""
+    order = [country.upper(), *(f.upper() for f in (STOREFRONT_FALLBACK if fallbacks is None else fallbacks))]
+    return list(dict.fromkeys(c for c in order if c))
+
+
 def candidates(term: str, aliases: list[str], *, country: str = "KR", limit: int = 5) -> list[dict[str, Any]]:
-    """별칭으로 검증된 프리뷰 후보들. Apple 우선(커버리지·메타 우수), Deezer 폴백."""
+    """별칭으로 검증된 프리뷰 후보들. Apple 우선(커버리지·메타 우수), Deezer 폴백.
+
+    Apple is walked storefront by storefront and stops at the first one that answers. Walking
+    the rest would stack several releases of one song, and the caller takes the first candidate
+    that decodes, so the extra releases would only make the pick arbitrary. Deezer stays
+    appended either way: it is what is left when no storefront has the track at all.
+    """
     found: list[dict[str, Any]] = []
-    for fn in (lambda: _apple(term, aliases, country, limit), lambda: _deezer(term, aliases, limit)):
+    for store in storefronts(country):
         try:
-            found.extend(fn())
+            got = _apple(term, aliases, store, limit)
         # S112(로깅하라)는 붙이지 않는다 — 여기서 삼키는 건 폴백 사슬의 제어 흐름이고,
         # 실패 자체는 후보 0건 → 상위에서 `미해석`으로 리포트에 남는다(삼켜서 사라지지 않는다).
         except Exception:  # noqa: BLE001, S112 — 소스 장애는 폴백으로, 원인은 미해석으로 기록
             continue
+        if got:
+            found.extend(got)
+            break
+    try:
+        found.extend(_deezer(term, aliases, limit))
+    except Exception:  # noqa: BLE001, S110 — 같은 이유. Deezer 장애는 후보 0건으로 나타난다
+        pass
     return found
 
 
@@ -112,7 +161,19 @@ def track_candidates(
     워치리스트와 달리 별칭 목록이 없으므로 **아티스트 또는 제목의 정규화 일치**로 검증한다.
     아티스트+제목을 함께 검색하므로 제목 완전일치는 강한 증거다. 둘 다 어긋나면 미해석
     (실측: 같은 Apple 차트를 코호트로 쓰면 표기 체계가 같아 25/25 채택 — RULES §1.1).
+
+    This path had no fallback at all, so one storefront going quiet took the whole chart cohort
+    with it. It now walks `storefronts()` and stops at the first one that verifies, and every
+    candidate carries `preview_market` so the record says where its numbers came from.
     """
+    for store in storefronts(country):
+        out = _track_candidates_at(artist, title, store, limit)
+        if out:
+            return out
+    return []
+
+
+def _track_candidates_at(artist: str, title: str, country: str, limit: int) -> list[dict[str, Any]]:
     q = urllib.parse.urlencode(
         {"term": f"{artist} {title}", "entity": "song", "country": country, "limit": limit}
     )
@@ -136,6 +197,7 @@ def track_candidates(
         out.append(
             {
                 "source": "apple",
+                "preview_market": country.upper(),
                 "track_id": str(item.get("trackId") or ""),
                 "artist": ra,
                 "title": rt,

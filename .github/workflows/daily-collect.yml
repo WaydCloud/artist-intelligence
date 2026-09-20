@@ -304,6 +304,12 @@ jobs:
           sys.exit(1 if bad else 0)
           PY
           python scripts/validate_report_data.py
+          python scripts/validate_coverage.py --selftest
+          # The runner restores layer 1, so here the gate can judge for real. This is
+          # the place to notice a quiet source before the reports are pushed back.
+          # `|| true` keeps it from blocking the push: a thin day should still ship,
+          # carrying its own sample line. The gate reports, it does not withhold.
+          python scripts/validate_coverage.py data/live/sonic --latest-only || true
 
       # 🔑 병행 운전의 대조 대상. 러너는 1층에도 main 에도 쓰지 않으므로, 아티팩트로
       #    남기지 않으면 **만든 리포트가 실행과 함께 사라진다** -- 로그 요약줄만 남아

@@ -1,12 +1,12 @@
-# Rebuild every report from layer 1, gate it, commit, push and deploy.
+﻿# Rebuild every report from layer 1, gate it, commit, push and deploy.
 #
 # Purpose    one command between a finished collection and the public page
 # Boundary   it does not collect. Run it after daily_collect has finished for the day
 # Invariant  it stops before deploying when a gate fails. Shipping a page that a gate
 #            rejected is how a thin day gets read as a real one
 # Failure    any failing step ends the run with a non-zero exit and nothing is deployed
-# Note       the deploy is a static upload of apps/dashboard/out to the Vercel project
-#            linked in apps/dashboard/.vercel (waydclouds-projects/artist-intelligence)
+# Note       the deploy is not run from here. The Vercel project builds every commit on
+#            main, so the push is the deploy. This waits for it and checks the paths.
 
 param(
   [switch]$NoDeploy,   # rebuild, gate and commit only
@@ -78,19 +78,35 @@ Step "push" { git push }
 
 if ($NoDeploy) { Write-Host ""; Write-Host "done (no deploy)"; exit 0 }
 
-Step "build" {
-  Set-Location (Join-Path $repo "apps/dashboard")
-  $env:AI_ALLOW_BUILD = "1"   # the port guard trips on other repos' dev servers
-  npm run build
-}
-Step "deploy" {
-  # The out/ link gets clobbered by the CLI, so restore it before every deploy.
-  # Without this, `vercel deploy` from out/ creates a NEW project called "out".
-  Copy-Item ".vercel/project.json" "out/.vercel/project.json" -Force
-  Set-Location "out"
-  vercel deploy --prod --yes
-}
+# The push above already triggered the deploy: this project is connected to GitHub and
+# every commit on main builds. Uploading out/ by hand would race that build and land a
+# second deployment on the same alias. So here we only watch and check.
+Write-Host ""
+Write-Host "== deploy (push 가 이미 걸었다. 기다린다) =="
+$deadline = (Get-Date).AddMinutes(6)
+do {
+  Start-Sleep -Seconds 15
+  $row = (vercel ls artist-intelligence --scope waydclouds-projects 2>$null | Select-Object -Index 4)
+  Write-Host "  $($row -replace '\s+', ' ')"
+} while ($row -notmatch 'Ready|Error' -and (Get-Date) -lt $deadline)
 
-Set-Location $repo
+if ($row -match 'Error') { Write-Host "!! 배포 실패 -- Vercel 로그를 볼 것"; exit 1 }
+if ($row -notmatch 'Ready') { Write-Host "!! 6분 안에 Ready 가 안 됐다 -- Vercel 을 볼 것"; exit 1 }
+
+# A green build is not a working page. The static export names the page
+# artist-intelligence.html while the site links to /artist-intelligence, and that gap
+# served 404 on every link once (2026-09-21). So the paths get checked, not assumed.
+Write-Host ""
+Write-Host "== 경로 확인 =="
+$bad = 0
+foreach ($path in @("/", "/artist-intelligence", "/labs", "/utilities")) {
+  try {
+    $code = (Invoke-WebRequest -Uri "https://artist-intelligence-mocha.vercel.app$path" -Method Head -UseBasicParsing).StatusCode
+  } catch { $code = $_.Exception.Response.StatusCode.value__ }
+  Write-Host "  $code  $path"
+  if ($code -ne 200) { $bad++ }
+}
+if ($bad) { Write-Host "!! 200 이 아닌 경로 $bad 개"; exit 1 }
+
 Write-Host ""
 Write-Host "done -- https://artist-intelligence-mocha.vercel.app"

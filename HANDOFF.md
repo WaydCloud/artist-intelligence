@@ -9,7 +9,8 @@
 # 🔵 **페이지가 50일치를 따라잡았다. sonic 코호트는 오늘 09:00부터 다시 찬다** (2026-09-21)
 
 > 📄 이전 세션 이력 = [`Handoffs/2026-08-02-runner-full-leg-and-canon-corpus.md`](Handoffs/2026-08-02-runner-full-leg-and-canon-corpus.md) · 이번 결정 = [`docs/DECISIONS.md`](docs/DECISIONS.md) **D-061**
-> 브랜치 = `fix/reflect-accrued-data-and-storefront-fallback` (커밋 6개, **push 안 함 · PR 안 열림**)
+> PR [#21](https://github.com/WaydCloud/artist-intelligence/pull/21) **머지됨**(`6c1552c`) · 배포 **완료** → https://artist-intelligence-mocha.vercel.app
+> 공개 페이지가 `2026-09-20` 데이터로 선다. 다른 컴퓨터에서도 같은 데이터를 본다.
 
 ## VERIFY: GREEN · E2E: 미검증 (사용자가 아직 눌러보지 않았다)
 
@@ -89,6 +90,11 @@
    PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python -m genre_impulse analyze --sonic data/live/sonic --watchlist packages/entity-master/watchlist.json -o modules/genre-impulse/output/
    node apps/dashboard/scripts/collect-reports.mjs && python scripts/validate_report_data.py
    ```
+0. 🔴 **오늘(09-21) 09:00 수집이 끝났으면 한 명령으로 페이지를 갱신한다.** 배포된 페이지의 sonic 코호트가 아직 8곡이다.
+   ```powershell
+   .\scriptsefresh_and_deploy.ps1          # 재생성 + 게이트 + 커밋 + push + 빌드 + 배포
+   .\scriptsefresh_and_deploy.ps1 -NoDeploy  # 커밋까지만
+   ```
 3. **결함 40의 값 판정**을 받는다(D-061 선택지 ㉠㉡㉢). **이것만 남은 미결 판단이다.**
 4. 커버리지 게이트의 **바닥값을 다른 스토어에도 쓸지** 본다. 지금 30%는 `data/live/sonic` 55일에서 읽은 값이고, 코호트 성격(시장·상위 N)이 바뀌면 다시 읽어야 한다.
 5. push·PR은 **아직 안 했다.** 올릴지는 별도 승인.
@@ -108,8 +114,20 @@
 | ㉡ | apple을 절대 우선으로 두고 deezer는 apple이 전무할 때만 쓴다 | apple이 못 잡는 날은 결측이 는다 |
 | ㉢ | 현행 유지 + 출처를 화면에 싣는다 (지금 상태) | 시계열의 계단이 남는다. 읽는 사람이 출처 라인을 봐야 한다 |
 
+## 🔴 배포에서 나온 것 (결함 41 · 42)
+
+**41. 공개 페이지의 링크가 전부 404였다.** `out/`을 그대로 올리면 `artist-intelligence.html`이 `/artist-intelligence`로 열리지 않는데, 페이지 자신의 링크가 `href="/artist-intelligence"`다. 홈에서 **무엇을 눌러도 404**였고, 첫 배포 직후 실측으로 잡았다.
+- 고침: `apps/dashboard/public/vercel.json`에 `cleanUrls`. `public/`은 빌드가 `out/`으로 복사하므로 배포 루트에서 읽히고 저장소에 남는다.
+- 배포 후 실측: `/` · `/artist-intelligence` · `/labs` · `/utilities` 전부 200.
+- 🔺 **빌드가 통과한 것과 올라간 것이 동작하는 것은 다르다.** `smoke:tabs` 12/12는 dev 서버에서 돈 것이고, 정적 호스트의 라우팅은 거기 없다.
+
+**42. 배포 중 `out`이라는 프로젝트가 실수로 하나 생겼다.** `vercel deploy`가 `out/.vercel/project.json`을 덮어써서 새 프로젝트를 만들었다(`prj_nbXYj9Y7delQzrGL41oVgeaBuCW1` · `out-gamma-teal.vercel.app`).
+- ⚠ **지우지 않았다.** 프로젝트 삭제는 비가역이고 사용자 계정이라 판단을 받는다. 내용은 이번 정적 빌드 1건뿐이다.
+- 재발 방지: `refresh_and_deploy.ps1`이 배포 직전에 링크를 매번 복원한다.
+
 ## 손대지 않은 것 (알고 남긴 것)
 
 - **1층 과거 스냅샷.** 09-05~09-20의 미해석 구간은 **장애가 있었다는 증거 그 자체**다. 덮어쓰지 않는다.
 - **`data/live/social_merged.json`의 `provenance.note`.** 스냅샷 스키마가 `additionalProperties: false`라 `validate_snapshot.py`가 INVALID를 낸다. CI는 픽스처만 검사해서 빨개지지 않는다. **범위 밖이라 안 고쳤다.**
 - **`data/live/sonic/2026-09-21.json`.** 지금 쓰면 09:00 정기 실행이 "이미 받음"으로 sonic 레그를 건너뛰어 **어제 차트 코호트로 오늘을 잰다.**
+- **Vercel `out` 프로젝트**(결함 42). 지울지는 사용자 판단.

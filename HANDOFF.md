@@ -9,7 +9,7 @@
 # 🔵 **페이지가 50일치를 따라잡았다. sonic 코호트는 오늘 09:00부터 다시 찬다** (2026-09-21)
 
 > 📄 이전 세션 이력 = [`Handoffs/2026-08-02-runner-full-leg-and-canon-corpus.md`](Handoffs/2026-08-02-runner-full-leg-and-canon-corpus.md) · 이번 결정 = [`docs/DECISIONS.md`](docs/DECISIONS.md) **D-061**
-> 브랜치 = `fix/reflect-accrued-data-and-storefront-fallback` (커밋 3개, **push 안 함 · PR 안 열림**)
+> 브랜치 = `fix/reflect-accrued-data-and-storefront-fallback` (커밋 6개, **push 안 함 · PR 안 열림**)
 
 ## VERIFY: GREEN · E2E: 미검증 (사용자가 아직 눌러보지 않았다)
 
@@ -19,6 +19,8 @@
 | `pyright@1.1.411 modules` | 0 errors, 0 warnings |
 | `validate_report_data.py --selftest` | 90/90 |
 | `validate_report_data.py` | **CLEAN 6/6** (세션 시작 시점 FAILED 1/6) |
+| `validate_coverage.py --selftest` | **11/11** (신규) |
+| `validate_coverage.py data/live/sonic` | **RED 16일** (설계대로. 09-05~09-20 장애 구간을 잡는다) |
 | report-schema (6개) | 전부 valid |
 | `sonic_profile selftest` · `genre_impulse selftest` | all passed · 17 passed |
 | dashboard `lint` · `typecheck` | 통과 |
@@ -39,7 +41,7 @@
 | sonic-profile | 관측 3,280곡 · 미해석 2,753곡 |
 | genre-impulse | 코호트 8곡 · 매치 1건 (아래 장애 구간) |
 
-- 🔺 **fandom-pulse는 daily가 `signals`만 부르고 `analyze`를 안 부른다.** series는 매일 새로 만들어지는데 report는 2026-07-30 이후 한 번도 안 만들어졌다. 수동으로 만들었다. **daily에 레그를 추가할지는 아직 안 정했다**(아래 남은 일).
+- ✅ **fandom `analyze` 레그를 daily에 넣었다.** `signals`만 돌고 `report`는 2026-07-30 이후 한 번도 안 만들어지던 구조였다. 3층이 1층을 **같은 실행에서** 따라가야 멈춘 것이 보인다.
 
 **2. 계약 게이트가 빨갛던 것을 고쳤다.** sonic 추론이 없는 차트(`age-hist`)를 가리키고 있었다. 최신 코호트에 발매일이 없으면 그 차트는 안 만들어지는데 추론은 조건 없이 나갔다. 질문(R1)에만 걸려 있던 앵커 규율을 추론에도 걸었다.
 
@@ -58,7 +60,11 @@
 
 - **실패가 빨간 X가 아니라 작아진 표본으로 나타났다.** CLI는 exit 0, 스키마 유효, CI 초록. 리포트가 `미해석 103곡`이라고 정직하게 적고 있었지만 **그 숫자를 읽는 게이트가 없었다.**
 - 고침은 D-061. `lookup` 엔드포인트는 KR에서 멀쩡하다는 것도 같이 쟀다(그래서 `lookup_preview`는 안 건드렸다).
-- 🔺 **다음에 같은 것을 막으려면**: 커버리지 급락을 재는 게이트가 필요하다. "해석 수가 전일 대비 50% 넘게 떨어지면 세운다" 같은 것. **이번 세션에 만들지 않았다.**
+- ✅ **게이트를 만들었다**: `scripts/validate_coverage.py`. 판정 둘을 함께 쓴다.
+  - **하락** 앞 7일 해석률 중앙값 대비 50% 이상 하락. 기준선이 어제 하나뿐이면 깨진 날이 깨진 날과 비교돼 둘째 날부터 조용해진다.
+  - **바닥** 절대 해석률 30% 미만. 하락 규칙만 두면 창이 깨진 날로 차는 순간 조용해진다. 실측으로 **끊김 17일 중 4일만** 잡았다. 바닥이 나머지를 들고 간다.
+  - 🔑 **바닥 30%는 고른 값이 아니라 읽은 값이다.** 정상 39일은 54.1% 밑으로 간 적이 없고 장애 16일은 전부 7.2%였다. 그 사이는 55일간 관측 0이다.
+  - 실측: 정상 39일 조용 · 장애 **16일 전부 검출** · 오탐 0. CI는 `--selftest`(1층이 없다), 러너는 실측 판정.
 
 ### 40. 워치리스트 출처가 8월부터 날마다 apple↔deezer로 뒤집히고 있었다
 
@@ -83,14 +89,24 @@
    PYTHONPATH="modules/genre-impulse/src;modules/sonic-profile/src" python -m genre_impulse analyze --sonic data/live/sonic --watchlist packages/entity-master/watchlist.json -o modules/genre-impulse/output/
    node apps/dashboard/scripts/collect-reports.mjs && python scripts/validate_report_data.py
    ```
-3. **결함 40의 값 판정**을 받는다(D-061 선택지 ㉠㉡㉢).
-4. **커버리지 급락 게이트**를 만들지 정한다(결함 39가 16일간 안 보인 이유).
-5. **fandom `analyze`를 daily에 넣을지** 정한다. 소셜 수집은 `experiment_end 2026-08-19`로 끝나 더 안 늘지만, series만 돌고 report가 안 도는 구조는 그대로 남는다.
-6. push·PR은 **아직 안 했다.** 올릴지는 별도 승인.
+3. **결함 40의 값 판정**을 받는다(D-061 선택지 ㉠㉡㉢). **이것만 남은 미결 판단이다.**
+4. 커버리지 게이트의 **바닥값을 다른 스토어에도 쓸지** 본다. 지금 30%는 `data/live/sonic` 55일에서 읽은 값이고, 코호트 성격(시장·상위 N)이 바뀌면 다시 읽어야 한다.
+5. push·PR은 **아직 안 했다.** 올릴지는 별도 승인.
 
 ## 갈래 ② 정답지 코퍼스 · 그대로 멈춰 있다
 
 [`docs/DRAFT-answer-sheet-corpus.md`](docs/DRAFT-answer-sheet-corpus.md) · 10케이스 중 3종 수집(`jersey-club` · `ukg-dnb` · `drill`). 남은 7종과 `drill` 둘째 출처는 2026-08-02 이후 진척 없다. 이전 핸드오프의 갈래 ② 절을 그대로 이어받는다.
+
+## 이번 세션의 미결 판단 하나
+
+🔴 **결함 40(출처 혼재)의 값은 안 정했다.** 화면이 그 사실을 말하게 하는 것까지만 했다.
+어떤 녹음을 정본으로 삼을지는 측정 모집단을 정하는 판단이라 `AGENTS.md` §2.1대로 도메인 소유자 몫이다.
+
+| 선택지 | 무엇 | 대가 |
+|---|---|---|
+| ㉠ | act마다 정본 `track_id`를 고정하고 `lookup_preview`로 같은 녹음을 다시 잰다 | 신곡이 나왔을 때 갱신 규칙이 따로 필요하다 |
+| ㉡ | apple을 절대 우선으로 두고 deezer는 apple이 전무할 때만 쓴다 | apple이 못 잡는 날은 결측이 는다 |
+| ㉢ | 현행 유지 + 출처를 화면에 싣는다 (지금 상태) | 시계열의 계단이 남는다. 읽는 사람이 출처 라인을 봐야 한다 |
 
 ## 손대지 않은 것 (알고 남긴 것)
 

@@ -356,6 +356,11 @@ Set-Derive "social-merge" $? "social merged+deduped" "social merge FAILED"
 $env:PYTHONPATH = "modules/fandom-pulse/src"
 python -m fandom_pulse signals data/live/social_merged.json --entities packages/entity-master/entities.json --watchlist packages/entity-master/watchlist.json -o data/live/social_series.json
 Set-Derive "social-series" $? "social series rebuilt (sound+hashtag attribution)" "social series FAILED"
+# The report was missing from this script, so series was rebuilt daily while the tab kept
+# showing a report from 2026-07-30 built out of one hashtag and 30 posts. Layer 3 has to
+# follow layer 1 on the same run or nobody notices it stopped.
+python -m fandom_pulse analyze data/live/social_merged.json --entities packages/entity-master/entities.json --watchlist packages/entity-master/watchlist.json -o modules/fandom-pulse/output/ 2>$null | Out-Null
+Set-Derive "social-report" ($LASTEXITCODE -eq 0) "fandom report written" "fandom report FAILED (exit $LASTEXITCODE)"
 
 # 3.5) free YouTube rail (official API, ~12 units/day) -- D-014
 $ytCache = Join-Path $repo "packages\entity-master\yt_channels.json"
@@ -421,6 +426,11 @@ if (Test-Path $sonicToday) {
   Set-Derive "sonic-series" ($LASTEXITCODE -eq 0) "sonic series rebuilt" "sonic series FAILED (exit $LASTEXITCODE)"
   python -m sonic_profile analyze data/live/sonic --watchlist $wlPath -o modules/sonic-profile/output/ 2>$null | Out-Null
   Set-Derive "sonic-report" ($LASTEXITCODE -eq 0) "sonic report written" "sonic report FAILED (exit $LASTEXITCODE)"
+  # Coverage gate (D-061 / RULES 1.1). This legs failure arrives as a smaller sample,
+  # not as a non-zero exit, so something has to read the sample. It does not stop the
+  # run: the day still derives, the log just says a source went quiet.
+  python scripts/validate_coverage.py data/live/sonic --latest-only 2>&1 | ForEach-Object { Log "coverage | $_" }
+  if ($LASTEXITCODE -ne 0) { $script:deriveFails += "sonic-coverage"; Log "!! sonic coverage RED -- source may be quiet, see lines above" }
 }
 
 # 3.7) genre-impulse (D-035): impulse ledger x daily sonic cohort -> monitor report (offline, no cost)

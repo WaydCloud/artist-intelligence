@@ -92,8 +92,8 @@
    ```
 0. 🔴 **오늘(09-21) 09:00 수집이 끝났으면 한 명령으로 페이지를 갱신한다.** 배포된 페이지의 sonic 코호트가 아직 8곡이다.
    ```powershell
-   .\scriptsefresh_and_deploy.ps1          # 재생성 + 게이트 + 커밋 + push + 빌드 + 배포
-   .\scriptsefresh_and_deploy.ps1 -NoDeploy  # 커밋까지만
+   .\scripts\refresh_and_deploy.ps1          # 재생성 + 게이트 + 커밋 + push + 빌드 + 배포
+   .\scripts\refresh_and_deploy.ps1 -NoDeploy  # 커밋까지만
    ```
 3. **결함 40의 값 판정**을 받는다(D-061 선택지 ㉠㉡㉢). **이것만 남은 미결 판단이다.**
 4. 커버리지 게이트의 **바닥값을 다른 스토어에도 쓸지** 본다. 지금 30%는 `data/live/sonic` 55일에서 읽은 값이고, 코호트 성격(시장·상위 N)이 바뀌면 다시 읽어야 한다.

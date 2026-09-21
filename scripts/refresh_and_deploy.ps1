@@ -80,18 +80,29 @@ if ($NoDeploy) { Write-Host ""; Write-Host "done (no deploy)"; exit 0 }
 
 # The push above already triggered the deploy: this project is connected to GitHub and
 # every commit on main builds. Uploading out/ by hand would race that build and land a
-# second deployment on the same alias. So here we only watch and check.
-Write-Host ""
-Write-Host "== deploy (push 가 이미 걸었다. 기다린다) =="
-$deadline = (Get-Date).AddMinutes(6)
-do {
-  Start-Sleep -Seconds 15
-  $row = (vercel ls artist-intelligence --scope waydclouds-projects 2>$null | Select-Object -Index 4)
-  Write-Host "  $($row -replace '\s+', ' ')"
-} while ($row -notmatch 'Ready|Error' -and (Get-Date) -lt $deadline)
+# second deployment on the same alias. So this only waits and checks.
+#
+# It waits on the outcome, not on a status word. Parsing `vercel ls` rows broke once
+# (2026-09-22) and reported a timeout while the deploy had in fact succeeded. The page
+# carrying this run's generatedAt is the thing we actually care about.
+$site = "https://artist-intelligence-mocha.vercel.app"
+$stamp = (Get-Content "modules/sonic-profile/output/report.json" -Raw -Encoding utf8 |
+          ConvertFrom-Json).generatedAt
 
-if ($row -match 'Error') { Write-Host "!! 배포 실패 -- Vercel 로그를 볼 것"; exit 1 }
-if ($row -notmatch 'Ready') { Write-Host "!! 6분 안에 Ready 가 안 됐다 -- Vercel 을 볼 것"; exit 1 }
+Write-Host ""
+Write-Host "== deploy (push 가 이미 걸었다. 페이지에 $stamp 가 뜨기를 기다린다) =="
+$deadline = (Get-Date).AddMinutes(8)
+$live = $false
+do {
+  Start-Sleep -Seconds 20
+  try {
+    $body = (Invoke-WebRequest -Uri "$site/artist-intelligence" -UseBasicParsing).Content
+    $live = $body.Contains($stamp)
+  } catch { $live = $false }
+  Write-Host "  $(Get-Date -Format HH:mm:ss)  $(if ($live) { '반영됨' } else { '아직' })"
+} while (-not $live -and (Get-Date) -lt $deadline)
+
+if (-not $live) { Write-Host "!! 8분 안에 페이지에 반영되지 않았다. Vercel 빌드 로그를 볼 것"; exit 1 }
 
 # A green build is not a working page. The static export names the page
 # artist-intelligence.html while the site links to /artist-intelligence, and that gap
@@ -101,7 +112,7 @@ Write-Host "== 경로 확인 =="
 $bad = 0
 foreach ($path in @("/", "/artist-intelligence", "/labs", "/utilities")) {
   try {
-    $code = (Invoke-WebRequest -Uri "https://artist-intelligence-mocha.vercel.app$path" -Method Head -UseBasicParsing).StatusCode
+    $code = (Invoke-WebRequest -Uri "$site$path" -Method Head -UseBasicParsing).StatusCode
   } catch { $code = $_.Exception.Response.StatusCode.value__ }
   Write-Host "  $code  $path"
   if ($code -ne 200) { $bad++ }
@@ -109,4 +120,4 @@ foreach ($path in @("/", "/artist-intelligence", "/labs", "/utilities")) {
 if ($bad) { Write-Host "!! 200 이 아닌 경로 $bad 개"; exit 1 }
 
 Write-Host ""
-Write-Host "done -- https://artist-intelligence-mocha.vercel.app"
+Write-Host "done -- $site"

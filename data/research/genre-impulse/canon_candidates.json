@@ -1,7 +1,7 @@
 {
   "provenance": {
     "generator": "scripts/canon_ingest.py",
-    "generatedAt": "2026-08-01T10:56:39+00:00",
+    "generatedAt": "2026-09-21T21:43:37+00:00",
     "prereg": "docs/DRAFT-answer-sheet-corpus.md",
     "weights": {
       "매우 높음": 2.0,
@@ -14,11 +14,41 @@
     "cutoff": 2.0,
     "min_measured": 10,
     "status": "A&R 확정 대기 — 어떤 게이트도 이 산출을 읽지 않는다",
-    "source_count": 5
+    "source_count": 12
   },
   "summary": {
+    "amapiano": {
+      "candidates": 15,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
+    "citypop": {
+      "candidates": 127,
+      "passes": 3,
+      "by_era": {
+        "미상": 3
+      },
+      "by_artist": {
+        "Junko Ohashi": 1,
+        "Mariya Takeuchi": 1,
+        "Tatsuro Yamashita": 1
+      },
+      "min_measured_ok": false,
+      "top_artist_share": 0.333
+    },
     "drill": {
       "candidates": 11,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
+    "hyperpop": {
+      "candidates": 45,
       "passes": 0,
       "by_era": {},
       "by_artist": {},
@@ -42,6 +72,30 @@
       "min_measured_ok": false,
       "top_artist_share": 0.125
     },
+    "moombahton-tropical": {
+      "candidates": 6,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
+    "njs": {
+      "candidates": 25,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
+    "reggaeton-dembow": {
+      "candidates": 50,
+      "passes": 0,
+      "by_era": {},
+      "by_artist": {},
+      "min_measured_ok": false,
+      "top_artist_share": 0.0
+    },
     "ukg-dnb": {
       "candidates": 39,
       "passes": 10,
@@ -60,6 +114,2156 @@
     }
   },
   "candidates": [
+    {
+      "key": "busta929xmpura|umsebenzi wethu",
+      "case": "amapiano",
+      "artist": "Busta 929 x Mpura",
+      "title": "Umsebenzi Wethu",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "chccoxmellowsleazy|nkao tempela",
+      "case": "amapiano",
+      "artist": "Ch'cco x Mellow & Sleazy",
+      "title": "Nkao Tempela",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "demthudaxnjelic|shesha",
+      "case": "amapiano",
+      "artist": "De Mthuda x Njelic",
+      "title": "Shesha",
+      "years": [
+        "2019"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "feloleteemyztro|66",
+      "case": "amapiano",
+      "artist": "Felo Le Tee & Myztro",
+      "title": "66",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "focalistic|ke star",
+      "case": "amapiano",
+      "artist": "Focalistic",
+      "title": "Ke Star",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kabzadesmalldjmaphorisa|emcimbini",
+      "case": "amapiano",
+      "artist": "Kabza De Small & DJ Maphorisa",
+      "title": "Emcimbini",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kabzadesmall|umshove",
+      "case": "amapiano",
+      "artist": "Kabza De Small feat. Leehleza",
+      "title": "Umshove",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kabzadesmallxdjmaphorisa|amantombazane",
+      "case": "amapiano",
+      "artist": "Kabza De Small x DJ Maphorisa",
+      "title": "Amantombazane",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kwiishsa|iskhathi",
+      "case": "amapiano",
+      "artist": "Kwiish SA",
+      "title": "Iskhathi (Gong Gong)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mfrsouls|love you tonight",
+      "case": "amapiano",
+      "artist": "MFR Souls",
+      "title": "Love You Tonight",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "masmusiq|sengizwile",
+      "case": "amapiano",
+      "artist": "Mas Musiq",
+      "title": "Sengizwile",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "samthingsoweto|akulaleki",
+      "case": "amapiano",
+      "artist": "Samthing Soweto feat. Sha Sha",
+      "title": "Akulaleki",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "semitee|labantwana ama uber",
+      "case": "amapiano",
+      "artist": "Semi Tee",
+      "title": "Labantwana Ama Uber",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "shasha|tender love",
+      "case": "amapiano",
+      "artist": "Sha Sha",
+      "title": "Tender Love",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "youngstunna|adiwele",
+      "case": "amapiano",
+      "artist": "Young Stunna",
+      "title": "Adiwele",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "grayarea-amapiano-2023",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "junkoohashi|telephone number",
+      "case": "citypop",
+      "artist": "Junko Ohashi",
+      "title": "Telephone Number",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        },
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariyatakeuchi|plastic love",
+      "case": "citypop",
+      "artist": "Mariya Takeuchi",
+      "title": "Plastic Love",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        },
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|music book",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Music Book",
+      "years": [],
+      "score": 2.0,
+      "passes": true,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        },
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "1986omegatribe|kimi wa 1000",
+      "case": "citypop",
+      "artist": "1986 Omega Tribe",
+      "title": "Kimi Wa 1000%",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akikoyano|ramen tabetai",
+      "case": "citypop",
+      "artist": "Akiko Yano",
+      "title": "Ramen Tabetai",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akikoyano|david",
+      "case": "citypop",
+      "artist": "Akiko Yano",
+      "title": "David",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akikoyano|harusakikobeni",
+      "case": "citypop",
+      "artist": "Akiko Yano",
+      "title": "Harusakikobeni",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akirainoue|bartok no kage",
+      "case": "citypop",
+      "artist": "Akira Inoue",
+      "title": "Bartok No Kage",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akiraterao|ruby no yubi",
+      "case": "citypop",
+      "artist": "Akira Terao",
+      "title": "Ruby No Yubi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "akiraterao|shadow city",
+      "case": "citypop",
+      "artist": "Akira Terao",
+      "title": "Shadow City",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "anri|windy summer",
+      "case": "citypop",
+      "artist": "Anri",
+      "title": "Windy Summer",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "awesomecityclub|outsider",
+      "case": "citypop",
+      "artist": "Awesome City Club",
+      "title": "Outsider",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "breadbutter|cruising on",
+      "case": "citypop",
+      "artist": "Bread & Butter",
+      "title": "Cruising On",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "casiopea|midnight rendezvous",
+      "case": "citypop",
+      "artist": "Casiopea",
+      "title": "Midnight Rendezvous",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "casiopea|eyes of mind",
+      "case": "citypop",
+      "artist": "Casiopea",
+      "title": "Eyes of Mind",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "char|all around me",
+      "case": "citypop",
+      "artist": "Char",
+      "title": "All Around Me",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "epo|doyobi no yoru wa paradise",
+      "case": "citypop",
+      "artist": "EPO",
+      "title": "Doyobi No Yoru Wa Paradise",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "epo|park ave 1981",
+      "case": "citypop",
+      "artist": "EPO",
+      "title": "Park Ave. 1981",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "epo|down town",
+      "case": "citypop",
+      "artist": "EPO",
+      "title": "Down Town",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "epo|ongaku no yona kaze",
+      "case": "citypop",
+      "artist": "EPO",
+      "title": "Ongaku No Yona Kaze",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|kimiwa tennenshoku",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Kimiwa Tennenshoku",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|canary islands nite",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Canary Islands Nite",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|ame no wednesday",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Ame No Wednesday",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|koisuru karen",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Koisuru Karen",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|peppermint blue",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Peppermint Blue",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eiichiohtaki|canary shoto nite",
+      "case": "citypop",
+      "artist": "Eiichi Ohtaki",
+      "title": "Canary Shoto Nite",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "eikichiyazawa|yes my love",
+      "case": "citypop",
+      "artist": "Eikichi Yazawa",
+      "title": "Yes My Love",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ginjiito|ame no stella",
+      "case": "citypop",
+      "artist": "Ginji Ito",
+      "title": "Ame No Stella",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "happyend|kaze wo atsumete",
+      "case": "citypop",
+      "artist": "Happy End",
+      "title": "Kaze Wo Atsumete",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "harukokuwana|down town",
+      "case": "citypop",
+      "artist": "Haruko Kuwana",
+      "title": "Down Town",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "harukokuwana|aoi kaze",
+      "case": "citypop",
+      "artist": "Haruko Kuwana",
+      "title": "Aoi Kaze",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hifiset|sunao ni naritai",
+      "case": "citypop",
+      "artist": "Hi-Fi Set",
+      "title": "Sunao Ni Naritai",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hirokoyakushimaru|tantei monogatari",
+      "case": "citypop",
+      "artist": "Hiroko Yakushimaru",
+      "title": "Tantei Monogatari",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hiroshisato|i cant wait",
+      "case": "citypop",
+      "artist": "Hiroshi Sato",
+      "title": "I Can't Wait",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hiroshisato|say goodbye",
+      "case": "citypop",
+      "artist": "Hiroshi Sato",
+      "title": "Say Goodbye",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hiroshisatoh|say goodbye",
+      "case": "citypop",
+      "artist": "Hiroshi Satoh",
+      "title": "Say Goodbye",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "junichiinagaki|natsu no klaxon",
+      "case": "citypop",
+      "artist": "Junichi Inagaki",
+      "title": "Natsu No Klaxon",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kaorusudo|anata dake i love you",
+      "case": "citypop",
+      "artist": "Kaoru Sudo",
+      "title": "Anata Dake I Love You",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "katokazuhiko|ano goro marie laurencin",
+      "case": "citypop",
+      "artist": "Kato Kazuhiko",
+      "title": "Ano Goro, Marie Laurencin",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "katokazuhiko|yasashi yoru no sugoshi kata",
+      "case": "citypop",
+      "artist": "Kato Kazuhiko",
+      "title": "Yasashi Yoru No Sugoshi Kata",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "katokazuhiko|new york confidential",
+      "case": "citypop",
+      "artist": "Kato Kazuhiko",
+      "title": "New York Confidential",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "katsumihoriiproject|hot is cool",
+      "case": "citypop",
+      "artist": "Katsumi Horii Project",
+      "title": "Hot Is Cool",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kazuhitomurata|i pon no ongaku",
+      "case": "citypop",
+      "artist": "Kazuhito Murata",
+      "title": "I-pon No Ongaku",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kazuhitomurata|denwa shitemo",
+      "case": "citypop",
+      "artist": "Kazuhito Murata",
+      "title": "Denwa Shitemo",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kenjisawada|senaka made 45 bun",
+      "case": "citypop",
+      "artist": "Kenji Sawada",
+      "title": "Senaka Made 45 Bun",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kiyotakasugiyama|umikaze tsushin",
+      "case": "citypop",
+      "artist": "Kiyotaka Sugiyama",
+      "title": "Umikaze Tsushin",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kiyotakasugiyamaomegatribe|summer suspicion",
+      "case": "citypop",
+      "artist": "Kiyotaka Sugiyama & Omega Tribe",
+      "title": "Summer Suspicion",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kiyotakasugiyamaomegatribe|dear breeze",
+      "case": "citypop",
+      "artist": "Kiyotaka Sugiyama & Omega Tribe",
+      "title": "Dear Breeze",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kyokoendo|giniro no natsu",
+      "case": "citypop",
+      "artist": "Kyoko Endo",
+      "title": "Giniro No Natsu",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "luckytapes|lady blues",
+      "case": "citypop",
+      "artist": "Lucky Tapes",
+      "title": "Lady Blues",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "makotomatsushita|sunset",
+      "case": "citypop",
+      "artist": "Makoto Matsushita",
+      "title": "Sunset",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "makotomatsushita|first light",
+      "case": "citypop",
+      "artist": "Makoto Matsushita",
+      "title": "First Light",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariiijima|blueberry jam",
+      "case": "citypop",
+      "artist": "Mari Iijima",
+      "title": "Blueberry Jam",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariyatakeuchi|koi no arashi",
+      "case": "citypop",
+      "artist": "Mariya Takeuchi",
+      "title": "Koi No Arashi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariyatakeuchi|fushigi na peach pie",
+      "case": "citypop",
+      "artist": "Mariya Takeuchi",
+      "title": "Fushigi Na Peach Pie",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariyatakeuchi|sweetest music",
+      "case": "citypop",
+      "artist": "Mariya Takeuchi",
+      "title": "Sweetest Music",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "mariyatakeuchi|oh no oh yes",
+      "case": "citypop",
+      "artist": "Mariya Takeuchi",
+      "title": "Oh No, Oh Yes!",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "masayoshitakanaka|sexy dance",
+      "case": "citypop",
+      "artist": "Masayoshi Takanaka",
+      "title": "Sexy Dance",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "masayukisuzuki|misty mauve",
+      "case": "citypop",
+      "artist": "Masayuki Suzuki",
+      "title": "Misty Mauve",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "meikonakahara|fantasy",
+      "case": "citypop",
+      "artist": "Meiko Nakahara",
+      "title": "Fantasy",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "minakoyoshida|hoho ni yoru no akari",
+      "case": "citypop",
+      "artist": "Minako Yoshida",
+      "title": "Hoho Ni Yoru No Akari",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "minakoyoshida|town",
+      "case": "citypop",
+      "artist": "Minako Yoshida",
+      "title": "Town",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "momokokikuchi|glass no sogen",
+      "case": "citypop",
+      "artist": "Momoko Kikuchi",
+      "title": "Glass No Sogen",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "momokokikuchi|adventure",
+      "case": "citypop",
+      "artist": "Momoko Kikuchi",
+      "title": "Adventure",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "moonriders|g o a p",
+      "case": "citypop",
+      "artist": "Moonriders",
+      "title": "G.o.a.P",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "motoharusano|young bloods",
+      "case": "citypop",
+      "artist": "Motoharu Sano",
+      "title": "Young Bloods",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "motoharusano|complication shakedown",
+      "case": "citypop",
+      "artist": "Motoharu Sano",
+      "title": "Complication Shakedown",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "motoharusano|someday",
+      "case": "citypop",
+      "artist": "Motoharu Sano",
+      "title": "Someday",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "motoharusano|sugartime",
+      "case": "citypop",
+      "artist": "Motoharu Sano",
+      "title": "Sugartime",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "naruminetsu|summer touches you",
+      "case": "citypop",
+      "artist": "Narumin & Etsu",
+      "title": "Summer Touches You",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "niagaratriangle|a men de koi wo shite",
+      "case": "citypop",
+      "artist": "Niagara Triangle",
+      "title": "A Men De Koi Wo Shite",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "pizzicatofive|kore wa koi de wa nai",
+      "case": "citypop",
+      "artist": "Pizzicato Five",
+      "title": "Kore Wa Koi De Wa Nai",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "pizzicatofive|mina waratta",
+      "case": "citypop",
+      "artist": "Pizzicato Five",
+      "title": "Mina Waratta",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ramu|rainy day lady",
+      "case": "citypop",
+      "artist": "RA MU",
+      "title": "Rainy Day Lady",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "rajie|goodbye transfer",
+      "case": "citypop",
+      "artist": "Rajie",
+      "title": "Goodbye Transfer",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ratsstar|t shirt ni kuchibeni",
+      "case": "citypop",
+      "artist": "Rats & Star",
+      "title": "T-shirt Ni Kuchibeni",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sandii|drip dry eyes",
+      "case": "citypop",
+      "artist": "SANDii",
+      "title": "Drip Dry Eyes",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "seasidelovers|evening shadows",
+      "case": "citypop",
+      "artist": "Seaside Lovers",
+      "title": "Evening Shadows",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "seikomatsuda|miami gozen goji",
+      "case": "citypop",
+      "artist": "Seiko Matsuda",
+      "title": "Miami Gozen Goji",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "seikomatsuda|kazetachinu",
+      "case": "citypop",
+      "artist": "Seiko Matsuda",
+      "title": "Kazetachinu",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "shigerusuzuki|coral reef",
+      "case": "citypop",
+      "artist": "Shigeru Suzuki",
+      "title": "Coral Reef",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "southernallstars|emanon",
+      "case": "citypop",
+      "artist": "Southern All-Stars",
+      "title": "Emanon",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "specialfavoritemusic|royal memories",
+      "case": "citypop",
+      "artist": "Special Favorite Music",
+      "title": "Royal Memories",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "suchmos|stay tune",
+      "case": "citypop",
+      "artist": "Suchmos",
+      "title": "Stay Tune",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "taekoohnuki|tokai",
+      "case": "citypop",
+      "artist": "Taeko Ohnuki",
+      "title": "Tokai",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "taekoonuki|shikisai toshi",
+      "case": "citypop",
+      "artist": "Taeko Onuki",
+      "title": "Shikisai Toshi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "taekoonuki|peter rabbit to watashi",
+      "case": "citypop",
+      "artist": "Taeko Onuki",
+      "title": "Peter Rabbit To Watashi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "taekoonuki|kuro no claire",
+      "case": "citypop",
+      "artist": "Taeko Onuki",
+      "title": "Kuro No Claire",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "takakomamiya|love trip",
+      "case": "citypop",
+      "artist": "Takako Mamiya",
+      "title": "Love Trip",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "takakomamiya|mayonaka no joke",
+      "case": "citypop",
+      "artist": "Takako Mamiya",
+      "title": "Mayonaka No Joke",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|sparkle",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Sparkle",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|ride on time",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Ride On Time",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|doyobi no koibito",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Doyobi No Koibito",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|amaku kiken na kaori",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Amaku Kiken Na Kaori",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|loveland island",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Loveland, Island",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|atarashii tokyo rhapsody",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Atarashii Tokyo Rhapsody",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|my sugar babe",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "My Sugar Babe",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|itsuka",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Itsuka",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|get back in love",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Get Back In Love",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|kaze no corridor",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Kaze No Corridor",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tatsuroyamashita|merry go round",
+      "case": "citypop",
+      "artist": "Tatsuro Yamashita",
+      "title": "Merry-Go-Round",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "thebeatniks|chotto tsurainda",
+      "case": "citypop",
+      "artist": "The Beatniks",
+      "title": "Chotto Tsurainda",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|no end summer",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "No End Summer",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|off shore",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "Off Shore",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|take you to the sky high",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "Take You To The Sky High",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|tokyo tower",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "Tokyo Tower",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|if you",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "If You...",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "toshikikadomatsu|i cant stop the night",
+      "case": "citypop",
+      "artist": "Toshiki Kadomatsu",
+      "title": "I Can't Stop The Night",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "wink|sabishii nettaigyo",
+      "case": "citypop",
+      "artist": "Wink",
+      "title": "Sabishii Nettaigyo",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yasuha|flyday chinatown",
+      "case": "citypop",
+      "artist": "Yasuha",
+      "title": "Flyday Chinatown",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yasuhiroabe|irene",
+      "case": "citypop",
+      "artist": "Yasuhiro Abe",
+      "title": "Irene",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yasuyukiokamura|super girl",
+      "case": "citypop",
+      "artist": "Yasuyuki Okamura",
+      "title": "Super Girl",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yellowmagicorchestra|kimi ni mune kyun",
+      "case": "citypop",
+      "artist": "Yellow Magic Orchestra",
+      "title": "Kimi Ni, Mune Kyun",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yoshinofujimaru|who are you",
+      "case": "citypop",
+      "artist": "Yoshino Fujimaru",
+      "title": "Who Are You",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yoshitakaminami|slow na boogie ni shitekure",
+      "case": "citypop",
+      "artist": "Yoshitaka Minami",
+      "title": "Slow Na Boogie Ni Shitekure",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yoshitakaminami|akogareno radio girl",
+      "case": "citypop",
+      "artist": "Yoshitaka Minami",
+      "title": "Akogareno Radio Girl",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yoshitakaminami|crescent night",
+      "case": "citypop",
+      "artist": "Yoshitaka Minami",
+      "title": "Crescent Night",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yoshiyukiohsawa|soshite boku wa toho ni kureru",
+      "case": "citypop",
+      "artist": "Yoshiyuki Ohsawa",
+      "title": "Soshite Boku Wa Toho Ni Kureru",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yosuiinoue|riverside hotel",
+      "case": "citypop",
+      "artist": "Yosui Inoue",
+      "title": "Riverside Hotel",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yubin|sook nyeo",
+      "case": "citypop",
+      "artist": "Yubin",
+      "title": "Sook Nyeo",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "vice-citypop-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yukihirotakahashi|drip dry eyes",
+      "case": "citypop",
+      "artist": "Yukihiro Takahashi",
+      "title": "Drip Dry Eyes",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuming|shinju no pierce",
+      "case": "citypop",
+      "artist": "Yuming",
+      "title": "Shinju No Pierce",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuming|yokoso kagayaku jikan e",
+      "case": "citypop",
+      "artist": "Yuming",
+      "title": "Yokoso Kagayaku Jikan E",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuming|tower side memory",
+      "case": "citypop",
+      "artist": "Yuming",
+      "title": "Tower Side Memory",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuming|koibito ga santa claus",
+      "case": "citypop",
+      "artist": "Yuming",
+      "title": "Koibito Ga Santa Claus",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuming|yusuzumi",
+      "case": "citypop",
+      "artist": "Yuming",
+      "title": "Yusuzumi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "yuriekokubu|snob na yoru e",
+      "case": "citypop",
+      "artist": "Yurie Kokubu",
+      "title": "Snob Na Yoru E",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "recordcollector-citypop-100",
+          "certainty": "높음"
+        }
+      ]
+    },
     {
       "key": "chiefkeef|i dont like",
       "case": "drill",
@@ -243,6 +2447,683 @@
       "named_by": [
         {
           "source_id": "pitchfork-drill-2019",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "100gecs|hand crushed by a mallet",
+      "case": "hyperpop",
+      "artist": "100 gecs",
+      "title": "hand crushed by a mallet",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "100gecs|money machine",
+      "case": "hyperpop",
+      "artist": "100 gecs",
+      "title": "money machine",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "agcook|beautiful",
+      "case": "hyperpop",
+      "artist": "A. G. Cook",
+      "title": "Beautiful",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "alicegas|ferrari",
+      "case": "hyperpop",
+      "artist": "Alice Gas",
+      "title": "Ferrari",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "alicelongyugaolaurales|ritch bitch juice remix",
+      "case": "hyperpop",
+      "artist": "Alice Longyu Gao, Laura Les",
+      "title": "Ritch Bitch Juice (Laura Les Remix)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "arca|klk",
+      "case": "hyperpop",
+      "artist": "Arca",
+      "title": "KLK",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bladee|be nice 2 me",
+      "case": "hyperpop",
+      "artist": "Bladee",
+      "title": "Be Nice 2 Me",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bladeemechatok|rainbow",
+      "case": "hyperpop",
+      "artist": "Bladee, Mechatok",
+      "title": "Rainbow",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "boofbby|online_v3 bounce back",
+      "case": "hyperpop",
+      "artist": "Boofbby",
+      "title": "online_v3!!! *BOUNCE BACK*",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "charlixcx|focus",
+      "case": "hyperpop",
+      "artist": "Charli XCX",
+      "title": "Focus",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "charlixcx|claws",
+      "case": "hyperpop",
+      "artist": "Charli XCX",
+      "title": "claws",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "charlixcx|pink diamond",
+      "case": "hyperpop",
+      "artist": "Charli XCX",
+      "title": "pink diamond",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "charlixcx|vroom vroom",
+      "case": "hyperpop",
+      "artist": "Charli XCX",
+      "title": "Vroom Vroom",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "charlixcxkimpetrastommycash|click",
+      "case": "hyperpop",
+      "artist": "Charli XCX, Kim Petras, Tommy Cash",
+      "title": "Click",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "cookii|love yourself",
+      "case": "hyperpop",
+      "artist": "Cookii",
+      "title": "love yourself (spend forever)",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dannylharle|broken flowers",
+      "case": "hyperpop",
+      "artist": "Danny L Harle",
+      "title": "Broken Flowers",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dannylharleclairo|blue angel",
+      "case": "hyperpop",
+      "artist": "Danny L Harle, Clairo",
+      "title": "Blue Angel",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "doloreshaze|white house",
+      "case": "hyperpop",
+      "artist": "Dolores Haze",
+      "title": "White House",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dylanbradypoterelvinger|marlboro man",
+      "case": "hyperpop",
+      "artist": "Dylan Brady, Poter Elvinger",
+      "title": "Marlboro Man",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "easyfun|be your usa",
+      "case": "hyperpop",
+      "artist": "EASYFUN",
+      "title": "Be Your USA",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "easyfun|fanta",
+      "case": "hyperpop",
+      "artist": "EASYFUN",
+      "title": "Fanta",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "flumekuckasophie|voices",
+      "case": "hyperpop",
+      "artist": "Flume, KUCKA, SOPHIE",
+      "title": "Voices",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "gupi|modest",
+      "case": "hyperpop",
+      "artist": "Gupi",
+      "title": "Modest",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hannahdiamond|every night",
+      "case": "hyperpop",
+      "artist": "Hannah Diamond",
+      "title": "Every Night",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "iglooghostmryote|mametchi usohachi",
+      "case": "hyperpop",
+      "artist": "Iglooghost, Mr. Yote",
+      "title": "Mametchi / Usohachi",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "jazminbeanzheani|monster truck",
+      "case": "hyperpop",
+      "artist": "Jazmin Bean, Zheani",
+      "title": "Monster Truck",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kimpetrassophie|1 2 3 dayz up",
+      "case": "hyperpop",
+      "artist": "Kim Petras, SOPHIE",
+      "title": "1,2,3 dayz up",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "madonnanickiminaj|bitch im madonna",
+      "case": "hyperpop",
+      "artist": "Madonna, Nicki Minaj",
+      "title": "Bitch I'm Madonna",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "nabi3|xxwhileimeatinicecreamxx",
+      "case": "hyperpop",
+      "artist": "Nabi:3",
+      "title": "XxwhileimeatinicecreamXx",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "qt|hey qt",
+      "case": "hyperpop",
+      "artist": "QT",
+      "title": "Hey QT",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "riconasty|iphone",
+      "case": "hyperpop",
+      "artist": "Rico Nasty",
+      "title": "IPHONE",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sebii|baffledd",
+      "case": "hyperpop",
+      "artist": "SEBii",
+      "title": "BAFFLEdd",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sophie|bipp",
+      "case": "hyperpop",
+      "artist": "SOPHIE",
+      "title": "BIPP",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sophie|ponyboy",
+      "case": "hyperpop",
+      "artist": "SOPHIE",
+      "title": "Ponyboy",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sophie|vyzee",
+      "case": "hyperpop",
+      "artist": "SOPHIE",
+      "title": "VYZEE",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sophie|immaterial",
+      "case": "hyperpop",
+      "artist": "SOPHIE",
+      "title": "Immaterial",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "slayyyter|hello kitty",
+      "case": "hyperpop",
+      "artist": "Slayyyter",
+      "title": "Hello Kitty",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "syko|brooklynbloodpop",
+      "case": "hyperpop",
+      "artist": "SyKo",
+      "title": "#BrooklynBloodPop!",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tonyvelour|do or die",
+      "case": "hyperpop",
+      "artist": "Tony Velour",
+      "title": "Do or Die",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "vincestaples|yeah right",
+      "case": "hyperpop",
+      "artist": "Vince Staples",
+      "title": "Yeah Right",
+      "years": [
+        "2017"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "d0llywood1|ihonestlymightjustgiveup",
+      "case": "hyperpop",
+      "artist": "d0llywood1",
+      "title": "ihonestlymightjustgiveup",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "osquinn|i dont want that many friends in the first place",
+      "case": "hyperpop",
+      "artist": "osquinn",
+      "title": "i dont want that many friends in the first place",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "osquinnblackwinterwells|bad idea",
+      "case": "hyperpop",
+      "artist": "osquinn, blackwinterwells",
+      "title": "bad idea",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "slayyyter|mine",
+      "case": "hyperpop",
+      "artist": "slayyyter",
+      "title": "Mine",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "umrulaurales|popular",
+      "case": "hyperpop",
+      "artist": "umru, Laura Les",
+      "title": "popular",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "fortyfive-hyperpop-2021",
           "certainty": "높음"
         }
       ]
@@ -696,6 +3577,1379 @@
       "named_by": [
         {
           "source_id": "vibe-jersey-2024",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dillonfrancis|masta blasta",
+      "case": "moombahton-tropical",
+      "artist": "Dillon Francis",
+      "title": "Masta Blasta",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "feedme|one click headshot",
+      "case": "moombahton-tropical",
+      "artist": "Feed Me",
+      "title": "One Click Headshot",
+      "years": [
+        "2012"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "munchi|esta noche",
+      "case": "moombahton-tropical",
+      "artist": "Munchi",
+      "title": "Esta Noche",
+      "years": [],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "nero|must be the feeling remix",
+      "case": "moombahton-tropical",
+      "artist": "Nero",
+      "title": "Must Be The Feeling (Delta Heavy Remix)",
+      "years": [
+        "2012"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "porterrobinson|100 in the bitch",
+      "case": "moombahton-tropical",
+      "artist": "Porter Robinson",
+      "title": "100% In The Bitch",
+      "years": [
+        "2012"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "silvioecomochuckie|moombah remix",
+      "case": "moombahton-tropical",
+      "artist": "Silvio Ecomo & Chuckie",
+      "title": "Moombah (Dave Nada Remix)",
+      "years": [
+        "2009"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "ukf-moombahton-2015",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "aaronhall|dont be afraid",
+      "case": "njs",
+      "artist": "Aaron Hall",
+      "title": "Don't Be Afraid",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "albsure|nite and day",
+      "case": "njs",
+      "artist": "Al B. Sure!",
+      "title": "Nite and Day",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bellbivdevoe|poison",
+      "case": "njs",
+      "artist": "Bell Biv DeVoe",
+      "title": "Poison",
+      "years": [
+        "1990"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bobbybrown|dont be cruel",
+      "case": "njs",
+      "artist": "Bobby Brown",
+      "title": "Don't Be Cruel",
+      "years": [
+        "1987"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "bobbybrown|my prerogative",
+      "case": "njs",
+      "artist": "Bobby Brown",
+      "title": "My Prerogative",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "boyziimen|motownphilly",
+      "case": "njs",
+      "artist": "Boyz II Men",
+      "title": "Motownphilly",
+      "years": [
+        "1991"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "christopherwilliams|im dreamin",
+      "case": "njs",
+      "artist": "Christopher Williams",
+      "title": "I'm Dreamin'",
+      "years": [
+        "1991"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "colormebadd|i wanna sex you up",
+      "case": "njs",
+      "artist": "Color Me Badd",
+      "title": "I Wanna Sex You Up",
+      "years": [
+        "1991"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "guy|teddys jam",
+      "case": "njs",
+      "artist": "Guy",
+      "title": "Teddy's Jam",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "guy|groove me",
+      "case": "njs",
+      "artist": "Guy",
+      "title": "Groove Me",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hifive|shes playing hard to get",
+      "case": "njs",
+      "artist": "Hi-Five",
+      "title": "She's Playing Hard To Get",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "jade|dont walk away",
+      "case": "njs",
+      "artist": "Jade",
+      "title": "Don't Walk Away",
+      "years": [
+        "1993"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "janetjackson|miss you much",
+      "case": "njs",
+      "artist": "Janet Jackson",
+      "title": "Miss You Much",
+      "years": [
+        "1989"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "joepublic|live learn",
+      "case": "njs",
+      "artist": "Joe Public",
+      "title": "Live & Learn",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "johnnygill|rub you the right way",
+      "case": "njs",
+      "artist": "Johnny Gill",
+      "title": "Rub You the Right Way",
+      "years": [
+        "1990"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "johnnykemp|just got paid",
+      "case": "njs",
+      "artist": "Johnny Kemp",
+      "title": "Just Got Paid",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "karynwhite|secret rendezvous",
+      "case": "njs",
+      "artist": "Karyn White",
+      "title": "Secret Rendezvous",
+      "years": [
+        "1989"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "keithsweat|i want her",
+      "case": "njs",
+      "artist": "Keith Sweat",
+      "title": "I Want Her",
+      "years": [
+        "1987"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "michaeljackson|remember the time",
+      "case": "njs",
+      "artist": "Michael Jackson",
+      "title": "Remember the Time",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "newedition|if it isnt love",
+      "case": "njs",
+      "artist": "New Edition",
+      "title": "If It Isn't Love",
+      "years": [
+        "1988"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "portrait|here we go again",
+      "case": "njs",
+      "artist": "Portrait",
+      "title": "Here We Go Again",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "rkellypublicannouncement|shes got that vibe",
+      "case": "njs",
+      "artist": "R. Kelly & Public Announcement",
+      "title": "She's Got That Vibe",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "teddyriley|is it good to you",
+      "case": "njs",
+      "artist": "Teddy Riley feat. Tammy Lucas",
+      "title": "Is It Good To You",
+      "years": [
+        "1992"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tonytonitone|feels good",
+      "case": "njs",
+      "artist": "Tony! Toni! Tone!",
+      "title": "Feels Good",
+      "years": [
+        "1990"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "wreckxneffect|new jack swing",
+      "case": "njs",
+      "artist": "Wreckx-N-Effect",
+      "title": "New Jack Swing",
+      "years": [
+        "1989"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "complex-njs-25",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "alexgargolas|soy una gargola",
+      "case": "reggaeton-dembow",
+      "artist": "Alex Gargolas feat. Randy",
+      "title": "Soy Una Gargola",
+      "years": [
+        "2006"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "angelykhriz|na de na",
+      "case": "reggaeton-dembow",
+      "artist": "Angel y Khriz feat. Gocho and John Eric",
+      "title": "Na De Na",
+      "years": [
+        "2008"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "anitta|envolver",
+      "case": "reggaeton-dembow",
+      "artist": "Anitta",
+      "title": "Envolver",
+      "years": [
+        "2022"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "arcangel|pa que la pases bien",
+      "case": "reggaeton-dembow",
+      "artist": "Arcangel",
+      "title": "Pa Que La Pases Bien",
+      "years": [
+        "2008"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "aventura|ella y yo",
+      "case": "reggaeton-dembow",
+      "artist": "Aventura feat. Don Omar",
+      "title": "Ella Y Yo",
+      "years": [
+        "2005"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "babyrastaandgringo|la competencia",
+      "case": "reggaeton-dembow",
+      "artist": "Baby Rasta and Gringo",
+      "title": "La Competencia",
+      "years": [
+        "1997"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "beckygandbadbunny|mayores",
+      "case": "reggaeton-dembow",
+      "artist": "Becky G and Bad Bunny",
+      "title": "Mayores",
+      "years": [
+        "2017"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "beckygandkarolg|mamiii",
+      "case": "reggaeton-dembow",
+      "artist": "Becky G and Karol G",
+      "title": "Mamiii",
+      "years": [
+        "2022"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "beckygandnattinatasha|sin pijama",
+      "case": "reggaeton-dembow",
+      "artist": "Becky G and Natti Natasha",
+      "title": "Sin Pijama",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "daddyyankee|dura remix",
+      "case": "reggaeton-dembow",
+      "artist": "Daddy Yankee feat. Bad Bunny, Natti Natasha, and Becky G",
+      "title": "Dura (Remix)",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "dannyocean|me rehuso",
+      "case": "reggaeton-dembow",
+      "artist": "Danny Ocean",
+      "title": "Me Rehuso",
+      "years": [
+        "2016"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "delaghetto|sensacion del bloque",
+      "case": "reggaeton-dembow",
+      "artist": "De La Ghetto feat. Randy",
+      "title": "Sensacion Del Bloque",
+      "years": [
+        "2007"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "donmiguelo|como yo le doy",
+      "case": "reggaeton-dembow",
+      "artist": "Don Miguelo",
+      "title": "Como Yo Le Doy",
+      "years": [
+        "2013"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "donomar|danza kuduro",
+      "case": "reggaeton-dembow",
+      "artist": "Don Omar feat. Lucenzo",
+      "title": "Danza Kuduro",
+      "years": [
+        "2010"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "enriqueiglesias|bailando",
+      "case": "reggaeton-dembow",
+      "artist": "Enrique Iglesias feat. Descemer Bueno and Gente de Zona",
+      "title": "Bailando",
+      "years": [
+        "2014"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "farruko|pepas",
+      "case": "reggaeton-dembow",
+      "artist": "Farruko",
+      "title": "Pepas",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "frankieboy|liza love",
+      "case": "reggaeton-dembow",
+      "artist": "Frankie Boy",
+      "title": "Liza Love",
+      "years": [
+        "2000"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hectorelfather|dejale caer to el peso",
+      "case": "reggaeton-dembow",
+      "artist": "Hector El Father",
+      "title": "Dejale Caer To' El Peso",
+      "years": [
+        "2005"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "hectorytito|baila morena",
+      "case": "reggaeton-dembow",
+      "artist": "Hector y Tito feat. Don Omar & Glory",
+      "title": "Baila Morena",
+      "years": [
+        "2004"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "jbalvinandbadbunny|la cancion",
+      "case": "reggaeton-dembow",
+      "artist": "J Balvin and Bad Bunny",
+      "title": "La Cancion",
+      "years": [
+        "2019"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "jbalvindualipabadbunnyandtainy|un dia",
+      "case": "reggaeton-dembow",
+      "artist": "J Balvin, Dua Lipa, Bad Bunny, and Tainy",
+      "title": "Un Dia (One Day)",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "jowellrandy|un poco loca",
+      "case": "reggaeton-dembow",
+      "artist": "Jowell & Randy feat. De La Ghetto",
+      "title": "Un Poco Loca",
+      "years": [
+        "2007"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "kaliuchis|te pongo mal",
+      "case": "reggaeton-dembow",
+      "artist": "Kali Uchis feat. Jowell & Randy",
+      "title": "Te Pongo Mal (Prendelo)",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "karolgandjbalvin|mi cama remix",
+      "case": "reggaeton-dembow",
+      "artist": "Karol G and J Balvin featuring Nicky Jam",
+      "title": "Mi Cama (Remix)",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "lafactoria|perdoname",
+      "case": "reggaeton-dembow",
+      "artist": "La Factoria feat. Eddy Lover",
+      "title": "Perdoname",
+      "years": [
+        "2006"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "latinfresh|ella se arrebata",
+      "case": "reggaeton-dembow",
+      "artist": "Latin Fresh",
+      "title": "Ella Se Arrebata",
+      "years": [
+        "1996"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "maluma|hawai",
+      "case": "reggaeton-dembow",
+      "artist": "Maluma",
+      "title": "Hawai",
+      "years": [
+        "2020"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "nattinatasha|me gusta",
+      "case": "reggaeton-dembow",
+      "artist": "Natti Natasha",
+      "title": "Me Gusta",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "nickyjamandjbalvin|x",
+      "case": "reggaeton-dembow",
+      "artist": "Nicky Jam and J Balvin",
+      "title": "X",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "niogarciajbalvinandbadbunny|am remix remix",
+      "case": "reggaeton-dembow",
+      "artist": "Nio Garcia, J Balvin, and Bad Bunny",
+      "title": "AM Remix",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "notchandbabyranks|verme",
+      "case": "reggaeton-dembow",
+      "artist": "Notch and Baby Ranks",
+      "title": "Verme",
+      "years": [
+        "2006"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ozuna|dile que tu me quieres",
+      "case": "reggaeton-dembow",
+      "artist": "Ozuna",
+      "title": "Dile Que Tu Me Quieres",
+      "years": [
+        "2017"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "ozuna|la modelo",
+      "case": "reggaeton-dembow",
+      "artist": "Ozuna feat. Cardi B",
+      "title": "La Modelo",
+      "years": [
+        "2017"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "planb|candy",
+      "case": "reggaeton-dembow",
+      "artist": "Plan B",
+      "title": "Candy",
+      "years": [
+        "2014"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "randyandapedrums|23",
+      "case": "reggaeton-dembow",
+      "artist": "Randy and Ape Drums",
+      "title": "23",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "rauwalejandroandchenchocorleone|desesperados",
+      "case": "reggaeton-dembow",
+      "artist": "Rauw Alejandro and Chencho Corleone",
+      "title": "Desesperados",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "rosaliaandjbalvin|con altura",
+      "case": "reggaeton-dembow",
+      "artist": "Rosalia and J Balvin feat. El Guincho",
+      "title": "Con Altura",
+      "years": [
+        "2019"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "rosaliaandozuna|yo x ti tu x mi",
+      "case": "reggaeton-dembow",
+      "artist": "Rosalia and Ozuna",
+      "title": "Yo x Ti, Tu x Mi",
+      "years": [
+        "2019"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "sech|911",
+      "case": "reggaeton-dembow",
+      "artist": "Sech",
+      "title": "911",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "shakira|chantaje",
+      "case": "reggaeton-dembow",
+      "artist": "Shakira feat. Maluma",
+      "title": "Chantaje",
+      "years": [
+        "2016"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "speedy|amor con la ropa",
+      "case": "reggaeton-dembow",
+      "artist": "Speedy",
+      "title": "Amor Con La Ropa",
+      "years": [
+        "2000"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tainy|lo siento bb",
+      "case": "reggaeton-dembow",
+      "artist": "Tainy feat. Julieta Venegas and Bad Bunny",
+      "title": "Lo Siento BB :/",
+      "years": [
+        "2021"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "thenoise|al escuchar mi coro",
+      "case": "reggaeton-dembow",
+      "artist": "The Noise feat. Ivy Queen",
+      "title": "Al Escuchar Mi Coro",
+      "years": [
+        "1997"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tomasadelreal|barre con el pelo",
+      "case": "reggaeton-dembow",
+      "artist": "Tomasa del Real feat. DJ Blass",
+      "title": "Barre Con El Pelo",
+      "years": [
+        "2018"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tonnytuntundaddyyankeelunytuneshectorelfatherwisinyandel|noche de entierro",
+      "case": "reggaeton-dembow",
+      "artist": "Tonny Tun Tun, Daddy Yankee, Luny Tunes, Hector el Father, Wisin & Yandel",
+      "title": "Noche De Entierro",
+      "years": [
+        "2006"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "tonydize|permitame",
+      "case": "reggaeton-dembow",
+      "artist": "Tony Dize feat. Yandel",
+      "title": "Permitame",
+      "years": [
+        "2008"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "trebolclanjoanandhectorelfather|gata fiera",
+      "case": "reggaeton-dembow",
+      "artist": "Trebol Clan, Joan and Hector El Father",
+      "title": "Gata Fiera",
+      "years": [
+        "2004"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "wisinyandel|sexy movimiento",
+      "case": "reggaeton-dembow",
+      "artist": "Wisin & Yandel",
+      "title": "Sexy Movimiento",
+      "years": [
+        "2007"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "wisog|el domingo por la tarde",
+      "case": "reggaeton-dembow",
+      "artist": "Wiso G",
+      "title": "El Domingo Por La Tarde",
+      "years": [
+        "2004"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
+          "certainty": "높음"
+        }
+      ]
+    },
+    {
+      "key": "zion|zun da da",
+      "case": "reggaeton-dembow",
+      "artist": "Zion",
+      "title": "Zun Da Da",
+      "years": [
+        "2007"
+      ],
+      "score": 1.0,
+      "passes": false,
+      "named_by": [
+        {
+          "source_id": "rollingstone-reggaeton-2022",
           "certainty": "높음"
         }
       ]

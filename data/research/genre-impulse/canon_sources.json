@@ -14,28 +14,116 @@
       "certainty_note": "신뢰 전문지 단일. 씬 당사자 셀렉션이 아니라 편집부 큐레이션이라 매우 높음이 아니다",
       "curator": "Amber Corrine, Regina Cho (VIBE 편집)",
       "tracks": [
-        { "artist": "DJ Jayhood", "title": "Heartbroken", "year": "" },
-        { "artist": "DJ Frosty", "title": "Ride Dat Wave", "year": "2009" },
-        { "artist": "DJ Tim Dolla", "title": "Swing Dat Sh*t", "year": "" },
-        { "artist": "DJ Lil Man", "title": "Sexy Walk", "year": "" },
-        { "artist": "DJ Jayhood", "title": "Rock My Hips", "year": "2010" },
-        { "artist": "DJ Lil Man", "title": "I Like The Way She Move", "year": "" },
-        { "artist": "DJ Tameil", "title": "Ay Bay Bay", "year": "" },
-        { "artist": "Pure", "title": "Body Talk", "year": "2010" },
-        { "artist": "Ms. Porsh", "title": "Can't Bounce Like Me", "year": "" },
-        { "artist": "DJ Sliink", "title": "Official Number One (Patty Cake)", "year": "" },
-        { "artist": "DJ Tim Dolla", "title": "Falsetto", "year": "" },
-        { "artist": "Unicorn151 & DJ K-Swift", "title": "Tote It Remix", "year": "" },
-        { "artist": "Chad B", "title": "Hit It", "year": "2010" },
-        { "artist": "Lil Uzi Vert", "title": "Just Wanna Rock", "year": "2022" },
-        { "artist": "ZEDDY WILL", "title": "Freak You", "year": "2023" },
-        { "artist": "Coi Leray", "title": "Players (DJ Smallz 732 Remix)", "year": "" },
-        { "artist": "Bandmanrill", "title": "Jiggy In Jersey", "year": "" },
-        { "artist": "Nicki Minaj", "title": "Everybody", "year": "2023" },
-        { "artist": "Ice Spice", "title": "Deli", "year": "" },
-        { "artist": "SJAYY", "title": "Not Like Us (Jersey Club Remix)", "year": "" },
-        { "artist": "Bad Bunny", "title": "Where She Goes", "year": "" },
-        { "artist": "Ciara", "title": "Level Up", "year": "" }
+        {
+          "artist": "DJ Jayhood",
+          "title": "Heartbroken",
+          "year": ""
+        },
+        {
+          "artist": "DJ Frosty",
+          "title": "Ride Dat Wave",
+          "year": "2009"
+        },
+        {
+          "artist": "DJ Tim Dolla",
+          "title": "Swing Dat Sh*t",
+          "year": ""
+        },
+        {
+          "artist": "DJ Lil Man",
+          "title": "Sexy Walk",
+          "year": ""
+        },
+        {
+          "artist": "DJ Jayhood",
+          "title": "Rock My Hips",
+          "year": "2010"
+        },
+        {
+          "artist": "DJ Lil Man",
+          "title": "I Like The Way She Move",
+          "year": ""
+        },
+        {
+          "artist": "DJ Tameil",
+          "title": "Ay Bay Bay",
+          "year": ""
+        },
+        {
+          "artist": "Pure",
+          "title": "Body Talk",
+          "year": "2010"
+        },
+        {
+          "artist": "Ms. Porsh",
+          "title": "Can't Bounce Like Me",
+          "year": ""
+        },
+        {
+          "artist": "DJ Sliink",
+          "title": "Official Number One (Patty Cake)",
+          "year": ""
+        },
+        {
+          "artist": "DJ Tim Dolla",
+          "title": "Falsetto",
+          "year": ""
+        },
+        {
+          "artist": "Unicorn151 & DJ K-Swift",
+          "title": "Tote It Remix",
+          "year": ""
+        },
+        {
+          "artist": "Chad B",
+          "title": "Hit It",
+          "year": "2010"
+        },
+        {
+          "artist": "Lil Uzi Vert",
+          "title": "Just Wanna Rock",
+          "year": "2022"
+        },
+        {
+          "artist": "ZEDDY WILL",
+          "title": "Freak You",
+          "year": "2023"
+        },
+        {
+          "artist": "Coi Leray",
+          "title": "Players (DJ Smallz 732 Remix)",
+          "year": ""
+        },
+        {
+          "artist": "Bandmanrill",
+          "title": "Jiggy In Jersey",
+          "year": ""
+        },
+        {
+          "artist": "Nicki Minaj",
+          "title": "Everybody",
+          "year": "2023"
+        },
+        {
+          "artist": "Ice Spice",
+          "title": "Deli",
+          "year": ""
+        },
+        {
+          "artist": "SJAYY",
+          "title": "Not Like Us (Jersey Club Remix)",
+          "year": ""
+        },
+        {
+          "artist": "Bad Bunny",
+          "title": "Where She Goes",
+          "year": ""
+        },
+        {
+          "artist": "Ciara",
+          "title": "Level Up",
+          "year": ""
+        }
       ]
     },
     {
@@ -51,14 +139,50 @@
       "curator": "DJ Fade · DJ Jayhood · Kia BHN 등 (씬 DJ)",
       "scope_note": "케이스가 '저지클럽/볼티모어클럽'이라 두 절을 모두 담았다. 시카고 하우스·디트로이트 테크노 절은 제외",
       "tracks": [
-        { "artist": "DJ Frosty and DJ Fade", "title": "Tip Toe", "year": "", "selected_by": "DJ Fade" },
-        { "artist": "DJ Jayhood", "title": "Back It Up", "year": "", "selected_by": "DJ Jayhood" },
-        { "artist": "DJ Flawless, DJ Jayhood and Nook", "title": "Shake Dat Donk", "year": "", "selected_by": "Kia BHN" },
-        { "artist": "DJ Big O", "title": "Salt Shaker", "year": "", "selected_by": "Kia BHN" },
-        { "artist": "DJ Frosty", "title": "Ride Dat Wave", "year": "" },
-        { "artist": "Miss Tony", "title": "How U Wanna Carry It", "year": "" },
-        { "artist": "Blaqstarr", "title": "Feel It In The Air", "year": "" },
-        { "artist": "Rod Lee", "title": "Dance My Pain Away", "year": "" }
+        {
+          "artist": "DJ Frosty and DJ Fade",
+          "title": "Tip Toe",
+          "year": "",
+          "selected_by": "DJ Fade"
+        },
+        {
+          "artist": "DJ Jayhood",
+          "title": "Back It Up",
+          "year": "",
+          "selected_by": "DJ Jayhood"
+        },
+        {
+          "artist": "DJ Flawless, DJ Jayhood and Nook",
+          "title": "Shake Dat Donk",
+          "year": "",
+          "selected_by": "Kia BHN"
+        },
+        {
+          "artist": "DJ Big O",
+          "title": "Salt Shaker",
+          "year": "",
+          "selected_by": "Kia BHN"
+        },
+        {
+          "artist": "DJ Frosty",
+          "title": "Ride Dat Wave",
+          "year": ""
+        },
+        {
+          "artist": "Miss Tony",
+          "title": "How U Wanna Carry It",
+          "year": ""
+        },
+        {
+          "artist": "Blaqstarr",
+          "title": "Feel It In The Air",
+          "year": ""
+        },
+        {
+          "artist": "Rod Lee",
+          "title": "Dance My Pain Away",
+          "year": ""
+        }
       ]
     },
     {
@@ -73,36 +197,156 @@
       "certainty_note": "신뢰 전문지. 큐레이터 Gorgon City 는 UKG 계보의 현역이지만 1990s 발원 당사자는 아니라 매우 높음으로 올리지 않았다 — A&R 재조정 대상",
       "curator": "Gorgon City",
       "tracks": [
-        { "artist": "Sparks & Kie", "title": "Fly Bi", "year": "" },
-        { "artist": "Antonio", "title": "Hypefunk", "year": "" },
-        { "artist": "DJ Luck & MC Neat", "title": "Masterblaster 2000", "year": "" },
-        { "artist": "Mark 'Ruff' Ryder", "title": "Joy (Original Mix)", "year": "" },
-        { "artist": "Indo", "title": "R U Sleeping (Todd Edwards Mix)", "year": "" },
-        { "artist": "Roy Davis Jr", "title": "Gabriel", "year": "" },
-        { "artist": "Reach & Spin", "title": "Hyper! (Instrumental Mix)", "year": "" },
-        { "artist": "Restless Natives", "title": "I Wanna Know", "year": "" },
-        { "artist": "Sunship", "title": "Check One Two", "year": "" },
-        { "artist": "MJ Cole", "title": "Sincere", "year": "" },
-        { "artist": "Bump and Flex", "title": "Long Time Coming", "year": "" },
-        { "artist": "Sunship", "title": "Try Me Out", "year": "" },
-        { "artist": "Colours", "title": "Hold On", "year": "" },
-        { "artist": "Zed Bias", "title": "Neighbourhood", "year": "" },
-        { "artist": "Kele Le Roc", "title": "My Love (10 Below Mix)", "year": "" },
-        { "artist": "Burgaboy", "title": "Where's My Mans Dem At", "year": "" },
-        { "artist": "The Streets", "title": "Has It Come To This", "year": "" },
-        { "artist": "Agent X", "title": "Decoy", "year": "" },
-        { "artist": "Masterstepz", "title": "Melody", "year": "" },
-        { "artist": "Sticky", "title": "Golly Gosh", "year": "" },
-        { "artist": "F.U.N", "title": "It's The Way 99", "year": "" },
-        { "artist": "Tina Moore", "title": "Never Letting You Go (Artful Dodger Mix)", "year": "" },
-        { "artist": "DJ Narrows", "title": "Saved Soul", "year": "" },
-        { "artist": "TNT", "title": "Transmission", "year": "" },
-        { "artist": "Dexplicit", "title": "Bullacake", "year": "" },
-        { "artist": "El B", "title": "2000", "year": "" },
-        { "artist": "Sia", "title": "Little Man (Exemen Remix)", "year": "" },
-        { "artist": "Double 99", "title": "RIP Groove", "year": "" },
-        { "artist": "Cleptomaniacs", "title": "All I Do (Dancehall Dub)", "year": "" },
-        { "artist": "Wookie", "title": "What's Going On", "year": "" }
+        {
+          "artist": "Sparks & Kie",
+          "title": "Fly Bi",
+          "year": ""
+        },
+        {
+          "artist": "Antonio",
+          "title": "Hypefunk",
+          "year": ""
+        },
+        {
+          "artist": "DJ Luck & MC Neat",
+          "title": "Masterblaster 2000",
+          "year": ""
+        },
+        {
+          "artist": "Mark 'Ruff' Ryder",
+          "title": "Joy (Original Mix)",
+          "year": ""
+        },
+        {
+          "artist": "Indo",
+          "title": "R U Sleeping (Todd Edwards Mix)",
+          "year": ""
+        },
+        {
+          "artist": "Roy Davis Jr",
+          "title": "Gabriel",
+          "year": ""
+        },
+        {
+          "artist": "Reach & Spin",
+          "title": "Hyper! (Instrumental Mix)",
+          "year": ""
+        },
+        {
+          "artist": "Restless Natives",
+          "title": "I Wanna Know",
+          "year": ""
+        },
+        {
+          "artist": "Sunship",
+          "title": "Check One Two",
+          "year": ""
+        },
+        {
+          "artist": "MJ Cole",
+          "title": "Sincere",
+          "year": ""
+        },
+        {
+          "artist": "Bump and Flex",
+          "title": "Long Time Coming",
+          "year": ""
+        },
+        {
+          "artist": "Sunship",
+          "title": "Try Me Out",
+          "year": ""
+        },
+        {
+          "artist": "Colours",
+          "title": "Hold On",
+          "year": ""
+        },
+        {
+          "artist": "Zed Bias",
+          "title": "Neighbourhood",
+          "year": ""
+        },
+        {
+          "artist": "Kele Le Roc",
+          "title": "My Love (10 Below Mix)",
+          "year": ""
+        },
+        {
+          "artist": "Burgaboy",
+          "title": "Where's My Mans Dem At",
+          "year": ""
+        },
+        {
+          "artist": "The Streets",
+          "title": "Has It Come To This",
+          "year": ""
+        },
+        {
+          "artist": "Agent X",
+          "title": "Decoy",
+          "year": ""
+        },
+        {
+          "artist": "Masterstepz",
+          "title": "Melody",
+          "year": ""
+        },
+        {
+          "artist": "Sticky",
+          "title": "Golly Gosh",
+          "year": ""
+        },
+        {
+          "artist": "F.U.N",
+          "title": "It's The Way 99",
+          "year": ""
+        },
+        {
+          "artist": "Tina Moore",
+          "title": "Never Letting You Go (Artful Dodger Mix)",
+          "year": ""
+        },
+        {
+          "artist": "DJ Narrows",
+          "title": "Saved Soul",
+          "year": ""
+        },
+        {
+          "artist": "TNT",
+          "title": "Transmission",
+          "year": ""
+        },
+        {
+          "artist": "Dexplicit",
+          "title": "Bullacake",
+          "year": ""
+        },
+        {
+          "artist": "El B",
+          "title": "2000",
+          "year": ""
+        },
+        {
+          "artist": "Sia",
+          "title": "Little Man (Exemen Remix)",
+          "year": ""
+        },
+        {
+          "artist": "Double 99",
+          "title": "RIP Groove",
+          "year": ""
+        },
+        {
+          "artist": "Cleptomaniacs",
+          "title": "All I Do (Dancehall Dub)",
+          "year": ""
+        },
+        {
+          "artist": "Wookie",
+          "title": "What's Going On",
+          "year": ""
+        }
       ]
     },
     {
@@ -117,16 +361,56 @@
       "certainty_note": "씬 당사자 1차 — DJ EZ 는 UKG 발원기의 현역 DJ다. 공표된 목록 형태이며 개인 SNS 추천이 아니다",
       "curator": "DJ EZ",
       "tracks": [
-        { "artist": "Antonio", "title": "I'll Take You There", "year": "" },
-        { "artist": "DJ Narrows", "title": "Saved Soul", "year": "" },
-        { "artist": "NCA", "title": "Lessons In Love (Steve Gurley Remix)", "year": "" },
-        { "artist": "George Morel", "title": "Let's Groove", "year": "" },
-        { "artist": "3rd Core", "title": "Mindless & Broken (MJ Cole Mix)", "year": "" },
-        { "artist": "The Sample Choir", "title": "Feeling Lonely", "year": "" },
-        { "artist": "Wookie", "title": "Flex", "year": "" },
-        { "artist": "RIP Productions", "title": "Jump To It", "year": "" },
-        { "artist": "Strickly Dubz", "title": "Realise", "year": "" },
-        { "artist": "Groove Control", "title": "Beautiful (Tuff N Jam Vocal Mix)", "year": "" }
+        {
+          "artist": "Antonio",
+          "title": "I'll Take You There",
+          "year": ""
+        },
+        {
+          "artist": "DJ Narrows",
+          "title": "Saved Soul",
+          "year": ""
+        },
+        {
+          "artist": "NCA",
+          "title": "Lessons In Love (Steve Gurley Remix)",
+          "year": ""
+        },
+        {
+          "artist": "George Morel",
+          "title": "Let's Groove",
+          "year": ""
+        },
+        {
+          "artist": "3rd Core",
+          "title": "Mindless & Broken (MJ Cole Mix)",
+          "year": ""
+        },
+        {
+          "artist": "The Sample Choir",
+          "title": "Feeling Lonely",
+          "year": ""
+        },
+        {
+          "artist": "Wookie",
+          "title": "Flex",
+          "year": ""
+        },
+        {
+          "artist": "RIP Productions",
+          "title": "Jump To It",
+          "year": ""
+        },
+        {
+          "artist": "Strickly Dubz",
+          "title": "Realise",
+          "year": ""
+        },
+        {
+          "artist": "Groove Control",
+          "title": "Beautiful (Tuff N Jam Vocal Mix)",
+          "year": ""
+        }
       ]
     },
     {
@@ -141,17 +425,1521 @@
       "certainty_note": "신뢰 전문지 단일. 시카고 드릴 한정이며 UK/브루클린 드릴은 이 목록 밖이다",
       "curator": "Alphonse Pierre (Pitchfork)",
       "tracks": [
-        { "artist": "King Louie and Bo$$ Woo", "title": "Gumbo Mobsters", "year": "2011" },
-        { "artist": "Shady", "title": "Go In", "year": "2011" },
-        { "artist": "Chief Keef", "title": "I Don't Like", "year": "2012" },
-        { "artist": "Lil Herb and Lil Bibby", "title": "Kill Shit", "year": "2012" },
-        { "artist": "Lil Durk", "title": "Dis Ain't What U Want", "year": "2013" },
-        { "artist": "L'A Capone and RondoNumbaNine", "title": "Play for Keeps", "year": "2013" },
-        { "artist": "Chief Keef", "title": "Faneto", "year": "2014" },
-        { "artist": "Young Pappy", "title": "Killa", "year": "2014" },
-        { "artist": "Famous Dex", "title": "2 Times", "year": "2015" },
-        { "artist": "FBG Duck", "title": "Slide", "year": "2018" },
-        { "artist": "Polo G", "title": "Battle Cry", "year": "2019" }
+        {
+          "artist": "King Louie and Bo$$ Woo",
+          "title": "Gumbo Mobsters",
+          "year": "2011"
+        },
+        {
+          "artist": "Shady",
+          "title": "Go In",
+          "year": "2011"
+        },
+        {
+          "artist": "Chief Keef",
+          "title": "I Don't Like",
+          "year": "2012"
+        },
+        {
+          "artist": "Lil Herb and Lil Bibby",
+          "title": "Kill Shit",
+          "year": "2012"
+        },
+        {
+          "artist": "Lil Durk",
+          "title": "Dis Ain't What U Want",
+          "year": "2013"
+        },
+        {
+          "artist": "L'A Capone and RondoNumbaNine",
+          "title": "Play for Keeps",
+          "year": "2013"
+        },
+        {
+          "artist": "Chief Keef",
+          "title": "Faneto",
+          "year": "2014"
+        },
+        {
+          "artist": "Young Pappy",
+          "title": "Killa",
+          "year": "2014"
+        },
+        {
+          "artist": "Famous Dex",
+          "title": "2 Times",
+          "year": "2015"
+        },
+        {
+          "artist": "FBG Duck",
+          "title": "Slide",
+          "year": "2018"
+        },
+        {
+          "artist": "Polo G",
+          "title": "Battle Cry",
+          "year": "2019"
+        }
+      ]
+    },
+    {
+      "id": "complex-njs-25",
+      "case": "njs",
+      "outlet": "Complex",
+      "title": "The 25 Best New Jack Swing Songs",
+      "url": "https://www.complex.com/music/a/brian-josephs/the-25-best-new-jack-swing-songs",
+      "published": "",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "신뢰 음악 매체 단일 필자 큐레이션. 씬 당사자(Teddy Riley 등) 공표 셀렉션이 아니라 매우 높음이 아니다",
+      "curator": "Brian Josephs (Complex)",
+      "extraction_note": "25항목 전부 취득. 연도 25/25 기재됨",
+      "tracks": [
+        {
+          "artist": "Wreckx-N-Effect",
+          "title": "New Jack Swing",
+          "year": "1989"
+        },
+        {
+          "artist": "Bobby Brown",
+          "title": "Don't Be Cruel",
+          "year": "1987"
+        },
+        {
+          "artist": "Karyn White",
+          "title": "Secret Rendezvous",
+          "year": "1989"
+        },
+        {
+          "artist": "Guy",
+          "title": "Teddy's Jam",
+          "year": "1988"
+        },
+        {
+          "artist": "R. Kelly & Public Announcement",
+          "title": "She's Got That Vibe",
+          "year": "1992"
+        },
+        {
+          "artist": "Christopher Williams",
+          "title": "I'm Dreamin'",
+          "year": "1991"
+        },
+        {
+          "artist": "Portrait",
+          "title": "Here We Go Again",
+          "year": "1992"
+        },
+        {
+          "artist": "Teddy Riley feat. Tammy Lucas",
+          "title": "Is It Good To You",
+          "year": "1992"
+        },
+        {
+          "artist": "Color Me Badd",
+          "title": "I Wanna Sex You Up",
+          "year": "1991"
+        },
+        {
+          "artist": "Joe Public",
+          "title": "Live & Learn",
+          "year": "1992"
+        },
+        {
+          "artist": "Johnny Kemp",
+          "title": "Just Got Paid",
+          "year": "1988"
+        },
+        {
+          "artist": "Hi-Five",
+          "title": "She's Playing Hard To Get",
+          "year": "1992"
+        },
+        {
+          "artist": "Jade",
+          "title": "Don't Walk Away",
+          "year": "1993"
+        },
+        {
+          "artist": "Tony! Toni! Tone!",
+          "title": "Feels Good",
+          "year": "1990"
+        },
+        {
+          "artist": "Aaron Hall",
+          "title": "Don't Be Afraid",
+          "year": "1992"
+        },
+        {
+          "artist": "Johnny Gill",
+          "title": "Rub You the Right Way",
+          "year": "1990"
+        },
+        {
+          "artist": "Janet Jackson",
+          "title": "Miss You Much",
+          "year": "1989"
+        },
+        {
+          "artist": "Guy",
+          "title": "Groove Me",
+          "year": "1988"
+        },
+        {
+          "artist": "New Edition",
+          "title": "If It Isn't Love",
+          "year": "1988"
+        },
+        {
+          "artist": "Keith Sweat",
+          "title": "I Want Her",
+          "year": "1987"
+        },
+        {
+          "artist": "Al B. Sure!",
+          "title": "Nite and Day",
+          "year": "1988"
+        },
+        {
+          "artist": "Boyz II Men",
+          "title": "Motownphilly",
+          "year": "1991"
+        },
+        {
+          "artist": "Michael Jackson",
+          "title": "Remember the Time",
+          "year": "1992"
+        },
+        {
+          "artist": "Bell Biv DeVoe",
+          "title": "Poison",
+          "year": "1990"
+        },
+        {
+          "artist": "Bobby Brown",
+          "title": "My Prerogative",
+          "year": "1988"
+        }
+      ]
+    },
+    {
+      "id": "fortyfive-hyperpop-2021",
+      "case": "hyperpop",
+      "outlet": "The Forty-Five",
+      "title": "The 45 best hyperpop songs of all time",
+      "url": "https://thefortyfive.com/opinion/best-hyperpop-songs-ever/",
+      "published": "2021-02-10",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "신뢰 음악 전문 매체 단일 필자 큐레이션. 씬 당사자 셀렉션이 아니라 매우 높음이 아니다",
+      "curator": "Sophie Walker (The Forty-Five)",
+      "extraction_note": "45항목 전부 취득. 기사가 발매연도를 적지 않아 year 는 Vince Staples 1곡을 빼고 전부 비어 있다 (측정 단계에서 iTunes 발매일로 채운다)",
+      "tracks": [
+        {
+          "artist": "Danny L Harle",
+          "title": "Broken Flowers",
+          "year": ""
+        },
+        {
+          "artist": "Hannah Diamond",
+          "title": "Every Night",
+          "year": ""
+        },
+        {
+          "artist": "Cookii",
+          "title": "love yourself (spend forever)",
+          "year": ""
+        },
+        {
+          "artist": "Nabi:3",
+          "title": "XxwhileimeatinicecreamXx",
+          "year": ""
+        },
+        {
+          "artist": "Jazmin Bean, Zheani",
+          "title": "Monster Truck",
+          "year": ""
+        },
+        {
+          "artist": "Dolores Haze",
+          "title": "White House",
+          "year": ""
+        },
+        {
+          "artist": "QT",
+          "title": "Hey QT",
+          "year": ""
+        },
+        {
+          "artist": "Kim Petras, SOPHIE",
+          "title": "1,2,3 dayz up",
+          "year": ""
+        },
+        {
+          "artist": "EASYFUN",
+          "title": "Be Your USA",
+          "year": ""
+        },
+        {
+          "artist": "Flume, KUCKA, SOPHIE",
+          "title": "Voices",
+          "year": ""
+        },
+        {
+          "artist": "Alice Gas",
+          "title": "Ferrari",
+          "year": ""
+        },
+        {
+          "artist": "Bladee",
+          "title": "Be Nice 2 Me",
+          "year": ""
+        },
+        {
+          "artist": "osquinn",
+          "title": "i dont want that many friends in the first place",
+          "year": ""
+        },
+        {
+          "artist": "Arca",
+          "title": "KLK",
+          "year": ""
+        },
+        {
+          "artist": "Gupi",
+          "title": "Modest",
+          "year": ""
+        },
+        {
+          "artist": "Alice Longyu Gao, Laura Les",
+          "title": "Ritch Bitch Juice (Laura Les Remix)",
+          "year": ""
+        },
+        {
+          "artist": "Charli XCX",
+          "title": "Focus",
+          "year": ""
+        },
+        {
+          "artist": "Dylan Brady, Poter Elvinger",
+          "title": "Marlboro Man",
+          "year": ""
+        },
+        {
+          "artist": "Charli XCX",
+          "title": "claws",
+          "year": ""
+        },
+        {
+          "artist": "d0llywood1",
+          "title": "ihonestlymightjustgiveup",
+          "year": ""
+        },
+        {
+          "artist": "EASYFUN",
+          "title": "Fanta",
+          "year": ""
+        },
+        {
+          "artist": "SOPHIE",
+          "title": "BIPP",
+          "year": ""
+        },
+        {
+          "artist": "A. G. Cook",
+          "title": "Beautiful",
+          "year": ""
+        },
+        {
+          "artist": "Tony Velour",
+          "title": "Do or Die",
+          "year": ""
+        },
+        {
+          "artist": "Bladee, Mechatok",
+          "title": "Rainbow",
+          "year": ""
+        },
+        {
+          "artist": "osquinn, blackwinterwells",
+          "title": "bad idea",
+          "year": ""
+        },
+        {
+          "artist": "Danny L Harle, Clairo",
+          "title": "Blue Angel",
+          "year": ""
+        },
+        {
+          "artist": "slayyyter",
+          "title": "Mine",
+          "year": ""
+        },
+        {
+          "artist": "100 gecs",
+          "title": "hand crushed by a mallet",
+          "year": ""
+        },
+        {
+          "artist": "SOPHIE",
+          "title": "Ponyboy",
+          "year": ""
+        },
+        {
+          "artist": "Charli XCX, Kim Petras, Tommy Cash",
+          "title": "Click",
+          "year": ""
+        },
+        {
+          "artist": "Slayyyter",
+          "title": "Hello Kitty",
+          "year": ""
+        },
+        {
+          "artist": "SyKo",
+          "title": "#BrooklynBloodPop!",
+          "year": ""
+        },
+        {
+          "artist": "SEBii",
+          "title": "BAFFLEdd",
+          "year": ""
+        },
+        {
+          "artist": "Boofbby",
+          "title": "online_v3!!! *BOUNCE BACK*",
+          "year": ""
+        },
+        {
+          "artist": "Iglooghost, Mr. Yote",
+          "title": "Mametchi / Usohachi",
+          "year": ""
+        },
+        {
+          "artist": "Charli XCX",
+          "title": "pink diamond",
+          "year": ""
+        },
+        {
+          "artist": "umru, Laura Les",
+          "title": "popular",
+          "year": ""
+        },
+        {
+          "artist": "Rico Nasty",
+          "title": "IPHONE",
+          "year": ""
+        },
+        {
+          "artist": "Vince Staples",
+          "title": "Yeah Right",
+          "year": "2017"
+        },
+        {
+          "artist": "SOPHIE",
+          "title": "VYZEE",
+          "year": ""
+        },
+        {
+          "artist": "Madonna, Nicki Minaj",
+          "title": "Bitch I'm Madonna",
+          "year": ""
+        },
+        {
+          "artist": "100 gecs",
+          "title": "money machine",
+          "year": ""
+        },
+        {
+          "artist": "Charli XCX",
+          "title": "Vroom Vroom",
+          "year": ""
+        },
+        {
+          "artist": "SOPHIE",
+          "title": "Immaterial",
+          "year": ""
+        }
+      ]
+    },
+    {
+      "id": "grayarea-amapiano-2023",
+      "case": "amapiano",
+      "outlet": "Gray Area",
+      "title": "Dive Into Amapiano With These 15 Essential Tracks",
+      "url": "https://grayarea.co/magazine/dive-into-amapiano-with-these-15-essential-tracks",
+      "published": "2023-01-25",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "전자음악 전문 매체 단일. 남아공 현지 필자이나 씬 당사자(프로듀서·DJ)의 공표 셀렉션은 아니라 매우 높음이 아니다",
+      "curator": "Madzadza Miya (Gray Area)",
+      "extraction_note": "15항목 전부 취득. 기사가 연도를 일부만 적어 12곡이 공란 (측정 단계에서 iTunes 발매일로 채운다)",
+      "tracks": [
+        {
+          "artist": "Kabza De Small feat. Leehleza",
+          "title": "Umshove",
+          "year": ""
+        },
+        {
+          "artist": "De Mthuda x Njelic",
+          "title": "Shesha",
+          "year": "2019"
+        },
+        {
+          "artist": "Kwiish SA",
+          "title": "Iskhathi (Gong Gong)",
+          "year": ""
+        },
+        {
+          "artist": "Samthing Soweto feat. Sha Sha",
+          "title": "Akulaleki",
+          "year": ""
+        },
+        {
+          "artist": "Sha Sha",
+          "title": "Tender Love",
+          "year": ""
+        },
+        {
+          "artist": "Kabza De Small x DJ Maphorisa",
+          "title": "Amantombazane",
+          "year": ""
+        },
+        {
+          "artist": "MFR Souls",
+          "title": "Love You Tonight",
+          "year": ""
+        },
+        {
+          "artist": "Semi Tee",
+          "title": "Labantwana Ama Uber",
+          "year": ""
+        },
+        {
+          "artist": "Kabza De Small & DJ Maphorisa",
+          "title": "Emcimbini",
+          "year": "2020"
+        },
+        {
+          "artist": "Focalistic",
+          "title": "Ke Star",
+          "year": "2020"
+        },
+        {
+          "artist": "Busta 929 x Mpura",
+          "title": "Umsebenzi Wethu",
+          "year": "2020"
+        },
+        {
+          "artist": "Felo Le Tee & Myztro",
+          "title": "66",
+          "year": ""
+        },
+        {
+          "artist": "Young Stunna",
+          "title": "Adiwele",
+          "year": ""
+        },
+        {
+          "artist": "Ch'cco x Mellow & Sleazy",
+          "title": "Nkao Tempela",
+          "year": ""
+        },
+        {
+          "artist": "Mas Musiq",
+          "title": "Sengizwile",
+          "year": ""
+        }
+      ]
+    },
+    {
+      "id": "recordcollector-citypop-100",
+      "case": "citypop",
+      "outlet": "Record Collector",
+      "title": "Best 100 City Pop Songs Of The 1980s",
+      "url": "https://mbmelodies.substack.com/p/make-believe-mailer-37-80s-canon",
+      "published": "2023-02-10",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "영국 음악 전문지 Record Collector 의 100선. 편집부 큐레이션이라 매우 높음이 아니다",
+      "curator": "Record Collector Magazine 편집부",
+      "extraction_note": "원 출처는 Record Collector 지면이고, 접근은 Patrick St. Michel 의 재게시본을 통했다 (사전 등록 §2: 재게시는 원 출처로 접는다). 지면 목록 100곡 중 100곡 취득. 기사가 연도를 적지 않아 year 전부 공란",
+      "tracks": [
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Sparkle",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Plastic Love",
+          "year": ""
+        },
+        {
+          "artist": "Taeko Onuki",
+          "title": "Shikisai Toshi",
+          "year": ""
+        },
+        {
+          "artist": "Minako Yoshida",
+          "title": "Hoho Ni Yoru No Akari",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Kimiwa Tennenshoku",
+          "year": ""
+        },
+        {
+          "artist": "Minako Yoshida",
+          "title": "Town",
+          "year": ""
+        },
+        {
+          "artist": "Yuming",
+          "title": "Shinju No Pierce",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Ride On Time",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Doyobi No Koibito",
+          "year": ""
+        },
+        {
+          "artist": "Kazuhito Murata",
+          "title": "I-pon No Ongaku",
+          "year": ""
+        },
+        {
+          "artist": "Akira Terao",
+          "title": "Ruby No Yubi",
+          "year": ""
+        },
+        {
+          "artist": "Junichi Inagaki",
+          "title": "Natsu No Klaxon",
+          "year": ""
+        },
+        {
+          "artist": "Yuming",
+          "title": "Yokoso Kagayaku Jikan E",
+          "year": ""
+        },
+        {
+          "artist": "Hiroshi Sato",
+          "title": "I Can't Wait",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Canary Islands Nite",
+          "year": ""
+        },
+        {
+          "artist": "Niagara Triangle",
+          "title": "A Men De Koi Wo Shite",
+          "year": ""
+        },
+        {
+          "artist": "Akira Terao",
+          "title": "Shadow City",
+          "year": ""
+        },
+        {
+          "artist": "Yoshiyuki Ohsawa",
+          "title": "Soshite Boku Wa Toho Ni Kureru",
+          "year": ""
+        },
+        {
+          "artist": "Kato Kazuhiko",
+          "title": "Ano Goro, Marie Laurencin",
+          "year": ""
+        },
+        {
+          "artist": "Southern All-Stars",
+          "title": "Emanon",
+          "year": ""
+        },
+        {
+          "artist": "Yoshitaka Minami",
+          "title": "Slow Na Boogie Ni Shitekure",
+          "year": ""
+        },
+        {
+          "artist": "Kato Kazuhiko",
+          "title": "Yasashi Yoru No Sugoshi Kata",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Ame No Wednesday",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Koisuru Karen",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Amaku Kiken Na Kaori",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Loveland, Island",
+          "year": ""
+        },
+        {
+          "artist": "Pizzicato Five",
+          "title": "Kore Wa Koi De Wa Nai",
+          "year": ""
+        },
+        {
+          "artist": "Kazuhito Murata",
+          "title": "Denwa Shitemo",
+          "year": ""
+        },
+        {
+          "artist": "EPO",
+          "title": "Doyobi No Yoru Wa Paradise",
+          "year": ""
+        },
+        {
+          "artist": "Kato Kazuhiko",
+          "title": "New York Confidential",
+          "year": ""
+        },
+        {
+          "artist": "Seiko Matsuda",
+          "title": "Miami Gozen Goji",
+          "year": ""
+        },
+        {
+          "artist": "Motoharu Sano",
+          "title": "Young Bloods",
+          "year": ""
+        },
+        {
+          "artist": "Hiroshi Sato",
+          "title": "Say Goodbye",
+          "year": ""
+        },
+        {
+          "artist": "Yuming",
+          "title": "Tower Side Memory",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "No End Summer",
+          "year": ""
+        },
+        {
+          "artist": "Kiyotaka Sugiyama & Omega Tribe",
+          "title": "Summer Suspicion",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Atarashii Tokyo Rhapsody",
+          "year": ""
+        },
+        {
+          "artist": "Junko Ohashi",
+          "title": "Telephone Number",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "My Sugar Babe",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Peppermint Blue",
+          "year": ""
+        },
+        {
+          "artist": "Yellow Magic Orchestra",
+          "title": "Kimi Ni, Mune Kyun",
+          "year": ""
+        },
+        {
+          "artist": "Char",
+          "title": "All Around Me",
+          "year": ""
+        },
+        {
+          "artist": "EPO",
+          "title": "Park Ave. 1981",
+          "year": ""
+        },
+        {
+          "artist": "Motoharu Sano",
+          "title": "Complication Shakedown",
+          "year": ""
+        },
+        {
+          "artist": "Bread & Butter",
+          "title": "Cruising On",
+          "year": ""
+        },
+        {
+          "artist": "Takako Mamiya",
+          "title": "Love Trip",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "Off Shore",
+          "year": ""
+        },
+        {
+          "artist": "Makoto Matsushita",
+          "title": "Sunset",
+          "year": ""
+        },
+        {
+          "artist": "Yuming",
+          "title": "Koibito Ga Santa Claus",
+          "year": ""
+        },
+        {
+          "artist": "Taeko Onuki",
+          "title": "Peter Rabbit To Watashi",
+          "year": ""
+        },
+        {
+          "artist": "Motoharu Sano",
+          "title": "Someday",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Itsuka",
+          "year": ""
+        },
+        {
+          "artist": "Yasuyuki Okamura",
+          "title": "Super Girl",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "Take You To The Sky High",
+          "year": ""
+        },
+        {
+          "artist": "EPO",
+          "title": "Down Town",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Koi No Arashi",
+          "year": ""
+        },
+        {
+          "artist": "Yukihiro Takahashi",
+          "title": "Drip Dry Eyes",
+          "year": ""
+        },
+        {
+          "artist": "Eikichi Yazawa",
+          "title": "Yes My Love",
+          "year": ""
+        },
+        {
+          "artist": "Ginji Ito",
+          "title": "Ame No Stella",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Fushigi Na Peach Pie",
+          "year": ""
+        },
+        {
+          "artist": "Rajie",
+          "title": "Goodbye Transfer",
+          "year": ""
+        },
+        {
+          "artist": "Taeko Onuki",
+          "title": "Kuro No Claire",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Music Book",
+          "year": ""
+        },
+        {
+          "artist": "Yoshitaka Minami",
+          "title": "Akogareno Radio Girl",
+          "year": ""
+        },
+        {
+          "artist": "1986 Omega Tribe",
+          "title": "Kimi Wa 1000%",
+          "year": ""
+        },
+        {
+          "artist": "The Beatniks",
+          "title": "Chotto Tsurainda",
+          "year": ""
+        },
+        {
+          "artist": "Anri",
+          "title": "Windy Summer",
+          "year": ""
+        },
+        {
+          "artist": "Takako Mamiya",
+          "title": "Mayonaka No Joke",
+          "year": ""
+        },
+        {
+          "artist": "Momoko Kikuchi",
+          "title": "Glass No Sogen",
+          "year": ""
+        },
+        {
+          "artist": "Motoharu Sano",
+          "title": "Sugartime",
+          "year": ""
+        },
+        {
+          "artist": "Kaoru Sudo",
+          "title": "Anata Dake I Love You",
+          "year": ""
+        },
+        {
+          "artist": "Akiko Yano",
+          "title": "Ramen Tabetai",
+          "year": ""
+        },
+        {
+          "artist": "Pizzicato Five",
+          "title": "Mina Waratta",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Get Back In Love",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "Tokyo Tower",
+          "year": ""
+        },
+        {
+          "artist": "Masayuki Suzuki",
+          "title": "Misty Mauve",
+          "year": ""
+        },
+        {
+          "artist": "Yoshino Fujimaru",
+          "title": "Who Are You",
+          "year": ""
+        },
+        {
+          "artist": "Yurie Kokubu",
+          "title": "Snob Na Yoru E",
+          "year": ""
+        },
+        {
+          "artist": "Haruko Kuwana",
+          "title": "Down Town",
+          "year": ""
+        },
+        {
+          "artist": "Hiroko Yakushimaru",
+          "title": "Tantei Monogatari",
+          "year": ""
+        },
+        {
+          "artist": "Akiko Yano",
+          "title": "David",
+          "year": ""
+        },
+        {
+          "artist": "SANDii",
+          "title": "Drip Dry Eyes",
+          "year": ""
+        },
+        {
+          "artist": "EPO",
+          "title": "Ongaku No Yona Kaze",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Kaze No Corridor",
+          "year": ""
+        },
+        {
+          "artist": "Mari Iijima",
+          "title": "Blueberry Jam",
+          "year": ""
+        },
+        {
+          "artist": "Moonriders",
+          "title": "G.o.a.P",
+          "year": ""
+        },
+        {
+          "artist": "Yasuhiro Abe",
+          "title": "Irene",
+          "year": ""
+        },
+        {
+          "artist": "Yoshitaka Minami",
+          "title": "Crescent Night",
+          "year": ""
+        },
+        {
+          "artist": "Seiko Matsuda",
+          "title": "Kazetachinu",
+          "year": ""
+        },
+        {
+          "artist": "Hi-Fi Set",
+          "title": "Sunao Ni Naritai",
+          "year": ""
+        },
+        {
+          "artist": "Yasuha",
+          "title": "Flyday Chinatown",
+          "year": ""
+        },
+        {
+          "artist": "Yuming",
+          "title": "Yusuzumi",
+          "year": ""
+        },
+        {
+          "artist": "Kenji Sawada",
+          "title": "Senaka Made 45 Bun",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Sweetest Music",
+          "year": ""
+        },
+        {
+          "artist": "Kyoko Endo",
+          "title": "Giniro No Natsu",
+          "year": ""
+        },
+        {
+          "artist": "Rats & Star",
+          "title": "T-shirt Ni Kuchibeni",
+          "year": ""
+        },
+        {
+          "artist": "Yosui Inoue",
+          "title": "Riverside Hotel",
+          "year": ""
+        },
+        {
+          "artist": "Akiko Yano",
+          "title": "Harusakikobeni",
+          "year": ""
+        },
+        {
+          "artist": "Meiko Nakahara",
+          "title": "Fantasy",
+          "year": ""
+        },
+        {
+          "artist": "Akira Inoue",
+          "title": "Bartok No Kage",
+          "year": ""
+        }
+      ]
+    },
+    {
+      "id": "rollingstone-reggaeton-2022",
+      "case": "reggaeton-dembow",
+      "outlet": "Rolling Stone",
+      "title": "100 Greatest Reggaeton Songs of All Time",
+      "url": "https://www.rollingstone.com/music/music-lists/best-reggaeton-songs-1234579826/",
+      "published": "2022-08-26",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "신뢰 전문지. 10인 편집·기고 합의 큐레이션이며 씬 당사자 셀렉션이 아니라 매우 높음이 아니다(VIBE 선례와 동일 판정)",
+      "curator": "Ecleen Luzmila Caraballo, Jon Dolan, Ricardo Duran, Katelina Eccleston, Veronica Bayetti Flores, Julyssa Lopez, Moises Mendez II, Jennifer Mota, Gary Suarez, Lucas Villa (Rolling Stone 편집·기고)",
+      "extraction_note": "100항목 목록 중 페이지에서 추출된 50곡. 지연 로딩으로 나머지 50곡은 취득하지 못했다 (부분 수집)",
+      "tracks": [
+        {
+          "artist": "Ozuna feat. Cardi B",
+          "title": "La Modelo",
+          "year": "2017"
+        },
+        {
+          "artist": "Zion",
+          "title": "Zun Da Da",
+          "year": "2007"
+        },
+        {
+          "artist": "Tomasa del Real feat. DJ Blass",
+          "title": "Barre Con El Pelo",
+          "year": "2018"
+        },
+        {
+          "artist": "J Balvin, Dua Lipa, Bad Bunny, and Tainy",
+          "title": "Un Dia (One Day)",
+          "year": "2020"
+        },
+        {
+          "artist": "Enrique Iglesias feat. Descemer Bueno and Gente de Zona",
+          "title": "Bailando",
+          "year": "2014"
+        },
+        {
+          "artist": "Kali Uchis feat. Jowell & Randy",
+          "title": "Te Pongo Mal (Prendelo)",
+          "year": "2020"
+        },
+        {
+          "artist": "Tainy feat. Julieta Venegas and Bad Bunny",
+          "title": "Lo Siento BB :/",
+          "year": "2021"
+        },
+        {
+          "artist": "Danny Ocean",
+          "title": "Me Rehuso",
+          "year": "2016"
+        },
+        {
+          "artist": "Don Miguelo",
+          "title": "Como Yo Le Doy",
+          "year": "2013"
+        },
+        {
+          "artist": "Nicky Jam and J Balvin",
+          "title": "X",
+          "year": "2018"
+        },
+        {
+          "artist": "Rauw Alejandro and Chencho Corleone",
+          "title": "Desesperados",
+          "year": "2021"
+        },
+        {
+          "artist": "Alex Gargolas feat. Randy",
+          "title": "Soy Una Gargola",
+          "year": "2006"
+        },
+        {
+          "artist": "Nio Garcia, J Balvin, and Bad Bunny",
+          "title": "AM Remix",
+          "year": "2021"
+        },
+        {
+          "artist": "Shakira feat. Maluma",
+          "title": "Chantaje",
+          "year": "2016"
+        },
+        {
+          "artist": "Angel y Khriz feat. Gocho and John Eric",
+          "title": "Na De Na",
+          "year": "2008"
+        },
+        {
+          "artist": "Becky G and Natti Natasha",
+          "title": "Sin Pijama",
+          "year": "2018"
+        },
+        {
+          "artist": "Farruko",
+          "title": "Pepas",
+          "year": "2021"
+        },
+        {
+          "artist": "Wiso G",
+          "title": "El Domingo Por La Tarde",
+          "year": "2004"
+        },
+        {
+          "artist": "Randy and Ape Drums",
+          "title": "23",
+          "year": "2021"
+        },
+        {
+          "artist": "Anitta",
+          "title": "Envolver",
+          "year": "2022"
+        },
+        {
+          "artist": "Baby Rasta and Gringo",
+          "title": "La Competencia",
+          "year": "1997"
+        },
+        {
+          "artist": "Wisin & Yandel",
+          "title": "Sexy Movimiento",
+          "year": "2007"
+        },
+        {
+          "artist": "Becky G and Bad Bunny",
+          "title": "Mayores",
+          "year": "2017"
+        },
+        {
+          "artist": "Latin Fresh",
+          "title": "Ella Se Arrebata",
+          "year": "1996"
+        },
+        {
+          "artist": "De La Ghetto feat. Randy",
+          "title": "Sensacion Del Bloque",
+          "year": "2007"
+        },
+        {
+          "artist": "Karol G and J Balvin featuring Nicky Jam",
+          "title": "Mi Cama (Remix)",
+          "year": "2018"
+        },
+        {
+          "artist": "Sech",
+          "title": "911",
+          "year": "2021"
+        },
+        {
+          "artist": "Natti Natasha",
+          "title": "Me Gusta",
+          "year": "2018"
+        },
+        {
+          "artist": "Hector y Tito feat. Don Omar & Glory",
+          "title": "Baila Morena",
+          "year": "2004"
+        },
+        {
+          "artist": "Speedy",
+          "title": "Amor Con La Ropa",
+          "year": "2000"
+        },
+        {
+          "artist": "Rosalia and Ozuna",
+          "title": "Yo x Ti, Tu x Mi",
+          "year": "2019"
+        },
+        {
+          "artist": "Notch and Baby Ranks",
+          "title": "Verme",
+          "year": "2006"
+        },
+        {
+          "artist": "Frankie Boy",
+          "title": "Liza Love",
+          "year": "2000"
+        },
+        {
+          "artist": "Don Omar feat. Lucenzo",
+          "title": "Danza Kuduro",
+          "year": "2010"
+        },
+        {
+          "artist": "Daddy Yankee feat. Bad Bunny, Natti Natasha, and Becky G",
+          "title": "Dura (Remix)",
+          "year": "2018"
+        },
+        {
+          "artist": "Becky G and Karol G",
+          "title": "Mamiii",
+          "year": "2022"
+        },
+        {
+          "artist": "Hector El Father",
+          "title": "Dejale Caer To' El Peso",
+          "year": "2005"
+        },
+        {
+          "artist": "Aventura feat. Don Omar",
+          "title": "Ella Y Yo",
+          "year": "2005"
+        },
+        {
+          "artist": "Ozuna",
+          "title": "Dile Que Tu Me Quieres",
+          "year": "2017"
+        },
+        {
+          "artist": "Maluma",
+          "title": "Hawai",
+          "year": "2020"
+        },
+        {
+          "artist": "Trebol Clan, Joan and Hector El Father",
+          "title": "Gata Fiera",
+          "year": "2004"
+        },
+        {
+          "artist": "La Factoria feat. Eddy Lover",
+          "title": "Perdoname",
+          "year": "2006"
+        },
+        {
+          "artist": "Tonny Tun Tun, Daddy Yankee, Luny Tunes, Hector el Father, Wisin & Yandel",
+          "title": "Noche De Entierro",
+          "year": "2006"
+        },
+        {
+          "artist": "J Balvin and Bad Bunny",
+          "title": "La Cancion",
+          "year": "2019"
+        },
+        {
+          "artist": "The Noise feat. Ivy Queen",
+          "title": "Al Escuchar Mi Coro",
+          "year": "1997"
+        },
+        {
+          "artist": "Plan B",
+          "title": "Candy",
+          "year": "2014"
+        },
+        {
+          "artist": "Tony Dize feat. Yandel",
+          "title": "Permitame",
+          "year": "2008"
+        },
+        {
+          "artist": "Rosalia and J Balvin feat. El Guincho",
+          "title": "Con Altura",
+          "year": "2019"
+        },
+        {
+          "artist": "Arcangel",
+          "title": "Pa Que La Pases Bien",
+          "year": "2008"
+        },
+        {
+          "artist": "Jowell & Randy feat. De La Ghetto",
+          "title": "Un Poco Loca",
+          "year": "2007"
+        }
+      ]
+    },
+    {
+      "id": "ukf-moombahton-2015",
+      "case": "moombahton-tropical",
+      "outlet": "UKF",
+      "title": "6 Of The Best: Moombahton Tracks",
+      "url": "https://ukf.com/read/6-of-the-best-moombahton-tracks/",
+      "published": "2015-08-18",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "베이스뮤직 전문 매체 단일 필자. 매우 높음이 아니다",
+      "curator": "Mike Atkin (UKF)",
+      "extraction_note": "6항목 전부 취득. 뭄바톤만 다루며 트로피컬하우스는 이 출처에 없다 (케이스의 절반만 덮는다)",
+      "tracks": [
+        {
+          "artist": "Silvio Ecomo & Chuckie",
+          "title": "Moombah (Dave Nada Remix)",
+          "year": "2009"
+        },
+        {
+          "artist": "Munchi",
+          "title": "Esta Noche",
+          "year": ""
+        },
+        {
+          "artist": "Dillon Francis",
+          "title": "Masta Blasta",
+          "year": ""
+        },
+        {
+          "artist": "Porter Robinson",
+          "title": "100% In The Bitch",
+          "year": "2012"
+        },
+        {
+          "artist": "Nero",
+          "title": "Must Be The Feeling (Delta Heavy Remix)",
+          "year": "2012"
+        },
+        {
+          "artist": "Feed Me",
+          "title": "One Click Headshot",
+          "year": "2012"
+        }
+      ]
+    },
+    {
+      "id": "vice-citypop-2019",
+      "case": "citypop",
+      "outlet": "VICE / Noisey",
+      "title": "The Guide to Getting Into City Pop, Tokyo's Lush 80s Nightlife Soundtrack",
+      "url": "https://www.vice.com/en/article/city-pop-guide-history-interview/",
+      "published": "2019-01-24",
+      "collected": "2026-09-22",
+      "certainty": "높음",
+      "certainty_note": "신뢰 매체 장르 가이드. 편집 큐레이션이라 매우 높음이 아니다",
+      "curator": "Rob Arcand, Sam Goldner (VICE/Noisey)",
+      "extraction_note": "가이드가 지목한 개별 곡 30곡. 기사 말미의 현대 계승 아티스트 절(Skylar Spence·Yubin·Suchmos 등)도 기사가 지목한 곡이므로 그대로 싣되, 1980년대 원 카탈로그가 아님을 여기 적는다. 연도 전부 공란",
+      "tracks": [
+        {
+          "artist": "Happy End",
+          "title": "Kaze Wo Atsumete",
+          "year": ""
+        },
+        {
+          "artist": "Taeko Ohnuki",
+          "title": "Tokai",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Music Book",
+          "year": ""
+        },
+        {
+          "artist": "Shigeru Suzuki",
+          "title": "Coral Reef",
+          "year": ""
+        },
+        {
+          "artist": "Kiyotaka Sugiyama & Omega Tribe",
+          "title": "Dear Breeze",
+          "year": ""
+        },
+        {
+          "artist": "Eiichi Ohtaki",
+          "title": "Canary Shoto Nite",
+          "year": ""
+        },
+        {
+          "artist": "Narumin & Etsu",
+          "title": "Summer Touches You",
+          "year": ""
+        },
+        {
+          "artist": "Seaside Lovers",
+          "title": "Evening Shadows",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "If You...",
+          "year": ""
+        },
+        {
+          "artist": "Casiopea",
+          "title": "Midnight Rendezvous",
+          "year": ""
+        },
+        {
+          "artist": "Makoto Matsushita",
+          "title": "First Light",
+          "year": ""
+        },
+        {
+          "artist": "Tatsuro Yamashita",
+          "title": "Merry-Go-Round",
+          "year": ""
+        },
+        {
+          "artist": "Masayoshi Takanaka",
+          "title": "Sexy Dance",
+          "year": ""
+        },
+        {
+          "artist": "Junko Ohashi",
+          "title": "Telephone Number",
+          "year": ""
+        },
+        {
+          "artist": "Momoko Kikuchi",
+          "title": "Adventure",
+          "year": ""
+        },
+        {
+          "artist": "Haruko Kuwana",
+          "title": "Aoi Kaze",
+          "year": ""
+        },
+        {
+          "artist": "Casiopea",
+          "title": "Eyes of Mind",
+          "year": ""
+        },
+        {
+          "artist": "Wink",
+          "title": "Sabishii Nettaigyo",
+          "year": ""
+        },
+        {
+          "artist": "Kiyotaka Sugiyama",
+          "title": "Umikaze Tsushin",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Oh No, Oh Yes!",
+          "year": ""
+        },
+        {
+          "artist": "Toshiki Kadomatsu",
+          "title": "I Can't Stop The Night",
+          "year": ""
+        },
+        {
+          "artist": "RA MU",
+          "title": "Rainy Day Lady",
+          "year": ""
+        },
+        {
+          "artist": "Katsumi Horii Project",
+          "title": "Hot Is Cool",
+          "year": ""
+        },
+        {
+          "artist": "Hiroshi Satoh",
+          "title": "Say Goodbye",
+          "year": ""
+        },
+        {
+          "artist": "Mariya Takeuchi",
+          "title": "Plastic Love",
+          "year": ""
+        },
+        {
+          "artist": "Yubin",
+          "title": "Sook Nyeo",
+          "year": ""
+        },
+        {
+          "artist": "Awesome City Club",
+          "title": "Outsider",
+          "year": ""
+        },
+        {
+          "artist": "Suchmos",
+          "title": "Stay Tune",
+          "year": ""
+        },
+        {
+          "artist": "Lucky Tapes",
+          "title": "Lady Blues",
+          "year": ""
+        },
+        {
+          "artist": "Special Favorite Music",
+          "title": "Royal Memories",
+          "year": ""
+        }
       ]
     }
   ]

@@ -1,8 +1,8 @@
 {
   "moduleId": "yt-pulse",
   "title": "YT 펄스 · 워치리스트 공식 채널",
-  "subtitle": "YouTube Data API v3 (official) · 수집 2026-09-20",
-  "generatedAt": "2026-09-20T21:39:12Z",
+  "subtitle": "YouTube Data API v3 (official) · 수집 2026-09-21",
+  "generatedAt": "2026-09-21T20:36:51Z",
   "metrics": [
     {
       "label": "추적 팀",
@@ -14,7 +14,7 @@
     },
     {
       "label": "수집한 영상",
-      "value": 1266,
+      "value": 1283,
       "unit": "개",
       "hint": "채널당 최근 업로드 창",
       "section": "reach",
@@ -22,14 +22,14 @@
     },
     {
       "label": "조회 합",
-      "value": 740660504,
+      "value": 752293139,
       "unit": "views",
       "section": "reach",
       "definition": "수집한 영상의 조회수를 모두 더한 값. 공개 집계 수치이며 인기의 총점이 아니다."
     },
     {
       "label": "가장 빠른 영상의 일 조회",
-      "value": 4521638,
+      "value": 3812271,
       "unit": "views/일",
       "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)",
       "section": "fresh",
@@ -37,7 +37,7 @@
     },
     {
       "label": "새 영상",
-      "value": 238,
+      "value": 241,
       "unit": "개",
       "hint": "최근 14일 내 업로드(캠페인 활성)",
       "section": "fresh",
@@ -51,47 +51,47 @@
       "data": [
         {
           "name": "KATSEYE",
-          "value": 283296621
+          "value": 289067795
         },
         {
           "name": "CORTIS",
-          "value": 106733580
+          "value": 107472922
         },
         {
           "name": "BABYMONSTER",
-          "value": 104983330
+          "value": 106039802
         },
         {
           "name": "ILLIT",
-          "value": 73282307
+          "value": 74181974
         },
         {
           "name": "Hearts2Hearts",
-          "value": 66107588
+          "value": 67268920
         },
         {
           "name": "RESCENE",
-          "value": 49328713
+          "value": 50560830
         },
         {
           "name": "KISS OF LIFE",
-          "value": 22787463
+          "value": 23176547
         },
         {
           "name": "KiiiKiii",
-          "value": 16313887
+          "value": 16464645
         },
         {
           "name": "MEOVV",
-          "value": 12742848
+          "value": 12877679
         },
         {
           "name": "izna",
-          "value": 4385186
+          "value": 4438279
         },
         {
           "name": "KEYVEATZ",
-          "value": 698981
+          "value": 743746
         }
       ],
       "section": "reach",
@@ -103,12 +103,12 @@
       "type": "bar",
       "id": "fresh-by-act",
       "reliability": {
-        "sample": "최근 14일 · 영상 238개 / 1266개"
+        "sample": "최근 14일 · 영상 241개 / 1283개"
       },
       "data": [
         {
           "name": "izna",
-          "value": 44
+          "value": 49
         },
         {
           "name": "KiiiKiii",
@@ -119,24 +119,24 @@
           "value": 26
         },
         {
-          "name": "CORTIS",
+          "name": "Hearts2Hearts",
           "value": 24
         },
         {
+          "name": "CORTIS",
+          "value": 23
+        },
+        {
           "name": "ILLIT",
-          "value": 22
-        },
-        {
-          "name": "Hearts2Hearts",
-          "value": 21
-        },
-        {
-          "name": "MEOVV",
-          "value": 21
+          "value": 20
         },
         {
           "name": "RESCENE",
-          "value": 20
+          "value": 19
+        },
+        {
+          "name": "MEOVV",
+          "value": 18
         },
         {
           "name": "KISS OF LIFE",
@@ -144,7 +144,7 @@
         },
         {
           "name": "BABYMONSTER",
-          "value": 10
+          "value": 12
         },
         {
           "name": "KATSEYE",
@@ -159,11 +159,11 @@
   ],
   "media": [],
   "insights": [
-    "신작: izna · '삐야의 수고 인사를 받아주는 법.izna 🫂😘 #izna #이즈나' (1일 전, 조회 5,953, +5,953/일) · 캠페인 활성 신호(참고)",
-    "신작: izna · 'izna 돌격 💨 Just getting started #izna #이즈나 #WHO_DAT_GIRL' (1일 전, 조회 2,683, +2,683/일) · 캠페인 활성 신호(참고)",
-    "신작: RESCENE · '2026년 9월 19일' (1일 전, 조회 211,218, +211,218/일) · 캠페인 활성 신호(참고)",
-    "신작: izna · 'the story begins 🎬 #izna #이즈나 #WHO_DAT_GIRL' (1일 전, 조회 4,388, +4,388/일) · 캠페인 활성 신호(참고)",
-    "신작: KiiiKiii · '404 4eva🤍Thanks to TiiiKiiis #TMA #2026TMA #KiiiKiii #키키' (1일 전, 조회 66,721, +66,721/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'going M.I.A #KATSEYE' (1일 전, 조회 1,389,587, +1,389,587/일) · 캠페인 활성 신호(참고)",
+    "신작: Hearts2Hearts · '21st september #Hearts2Hearts #하츠투하츠 #STELLA #A_NA #YE_ON' (1일 전, 조회 78,464, +78,464/일) · 캠페인 활성 신호(참고)",
+    "신작: izna · 'Shining moments, just the beginning ✨ #izna #이즈나 #WHO_DAT_GIRL' (1일 전, 조회 5,218, +5,218/일) · 캠페인 활성 신호(참고)",
+    "신작: izna · '언니가 수고 인사를 받아주는 법.izna 🫂🫠 #izna #이즈나 #WHO_DAT_GIRL' (1일 전, 조회 19,434, +19,434/일) · 캠페인 활성 신호(참고)",
+    "신작: izna · 'Concert Finale, BEAT DROP🙌 #izna #이즈나' (1일 전, 조회 18,699, +18,699/일) · 캠페인 활성 신호(참고)",
     "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
     "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
     "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"
@@ -180,40 +180,40 @@
     "question": "지금 가장 빠르게 조회를 모으는 팀은 어디인가?",
     "definition": "팀의 영상 중 평균 일 조회가 가장 높은 한 편의 값(조회수 ÷ 공개 후 지난 날, 상위 8팀). 수명 전체 평균이라 갓 올라온 영상의 초반 화력은 낮게, 오래된 영상은 평탄하게 잡힌다. 채널 규모가 크면 같은 반응에서도 값이 커진다.",
     "reliability": {
-      "sample": "팀 11팀 · 영상 1266개"
+      "sample": "팀 11팀 · 영상 1283개"
     },
     "data": [
       {
         "name": "KATSEYE",
-        "value": 4521638
+        "value": 3812271
       },
       {
         "name": "RESCENE",
-        "value": 730413
-      },
-      {
-        "name": "CORTIS",
-        "value": 620303
-      },
-      {
-        "name": "ILLIT",
-        "value": 510600
+        "value": 529810
       },
       {
         "name": "BABYMONSTER",
-        "value": 470780
+        "value": 516258
+      },
+      {
+        "name": "CORTIS",
+        "value": 496243
       },
       {
         "name": "Hearts2Hearts",
-        "value": 400989
+        "value": 444142
+      },
+      {
+        "name": "ILLIT",
+        "value": 433721
       },
       {
         "name": "KISS OF LIFE",
-        "value": 192923
+        "value": 211661
       },
       {
         "name": "KiiiKiii",
-        "value": 122220
+        "value": 113490
       }
     ]
   },
@@ -239,24 +239,24 @@
     "광고가 붙은 조회인지. 유기적 조회와 구분하지 않는다"
   ],
   "reliability": {
-    "sample": "팀 11팀 · 영상 1266개 · 기준일 2026-09-20",
+    "sample": "팀 11팀 · 영상 1283개 · 기준일 2026-09-21",
     "accuracy": "조회·구독은 API가 돌려준 공개 집계값. 평균 일 조회는 수명 평균 근사이며 정확도 미측정",
     "missing": "팀 공식 채널만 본다. 레이블 채널 업로드와 채널이 확인되지 않은 팀은 이 표본에 없다",
-    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-09-20T00:11:22Z"
+    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-09-21T00:16:33Z"
   },
   "inferences": [
     {
-      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 11배다.",
-      "basis": "1위 KATSEYE 4,521,638/일 · 중앙값 400,989/일 · 팀 11팀",
-      "sample": "팀 11팀 · 영상 1266개",
+      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 9배다.",
+      "basis": "1위 KATSEYE 3,812,271/일 · 중앙값 433,721/일 · 팀 11팀",
+      "sample": "팀 11팀 · 영상 1283개",
       "confidence": "medium",
       "limits": "구독자 규모가 큰 채널은 같은 반응에서도 값이 커진다. 이 값은 화력의 분포이지 완성도의 순위가 아니다.",
       "chartId": "velocity-by-act"
     },
     {
-      "text": "최근 14일 업로드가 한쪽으로 몰린 것으로 읽힌다. izna 44개, KiiiKiii 28개, KEYVEATZ 26개 순이다.",
-      "basis": "업로드가 있는 11팀 · 합 238개 · 중앙값 21개",
-      "sample": "팀 11팀 · 영상 1266개",
+      "text": "최근 14일 업로드가 한쪽으로 몰린 것으로 읽힌다. izna 49개, KiiiKiii 28개, KEYVEATZ 26개 순이다.",
+      "basis": "업로드가 있는 11팀 · 합 241개 · 중앙값 20개",
+      "sample": "팀 11팀 · 영상 1283개",
       "confidence": "low",
       "limits": "채널 캐시가 최근 업로드 위주라 이 수는 수집 창의 산물이기도 하다. 업로드 수는 활동량이며 성과가 아니다.",
       "chartId": "fresh-by-act"

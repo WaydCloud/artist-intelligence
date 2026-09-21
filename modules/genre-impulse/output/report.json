@@ -1,8 +1,8 @@
 {
   "moduleId": "genre-impulse",
   "title": "장르 임펄스 모니터",
-  "subtitle": "원장 10건 × 코호트 8곡 (2026-09-20.json) · v0.1.0",
-  "generatedAt": "2026-09-20T22:41:05.938001+00:00",
+  "subtitle": "원장 10건 × 코호트 90곡 (2026-09-21.json) · v0.1.0",
+  "generatedAt": "2026-09-21T20:36:53.343933+00:00",
   "metrics": [
     {
       "label": "원장 임펄스",
@@ -21,14 +21,14 @@
     },
     {
       "label": "오늘 본 곡",
-      "value": 8,
+      "value": 90,
       "unit": "곡",
       "section": "matches",
       "definition": "이번 스냅샷에서 특질이 계산된 곡의 수. 백분위의 분모이며, 이 집합이 바뀌면 같은 곡의 백분위도 바뀐다."
     },
     {
       "label": "규칙에 걸린 곡",
-      "value": 1,
+      "value": 21,
       "unit": "곡",
       "section": "matches",
       "definition": "확정된 검출 규칙의 하한·상한 조건을 모두 만족한 곡의 수. 여러 규칙에 걸린 곡도 한 번만 센다. 검토 후보이지 판정이 아니다."
@@ -39,11 +39,35 @@
       "type": "heatmap",
       "id": "match-axes",
       "reliability": {
-        "sample": "매치 1건 / 코호트 8곡"
+        "sample": "매치 25건 / 코호트 90곡"
       },
       "data": {
         "rows": [
-          "UKG 원형 · ★RESCENE - Pretty Girl"
+          "하이퍼팝 · ★CORTIS - REDRED",
+          "하이퍼팝 · ★KISS OF LIFE - Igloo",
+          "하이퍼팝 · aespa - Drama",
+          "하이퍼팝 · BIGBANG - BiiiG",
+          "하이퍼팝 · NMIXX - Heavy Serenade",
+          "하이퍼팝 · ★KiiiKiii - Pop Off Pop Off",
+          "하이퍼팝 · ★Keyveatz - Key Beats",
+          "하이퍼팝 · ★KiiiKiii - Candy Pink Magic Hole Flip Phone",
+          "하이퍼팝 · aespa - Whiplash",
+          "하이퍼팝 · NewJeans - Cookie",
+          "뭄바톤 KR · ★Hearts2Hearts - FOCUS",
+          "뭄바톤 KR · ★CORTIS - REDRED",
+          "뭄바톤 KR · aespa - KISS N TELL",
+          "뭄바톤 KR · ★KiiiKiii - 404 (New Era)",
+          "UKG 원형 · ★RESCENE - Pretty Girl",
+          "UKG 원형 · OSUN - U",
+          "UKG 원형 · ★RESCENE - Runaway",
+          "UKG 원형 · ★KiiiKiii - Candy Pink Magic Hole Flip Phone",
+          "UKG 원형 · ★Hearts2Hearts - FOCUS",
+          "UKG 원형 · ★Hearts2Hearts - ICONIC HEART",
+          "UKG 원형 · JENNIE - FALLEN ANGEL",
+          "UKG 원형 · ★ILLIT - It's Me",
+          "UKG 원형 · ★KiiiKiii - Pop Off Pop Off",
+          "UKG 원형 · ★KATSEYE - Animal",
+          "UKG 원형 · ENHYPEN - Bloody Paradise"
         ],
         "cols": [
           "음색 밝기",
@@ -56,13 +80,229 @@
         ],
         "cells": [
           [
-            100.0,
-            37.5,
-            100.0,
-            25.0,
-            100.0,
-            100.0,
-            87.5
+            83.3,
+            1.1,
+            41.1,
+            5.6,
+            84.4,
+            33.7,
+            56.7
+          ],
+          [
+            66.7,
+            3.3,
+            82.2,
+            47.8,
+            51.1,
+            7.9,
+            10.0
+          ],
+          [
+            52.2,
+            4.4,
+            90.0,
+            8.9,
+            78.9,
+            51.7,
+            5.6
+          ],
+          [
+            47.8,
+            5.6,
+            83.3,
+            18.9,
+            38.9,
+            39.3,
+            46.7
+          ],
+          [
+            76.7,
+            7.8,
+            97.8,
+            20.0,
+            77.8,
+            58.4,
+            83.3
+          ],
+          [
+            87.8,
+            8.9,
+            76.7,
+            42.2,
+            93.3,
+            86.5,
+            87.8
+          ],
+          [
+            64.4,
+            11.1,
+            91.1,
+            6.7,
+            70.0,
+            36.0,
+            15.6
+          ],
+          [
+            92.2,
+            12.2,
+            88.9,
+            28.9,
+            90.0,
+            93.3,
+            95.6
+          ],
+          [
+            51.1,
+            13.3,
+            88.9,
+            1.1,
+            55.6,
+            1.1,
+            67.8
+          ],
+          [
+            80.0,
+            17.8,
+            80.0,
+            77.8,
+            43.3,
+            49.4,
+            20.0
+          ],
+          [
+            91.1,
+            45.6,
+            50.0,
+            4.4,
+            94.4,
+            92.1,
+            85.6
+          ],
+          [
+            83.3,
+            1.1,
+            41.1,
+            5.6,
+            84.4,
+            33.7,
+            56.7
+          ],
+          [
+            98.9,
+            50.0,
+            84.4,
+            10.0,
+            98.9,
+            2.2,
+            66.7
+          ],
+          [
+            86.7,
+            42.2,
+            64.4,
+            13.3,
+            91.1,
+            65.2,
+            72.2
+          ],
+          [
+            97.8,
+            22.2,
+            96.7,
+            48.9,
+            96.7,
+            97.8,
+            90.0
+          ],
+          [
+            34.4,
+            80.0,
+            36.7,
+            63.3,
+            34.4,
+            96.6,
+            100.0
+          ],
+          [
+            40.0,
+            55.6,
+            71.1,
+            57.8,
+            36.7,
+            94.4,
+            98.9
+          ],
+          [
+            92.2,
+            12.2,
+            88.9,
+            28.9,
+            90.0,
+            93.3,
+            95.6
+          ],
+          [
+            91.1,
+            45.6,
+            50.0,
+            4.4,
+            94.4,
+            92.1,
+            85.6
+          ],
+          [
+            58.9,
+            25.6,
+            41.1,
+            35.6,
+            50.0,
+            91.0,
+            96.7
+          ],
+          [
+            7.8,
+            66.7,
+            25.6,
+            56.7,
+            14.4,
+            89.9,
+            92.2
+          ],
+          [
+            41.1,
+            2.2,
+            31.1,
+            14.4,
+            45.6,
+            88.8,
+            94.4
+          ],
+          [
+            87.8,
+            8.9,
+            76.7,
+            42.2,
+            93.3,
+            86.5,
+            87.8
+          ],
+          [
+            61.1,
+            53.3,
+            62.2,
+            44.4,
+            58.9,
+            84.3,
+            97.8
+          ],
+          [
+            77.8,
+            31.1,
+            67.8,
+            3.3,
+            73.3,
+            80.9,
+            84.4
           ]
         ],
         "scale": "value",
@@ -80,7 +320,7 @@
       "type": "tunable",
       "id": "impulse-tuner",
       "reliability": {
-        "sample": "코호트 8곡 · 축 7종"
+        "sample": "코호트 90곡 · 축 7종"
       },
       "data": {
         "view": "impulse-rules",
@@ -106,74 +346,647 @@
         },
         "pools": {
           "brightness_hz": [
-            2222.2,
-            2342.4,
-            2342.6,
-            2348.0,
-            2531.6,
-            2828.0,
-            3031.5,
-            3389.8
+            802.8,
+            949.9,
+            1105.2,
+            1174.3,
+            1176.2,
+            1485.4,
+            1623.1,
+            1650.4,
+            1652.3,
+            1666.7,
+            1682.1,
+            1687.0,
+            1728.7,
+            1773.8,
+            1803.2,
+            1836.7,
+            1850.8,
+            1873.9,
+            1982.6,
+            2024.9,
+            2035.3,
+            2074.7,
+            2075.8,
+            2135.9,
+            2139.5,
+            2146.2,
+            2164.8,
+            2199.7,
+            2200.1,
+            2223.7,
+            2232.9,
+            2257.9,
+            2258.7,
+            2272.6,
+            2323.6,
+            2333.9,
+            2349.5,
+            2352.0,
+            2380.7,
+            2418.0,
+            2449.8,
+            2452.2,
+            2456.1,
+            2464.9,
+            2466.5,
+            2467.5,
+            2481.8,
+            2498.2,
+            2516.0,
+            2530.7,
+            2556.7,
+            2564.4,
+            2566.1,
+            2570.2,
+            2610.3,
+            2612.7,
+            2640.7,
+            2672.7,
+            2675.5,
+            2687.6,
+            2734.1,
+            2743.8,
+            2768.2,
+            2768.5,
+            2774.4,
+            2806.2,
+            2814.0,
+            2818.7,
+            2840.1,
+            2842.9,
+            2845.1,
+            2850.4,
+            2865.9,
+            2882.2,
+            2882.9,
+            2902.6,
+            2907.8,
+            2933.5,
+            2942.4,
+            2971.0,
+            2972.1,
+            3077.8,
+            3081.1,
+            3134.1,
+            3158.0,
+            3194.0,
+            3240.5,
+            3298.1,
+            3432.1,
+            3497.9
           ],
           "organic_ratio": [
-            0.2404,
-            0.3364,
-            0.4074,
-            0.4078,
-            0.4895,
-            0.5953,
-            0.6267,
-            0.7998
+            0.1942,
+            0.1944,
+            0.2014,
+            0.2408,
+            0.2634,
+            0.2676,
+            0.2704,
+            0.2782,
+            0.2845,
+            0.2933,
+            0.2981,
+            0.2992,
+            0.321,
+            0.328,
+            0.3456,
+            0.3461,
+            0.348,
+            0.3502,
+            0.3615,
+            0.365,
+            0.3695,
+            0.3744,
+            0.3788,
+            0.3825,
+            0.3869,
+            0.3943,
+            0.3962,
+            0.3964,
+            0.3975,
+            0.4007,
+            0.4037,
+            0.4052,
+            0.4107,
+            0.4157,
+            0.4192,
+            0.4329,
+            0.4339,
+            0.437,
+            0.4413,
+            0.4414,
+            0.4519,
+            0.4524,
+            0.4548,
+            0.4583,
+            0.4596,
+            0.4731,
+            0.4795,
+            0.4821,
+            0.4954,
+            0.4961,
+            0.5047,
+            0.5143,
+            0.5146,
+            0.5154,
+            0.536,
+            0.5407,
+            0.542,
+            0.5474,
+            0.5483,
+            0.5546,
+            0.5649,
+            0.5698,
+            0.5726,
+            0.585,
+            0.6123,
+            0.6124,
+            0.62,
+            0.6266,
+            0.6325,
+            0.6335,
+            0.6396,
+            0.6702,
+            0.6735,
+            0.6845,
+            0.6945,
+            0.6954,
+            0.7019,
+            0.7035,
+            0.7047,
+            0.7479,
+            0.7652,
+            0.7779,
+            0.7808,
+            0.8025,
+            0.8313,
+            0.8333,
+            0.8473,
+            0.8662,
+            0.8788,
+            0.9618
           ],
           "over_unity_ratio": [
             0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            2e-06,
+            2e-06,
+            2e-06,
+            2e-06,
+            3e-06,
+            3e-06,
+            3e-06,
+            3e-06,
+            3e-06,
+            3e-06,
+            3e-06,
             5e-06,
-            5e-06,
+            8e-06,
+            9e-06,
+            9e-06,
+            1.1e-05,
+            1.1e-05,
+            1.2e-05,
+            1.4e-05,
+            1.4e-05,
+            1.5e-05,
+            1.7e-05,
+            2.1e-05,
+            2.1e-05,
+            2.1e-05,
+            2.1e-05,
+            2.3e-05,
+            2.4e-05,
+            2.6e-05,
+            2.7e-05,
             2.9e-05,
-            4.7e-05,
+            2.9e-05,
+            3e-05,
+            3e-05,
+            3.5e-05,
+            3.6e-05,
+            3.9e-05,
+            4.2e-05,
+            4.2e-05,
+            4.2e-05,
+            4.2e-05,
+            5e-05,
+            5.1e-05,
+            5.1e-05,
+            5.1e-05,
+            5.3e-05,
             5.6e-05,
             5.7e-05,
-            0.000286
+            6.2e-05,
+            6.4e-05,
+            9.4e-05,
+            9.8e-05,
+            0.000104,
+            0.000107,
+            0.00011,
+            0.000114,
+            0.000116,
+            0.00012,
+            0.000124,
+            0.000136,
+            0.000147,
+            0.000216,
+            0.000233,
+            0.00025,
+            0.000257,
+            0.000272,
+            0.000273,
+            0.0003,
+            0.0003,
+            0.00039,
+            0.000463,
+            0.000469,
+            0.000505,
+            0.000507,
+            0.00064,
+            0.000717,
+            0.000843,
+            0.002208,
+            0.002388
           ],
           "spectral_contrast_mean": [
-            21.45,
-            22.262,
-            22.324,
-            22.719,
-            22.958,
-            23.117,
-            23.609,
-            26.68
+            20.408,
+            20.531,
+            21.009,
+            21.035,
+            21.153,
+            21.248,
+            21.322,
+            21.349,
+            21.355,
+            21.574,
+            21.589,
+            21.597,
+            21.642,
+            21.648,
+            21.715,
+            21.762,
+            21.831,
+            21.85,
+            21.878,
+            21.892,
+            21.936,
+            21.988,
+            22.169,
+            22.178,
+            22.183,
+            22.244,
+            22.249,
+            22.288,
+            22.298,
+            22.332,
+            22.348,
+            22.449,
+            22.476,
+            22.486,
+            22.526,
+            22.538,
+            22.573,
+            22.609,
+            22.625,
+            22.64,
+            22.644,
+            22.655,
+            22.702,
+            22.724,
+            22.73,
+            22.739,
+            22.868,
+            22.923,
+            22.984,
+            22.991,
+            23.004,
+            23.011,
+            23.043,
+            23.097,
+            23.136,
+            23.137,
+            23.242,
+            23.253,
+            23.287,
+            23.292,
+            23.382,
+            23.441,
+            23.519,
+            23.657,
+            23.869,
+            23.87,
+            24.003,
+            24.101,
+            24.112,
+            24.21,
+            24.212,
+            24.289,
+            24.304,
+            24.317,
+            24.339,
+            24.408,
+            24.603,
+            24.848,
+            24.944,
+            25.031,
+            25.046,
+            25.223,
+            25.384,
+            25.668,
+            25.846,
+            25.863,
+            25.89,
+            26.045,
+            26.988,
+            27.837
           ],
           "spectral_flatness": [
-            0.0024,
-            0.0054,
-            0.0101,
+            0.0001,
+            0.0003,
+            0.0005,
+            0.0008,
+            0.001,
+            0.0014,
+            0.0015,
+            0.0016,
+            0.0017,
+            0.002,
+            0.0022,
+            0.0026,
+            0.0031,
+            0.0035,
+            0.0036,
+            0.0037,
+            0.0037,
+            0.0043,
+            0.005,
+            0.005,
+            0.005,
+            0.005,
+            0.0052,
+            0.0061,
+            0.0061,
+            0.0066,
+            0.0072,
+            0.0073,
+            0.0076,
+            0.0079,
+            0.0082,
+            0.0087,
+            0.0088,
+            0.0091,
+            0.0096,
+            0.0098,
+            0.0099,
+            0.01,
+            0.0102,
+            0.0104,
+            0.0108,
+            0.0114,
+            0.0114,
+            0.0115,
+            0.0115,
+            0.0118,
+            0.0119,
             0.0121,
-            0.0125,
-            0.0158,
-            0.0206,
-            0.0404
+            0.0123,
+            0.0136,
+            0.0139,
+            0.0146,
+            0.0152,
+            0.0154,
+            0.0154,
+            0.0156,
+            0.0167,
+            0.0168,
+            0.017,
+            0.0171,
+            0.0172,
+            0.0178,
+            0.0189,
+            0.0194,
+            0.0194,
+            0.0203,
+            0.0211,
+            0.0211,
+            0.0211,
+            0.0212,
+            0.0218,
+            0.0219,
+            0.0219,
+            0.0222,
+            0.0226,
+            0.0235,
+            0.0238,
+            0.024,
+            0.0264,
+            0.027,
+            0.027,
+            0.0284,
+            0.0309,
+            0.031,
+            0.0326,
+            0.0328,
+            0.0354,
+            0.0379,
+            0.0382,
+            0.0388
           ],
           "swing_ratio": [
-            0.515,
-            0.5242,
+            0.4778,
+            0.4874,
+            0.4899,
+            0.4908,
+            0.4952,
+            0.4974,
+            0.5001,
+            0.5004,
+            0.5009,
+            0.5052,
+            0.507,
+            0.5082,
+            0.5082,
+            0.5101,
+            0.5101,
+            0.5103,
+            0.5105,
+            0.5108,
+            0.5109,
+            0.5111,
+            0.5113,
+            0.5117,
+            0.5118,
+            0.5123,
+            0.5128,
+            0.513,
+            0.5138,
+            0.5141,
+            0.5142,
+            0.5146,
+            0.5149,
+            0.5152,
+            0.5153,
+            0.5155,
+            0.5155,
+            0.5158,
+            0.516,
+            0.516,
+            0.516,
+            0.5161,
+            0.5162,
+            0.5169,
+            0.5187,
+            0.5199,
+            0.5213,
+            0.5216,
+            0.5226,
+            0.5237,
+            0.5243,
+            0.5243,
+            0.5243,
+            0.5243,
             0.5251,
-            0.5319,
-            0.5334,
-            0.5477,
-            0.5542,
-            0.6586
+            0.5251,
+            0.5256,
+            0.5259,
+            0.5278,
+            0.5279,
+            0.5282,
+            0.5283,
+            0.5285,
+            0.5286,
+            0.5288,
+            0.5299,
+            0.5318,
+            0.5322,
+            0.5335,
+            0.5336,
+            0.5336,
+            0.534,
+            0.5357,
+            0.5386,
+            0.5391,
+            0.5396,
+            0.5404,
+            0.5405,
+            0.5405,
+            0.5434,
+            0.5442,
+            0.5472,
+            0.5484,
+            0.5515,
+            0.5545,
+            0.5634,
+            0.5818,
+            0.5824,
+            0.6228,
+            0.6745,
+            0.7114
           ],
           "tempo_bpm": [
-            76.63,
-            97.22,
-            107.01,
-            116.0,
-            124.99,
+            58.56,
+            60.0,
+            60.98,
+            65.01,
+            65.49,
+            65.91,
+            67.98,
+            69.01,
+            70.01,
+            70.95,
+            71.04,
+            73.0,
+            73.04,
+            75.99,
+            76.97,
+            77.15,
+            77.51,
+            78.5,
+            80.01,
+            80.48,
+            80.97,
+            82.02,
+            84.05,
+            84.97,
+            87.49,
+            88.01,
+            89.98,
+            91.01,
+            92.06,
+            93.86,
+            95.02,
+            95.26,
+            95.48,
+            95.99,
+            98.5,
+            99.86,
+            99.94,
+            103.95,
+            103.97,
+            104.93,
+            105.04,
+            108.4,
+            109.0,
+            110.99,
+            112.01,
+            114.99,
+            118.05,
+            119.98,
+            119.99,
+            119.99,
+            120.97,
+            122.02,
+            123.02,
+            124.03,
+            124.03,
+            124.05,
+            124.9,
+            124.97,
+            124.98,
+            125.95,
+            125.96,
+            125.99,
+            125.99,
+            126.97,
+            127.0,
+            127.01,
+            127.02,
             127.96,
-            134.0,
-            149.98
+            128.0,
+            128.0,
+            128.03,
+            128.03,
+            128.11,
+            129.0,
+            129.97,
+            129.99,
+            130.01,
+            130.95,
+            131.02,
+            133.05,
+            133.96,
+            136.15,
+            137.98,
+            142.57,
+            146.95,
+            147.87,
+            150.05,
+            150.09,
+            170.01,
+            190.03
           ]
         },
         "rules": [
@@ -213,107 +1026,1172 @@
         ],
         "tracks": [
           {
-            "name": "Keyveatz - OXY",
+            "name": "CORTIS - REDRED",
             "watch": true,
             "pcts": {
-              "brightness_hz": 87.5,
-              "organic_ratio": 12.5,
-              "over_unity_ratio": 37.5,
-              "spectral_contrast_mean": 62.5,
-              "spectral_flatness": 50.0,
-              "swing_ratio": 12.5,
-              "tempo_bpm": 12.5
+              "brightness_hz": 83.3,
+              "organic_ratio": 1.1,
+              "over_unity_ratio": 41.1,
+              "spectral_contrast_mean": 5.6,
+              "spectral_flatness": 84.4,
+              "swing_ratio": 33.7,
+              "tempo_bpm": 56.7
             }
           },
           {
-            "name": "CORTIS - Mention Me (From The Movie \"GOAT\")",
+            "name": "ILLIT - It's Me",
             "watch": true,
             "pcts": {
-              "brightness_hz": 50.0,
-              "organic_ratio": 25.0,
-              "over_unity_ratio": 37.5,
-              "spectral_contrast_mean": 12.5,
-              "spectral_flatness": 87.5,
-              "swing_ratio": 37.5,
-              "tempo_bpm": 25.0
+              "brightness_hz": 41.1,
+              "organic_ratio": 2.2,
+              "over_unity_ratio": 31.1,
+              "spectral_contrast_mean": 14.4,
+              "spectral_flatness": 45.6,
+              "swing_ratio": 88.8,
+              "tempo_bpm": 94.4
+            }
+          },
+          {
+            "name": "KISS OF LIFE - Igloo",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 66.7,
+              "organic_ratio": 3.3,
+              "over_unity_ratio": 82.2,
+              "spectral_contrast_mean": 47.8,
+              "spectral_flatness": 51.1,
+              "swing_ratio": 7.9,
+              "tempo_bpm": 10.0
+            }
+          },
+          {
+            "name": "aespa - Drama",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 52.2,
+              "organic_ratio": 4.4,
+              "over_unity_ratio": 90.0,
+              "spectral_contrast_mean": 8.9,
+              "spectral_flatness": 78.9,
+              "swing_ratio": 51.7,
+              "tempo_bpm": 5.6
+            }
+          },
+          {
+            "name": "BIGBANG - BiiiG",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 47.8,
+              "organic_ratio": 5.6,
+              "over_unity_ratio": 83.3,
+              "spectral_contrast_mean": 18.9,
+              "spectral_flatness": 38.9,
+              "swing_ratio": 39.3,
+              "tempo_bpm": 46.7
+            }
+          },
+          {
+            "name": "CORTIS - ACAI",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 24.4,
+              "organic_ratio": 6.7,
+              "over_unity_ratio": 57.8,
+              "spectral_contrast_mean": 15.6,
+              "spectral_flatness": 32.2,
+              "swing_ratio": 75.3,
+              "tempo_bpm": 91.1
+            }
+          },
+          {
+            "name": "NMIXX - Heavy Serenade",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 76.7,
+              "organic_ratio": 7.8,
+              "over_unity_ratio": 97.8,
+              "spectral_contrast_mean": 20.0,
+              "spectral_flatness": 77.8,
+              "swing_ratio": 58.4,
+              "tempo_bpm": 83.3
+            }
+          },
+          {
+            "name": "KiiiKiii - Pop Off Pop Off",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 87.8,
+              "organic_ratio": 8.9,
+              "over_unity_ratio": 76.7,
+              "spectral_contrast_mean": 42.2,
+              "spectral_flatness": 93.3,
+              "swing_ratio": 86.5,
+              "tempo_bpm": 87.8
+            }
+          },
+          {
+            "name": "ILLIT - Magnetic",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 38.9,
+              "organic_ratio": 10.0,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 54.4,
+              "spectral_flatness": 28.9,
+              "swing_ratio": 60.7,
+              "tempo_bpm": 86.7
+            }
+          },
+          {
+            "name": "Keyveatz - Key Beats",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 64.4,
+              "organic_ratio": 11.1,
+              "over_unity_ratio": 91.1,
+              "spectral_contrast_mean": 6.7,
+              "spectral_flatness": 70.0,
+              "swing_ratio": 36.0,
+              "tempo_bpm": 15.6
+            }
+          },
+          {
+            "name": "KiiiKiii - Candy Pink Magic Hole Flip Phone",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 92.2,
+              "organic_ratio": 12.2,
+              "over_unity_ratio": 88.9,
+              "spectral_contrast_mean": 28.9,
+              "spectral_flatness": 90.0,
+              "swing_ratio": 93.3,
+              "tempo_bpm": 95.6
+            }
+          },
+          {
+            "name": "aespa - Whiplash",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 51.1,
+              "organic_ratio": 13.3,
+              "over_unity_ratio": 88.9,
+              "spectral_contrast_mean": 1.1,
+              "spectral_flatness": 55.6,
+              "swing_ratio": 1.1,
+              "tempo_bpm": 67.8
+            }
+          },
+          {
+            "name": "OFFICIAL HIGE DANDISM - Pretender",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 44.4,
+              "organic_ratio": 14.4,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 50.0,
+              "spectral_flatness": 61.1,
+              "swing_ratio": 73.0,
+              "tempo_bpm": 36.7
+            }
+          },
+          {
+            "name": "WOODZ - Drowning",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 65.6,
+              "organic_ratio": 15.6,
+              "over_unity_ratio": 43.3,
+              "spectral_contrast_mean": 52.2,
+              "spectral_flatness": 72.2,
+              "swing_ratio": 79.8,
+              "tempo_bpm": 48.9
+            }
+          },
+          {
+            "name": "TUIDE - GRLS",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 82.2,
+              "organic_ratio": 16.7,
+              "over_unity_ratio": 51.1,
+              "spectral_contrast_mean": 26.7,
+              "spectral_flatness": 56.7,
+              "swing_ratio": 69.7,
+              "tempo_bpm": 88.9
+            }
+          },
+          {
+            "name": "NewJeans - Cookie",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 80.0,
+              "organic_ratio": 17.8,
+              "over_unity_ratio": 80.0,
+              "spectral_contrast_mean": 77.8,
+              "spectral_flatness": 43.3,
+              "swing_ratio": 49.4,
+              "tempo_bpm": 20.0
+            }
+          },
+          {
+            "name": "Hearts2Hearts - The Chase",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 20.0,
+              "organic_ratio": 18.9,
+              "over_unity_ratio": 57.8,
+              "spectral_contrast_mean": 11.1,
+              "spectral_flatness": 24.4,
+              "swing_ratio": 58.4,
+              "tempo_bpm": 70.0
+            }
+          },
+          {
+            "name": "Heize - And July (feat. DEAN & dj friz)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 26.7,
+              "organic_ratio": 20.0,
+              "over_unity_ratio": 74.4,
+              "spectral_contrast_mean": 30.0,
+              "spectral_flatness": 42.2,
+              "swing_ratio": 44.9,
+              "tempo_bpm": 38.9
+            }
+          },
+          {
+            "name": "aespa - Next Level",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 55.6,
+              "organic_ratio": 21.1,
+              "over_unity_ratio": 41.1,
+              "spectral_contrast_mean": 21.1,
+              "spectral_flatness": 62.2,
+              "swing_ratio": 20.2,
+              "tempo_bpm": 47.8
             }
           },
           {
             "name": "RESCENE - Pretty Girl",
             "watch": true,
             "pcts": {
-              "brightness_hz": 100.0,
-              "organic_ratio": 37.5,
+              "brightness_hz": 97.8,
+              "organic_ratio": 22.2,
+              "over_unity_ratio": 96.7,
+              "spectral_contrast_mean": 48.9,
+              "spectral_flatness": 96.7,
+              "swing_ratio": 97.8,
+              "tempo_bpm": 90.0
+            }
+          },
+          {
+            "name": "Epik High - Love Love Love (feat. 융진)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 60.0,
+              "organic_ratio": 23.3,
+              "over_unity_ratio": 98.9,
+              "spectral_contrast_mean": 12.2,
+              "spectral_flatness": 76.7,
+              "swing_ratio": 58.4,
+              "tempo_bpm": 80.0
+            }
+          },
+          {
+            "name": "Coogie - Alone (feat. LeeHi)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 42.2,
+              "organic_ratio": 24.4,
+              "over_unity_ratio": 85.6,
+              "spectral_contrast_mean": 55.6,
+              "spectral_flatness": 33.3,
+              "swing_ratio": 9.0,
+              "tempo_bpm": 2.2
+            }
+          },
+          {
+            "name": "Hearts2Hearts - ICONIC HEART",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 58.9,
+              "organic_ratio": 25.6,
+              "over_unity_ratio": 41.1,
+              "spectral_contrast_mean": 35.6,
+              "spectral_flatness": 50.0,
+              "swing_ratio": 91.0,
+              "tempo_bpm": 96.7
+            }
+          },
+          {
+            "name": "aespa - LEMONADE",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 70.0,
+              "organic_ratio": 26.7,
+              "over_unity_ratio": 77.8,
+              "spectral_contrast_mean": 7.8,
+              "spectral_flatness": 86.7,
+              "swing_ratio": 21.3,
+              "tempo_bpm": 77.8
+            }
+          },
+          {
+            "name": "The Black Skirts - Antifreeze",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 32.2,
+              "organic_ratio": 27.8,
+              "over_unity_ratio": 86.7,
+              "spectral_contrast_mean": 36.7,
+              "spectral_flatness": 52.2,
+              "swing_ratio": 61.8,
+              "tempo_bpm": 80.0
+            }
+          },
+          {
+            "name": "ROSÉ - new trick",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 54.4,
+              "organic_ratio": 28.9,
+              "over_unity_ratio": 81.1,
+              "spectral_contrast_mean": 2.2,
+              "spectral_flatness": 90.0,
+              "swing_ratio": 77.5,
+              "tempo_bpm": 93.3
+            }
+          },
+          {
+            "name": "aespa - Armageddon",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 36.7,
+              "organic_ratio": 30.0,
+              "over_unity_ratio": 57.8,
+              "spectral_contrast_mean": 60.0,
+              "spectral_flatness": 37.8,
+              "swing_ratio": 23.6,
+              "tempo_bpm": 32.2
+            }
+          },
+          {
+            "name": "ENHYPEN - Bloody Paradise",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 77.8,
+              "organic_ratio": 31.1,
+              "over_unity_ratio": 67.8,
+              "spectral_contrast_mean": 3.3,
+              "spectral_flatness": 73.3,
+              "swing_ratio": 80.9,
+              "tempo_bpm": 84.4
+            }
+          },
+          {
+            "name": "NewJeans - OMG",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 45.6,
+              "organic_ratio": 32.2,
+              "over_unity_ratio": 34.4,
+              "spectral_contrast_mean": 73.3,
+              "spectral_flatness": 44.4,
+              "swing_ratio": 70.8,
+              "tempo_bpm": 73.3
+            }
+          },
+          {
+            "name": "BESTie - Love Options",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 93.3,
+              "organic_ratio": 33.3,
               "over_unity_ratio": 100.0,
-              "spectral_contrast_mean": 25.0,
-              "spectral_flatness": 100.0,
-              "swing_ratio": 100.0,
-              "tempo_bpm": 87.5
+              "spectral_contrast_mean": 64.4,
+              "spectral_flatness": 95.6,
+              "swing_ratio": 66.3,
+              "tempo_bpm": 58.9
+            }
+          },
+          {
+            "name": "RESCENE - Deja Vu",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 78.9,
+              "organic_ratio": 34.4,
+              "over_unity_ratio": 75.6,
+              "spectral_contrast_mean": 51.1,
+              "spectral_flatness": 68.9,
+              "swing_ratio": 22.5,
+              "tempo_bpm": 65.6
+            }
+          },
+          {
+            "name": "NewJeans - Attention",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 90.0,
+              "organic_ratio": 35.6,
+              "over_unity_ratio": 65.6,
+              "spectral_contrast_mean": 33.3,
+              "spectral_flatness": 83.3,
+              "swing_ratio": 67.4,
+              "tempo_bpm": 44.4
+            }
+          },
+          {
+            "name": "Justin Bieber - Beauty and a Beat (feat. Nicki Minaj)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 56.7,
+              "organic_ratio": 36.7,
+              "over_unity_ratio": 62.2,
+              "spectral_contrast_mean": 82.2,
+              "spectral_flatness": 53.3,
+              "swing_ratio": 18.0,
+              "tempo_bpm": 77.8
+            }
+          },
+          {
+            "name": "Hearts2Hearts - STYLE",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 71.1,
+              "organic_ratio": 37.8,
+              "over_unity_ratio": 41.1,
+              "spectral_contrast_mean": 34.4,
+              "spectral_flatness": 87.8,
+              "swing_ratio": 37.1,
+              "tempo_bpm": 71.1
             }
           },
           {
             "name": "Hearts2Hearts - RUDE!",
             "watch": true,
             "pcts": {
-              "brightness_hz": 75.0,
-              "organic_ratio": 50.0,
-              "over_unity_ratio": 75.0,
-              "spectral_contrast_mean": 75.0,
-              "spectral_flatness": 75.0,
-              "swing_ratio": 50.0,
-              "tempo_bpm": 75.0
+              "brightness_hz": 72.2,
+              "organic_ratio": 38.9,
+              "over_unity_ratio": 47.8,
+              "spectral_contrast_mean": 66.7,
+              "spectral_flatness": 61.1,
+              "swing_ratio": 53.9,
+              "tempo_bpm": 75.6
             }
           },
           {
-            "name": "izna - Mamma Mia",
+            "name": "nowimyoung & Royal 44 - KISS KISS KISS (Prod. by Hukky Shibaseki) [feat. SUNWOO]",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 68.9,
+              "organic_ratio": 40.0,
+              "over_unity_ratio": 95.6,
+              "spectral_contrast_mean": 46.7,
+              "spectral_flatness": 65.6,
+              "swing_ratio": 10.1,
+              "tempo_bpm": 23.3
+            }
+          },
+          {
+            "name": "Hearts2Hearts - Lemon Tang",
             "watch": true,
             "pcts": {
-              "brightness_hz": 25.0,
-              "organic_ratio": 62.5,
-              "over_unity_ratio": 62.5,
-              "spectral_contrast_mean": 87.5,
-              "spectral_flatness": 25.0,
-              "swing_ratio": 87.5,
-              "tempo_bpm": 37.5
+              "brightness_hz": 74.4,
+              "organic_ratio": 41.1,
+              "over_unity_ratio": 42.2,
+              "spectral_contrast_mean": 68.9,
+              "spectral_flatness": 63.3,
+              "swing_ratio": 43.8,
+              "tempo_bpm": 64.4
+            }
+          },
+          {
+            "name": "KiiiKiii - 404 (New Era)",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 86.7,
+              "organic_ratio": 42.2,
+              "over_unity_ratio": 64.4,
+              "spectral_contrast_mean": 13.3,
+              "spectral_flatness": 91.1,
+              "swing_ratio": 65.2,
+              "tempo_bpm": 72.2
+            }
+          },
+          {
+            "name": "ATEEZ - BAD",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 33.3,
+              "organic_ratio": 43.3,
+              "over_unity_ratio": 92.2,
+              "spectral_contrast_mean": 17.8,
+              "spectral_flatness": 27.8,
+              "swing_ratio": 82.0,
+              "tempo_bpm": 61.1
+            }
+          },
+          {
+            "name": "Hearts2Hearts - Moonride",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 73.3,
+              "organic_ratio": 44.4,
+              "over_unity_ratio": 72.2,
+              "spectral_contrast_mean": 16.7,
+              "spectral_flatness": 76.7,
+              "swing_ratio": 78.7,
+              "tempo_bpm": 82.2
+            }
+          },
+          {
+            "name": "Hearts2Hearts - FOCUS",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 91.1,
+              "organic_ratio": 45.6,
+              "over_unity_ratio": 50.0,
+              "spectral_contrast_mean": 4.4,
+              "spectral_flatness": 94.4,
+              "swing_ratio": 92.1,
+              "tempo_bpm": 85.6
+            }
+          },
+          {
+            "name": "Girls' Generation-HRS - Skibidi",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 85.6,
+              "organic_ratio": 46.7,
+              "over_unity_ratio": 31.1,
+              "spectral_contrast_mean": 24.4,
+              "spectral_flatness": 85.6,
+              "swing_ratio": 27.0,
+              "tempo_bpm": 74.4
+            }
+          },
+          {
+            "name": "CORTIS - FaSHioN",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 62.2,
+              "organic_ratio": 47.8,
+              "over_unity_ratio": 68.9,
+              "spectral_contrast_mean": 27.8,
+              "spectral_flatness": 57.8,
+              "swing_ratio": 19.1,
+              "tempo_bpm": 18.9
+            }
+          },
+          {
+            "name": "BIG Naughty - Nostalgia",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 37.8,
+              "organic_ratio": 48.9,
+              "over_unity_ratio": 53.3,
+              "spectral_contrast_mean": 38.9,
+              "spectral_flatness": 50.0,
+              "swing_ratio": 60.7,
+              "tempo_bpm": 40.0
+            }
+          },
+          {
+            "name": "aespa - KISS N TELL",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 98.9,
+              "organic_ratio": 50.0,
+              "over_unity_ratio": 84.4,
+              "spectral_contrast_mean": 10.0,
+              "spectral_flatness": 98.9,
+              "swing_ratio": 2.2,
+              "tempo_bpm": 66.7
+            }
+          },
+          {
+            "name": "Pluggboi - 영원은 그렇듯",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 84.4,
+              "organic_ratio": 51.1,
+              "over_unity_ratio": 16.7,
+              "spectral_contrast_mean": 62.2,
+              "spectral_flatness": 82.2,
+              "swing_ratio": 16.9,
+              "tempo_bpm": 34.4
+            }
+          },
+          {
+            "name": "MEOVV - Hit 'Em",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 28.9,
+              "organic_ratio": 52.2,
+              "over_unity_ratio": 26.7,
+              "spectral_contrast_mean": 45.6,
+              "spectral_flatness": 40.0,
+              "swing_ratio": 64.0,
+              "tempo_bpm": 70.0
             }
           },
           {
             "name": "KATSEYE - Animal",
             "watch": true,
             "pcts": {
-              "brightness_hz": 37.5,
-              "organic_ratio": 75.0,
-              "over_unity_ratio": 87.5,
-              "spectral_contrast_mean": 37.5,
-              "spectral_flatness": 37.5,
-              "swing_ratio": 75.0,
-              "tempo_bpm": 100.0
+              "brightness_hz": 61.1,
+              "organic_ratio": 53.3,
+              "over_unity_ratio": 62.2,
+              "spectral_contrast_mean": 44.4,
+              "spectral_flatness": 58.9,
+              "swing_ratio": 84.3,
+              "tempo_bpm": 97.8
             }
           },
           {
-            "name": "MEOVV - ME ME ME",
+            "name": "Red Velvet - Surfin' Boy",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 63.3,
+              "organic_ratio": 54.4,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 23.3,
+              "spectral_flatness": 76.7,
+              "swing_ratio": 86.5,
+              "tempo_bpm": 45.6
+            }
+          },
+          {
+            "name": "RESCENE - Runaway",
             "watch": true,
             "pcts": {
-              "brightness_hz": 62.5,
-              "organic_ratio": 87.5,
-              "over_unity_ratio": 50.0,
-              "spectral_contrast_mean": 50.0,
-              "spectral_flatness": 62.5,
-              "swing_ratio": 25.0,
+              "brightness_hz": 40.0,
+              "organic_ratio": 55.6,
+              "over_unity_ratio": 71.1,
+              "spectral_contrast_mean": 57.8,
+              "spectral_flatness": 36.7,
+              "swing_ratio": 94.4,
+              "tempo_bpm": 98.9
+            }
+          },
+          {
+            "name": "NewJeans - How Sweet",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 96.7,
+              "organic_ratio": 56.7,
+              "over_unity_ratio": 94.4,
+              "spectral_contrast_mean": 32.2,
+              "spectral_flatness": 97.8,
+              "swing_ratio": 50.6,
+              "tempo_bpm": 63.3
+            }
+          },
+          {
+            "name": "HAON - Skrr (feat. GISELLE)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 16.7,
+              "organic_ratio": 57.8,
+              "over_unity_ratio": 58.9,
+              "spectral_contrast_mean": 91.1,
+              "spectral_flatness": 10.0,
+              "swing_ratio": 30.3,
+              "tempo_bpm": 1.1
+            }
+          },
+          {
+            "name": "izna - METRONOME",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 50.0,
+              "organic_ratio": 58.9,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 95.6,
+              "spectral_flatness": 25.6,
+              "swing_ratio": 5.6,
+              "tempo_bpm": 81.1
+            }
+          },
+          {
+            "name": "RESCENE - LOVE ATTACK",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 75.6,
+              "organic_ratio": 60.0,
+              "over_unity_ratio": 73.3,
+              "spectral_contrast_mean": 25.6,
+              "spectral_flatness": 81.1,
+              "swing_ratio": 48.3,
               "tempo_bpm": 50.0
             }
           },
           {
-            "name": "BABYMONSTER - DREAM",
+            "name": "NewJeans - Hype Boy",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 95.6,
+              "organic_ratio": 61.1,
+              "over_unity_ratio": 35.6,
+              "spectral_contrast_mean": 65.6,
+              "spectral_flatness": 100.0,
+              "swing_ratio": 47.2,
+              "tempo_bpm": 41.1
+            }
+          },
+          {
+            "name": "BIG Naughty - Vancouver",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 13.3,
+              "organic_ratio": 62.2,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 31.1,
+              "spectral_flatness": 16.7,
+              "swing_ratio": 43.8,
+              "tempo_bpm": 30.0
+            }
+          },
+          {
+            "name": "RESCENE - Pinball",
             "watch": true,
             "pcts": {
-              "brightness_hz": 12.5,
-              "organic_ratio": 100.0,
-              "over_unity_ratio": 12.5,
+              "brightness_hz": 88.9,
+              "organic_ratio": 63.3,
+              "over_unity_ratio": 78.9,
+              "spectral_contrast_mean": 41.1,
+              "spectral_flatness": 67.8,
+              "swing_ratio": 28.1,
+              "tempo_bpm": 26.7
+            }
+          },
+          {
+            "name": "BABYMONSTER - CHOOM",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 48.9,
+              "organic_ratio": 64.4,
+              "over_unity_ratio": 28.9,
+              "spectral_contrast_mean": 22.2,
+              "spectral_flatness": 47.8,
+              "swing_ratio": 24.7,
+              "tempo_bpm": 53.3
+            }
+          },
+          {
+            "name": "IU - Dear my crazy soulmate",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 100.0,
+              "organic_ratio": 65.6,
+              "over_unity_ratio": 47.8,
+              "spectral_contrast_mean": 85.6,
+              "spectral_flatness": 72.2,
+              "swing_ratio": 52.8,
+              "tempo_bpm": 22.2
+            }
+          },
+          {
+            "name": "JENNIE - FALLEN ANGEL",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 7.8,
+              "organic_ratio": 66.7,
+              "over_unity_ratio": 25.6,
+              "spectral_contrast_mean": 56.7,
+              "spectral_flatness": 14.4,
+              "swing_ratio": 89.9,
+              "tempo_bpm": 92.2
+            }
+          },
+          {
+            "name": "ROSÉ - toxic till the end",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 67.8,
+              "organic_ratio": 67.8,
+              "over_unity_ratio": 16.7,
+              "spectral_contrast_mean": 58.9,
+              "spectral_flatness": 66.7,
+              "swing_ratio": 25.8,
+              "tempo_bpm": 25.6
+            }
+          },
+          {
+            "name": "SYSTEM SEOUL & ycs - Summer Time : D",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 81.1,
+              "organic_ratio": 68.9,
+              "over_unity_ratio": 45.6,
+              "spectral_contrast_mean": 53.3,
+              "spectral_flatness": 92.2,
+              "swing_ratio": 16.9,
+              "tempo_bpm": 35.6
+            }
+          },
+          {
+            "name": "Young B - Rose (feat. Skinny Brown & Homeboy)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 21.1,
+              "organic_ratio": 70.0,
+              "over_unity_ratio": 66.7,
+              "spectral_contrast_mean": 70.0,
+              "spectral_flatness": 24.4,
+              "swing_ratio": 58.4,
+              "tempo_bpm": 27.8
+            }
+          },
+          {
+            "name": "Shane - Nothing",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 46.7,
+              "organic_ratio": 71.1,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 71.1,
+              "spectral_flatness": 41.1,
+              "swing_ratio": 34.8,
+              "tempo_bpm": 13.3
+            }
+          },
+          {
+            "name": "Post Malone & Swae Lee - Sunflower (Spider-Man: Into the Spider-Verse)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 22.2,
+              "organic_ratio": 72.2,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 87.8,
+              "spectral_flatness": 18.9,
+              "swing_ratio": 14.6,
+              "tempo_bpm": 33.3
+            }
+          },
+          {
+            "name": "The Black Skirts - EVERYTHING",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 1.1,
+              "organic_ratio": 73.3,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 88.9,
+              "spectral_flatness": 1.1,
+              "tempo_bpm": 55.6
+            }
+          },
+          {
+            "name": "D.O. - Guitarist",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 57.8,
+              "organic_ratio": 74.4,
+              "over_unity_ratio": 63.3,
+              "spectral_contrast_mean": 37.8,
+              "spectral_flatness": 64.4,
+              "swing_ratio": 29.2,
+              "tempo_bpm": 51.1
+            }
+          },
+          {
+            "name": "Ariana Grande - hate that i made you love me",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 10.0,
+              "organic_ratio": 75.6,
+              "over_unity_ratio": 34.4,
+              "spectral_contrast_mean": 67.8,
+              "spectral_flatness": 11.1,
+              "swing_ratio": 87.6,
+              "tempo_bpm": 37.8
+            }
+          },
+          {
+            "name": "Leellamarz - Trip (feat. Hannah)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 94.4,
+              "organic_ratio": 76.7,
+              "over_unity_ratio": 62.2,
+              "spectral_contrast_mean": 80.0,
+              "spectral_flatness": 81.1,
+              "swing_ratio": 3.4,
+              "tempo_bpm": 31.1
+            }
+          },
+          {
+            "name": "JENNIE - Less than a Lover",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 31.1,
+              "organic_ratio": 77.8,
+              "over_unity_ratio": 44.4,
+              "spectral_contrast_mean": 43.3,
+              "spectral_flatness": 35.6,
+              "swing_ratio": 68.5,
+              "tempo_bpm": 57.8
+            }
+          },
+          {
+            "name": "Green Day - Last Night On Earth",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 27.8,
+              "organic_ratio": 78.9,
+              "over_unity_ratio": 52.2,
+              "spectral_contrast_mean": 81.1,
+              "spectral_flatness": 30.0,
+              "swing_ratio": 77.5,
+              "tempo_bpm": 55.6
+            }
+          },
+          {
+            "name": "OSUN - U",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 34.4,
+              "organic_ratio": 80.0,
+              "over_unity_ratio": 36.7,
+              "spectral_contrast_mean": 63.3,
+              "spectral_flatness": 34.4,
+              "swing_ratio": 96.6,
+              "tempo_bpm": 100.0
+            }
+          },
+          {
+            "name": "wave to earth - seasons",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 5.6,
+              "organic_ratio": 81.1,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 76.7,
+              "spectral_flatness": 5.6,
+              "swing_ratio": 12.4,
+              "tempo_bpm": 3.3
+            }
+          },
+          {
+            "name": "Lim Hyunjung - 사랑은 봄비처럼...이별은 겨울비처럼... (Bonus Track Version)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 53.3,
+              "organic_ratio": 82.2,
+              "over_unity_ratio": 57.8,
+              "spectral_contrast_mean": 84.4,
+              "spectral_flatness": 24.4,
+              "swing_ratio": 46.1,
+              "tempo_bpm": 24.4
+            }
+          },
+          {
+            "name": "Vinxen - FLYING HIGH WITH U",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 12.2,
+              "organic_ratio": 83.3,
+              "over_unity_ratio": 50.0,
+              "spectral_contrast_mean": 40.0,
+              "spectral_flatness": 20.0,
+              "swing_ratio": 62.9,
+              "tempo_bpm": 43.3
+            }
+          },
+          {
+            "name": "wave to earth - love.",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 3.3,
+              "organic_ratio": 84.4,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 78.9,
+              "spectral_flatness": 4.4,
+              "swing_ratio": 100.0,
+              "tempo_bpm": 61.1
+            }
+          },
+          {
+            "name": "Han Yo Han - It's You (feat. NO:EL)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 43.3,
+              "organic_ratio": 85.6,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 72.2,
+              "spectral_flatness": 47.8,
+              "swing_ratio": 6.7,
+              "tempo_bpm": 42.2
+            }
+          },
+          {
+            "name": "Yerin Baek - Bye bye my blue",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 30.0,
+              "organic_ratio": 86.7,
+              "over_unity_ratio": 32.2,
+              "spectral_contrast_mean": 86.7,
+              "spectral_flatness": 18.9,
+              "swing_ratio": 4.5,
+              "tempo_bpm": 28.9
+            }
+          },
+          {
+            "name": "TUIDE - SUN KISS",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 25.6,
+              "organic_ratio": 87.8,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 61.1,
+              "spectral_flatness": 27.8,
+              "swing_ratio": 11.2,
+              "tempo_bpm": 52.2
+            }
+          },
+          {
+            "name": "Nerd Connection - ‎Good Night Good Dream",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 4.4,
+              "organic_ratio": 88.9,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 98.9,
+              "spectral_flatness": 3.3,
+              "swing_ratio": 32.6,
+              "tempo_bpm": 4.4
+            }
+          },
+          {
+            "name": "Yerin Baek - Antifreeze",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 14.4,
+              "organic_ratio": 90.0,
+              "over_unity_ratio": 28.9,
+              "spectral_contrast_mean": 74.4,
+              "spectral_flatness": 13.3,
+              "swing_ratio": 83.1,
+              "tempo_bpm": 62.2
+            }
+          },
+          {
+            "name": "BIGBANG - IF YOU",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 8.9,
+              "organic_ratio": 91.1,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 97.8,
+              "spectral_flatness": 8.9,
+              "swing_ratio": 71.9,
+              "tempo_bpm": 12.2
+            }
+          },
+          {
+            "name": "Damons year - yours",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 6.7,
+              "organic_ratio": 92.2,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 96.7,
+              "spectral_flatness": 7.8,
+              "swing_ratio": 98.9,
+              "tempo_bpm": 14.4
+            }
+          },
+          {
+            "name": "The Black Skirts - Ling Ling",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 35.6,
+              "organic_ratio": 93.3,
+              "over_unity_ratio": 70.0,
+              "spectral_contrast_mean": 83.3,
+              "spectral_flatness": 54.4,
+              "swing_ratio": 39.3,
+              "tempo_bpm": 21.1
+            }
+          },
+          {
+            "name": "back number - Heroine",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 23.3,
+              "organic_ratio": 94.4,
+              "over_unity_ratio": 16.7,
+              "spectral_contrast_mean": 75.6,
+              "spectral_flatness": 31.1,
+              "swing_ratio": 31.5,
+              "tempo_bpm": 16.7
+            }
+          },
+          {
+            "name": "Nerd Connection - If I have you only (My love)",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 15.6,
+              "organic_ratio": 95.6,
+              "over_unity_ratio": 12.2,
               "spectral_contrast_mean": 100.0,
-              "spectral_flatness": 12.5,
-              "swing_ratio": 62.5,
-              "tempo_bpm": 62.5
+              "spectral_flatness": 6.7,
+              "swing_ratio": 40.4,
+              "tempo_bpm": 8.9
+            }
+          },
+          {
+            "name": "Sung Si Kyung - 거리에서",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 17.8,
+              "organic_ratio": 96.7,
+              "over_unity_ratio": 24.4,
+              "spectral_contrast_mean": 92.2,
+              "spectral_flatness": 15.6,
+              "swing_ratio": 43.8,
+              "tempo_bpm": 6.7
+            }
+          },
+          {
+            "name": "HANRORO - 0+0",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 18.9,
+              "organic_ratio": 97.8,
+              "over_unity_ratio": 93.3,
+              "spectral_contrast_mean": 90.0,
+              "spectral_flatness": 24.4,
+              "swing_ratio": 14.6,
+              "tempo_bpm": 7.8
+            }
+          },
+          {
+            "name": "M.C the MAX - 행복하지 말아요",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 11.1,
+              "organic_ratio": 98.9,
+              "over_unity_ratio": 16.7,
+              "spectral_contrast_mean": 94.4,
+              "spectral_flatness": 12.2,
+              "swing_ratio": 74.2,
+              "tempo_bpm": 11.1
+            }
+          },
+          {
+            "name": "Clairo - Bubble Gum",
+            "watch": false,
+            "pcts": {
+              "brightness_hz": 2.2,
+              "organic_ratio": 100.0,
+              "over_unity_ratio": 12.2,
+              "spectral_contrast_mean": 93.3,
+              "spectral_flatness": 2.2,
+              "swing_ratio": 95.5,
+              "tempo_bpm": 17.8
             }
           }
         ],
@@ -348,10 +2226,21 @@
     "유사는 도달이 아니다. 매치는 검토 후보이지 예측이 아니며 판단은 A&R의 몫이다.",
     "검출 규칙 커버리지 3/10. 대부분의 임펄스는 아직 규칙이 없다(아래 관측 불가 표).",
     "백분위는 당일 코호트 내 상대 위치다. 코호트 구성이 바뀌면 같은 곡도 값이 달라진다.",
-    "규칙 ukg-origin-shuffle에 걸린 곡 1곡. 곡별 위치는 격자 참조",
+    "규칙 hyperpop-texture에 걸린 곡 10곡. 곡별 위치는 격자 참조",
+    "규칙 ukg-origin-shuffle에 걸린 곡 11곡. 곡별 위치는 격자 참조",
+    "규칙 moombahton-kr-tropical에 걸린 곡 4곡. 곡별 위치는 격자 참조",
+    "'하이퍼팝' 수용 모드: element (원장 1.1.0)",
+    "과거 차용 앵커: aespa - Savage (2021-10, 확실성 매우 높음)",
+    "과거 차용 앵커: TXT - Frost (2022-05, 확실성 중간)",
+    "과거 차용 앵커: tripleS - Rising (2023-02, 확실성 중간)",
+    "과거 차용 앵커: SEVENTEEN - GAM3 BO1 (2023-10, 확실성 중간)",
+    "과거 차용 앵커: aespa - Hot Mess (2024-07, 확실성 중간)",
+    "과거 차용 앵커: 최예나 - Catch Catch (2026-03, 확실성 중간)",
+    "정체성화 전례: aespa '쇠맛' (언론 공식화 2024-05)",
     "규칙 근거 hyperpop-texture: A2.1 실측 2026-07-30. Savage organic P2.2·flatness P87.9·over_unity P80.2 (CASEBOOK §A2.1). A2 본편 재검(2026-07-31): organic↓·flatness↑은 동시대 프레임에서도 성립, over_unity는 프레임 의존(동시대 중앙 P66, RULES §2.1 한계 참조)",
     "'UK개러지·드럼앤베이스 리바이벌' 수용 모드: full (원장 1.1.0)",
     "규칙 근거 ukg-origin-shuffle: A2 본편 실측 2026-07-31. 원형 swing P91.3(▲4/6)·tempo P96.0(▲5/6). 한국 수용형은 스윙 소거(P37.8)로 안 걸린다. 원형 진입 감지용 (CASEBOOK §A2 본편)",
+    "'뭄바톤·트로피컬하우스' 수용 모드: full (원장 1.1.0)",
     "규칙 근거 moombahton-kr-tropical: A2 본편 실측 2026-07-31. 한국 수용형 contrast ▼7/7(P17.3)·brightness ▲5/7(P88.8). 청량 변형 검출용, 원형(명도 P73)은 경계 아래 (CASEBOOK §A2 본편)"
   ],
   "recommendations": [
@@ -416,10 +2305,10 @@
     "레게톤/뎀보우 흐름이 지금 도는지. 등재 없음. 템플릿 정체 해소 선행"
   ],
   "reliability": {
-    "sample": "원장 10건 · 코호트 8곡 · 매치 1건",
+    "sample": "원장 10건 · 코호트 90곡 · 매치 25건",
     "accuracy": "검출 규칙은 과거 사례에서 뽑은 가설이다. 사람 라벨이 없어 정확도 미측정",
     "missing": "세 축 중 하나라도 계산되지 않은 곡은 규칙을 적용하지 않는다(결측을 0으로 읽지 않는다)",
-    "engine": "genre-impulse v0.1.0 · 스냅샷 2026-09-20.json · 컷 P20/P80"
+    "engine": "genre-impulse v0.1.0 · 스냅샷 2026-09-21.json · 컷 P20/P80"
   },
   "inferences": [
     {
@@ -431,16 +2320,16 @@
       "chartId": "impulse-coverage"
     },
     {
-      "text": "코호트 8곡 중 1곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
-      "basis": "컷 P20/P80 · 매치 1건 · 곡 1/8 (12%)",
-      "sample": "코호트 8곡",
+      "text": "코호트 90곡 중 21곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
+      "basis": "컷 P20/P80 · 매치 25건 · 곡 21/90 (23%)",
+      "sample": "코호트 90곡",
       "confidence": "medium",
       "limits": "이 수는 컷을 움직이면 함께 움직인다. 백분위는 그날 코호트 안에서의 상대 위치라 코호트 구성이 바뀌면 같은 곡도 다른 값을 받는다.",
       "chartId": "match-axes"
     },
     {
-      "text": "워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. 1곡이다.",
-      "basis": "매치된 1곡 중 워치리스트 1곡 · RESCENE - Pretty Girl",
+      "text": "워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. 12곡이다.",
+      "basis": "매치된 21곡 중 워치리스트 12곡 · CORTIS - REDRED, KISS OF LIFE - Igloo, KiiiKiii - Pop Off Pop Off, Keyveatz - Key Beats, KiiiKiii - Candy Pink Magic Hol",
       "sample": "워치리스트 11팀",
       "confidence": "medium",
       "limits": "걸렸다는 것은 축의 위치가 규칙과 맞았다는 뜻이며 그 곡이 그 장르라는 판정이 아니다.",

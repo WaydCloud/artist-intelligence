@@ -5,18 +5,23 @@
 # Invariant  it stops before deploying when a gate fails. Shipping a page that a gate
 #            rejected is how a thin day gets read as a real one
 # Failure    any failing step ends the run with a non-zero exit and nothing is deployed
+#            exit 3 means the push went out but the page was not confirmed. Rerunning
+#            would only rebuild and push again
 # Note       the deploy is not run from here. The Vercel project builds every commit on
 #            main, so the push is the deploy. This waits for it and checks the paths.
 
 param(
   [switch]$NoDeploy,   # rebuild, gate and commit only
-  [switch]$NoCommit    # rebuild and gate only
+  [switch]$NoCommit,   # rebuild and gate only
+  [switch]$DataOnly    # push only when every unpushed commit is a data commit (daily_publish)
 )
 
 $ErrorActionPreference = "Continue"
 $repo = Split-Path -Parent $PSScriptRoot
 Set-Location $repo
 $env:PYTHONIOENCODING = "utf-8"
+# Python writes UTF-8, so PowerShell must read it as UTF-8 or captured logs come out garbled.
+try { [Console]::OutputEncoding = [System.Text.Encoding]::UTF8 } catch { }
 $wl = "packages/entity-master/watchlist.json"
 
 function Step($name, [scriptblock]$body) {
@@ -54,9 +59,13 @@ Step "signal-bridge report" {
   $env:PYTHONPATH = "modules/signal-bridge/src"
   python -m signal_bridge analyze --social data/live/social_series.json --chart data/live/chart_series.json --theta-rank 200 --focus-social --watchlist $wl --youtube data/live/yt_series.json -o modules/signal-bridge/output/
 }
-Step "dashboard collect" { node apps/dashboard/scripts/collect-reports.mjs; node apps/dashboard/scripts/collect-labs.mjs }
+# One command per Step. Step reads only the last exit code, so a failing first command
+# in a pair would pass unseen.
+Step "dashboard collect reports" { node apps/dashboard/scripts/collect-reports.mjs }
+Step "dashboard collect labs" { node apps/dashboard/scripts/collect-labs.mjs }
 
-Step "contract gate" { python scripts/validate_report_data.py --selftest; python scripts/validate_report_data.py }
+Step "contract gate selftest" { python scripts/validate_report_data.py --selftest }
+Step "contract gate" { python scripts/validate_report_data.py }
 
 # The coverage gate reports, it does not withhold. A thin day still ships, carrying its
 # own sample line. It is here so the person running this sees it before the page is public.
@@ -67,14 +76,28 @@ if ($LASTEXITCODE -ne 0) { Write-Host "!! coverage RED -- the page will carry a 
 
 if ($NoCommit) { Write-Host ""; Write-Host "done (no commit)"; exit 0 }
 
+# Every git call names these paths, so whatever else a person has staged is left alone.
+$reportPaths = @(git ls-files -- "modules/*/output/report.json") + @("apps/dashboard/data/reports.json", "apps/dashboard/data/labs.json")
 Step "commit" {
-  git add modules/*/output/report.json apps/dashboard/data/reports.json apps/dashboard/data/labs.json
-  $changed = git diff --cached --name-only
+  git add -- $reportPaths
+  $changed = git diff --cached --name-only -- $reportPaths
   if (-not $changed) { Write-Host "  변경 없음 -- 커밋 생략"; $global:LASTEXITCODE = 0; return }
+  # The repo is public, so the scan runs before the commit exists, not after the push.
+  & (Join-Path $PSScriptRoot "scan_staged_secrets.ps1") -Paths $reportPaths
+  if ($LASTEXITCODE -ne 0) { git reset -q -- $reportPaths; $global:LASTEXITCODE = 1; return }
   $today = Get-Date -Format "yyyy-MM-dd"
-  git commit -m "data: $today 수집을 리포트에 반영"
+  git commit -m "data: $today 수집을 리포트에 반영" -- $reportPaths
 }
-Step "push" { git push }
+Step "push" {
+  if (-not $DataOnly) { git push; return }
+  # Checked again here, not only before the rebuild: a person may commit on main meanwhile.
+  $head = (git rev-parse HEAD | Out-String).Trim()
+  $subjects = @(git log --format=%s "origin/main..$head")
+  $files = @(git diff --name-only "origin/main" $head)
+  $foreign = @($subjects | Where-Object { $_ -notmatch '^data: \d{4}-\d{2}-\d{2} ' }) + @($files | Where-Object { $reportPaths -notcontains $_ })
+  if ($foreign.Count -gt 0) { Write-Host "!! unpushed work that is not a data commit -- not pushing"; $global:LASTEXITCODE = 1; return }
+  git push origin "${head}:refs/heads/main"
+}
 
 if ($NoDeploy) { Write-Host ""; Write-Host "done (no deploy)"; exit 0 }
 
@@ -102,7 +125,7 @@ do {
   Write-Host "  $(Get-Date -Format HH:mm:ss)  $(if ($live) { '반영됨' } else { '아직' })"
 } while (-not $live -and (Get-Date) -lt $deadline)
 
-if (-not $live) { Write-Host "!! 8분 안에 페이지에 반영되지 않았다. Vercel 빌드 로그를 볼 것"; exit 1 }
+if (-not $live) { Write-Host "!! 8분 안에 페이지에 반영되지 않았다. Vercel 빌드 로그를 볼 것"; exit 3 }
 
 # A green build is not a working page. The static export names the page
 # artist-intelligence.html while the site links to /artist-intelligence, and that gap
@@ -117,7 +140,7 @@ foreach ($path in @("/", "/artist-intelligence", "/labs", "/utilities")) {
   Write-Host "  $code  $path"
   if ($code -ne 200) { $bad++ }
 }
-if ($bad) { Write-Host "!! 200 이 아닌 경로 $bad 개"; exit 1 }
+if ($bad) { Write-Host "!! 200 이 아닌 경로 $bad 개"; exit 3 }
 
 Write-Host ""
 Write-Host "done -- $site"

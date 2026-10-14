@@ -14,6 +14,7 @@
 
 param(
   [string]$TaskName = "AI-daily-collect",
+  [string]$Script = "daily_collect.ps1",   # daily_publish.ps1 for "AI-daily-publish"
   [string]$At = "09:00",
   [int]$RepeatHours = 2,
   [int]$RepeatWindowHours = 12,
@@ -23,8 +24,8 @@ param(
 $ErrorActionPreference = "Stop"
 if ($PSScriptRoot) { $scriptDir = $PSScriptRoot } else { $scriptDir = Split-Path -Parent $PSCommandPath }
 $repo = Split-Path -Parent $scriptDir
-$target = Join-Path $scriptDir "daily_collect.ps1"
-if (-not (Test-Path $target)) { throw "collector not found: $target" }
+$target = Join-Path $scriptDir $Script
+if (-not (Test-Path $target)) { throw "script not found: $target" }
 
 $user = "$env:USERDOMAIN\$env:USERNAME"
 

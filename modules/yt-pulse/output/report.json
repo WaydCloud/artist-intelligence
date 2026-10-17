@@ -1,8 +1,8 @@
 {
   "moduleId": "yt-pulse",
   "title": "YT 펄스 · 워치리스트 공식 채널",
-  "subtitle": "YouTube Data API v3 (official) · 수집 2026-10-16",
-  "generatedAt": "2026-10-16T02:41:47Z",
+  "subtitle": "YouTube Data API v3 (official) · 수집 2026-10-17",
+  "generatedAt": "2026-10-17T00:42:04Z",
   "metrics": [
     {
       "label": "추적 팀",
@@ -14,7 +14,7 @@
     },
     {
       "label": "수집한 영상",
-      "value": 1708,
+      "value": 1736,
       "unit": "개",
       "hint": "채널당 최근 업로드 창",
       "section": "reach",
@@ -22,22 +22,22 @@
     },
     {
       "label": "조회 합",
-      "value": 975043852,
+      "value": 985792174,
       "unit": "views",
       "section": "reach",
       "definition": "수집한 영상의 조회수를 모두 더한 값. 공개 집계 수치이며 인기의 총점이 아니다."
     },
     {
       "label": "가장 빠른 영상의 일 조회",
-      "value": 1162307,
+      "value": 2979052,
       "unit": "views/일",
-      "hint": "KATSEYE · 평균 일 조회(수명 평균 근사)",
+      "hint": "ILLIT · 평균 일 조회(수명 평균 근사)",
       "section": "fresh",
       "definition": "수집한 영상 중 평균 일 조회가 가장 높은 한 편의 값. 조회수를 공개 후 지난 날로 나눈 수명 평균이라, 갓 올라온 영상의 초반 화력은 낮게 잡힌다."
     },
     {
       "label": "새 영상",
-      "value": 255,
+      "value": 261,
       "unit": "개",
       "hint": "최근 14일 내 업로드(캠페인 활성)",
       "section": "fresh",
@@ -51,47 +51,47 @@
       "data": [
         {
           "name": "KATSEYE",
-          "value": 367216218
+          "value": 368758828
         },
         {
           "name": "CORTIS",
-          "value": 139829816
+          "value": 141649195
         },
         {
           "name": "BABYMONSTER",
-          "value": 134931119
+          "value": 135309961
         },
         {
           "name": "ILLIT",
-          "value": 102753343
+          "value": 106498537
         },
         {
           "name": "Hearts2Hearts",
-          "value": 94851115
+          "value": 97002517
         },
         {
           "name": "RESCENE",
-          "value": 66307664
+          "value": 66894622
         },
         {
           "name": "KISS OF LIFE",
-          "value": 24450018
+          "value": 24508746
         },
         {
           "name": "KiiiKiii",
-          "value": 19518346
+          "value": 19570670
         },
         {
           "name": "MEOVV",
-          "value": 17246347
+          "value": 17561202
         },
         {
           "name": "izna",
-          "value": 6655474
+          "value": 6721377
         },
         {
           "name": "KEYVEATZ",
-          "value": 1284392
+          "value": 1316519
         }
       ],
       "section": "reach",
@@ -103,52 +103,52 @@
       "type": "bar",
       "id": "fresh-by-act",
       "reliability": {
-        "sample": "최근 14일 · 영상 255개 / 1708개"
+        "sample": "최근 14일 · 영상 261개 / 1736개"
       },
       "data": [
         {
           "name": "Hearts2Hearts",
-          "value": 44
+          "value": 47
         },
         {
           "name": "izna",
-          "value": 40
+          "value": 38
         },
         {
           "name": "KiiiKiii",
           "value": 36
         },
         {
-          "name": "ILLIT",
-          "value": 28
-        },
-        {
           "name": "MEOVV",
-          "value": 27
+          "value": 32
         },
         {
-          "name": "KEYVEATZ",
-          "value": 22
+          "name": "ILLIT",
+          "value": 30
         },
         {
           "name": "CORTIS",
           "value": 19
         },
         {
-          "name": "KATSEYE",
-          "value": 12
+          "name": "KEYVEATZ",
+          "value": 19
         },
         {
           "name": "RESCENE",
-          "value": 12
+          "value": 13
+        },
+        {
+          "name": "KATSEYE",
+          "value": 11
         },
         {
           "name": "KISS OF LIFE",
-          "value": 8
+          "value": 10
         },
         {
           "name": "BABYMONSTER",
-          "value": 7
+          "value": 6
         }
       ],
       "section": "fresh",
@@ -159,11 +159,11 @@
   ],
   "media": [],
   "insights": [
-    "신작: MEOVV · 'dab a ranch' (1일 전, 조회 2,086, +2,086/일) · 캠페인 활성 신호(참고)",
-    "신작: KEYVEATZ · '에이원고짱 에이원고또하자' (1일 전, 조회 2,781, +2,781/일) · 캠페인 활성 신호(참고)",
-    "신작: ILLIT · 'STOP!!!!!! #BREAK_EVEN #체포하겠어 #You_re_Under_Arrest #ILLIT #아일릿' (1일 전, 조회 322,063, +322,063/일) · 캠페인 활성 신호(참고)",
-    "신작: KEYVEATZ · '슬냥이 키우기' (1일 전, 조회 8,613, +8,613/일) · 캠페인 활성 신호(참고)",
-    "신작: Hearts2Hearts · 'the iconic intro #Hearts2Hearts #하츠투하츠 #H2H #ICONICHEART #Hearts2Hearts_ICONICHEART' (1일 전, 조회 238,768, +238,768/일) · 캠페인 활성 신호(참고)",
+    "신작: KATSEYE · 'Unloveu on repeat #KATSEYE' (1일 전, 조회 486,370, +486,370/일) · 캠페인 활성 신호(참고)",
+    "신작: Hearts2Hearts · '같이 할 친구 @@ #Hearts2Hearts #하츠투하츠 #H2H' (1일 전, 조회 489,993, +489,993/일) · 캠페인 활성 신호(참고)",
+    "신작: KISS OF LIFE · '🥪🍱🍜🍓#KISSOFLIFE #키스오브라이프 #KIOF #HANEUL #하늘 #Shorts' (1일 전, 조회 40,484, +40,484/일) · 캠페인 활성 신호(참고)",
+    "신작: KISS OF LIFE · '[KI-OFF] KLIP-#52 | 'WATERBOMB KAOHSIUNG 2026' Behind' (1일 전, 조회 8,275, +8,275/일) · 캠페인 활성 신호(참고)",
+    "신작: MEOVV · '🤫🐈‍⬛' (1일 전, 조회 50,126, +50,126/일) · 캠페인 활성 신호(참고)",
     "공식 채널 업로드 한정. 레이블 채널(HYBE LABELS 등)에 올라간 MV는 미포착",
     "평균 일 조회는 수명 전체 평균 근사(초반 화력 과소평가 가능). 여러 날 쌓이면 실측 증분으로 대체 예정",
     "조회·구독은 공개 집계 지표. 인기나 실력의 단정이 아닌 참고 신호"
@@ -180,40 +180,40 @@
     "question": "지금 가장 빠르게 조회를 모으는 팀은 어디인가?",
     "definition": "팀의 영상 중 평균 일 조회가 가장 높은 한 편의 값(조회수 ÷ 공개 후 지난 날, 상위 8팀). 수명 전체 평균이라 갓 올라온 영상의 초반 화력은 낮게, 오래된 영상은 평탄하게 잡힌다. 채널 규모가 크면 같은 반응에서도 값이 커진다.",
     "reliability": {
-      "sample": "팀 11팀 · 영상 1708개"
+      "sample": "팀 11팀 · 영상 1736개"
     },
     "data": [
       {
-        "name": "KATSEYE",
-        "value": 1162307
-      },
-      {
         "name": "ILLIT",
-        "value": 585403
+        "value": 2979052
       },
       {
         "name": "Hearts2Hearts",
-        "value": 545777
+        "value": 1151728
       },
       {
         "name": "CORTIS",
-        "value": 465279
+        "value": 992053
+      },
+      {
+        "name": "KATSEYE",
+        "value": 968590
       },
       {
         "name": "BABYMONSTER",
-        "value": 430801
+        "value": 355315
       },
       {
         "name": "RESCENE",
-        "value": 316674
+        "value": 215296
       },
       {
         "name": "MEOVV",
-        "value": 211336
+        "value": 154678
       },
       {
         "name": "KISS OF LIFE",
-        "value": 109721
+        "value": 108238
       }
     ]
   },
@@ -239,16 +239,32 @@
     "광고가 붙은 조회인지. 유기적 조회와 구분하지 않는다"
   ],
   "reliability": {
-    "sample": "팀 11팀 · 영상 1708개 · 기준일 2026-10-16",
+    "sample": "팀 11팀 · 영상 1736개 · 기준일 2026-10-17",
     "accuracy": "조회·구독은 API가 돌려준 공개 집계값. 평균 일 조회는 수명 평균 근사이며 정확도 미측정",
     "missing": "팀 공식 채널만 본다. 레이블 채널 업로드와 채널이 확인되지 않은 팀은 이 표본에 없다",
-    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-10-16T00:09:07Z"
+    "engine": "YouTube Data API v3 (official) · 스냅샷 2026-10-17T00:07:45Z"
   },
   "inferences": [
     {
-      "text": "최근 14일 업로드가 한쪽으로 몰린 것으로 읽힌다. Hearts2Hearts 44개, izna 40개, KiiiKiii 36개 순이다.",
-      "basis": "업로드가 있는 11팀 · 합 255개 · 중앙값 22개",
-      "sample": "팀 11팀 · 영상 1708개",
+      "text": "쌓인 조회가 가장 큰 팀과 지금 가장 빠른 팀이 다른 것으로 읽힌다. 조회 합은 KATSEYE이고 일 조회는 ILLIT이다.",
+      "basis": "조회 합 1위 KATSEYE 368,758,828 · 일 조회 1위 ILLIT 2,979,052/일",
+      "sample": "팀 11팀 · 영상 1736개",
+      "confidence": "medium",
+      "limits": "조회 합은 영상 수가 많을수록 커지고 일 조회는 수명 평균 근사라, 두 값은 같은 축이 아니다. 채널 규모가 크면 양쪽 다 커진다.",
+      "chartId": "velocity-by-act"
+    },
+    {
+      "text": "일 조회가 한 팀 쪽으로 크게 쏠린 상태와 정합한다. 1위가 중앙값의 14배다.",
+      "basis": "1위 ILLIT 2,979,052/일 · 중앙값 215,296/일 · 팀 11팀",
+      "sample": "팀 11팀 · 영상 1736개",
+      "confidence": "medium",
+      "limits": "구독자 규모가 큰 채널은 같은 반응에서도 값이 커진다. 이 값은 화력의 분포이지 완성도의 순위가 아니다.",
+      "chartId": "velocity-by-act"
+    },
+    {
+      "text": "최근 14일 업로드가 한쪽으로 몰린 것으로 읽힌다. Hearts2Hearts 47개, izna 38개, KiiiKiii 36개 순이다.",
+      "basis": "업로드가 있는 11팀 · 합 261개 · 중앙값 19개",
+      "sample": "팀 11팀 · 영상 1736개",
       "confidence": "low",
       "limits": "채널 캐시가 최근 업로드 위주라 이 수는 수집 창의 산물이기도 하다. 업로드 수는 활동량이며 성과가 아니다.",
       "chartId": "fresh-by-act"

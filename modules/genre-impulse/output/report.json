@@ -1,8 +1,8 @@
 {
   "moduleId": "genre-impulse",
   "title": "장르 임펄스 모니터",
-  "subtitle": "원장 10건 × 코호트 50곡 (2026-10-18.json) · v0.1.0",
-  "generatedAt": "2026-10-18T00:41:31.075781+00:00",
+  "subtitle": "원장 10건 × 코호트 50곡 (2026-10-19.json) · v0.1.0",
+  "generatedAt": "2026-10-19T02:42:30.513467+00:00",
   "metrics": [
     {
       "label": "원장 임펄스",
@@ -28,7 +28,7 @@
     },
     {
       "label": "규칙에 걸린 곡",
-      "value": 10,
+      "value": 9,
       "unit": "곡",
       "section": "matches",
       "definition": "확정된 검출 규칙의 하한·상한 조건을 모두 만족한 곡의 수. 여러 규칙에 걸린 곡도 한 번만 센다. 검토 후보이지 판정이 아니다."
@@ -39,7 +39,7 @@
       "type": "heatmap",
       "id": "match-axes",
       "reliability": {
-        "sample": "매치 13건 / 코호트 50곡"
+        "sample": "매치 12건 / 코호트 50곡"
       },
       "data": {
         "rows": [
@@ -54,8 +54,7 @@
           "UKG 원형 · ★RESCENE - Pretty Girl",
           "UKG 원형 · ★KATSEYE - Animal",
           "UKG 원형 · ★ILLIT - It's Me",
-          "UKG 원형 · ★KiiiKiii - Pop Off Pop Off",
-          "UKG 원형 · ★Hearts2Hearts - ICONIC HEART (Korean Version)"
+          "UKG 원형 · ★KiiiKiii - Pop Off Pop Off"
         ],
         "cols": [
           "음색 밝기",
@@ -71,18 +70,18 @@
             78.0,
             10.0,
             76.0,
-            58.0,
+            60.0,
             88.0,
-            84.0,
+            82.0,
             80.0
           ],
           [
-            50.0,
+            48.0,
             12.0,
-            96.0,
+            98.0,
             10.0,
-            60.0,
-            86.0,
+            58.0,
+            84.0,
             74.0
           ],
           [
@@ -91,7 +90,7 @@
             24.0,
             26.0,
             84.0,
-            6.0,
+            4.0,
             90.0
           ],
           [
@@ -100,89 +99,80 @@
             84.0,
             2.0,
             42.0,
-            4.0,
-            60.0
+            2.0,
+            58.0
           ],
           [
             80.0,
             20.0,
             66.0,
-            16.0,
+            18.0,
             94.0,
-            24.0,
-            64.0
+            22.0,
+            62.0
           ],
           [
             92.0,
-            58.0,
+            62.0,
             44.0,
             4.0,
             90.0,
-            94.0,
+            92.0,
             76.0
           ],
           [
             80.0,
             20.0,
             66.0,
-            16.0,
+            18.0,
             94.0,
-            24.0,
-            64.0
+            22.0,
+            62.0
           ],
           [
             100.0,
-            44.0,
+            46.0,
             82.0,
-            38.0,
+            40.0,
             100.0,
-            100.0,
+            98.0,
             88.0
           ],
           [
             98.0,
             32.0,
-            94.0,
-            62.0,
             96.0,
-            98.0,
+            64.0,
+            96.0,
+            96.0,
             86.0
           ],
           [
             32.0,
             82.0,
             62.0,
-            44.0,
+            46.0,
             30.0,
-            92.0,
+            90.0,
             94.0
           ],
           [
             36.0,
             4.0,
             28.0,
-            20.0,
+            22.0,
             32.0,
-            90.0,
+            88.0,
             92.0
           ],
           [
             78.0,
             10.0,
             76.0,
-            58.0,
+            60.0,
             88.0,
-            84.0,
+            82.0,
             80.0
-          ],
-          [
-            82.0,
-            52.0,
-            32.0,
-            28.0,
-            82.0,
-            80.0,
-            96.0
           ]
         ],
         "scale": "value",
@@ -228,10 +218,10 @@
           "brightness_hz": [
             1652.3,
             1687.0,
+            1739.6,
             1836.7,
             1850.8,
             1873.9,
-            1948.5,
             1982.6,
             2075.8,
             2114.2,
@@ -246,13 +236,13 @@
             2349.5,
             2380.7,
             2467.5,
-            2477.4,
             2496.9,
             2531.6,
             2582.1,
             2624.7,
             2709.9,
             2711.0,
+            2727.9,
             2768.2,
             2774.4,
             2814.0,
@@ -295,11 +285,13 @@
             0.3511,
             0.365,
             0.3825,
+            0.3901,
             0.4012,
             0.4025,
             0.4037,
             0.4052,
             0.4074,
+            0.4078,
             0.4078,
             0.4192,
             0.4339,
@@ -307,10 +299,8 @@
             0.437,
             0.4413,
             0.4519,
-            0.4644,
             0.4731,
             0.4895,
-            0.4944,
             0.5047,
             0.5154,
             0.5407,
@@ -372,14 +362,14 @@
             0.000136,
             0.000286,
             0.0003,
+            0.000371,
             0.000469,
             0.000505,
             0.000507,
             0.000607,
             0.000717,
             0.001755,
-            0.002333,
-            0.002492
+            0.002333
           ],
           "spectral_contrast_mean": [
             20.408,
@@ -388,14 +378,15 @@
             21.322,
             21.422,
             21.45,
+            21.508,
             21.574,
             21.583,
             21.597,
             21.642,
-            21.646,
             21.762,
             21.782,
             21.823,
+            21.898,
             22.169,
             22.178,
             22.248,
@@ -428,16 +419,15 @@
             23.519,
             23.609,
             23.869,
-            24.074,
             24.339,
             25.046,
             25.384
           ],
           "spectral_flatness": [
             0.002,
+            0.0033,
             0.0035,
             0.0036,
-            0.004,
             0.005,
             0.005,
             0.005,
@@ -463,11 +453,11 @@
             0.0167,
             0.0172,
             0.0175,
-            0.0175,
             0.0178,
             0.0187,
             0.0188,
             0.0206,
+            0.0215,
             0.0219,
             0.0222,
             0.0226,
@@ -486,7 +476,6 @@
             0.0404
           ],
           "swing_ratio": [
-            0.4746,
             0.4778,
             0.4913,
             0.4974,
@@ -498,7 +487,6 @@
             0.5111,
             0.5128,
             0.5128,
-            0.513,
             0.5146,
             0.515,
             0.5155,
@@ -523,6 +511,7 @@
             0.5283,
             0.5283,
             0.5286,
+            0.5308,
             0.5318,
             0.5319,
             0.5345,
@@ -535,7 +524,8 @@
             0.5515,
             0.5542,
             0.6228,
-            0.6586
+            0.6586,
+            0.6676
           ],
           "tempo_bpm": [
             65.91,
@@ -545,7 +535,6 @@
             80.01,
             84.97,
             87.49,
-            87.5,
             89.98,
             95.02,
             95.97,
@@ -559,8 +548,8 @@
             110.02,
             112.01,
             116.0,
+            118.01,
             118.05,
-            120.0,
             120.97,
             123.02,
             124.03,
@@ -570,6 +559,7 @@
             125.96,
             125.99,
             126.01,
+            126.99,
             127.0,
             127.96,
             127.96,
@@ -635,8 +625,8 @@
               "over_unity_ratio": 36.0,
               "spectral_contrast_mean": 6.0,
               "spectral_flatness": 78.0,
-              "swing_ratio": 28.0,
-              "tempo_bpm": 48.0
+              "swing_ratio": 24.0,
+              "tempo_bpm": 46.0
             }
           },
           {
@@ -646,9 +636,9 @@
               "brightness_hz": 36.0,
               "organic_ratio": 4.0,
               "over_unity_ratio": 28.0,
-              "spectral_contrast_mean": 20.0,
+              "spectral_contrast_mean": 22.0,
               "spectral_flatness": 32.0,
-              "swing_ratio": 90.0,
+              "swing_ratio": 88.0,
               "tempo_bpm": 92.0
             }
           },
@@ -659,9 +649,9 @@
               "brightness_hz": 72.0,
               "organic_ratio": 6.0,
               "over_unity_ratio": 54.0,
-              "spectral_contrast_mean": 48.0,
+              "spectral_contrast_mean": 50.0,
               "spectral_flatness": 52.0,
-              "swing_ratio": 10.0,
+              "swing_ratio": 8.0,
               "tempo_bpm": 100.0
             }
           },
@@ -672,9 +662,9 @@
               "brightness_hz": 90.0,
               "organic_ratio": 8.0,
               "over_unity_ratio": 22.0,
-              "spectral_contrast_mean": 66.0,
+              "spectral_contrast_mean": 68.0,
               "spectral_flatness": 36.0,
-              "swing_ratio": 30.0,
+              "swing_ratio": 26.0,
               "tempo_bpm": 8.0
             }
           },
@@ -685,9 +675,9 @@
               "brightness_hz": 78.0,
               "organic_ratio": 10.0,
               "over_unity_ratio": 76.0,
-              "spectral_contrast_mean": 58.0,
+              "spectral_contrast_mean": 60.0,
               "spectral_flatness": 88.0,
-              "swing_ratio": 84.0,
+              "swing_ratio": 82.0,
               "tempo_bpm": 80.0
             }
           },
@@ -695,12 +685,12 @@
             "name": "A2O & A2O LITE - NEON",
             "watch": false,
             "pcts": {
-              "brightness_hz": 50.0,
+              "brightness_hz": 48.0,
               "organic_ratio": 12.0,
-              "over_unity_ratio": 96.0,
+              "over_unity_ratio": 98.0,
               "spectral_contrast_mean": 10.0,
-              "spectral_flatness": 60.0,
-              "swing_ratio": 86.0,
+              "spectral_flatness": 58.0,
+              "swing_ratio": 84.0,
               "tempo_bpm": 74.0
             }
           },
@@ -711,9 +701,9 @@
               "brightness_hz": 28.0,
               "organic_ratio": 14.0,
               "over_unity_ratio": 18.0,
-              "spectral_contrast_mean": 68.0,
+              "spectral_contrast_mean": 70.0,
               "spectral_flatness": 24.0,
-              "swing_ratio": 66.0,
+              "swing_ratio": 62.0,
               "tempo_bpm": 78.0
             }
           },
@@ -726,7 +716,7 @@
               "over_unity_ratio": 24.0,
               "spectral_contrast_mean": 26.0,
               "spectral_flatness": 84.0,
-              "swing_ratio": 6.0,
+              "swing_ratio": 4.0,
               "tempo_bpm": 90.0
             }
           },
@@ -739,8 +729,8 @@
               "over_unity_ratio": 84.0,
               "spectral_contrast_mean": 2.0,
               "spectral_flatness": 42.0,
-              "swing_ratio": 4.0,
-              "tempo_bpm": 60.0
+              "swing_ratio": 2.0,
+              "tempo_bpm": 58.0
             }
           },
           {
@@ -750,10 +740,10 @@
               "brightness_hz": 80.0,
               "organic_ratio": 20.0,
               "over_unity_ratio": 66.0,
-              "spectral_contrast_mean": 16.0,
+              "spectral_contrast_mean": 18.0,
               "spectral_flatness": 94.0,
-              "swing_ratio": 24.0,
-              "tempo_bpm": 64.0
+              "swing_ratio": 22.0,
+              "tempo_bpm": 62.0
             }
           },
           {
@@ -764,9 +754,9 @@
               "organic_ratio": 22.0,
               "over_unity_ratio": 22.0,
               "spectral_contrast_mean": 12.0,
-              "spectral_flatness": 68.0,
-              "swing_ratio": 66.0,
-              "tempo_bpm": 26.0
+              "spectral_flatness": 66.0,
+              "swing_ratio": 62.0,
+              "tempo_bpm": 24.0
             }
           },
           {
@@ -776,9 +766,9 @@
               "brightness_hz": 68.0,
               "organic_ratio": 24.0,
               "over_unity_ratio": 48.0,
-              "spectral_contrast_mean": 32.0,
+              "spectral_contrast_mean": 34.0,
               "spectral_flatness": 44.0,
-              "swing_ratio": 74.0,
+              "swing_ratio": 70.0,
               "tempo_bpm": 84.0
             }
           },
@@ -786,13 +776,13 @@
             "name": "Hearts2Hearts - The Chase",
             "watch": true,
             "pcts": {
-              "brightness_hz": 10.0,
+              "brightness_hz": 12.0,
               "organic_ratio": 26.0,
               "over_unity_ratio": 50.0,
-              "spectral_contrast_mean": 14.0,
+              "spectral_contrast_mean": 16.0,
               "spectral_flatness": 14.0,
-              "swing_ratio": 60.0,
-              "tempo_bpm": 62.0
+              "swing_ratio": 56.0,
+              "tempo_bpm": 60.0
             }
           },
           {
@@ -802,22 +792,22 @@
               "brightness_hz": 20.0,
               "organic_ratio": 28.0,
               "over_unity_ratio": 72.0,
-              "spectral_contrast_mean": 36.0,
+              "spectral_contrast_mean": 38.0,
               "spectral_flatness": 28.0,
-              "swing_ratio": 40.0,
-              "tempo_bpm": 28.0
+              "swing_ratio": 36.0,
+              "tempo_bpm": 26.0
             }
           },
           {
             "name": "ALLDAY PROJECT - CRASH",
             "watch": false,
             "pcts": {
-              "brightness_hz": 52.0,
+              "brightness_hz": 50.0,
               "organic_ratio": 30.0,
               "over_unity_ratio": 36.0,
-              "spectral_contrast_mean": 50.0,
-              "spectral_flatness": 64.0,
-              "swing_ratio": 72.0,
+              "spectral_contrast_mean": 52.0,
+              "spectral_flatness": 62.0,
+              "swing_ratio": 68.0,
               "tempo_bpm": 82.0
             }
           },
@@ -827,10 +817,10 @@
             "pcts": {
               "brightness_hz": 98.0,
               "organic_ratio": 32.0,
-              "over_unity_ratio": 94.0,
-              "spectral_contrast_mean": 62.0,
+              "over_unity_ratio": 96.0,
+              "spectral_contrast_mean": 64.0,
               "spectral_flatness": 96.0,
-              "swing_ratio": 98.0,
+              "swing_ratio": 96.0,
               "tempo_bpm": 86.0
             }
           },
@@ -843,20 +833,33 @@
               "over_unity_ratio": 78.0,
               "spectral_contrast_mean": 8.0,
               "spectral_flatness": 80.0,
-              "swing_ratio": 18.0,
+              "swing_ratio": 16.0,
               "tempo_bpm": 72.0
+            }
+          },
+          {
+            "name": "Illit - Pop",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 6.0,
+              "organic_ratio": 36.0,
+              "over_unity_ratio": 86.0,
+              "spectral_contrast_mean": 14.0,
+              "spectral_flatness": 4.0,
+              "swing_ratio": 72.0,
+              "tempo_bpm": 64.0
             }
           },
           {
             "name": "The Weeknd & ROSALÍA - Blinding Lights (Remix)",
             "watch": false,
             "pcts": {
-              "brightness_hz": 44.0,
-              "organic_ratio": 36.0,
+              "brightness_hz": 42.0,
+              "organic_ratio": 38.0,
               "over_unity_ratio": 2.0,
-              "spectral_contrast_mean": 56.0,
+              "spectral_contrast_mean": 58.0,
               "spectral_flatness": 46.0,
-              "swing_ratio": 42.0,
+              "swing_ratio": 38.0,
               "tempo_bpm": 98.0
             }
           },
@@ -865,12 +868,12 @@
             "watch": false,
             "pcts": {
               "brightness_hz": 94.0,
-              "organic_ratio": 38.0,
-              "over_unity_ratio": 98.0,
-              "spectral_contrast_mean": 78.0,
+              "organic_ratio": 40.0,
+              "over_unity_ratio": 100.0,
+              "spectral_contrast_mean": 80.0,
               "spectral_flatness": 92.0,
-              "swing_ratio": 76.0,
-              "tempo_bpm": 50.0
+              "swing_ratio": 74.0,
+              "tempo_bpm": 48.0
             }
           },
           {
@@ -878,12 +881,12 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 66.0,
-              "organic_ratio": 40.0,
+              "organic_ratio": 42.0,
               "over_unity_ratio": 74.0,
-              "spectral_contrast_mean": 64.0,
-              "spectral_flatness": 62.0,
-              "swing_ratio": 20.0,
-              "tempo_bpm": 58.0
+              "spectral_contrast_mean": 66.0,
+              "spectral_flatness": 60.0,
+              "swing_ratio": 18.0,
+              "tempo_bpm": 56.0
             }
           },
           {
@@ -891,12 +894,12 @@
             "watch": false,
             "pcts": {
               "brightness_hz": 86.0,
-              "organic_ratio": 42.0,
+              "organic_ratio": 44.0,
               "over_unity_ratio": 62.0,
-              "spectral_contrast_mean": 46.0,
+              "spectral_contrast_mean": 48.0,
               "spectral_flatness": 74.0,
-              "swing_ratio": 72.0,
-              "tempo_bpm": 34.0
+              "swing_ratio": 68.0,
+              "tempo_bpm": 32.0
             }
           },
           {
@@ -904,12 +907,25 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 100.0,
-              "organic_ratio": 44.0,
+              "organic_ratio": 46.0,
               "over_unity_ratio": 82.0,
-              "spectral_contrast_mean": 38.0,
+              "spectral_contrast_mean": 40.0,
               "spectral_flatness": 100.0,
-              "swing_ratio": 100.0,
+              "swing_ratio": 98.0,
               "tempo_bpm": 88.0
+            }
+          },
+          {
+            "name": "BABYMONSTER - MONSTERS (Intro)",
+            "watch": true,
+            "pcts": {
+              "brightness_hz": 54.0,
+              "organic_ratio": 50.0,
+              "over_unity_ratio": 8.0,
+              "spectral_contrast_mean": 30.0,
+              "spectral_flatness": 68.0,
+              "swing_ratio": 100.0,
+              "tempo_bpm": 42.0
             }
           },
           {
@@ -917,11 +933,11 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 64.0,
-              "organic_ratio": 46.0,
+              "organic_ratio": 50.0,
               "over_unity_ratio": 58.0,
-              "spectral_contrast_mean": 70.0,
+              "spectral_contrast_mean": 72.0,
               "spectral_flatness": 52.0,
-              "swing_ratio": 78.0,
+              "swing_ratio": 76.0,
               "tempo_bpm": 70.0
             }
           },
@@ -930,11 +946,11 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 58.0,
-              "organic_ratio": 48.0,
+              "organic_ratio": 52.0,
               "over_unity_ratio": 42.0,
-              "spectral_contrast_mean": 80.0,
+              "spectral_contrast_mean": 82.0,
               "spectral_flatness": 48.0,
-              "swing_ratio": 54.0,
+              "swing_ratio": 50.0,
               "tempo_bpm": 70.0
             }
           },
@@ -943,12 +959,12 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 60.0,
-              "organic_ratio": 50.0,
+              "organic_ratio": 54.0,
               "over_unity_ratio": 38.0,
-              "spectral_contrast_mean": 86.0,
+              "spectral_contrast_mean": 88.0,
               "spectral_flatness": 54.0,
-              "swing_ratio": 38.0,
-              "tempo_bpm": 56.0
+              "swing_ratio": 34.0,
+              "tempo_bpm": 54.0
             }
           },
           {
@@ -956,11 +972,11 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 82.0,
-              "organic_ratio": 52.0,
+              "organic_ratio": 56.0,
               "over_unity_ratio": 32.0,
               "spectral_contrast_mean": 28.0,
               "spectral_flatness": 82.0,
-              "swing_ratio": 80.0,
+              "swing_ratio": 78.0,
               "tempo_bpm": 96.0
             }
           },
@@ -969,11 +985,11 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 76.0,
-              "organic_ratio": 54.0,
+              "organic_ratio": 58.0,
               "over_unity_ratio": 58.0,
-              "spectral_contrast_mean": 18.0,
+              "spectral_contrast_mean": 20.0,
               "spectral_flatness": 86.0,
-              "swing_ratio": 68.0,
+              "swing_ratio": 64.0,
               "tempo_bpm": 66.0
             }
           },
@@ -982,12 +998,12 @@
             "watch": false,
             "pcts": {
               "brightness_hz": 22.0,
-              "organic_ratio": 56.0,
-              "over_unity_ratio": 86.0,
+              "organic_ratio": 60.0,
+              "over_unity_ratio": 88.0,
               "spectral_contrast_mean": 24.0,
               "spectral_flatness": 22.0,
-              "swing_ratio": 82.0,
-              "tempo_bpm": 52.0
+              "swing_ratio": 80.0,
+              "tempo_bpm": 50.0
             }
           },
           {
@@ -995,25 +1011,12 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 92.0,
-              "organic_ratio": 58.0,
+              "organic_ratio": 62.0,
               "over_unity_ratio": 44.0,
               "spectral_contrast_mean": 4.0,
               "spectral_flatness": 90.0,
-              "swing_ratio": 94.0,
+              "swing_ratio": 92.0,
               "tempo_bpm": 76.0
-            }
-          },
-          {
-            "name": "The Weeknd, JENNIE & Lily Rose Depp - One Of The Girls",
-            "watch": false,
-            "pcts": {
-              "brightness_hz": 12.0,
-              "organic_ratio": 60.0,
-              "over_unity_ratio": 100.0,
-              "spectral_contrast_mean": 94.0,
-              "spectral_flatness": 8.0,
-              "swing_ratio": 26.0,
-              "tempo_bpm": 16.0
             }
           },
           {
@@ -1021,12 +1024,12 @@
             "watch": false,
             "pcts": {
               "brightness_hz": 74.0,
-              "organic_ratio": 62.0,
+              "organic_ratio": 64.0,
               "over_unity_ratio": 8.0,
-              "spectral_contrast_mean": 74.0,
+              "spectral_contrast_mean": 76.0,
               "spectral_flatness": 72.0,
-              "swing_ratio": 16.0,
-              "tempo_bpm": 20.0
+              "swing_ratio": 14.0,
+              "tempo_bpm": 18.0
             }
           },
           {
@@ -1034,25 +1037,12 @@
             "watch": true,
             "pcts": {
               "brightness_hz": 30.0,
-              "organic_ratio": 64.0,
-              "over_unity_ratio": 54.0,
-              "spectral_contrast_mean": 90.0,
-              "spectral_flatness": 16.0,
-              "swing_ratio": 96.0,
-              "tempo_bpm": 36.0
-            }
-          },
-          {
-            "name": "BABYMONSTER - DRIP",
-            "watch": true,
-            "pcts": {
-              "brightness_hz": 42.0,
               "organic_ratio": 66.0,
-              "over_unity_ratio": 8.0,
-              "spectral_contrast_mean": 22.0,
-              "spectral_flatness": 60.0,
-              "swing_ratio": 2.0,
-              "tempo_bpm": 46.0
+              "over_unity_ratio": 54.0,
+              "spectral_contrast_mean": 92.0,
+              "spectral_flatness": 16.0,
+              "swing_ratio": 94.0,
+              "tempo_bpm": 34.0
             }
           },
           {
@@ -1061,11 +1051,11 @@
             "pcts": {
               "brightness_hz": 96.0,
               "organic_ratio": 68.0,
-              "over_unity_ratio": 90.0,
-              "spectral_contrast_mean": 42.0,
+              "over_unity_ratio": 92.0,
+              "spectral_contrast_mean": 44.0,
               "spectral_flatness": 98.0,
-              "swing_ratio": 50.0,
-              "tempo_bpm": 54.0
+              "swing_ratio": 46.0,
+              "tempo_bpm": 52.0
             }
           },
           {
@@ -1075,10 +1065,10 @@
               "brightness_hz": 62.0,
               "organic_ratio": 70.0,
               "over_unity_ratio": 70.0,
-              "spectral_contrast_mean": 30.0,
+              "spectral_contrast_mean": 32.0,
               "spectral_flatness": 70.0,
-              "swing_ratio": 48.0,
-              "tempo_bpm": 40.0
+              "swing_ratio": 44.0,
+              "tempo_bpm": 38.0
             }
           },
           {
@@ -1088,10 +1078,10 @@
               "brightness_hz": 4.0,
               "organic_ratio": 72.0,
               "over_unity_ratio": 18.0,
-              "spectral_contrast_mean": 40.0,
-              "spectral_flatness": 6.0,
-              "swing_ratio": 38.0,
-              "tempo_bpm": 18.0
+              "spectral_contrast_mean": 42.0,
+              "spectral_flatness": 8.0,
+              "swing_ratio": 34.0,
+              "tempo_bpm": 16.0
             }
           },
           {
@@ -1101,9 +1091,9 @@
               "brightness_hz": 84.0,
               "organic_ratio": 74.0,
               "over_unity_ratio": 80.0,
-              "spectral_contrast_mean": 54.0,
+              "spectral_contrast_mean": 56.0,
               "spectral_flatness": 56.0,
-              "swing_ratio": 24.0,
+              "swing_ratio": 22.0,
               "tempo_bpm": 12.0
             }
           },
@@ -1114,9 +1104,9 @@
               "brightness_hz": 14.0,
               "organic_ratio": 76.0,
               "over_unity_ratio": 64.0,
-              "spectral_contrast_mean": 88.0,
+              "spectral_contrast_mean": 90.0,
               "spectral_flatness": 14.0,
-              "swing_ratio": 60.0,
+              "swing_ratio": 56.0,
               "tempo_bpm": 14.0
             }
           },
@@ -1127,10 +1117,10 @@
               "brightness_hz": 18.0,
               "organic_ratio": 78.0,
               "over_unity_ratio": 46.0,
-              "spectral_contrast_mean": 84.0,
+              "spectral_contrast_mean": 86.0,
               "spectral_flatness": 26.0,
-              "swing_ratio": 46.0,
-              "tempo_bpm": 30.0
+              "swing_ratio": 42.0,
+              "tempo_bpm": 28.0
             }
           },
           {
@@ -1140,9 +1130,9 @@
               "brightness_hz": 24.0,
               "organic_ratio": 80.0,
               "over_unity_ratio": 8.0,
-              "spectral_contrast_mean": 78.0,
+              "spectral_contrast_mean": 80.0,
               "spectral_flatness": 18.0,
-              "swing_ratio": 52.0,
+              "swing_ratio": 48.0,
               "tempo_bpm": 4.0
             }
           },
@@ -1153,9 +1143,9 @@
               "brightness_hz": 32.0,
               "organic_ratio": 82.0,
               "over_unity_ratio": 62.0,
-              "spectral_contrast_mean": 44.0,
+              "spectral_contrast_mean": 46.0,
               "spectral_flatness": 30.0,
-              "swing_ratio": 92.0,
+              "swing_ratio": 90.0,
               "tempo_bpm": 94.0
             }
           },
@@ -1163,13 +1153,13 @@
             "name": "NCT WISH - Like A Dream",
             "watch": false,
             "pcts": {
-              "brightness_hz": 48.0,
+              "brightness_hz": 46.0,
               "organic_ratio": 84.0,
               "over_unity_ratio": 28.0,
-              "spectral_contrast_mean": 34.0,
-              "spectral_flatness": 66.0,
-              "swing_ratio": 62.0,
-              "tempo_bpm": 22.0
+              "spectral_contrast_mean": 36.0,
+              "spectral_flatness": 64.0,
+              "swing_ratio": 58.0,
+              "tempo_bpm": 20.0
             }
           },
           {
@@ -1179,36 +1169,36 @@
               "brightness_hz": 2.0,
               "organic_ratio": 86.0,
               "over_unity_ratio": 30.0,
-              "spectral_contrast_mean": 82.0,
+              "spectral_contrast_mean": 84.0,
               "spectral_flatness": 2.0,
-              "swing_ratio": 88.0,
-              "tempo_bpm": 24.0
+              "swing_ratio": 86.0,
+              "tempo_bpm": 22.0
             }
           },
           {
             "name": "MEOVV - ME ME ME",
             "watch": true,
             "pcts": {
-              "brightness_hz": 46.0,
+              "brightness_hz": 44.0,
               "organic_ratio": 88.0,
               "over_unity_ratio": 42.0,
-              "spectral_contrast_mean": 60.0,
+              "spectral_contrast_mean": 62.0,
               "spectral_flatness": 40.0,
-              "swing_ratio": 56.0,
-              "tempo_bpm": 42.0
+              "swing_ratio": 52.0,
+              "tempo_bpm": 40.0
             }
           },
           {
             "name": "A2O & A2O SOUL - SUPERSTAR",
             "watch": false,
             "pcts": {
-              "brightness_hz": 54.0,
+              "brightness_hz": 52.0,
               "organic_ratio": 90.0,
-              "over_unity_ratio": 92.0,
-              "spectral_contrast_mean": 52.0,
+              "over_unity_ratio": 94.0,
+              "spectral_contrast_mean": 54.0,
               "spectral_flatness": 76.0,
-              "swing_ratio": 44.0,
-              "tempo_bpm": 38.0
+              "swing_ratio": 40.0,
+              "tempo_bpm": 36.0
             }
           },
           {
@@ -1218,10 +1208,10 @@
               "brightness_hz": 38.0,
               "organic_ratio": 92.0,
               "over_unity_ratio": 18.0,
-              "spectral_contrast_mean": 92.0,
+              "spectral_contrast_mean": 94.0,
               "spectral_flatness": 34.0,
-              "swing_ratio": 8.0,
-              "tempo_bpm": 32.0
+              "swing_ratio": 6.0,
+              "tempo_bpm": 30.0
             }
           },
           {
@@ -1231,9 +1221,9 @@
               "brightness_hz": 16.0,
               "organic_ratio": 94.0,
               "over_unity_ratio": 18.0,
-              "spectral_contrast_mean": 72.0,
+              "spectral_contrast_mean": 74.0,
               "spectral_flatness": 22.0,
-              "swing_ratio": 12.0,
+              "swing_ratio": 10.0,
               "tempo_bpm": 44.0
             }
           },
@@ -1246,7 +1236,7 @@
               "over_unity_ratio": 68.0,
               "spectral_contrast_mean": 96.0,
               "spectral_flatness": 38.0,
-              "swing_ratio": 32.0,
+              "swing_ratio": 28.0,
               "tempo_bpm": 10.0
             }
           },
@@ -1254,12 +1244,12 @@
             "name": "Sung Si Kyung - 거리에서",
             "watch": false,
             "pcts": {
-              "brightness_hz": 6.0,
+              "brightness_hz": 8.0,
               "organic_ratio": 98.0,
               "over_unity_ratio": 18.0,
               "spectral_contrast_mean": 100.0,
-              "spectral_flatness": 4.0,
-              "swing_ratio": 38.0,
+              "spectral_flatness": 6.0,
+              "swing_ratio": 34.0,
               "tempo_bpm": 2.0
             }
           },
@@ -1267,12 +1257,12 @@
             "name": "HANRORO - 0+0",
             "watch": false,
             "pcts": {
-              "brightness_hz": 8.0,
+              "brightness_hz": 10.0,
               "organic_ratio": 100.0,
-              "over_unity_ratio": 88.0,
+              "over_unity_ratio": 90.0,
               "spectral_contrast_mean": 98.0,
               "spectral_flatness": 14.0,
-              "swing_ratio": 14.0,
+              "swing_ratio": 12.0,
               "tempo_bpm": 6.0
             }
           }
@@ -1309,7 +1299,7 @@
     "검출 규칙 커버리지 3/10. 대부분의 임펄스는 아직 규칙이 없다(아래 관측 불가 표).",
     "백분위는 당일 코호트 내 상대 위치다. 코호트 구성이 바뀌면 같은 곡도 값이 달라진다.",
     "규칙 hyperpop-texture에 걸린 곡 5곡. 곡별 위치는 격자 참조",
-    "규칙 ukg-origin-shuffle에 걸린 곡 6곡. 곡별 위치는 격자 참조",
+    "규칙 ukg-origin-shuffle에 걸린 곡 5곡. 곡별 위치는 격자 참조",
     "규칙 moombahton-kr-tropical에 걸린 곡 2곡. 곡별 위치는 격자 참조",
     "'하이퍼팝' 수용 모드: element (원장 1.1.0)",
     "과거 차용 앵커: aespa - Savage (2021-10, 확실성 매우 높음)",
@@ -1387,10 +1377,10 @@
     "레게톤/뎀보우 흐름이 지금 도는지. 등재 없음. 템플릿 정체 해소 선행"
   ],
   "reliability": {
-    "sample": "원장 10건 · 코호트 50곡 · 매치 13건",
+    "sample": "원장 10건 · 코호트 50곡 · 매치 12건",
     "accuracy": "검출 규칙은 과거 사례에서 뽑은 가설이다. 사람 라벨이 없어 정확도 미측정",
     "missing": "세 축 중 하나라도 계산되지 않은 곡은 규칙을 적용하지 않는다(결측을 0으로 읽지 않는다)",
-    "engine": "genre-impulse v0.1.0 · 스냅샷 2026-10-18.json · 컷 P20/P80"
+    "engine": "genre-impulse v0.1.0 · 스냅샷 2026-10-19.json · 컷 P20/P80"
   },
   "inferences": [
     {
@@ -1402,16 +1392,16 @@
       "chartId": "impulse-coverage"
     },
     {
-      "text": "코호트 50곡 중 10곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
-      "basis": "컷 P20/P80 · 매치 13건 · 곡 10/50 (20%)",
+      "text": "코호트 50곡 중 9곡이 지금 컷에서 규칙에 걸린 상태와 정합한다.",
+      "basis": "컷 P20/P80 · 매치 12건 · 곡 9/50 (18%)",
       "sample": "코호트 50곡",
       "confidence": "medium",
       "limits": "이 수는 컷을 움직이면 함께 움직인다. 백분위는 그날 코호트 안에서의 상대 위치라 코호트 구성이 바뀌면 같은 곡도 다른 값을 받는다.",
       "chartId": "match-axes"
     },
     {
-      "text": "워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. 6곡이다.",
-      "basis": "매치된 10곡 중 워치리스트 6곡 · KiiiKiii - Pop Off Pop Off, Hearts2Hearts - FOCUS, RESCENE - Pretty Girl, KATSEYE - Animal, ILLIT - It's Me, Hearts2Hear",
+      "text": "워치리스트 팀의 곡도 규칙에 걸린 것으로 읽힌다. 5곡이다.",
+      "basis": "매치된 9곡 중 워치리스트 5곡 · KiiiKiii - Pop Off Pop Off, Hearts2Hearts - FOCUS, RESCENE - Pretty Girl, KATSEYE - Animal, ILLIT - It's Me",
       "sample": "워치리스트 11팀",
       "confidence": "medium",
       "limits": "걸렸다는 것은 축의 위치가 규칙과 맞았다는 뜻이며 그 곡이 그 장르라는 판정이 아니다.",

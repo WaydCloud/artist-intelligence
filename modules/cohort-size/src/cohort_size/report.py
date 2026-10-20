@@ -236,6 +236,17 @@ def _post_hoc_lines(e: dict[str, Any], keys: list[str]) -> list[str]:
     return out
 
 
+def _mid_line(e: dict[str, Any]) -> str:
+    m = e.get("midTest")
+    if not m or m["pExact"] is None:
+        return ""
+    sizes = " · ".join(str(s) for s in m["sizes"])
+    cells = " · ".join(f"{k}/{n}" for k, n in m["table"])
+    ref = (f"(기대 빈도 최소 {m['minExpected']:.2f}, 카이제곱 p {_p(m['pChi2'])}는 참고)"
+           if m["minExpected"] is not None else "")
+    return f"{sizes}명 비교 {cells}, 피셔-프리먼-홀턴 정확검정 p {_p(m['pExact'])}{ref}"
+
+
 def _exact_inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
     x = a["exact"]
     out = []
@@ -243,6 +254,9 @@ def _exact_inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
         if not e["closed"] or "postHoc" not in e:
             continue
         lines = _post_hoc_lines(e, x["highlight"])
+        mid = _mid_line(e)
+        if mid:
+            lines.append(mid)
         fam = next(iter(e["postHoc"].values()))["holmFamily"]
         out.append({
             "text": f"{e['label']} 데뷔 팀의 사후 비교는 {' · '.join(lines)}로 읽힌다.",
@@ -250,9 +264,10 @@ def _exact_inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
             + " · ".join(_post_hoc_lines(e, list(e["postHoc"]))),
             "sample": f"{e['label']} 데뷔 {e['n']}팀 중 성공 {e['k']}팀",
             "confidence": "low",
-            "limits": f"사후 비교다. 비교할 인원 묶음뿐 아니라 시기 경계(2012~17 · 2018~23)와 8명이라는 기준도 "
+            "limits": f"사후 비교다. 5 · 6 · 7명 비교도 표를 본 뒤 골랐다. 비교할 인원 묶음뿐 아니라 시기 경계(2012~17 · 2018~23)와 8명이라는 기준도 "
             "데이터를 본 뒤 골랐으므로 피셔 p는 실제보다 작게 나온다. 보정은 인원 열 "
-            f"{fam}개 비교 전체를 한 묶음으로 홀름 보정한 값을 함께 적었다. 칸마다 팀 수가 적고, 기획사 규모와 "
+            f"{fam}개 비교 전체를 한 묶음으로 홀름 보정한 값을 함께 적었다. 5 · 6 · 7명 정확검정 p는 그 묶음 밖이라 "
+            "보정하지 않은 값이다. 칸마다 팀 수가 적고, 기획사 규모와 "
             "데뷔 예산은 통제하지 않았다.",
             "chartId": "exact-by-era",
         })

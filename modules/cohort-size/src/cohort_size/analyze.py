@@ -46,6 +46,7 @@ class Config:
     impute_b: int = 5000
     exact_cuts: tuple[int, ...] = (3, 4, 5, 6, 7, 8)
     exact_eras: tuple[tuple[int, int], ...] = ((2012, 2017), (2018, 2023))
+    exact_mid: tuple[int, ...] = (5, 6, 7)
 
 
 def bucket_labels(cuts: tuple[int, ...]) -> list[str]:
@@ -281,6 +282,21 @@ def _fisher_split(groups: list[dict[str, Any]], inside: Any) -> dict[str, Any]:
     return {"k1": a, "n1": n1, "k2": c, "n2": n2, "p": p}
 
 
+def _mid_test(groups: list[dict[str, Any]], sizes: tuple[int, ...]) -> dict[str, Any]:
+    """Composite success across a few exact sizes: Fisher-Freeman-Halton exact p, with Pearson for reference.
+
+    The exact test is the main value. Pearson is kept to show why: its expected counts fall below 5 here.
+    """
+    table = [(sum(1 for g in groups if g["size"] == s and g["any"]), sum(1 for g in groups if g["size"] == s))
+             for s in sizes]
+    cs = stats.chi_square(table)
+    out: dict[str, Any] = {"sizes": list(sizes), "table": [list(t) for t in table], "pExact": stats.ffh_exact(table),
+                           "chi2": None, "df": None, "pChi2": None, "minExpected": None}
+    if cs is not None:
+        out.update(chi2=cs[0], df=cs[1], pChi2=stats.chi2_sf(cs[0], cs[1]), minExpected=min(cs[2]))
+    return out
+
+
 def exact_by_era(groups: list[dict[str, Any]], cfg: Config, complete: list[int], in_progress: list[int],
                  fixture: dict[str, Any]) -> dict[str, Any]:
     """Composite success by exact debut size (fine columns) and two wide eras, plus an in-progress row.
@@ -320,6 +336,7 @@ def exact_by_era(groups: list[dict[str, Any]], cfg: Config, complete: list[int],
                 family[k_]["pHolm"] = adj
                 family[k_]["holmFamily"] = len(keys)
             entry["postHoc"] = family
+            entry["midTest"] = _mid_test(gs, cfg.exact_mid)
         rows_out.append(entry)
     wins = fixture["sources"].get("win", [])
     last_win = max((w.get("retrieved", "") for w in wins), default="")
@@ -393,7 +410,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
             "eras": [list(e) for e in cfg.eras], "firstYear": cfg.first_year, "lastYear": cfg.last_year,
             "includeIncomplete": cfg.include_incomplete, "exactB": cfg.exact_b,
             "seed": cfg.seed, "alpha": cfg.alpha, "trendScores": cfg.trend_scores, "focusSize": cfg.focus_size,
-            "exactCuts": list(cfg.exact_cuts),
+            "exactCuts": list(cfg.exact_cuts), "exactMid": list(cfg.exact_mid),
             "exactEras": [list(e) for e in cfg.exact_eras], "imputeRuns": cfg.impute_runs, "imputeSampleSeed": cfg.impute_sample_seed, "imputeB": cfg.impute_b,
         },
         "lastCompleteYear": last_full,

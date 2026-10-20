@@ -67,6 +67,7 @@ def config_from(args: argparse.Namespace) -> an.Config:
         seed=args.seed, alpha=args.alpha, trend_scores=args.trend_scores,
         focus_size=args.focus_size, impute_runs=args.impute_runs,
         exact_cuts=tuple(int(x) for x in args.exact_cuts.split(",")), exact_eras=_eras(args.exact_eras),
+        exact_mid=tuple(int(x) for x in args.exact_mid.split(",")),
     )
 
 
@@ -150,6 +151,7 @@ def main(argv: list[str] | None = None) -> int:
     p_a.add_argument("--exact-cuts", default="3,4,5,6,7,8",
                      help="exact-size columns: upper bounds of all but the last (default: <=3, 4, 5, 6, 7, 8, 9+)")
     p_a.add_argument("--exact-eras", default="2012-2017,2018-2023", help="closed eras of the exact-size view")
+    p_a.add_argument("--exact-mid", default="5,6,7", help="exact sizes compared together by the exact test")
     p_a.add_argument("--impute-runs", type=int, default=20, help="seeds per random scheme for undetermined sizes")
     p_a.add_argument("--print-matches", action="store_true")
     p_a.set_defaults(func=cmd_analyze)

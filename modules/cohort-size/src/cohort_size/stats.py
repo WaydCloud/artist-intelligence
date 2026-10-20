@@ -212,6 +212,46 @@ def fisher_exact_2x2(a: int, b: int, c: int, d: int) -> float:
     return min(1.0, sum(math.exp(logp(x)) for x in range(lo, hi + 1) if logp(x) <= obs + 1e-9))
 
 
+def ffh_exact(table: Table, max_tables: int = 2_000_000) -> float | None:
+    """Fisher-Freeman-Halton exact p for an r x 2 table by full enumeration of tables with the same margins.
+
+    A table is at least as extreme as the observed one when its hypergeometric probability is not
+    larger. None when the table is untestable or the number of tables would pass max_tables.
+    """
+    if testable(table):
+        return None
+    rows = _rows(table)
+    big_k = sum(k for k, _ in rows)
+    big_n = sum(n for _, n in rows)
+    # The last row is fixed by the others, so only the first r - 1 rows set the table count bound.
+    count = 1
+    for _, n in rows[:-1]:
+        count *= min(n, big_k) + 1
+    if count > max_tables:
+        return None
+    lg = [math.lgamma(i + 1) for i in range(big_n + 1)]
+    sizes = [n for _, n in rows]
+    obs = sum(-lg[k] - lg[n - k] for k, n in rows)
+    eps = 1e-9 * max(1.0, abs(obs))
+    norm = lg[big_k] + lg[big_n - big_k] - lg[big_n] + sum(lg[n] for n in sizes)
+    total = 0.0
+
+    def walk(i: int, left: int, acc: float) -> None:
+        nonlocal total
+        if i == len(sizes) - 1:
+            if left <= sizes[i]:
+                w = acc - lg[left] - lg[sizes[i] - left]
+                if w <= obs + eps:
+                    total += math.exp(w + norm)
+            return
+        rest = sum(sizes[i + 1:])
+        for k in range(max(0, left - rest), min(sizes[i], left) + 1):
+            walk(i + 1, left - k, acc - lg[k] - lg[sizes[i] - k])
+
+    walk(0, big_k, 0.0)
+    return min(1.0, total)
+
+
 def holm(pvals: Sequence[float]) -> list[float]:
     """Holm step-down adjusted p values, same order as the input."""
     m = len(pvals)

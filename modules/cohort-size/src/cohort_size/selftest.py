@@ -97,6 +97,20 @@ def _stats(r: _Run) -> None:
     a = stats.exact_mc([(3, 20), (9, 25), (2, 15)], random.Random(11), 500)
     b = stats.exact_mc([(3, 20), (9, 25), (2, 15)], random.Random(11), 500)
     r.check("8 same seed, same Monte Carlo p", a == b)
+    two = [(8, 10), (1, 6)], [(3, 12), (0, 9)], [(5, 5), (2, 9)]
+    r.check("8b Fisher-Freeman-Halton enumeration equals Fisher 2 x 2",
+            all(_close(stats.ffh_exact(t) or -1, stats.fisher_exact_2x2(t[0][0], t[0][1] - t[0][0], t[1][0],
+                                                                          t[1][1] - t[1][0]), 1e-12) for t in two))
+    t3x = [(3, 20), (9, 25), (2, 15)]
+    ffh = stats.ffh_exact(t3x)
+    mc3 = stats.exact_mc(t3x, random.Random(5), 20000)
+    r.check("8c Fisher-Freeman-Halton enumeration within 4 SE of the Monte Carlo exact p on 3 x 2",
+            ffh is not None and mc3 is not None and abs(mc3[0] - ffh) <= 4 * mc3[1], f"ffh={ffh} mc={mc3}")
+    r.check("8d Fisher-Freeman-Halton refuses untestable and oversized tables",
+            stats.ffh_exact([(0, 10), (0, 5)]) is None and stats.ffh_exact(t3x, max_tables=10) is None)
+    t4 = [(15, 37), (16, 38), (12, 40), (8, 33)]
+    r.check("8e Fisher-Freeman-Halton bound counts r - 1 rows (4 x 2 table under the default cap)",
+            stats.ffh_exact(t4) is not None)
 
 
 def _sizes(r: _Run) -> None:
@@ -392,6 +406,14 @@ def _report(r: _Run) -> None:
             len(fam) == 8 and all(v["holmFamily"] == 8 and v["pHolm"] >= v["p"] - 1e-12 for v in fam.values())
             and all(_close(v["p"], stats.fisher_exact_2x2(v["k1"], v["n1"] - v["k1"], v["k2"], v["n2"] - v["k2"]))
                     for v in fam.values()))
+    mid = era["2018~23"]["midTest"]
+    r.check("61 5 · 6 · 7 exact test on closed eras: table from the cells, exact p, expected counts under 5",
+            mid["sizes"] == [5, 6, 7] and mid["table"] == [[2, 31], [6, 23], [2, 17]]
+            and _close(mid["pExact"], 0.1237244127, 1e-8) and mid["minExpected"] < 5
+            and "midTest" in era["2012~17"] and "midTest" not in era["2024~26"]
+            and any(i.get("chartId") == "exact-by-era" and "피셔-프리먼-홀턴 정확검정 p 0.124" in i["text"]
+                    and "보정하지 않은 값" in i["limits"]
+                    for i in rep["inferences"]), str(mid))
     exact_chart = next(c for c in rep["charts"] if c["id"] == "exact-by-era")
     r.check("57 exact chart in the era section, names on screen, in-progress label",
             exact_chart["section"] == "era"

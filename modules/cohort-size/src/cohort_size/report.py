@@ -187,7 +187,85 @@ def _spotify_chart(a: dict[str, Any]) -> dict[str, Any]:
 
 
 def _era_label(e: dict[str, Any]) -> str:
-    return e["label"] if e["complete"] else f"{e['label']} 창 미완"
+    return e["label"] if e["complete"] else f"{e['label']} 진행 중"
+
+
+def _short(title: str) -> str:
+    """Display name without the Kpop Wiki "(group)" qualifier."""
+    return title.rsplit(" (", 1)[0] if title.endswith(")") and " (" in title else title
+
+
+def _exact_era_label(e: dict[str, Any]) -> str:
+    return e["label"] if e["closed"] else f"{e['label']} 진행 중"
+
+
+def _exact_chart(a: dict[str, Any]) -> dict[str, Any]:
+    x = a["exact"]
+    data = []
+    for e in x["eras"]:
+        for c in e["cells"]:
+            if c["n"]:
+                data.append({"name": f"{_exact_era_label(e)} · {c['label']} · {c['k']}/{c['n']}팀 · 구간 {_ci(c)}",
+                             "value": round(c["rate"] * 100, 1)})
+    cut = x["cut"]
+    return {
+        "type": "bar",
+        "id": "exact-by-era",
+        "section": "era",
+        "title": "정확한 인원 × 시기",
+        "question": "정확한 데뷔 인원별로 성공 비율은 시기마다 얼마인가?",
+        "definition": f"구간을 넓히지 않고 데뷔 인원 그대로({', '.join(x['labels'])}) 나눴다. 닫힌 시기는 데뷔 연도부터 "
+        f"{_w(a)}년 안의 종합 성공이다. 진행 중 줄은 지금까지의 성공만 센다: 음방 1위는 "
+        f"{cut['winRetrieved'][:10]} 수집분까지, 멜론 · 써클은 {cut['melonLastYear']}년 연말 차트까지이며 "
+        f"{cut['melonLastYear'] + 1}년 연말 차트는 아직 없다. 오른쪽 수는 성공 비율(%), 성공 팀 이름은 아래 인사이트에 있다.",
+        "reliability": {"sample": " · ".join(f"{_exact_era_label(e)} {e['k']}/{e['n']}팀" for e in x["eras"])},
+        "data": data,
+    }
+
+
+def _post_hoc_lines(e: dict[str, Any], keys: list[str]) -> list[str]:
+    out = []
+    for key in keys:
+        t = e["postHoc"].get(key)
+        if not t or t["p"] is None:
+            continue
+        out.append(f"{key.replace(' vs rest', ' 대 나머지').replace(' vs ', ' 대 ')} {t['k1']}/{t['n1']} 대 "
+                   f"{t['k2']}/{t['n2']}, 피셔 p {_p(t['p'])}, 홀름 p {_p(t['pHolm'])}")
+    return out
+
+
+def _exact_inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
+    x = a["exact"]
+    out = []
+    for e in x["eras"]:
+        if not e["closed"] or "postHoc" not in e:
+            continue
+        lines = _post_hoc_lines(e, x["highlight"])
+        fam = next(iter(e["postHoc"].values()))["holmFamily"]
+        out.append({
+            "text": f"{e['label']} 데뷔 팀의 사후 비교는 {' · '.join(lines)}로 읽힌다.",
+            "basis": "인원 열 하나 대 나머지 전부와 큰 인원 묶음 대 나머지의 피셔 정확검정(종합 성공). 열별 "
+            + " · ".join(_post_hoc_lines(e, list(e["postHoc"]))),
+            "sample": f"{e['label']} 데뷔 {e['n']}팀 중 성공 {e['k']}팀",
+            "confidence": "low",
+            "limits": f"사후 비교다. 비교할 묶음을 데이터를 본 뒤 골랐으므로 피셔 p는 실제보다 작게 나온다. 그래서 인원 열 "
+            f"{fam}개 비교 전체를 한 묶음으로 홀름 보정한 값을 함께 적었다. 칸마다 팀 수가 적고, 기획사 규모와 "
+            "데뷔 예산은 통제하지 않았다.",
+            "chartId": "exact-by-era",
+        })
+    return out
+
+
+def _exact_insights(a: dict[str, Any]) -> list[str]:
+    x = a["exact"]
+    out = []
+    for e in x["eras"]:
+        for c in e["cells"]:
+            if c["successes"]:
+                names = ", ".join(
+                    _short(s["title"]) + ("" if e["closed"] else f"({s['year']})") for s in c["successes"])
+                out.append(f"성공 팀 · {_exact_era_label(e)} · {c['label']} {c['k']}/{c['n']}: {names}")
+    return out
 
 
 def _era_rate_chart(a: dict[str, Any]) -> dict[str, Any]:
@@ -201,7 +279,7 @@ def _era_rate_chart(a: dict[str, Any]) -> dict[str, Any]:
         "title": "시기별 종합 성공률",
         "question": "데뷔 시기마다 인원 구간별 성공 비율은 얼마인가?",
         "definition": "종합 성공 비율을 데뷔 시기와 인원 구간으로 나눴다. 팀이 없는 구간은 줄을 뺐다. "
-        "창 미완은 관측 창이 아직 닫히지 않은 시기라 비율이 더 오를 수 있다.",
+        "진행 중은 관측 창이 아직 닫히지 않은 시기라 지금까지의 성공만 세며 비율이 더 오를 수 있다.",
         "reliability": {"sample": " · ".join(f"{_era_label(e)} {e['n']}팀" for e in a["eras"])},
         "data": data,
     }
@@ -530,7 +608,7 @@ def build_report(a: dict[str, Any]) -> dict[str, Any]:
     ]
     charts = [
         _measure_chart(a), _tests_chart(a), _spotify_chart(a),
-        _era_rate_chart(a), _era_test_chart(a),
+        _era_rate_chart(a), _era_test_chart(a), _exact_chart(a),
         _share_chart(a), _median_chart(a), _focus_chart(a),
     ]
     t = a["pooled"]["default"]["measures"]["any"]["test"]
@@ -542,7 +620,7 @@ def build_report(a: dict[str, Any]) -> dict[str, Any]:
         "metrics": _metrics(a),
         "charts": charts,
         "media": [],
-        "insights": _insights(a),
+        "insights": _insights(a) + _exact_insights(a),
         "recommendations": [],
         "summary": _summary(a),
         "sections": sections,
@@ -554,5 +632,5 @@ def build_report(a: dict[str, Any]) -> dict[str, Any]:
         ],
         "notAnswered": _not_answered(),
         "reliability": _reliability(a),
-        "inferences": _inferences(a),
+        "inferences": _inferences(a) + _exact_inferences(a),
     }

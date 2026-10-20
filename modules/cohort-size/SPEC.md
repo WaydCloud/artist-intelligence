@@ -38,7 +38,7 @@ PYTHONPATH=modules/cohort-size/src python -m cohort_size selftest
   | 구획 | 질문 | 차트 | 지표 |
   |---|---|---|---|
   | `size` 인원 | 인원에 따라 성공률이 다른가? | `measure-by-size` · `tests-by-population` · `spotify-by-size` | 분석한 팀 · 종합 성공 · 정확검정 p · 보정 크라메르 V · 추세 p · 카이제곱 p |
-  | `era` 시기 | 데뷔 시기마다 달랐나? | `era-by-size` · `era-tests` | 없음 |
+  | `era` 시기 | 데뷔 시기마다 달랐나? | `era-by-size` · `era-tests` · `exact-by-era`(정확한 인원 × 시기) | 없음 |
   | `who` 성공한 팀 | 성공한 팀은 몇 명이었나? | `size-share` · `era-median` · `era-focus` | 성공한 팀 중앙 인원 · 전체 중앙 인원 |
 
 - k/n은 막대 이름에 **텍스트로** 찍는다(길이만으로 말하지 않는다). 팀이 없는 구간은 줄을 뺀다(0 길이가 0%로 읽히지 않게).

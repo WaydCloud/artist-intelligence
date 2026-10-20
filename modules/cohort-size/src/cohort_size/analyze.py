@@ -32,7 +32,7 @@ class Config:
     cuts: tuple[int, ...] = (3, 4, 5, 6)
     eras: tuple[tuple[int, int], ...] = ((2012, 2014), (2015, 2017), (2018, 2020), (2021, 2023))
     first_year: int = 2012
-    last_year: int = 2024
+    last_year: int = 2026
     include_incomplete: bool = False
     exact_b: int = 20000
     seed: int = 20261020
@@ -43,6 +43,8 @@ class Config:
     impute_sample_seed: int = 20261021
     impute_sample_n: int = 36
     impute_b: int = 5000
+    exact_cuts: tuple[int, ...] = (3, 4, 5, 6, 7, 8)
+    exact_eras: tuple[tuple[int, int], ...] = ((2012, 2017), (2018, 2023))
 
 
 def bucket_labels(cuts: tuple[int, ...]) -> list[str]:
@@ -257,6 +259,70 @@ def imputation(fixture: dict[str, Any], cfg: Config, years: set[int]) -> dict[st
     return out
 
 
+def _span(lo: int, hi: int) -> str:
+    return f"{lo}~{str(hi)[2:]}" if lo != hi else str(lo)
+
+
+def _fisher_split(groups: list[dict[str, Any]], inside: Any) -> dict[str, Any]:
+    """Fisher exact 2 x 2: groups where inside(size) holds against the rest, composite success."""
+    a = sum(1 for g in groups if inside(g["size"]) and g["any"])
+    n1 = sum(1 for g in groups if inside(g["size"]))
+    c = sum(1 for g in groups if not inside(g["size"]) and g["any"])
+    n2 = len(groups) - n1
+    p = stats.fisher_exact_2x2(a, n1 - a, c, n2 - c) if n1 and n2 else None
+    return {"k1": a, "n1": n1, "k2": c, "n2": n2, "p": p}
+
+
+def exact_by_era(groups: list[dict[str, Any]], cfg: Config, complete: list[int], in_progress: list[int],
+                 fixture: dict[str, Any]) -> dict[str, Any]:
+    """Composite success by exact debut size (fine columns) and two wide eras, plus an in-progress row.
+
+    Closed eras use the full window. The in-progress row counts success to date: wins up to the last
+    captured page, Melon and Circle up to the last year-end chart. Post-hoc 2 x 2 tests are run for the
+    closed eras only. They were chosen after seeing the data, so each era also gets every
+    column-against-rest test and a Holm adjustment over that whole family.
+    """
+    labels = bucket_labels(cfg.exact_cuts)
+    eras = [(lo, hi, True) for lo, hi in cfg.exact_eras]
+    if in_progress:
+        eras.append((min(in_progress), max(in_progress), False))
+    rows_out = []
+    for lo, hi, closed in eras:
+        gs = [g for g in groups if lo <= g["year"] <= hi]
+        cells = []
+        for i, lab in enumerate(labels):
+            members = [g for g in gs if bucket_of(g["size"], cfg.exact_cuts) == i]
+            succ = sorted((g for g in members if g["any"]), key=lambda g: (g["year"], g["title"].lower()))
+            k, n = len(succ), len(members)
+            wl, wh = stats.wilson(k, n)
+            cells.append({"label": lab, "k": k, "n": n, "rate": k / n if n else None,
+                          "lo": wl if n else None, "hi": wh if n else None,
+                          "successes": [{"title": g["title"], "year": g["year"], "size": g["size"]} for g in succ]})
+        entry: dict[str, Any] = {"label": _span(lo, hi), "years": [lo, hi], "closed": closed and all(
+            y in complete for y in range(lo, hi + 1)), "n": len(gs), "k": sum(1 for g in gs if g["any"]),
+            "cells": cells}
+        if entry["closed"]:
+            family: dict[str, dict[str, Any]] = {}
+            for i, lab in enumerate(labels):
+                family[f"{lab} vs rest"] = _fisher_split(gs, lambda n, i=i: bucket_of(n, cfg.exact_cuts) == i)
+            big = cfg.exact_cuts[-1]
+            family[f"{big}명 이상 vs {big}명 미만"] = _fisher_split(gs, lambda n, big=big: n >= big)
+            keys = [k_ for k_, v in family.items() if v["p"] is not None]
+            for k_, adj in zip(keys, stats.holm([family[k_]["p"] for k_ in keys]), strict=True):
+                family[k_]["pHolm"] = adj
+                family[k_]["holmFamily"] = len(keys)
+            entry["postHoc"] = family
+        rows_out.append(entry)
+    wins = fixture["sources"].get("win", [])
+    last_win = max((w.get("retrieved", "") for w in wins), default="")
+    return {
+        "cuts": list(cfg.exact_cuts), "labels": labels, "eras": rows_out,
+        "highlight": [f"{cfg.exact_cuts[-1]}명 이상 vs {cfg.exact_cuts[-1]}명 미만", "6명 vs rest"],
+        "cut": {"winRetrieved": last_win, "melonLastYear": max(fixture["coverage"]["melonYears"]),
+                "circleLastYear": max(fixture["coverage"]["circleYears"])},
+    }
+
+
 def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
     last_full = last_complete_year(fixture)
     complete_years = [y for y in range(cfg.first_year, cfg.last_year + 1) if y + cfg.window - 1 <= last_full]
@@ -275,14 +341,15 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
     eras = []
     for lo, hi in cfg.eras:
         gs = [g for g in default_all if lo <= g["year"] <= hi]
-        eras.append({"label": f"{lo}~{str(hi)[2:]}" if lo != hi else str(lo), "years": [lo, hi],
+        eras.append({"label": _span(lo, hi), "years": [lo, hi],
                      "complete": all(y in complete_years for y in range(lo, hi + 1)), **block(gs, cfg, f"era|{lo}")})
     covered = {y for lo, hi in cfg.eras for y in range(lo, hi + 1)}
-    for y in incomplete_years:
-        if y in covered:
-            continue
-        gs = [g for g in default_all if g["year"] == y]
-        eras.append({"label": str(y), "years": [y, y], "complete": False, **block(gs, cfg, f"era|{y}")})
+    rest = [y for y in incomplete_years if y not in covered]
+    if rest:
+        # Cohorts still inside their window form one "in progress" row: success to date only.
+        lo, hi = min(rest), max(rest)
+        gs = [g for g in default_all if g["year"] in rest]
+        eras.append({"label": _span(lo, hi), "years": [lo, hi], "complete": False, **block(gs, cfg, f"era|{lo}")})
 
     # Holm across the complete eras, per measure: four eras tested separately make a low p by chance likelier.
     for m in TESTED:
@@ -314,7 +381,8 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
             "eras": [list(e) for e in cfg.eras], "firstYear": cfg.first_year, "lastYear": cfg.last_year,
             "includeIncomplete": cfg.include_incomplete, "exactB": cfg.exact_b,
             "seed": cfg.seed, "alpha": cfg.alpha, "trendScores": cfg.trend_scores, "focusSize": cfg.focus_size,
-            "imputeRuns": cfg.impute_runs, "imputeSampleSeed": cfg.impute_sample_seed, "imputeB": cfg.impute_b,
+            "exactCuts": list(cfg.exact_cuts),
+            "exactEras": [list(e) for e in cfg.exact_eras], "imputeRuns": cfg.impute_runs, "imputeSampleSeed": cfg.impute_sample_seed, "imputeB": cfg.impute_b,
         },
         "lastCompleteYear": last_full,
         "completeYears": complete_years,
@@ -322,6 +390,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
         "cohorts": cohorts,
         "pooled": pooled,
         "eras": eras,
+        "exact": exact_by_era(default_all, cfg, complete_years, rest, fixture),
         "successes": [brief(g) for g in default_all if g["any"] or g["spotify"]],
         "counts": {
             v: {"all": len(variants[v]["all"]), "tested": len(variants[v]["tested"])} for v in VARIANTS

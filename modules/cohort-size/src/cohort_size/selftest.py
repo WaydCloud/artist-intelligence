@@ -364,6 +364,40 @@ def _report(r: _Run) -> None:
             and d["determined"]["n"] + d["undetermined"]["n"]
             == sum(1 for g in fixture["groups"] if g["year"] in set(a["completeYears"]) and not g["unit"]))
     r.check("33b the V upper-bound wording is gone", "이하 수준" not in blob)
+    x = a["exact"]
+    era = {e["label"]: e for e in x["eras"]}
+    cell = {(e["label"], c["label"]): c for e in x["eras"] for c in e["cells"]}
+    r.check("53 exact columns and eras: labels, cells add up to the era",
+            x["labels"] == ["3명 이하", "4명", "5명", "6명", "7명", "8명", "9명 이상"]
+            and list(era) == ["2012~17", "2018~23", "2024~26"]
+            and all(sum(c["n"] for c in e["cells"]) == e["n"] and sum(c["k"] for c in e["cells"]) == e["k"]
+                    for e in x["eras"]))
+    six = {s["title"] for s in cell[("2018~23", "6명")]["successes"]}
+    ph17 = era["2012~17"]["postHoc"]["8명 이상 vs 8명 미만"]
+    r.check("54 known cells (checked against an independent count of the same fixture)",
+            (cell[("2012~17", "8명")]["k"], cell[("2012~17", "8명")]["n"]) == (4, 6)
+            and (cell[("2012~17", "9명 이상")]["k"], cell[("2012~17", "9명 이상")]["n"]) == (4, 5)
+            and (ph17["k1"], ph17["n1"], ph17["k2"], ph17["n2"]) == (8, 11, 8, 173)
+            and (cell[("2018~23", "6명")]["k"], cell[("2018~23", "6명")]["n"]) == (6, 23)
+            and six == {"IVE", "LE SSERAFIM", "I-dle", "STAYC", "EVERGLOW (group)", "Billlie"}
+            and (cell[("2018~23", "8명")]["k"], cell[("2018~23", "8명")]["n"]) == (0, 13), str(six))
+    h2h = [s for s in cell[("2024~26", "8명")]["successes"] if s["title"] == "Hearts2Hearts"]
+    r.check("55 2025-2026 debuts are in the in-progress row and never tested (Hearts2Hearts 8, wins counted)",
+            not era["2024~26"]["closed"] and "postHoc" not in era["2024~26"] and bool(h2h) and h2h[0]["year"] == 2025
+            and a["incompleteYears"] == [2024, 2025, 2026]
+            and a["pooled"]["default"]["measures"]["any"]["test"]["n"]
+            == sum(1 for g in fixture["groups"] if g["year"] <= 2023 and not g["unit"] and g["n"]))
+    fam = era["2018~23"]["postHoc"]
+    r.check("56 post-hoc family: every column plus the 8+ split, Holm at least the raw p",
+            len(fam) == 8 and all(v["holmFamily"] == 8 and v["pHolm"] >= v["p"] - 1e-12 for v in fam.values())
+            and all(_close(v["p"], stats.fisher_exact_2x2(v["k1"], v["n1"] - v["k1"], v["k2"], v["n2"] - v["k2"]))
+                    for v in fam.values()))
+    exact_chart = next(c for c in rep["charts"] if c["id"] == "exact-by-era")
+    r.check("57 exact chart in the era section, names on screen, in-progress label",
+            exact_chart["section"] == "era"
+            and any(i.startswith("성공 팀 · 2018~23 · 6명 6/23:") and "LE SSERAFIM" in i for i in rep["insights"])
+            and any("2024~26 진행 중" in d["name"] for d in exact_chart["data"])
+            and any(i.get("chartId") == "exact-by-era" and "사후 비교" in i["limits"] for i in rep["inferences"]))
     im = a["imputation"]
     tested_nonunit = d["determined"]["n"] + d["undetermined"]["n"]
     r.check("50 imputation: five schemes, all groups back in, ranges ordered",

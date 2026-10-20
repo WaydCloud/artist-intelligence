@@ -66,6 +66,7 @@ def config_from(args: argparse.Namespace) -> an.Config:
         last_year=args.last_year, include_incomplete=args.include_incomplete, exact_b=args.exact_b,
         seed=args.seed, alpha=args.alpha, trend_scores=args.trend_scores,
         focus_size=args.focus_size, impute_runs=args.impute_runs,
+        exact_cuts=tuple(int(x) for x in args.exact_cuts.split(",")), exact_eras=_eras(args.exact_eras),
     )
 
 
@@ -138,7 +139,7 @@ def main(argv: list[str] | None = None) -> int:
                      help="upper bounds of all buckets but the last (default: <=3, 4, 5, 6, 7+)")
     p_a.add_argument("--eras", default="2012-2014,2015-2017,2018-2020,2021-2023")
     p_a.add_argument("--first-year", type=int, default=2012)
-    p_a.add_argument("--last-year", type=int, default=2024)
+    p_a.add_argument("--last-year", type=int, default=2026)
     p_a.add_argument("--include-incomplete", action="store_true",
                      help="also test cohorts whose window is not closed yet")
     p_a.add_argument("--exact-b", type=int, default=20000, help="Monte Carlo permutations for the exact test")
@@ -146,6 +147,9 @@ def main(argv: list[str] | None = None) -> int:
     p_a.add_argument("--alpha", type=float, default=0.05, help="level that switches the inference wording")
     p_a.add_argument("--trend-scores", choices=("ordinal", "median"), default="ordinal")
     p_a.add_argument("--focus-size", type=int, default=5, help="lineup size tracked in the era share chart")
+    p_a.add_argument("--exact-cuts", default="3,4,5,6,7,8",
+                     help="exact-size columns: upper bounds of all but the last (default: <=3, 4, 5, 6, 7, 8, 9+)")
+    p_a.add_argument("--exact-eras", default="2012-2017,2018-2023", help="closed eras of the exact-size view")
     p_a.add_argument("--impute-runs", type=int, default=20, help="seeds per random scheme for undetermined sizes")
     p_a.add_argument("--print-matches", action="store_true")
     p_a.set_defaults(func=cmd_analyze)

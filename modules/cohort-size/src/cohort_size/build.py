@@ -19,7 +19,10 @@ from typing import Any
 from cohort_size import match, sizes
 
 # RAW ids in the planning repo (data/references). Year order matters: zip pairs years with ids.
-KPOPWIKI_IDS: dict[int, int] = {**{2012 + i: 901 + i for i in range(10)}, 2022: 484, 2023: 485, 2024: 486}
+# 2025 and 2026 debuts are still inside their window. They are shown as in progress and never tested.
+KPOPWIKI_IDS: dict[int, int] = {
+    **{2012 + i: 901 + i for i in range(10)}, 2022: 484, 2023: 485, 2024: 486, 2025: 487, 2026: 488,
+}
 WIN_IDS: list[int] = [*range(801, 856), *range(761, 791)]
 MELON_IDS: list[int] = [*range(856, 866), *range(791, 795)]
 CIRCLE_IDS: list[int] = [*range(866, 876), *range(795, 799)]
@@ -109,7 +112,8 @@ def load_wins(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
         if program not in PROGRAMS:
             raise ValueError(f"unknown program {program!r} in {d}")
         redirect = "Redirect:" in str(meta.get("notes_factual", ""))
-        body = match.wikitext_body(_read(d / "raw.md"))
+        raw = _read(d / "raw.md")
+        body = match.wikitext_body(raw)
         if redirect:
             body = match.year_section(body, year)
         cells, fmt = match.winner_cells(body)
@@ -117,7 +121,7 @@ def load_wins(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
             raise ValueError(f"no winner rows read from {d} ({program} {year})")
         pages.append({"program": program, "year": year, "cells": cells})
         index.append({"id": f"R08-{rid}", "program": program, "year": year, "redirect": redirect,
-                      "format": fmt, "lines": len(cells)})
+                      "format": fmt, "lines": len(cells), "retrieved": match.retrieved_at(raw)})
     return pages, index
 
 

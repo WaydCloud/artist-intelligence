@@ -103,6 +103,20 @@
    "n": 42,
    "tested": false,
    "year": 2024
+  },
+  {
+   "complete": false,
+   "gaps": [],
+   "n": 31,
+   "tested": false,
+   "year": 2025
+  },
+  {
+   "complete": false,
+   "gaps": [],
+   "n": 18,
+   "tested": false,
+   "year": 2026
   }
  ],
  "completeYears": [
@@ -153,28 +167,46 @@
    ]
   ],
   "exactB": 20000,
+  "exactCuts": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "exactEras": [
+   [
+    2012,
+    2017
+   ],
+   [
+    2018,
+    2023
+   ]
+  ],
   "firstYear": 2012,
   "focusSize": 5,
   "imputeB": 5000,
   "imputeRuns": 20,
   "imputeSampleSeed": 20261021,
   "includeIncomplete": false,
-  "lastYear": 2024,
+  "lastYear": 2026,
   "seed": 20261020,
   "trendScores": "ordinal",
   "window": 3
  },
  "counts": {
   "default": {
-   "all": 405,
+   "all": 454,
    "tested": 363
   },
   "range": {
-   "all": 560,
+   "all": 617,
    "tested": 511
   },
   "units": {
-   "all": 450,
+   "all": 512,
    "tested": 402
   }
  },
@@ -1894,316 +1926,316 @@
    "complete": false,
    "dist": {
     "all": {
-     "focus": 14,
+     "focus": 30,
      "median": 5.0,
-     "n": 42,
+     "n": 91,
      "shares": [
       {
-       "k": 7,
+       "k": 11,
        "label": "3명 이하",
-       "n": 42
+       "n": 91
       },
       {
-       "k": 6,
+       "k": 18,
        "label": "4명",
-       "n": 42
+       "n": 91
       },
       {
-       "k": 14,
+       "k": 30,
        "label": "5명",
-       "n": 42
+       "n": 91
       },
       {
-       "k": 6,
+       "k": 12,
        "label": "6명",
-       "n": 42
+       "n": 91
       },
       {
-       "k": 9,
+       "k": 20,
        "label": "7명 이상",
-       "n": 42
+       "n": 91
       }
      ]
     },
     "success": {
-     "focus": 3,
+     "focus": 4,
      "median": 6.0,
-     "n": 7,
+     "n": 9,
      "shares": [
       {
        "k": 0,
        "label": "3명 이하",
-       "n": 7
+       "n": 9
       },
       {
        "k": 0,
        "label": "4명",
-       "n": 7
+       "n": 9
       },
       {
-       "k": 3,
+       "k": 4,
        "label": "5명",
-       "n": 7
+       "n": 9
       },
       {
        "k": 1,
        "label": "6명",
-       "n": 7
+       "n": 9
       },
       {
-       "k": 3,
+       "k": 4,
        "label": "7명 이상",
-       "n": 7
+       "n": 9
       }
      ]
     }
    },
-   "label": "2024",
+   "label": "2024~26",
    "measures": {
     "any": {
      "rows": [
       {
        "bucket": 0,
-       "hi": 0.35433043506668743,
+       "hi": 0.2588329669680317,
        "k": 0,
        "label": "3명 이하",
-       "lo": 5.551115123125783e-17,
-       "n": 7,
+       "lo": 0.0,
+       "n": 11,
        "rate": 0.0
       },
       {
        "bucket": 1,
-       "hi": 0.3903342879021653,
+       "hi": 0.17587922364665765,
        "k": 0,
        "label": "4명",
-       "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "lo": 0.0,
+       "n": 18,
        "rate": 0.0
       },
       {
        "bucket": 2,
-       "hi": 0.47589230586600295,
-       "k": 3,
+       "hi": 0.296813266820363,
+       "k": 4,
        "label": "5명",
-       "lo": 0.07571386712693184,
-       "n": 14,
-       "rate": 0.21428571428571427
+       "lo": 0.053096554840547455,
+       "n": 30,
+       "rate": 0.13333333333333333
       },
       {
        "bucket": 3,
-       "hi": 0.5635028221864702,
+       "hi": 0.35387991114111694,
        "k": 1,
        "label": "6명",
-       "lo": 0.030053369748306635,
-       "n": 6,
-       "rate": 0.16666666666666666
+       "lo": 0.014865094404917095,
+       "n": 12,
+       "rate": 0.08333333333333333
       },
       {
        "bucket": 4,
-       "hi": 0.6457978644196036,
-       "k": 3,
+       "hi": 0.41601743225189364,
+       "k": 4,
        "label": "7명 이상",
-       "lo": 0.1205838183869109,
-       "n": 9,
-       "rate": 0.3333333333333333
+       "lo": 0.08065766257979806,
+       "n": 20,
+       "rate": 0.2
       }
      ],
      "test": {
       "cells": 10,
-      "chi2": 4.628571428571428,
+      "chi2": 5.908423667570009,
       "df": 4,
       "exactB": 20000,
-      "k": 7,
+      "k": 9,
       "lowExpected": 5,
-      "mcSe": 0.003442131409971876,
-      "n": 42,
-      "pChi2": 0.3275732500409534,
-      "pExact": 0.3858307084645768,
-      "pTrend": 0.05067013112901894,
-      "trendZ": 1.954262924180418,
-      "v": 0.33197000110349284,
-      "vbc": 0.11383841036078013,
-      "vbcNull95": 0.34690075822116867
+      "mcSe": 0.002949902165490679,
+      "n": 91,
+      "pChi2": 0.20609242702919706,
+      "pExact": 0.22438878056097195,
+      "pTrend": 0.034010975434037326,
+      "trendZ": 2.1199415427028803,
+      "v": 0.2548092082532722,
+      "vbc": 0.1439216365646714,
+      "vbcNull95": 0.24676278682911945
      }
     },
     "circle": {
      "rows": [
       {
        "bucket": 0,
-       "hi": 0.35433043506668743,
+       "hi": 0.2588329669680317,
        "k": 0,
        "label": "3명 이하",
-       "lo": 5.551115123125783e-17,
-       "n": 7,
+       "lo": 0.0,
+       "n": 11,
        "rate": 0.0
       },
       {
        "bucket": 1,
-       "hi": 0.3903342879021653,
+       "hi": 0.17587922364665765,
        "k": 0,
        "label": "4명",
-       "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "lo": 0.0,
+       "n": 18,
        "rate": 0.0
       },
       {
        "bucket": 2,
-       "hi": 0.39941379496970353,
-       "k": 2,
+       "hi": 0.25621082579184085,
+       "k": 3,
        "label": "5명",
-       "lo": 0.040093921271464966,
-       "n": 14,
-       "rate": 0.14285714285714285
+       "lo": 0.03459988874733419,
+       "n": 30,
+       "rate": 0.1
       },
       {
        "bucket": 3,
-       "hi": 0.3903342879021653,
+       "hi": 0.24249400665524085,
        "k": 0,
        "label": "6명",
        "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "n": 12,
        "rate": 0.0
       },
       {
        "bucket": 4,
-       "hi": 0.434999705576656,
-       "k": 1,
+       "hi": 0.3010336452284873,
+       "k": 2,
        "label": "7명 이상",
-       "lo": 0.019890887638544907,
-       "n": 9,
-       "rate": 0.1111111111111111
+       "lo": 0.027866481213768224,
+       "n": 20,
+       "rate": 0.1
       }
      ],
      "test": {
       "cells": 10,
-      "chi2": 2.752136752136752,
+      "chi2": 4.338372093023255,
       "df": 4,
       "exactB": 20000,
-      "k": 3,
+      "k": 5,
       "lowExpected": 5,
-      "mcSe": 0.001861273839957038,
-      "n": 42,
-      "pChi2": 0.600122668492221,
-      "pExact": 0.9251037448127594,
-      "pTrend": 0.44399614176997265,
-      "trendZ": 0.7654625782681534,
-      "v": 0.25598254926276814,
-      "vbc": 0.0,
-      "vbcNull95": 0.3276220113731406
+      "mcSe": 0.0035354973122074616,
+      "n": 91,
+      "pChi2": 0.36214475939639723,
+      "pExact": 0.5022748862556872,
+      "pTrend": 0.2350431724674175,
+      "trendZ": 1.1874677440665373,
+      "v": 0.21834472424276974,
+      "vbc": 0.05715125549542562,
+      "vbcNull95": 0.22924318619326323
      }
     },
     "melon": {
      "rows": [
       {
        "bucket": 0,
-       "hi": 0.35433043506668743,
+       "hi": 0.2588329669680317,
        "k": 0,
        "label": "3명 이하",
-       "lo": 5.551115123125783e-17,
-       "n": 7,
+       "lo": 0.0,
+       "n": 11,
        "rate": 0.0
       },
       {
        "bucket": 1,
-       "hi": 0.3903342879021653,
+       "hi": 0.17587922364665765,
        "k": 0,
        "label": "4명",
-       "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "lo": 0.0,
+       "n": 18,
        "rate": 0.0
       },
       {
        "bucket": 2,
-       "hi": 0.39941379496970353,
-       "k": 2,
+       "hi": 0.25621082579184085,
+       "k": 3,
        "label": "5명",
-       "lo": 0.040093921271464966,
-       "n": 14,
-       "rate": 0.14285714285714285
+       "lo": 0.03459988874733419,
+       "n": 30,
+       "rate": 0.1
       },
       {
        "bucket": 3,
-       "hi": 0.3903342879021653,
+       "hi": 0.24249400665524085,
        "k": 0,
        "label": "6명",
        "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "n": 12,
        "rate": 0.0
       },
       {
        "bucket": 4,
-       "hi": 0.434999705576656,
-       "k": 1,
+       "hi": 0.3010336452284873,
+       "k": 2,
        "label": "7명 이상",
-       "lo": 0.019890887638544907,
-       "n": 9,
-       "rate": 0.1111111111111111
+       "lo": 0.027866481213768224,
+       "n": 20,
+       "rate": 0.1
       }
      ],
      "test": {
       "cells": 10,
-      "chi2": 2.752136752136752,
+      "chi2": 4.338372093023255,
       "df": 4,
       "exactB": 20000,
-      "k": 3,
+      "k": 5,
       "lowExpected": 5,
-      "mcSe": 0.0019050884637520438,
-      "n": 42,
-      "pChi2": 0.600122668492221,
-      "pExact": 0.9212039398030099,
-      "pTrend": 0.44399614176997265,
-      "trendZ": 0.7654625782681534,
-      "v": 0.25598254926276814,
-      "vbc": 0.0,
-      "vbcNull95": 0.3276220113731406
+      "mcSe": 0.0035353296328903038,
+      "n": 91,
+      "pChi2": 0.36214475939639723,
+      "pExact": 0.5053747312634368,
+      "pTrend": 0.2350431724674175,
+      "trendZ": 1.1874677440665373,
+      "v": 0.21834472424276974,
+      "vbc": 0.05715125549542562,
+      "vbcNull95": 0.2393911479543204
      }
     },
     "spotify": {
      "rows": [
       {
        "bucket": 0,
-       "hi": 0.35433043506668743,
+       "hi": 0.2588329669680317,
        "k": 0,
        "label": "3명 이하",
-       "lo": 5.551115123125783e-17,
-       "n": 7,
+       "lo": 0.0,
+       "n": 11,
        "rate": 0.0
       },
       {
        "bucket": 1,
-       "hi": 0.3903342879021653,
+       "hi": 0.17587922364665765,
        "k": 0,
        "label": "4명",
-       "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "lo": 0.0,
+       "n": 18,
        "rate": 0.0
       },
       {
        "bucket": 2,
-       "hi": 0.31468704424151117,
+       "hi": 0.16670390991409173,
        "k": 1,
        "label": "5명",
-       "lo": 0.012722215247890939,
-       "n": 14,
-       "rate": 0.07142857142857142
+       "lo": 0.005908590381612455,
+       "n": 30,
+       "rate": 0.03333333333333333
       },
       {
        "bucket": 3,
-       "hi": 0.5635028221864702,
+       "hi": 0.35387991114111694,
        "k": 1,
        "label": "6명",
-       "lo": 0.030053369748306635,
-       "n": 6,
-       "rate": 0.16666666666666666
+       "lo": 0.014865094404917095,
+       "n": 12,
+       "rate": 0.08333333333333333
       },
       {
        "bucket": 4,
-       "hi": 0.434999705576656,
-       "k": 1,
+       "hi": 0.3010336452284873,
+       "k": 2,
        "label": "7명 이상",
-       "lo": 0.019890887638544907,
-       "n": 9,
-       "rate": 0.1111111111111111
+       "lo": 0.027866481213768224,
+       "n": 20,
+       "rate": 0.1
       }
      ]
     },
@@ -2211,79 +2243,713 @@
      "rows": [
       {
        "bucket": 0,
-       "hi": 0.35433043506668743,
+       "hi": 0.2588329669680317,
        "k": 0,
        "label": "3명 이하",
-       "lo": 5.551115123125783e-17,
-       "n": 7,
+       "lo": 0.0,
+       "n": 11,
        "rate": 0.0
       },
       {
        "bucket": 1,
-       "hi": 0.3903342879021653,
+       "hi": 0.17587922364665765,
        "k": 0,
        "label": "4명",
-       "lo": 2.7755575615628914e-17,
-       "n": 6,
+       "lo": 0.0,
+       "n": 18,
        "rate": 0.0
       },
       {
        "bucket": 2,
-       "hi": 0.47589230586600295,
-       "k": 3,
+       "hi": 0.296813266820363,
+       "k": 4,
        "label": "5명",
-       "lo": 0.07571386712693184,
-       "n": 14,
-       "rate": 0.21428571428571427
+       "lo": 0.053096554840547455,
+       "n": 30,
+       "rate": 0.13333333333333333
       },
       {
        "bucket": 3,
-       "hi": 0.5635028221864702,
+       "hi": 0.35387991114111694,
        "k": 1,
        "label": "6명",
-       "lo": 0.030053369748306635,
-       "n": 6,
-       "rate": 0.16666666666666666
+       "lo": 0.014865094404917095,
+       "n": 12,
+       "rate": 0.08333333333333333
       },
       {
        "bucket": 4,
-       "hi": 0.6457978644196036,
-       "k": 3,
+       "hi": 0.41601743225189364,
+       "k": 4,
        "label": "7명 이상",
-       "lo": 0.1205838183869109,
-       "n": 9,
-       "rate": 0.3333333333333333
+       "lo": 0.08065766257979806,
+       "n": 20,
+       "rate": 0.2
       }
      ],
      "test": {
       "cells": 10,
-      "chi2": 4.628571428571428,
+      "chi2": 5.908423667570009,
       "df": 4,
       "exactB": 20000,
-      "k": 7,
+      "k": 9,
       "lowExpected": 5,
-      "mcSe": 0.003451884654713174,
-      "n": 42,
-      "pChi2": 0.3275732500409534,
-      "pExact": 0.39188040597970103,
-      "pTrend": 0.05067013112901894,
-      "trendZ": 1.954262924180418,
-      "v": 0.33197000110349284,
-      "vbc": 0.11383841036078013,
-      "vbcNull95": 0.3367006785540765
+      "mcSe": 0.0029649559662218304,
+      "n": 91,
+      "pChi2": 0.20609242702919706,
+      "pExact": 0.22763861806909655,
+      "pTrend": 0.034010975434037326,
+      "trendZ": 2.1199415427028803,
+      "v": 0.2548092082532722,
+      "vbc": 0.1439216365646714,
+      "vbcNull95": 0.24676278682911945
      }
     }
    },
-   "n": 42,
+   "n": 91,
    "years": [
     2024,
-    2024
+    2026
    ]
   }
  ],
+ "exact": {
+  "cut": {
+   "circleLastYear": 2025,
+   "melonLastYear": 2025,
+   "winRetrieved": "2026-10-19T23:50:53+00:00"
+  },
+  "cuts": [
+   3,
+   4,
+   5,
+   6,
+   7,
+   8
+  ],
+  "eras": [
+   {
+    "cells": [
+     {
+      "hi": 0.11696979849974075,
+      "k": 0,
+      "label": "3명 이하",
+      "lo": 0.0,
+      "n": 29,
+      "rate": 0.0,
+      "successes": []
+     },
+     {
+      "hi": 0.12713847263338832,
+      "k": 3,
+      "label": "4명",
+      "lo": 0.015819840413512566,
+      "n": 65,
+      "rate": 0.046153846153846156,
+      "successes": [
+       {
+        "size": 4,
+        "title": "MAMAMOO",
+        "year": 2014
+       },
+       {
+        "size": 4,
+        "title": "Red Velvet",
+        "year": 2014
+       },
+       {
+        "size": 4,
+        "title": "BLACKPINK",
+        "year": 2016
+       }
+      ]
+     },
+     {
+      "hi": 0.13216305655362268,
+      "k": 2,
+      "label": "5명",
+      "lo": 0.010821083352867085,
+      "n": 51,
+      "rate": 0.0392156862745098,
+      "successes": [
+       {
+        "size": 5,
+        "title": "Crayon Pop",
+        "year": 2012
+       },
+       {
+        "size": 5,
+        "title": "LADIES' CODE",
+        "year": 2013
+       }
+      ]
+     },
+     {
+      "hi": 0.32799765130178804,
+      "k": 2,
+      "label": "6명",
+      "lo": 0.03101952264561239,
+      "n": 18,
+      "rate": 0.1111111111111111,
+      "successes": [
+       {
+        "size": 6,
+        "title": "EXID",
+        "year": 2012
+       },
+       {
+        "size": 6,
+        "title": "GFRIEND",
+        "year": 2015
+       }
+      ]
+     },
+     {
+      "hi": 0.4041500267952385,
+      "k": 1,
+      "label": "7명",
+      "lo": 0.017876213095072896,
+      "n": 10,
+      "rate": 0.1,
+      "successes": [
+       {
+        "size": 7,
+        "title": "MOMOLAND",
+        "year": 2016
+       }
+      ]
+     },
+     {
+      "hi": 0.9032285888942195,
+      "k": 4,
+      "label": "8명",
+      "lo": 0.299993315138392,
+      "n": 6,
+      "rate": 0.6666666666666666,
+      "successes": [
+       {
+        "size": 8,
+        "title": "AOA",
+        "year": 2012
+       },
+       {
+        "size": 8,
+        "title": "Lovelyz",
+        "year": 2014
+       },
+       {
+        "size": 8,
+        "title": "OH MY GIRL",
+        "year": 2015
+       },
+       {
+        "size": 8,
+        "title": "Weki Meki",
+        "year": 2017
+       }
+      ]
+     },
+     {
+      "hi": 0.9637758913675698,
+      "k": 4,
+      "label": "9명 이상",
+      "lo": 0.37553462976252533,
+      "n": 5,
+      "rate": 0.8,
+      "successes": [
+       {
+        "size": 9,
+        "title": "TWICE",
+        "year": 2015
+       },
+       {
+        "size": 9,
+        "title": "Gugudan",
+        "year": 2016
+       },
+       {
+        "size": 12,
+        "title": "WJSN",
+        "year": 2016
+       },
+       {
+        "size": 10,
+        "title": "PRISTIN",
+        "year": 2017
+       }
+      ]
+     }
+    ],
+    "closed": true,
+    "k": 16,
+    "label": "2012~17",
+    "n": 184,
+    "postHoc": {
+     "3명 이하 vs rest": {
+      "holmFamily": 8,
+      "k1": 0,
+      "k2": 16,
+      "n1": 29,
+      "n2": 155,
+      "p": 0.07988958882205148,
+      "pHolm": 0.3994479441102574
+     },
+     "4명 vs rest": {
+      "holmFamily": 8,
+      "k1": 3,
+      "k2": 13,
+      "n1": 65,
+      "n2": 119,
+      "p": 0.17905856090369338,
+      "pHolm": 0.7162342436147735
+     },
+     "5명 vs rest": {
+      "holmFamily": 8,
+      "k1": 2,
+      "k2": 14,
+      "n1": 51,
+      "n2": 133,
+      "p": 0.24194144105677923,
+      "pHolm": 0.7258243231703376
+     },
+     "6명 vs rest": {
+      "holmFamily": 8,
+      "k1": 2,
+      "k2": 14,
+      "n1": 18,
+      "n2": 166,
+      "p": 0.6592790688432428,
+      "pHolm": 1.0
+     },
+     "7명 vs rest": {
+      "holmFamily": 8,
+      "k1": 1,
+      "k2": 15,
+      "n1": 10,
+      "n2": 174,
+      "p": 0.9999999999999728,
+      "pHolm": 1.0
+     },
+     "8명 vs rest": {
+      "holmFamily": 8,
+      "k1": 4,
+      "k2": 12,
+      "n1": 6,
+      "n2": 178,
+      "p": 0.0005292907598415273,
+      "pHolm": 0.003175744559049164
+     },
+     "8명 이상 vs 8명 미만": {
+      "holmFamily": 8,
+      "k1": 8,
+      "k2": 8,
+      "n1": 11,
+      "n2": 173,
+      "p": 6.715187282731265e-08,
+      "pHolm": 5.372149826185012e-07
+     },
+     "9명 이상 vs rest": {
+      "holmFamily": 8,
+      "k1": 4,
+      "k2": 12,
+      "n1": 5,
+      "n2": 179,
+      "p": 0.00018639353450711178,
+      "pHolm": 0.0013047547415497825
+     }
+    },
+    "years": [
+     2012,
+     2017
+    ]
+   },
+   {
+    "cells": [
+     {
+      "hi": 0.18283465933575843,
+      "k": 1,
+      "label": "3명 이하",
+      "lo": 0.006568145980785103,
+      "n": 27,
+      "rate": 0.037037037037037035,
+      "successes": [
+       {
+        "size": 3,
+        "title": "VIVIZ",
+        "year": 2022
+       }
+      ]
+     },
+     {
+      "hi": 0.2032466407411883,
+      "k": 4,
+      "label": "4명",
+      "lo": 0.03433586789472588,
+      "n": 46,
+      "rate": 0.08695652173913043,
+      "successes": [
+       {
+        "size": 4,
+        "title": "Aespa",
+        "year": 2020
+       },
+       {
+        "size": 4,
+        "title": "FIFTY FIFTY",
+        "year": 2022
+       },
+       {
+        "size": 4,
+        "title": "H1-KEY",
+        "year": 2022
+       },
+       {
+        "size": 4,
+        "title": "KISS OF LIFE",
+        "year": 2023
+       }
+      ]
+     },
+     {
+      "hi": 0.20718636736298127,
+      "k": 2,
+      "label": "5명",
+      "lo": 0.017874783521914572,
+      "n": 31,
+      "rate": 0.06451612903225806,
+      "successes": [
+       {
+        "size": 5,
+        "title": "ITZY",
+        "year": 2019
+       },
+       {
+        "size": 5,
+        "title": "NewJeans",
+        "year": 2022
+       }
+      ]
+     },
+     {
+      "hi": 0.4647000483742537,
+      "k": 6,
+      "label": "6명",
+      "lo": 0.12548616044986347,
+      "n": 23,
+      "rate": 0.2608695652173913,
+      "successes": [
+       {
+        "size": 6,
+        "title": "I-dle",
+        "year": 2018
+       },
+       {
+        "size": 6,
+        "title": "EVERGLOW (group)",
+        "year": 2019
+       },
+       {
+        "size": 6,
+        "title": "STAYC",
+        "year": 2020
+       },
+       {
+        "size": 6,
+        "title": "Billlie",
+        "year": 2021
+       },
+       {
+        "size": 6,
+        "title": "IVE",
+        "year": 2021
+       },
+       {
+        "size": 6,
+        "title": "LE SSERAFIM",
+        "year": 2022
+       }
+      ]
+     },
+     {
+      "hi": 0.3433635059488588,
+      "k": 2,
+      "label": "7명",
+      "lo": 0.03287977376379267,
+      "n": 17,
+      "rate": 0.11764705882352941,
+      "successes": [
+       {
+        "size": 7,
+        "title": "CSR",
+        "year": 2022
+       },
+       {
+        "size": 7,
+        "title": "NMIXX",
+        "year": 2022
+       }
+      ]
+     },
+     {
+      "hi": 0.22809537235419838,
+      "k": 0,
+      "label": "8명",
+      "lo": 0.0,
+      "n": 13,
+      "rate": 0.0,
+      "successes": []
+     },
+     {
+      "hi": 0.33334987166571717,
+      "k": 3,
+      "label": "9명 이상",
+      "lo": 0.04749003714055253,
+      "n": 22,
+      "rate": 0.13636363636363635,
+      "successes": [
+       {
+        "size": 9,
+        "title": "Fromis 9",
+        "year": 2018
+       },
+       {
+        "size": 12,
+        "title": "LOONA",
+        "year": 2018
+       },
+       {
+        "size": 24,
+        "title": "TripleS",
+        "year": 2023
+       }
+      ]
+     }
+    ],
+    "closed": true,
+    "k": 18,
+    "label": "2018~23",
+    "n": 179,
+    "postHoc": {
+     "3명 이하 vs rest": {
+      "holmFamily": 8,
+      "k1": 1,
+      "k2": 17,
+      "n1": 27,
+      "n2": 152,
+      "p": 0.31725535147905815,
+      "pHolm": 1.0
+     },
+     "4명 vs rest": {
+      "holmFamily": 8,
+      "k1": 4,
+      "k2": 14,
+      "n1": 46,
+      "n2": 133,
+      "p": 1.0,
+      "pHolm": 1.0
+     },
+     "5명 vs rest": {
+      "holmFamily": 8,
+      "k1": 2,
+      "k2": 16,
+      "n1": 31,
+      "n2": 148,
+      "p": 0.7427353224157933,
+      "pHolm": 1.0
+     },
+     "6명 vs rest": {
+      "holmFamily": 8,
+      "k1": 6,
+      "k2": 12,
+      "n1": 23,
+      "n2": 156,
+      "p": 0.01525526412393144,
+      "pHolm": 0.12204211299145153
+     },
+     "7명 vs rest": {
+      "holmFamily": 8,
+      "k1": 2,
+      "k2": 16,
+      "n1": 17,
+      "n2": 162,
+      "p": 0.6820068408953608,
+      "pHolm": 1.0
+     },
+     "8명 vs rest": {
+      "holmFamily": 8,
+      "k1": 0,
+      "k2": 18,
+      "n1": 13,
+      "n2": 166,
+      "p": 0.36798585210187346,
+      "pHolm": 1.0
+     },
+     "8명 이상 vs 8명 미만": {
+      "holmFamily": 8,
+      "k1": 3,
+      "k2": 15,
+      "n1": 35,
+      "n2": 144,
+      "p": 0.9999999999999073,
+      "pHolm": 1.0
+     },
+     "9명 이상 vs rest": {
+      "holmFamily": 8,
+      "k1": 3,
+      "k2": 15,
+      "n1": 22,
+      "n2": 157,
+      "p": 0.46825649874380054,
+      "pHolm": 1.0
+     }
+    },
+    "years": [
+     2018,
+     2023
+    ]
+   },
+   {
+    "cells": [
+     {
+      "hi": 0.2588329669680317,
+      "k": 0,
+      "label": "3명 이하",
+      "lo": 0.0,
+      "n": 11,
+      "rate": 0.0,
+      "successes": []
+     },
+     {
+      "hi": 0.17587922364665765,
+      "k": 0,
+      "label": "4명",
+      "lo": 0.0,
+      "n": 18,
+      "rate": 0.0,
+      "successes": []
+     },
+     {
+      "hi": 0.296813266820363,
+      "k": 4,
+      "label": "5명",
+      "lo": 0.053096554840547455,
+      "n": 30,
+      "rate": 0.13333333333333333,
+      "successes": [
+       {
+        "size": 5,
+        "title": "ILLIT",
+        "year": 2024
+       },
+       {
+        "size": 5,
+        "title": "MEOVV",
+        "year": 2024
+       },
+       {
+        "size": 5,
+        "title": "RESCENE",
+        "year": 2024
+       },
+       {
+        "size": 5,
+        "title": "KiiiKiii",
+        "year": 2025
+       }
+      ]
+     },
+     {
+      "hi": 0.35387991114111694,
+      "k": 1,
+      "label": "6명",
+      "lo": 0.014865094404917095,
+      "n": 12,
+      "rate": 0.08333333333333333,
+      "successes": [
+       {
+        "size": 6,
+        "title": "KATSEYE",
+        "year": 2024
+       }
+      ]
+     },
+     {
+      "hi": 0.47589230586600295,
+      "k": 3,
+      "label": "7명",
+      "lo": 0.07571386712693184,
+      "n": 14,
+      "rate": 0.21428571428571427,
+      "successes": [
+       {
+        "size": 7,
+        "title": "BABYMONSTER",
+        "year": 2024
+       },
+       {
+        "size": 7,
+        "title": "Izna",
+        "year": 2024
+       },
+       {
+        "size": 7,
+        "title": "SAY MY NAME (group)",
+        "year": 2024
+       }
+      ]
+     },
+     {
+      "hi": 0.9054687942657693,
+      "k": 1,
+      "label": "8명",
+      "lo": 0.09453120573423074,
+      "n": 2,
+      "rate": 0.5,
+      "successes": [
+       {
+        "size": 8,
+        "title": "Hearts2Hearts",
+        "year": 2025
+       }
+      ]
+     },
+     {
+      "hi": 0.4898908364545973,
+      "k": 0,
+      "label": "9명 이상",
+      "lo": 0.0,
+      "n": 4,
+      "rate": 0.0,
+      "successes": []
+     }
+    ],
+    "closed": false,
+    "k": 9,
+    "label": "2024~26",
+    "n": 91,
+    "years": [
+     2024,
+     2026
+    ]
+   }
+  ],
+  "highlight": [
+   "8명 이상 vs 8명 미만",
+   "6명 vs rest"
+  ],
+  "labels": [
+   "3명 이하",
+   "4명",
+   "5명",
+   "6명",
+   "7명",
+   "8명",
+   "9명 이상"
+  ]
+ },
  "excludedDefault": {
-  "undetermined": 155,
-  "units": 63
+  "undetermined": 163,
+  "units": 76
  },
  "imputation": {
   "runs": 20,
@@ -2411,7 +3077,9 @@
   "undetermined": 148
  },
  "incompleteYears": [
-  2024
+  2024,
+  2025,
+  2026
  ],
  "lastCompleteYear": 2025,
  "pooled": {
@@ -3654,7 +4322,9 @@
    "2021": "R04-910",
    "2022": "R04-484",
    "2023": "R04-485",
-   "2024": "R04-486"
+   "2024": "R04-486",
+   "2025": "R04-487",
+   "2026": "R04-488"
   },
   "melon": [
    {
@@ -3740,6 +4410,7 @@
     "lines": 258,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:39+00:00",
     "year": 2012
    },
    {
@@ -3748,6 +4419,7 @@
     "lines": 338,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:43+00:00",
     "year": 2013
    },
    {
@@ -3756,6 +4428,7 @@
     "lines": 318,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:47+00:00",
     "year": 2014
    },
    {
@@ -3764,6 +4437,7 @@
     "lines": 286,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:51+00:00",
     "year": 2015
    },
    {
@@ -3772,6 +4446,7 @@
     "lines": 287,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:55+00:00",
     "year": 2016
    },
    {
@@ -3780,6 +4455,7 @@
     "lines": 290,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:44:59+00:00",
     "year": 2017
    },
    {
@@ -3788,6 +4464,7 @@
     "lines": 292,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:03+00:00",
     "year": 2018
    },
    {
@@ -3796,6 +4473,7 @@
     "lines": 296,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:07+00:00",
     "year": 2019
    },
    {
@@ -3804,6 +4482,7 @@
     "lines": 290,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:11+00:00",
     "year": 2020
    },
    {
@@ -3812,6 +4491,7 @@
     "lines": 307,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:15+00:00",
     "year": 2021
    },
    {
@@ -3820,6 +4500,7 @@
     "lines": 277,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:22+00:00",
     "year": 2013
    },
    {
@@ -3828,6 +4509,7 @@
     "lines": 350,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:26+00:00",
     "year": 2014
    },
    {
@@ -3836,6 +4518,7 @@
     "lines": 286,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:31+00:00",
     "year": 2015
    },
    {
@@ -3844,6 +4527,7 @@
     "lines": 297,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:35+00:00",
     "year": 2016
    },
    {
@@ -3852,6 +4536,7 @@
     "lines": 283,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:45:39+00:00",
     "year": 2017
    },
    {
@@ -3860,6 +4545,7 @@
     "lines": 281,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:29+00:00",
     "year": 2018
    },
    {
@@ -3868,6 +4554,7 @@
     "lines": 297,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:33+00:00",
     "year": 2019
    },
    {
@@ -3876,6 +4563,7 @@
     "lines": 268,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:38+00:00",
     "year": 2020
    },
    {
@@ -3884,6 +4572,7 @@
     "lines": 284,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:42+00:00",
     "year": 2021
    },
    {
@@ -3892,6 +4581,7 @@
     "lines": 269,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:45+00:00",
     "year": 2012
    },
    {
@@ -3900,6 +4590,7 @@
     "lines": 280,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:49+00:00",
     "year": 2013
    },
    {
@@ -3908,6 +4599,7 @@
     "lines": 278,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:53+00:00",
     "year": 2014
    },
    {
@@ -3916,6 +4608,7 @@
     "lines": 336,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:46:57+00:00",
     "year": 2015
    },
    {
@@ -3924,6 +4617,7 @@
     "lines": 344,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:02+00:00",
     "year": 2016
    },
    {
@@ -3932,6 +4626,7 @@
     "lines": 334,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:05+00:00",
     "year": 2017
    },
    {
@@ -3940,6 +4635,7 @@
     "lines": 343,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:09+00:00",
     "year": 2018
    },
    {
@@ -3948,6 +4644,7 @@
     "lines": 346,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:13+00:00",
     "year": 2019
    },
    {
@@ -3956,6 +4653,7 @@
     "lines": 340,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:18+00:00",
     "year": 2020
    },
    {
@@ -3964,6 +4662,7 @@
     "lines": 322,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:21+00:00",
     "year": 2021
    },
    {
@@ -3972,6 +4671,7 @@
     "lines": 162,
     "program": "Show! Music Core",
     "redirect": true,
+    "retrieved": "2026-10-19T23:47:29+00:00",
     "year": 2013
    },
    {
@@ -3980,6 +4680,7 @@
     "lines": 183,
     "program": "Show! Music Core",
     "redirect": true,
+    "retrieved": "2026-10-19T23:47:33+00:00",
     "year": 2014
    },
    {
@@ -3988,6 +4689,7 @@
     "lines": 147,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:47:37+00:00",
     "year": 2015
    },
    {
@@ -3996,6 +4698,7 @@
     "lines": 170,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:48:31+00:00",
     "year": 2017
    },
    {
@@ -4004,6 +4707,7 @@
     "lines": 307,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:48:34+00:00",
     "year": 2018
    },
    {
@@ -4012,6 +4716,7 @@
     "lines": 306,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:48:38+00:00",
     "year": 2019
    },
    {
@@ -4020,6 +4725,7 @@
     "lines": 329,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:48:42+00:00",
     "year": 2020
    },
    {
@@ -4028,6 +4734,7 @@
     "lines": 346,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T23:48:46+00:00",
     "year": 2021
    },
    {
@@ -4036,6 +4743,7 @@
     "lines": 28,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:48:50+00:00",
     "year": 2012
    },
    {
@@ -4044,6 +4752,7 @@
     "lines": 48,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:48:54+00:00",
     "year": 2013
    },
    {
@@ -4052,6 +4761,7 @@
     "lines": 231,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:48:59+00:00",
     "year": 2014
    },
    {
@@ -4060,6 +4770,7 @@
     "lines": 231,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:03+00:00",
     "year": 2015
    },
    {
@@ -4068,6 +4779,7 @@
     "lines": 238,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:07+00:00",
     "year": 2016
    },
    {
@@ -4076,6 +4788,7 @@
     "lines": 225,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:11+00:00",
     "year": 2017
    },
    {
@@ -4084,6 +4797,7 @@
     "lines": 225,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:15+00:00",
     "year": 2018
    },
    {
@@ -4092,6 +4806,7 @@
     "lines": 243,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:19+00:00",
     "year": 2019
    },
    {
@@ -4100,6 +4815,7 @@
     "lines": 228,
     "program": "Show Champion",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:23+00:00",
     "year": 2020
    },
    {
@@ -4108,6 +4824,7 @@
     "lines": 322,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T23:49:27+00:00",
     "year": 2021
    },
    {
@@ -4116,6 +4833,7 @@
     "lines": 61,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:49:38+00:00",
     "year": 2014
    },
    {
@@ -4124,6 +4842,7 @@
     "lines": 266,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:29+00:00",
     "year": 2015
    },
    {
@@ -4132,6 +4851,7 @@
     "lines": 280,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:33+00:00",
     "year": 2016
    },
    {
@@ -4140,6 +4860,7 @@
     "lines": 273,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:37+00:00",
     "year": 2017
    },
    {
@@ -4148,6 +4869,7 @@
     "lines": 277,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:41+00:00",
     "year": 2018
    },
    {
@@ -4156,6 +4878,7 @@
     "lines": 285,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:45+00:00",
     "year": 2019
    },
    {
@@ -4164,6 +4887,7 @@
     "lines": 276,
     "program": "The Show",
     "redirect": true,
+    "retrieved": "2026-10-19T23:50:49+00:00",
     "year": 2020
    },
    {
@@ -4172,6 +4896,7 @@
     "lines": 331,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T23:50:53+00:00",
     "year": 2021
    },
    {
@@ -4180,6 +4905,7 @@
     "lines": 301,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:35+00:00",
     "year": 2022
    },
    {
@@ -4188,6 +4914,7 @@
     "lines": 301,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:39+00:00",
     "year": 2023
    },
    {
@@ -4196,6 +4923,7 @@
     "lines": 313,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:42+00:00",
     "year": 2024
    },
    {
@@ -4204,6 +4932,7 @@
     "lines": 327,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:46+00:00",
     "year": 2025
    },
    {
@@ -4212,6 +4941,7 @@
     "lines": 260,
     "program": "Music Bank",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:50+00:00",
     "year": 2026
    },
    {
@@ -4220,6 +4950,7 @@
     "lines": 267,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:55+00:00",
     "year": 2022
    },
    {
@@ -4228,6 +4959,7 @@
     "lines": 277,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T15:26:59+00:00",
     "year": 2023
    },
    {
@@ -4236,6 +4968,7 @@
     "lines": 255,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:03+00:00",
     "year": 2024
    },
    {
@@ -4244,6 +4977,7 @@
     "lines": 290,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:07+00:00",
     "year": 2025
    },
    {
@@ -4252,6 +4986,7 @@
     "lines": 236,
     "program": "Inkigayo",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:11+00:00",
     "year": 2026
    },
    {
@@ -4260,6 +4995,7 @@
     "lines": 345,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:14+00:00",
     "year": 2022
    },
    {
@@ -4268,6 +5004,7 @@
     "lines": 326,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:18+00:00",
     "year": 2023
    },
    {
@@ -4276,6 +5013,7 @@
     "lines": 325,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:22+00:00",
     "year": 2024
    },
    {
@@ -4284,6 +5022,7 @@
     "lines": 280,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:26+00:00",
     "year": 2025
    },
    {
@@ -4292,6 +5031,7 @@
     "lines": 254,
     "program": "M Countdown",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:30+00:00",
     "year": 2026
    },
    {
@@ -4300,6 +5040,7 @@
     "lines": 323,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:34+00:00",
     "year": 2022
    },
    {
@@ -4308,6 +5049,7 @@
     "lines": 324,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T15:27:38+00:00",
     "year": 2023
    },
    {
@@ -4316,6 +5058,7 @@
     "lines": 325,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:29+00:00",
     "year": 2024
    },
    {
@@ -4324,6 +5067,7 @@
     "lines": 295,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:33+00:00",
     "year": 2025
    },
    {
@@ -4332,6 +5076,7 @@
     "lines": 261,
     "program": "Show! Music Core",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:37+00:00",
     "year": 2026
    },
    {
@@ -4340,6 +5085,7 @@
     "lines": 336,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:41+00:00",
     "year": 2022
    },
    {
@@ -4348,6 +5094,7 @@
     "lines": 318,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:44+00:00",
     "year": 2023
    },
    {
@@ -4356,6 +5103,7 @@
     "lines": 336,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:48+00:00",
     "year": 2024
    },
    {
@@ -4364,6 +5112,7 @@
     "lines": 301,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:52+00:00",
     "year": 2025
    },
    {
@@ -4372,6 +5121,7 @@
     "lines": 249,
     "program": "Show Champion",
     "redirect": false,
+    "retrieved": "2026-10-19T15:28:56+00:00",
     "year": 2026
    },
    {
@@ -4380,6 +5130,7 @@
     "lines": 311,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T15:29:00+00:00",
     "year": 2022
    },
    {
@@ -4388,6 +5139,7 @@
     "lines": 250,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T15:29:04+00:00",
     "year": 2023
    },
    {
@@ -4396,6 +5148,7 @@
     "lines": 248,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T15:29:07+00:00",
     "year": 2024
    },
    {
@@ -4404,6 +5157,7 @@
     "lines": 272,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T15:29:11+00:00",
     "year": 2025
    },
    {
@@ -4412,6 +5166,7 @@
     "lines": 121,
     "program": "The Show",
     "redirect": false,
+    "retrieved": "2026-10-19T15:29:15+00:00",
     "year": 2026
    }
   ]
@@ -5056,6 +5811,40 @@
     2026
    ],
    "year": 2024
+  },
+  {
+   "circleYears": [
+    2025
+   ],
+   "melonYears": [
+    2025
+   ],
+   "size": 8,
+   "sizeSource": "current_no_former",
+   "spotify": true,
+   "title": "Hearts2Hearts",
+   "winYears": [
+    2025,
+    2026
+   ],
+   "year": 2025
+  },
+  {
+   "circleYears": [
+    2025
+   ],
+   "melonYears": [
+    2025
+   ],
+   "size": 5,
+   "sizeSource": "current_no_former",
+   "spotify": false,
+   "title": "KiiiKiii",
+   "winYears": [
+    2025,
+    2026
+   ],
+   "year": 2025
   }
  ]
 }

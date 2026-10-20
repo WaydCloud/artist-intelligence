@@ -67,6 +67,14 @@ jobs:
           uv run --project modules/fandom-pulse python -m fandom_pulse analyze
           modules/fandom-pulse/tests/fixtures/ig_hashtag_kpopdance.json
           -o modules/fandom-pulse/output/
+      # cohort-size reads only the committed facts fixture, so CI needs no planning repo.
+      # selftest also runs the chart data gate on the report it builds.
+      - name: Smoke · cohort-size (selftest + analyze from the committed fixture)
+        env:
+          PYTHONPATH: modules/cohort-size/src
+        run: |
+          uv run --no-project --with jsonschema python -m cohort_size selftest
+          uv run --no-project --with jsonschema python -m cohort_size analyze -o "${RUNNER_TEMP}/cohort-size/"
       - name: Smoke — dance-dynamics
         run: |
           if [ -f modules/dance-dynamics/src/dance_dynamics/__main__.py ]; then

@@ -64,6 +64,7 @@ ADOPTED_MODULES = frozenset({
     "yt-pulse",
     "genre-impulse",
     "signal-bridge",
+    "cohort-size",
 })
 
 # 구획 하나가 담을 수 있는 차트 수 (D-043 · 도메인 소유자 지시 2026-07-30:

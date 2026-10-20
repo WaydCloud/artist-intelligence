@@ -133,6 +133,7 @@ export interface LandingStory {
 // (모듈이 지표 순서를 바꿔도 랜딩의 얼굴이 따라 흔들리지 않게).
 const RAIL_METRIC: Record<string, string> = {
   "chart-history": "조사한 나라",
+  "cohort-size": "분석한 팀",
   "fandom-pulse": "곡 라벨로 잡힌 팀",
   "genre-impulse": "오늘 본 곡",
   "signal-bridge": "추적 아티스트",

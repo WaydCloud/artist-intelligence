@@ -369,6 +369,30 @@ def era_note(a: dict[str, Any]) -> str:
     return " ".join(parts)
 
 
+IMPUTE_LABEL = {
+    "resampleDeterminedFailures": "판정된 실패 팀의 인원을 뽑아 넣으면",
+    "resampleCheckedSample": "확인 표본의 마지막 인원을 뽑아 넣으면",
+    "uniformInRange": "마지막 인원과 상한 사이에서 고르게 뽑으면",
+    "allAtFinal": "전부 마지막 인원이면",
+    "allAtUpper": "전부 상한이면",
+}
+
+
+def _impute_line(a: dict[str, Any]) -> str:
+    """One clause per imputation scheme, numbers straight from analysis["imputation"]."""
+    im = a["imputation"]
+    parts = []
+    for key, label in IMPUTE_LABEL.items():
+        s = im["schemes"][key]
+        lo, hi = _p(s["pExactMin"]), _p(s["pExactMax"])
+        rng = lo if lo == hi else f"{lo}~{hi}"
+        runs = f"(시드 {len(s['seeds'])}개)" if len(s["seeds"]) > 1 else ""
+        trend = f", 추세 p {_p(s['pTrendMin'])}" if key == "allAtUpper" else ""
+        parts.append(f"{label} {rng}{runs}{trend}")
+    return (" · ".join(parts) + f"이다. 확인 표본은 미판정 {im['undetermined']}팀에서 시드 {im['sampleSeed']}로 뽑은 "
+            f"{im['sampleN']}팀")
+
+
 def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
     alpha = float(a["config"]["alpha"])
     out: list[dict[str, Any]] = []
@@ -398,8 +422,8 @@ def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
                       + ", ".join(f"{SOURCE_LABEL.get(k, k)} {v['k']}/{v['n']}" for k, v in d["bySource"].items())),
             "sample": f"{_tested_span(a)} 데뷔 유닛 제외 {de['n'] + un['n']}팀",
             "confidence": "medium",
-            "limits": "미판정 팀은 멤버가 바뀌었는데 데뷔 문장이 없는 팀이다. 이들을 상한 인원으로 넣은 결과가 범위 포함 "
-            "변형이고, 하한이나 실제 인원으로 넣었을 때의 결과는 계산하지 않았다. 손으로 확인한 팀은 검토자가 이미 "
+            "limits": "미판정 팀은 멤버 변동 또는 인원 기록 없음으로 데뷔 인원을 읽지 못한 팀이다. 이들에게 인원을 "
+            f"채워 넣고 종합 정확검정을 다시 하면 p는 {_impute_line(a)}이다. 손으로 확인한 팀은 검토자가 이미 "
             "알던 팀이라 성공한 팀에 몰려 있다.",
             "chartId": "tests-by-population",
         })
@@ -475,7 +499,7 @@ def _insights(a: dict[str, Any]) -> list[str]:
         (
             "데뷔 인원은 문서 첫머리의 데뷔 문장, 전 멤버가 없으면 현재 인원, 현재 멤버가 없으면 「N인조였다」 문장과 "
             "전 멤버 수가 맞을 때 그 수로 정했다. 문장이 다른 해의 데뷔나 재데뷔를 말하면 쓰지 않았다. 규칙으로 못 읽은 "
-            f"3팀은 손으로 확인했다. 그래도 정하지 못한 {ex['undetermined']}팀(멤버가 바뀌었고 데뷔 문장이 없는 팀)은 "
+            f"3팀은 손으로 확인했다. 그래도 정하지 못한 {ex['undetermined']}팀(멤버 변동 또는 인원 기록 없음)은 "
             "기본 분석에서 빠지고 범위 포함 변형에서만 상한으로 들어간다."
         ),
         f"음방 1위 캡처가 없는 프로그램·연도: {gaps}. 이 수집에 해당 연도 목록 페이지가 없고, 0승으로 세지 않았다.",

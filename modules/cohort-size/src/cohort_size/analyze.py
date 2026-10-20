@@ -15,7 +15,7 @@ from __future__ import annotations
 import random
 import statistics
 import zlib
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from itertools import pairwise
 from typing import Any
 
@@ -39,6 +39,10 @@ class Config:
     alpha: float = 0.05
     trend_scores: str = "ordinal"
     focus_size: int = 5
+    impute_runs: int = 20
+    impute_sample_seed: int = 20261021
+    impute_sample_n: int = 36
+    impute_b: int = 5000
 
 
 def bucket_labels(cuts: tuple[int, ...]) -> list[str]:
@@ -201,6 +205,58 @@ def _determination(fixture: dict[str, Any], cfg: Config, years: set[int]) -> dic
                          for src in sorted({str(g["sizeSource"]) for g in det})}}
 
 
+def _bracket(g: dict[str, Any]) -> tuple[int, int]:
+    """Plausible debut-size range of an undetermined group: latest lineup size to current + former."""
+    lo = g.get("finalSize") or g["current"] or min(3, g["former"] or 3)
+    return lo, max(lo, g["current"] + g["former"])
+
+
+def imputation(fixture: dict[str, Any], cfg: Config, years: set[int]) -> dict[str, Any]:
+    """Composite tests with the undetermined groups given a size by five schemes.
+
+    The default sample leaves these groups out. Each scheme puts them back with a different
+    assumption, so a reader sees how far the composite p moves. Seeds are 1..runs per scheme and
+    `impute_sample_seed` for the checked sample. Only the composite pooled table is tested.
+    """
+    base = [dict(g) for g in fixture["groups"] if g["year"] in years and not g["unit"]]
+    mark(base, cfg)
+    det = [g for g in base if g["n"]]
+    und = [g for g in base if not g["n"]]
+    for g in det:
+        g["size"] = g["n"]
+    fail_sizes = [g["n"] for g in det if not g["any"]]
+    sample = random.Random(cfg.impute_sample_seed).sample(und, min(cfg.impute_sample_n, len(und)))
+    sample_sizes = [g.get("finalSize") or (g["current"] + g["former"]) for g in sample]
+
+    schemes: dict[str, Any] = {
+        "resampleDeterminedFailures": lambda g, r: r.choice(fail_sizes),
+        "resampleCheckedSample": lambda g, r: r.choice(sample_sizes),
+        "uniformInRange": lambda g, r: r.randint(*_bracket(g)),
+        "allAtFinal": lambda g, r: _bracket(g)[0],
+        "allAtUpper": lambda g, r: _bracket(g)[1],
+    }
+    single = {"allAtFinal", "allAtUpper"}
+    out: dict[str, Any] = {"undetermined": len(und), "sampleSeed": cfg.impute_sample_seed,
+                           "sampleN": len(sample), "runs": cfg.impute_runs, "schemes": {}}
+    for name, assign in schemes.items():
+        seeds = [1] if name in single else list(range(1, cfg.impute_runs + 1))
+        res = []
+        for s in seeds:
+            rng = random.Random(s)
+            gs = det + [dict(g, size=assign(g, rng)) for g in und]
+            t = run_test(table_rows(gs, "any", cfg), gs, cfg, f"impute|{name}|{s}")
+            res.append(t)
+        ok = [t for t in res if "pExact" in t]
+        out["schemes"][name] = {
+            "seeds": seeds,
+            "n": res[0]["n"],
+            "pExactMin": min(t["pExact"] for t in ok), "pExactMax": max(t["pExact"] for t in ok),
+            "pTrendMin": min(t["pTrend"] for t in ok), "pTrendMax": max(t["pTrend"] for t in ok),
+            "vbcMin": min(t["vbc"] for t in ok), "vbcMax": max(t["vbc"] for t in ok),
+        }
+    return out
+
+
 def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
     last_full = last_complete_year(fixture)
     complete_years = [y for y in range(cfg.first_year, cfg.last_year + 1) if y + cfg.window - 1 <= last_full]
@@ -258,6 +314,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
             "eras": [list(e) for e in cfg.eras], "firstYear": cfg.first_year, "lastYear": cfg.last_year,
             "includeIncomplete": cfg.include_incomplete, "exactB": cfg.exact_b,
             "seed": cfg.seed, "alpha": cfg.alpha, "trendScores": cfg.trend_scores, "focusSize": cfg.focus_size,
+            "imputeRuns": cfg.impute_runs, "imputeSampleSeed": cfg.impute_sample_seed, "imputeB": cfg.impute_b,
         },
         "lastCompleteYear": last_full,
         "completeYears": complete_years,
@@ -270,6 +327,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
             v: {"all": len(variants[v]["all"]), "tested": len(variants[v]["tested"])} for v in VARIANTS
         },
         "determination": _determination(fixture, cfg, tested_years),
+        "imputation": imputation(fixture, replace(cfg, exact_b=cfg.impute_b), tested_years),
         "excludedDefault": {
             "undetermined": sum(1 for g in fixture["groups"]
                                 if cfg.first_year <= g["year"] <= cfg.last_year and not g["unit"] and not g["n"]),

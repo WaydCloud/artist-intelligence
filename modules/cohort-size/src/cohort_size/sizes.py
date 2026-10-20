@@ -36,7 +36,10 @@ _LEAD_PATTERNS = (
 )
 # "was a 10-member girl group": used only for groups with no current member, and only when the
 # number equals the former-member count. Disbanded groups otherwise have no size at all.
-_WAS_N = re.compile(r"\b(?:is|was) (?:a|an) " + _NUM + r"[- ]member", re.IGNORECASE)
+# One modifier word may sit before the number ("was a project four-member girl group").
+_WAS_N = re.compile(r"\b(?:is|was) (?:a|an) (?:[a-z]+ )?" + _NUM + r"[- ]member", re.IGNORECASE)
+# Hangul in the lead parenthesis after the bold title: '''Crayon Pop''' (크레용팝) is ...
+_LEAD_HANGUL = re.compile(r"^'''[^']+'''\s*\(([^);]*)")
 _REDEBUT = re.compile(r"re-?debut", re.IGNORECASE)
 _YEAR = re.compile(r"\b(?:19|20)\d\d\b")
 # A sentence may end inside wiki markup: ''[[Album]].'' Previously, ...
@@ -131,9 +134,22 @@ def is_girl_group(categories: list[str], text: str) -> bool:
 
 
 def hangul_name(text: str) -> str:
+    """Infobox `hangul`, else the hangul in the lead parenthesis. Melon and Circle match on it."""
     params, _ = infobox(text)
-    val = re.split(r"<br\s*/?>|\{\{|<", params.get("hangul", ""))[0]
-    return val.strip()
+    val = re.split(r"<br\s*/?>|\{\{|<", params.get("hangul", ""))[0].strip()
+    if val:
+        return val
+    m = _LEAD_HANGUL.search(lead_text(text))
+    if not m:
+        return ""
+    part = m.group(1).split(",")[0].replace("Hangul:", "").strip()
+    return part if re.search("[가-힣]", part) else ""
+
+
+def final_size(text: str) -> int | None:
+    """Size the lead gives for the latest lineup ("is/was a N-member"), or None."""
+    w = _WAS_N.search(lead_text(text))
+    return _num(w.group(1)) if w else None
 
 
 def debut_sentences(lead: str, year: int | None) -> str:

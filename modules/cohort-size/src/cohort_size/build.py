@@ -89,6 +89,7 @@ def load_groups(root: Path) -> list[dict[str, Any]]:
                     "former": s["former"],
                     "unit": sizes.is_unit(cats),
                     "redebut": s["redebut"],
+                    "finalSize": sizes.final_size(text),
                     "source": f"R04-{rid:03d}",
                 })
     return out

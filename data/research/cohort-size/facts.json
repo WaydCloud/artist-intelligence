@@ -76,11 +76,18 @@
  "groups": [
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
-   "hangul": "",
+   "hangul": "크레용팝",
    "hits": {
     "circle": [],
-    "melon": [],
+    "melon": [
+     {
+      "rank": 22,
+      "text": "크레용팝",
+      "year": 2013
+     }
+    ],
     "spotify": null,
     "win": [
      {
@@ -101,6 +108,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "피에스타",
    "hits": {
@@ -120,6 +128,7 @@
   },
   {
    "current": 3,
+   "finalSize": null,
    "former": 5,
    "hangul": "에이오에이",
    "hits": {
@@ -222,6 +231,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 3,
    "hangul": "이엑스아이디",
    "hits": {
@@ -319,6 +329,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 14,
    "hangul": "플래쉬",
    "hits": {
@@ -338,8 +349,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
-   "hangul": "",
+   "hangul": "에즈 원",
    "hits": {
     "circle": [],
     "melon": [],
@@ -357,6 +369,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "이블",
    "hits": {
@@ -376,6 +389,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "비티스윙",
    "hits": {
@@ -395,6 +409,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "갱키즈",
    "hits": {
@@ -414,6 +429,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "에잇폴리",
    "hits": {
@@ -433,6 +449,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "이투알이",
    "hits": {
@@ -452,6 +469,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
    "hangul": "비비드 걸",
    "hits": {
@@ -471,8 +489,9 @@
   },
   {
    "current": 0,
+   "finalSize": 2,
    "former": 4,
-   "hangul": "",
+   "hangul": "디유닛",
    "hits": {
     "circle": [],
     "melon": [],
@@ -490,6 +509,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 11,
    "hangul": "비키니",
    "hits": {
@@ -509,6 +529,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "다이아몬드 퀸",
    "hits": {
@@ -528,8 +549,9 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 8,
-   "hangul": "",
+   "hangul": "헬로비너스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -547,6 +569,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 12,
    "hangul": "식스밤",
    "hits": {
@@ -566,8 +589,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "스카프",
    "hits": {
     "circle": [],
     "melon": [],
@@ -585,6 +609,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 30,
    "hangul": "헤이걸스",
    "hits": {
@@ -604,6 +629,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "글램",
    "hits": {
@@ -623,6 +649,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "레이티",
    "hits": {
@@ -642,6 +669,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "엔이피",
    "hits": {
@@ -661,6 +689,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "쉬즈",
    "hits": {
@@ -680,6 +709,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "퀸비즈",
    "hits": {
@@ -699,8 +729,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "라떼",
    "hits": {
     "circle": [],
     "melon": [],
@@ -718,6 +749,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "릭시아",
    "hits": {
@@ -737,6 +769,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "퓨리티",
    "hits": {
@@ -756,6 +789,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "아이엔걸스",
    "hits": {
@@ -775,6 +809,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "가디스",
    "hits": {
@@ -794,6 +829,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 3,
    "hangul": "플레야",
    "hits": {
@@ -813,6 +849,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 10,
    "hangul": "루비",
    "hits": {
@@ -832,6 +869,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "하이레이디",
    "hits": {
@@ -851,6 +889,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "스피카",
    "hits": {
@@ -870,6 +909,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 10,
    "hangul": "타히티",
    "hits": {
@@ -889,6 +929,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "타이니지",
    "hits": {
@@ -908,6 +949,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "투엑스",
    "hits": {
@@ -927,8 +969,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "더 씨야",
    "hits": {
     "circle": [],
     "melon": [],
@@ -946,8 +989,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 12,
-   "hangul": "",
+   "hangul": "써니데이즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -965,6 +1009,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "티너스",
    "hits": {
@@ -984,6 +1029,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
    "hangul": "비비드",
    "hits": {
@@ -1003,6 +1049,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "베스티",
    "hits": {
@@ -1022,6 +1069,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "투아이즈",
    "hits": {
@@ -1041,6 +1089,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
    "hangul": "비피팝",
    "hits": {
@@ -1060,6 +1109,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 7,
    "hangul": "지아이",
    "hits": {
@@ -1079,8 +1129,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
-   "hangul": "",
+   "hangul": "딜라잇",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1098,6 +1149,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 8,
    "hangul": "케이걸즈",
    "hits": {
@@ -1117,6 +1169,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 12,
    "hangul": "에이딘",
    "hits": {
@@ -1136,6 +1189,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 11,
    "hangul": "에이걸스",
    "hits": {
@@ -1155,6 +1209,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 13,
    "hangul": "하트 래빗 걸스",
    "hits": {
@@ -1174,6 +1229,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "티너스",
    "hits": {
@@ -1193,6 +1249,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "씨엘오",
    "hits": {
@@ -1212,6 +1269,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "큐티파이스",
    "hits": {
@@ -1231,6 +1289,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 2,
    "hangul": "레이디스 코드",
    "hits": {
@@ -1256,6 +1315,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "풍뎅이",
    "hits": {
@@ -1275,6 +1335,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 9,
    "hangul": "트랜디",
    "hits": {
@@ -1294,6 +1355,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "틴트",
    "hits": {
@@ -1313,6 +1375,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 7,
    "hangul": "와썹",
    "hits": {
@@ -1332,8 +1395,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 7,
-   "hangul": "",
+   "hangul": "리브하이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1351,6 +1415,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 27,
    "hangul": "투란",
    "hits": {
@@ -1370,6 +1435,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 15,
    "hangul": "스위치 베리",
    "hits": {
@@ -1389,8 +1455,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "더러쉬",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1408,6 +1475,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "퍼플레이",
    "hits": {
@@ -1427,8 +1495,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
-   "hangul": "",
+   "hangul": "피치걸",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1446,6 +1515,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "더 글로스",
    "hits": {
@@ -1465,6 +1535,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 18,
    "hangul": "메이퀸",
    "hits": {
@@ -1484,6 +1555,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "피어나인",
    "hits": {
@@ -1503,6 +1575,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "벨로체",
    "hits": {
@@ -1522,6 +1595,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 8,
    "hangul": "오드아이",
    "hits": {
@@ -1541,6 +1615,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 9,
    "hangul": "요요걸스",
    "hits": {
@@ -1560,6 +1635,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "옐로우",
    "hits": {
@@ -1579,8 +1655,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 7,
-   "hangul": "",
+   "hangul": "포텐",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1598,8 +1675,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "단발머리",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1617,6 +1695,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "원피스",
    "hits": {
@@ -1636,6 +1715,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
    "hangul": "에이코어",
    "hits": {
@@ -1655,6 +1735,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 9,
    "hangul": "디홀릭",
    "hits": {
@@ -1674,8 +1755,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
-   "hangul": "",
+   "hangul": "아는동생",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1693,6 +1775,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 9,
    "hangul": "베리굿",
    "hits": {
@@ -1712,8 +1795,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "베이비",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1731,6 +1815,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 16,
    "hangul": "에이데일리",
    "hits": {
@@ -1750,6 +1835,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "포엘",
    "hits": {
@@ -1769,6 +1855,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 24,
    "hangul": "배드키즈",
    "hits": {
@@ -1788,8 +1875,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "넷지",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1807,6 +1895,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "애인",
    "hits": {
@@ -1826,6 +1915,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "아일라",
    "hits": {
@@ -1845,8 +1935,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "엘리스 화이트",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1864,6 +1955,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 17,
    "hangul": "바비디",
    "hits": {
@@ -1883,6 +1975,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "빌리언",
    "hits": {
@@ -1902,6 +1995,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
    "hangul": "데이트",
    "hits": {
@@ -1921,6 +2015,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "바니걸",
    "hits": {
@@ -1940,6 +2035,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "라붐",
    "hits": {
@@ -1971,8 +2067,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "키스&크라이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -1990,6 +2087,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "조이엘리",
    "hits": {
@@ -1998,10 +2096,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 3,
    "name": "Gioielli",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-903",
    "title": "Gioielli",
    "unit": false,
@@ -2009,6 +2107,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 16,
    "hangul": "레이디티",
    "hits": {
@@ -2028,6 +2127,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "소녀시절",
    "hits": {
@@ -2047,6 +2147,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "러블리즈",
    "hits": {
@@ -2109,6 +2210,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "마마무",
    "hits": {
@@ -2306,6 +2408,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "소나무",
    "hits": {
@@ -2325,6 +2428,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "레드벨벳",
    "hits": {
@@ -2630,6 +2734,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "스칼렛",
    "hits": {
@@ -2649,6 +2754,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "퍼펄즈",
    "hits": {
@@ -2668,6 +2774,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 7,
    "hangul": "앤화이트",
    "hits": {
@@ -2687,6 +2794,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "멜로디데이",
    "hits": {
@@ -2706,8 +2814,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "밍스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -2725,8 +2834,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "루루즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -2744,6 +2854,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 13,
    "hangul": "모아",
    "hits": {
@@ -2763,6 +2874,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "프리츠",
    "hits": {
@@ -2782,6 +2894,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "스마일지",
    "hits": {
@@ -2801,6 +2914,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "몹씨",
    "hits": {
@@ -2820,6 +2934,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "엔타픽",
    "hits": {
@@ -2839,6 +2954,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "러브큐빅",
    "hits": {
@@ -2858,8 +2974,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
-   "hangul": "",
+   "hangul": "립서비스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -2877,6 +2994,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
    "hangul": "오이지",
    "hits": {
@@ -2896,6 +3014,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "로즈마리",
    "hits": {
@@ -2915,8 +3034,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 8,
-   "hangul": "",
+   "hangul": "워너비",
    "hits": {
     "circle": [],
     "melon": [],
@@ -2934,6 +3054,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 11,
    "hangul": "예아",
    "hits": {
@@ -2953,6 +3074,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "칠학년일반",
    "hits": {
@@ -2972,6 +3094,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "베티엘",
    "hits": {
@@ -2991,6 +3114,7 @@
   },
   {
    "current": 7,
+   "finalSize": null,
    "former": 0,
    "hangul": "씨엘씨",
    "hits": {
@@ -3016,6 +3140,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "여자친구",
    "hits": {
@@ -3213,8 +3338,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 9,
-   "hangul": "",
+   "hangul": "밤비노",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3232,8 +3358,9 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 8,
-   "hangul": "",
+   "hangul": "에이프릴",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3251,6 +3378,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 4,
    "hangul": "다이아",
    "hits": {
@@ -3276,8 +3404,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
-   "hangul": "",
+   "hangul": "여자여자",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3295,8 +3424,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "아샤",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3314,6 +3444,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 19,
    "hangul": "처음처럼",
    "hits": {
@@ -3333,6 +3464,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 24,
    "hangul": "바바",
    "hits": {
@@ -3352,6 +3484,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "큐피트",
    "hits": {
@@ -3371,8 +3504,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "포썸",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3390,6 +3524,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "텐텐",
    "hits": {
@@ -3409,8 +3544,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 12,
-   "hangul": "",
+   "hangul": "베이비부",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3428,8 +3564,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
-   "hangul": "",
+   "hangul": "에이스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3447,8 +3584,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "에이플러스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3466,8 +3604,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "아하",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3485,6 +3624,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 8,
    "hangul": "에피소드",
    "hits": {
@@ -3504,8 +3644,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "피오나",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3523,8 +3664,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "헤쎄",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3542,6 +3684,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "어썸 베이비",
    "hits": {
@@ -3561,6 +3704,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "하디",
    "hits": {
@@ -3580,6 +3724,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "에이티티",
    "hits": {
@@ -3599,6 +3744,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 7,
    "hangul": "포엑스",
    "hits": {
@@ -3618,6 +3764,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "핏걸스",
    "hits": {
@@ -3637,6 +3784,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "다이아걸스",
    "hits": {
@@ -3656,6 +3804,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 2,
    "hangul": "오마이걸",
    "hits": {
@@ -3783,8 +3932,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "러브어스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3802,6 +3952,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "마이비",
    "hits": {
@@ -3821,8 +3972,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
-   "hangul": "",
+   "hangul": "짜리몽땅‬",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3840,8 +3992,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
-   "hangul": "",
+   "hangul": "아이스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3859,6 +4012,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 13,
    "hangul": "레이샤",
    "hits": {
@@ -3878,8 +4032,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
-   "hangul": "",
+   "hangul": "허니걸스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3897,6 +4052,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "핫티즈",
    "hits": {
@@ -3916,6 +4072,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 20,
    "hangul": "리치걸",
    "hits": {
@@ -3935,6 +4092,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "미스매치",
    "hits": {
@@ -3954,6 +4112,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "허니프렌즈",
    "hits": {
@@ -3973,8 +4132,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "디아크",
    "hits": {
     "circle": [],
     "melon": [],
@@ -3992,6 +4152,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "플레이백",
    "hits": {
@@ -4011,6 +4172,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "트와이스",
    "hits": {
@@ -4286,6 +4448,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "유니콘",
    "hits": {
@@ -4305,6 +4468,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "비비디바",
    "hits": {
@@ -4324,8 +4488,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
-   "hangul": "",
+   "hangul": "피피엘",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4343,6 +4508,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
    "hangul": "써스포",
    "hits": {
@@ -4362,6 +4528,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 14,
    "hangul": "트위티",
    "hits": {
@@ -4381,8 +4548,9 @@
   },
   {
    "current": 3,
+   "finalSize": null,
    "former": 11,
-   "hangul": "",
+   "hangul": "포켓걸스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4400,8 +4568,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "유니즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4419,8 +4588,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 8,
-   "hangul": "",
+   "hangul": "더스타즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4438,8 +4608,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
-   "hangul": "",
+   "hangul": "프리티지",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4457,6 +4628,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 18,
    "hangul": "비타민",
    "hits": {
@@ -4476,6 +4648,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "지지베스트",
    "hits": {
@@ -4495,8 +4668,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "블루미",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4514,6 +4688,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "블랙핑크",
    "hits": {
@@ -4734,6 +4909,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "도로시",
    "hits": {
@@ -4753,6 +4929,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 7,
    "hangul": "에이디이",
    "hits": {
@@ -4772,6 +4949,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "불독",
    "hits": {
@@ -4791,6 +4969,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "씨아이브이에이",
    "hits": {
@@ -4810,8 +4989,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
-   "hangul": "",
+   "hangul": "어썸",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4829,8 +5009,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "블링",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4848,8 +5029,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "주사위",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4867,8 +5049,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "데이드림",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4886,8 +5069,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "디엘",
    "hits": {
     "circle": [],
     "melon": [],
@@ -4905,6 +5089,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "블랙스완",
    "hits": {
@@ -4924,6 +5109,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 8,
    "hangul": "다임피스",
    "hits": {
@@ -4943,6 +5129,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "베베헬",
    "hits": {
@@ -4962,6 +5149,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "블리티",
    "hits": {
@@ -4981,6 +5169,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "",
    "hits": {
@@ -5000,6 +5189,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "아이오아이",
    "hits": {
@@ -5077,6 +5267,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 9,
    "hangul": "구구단",
    "hits": {
@@ -5102,8 +5293,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "아이비아이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5121,8 +5313,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "하이틴",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5140,6 +5333,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "하트",
    "hits": {
@@ -5159,6 +5353,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 10,
    "hangul": "홀릭스",
    "hits": {
@@ -5178,6 +5373,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "하이디",
    "hits": {
@@ -5197,8 +5393,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 8,
-   "hangul": "",
+   "hangul": "헤이미스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5216,8 +5413,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "판타스티",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5235,6 +5433,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "아이렌",
    "hits": {
@@ -5254,6 +5453,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "홀리데이즈",
    "hits": {
@@ -5273,6 +5473,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "고고로켓",
    "hits": {
@@ -5292,6 +5493,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "허니츄",
    "hits": {
@@ -5311,6 +5513,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "걸수온탭",
    "hits": {
@@ -5330,8 +5533,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "마틸다",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5349,8 +5553,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
-   "hangul": "",
+   "hangul": "믹스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5368,6 +5573,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
    "hangul": "",
    "hits": {
@@ -5387,6 +5593,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 3,
    "hangul": "모모랜드",
    "hits": {
@@ -5453,8 +5660,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "오블리스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5472,8 +5680,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 8,
-   "hangul": "",
+   "hangul": "퀸덤",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5491,8 +5700,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "머큐리",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5510,8 +5720,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
-   "hangul": "",
+   "hangul": "뉴에이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5529,6 +5740,7 @@
   },
   {
    "current": 0,
+   "finalSize": 10,
    "former": 11,
    "hangul": "리얼걸프로젝트",
    "hits": {
@@ -5548,6 +5760,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "럭키걸스",
    "hits": {
@@ -5567,6 +5780,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "로즈베리",
    "hits": {
@@ -5586,6 +5800,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "세컨드",
    "hits": {
@@ -5605,8 +5820,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "스캔들",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5624,6 +5840,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "메리트",
    "hits": {
@@ -5643,6 +5860,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 3,
    "hangul": "우주소녀",
    "hits": {
@@ -5694,8 +5912,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "솔티",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5713,6 +5932,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 9,
    "hangul": "베리어스",
    "hits": {
@@ -5732,6 +5952,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 11,
    "hangul": "언니쓰",
    "hits": {
@@ -5762,6 +5983,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "써니걸스",
    "hits": {
@@ -5781,8 +6003,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "슈가문",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5800,8 +6023,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "슈파",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5819,8 +6043,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "유어스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5838,6 +6063,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "유레카",
    "hits": {
@@ -5857,6 +6083,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 25,
    "hangul": "영기스트",
    "hits": {
@@ -5876,6 +6103,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "드림캐쳐",
    "hits": {
@@ -5927,8 +6155,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
-   "hangul": "",
+   "hangul": "보너스베이비",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5946,6 +6175,7 @@
   },
   {
    "current": 2,
+   "finalSize": 2,
    "former": 5,
    "hangul": "앨리스",
    "hits": {
@@ -5965,8 +6195,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "애플비",
    "hits": {
     "circle": [],
     "melon": [],
@@ -5984,6 +6215,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "원앤비",
    "hits": {
@@ -6003,8 +6235,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "에이시드",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6022,6 +6255,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 13,
    "hangul": "버스터즈",
    "hits": {
@@ -6041,6 +6275,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "블라블라",
    "hits": {
@@ -6060,8 +6295,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 7,
-   "hangul": "",
+   "hangul": "시크엔젤",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6079,6 +6315,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "베리츄",
    "hits": {
@@ -6098,8 +6335,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
-   "hangul": "",
+   "hangul": "에이브리",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6117,8 +6355,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "어썸",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6136,8 +6375,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 6,
-   "hangul": "",
+   "hangul": "아모르",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6155,8 +6395,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 7,
-   "hangul": "",
+   "hangul": "베베식스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6174,8 +6415,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "클로리스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6193,6 +6435,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "투엔티스",
    "hits": {
@@ -6212,6 +6455,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "에이치투엘",
    "hits": {
@@ -6231,6 +6475,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 8,
    "hangul": "에이치유비",
    "hits": {
@@ -6250,6 +6495,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "페이버릿",
    "hits": {
@@ -6269,6 +6515,7 @@
   },
   {
    "current": 0,
+   "finalSize": 10,
    "former": 10,
    "hangul": "굿데이",
    "hits": {
@@ -6288,8 +6535,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
-   "hangul": "",
+   "hangul": "해시태그",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6307,6 +6555,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "그레이시",
    "hits": {
@@ -6326,6 +6575,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 8,
    "hangul": "힌트",
    "hits": {
@@ -6345,6 +6595,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 9,
    "hangul": "지구",
    "hits": {
@@ -6364,6 +6615,7 @@
   },
   {
    "current": 2,
+   "finalSize": null,
    "former": 4,
    "hangul": "하이큐티",
    "hits": {
@@ -6383,8 +6635,9 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
-   "hangul": "",
+   "hangul": "옆집소녀",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6402,8 +6655,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
-   "hangul": "",
+   "hangul": "소녀주의보",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6421,6 +6675,7 @@
   },
   {
    "current": 1,
+   "finalSize": null,
    "former": 6,
    "hangul": "팬시레드",
    "hits": {
@@ -6440,6 +6695,7 @@
   },
   {
    "current": 0,
+   "finalSize": 10,
    "former": 10,
    "hangul": "프리스틴",
    "hits": {
@@ -6465,6 +6721,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "립버블",
    "hits": {
@@ -6484,8 +6741,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
-   "hangul": "",
+   "hangul": "마르멜로",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6503,6 +6761,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "라임소다",
    "hits": {
@@ -6522,6 +6781,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "피오피",
    "hits": {
@@ -6541,8 +6801,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
-   "hangul": "",
+   "hangul": "오마주",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6560,6 +6821,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "피터패트",
    "hits": {
@@ -6579,6 +6841,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "라미슈",
    "hits": {
@@ -6598,6 +6861,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
    "hangul": "모아이",
    "hits": {
@@ -6617,6 +6881,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 8,
    "hangul": "위키미키",
    "hits": {
@@ -6642,6 +6907,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "에스아이에스",
    "hits": {
@@ -6661,6 +6927,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "에스투",
    "hits": {
@@ -6680,8 +6947,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "에스이티",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6699,8 +6967,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 9,
-   "hangul": "",
+   "hangul": "써니플레이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6718,6 +6987,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "비바",
    "hits": {
@@ -6737,6 +7007,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "에스투유",
    "hits": {
@@ -6756,8 +7027,9 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 26,
-   "hangul": "",
+   "hangul": "노래하는 말괄량이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6775,6 +7047,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "유니카",
    "hits": {
@@ -6794,8 +7067,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "유후",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6813,6 +7087,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 6,
    "hangul": "로즈퀸",
    "hits": {
@@ -6832,6 +7107,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "레드퀸",
    "hits": {
@@ -6851,6 +7127,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 10,
    "hangul": "옐로비",
    "hits": {
@@ -6870,8 +7147,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 13,
-   "hangul": "",
+   "hangul": "엑스오엑스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6889,6 +7167,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "지지배",
    "hits": {
@@ -6908,8 +7187,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "에이지엠",
    "hits": {
     "circle": [],
     "melon": [],
@@ -6927,6 +7207,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "아이리수",
    "hits": {
@@ -6946,6 +7227,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "체리온탑",
    "hits": {
@@ -6965,6 +7247,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 8,
    "hangul": "드림노트",
    "hits": {
@@ -6984,8 +7267,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "카밀라",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7003,8 +7287,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "데스티니",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7022,8 +7307,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
-   "hangul": "",
+   "hangul": "얼라이크",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7041,6 +7327,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "아쿠아",
    "hits": {
@@ -7060,6 +7347,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "플로어스",
    "hits": {
@@ -7079,8 +7367,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 14,
-   "hangul": "",
+   "hangul": "파란여우들",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7098,8 +7387,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "가을로 가는 기차",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7117,8 +7407,9 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
-   "hangul": "",
+   "hangul": "셀럽파이브",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7136,8 +7427,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "비걸스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7155,8 +7447,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 1,
-   "hangul": "",
+   "hangul": "디팝프렌즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7174,6 +7467,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "뿌렉터",
    "hits": {
@@ -7193,6 +7487,7 @@
   },
   {
    "current": 8,
+   "finalSize": null,
    "former": 8,
    "hangul": "플윗미/ 플라이위드미",
    "hits": {
@@ -7212,6 +7507,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "씨에스티",
    "hits": {
@@ -7231,6 +7527,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "꽃누나",
    "hits": {
@@ -7250,6 +7547,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 4,
    "hangul": "프로미스나인",
    "hits": {
@@ -7367,6 +7665,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "걸카인드",
    "hits": {
@@ -7386,6 +7685,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "허니팝콘",
    "hits": {
@@ -7405,6 +7705,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "아이들",
    "hits": {
@@ -7660,6 +7961,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "가위바위보",
    "hits": {
@@ -7679,6 +7981,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "공원소녀",
    "hits": {
@@ -7698,6 +8001,7 @@
   },
   {
    "current": 0,
+   "finalSize": 12,
    "former": 12,
    "hangul": "아이즈원",
    "hits": {
@@ -7800,6 +8104,7 @@
   },
   {
    "current": 15,
+   "finalSize": null,
    "former": 0,
    "hangul": "",
    "hits": {
@@ -7819,6 +8124,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 12,
    "hangul": "젤리걸",
    "hits": {
@@ -7838,6 +8144,7 @@
   },
   {
    "current": 11,
+   "finalSize": null,
    "former": 1,
    "hangul": "이달의 소녀",
    "hits": {
@@ -7899,6 +8206,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "네이처",
    "hits": {
@@ -7918,6 +8226,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 8,
    "hangul": "마이달링",
    "hits": {
@@ -7937,6 +8246,7 @@
   },
   {
    "current": 0,
+   "finalSize": 1,
    "former": 5,
    "hangul": "메이위시",
    "hits": {
@@ -7956,8 +8266,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
-   "hangul": "",
+   "hangul": "키튼걸스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -7975,6 +8286,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "네온펀치",
    "hits": {
@@ -7994,8 +8306,9 @@
   },
   {
    "current": 0,
+   "finalSize": 9,
    "former": 9,
-   "hangul": "",
+   "hangul": "유니티",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8013,8 +8326,9 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 11,
-   "hangul": "",
+   "hangul": "샤샤",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8032,6 +8346,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 9,
    "hangul": "세러데이",
    "hits": {
@@ -8051,8 +8366,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
-   "hangul": "",
+   "hangul": "퍼플",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8070,6 +8386,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "트로피칼",
    "hits": {
@@ -8089,6 +8406,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "샤플라",
    "hits": {
@@ -8108,8 +8426,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
-   "hangul": "",
+   "hangul": "로즈핑거",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8127,6 +8446,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 12,
    "hangul": "핑크판타지",
    "hits": {
@@ -8146,8 +8466,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "슈가틴트",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8165,8 +8486,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
-   "hangul": "",
+   "hangul": "시오시작",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8184,8 +8506,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "프리즘",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8203,8 +8526,9 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 37,
-   "hangul": "",
+   "hangul": "피어스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8222,6 +8546,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 4,
    "hangul": "레드민트",
    "hits": {
@@ -8241,6 +8566,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 9,
    "hangul": "틴즈엘",
    "hits": {
@@ -8260,6 +8586,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 3,
    "hangul": "파스텔걸스",
    "hits": {
@@ -8279,6 +8606,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "우주미키",
    "hits": {
@@ -8298,6 +8626,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 15,
    "hangul": "위걸스",
    "hits": {
@@ -8317,8 +8646,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
-   "hangul": "",
+   "hangul": "여주인공",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8336,6 +8666,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 8,
    "hangul": "예쁘다",
    "hits": {
@@ -8355,6 +8686,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "체리블렛",
    "hits": {
@@ -8374,6 +8706,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 14,
    "hangul": "코코",
    "hits": {
@@ -8393,6 +8726,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "아리아즈",
    "hits": {
@@ -8412,6 +8746,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "밴디트",
    "hits": {
@@ -8431,6 +8766,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "써드아이",
    "hits": {
@@ -8450,8 +8786,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
-   "hangul": "",
+   "hangul": "에이피아이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8469,8 +8806,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "블랙바니",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8488,6 +8826,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 8,
    "hangul": "에이엔에스",
    "hits": {
@@ -8507,6 +8846,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "에이필",
    "hits": {
@@ -8526,8 +8866,9 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 1,
-   "hangul": "",
+   "hangul": "4캐럿",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8545,6 +8886,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "블루민트",
    "hits": {
@@ -8564,6 +8906,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "캣츄",
    "hits": {
@@ -8583,6 +8926,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "비트리플",
    "hits": {
@@ -8591,10 +8935,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 4,
    "name": "Btriple",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-908",
    "title": "Btriple",
    "unit": false,
@@ -8602,6 +8946,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 8,
    "hangul": "파나틱스",
    "hits": {
@@ -8621,6 +8966,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
    "hangul": "여고생",
    "hits": {
@@ -8640,6 +8986,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "에버글로우",
    "hits": {
@@ -8675,6 +9022,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 9,
    "hangul": "아이러브",
    "hits": {
@@ -8694,8 +9042,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 8,
-   "hangul": "",
+   "hangul": "그로우비",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8713,8 +9062,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "지아이콘",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8732,8 +9082,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "글로즈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8751,8 +9102,9 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
-   "hangul": "",
+   "hangul": "아이씨유",
    "hits": {
     "circle": [],
     "melon": [],
@@ -8770,6 +9122,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "희나피아",
    "hits": {
@@ -8789,6 +9142,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "핫틴",
    "hits": {
@@ -8808,6 +9162,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "화이팅",
    "hits": {
@@ -8827,6 +9182,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "있지",
    "hits": {
@@ -8999,6 +9355,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "러스티",
    "hits": {
@@ -9018,6 +9375,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "리즈걸스",
    "hits": {
@@ -9037,6 +9395,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "피쓰",
    "hits": {
@@ -9056,8 +9415,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "퍼플백",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9075,8 +9435,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
-   "hangul": "",
+   "hangul": "스트로우",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9094,6 +9455,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
    "hangul": "로켓펀치",
    "hits": {
@@ -9113,8 +9475,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "스카이걸스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9132,8 +9495,9 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
-   "hangul": "",
+   "hangul": "리파이너스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9151,6 +9515,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 6,
    "hangul": "미니리치걸",
    "hits": {
@@ -9170,6 +9535,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 8,
    "hangul": "네키루",
    "hits": {
@@ -9189,8 +9555,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "핑크레이디",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9208,6 +9575,7 @@
   },
   {
    "current": 0,
+   "finalSize": 2,
    "former": 7,
    "hangul": "",
    "hits": {
@@ -9227,8 +9595,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "비너스",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9246,8 +9615,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
-   "hangul": "",
+   "hangul": "바이올렛",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9265,8 +9635,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "화이트데이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9284,8 +9655,9 @@
   },
   {
    "current": 6,
+   "finalSize": null,
    "former": 5,
-   "hangul": "",
+   "hangul": "유에이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9303,6 +9675,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 4,
    "hangul": "썬샤인",
    "hits": {
@@ -9322,6 +9695,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 4,
    "hangul": "블랙스완",
    "hits": {
@@ -9341,6 +9715,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "크랙시",
    "hits": {
@@ -9360,6 +9735,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 9,
    "hangul": "시그니처",
    "hits": {
@@ -9379,6 +9755,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 6,
    "hangul": "데이드림",
    "hits": {
@@ -9398,6 +9775,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 17,
    "hangul": "시크한 아이들",
    "hits": {
@@ -9417,6 +9795,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "에이리얼",
    "hits": {
@@ -9436,6 +9815,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 8,
    "hangul": "보토패스",
    "hits": {
@@ -9455,8 +9835,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "블레스타",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9474,8 +9855,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
-   "hangul": "",
+   "hangul": "별찌",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9493,6 +9875,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "블링블링",
    "hits": {
@@ -9512,6 +9895,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "에이썸디",
    "hits": {
@@ -9531,6 +9915,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "에스파",
    "hits": {
@@ -9721,6 +10106,7 @@
   },
   {
    "current": 4,
+   "finalSize": 5,
    "former": 9,
    "hangul": "드림캔디",
    "hits": {
@@ -9740,6 +10126,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 7,
    "hangul": "버비",
    "hits": {
@@ -9759,6 +10146,7 @@
   },
   {
    "current": 4,
+   "finalSize": null,
    "former": 4,
    "hangul": "아리엘",
    "hits": {
@@ -9778,6 +10166,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 9,
    "hangul": "소공녀 프로젝트",
    "hits": {
@@ -9797,6 +10186,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "가치",
    "hits": {
@@ -9816,6 +10206,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 6,
    "hangul": "플로리아",
    "hits": {
@@ -9835,6 +10226,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "히바나",
    "hits": {
@@ -9854,6 +10246,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 2,
    "hangul": "큐빅스",
    "hits": {
@@ -9873,6 +10266,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "루나솔라",
    "hits": {
@@ -9892,6 +10286,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "프리즈마",
    "hits": {
@@ -9911,6 +10306,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 9,
    "hangul": "프레셔스",
    "hits": {
@@ -9930,8 +10326,9 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 4,
-   "hangul": "",
+   "hangul": "라이크미",
    "hits": {
     "circle": [],
     "melon": [],
@@ -9949,6 +10346,7 @@
   },
   {
    "current": 1,
+   "finalSize": 5,
    "former": 4,
    "hangul": "마카마카",
    "hits": {
@@ -9968,6 +10366,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 8,
    "hangul": "루미너스엘프",
    "hits": {
@@ -9987,6 +10386,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "원",
    "hits": {
@@ -10006,6 +10406,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "메라메라하트",
    "hits": {
@@ -10025,6 +10426,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
    "hangul": "퍼퓸 드 앙쥬",
    "hits": {
@@ -10044,6 +10446,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "리키즈 엔젤",
    "hits": {
@@ -10063,6 +10466,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "니쥬",
    "hits": {
@@ -10098,6 +10502,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 5,
    "hangul": "큐오스",
    "hits": {
@@ -10117,6 +10522,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "오케이 걸 그룹",
    "hits": {
@@ -10136,6 +10542,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "썸",
    "hits": {
@@ -10155,6 +10562,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 1,
    "hangul": "위클리",
    "hits": {
@@ -10174,6 +10582,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 7,
    "hangul": "시크릿넘버",
    "hits": {
@@ -10193,6 +10602,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "우아",
    "hits": {
@@ -10212,6 +10622,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "환불원정대",
    "hits": {
@@ -10237,6 +10648,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "",
    "hits": {
@@ -10256,6 +10668,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "스테이씨",
    "hits": {
@@ -10378,6 +10791,7 @@
   },
   {
    "current": 6,
+   "finalSize": null,
    "former": 0,
    "hangul": "위즈엔",
    "hits": {
@@ -10397,6 +10811,7 @@
   },
   {
    "current": 3,
+   "finalSize": null,
    "former": 2,
    "hangul": "소코노키미니",
    "hits": {
@@ -10416,6 +10831,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 6,
    "hangul": "레드스퀘어",
    "hits": {
@@ -10435,6 +10851,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "버가부",
    "hits": {
@@ -10454,6 +10871,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "빌리",
    "hits": {
@@ -10479,6 +10897,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "아째르",
    "hits": {
@@ -10498,8 +10917,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 8,
-   "hangul": "",
+   "hangul": "쿠키",
    "hits": {
     "circle": [],
     "melon": [],
@@ -10517,6 +10937,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 8,
    "hangul": "뷰티박스",
    "hits": {
@@ -10536,6 +10957,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 12,
    "hangul": "지지",
    "hits": {
@@ -10555,6 +10977,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 3,
    "hangul": "페리블루",
    "hits": {
@@ -10574,6 +10997,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "아째르 블라썸",
    "hits": {
@@ -10593,6 +11017,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "코튼캔디",
    "hits": {
@@ -10612,6 +11037,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "치트코드",
    "hits": {
@@ -10631,6 +11057,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "아시아걸즈",
    "hits": {
@@ -10650,6 +11077,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "드림걸",
    "hits": {
@@ -10669,6 +11097,7 @@
   },
   {
    "current": 1,
+   "finalSize": null,
    "former": 2,
    "hangul": "비엘이",
    "hits": {
@@ -10688,8 +11117,9 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
-   "hangul": "",
+   "hangul": "핫이슈",
    "hits": {
     "circle": [],
     "melon": [],
@@ -10707,6 +11137,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 2,
    "hangul": "라잇썸",
    "hits": {
@@ -10726,6 +11157,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "하이엘",
    "hits": {
@@ -10745,6 +11177,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "아이스크림",
    "hits": {
@@ -10764,6 +11197,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 4,
    "hangul": "레몬에이드",
    "hits": {
@@ -10783,6 +11217,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "라온제나",
    "hits": {
@@ -10802,6 +11237,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 1,
    "hangul": "키즈나 시뮬레이션",
    "hits": {
@@ -10821,6 +11257,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 1,
    "hangul": "아이칠린",
    "hits": {
@@ -10840,6 +11277,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "카미사마",
    "hits": {
@@ -10859,6 +11297,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "아이브",
    "hits": {
@@ -11051,6 +11490,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "이터니티",
    "hits": {
@@ -11070,6 +11510,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "키돌즈",
    "hits": {
@@ -11089,6 +11530,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "이세계아이돌",
    "hits": {
@@ -11108,6 +11550,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 7,
    "hangul": "퍼플키스",
    "hits": {
@@ -11127,6 +11570,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "픽시",
    "hits": {
@@ -11146,6 +11590,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "코데즈",
    "hits": {
@@ -11165,6 +11610,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "메이져스",
    "hits": {
@@ -11184,6 +11630,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "리키즈 블룸",
    "hits": {
@@ -11203,6 +11650,7 @@
   },
   {
    "current": 1,
+   "finalSize": 1,
    "former": 2,
    "hangul": "미니마니",
    "hits": {
@@ -11222,6 +11670,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "매직걸",
    "hits": {
@@ -11241,6 +11690,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "퍼퓸",
    "hits": {
@@ -11260,6 +11710,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "온탑",
    "hits": {
@@ -11279,6 +11730,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 6,
    "hangul": "프록시마 클럽",
    "hits": {
@@ -11298,6 +11750,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 3,
    "hangul": "리키즈 크리스탈",
    "hits": {
@@ -11317,6 +11770,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "미리걸스",
    "hits": {
@@ -11336,6 +11790,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "룰루팝",
    "hits": {
@@ -11355,6 +11810,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 7,
    "hangul": "트라이비",
    "hits": {
@@ -11374,6 +11830,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "쏠리아",
    "hits": {
@@ -11393,6 +11850,7 @@
   },
   {
    "current": 3,
+   "finalSize": null,
    "former": 0,
    "hangul": "티파티",
    "hits": {
@@ -11412,6 +11870,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "탑걸",
    "hits": {
@@ -11431,6 +11890,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "스카이리",
    "hits": {
@@ -11450,6 +11910,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "럼블지",
    "hits": {
@@ -11469,6 +11930,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "레아",
    "hits": {
@@ -11488,6 +11950,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "스파클링",
    "hits": {
@@ -11507,6 +11970,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 1,
    "hangul": "바닐라",
    "hits": {
@@ -11526,8 +11990,9 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
-   "hangul": "",
+   "hangul": "루키",
    "hits": {
     "circle": [],
     "melon": [],
@@ -11545,6 +12010,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 1,
    "hangul": "록킹돌",
    "hits": {
@@ -11564,6 +12030,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "쌈박걸스",
    "hits": {
@@ -11583,6 +12050,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "세로즈나",
    "hits": {
@@ -11602,6 +12070,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "첫사랑",
    "hits": {
@@ -11627,6 +12096,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 3,
    "hangul": "버블",
    "hits": {
@@ -11646,6 +12116,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "디아트 & 다트",
    "hits": {
@@ -11665,6 +12136,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "데이스타",
    "hits": {
@@ -11684,6 +12156,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "데이지",
    "hits": {
@@ -11703,6 +12176,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "큐피트",
    "hits": {
@@ -11711,10 +12185,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 3,
    "name": "Cupid",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-484",
    "title": "Cupid (2022 group)",
    "unit": false,
@@ -11722,6 +12196,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "블랙 로즈",
    "hits": {
@@ -11741,6 +12216,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 2,
    "hangul": "앰버",
    "hits": {
@@ -11766,6 +12242,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "디에스타",
    "hits": {
@@ -11785,6 +12262,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 7,
    "hangul": "아트비트 v",
    "hits": {
@@ -11804,6 +12282,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "코카앤버터",
    "hits": {
@@ -11823,6 +12302,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 12,
    "hangul": "초코파이브",
    "hits": {
@@ -11842,6 +12322,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "클라씨",
    "hits": {
@@ -11861,6 +12342,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "아이리스",
    "hits": {
@@ -11880,6 +12362,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "페이니티",
    "hits": {
@@ -11899,6 +12382,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "하이키",
    "hits": {
@@ -11930,6 +12414,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "갓 더 비트",
    "hits": {
@@ -11966,6 +12451,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "아일리원",
    "hits": {
@@ -11985,6 +12471,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "프레쉬",
    "hits": {
@@ -12004,6 +12491,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "소녀세상",
    "hits": {
@@ -12023,6 +12511,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "",
    "hits": {
@@ -12042,6 +12531,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "유노아이",
    "hits": {
@@ -12061,6 +12551,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 3,
    "hangul": "피프티피프티",
    "hits": {
@@ -12089,6 +12580,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "이로피로",
    "hits": {
@@ -12108,6 +12600,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "프리아",
    "hits": {
@@ -12127,6 +12620,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 3,
    "hangul": "케플러",
    "hits": {
@@ -12178,6 +12672,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "라라걸스",
    "hits": {
@@ -12197,6 +12692,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "마마돌",
    "hits": {
@@ -12216,6 +12712,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "르세라핌",
    "hits": {
@@ -12376,6 +12873,7 @@
   },
   {
    "current": 0,
+   "finalSize": 6,
    "former": 6,
    "hangul": "라필루스",
    "hits": {
@@ -12395,6 +12893,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "미미로즈",
    "hits": {
@@ -12414,6 +12913,7 @@
   },
   {
    "current": 11,
+   "finalSize": 11,
    "former": 0,
    "hangul": "메모리아",
    "hits": {
@@ -12433,6 +12933,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 3,
    "hangul": "라플로르",
    "hits": {
@@ -12452,6 +12953,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "피치아",
    "hits": {
@@ -12471,6 +12973,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 1,
    "hangul": "엔믹스",
    "hits": {
@@ -12583,6 +13086,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "섀도우",
    "hits": {
@@ -12602,6 +13106,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "프리티",
    "hits": {
@@ -12621,6 +13126,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "실루엣",
    "hits": {
@@ -12640,6 +13146,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "러쉬",
    "hits": {
@@ -12659,6 +13166,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "레드밤",
    "hits": {
@@ -12678,6 +13186,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "뉴진스",
    "hits": {
@@ -12798,6 +13307,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "스칼렛",
    "hits": {
@@ -12817,8 +13327,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "피오에이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -12836,6 +13347,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "스피릿",
    "hits": {
@@ -12855,6 +13367,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 4,
    "hangul": "퀸즈아이",
    "hits": {
@@ -12874,6 +13387,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "스타즈",
    "hits": {
@@ -12893,6 +13407,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "N번째 고백 연습",
    "hits": {
@@ -12912,6 +13427,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 3,
    "hangul": "포치푸리",
    "hits": {
@@ -12931,6 +13447,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "수아콩",
    "hits": {
@@ -12939,10 +13456,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 3,
    "name": "SUAKONG",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-484",
    "title": "SUAKONG",
    "unit": true,
@@ -12950,6 +13467,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 3,
    "hangul": "위나",
    "hits": {
@@ -12969,6 +13487,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "비비지",
    "hits": {
@@ -13005,6 +13524,7 @@
   },
   {
    "current": 0,
+   "finalSize": 10,
    "former": 10,
    "hangul": "위드미",
    "hits": {
@@ -13024,6 +13544,7 @@
   },
   {
    "current": 0,
+   "finalSize": 12,
    "former": 12,
    "hangul": "WSG워너비",
    "hits": {
@@ -13060,6 +13581,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "",
    "hits": {
@@ -13079,6 +13601,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "위니",
    "hits": {
@@ -13098,6 +13621,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "밴드유니",
    "hits": {
@@ -13117,6 +13641,7 @@
   },
   {
    "current": 3,
+   "finalSize": null,
    "former": 9,
    "hangul": "브이럽",
    "hits": {
@@ -13136,6 +13661,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "블라썸",
    "hits": {
@@ -13155,6 +13681,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "체리쉬",
    "hits": {
@@ -13174,6 +13701,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 5,
    "hangul": "클레어",
    "hits": {
@@ -13193,6 +13721,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 7,
    "hangul": "아플러스",
    "hits": {
@@ -13212,6 +13741,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "에이디야",
    "hits": {
@@ -13231,6 +13761,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "딜라잇",
    "hits": {
@@ -13250,6 +13781,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "클로저",
    "hits": {
@@ -13269,6 +13801,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "바니티",
    "hits": {
@@ -13288,6 +13821,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "베이비스",
    "hits": {
@@ -13307,6 +13841,7 @@
   },
   {
    "current": 2,
+   "finalSize": 2,
    "former": 1,
    "hangul": "엘핀",
    "hits": {
@@ -13326,6 +13861,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "엘즈업",
    "hits": {
@@ -13345,6 +13881,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "아띠",
    "hits": {
@@ -13364,6 +13901,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "에스더",
    "hits": {
@@ -13383,6 +13921,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "에이트",
    "hits": {
@@ -13402,6 +13941,7 @@
   },
   {
    "current": 4,
+   "finalSize": 5,
    "former": 1,
    "hangul": "드림스윗",
    "hits": {
@@ -13421,6 +13961,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 11,
    "hangul": "디디걸스",
    "hits": {
@@ -13440,6 +13981,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "에코엔젤스",
    "hits": {
@@ -13459,6 +14001,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "제니웨리",
    "hits": {
@@ -13467,10 +14010,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 4,
    "name": "January",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-485",
    "title": "January",
    "unit": false,
@@ -13478,6 +14021,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 7,
    "hangul": "하나",
    "hits": {
@@ -13497,6 +14041,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "피버스",
    "hits": {
@@ -13516,6 +14061,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "",
    "hits": {
@@ -13535,6 +14081,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 4,
    "hangul": "골든걸스",
    "hits": {
@@ -13554,6 +14101,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 8,
    "hangul": "아이클링",
    "hits": {
@@ -13573,6 +14121,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "캔디스",
    "hits": {
@@ -13592,6 +14141,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "메이브",
    "hits": {
@@ -13611,6 +14161,7 @@
   },
   {
    "current": 0,
+   "finalSize": 9,
    "former": 9,
    "hangul": "",
    "hits": {
@@ -13619,10 +14170,10 @@
     "spotify": null,
     "win": []
    },
-   "n": null,
+   "n": 9,
    "name": "ONEST",
    "redebut": false,
-   "sizeSource": null,
+   "sizeSource": "lead_was_n",
    "source": "R04-485",
    "title": "ONEST",
    "unit": true,
@@ -13630,6 +14181,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "키스 오브 라이프",
    "hits": {
@@ -13681,6 +14233,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "루시드",
    "hits": {
@@ -13700,6 +14253,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "루셈블",
    "hits": {
@@ -13719,6 +14273,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 2,
    "hangul": "러브다이아",
    "hits": {
@@ -13738,6 +14293,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "엔아이디",
    "hits": {
@@ -13757,6 +14313,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "메이리즈",
    "hits": {
@@ -13776,6 +14333,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "카와나리",
    "hits": {
@@ -13795,6 +14353,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "라임라잇",
    "hits": {
@@ -13814,6 +14373,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 5,
    "hangul": "캠비",
    "hits": {
@@ -13833,6 +14393,7 @@
   },
   {
    "current": 24,
+   "finalSize": 24,
    "former": 0,
    "hangul": "트리플에스",
    "hits": {
@@ -13889,6 +14450,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "프림로즈",
    "hits": {
@@ -13908,6 +14470,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "레드플럼",
    "hits": {
@@ -13927,6 +14490,7 @@
   },
   {
    "current": 2,
+   "finalSize": 2,
    "former": 4,
    "hangul": "스타데이즈",
    "hits": {
@@ -13946,6 +14510,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "피어니",
    "hits": {
@@ -13965,6 +14530,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 7,
    "hangul": "퍼즐",
    "hits": {
@@ -13984,6 +14550,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "큐더블유이알",
    "hits": {
@@ -14030,6 +14597,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "스타시드즈",
    "hits": {
@@ -14049,6 +14617,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 10,
    "hangul": "업투유",
    "hits": {
@@ -14068,6 +14637,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 9,
    "hangul": "루비체",
    "hits": {
@@ -14087,6 +14657,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 11,
    "hangul": "티엔젤",
    "hits": {
@@ -14106,6 +14677,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 2,
    "hangul": "엑신",
    "hits": {
@@ -14125,6 +14697,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "영파씨",
    "hits": {
@@ -14144,6 +14717,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "윈썸",
    "hits": {
@@ -14163,6 +14737,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "베이비몬스터",
    "hits": {
@@ -14218,6 +14793,7 @@
   },
   {
    "current": 3,
+   "finalSize": 4,
    "former": 2,
    "hangul": "클리어리",
    "hits": {
@@ -14237,6 +14813,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "비아워즈",
    "hits": {
@@ -14256,6 +14833,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "아르테미스",
    "hits": {
@@ -14275,6 +14853,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "쓰리피스",
    "hits": {
@@ -14294,6 +14873,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 0,
    "hangul": "블루벨",
    "hits": {
@@ -14313,6 +14893,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "캔디샵",
    "hits": {
@@ -14332,6 +14913,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 6,
    "hangul": "비웨이브",
    "hits": {
@@ -14351,6 +14933,7 @@
   },
   {
    "current": 0,
+   "finalSize": 7,
    "former": 7,
    "hangul": "배드빌런",
    "hits": {
@@ -14370,6 +14953,7 @@
   },
   {
    "current": 5,
+   "finalSize": null,
    "former": 0,
    "hangul": "AF드림걸즈",
    "hits": {
@@ -14389,6 +14973,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "아스텔",
    "hits": {
@@ -14408,6 +14993,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "포워드",
    "hits": {
@@ -14427,8 +15013,9 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
-   "hangul": "",
+   "hangul": "A2O 메이",
    "hits": {
     "circle": [],
     "melon": [],
@@ -14446,6 +15033,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "이오칠",
    "hits": {
@@ -14465,6 +15053,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "아일릿",
    "hits": {
@@ -14570,6 +15159,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "플로라",
    "hits": {
@@ -14589,6 +15179,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 2,
    "hangul": "걸셋",
    "hits": {
@@ -14608,6 +15199,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 2,
    "hangul": "아이몬드",
    "hits": {
@@ -14627,6 +15219,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "지니어스",
    "hits": {
@@ -14646,6 +15239,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "헤이미쉬",
    "hits": {
@@ -14665,6 +15259,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "아이보리",
    "hits": {
@@ -14684,6 +15279,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 1,
    "hangul": "이즈나",
    "hits": {
@@ -14714,6 +15310,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "크리스탈",
    "hits": {
@@ -14733,6 +15330,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "젠블루",
    "hits": {
@@ -14752,6 +15350,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 0,
    "hangul": "큐리어스",
    "hits": {
@@ -14771,6 +15370,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "허니즈",
    "hits": {
@@ -14790,6 +15390,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "엘리먼트",
    "hits": {
@@ -14809,8 +15410,9 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
-   "hangul": "",
+   "hangul": "켈트나인",
    "hits": {
     "circle": [],
     "melon": [],
@@ -14828,6 +15430,7 @@
   },
   {
    "current": 2,
+   "finalSize": 2,
    "former": 1,
    "hangul": "엔데이",
    "hits": {
@@ -14847,6 +15450,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 3,
    "hangul": "메이딘",
    "hits": {
@@ -14866,6 +15470,7 @@
   },
   {
    "current": 6,
+   "finalSize": 6,
    "former": 0,
    "hangul": "캣츠아이",
    "hits": {
@@ -14894,6 +15499,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "미야오",
    "hits": {
@@ -14931,8 +15537,9 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
-   "hangul": "",
+   "hangul": "러브원",
    "hits": {
     "circle": [],
     "melon": [],
@@ -14950,6 +15557,7 @@
   },
   {
    "current": 0,
+   "finalSize": null,
    "former": 10,
    "hangul": "라이킷",
    "hits": {
@@ -14969,6 +15577,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 5,
    "hangul": "수피아",
    "hits": {
@@ -14988,6 +15597,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "리센느",
    "hits": {
@@ -15023,6 +15633,7 @@
   },
   {
    "current": 10,
+   "finalSize": 10,
    "former": 1,
    "hangul": "스텔라이브",
    "hits": {
@@ -15042,6 +15653,7 @@
   },
   {
    "current": 7,
+   "finalSize": 7,
    "former": 0,
    "hangul": "펄리스",
    "hits": {
@@ -15061,6 +15673,7 @@
   },
   {
    "current": 9,
+   "finalSize": 9,
    "former": 0,
    "hangul": "오르비스",
    "hits": {
@@ -15080,6 +15693,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "신디에잇",
    "hits": {
@@ -15099,6 +15713,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "오드유스",
    "hits": {
@@ -15118,6 +15733,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "핑크버스",
    "hits": {
@@ -15137,6 +15753,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "뉴엘",
    "hits": {
@@ -15156,6 +15773,7 @@
   },
   {
    "current": 8,
+   "finalSize": 8,
    "former": 0,
    "hangul": "세이마이네임",
    "hits": {
@@ -15181,6 +15799,7 @@
   },
   {
    "current": 0,
+   "finalSize": 3,
    "former": 3,
    "hangul": "박하정",
    "hits": {
@@ -15200,6 +15819,7 @@
   },
   {
    "current": 0,
+   "finalSize": 4,
    "former": 4,
    "hangul": "트레이서",
    "hits": {
@@ -15219,6 +15839,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "위치스",
    "hits": {
@@ -15238,6 +15859,7 @@
   },
   {
    "current": 0,
+   "finalSize": 5,
    "former": 5,
    "hangul": "비브",
    "hits": {
@@ -15257,6 +15879,7 @@
   },
   {
    "current": 0,
+   "finalSize": 8,
    "former": 8,
    "hangul": "유니스",
    "hits": {
@@ -15282,6 +15905,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "트리플 아이즈",
    "hits": {
@@ -15301,6 +15925,7 @@
   },
   {
    "current": 4,
+   "finalSize": 4,
    "former": 1,
    "hangul": "비비업",
    "hits": {
@@ -15320,6 +15945,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 0,
    "hangul": "유니코드",
    "hits": {
@@ -15339,6 +15965,7 @@
   },
   {
    "current": 3,
+   "finalSize": 3,
    "former": 0,
    "hangul": "요노호시",
    "hits": {
@@ -15358,6 +15985,7 @@
   },
   {
    "current": 5,
+   "finalSize": 5,
    "former": 1,
    "hangul": "절대전력Z",
    "hits": {
@@ -15377,6 +16005,7 @@
   },
   {
    "current": 2,
+   "finalSize": null,
    "former": 0,
    "hangul": "위시스",
    "hits": {

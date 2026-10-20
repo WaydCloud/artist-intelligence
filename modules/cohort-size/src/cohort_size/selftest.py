@@ -158,6 +158,16 @@ def _sizes(r: _Run) -> None:
     r.check("47 duplicate titles keep the earliest year",
             by_title["BADKIZ"]["year"] == 2014 and by_title["PRITTI-G"]["year"] == 2015
             and by_title["LIVE HIGH"]["year"] == 2013)
+    btriple = ("{{Infobox group\n| former =\n* A\n* B\n* C\n* D\n}}\n'''Btriple''' (비트리플) was a project "
+               "four-member girl group under LSJ Company. They debuted on December 17, 2019.")
+    r.check("48 'was a project four-member' (one modifier word) gives 4",
+            sizes.debut_size(btriple, 2019)["n"] == 4 and by_title["Btriple"]["n"] == 4,
+            f"{sizes.debut_size(btriple, 2019)} fixture {by_title['Btriple']['n']}")
+    crayon = by_title["Crayon Pop"]
+    r.check("49 hangul from the lead parenthesis when the infobox has none (Crayon Pop, Melon 2013)",
+            crayon["hangul"] == "크레용팝" and any(x["year"] == 2013 for x in crayon["hits"]["melon"])
+            and sizes.hangul_name("{{Infobox group\n}}\n'''X''' (엑스) is a group.") == "엑스",
+            crayon["hangul"])
 
     # The planning rows are now a historical fixture. Rows that had a size must keep it, except the
     # documented corrections. Undetermined rows may gain a size. Only the duplicate LA FLOR 2023 row goes.
@@ -354,6 +364,18 @@ def _report(r: _Run) -> None:
             and d["determined"]["n"] + d["undetermined"]["n"]
             == sum(1 for g in fixture["groups"] if g["year"] in set(a["completeYears"]) and not g["unit"]))
     r.check("33b the V upper-bound wording is gone", "이하 수준" not in blob)
+    im = a["imputation"]
+    tested_nonunit = d["determined"]["n"] + d["undetermined"]["n"]
+    r.check("50 imputation: five schemes, all groups back in, ranges ordered",
+            set(im["schemes"]) == {"resampleDeterminedFailures", "resampleCheckedSample", "uniformInRange",
+                                   "allAtFinal", "allAtUpper"}
+            and all(s["n"] == tested_nonunit and s["pExactMin"] <= s["pExactMax"] for s in im["schemes"].values())
+            and im["sampleN"] == min(36, d["undetermined"]["n"]))
+    r.check("51 imputation is reproducible (same seeds, same ranges)", a_again["imputation"] == im)
+    inf_limits = rep["inferences"][1]["limits"]
+    lo = im["schemes"]["allAtUpper"]["pExactMin"]
+    r.check("52 the imputation numbers on screen come from the analysis",
+            ("<0.001" if lo < 0.001 else f"{lo:.3f}") in inf_limits and "멤버 변동 또는 인원 기록 없음" in inf_limits)
 
 
 def run() -> int:

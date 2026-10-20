@@ -65,7 +65,7 @@ def config_from(args: argparse.Namespace) -> an.Config:
         window=args.window, cuts=cuts, eras=_eras(args.eras), first_year=args.first_year,
         last_year=args.last_year, include_incomplete=args.include_incomplete, exact_b=args.exact_b,
         seed=args.seed, alpha=args.alpha, trend_scores=args.trend_scores,
-        focus_size=args.focus_size,
+        focus_size=args.focus_size, impute_runs=args.impute_runs,
     )
 
 
@@ -146,6 +146,7 @@ def main(argv: list[str] | None = None) -> int:
     p_a.add_argument("--alpha", type=float, default=0.05, help="level that switches the inference wording")
     p_a.add_argument("--trend-scores", choices=("ordinal", "median"), default="ordinal")
     p_a.add_argument("--focus-size", type=int, default=5, help="lineup size tracked in the era share chart")
+    p_a.add_argument("--impute-runs", type=int, default=20, help="seeds per random scheme for undetermined sizes")
     p_a.add_argument("--print-matches", action="store_true")
     p_a.set_defaults(func=cmd_analyze)
 

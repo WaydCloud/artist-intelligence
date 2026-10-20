@@ -182,6 +182,8 @@ def build(root: Path) -> dict[str, Any]:
         "note": "Facts only. Group lineup counts and matched success rows. Raw captures stay in the planning repo.",
         "sources": {
             "kpopwiki": {str(y): f"R04-{rid:03d}" for y, rid in KPOPWIKI_IDS.items()},
+            "kpopwikiRetrieved": {str(y): str(_meta(_dir(root, "R04-cases", rid)).get("retrieved", ""))
+                                  for y, rid in KPOPWIKI_IDS.items()},
             "win": win_index,
             "melon": [{"id": p["id"], "year": p["year"], "rows": len(p["entries"])} for p in melon],
             "circle": [{"id": p["id"], "year": p["year"], "rows": len(p["entries"])} for p in circle],

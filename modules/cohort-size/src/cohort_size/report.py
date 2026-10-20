@@ -218,7 +218,9 @@ def _exact_chart(a: dict[str, Any]) -> dict[str, Any]:
         f"{_w(a)}년 안의 종합 성공이다. 진행 중 줄은 지금까지의 성공만 센다: 음방 1위는 "
         f"{cut['winRetrieved'][:10]} 수집분까지, 멜론 · 써클은 {cut['melonLastYear']}년 연말 차트까지이며 "
         f"{cut['melonLastYear'] + 1}년 연말 차트는 아직 없다. 오른쪽 수는 성공 비율(%), 성공 팀 이름은 아래 인사이트에 있다.",
-        "reliability": {"sample": " · ".join(f"{_exact_era_label(e)} {e['k']}/{e['n']}팀" for e in x["eras"])},
+        "reliability": {"sample": " · ".join(f"{_exact_era_label(e)} {e['k']}/{e['n']}팀" for e in x["eras"]),
+                        "missing": f"{_partial(a)}. 음방 1위 캡처가 없는 프로그램·연도 {len(a['coverage']['gaps'])}건은 "
+                                   "0승이 아니라 결측이다"},
         "data": data,
     }
 
@@ -248,7 +250,8 @@ def _exact_inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
             + " · ".join(_post_hoc_lines(e, list(e["postHoc"]))),
             "sample": f"{e['label']} 데뷔 {e['n']}팀 중 성공 {e['k']}팀",
             "confidence": "low",
-            "limits": f"사후 비교다. 비교할 묶음을 데이터를 본 뒤 골랐으므로 피셔 p는 실제보다 작게 나온다. 그래서 인원 열 "
+            "limits": f"사후 비교다. 비교할 인원 묶음뿐 아니라 시기 경계(2012~17 · 2018~23)와 8명이라는 기준도 "
+            "데이터를 본 뒤 골랐으므로 피셔 p는 실제보다 작게 나온다. 보정은 인원 열 "
             f"{fam}개 비교 전체를 한 묶음으로 홀름 보정한 값을 함께 적었다. 칸마다 팀 수가 적고, 기획사 규모와 "
             "데뷔 예산은 통제하지 않았다.",
             "chartId": "exact-by-era",
@@ -288,6 +291,8 @@ def _era_rate_chart(a: dict[str, Any]) -> dict[str, Any]:
 def _era_test_chart(a: dict[str, Any]) -> dict[str, Any]:
     data = []
     for e in a["eras"]:
+        if not e["complete"]:
+            continue  # an in-progress row gets no test: its window is still open
         for m in ("any", "win", "melon", "circle"):
             t = e["measures"][m]["test"]
             if "reason" in t:
@@ -305,7 +310,8 @@ def _era_test_chart(a: dict[str, Any]) -> dict[str, Any]:
         "question": "어느 시기에서 인원 구간과 성공이 함께 움직였나?",
         "definition": "시기마다 종합과 세 척도를 따로 검정했다. 막대 길이는 보정 크라메르 V, 괄호는 관계가 없을 때 "
         f"보정 V의 95번째 백분위다. 홀름 p는 관측 창이 닫힌 시기 {fam}개를 척도마다 한 묶음으로 본 보정 값이다. "
-        "시기마다 팀 수가 적어 값이 크게 흔들린다.",
+        "시기마다 팀 수가 적어 값이 크게 흔들린다. 진행 중 시기는 관측 창이 열려 있어 검정하지 않고 이 차트에서 뺐다. "
+        "그 시기의 k/n은 시기별 종합 성공률 차트에 있다.",
         "reliability": {"sample": " · ".join(f"{_era_label(e)} {e['n']}팀" for e in a["eras"])},
         "data": data,
     }
@@ -557,10 +563,23 @@ def _reliability(a: dict[str, Any]) -> dict[str, Any]:
         f"판정 {d['determined']['k']}/{d['determined']['n']}, 미판정 {d['undetermined']['k']}/{d['undetermined']['n']}",
         "accuracy": "성공은 이름 대조로 셌다. 오탐은 규칙과 검토 목록으로 걸렀고 놓친 비율은 재지 않았다(정확도 미측정)",
         "missing": f"음방 1위 캡처가 없는 프로그램·연도 {len(a['coverage']['gaps'])}건({_gaps(a)})은 "
-        f"0승이 아니라 결측이다. {_inc(a)} 데뷔는 관측 창이 닫히지 않아 검정에서 뺐다",
+        f"0승이 아니라 결측이다. {_inc(a)} 데뷔는 관측 창이 닫히지 않아 검정에서 뺐다. {_partial(a)}",
         "engine": f"cohort-size v{MODULE_VERSION} · 창 {c['window']}년 · 구간 {', '.join(c['buckets'])} · "
         f"순열 {c['exactB']:,}회 · 시드 {c['seed']} · 추세 점수 {TREND_LABEL[c['trendScores']]}",
     }
+
+
+def _partial(a: dict[str, Any]) -> str:
+    """The last debut year is captured mid-year, and the in-progress row mixes very different observation lengths."""
+    cut = a["exact"]["cut"]
+    years = sorted(int(y) for y in cut["observedYears"])
+    if not years:
+        return ""
+    last = years[-1]
+    got = cut["kpopwikiRetrieved"].get(str(last), "")
+    obs = cut["observedYears"]
+    return (f"{last} 데뷔 목록은 Kpop Wiki {last} 범주를 {got}에 받은 것이라 그 뒤(10월 하순~12월) 데뷔는 빠졌다. 진행 중 "
+            f"줄은 관측 기간이 {years[0]} 데뷔 약 {obs[str(years[0])]}년부터 {last} 데뷔 {obs[str(last)]}년 이하까지 섞여 있다")
 
 
 def _gaps(a: dict[str, Any]) -> str:

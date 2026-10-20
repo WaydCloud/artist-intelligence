@@ -16,6 +16,7 @@ import random
 import statistics
 import zlib
 from dataclasses import dataclass, replace
+from datetime import date
 from itertools import pairwise
 from typing import Any
 
@@ -259,6 +260,13 @@ def imputation(fixture: dict[str, Any], cfg: Config, years: set[int]) -> dict[st
     return out
 
 
+def _observed(year: int, cut: str) -> float | None:
+    if len(cut) < 10:
+        return None
+    end = date.fromisoformat(cut[:10])
+    return round((end - date(year, 1, 1)).days / 365.25, 1)
+
+
 def _span(lo: int, hi: int) -> str:
     return f"{lo}~{str(hi)[2:]}" if lo != hi else str(lo)
 
@@ -319,7 +327,11 @@ def exact_by_era(groups: list[dict[str, Any]], cfg: Config, complete: list[int],
         "cuts": list(cfg.exact_cuts), "labels": labels, "eras": rows_out,
         "highlight": [f"{cfg.exact_cuts[-1]}명 이상 vs {cfg.exact_cuts[-1]}명 미만", "6명 vs rest"],
         "cut": {"winRetrieved": last_win, "melonLastYear": max(fixture["coverage"]["melonYears"]),
-                "circleLastYear": max(fixture["coverage"]["circleYears"])},
+                "circleLastYear": max(fixture["coverage"]["circleYears"]),
+                "kpopwikiRetrieved": fixture["sources"].get("kpopwikiRetrieved", {}),
+                # Years of observation to the win cut, counted from 1 January of the debut year
+                # (an upper bound: a group observes less if it debuted later in that year).
+                "observedYears": {str(y): _observed(y, last_win) for y in in_progress}},
     }
 
 

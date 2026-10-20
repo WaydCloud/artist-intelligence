@@ -398,6 +398,16 @@ def _report(r: _Run) -> None:
             and any(i.startswith("성공 팀 · 2018~23 · 6명 6/23:") and "LE SSERAFIM" in i for i in rep["insights"])
             and any("2024~26 진행 중" in d["name"] for d in exact_chart["data"])
             and any(i.get("chartId") == "exact-by-era" and "사후 비교" in i["limits"] for i in rep["inferences"]))
+    era_tests = next(c for c in rep["charts"] if c["id"] == "era-tests")
+    r.check("58 era-tests shows no test value for the in-progress row",
+            not any("진행 중" in d["name"] for d in era_tests["data"]))
+    obs = x["cut"]["observedYears"]
+    r.check("59 partial 2026 cohort and mixed observation stated on screen",
+            "10월 하순~12월" in rep["reliability"]["missing"] and "10월 하순~12월" in exact_chart["reliability"]["missing"]
+            and obs["2024"] > 2.5 and obs["2026"] < 1.0, str(obs))
+    r.check("60 post-hoc limits name the era boundaries and the 8 cut as chosen after seeing the data",
+            any(i.get("chartId") == "exact-by-era" and "시기 경계" in i["limits"] and "8명이라는 기준" in i["limits"]
+                for i in rep["inferences"]))
     im = a["imputation"]
     tested_nonunit = d["determined"]["n"] + d["undetermined"]["n"]
     r.check("50 imputation: five schemes, all groups back in, ranges ordered",

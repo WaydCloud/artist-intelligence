@@ -19,6 +19,8 @@ MEASURE_LABEL = {"any": "종합", "win": "음방 1위", "melon": "멜론", "circ
 VARIANT_LABEL = {"default": "기본", "range": "범위 포함", "units": "유닛 포함"}
 SUMMARY_ID = "any-by-size"
 TREND_LABEL = {"ordinal": "구간 순서", "median": "구간 중앙 인원"}
+SOURCE_LABEL = {"lead_debut": "데뷔 문장", "current_no_former": "현재 인원", "lead_was_n": "N인조였다 문장",
+                "reviewed": "손 확인"}
 PROGRAM_LABEL = {"Music Bank": "뮤직뱅크", "Inkigayo": "인기가요", "M Countdown": "엠카운트다운",
                  "Show! Music Core": "쇼! 음악중심", "Show Champion": "쇼챔피언", "The Show": "더쇼"}
 
@@ -27,15 +29,15 @@ _SECTIONS = [
         "id": "size",
         "label": "인원",
         "question": "인원에 따라 성공률이 다른가?",
-        "note": "성공은 데뷔 연도부터 {w}년 안의 기록만 센다. 차이를 찾지 못한 것은 차이가 없다는 뜻이 아니다. "
-        "구간마다 팀 수가 적어 작은 차이는 이 검정으로 가려지지 않는다.",
+        "note": "성공은 데뷔 연도부터 {w}년 안의 기록만 센다. 인원과 성공이 함께 나타나는지만 보며, 기획사 규모와 "
+        "데뷔 예산은 통제하지 않았다. 구간마다 팀 수가 적어 작은 차이는 이 검정으로 가려지지 않는다.",
     },
     {
         "id": "era",
         "label": "시기",
         "question": "데뷔 시기마다 달랐나?",
         "note": "시기를 나눠 따로 검정했다. 여러 번 검정하면 낮은 p가 우연히 나올 수 있어 홀름 보정 p를 함께 적었다. "
-        "{inc} 데뷔는 관측 창이 아직 닫히지 않아 따로 표시하고 보정에 넣지 않았다.",
+        "{inc} 데뷔는 관측 창이 아직 닫히지 않아 따로 표시하고 보정에 넣지 않았다. {era}",
     },
     {
         "id": "who",
@@ -51,6 +53,13 @@ def _p(v: float | None) -> str:
     if v is None:
         return "없음"
     return "<0.001" if v < 0.001 else f"{v:.3f}"
+
+
+def _pv(v: float | None) -> float | str:
+    """Metric value for a p: a number, or "<0.001" so a tiny p never prints as 0.0."""
+    if v is None:
+        return "없음"
+    return "<0.001" if v < 0.001 else round(v, 3)
 
 
 def _pct(x: float | None) -> str:
@@ -73,7 +82,15 @@ def _rate_rows(rows: list[dict[str, Any]], prefix: str = "") -> list[dict[str, A
 def _test_line(t: dict[str, Any]) -> str:
     if "reason" in t:
         return f"검정 없음({t['reason']})"
-    return (f"V {t['v']:.2f} ({t['vLo']:.2f}~{t['vHi']:.2f}) · 정확 p {_p(t['pExact'])} · 추세 p {_p(t['pTrend'])}")
+    return (f"보정 V {t['vbc']:.2f} (무관일 때 95% {t['vbcNull95']:.2f}) · 정확 p {_p(t['pExact'])} · "
+            f"추세 p {_p(t['pTrend'])}")
+
+
+def _direction(t: dict[str, Any]) -> str:
+    z = t.get("trendZ")
+    if z is None:
+        return ""
+    return "인원이 많은 구간일수록 성공 비율이 높은 쪽" if z > 0 else "인원이 적은 구간일수록 성공 비율이 높은 쪽"
 
 
 def _w(a: dict[str, Any]) -> int:
@@ -133,7 +150,7 @@ def _tests_chart(a: dict[str, Any]) -> dict[str, Any]:
             if "reason" in t:
                 continue
             data.append({"name": f"{MEASURE_LABEL[m]} · {VARIANT_LABEL[v]} {t['n']}팀 · {_test_line(t)}",
-                         "value": round(t["v"], 3)})
+                         "value": round(t["vbc"], 3)})
     c = a["counts"]
     return {
         "type": "bar",
@@ -141,9 +158,10 @@ def _tests_chart(a: dict[str, Any]) -> dict[str, Any]:
         "section": "size",
         "title": "모집단을 바꾼 검정",
         "question": "모집단을 바꾸면 결과가 움직이나?",
-        "definition": "막대 길이는 크라메르 V다. 0이면 인원 구간과 성공이 따로 놀고, 1이면 구간이 성공을 완전히 가른다. "
-        "관계가 없어도 표본이 작으면 V는 0보다 크게 나온다. 괄호는 부트스트랩 95% 구간, 정확 p는 몬테카를로 "
-        "정확검정, 추세 p는 구간 순서(작은 팀에서 큰 팀으로)를 따라 비율이 한쪽으로 움직이는지 보는 검정이다. "
+        "definition": "막대 길이는 치우침을 보정한 크라메르 V(버그스마 2013)다. 0이면 인원 구간과 성공이 따로 놀고, "
+        "1이면 구간이 성공을 완전히 가른다. 괄호 안은 성공을 팀들에 무작위로 다시 나눴을 때(관계 없음) 보정 V의 "
+        "95번째 백분위로, 막대가 이 값보다 길면 우연만으로는 드문 크기다. 정확 p는 몬테카를로 정확검정, 추세 p는 "
+        "구간 순서(작은 팀에서 큰 팀으로)를 따라 비율이 한쪽으로 움직이는지 보는 검정이다. "
         "범위 포함은 데뷔 인원을 판정하지 못한 팀을 현재와 전 멤버 수의 합(상한)으로 넣은 것, 유닛 포함은 "
         "서브유닛·프로젝트 그룹을 넣은 것이다.",
         "reliability": {"sample": f"기본 {c['default']['tested']}팀 · 범위 포함 {c['range']['tested']}팀 · "
@@ -192,11 +210,13 @@ def _era_rate_chart(a: dict[str, Any]) -> dict[str, Any]:
 def _era_test_chart(a: dict[str, Any]) -> dict[str, Any]:
     data = []
     for e in a["eras"]:
-        t = e["measures"]["any"]["test"]
-        if "reason" in t:
-            continue
-        holm = f" · 보정 p {_p(t['pHolm'])}" if "pHolm" in t else ""
-        data.append({"name": f"{_era_label(e)} · {t['n']}팀 · {_test_line(t)}{holm}", "value": round(t["v"], 3)})
+        for m in ("any", "win", "melon", "circle"):
+            t = e["measures"][m]["test"]
+            if "reason" in t:
+                continue
+            holm = f" · 홀름 p {_p(t['pHolm'])}" if "pHolm" in t else ""
+            data.append({"name": f"{_era_label(e)} · {MEASURE_LABEL[m]} · {t['k']}/{t['n']}팀 · {_test_line(t)}{holm}",
+                         "value": round(t["vbc"], 3)})
     fam = next((e["measures"]["any"]["test"].get("holmFamily") for e in a["eras"]
                 if "holmFamily" in e["measures"]["any"]["test"]), 0)
     return {
@@ -205,8 +225,9 @@ def _era_test_chart(a: dict[str, Any]) -> dict[str, Any]:
         "section": "era",
         "title": "시기별 검정",
         "question": "어느 시기에서 인원 구간과 성공이 함께 움직였나?",
-        "definition": "막대 길이는 크라메르 V(종합 기준). 보정 p는 관측 창이 닫힌 시기 "
-        f"{fam}개를 한 묶음으로 본 홀름 보정 값이다. 시기마다 팀 수가 적어 구간이 크게 흔들린다.",
+        "definition": "시기마다 종합과 세 척도를 따로 검정했다. 막대 길이는 보정 크라메르 V, 괄호는 관계가 없을 때 "
+        f"보정 V의 95번째 백분위다. 홀름 p는 관측 창이 닫힌 시기 {fam}개를 척도마다 한 묶음으로 본 보정 값이다. "
+        "시기마다 팀 수가 적어 값이 크게 흔들린다.",
         "reliability": {"sample": " · ".join(f"{_era_label(e)} {e['n']}팀" for e in a["eras"])},
         "data": data,
     }
@@ -293,17 +314,18 @@ def _metrics(a: dict[str, Any]) -> list[dict[str, Any]]:
                   "definition": "표가 검정할 수 있는 모양이 아니다."})
         return m
     m += [
-        {"label": "정확검정 p", "value": round(t["pExact"], 3), "section": "size",
+        {"label": "정확검정 p", "value": _pv(t["pExact"]), "section": "size",
          "hint": f"몬테카를로 {t['exactB']:,}회 · 표준오차 {t['mcSe']:.4f}",
          "definition": "인원 구간과 종합 성공 사이에 관계가 없다고 가정할 때 지금만큼 치우친 표가 나올 확률. "
          "칸의 기대 빈도가 작아도 쓸 수 있는 검정이다."},
-        {"label": "크라메르 V", "value": round(t["v"], 2), "section": "size",
-         "hint": f"부트스트랩 95% 구간 {t['vLo']:.2f}~{t['vHi']:.2f}",
-         "definition": "관계의 크기(0~1). 관계가 없어도 표본이 작으면 0보다 크게 나온다."},
-        {"label": "추세 p", "value": round(t["pTrend"], 3) if t["pTrend"] is not None else "없음", "section": "size",
-         "hint": "코크란-아미티지",
+        {"label": "보정 크라메르 V", "value": round(t["vbc"], 2), "section": "size",
+         "hint": f"관계 없을 때 95번째 백분위 {t['vbcNull95']:.2f} · 보정 전 V {t['v']:.2f}",
+         "definition": "관계의 크기(0~1). 보정 전 V는 관계가 없어도 0보다 크게 나와 버그스마(2013) 방식으로 치우침을 "
+         "뺐다. 힌트의 기준값은 성공을 팀들에 무작위로 다시 나눴을 때의 95번째 백분위다."},
+        {"label": "추세 p", "value": _pv(t["pTrend"]), "section": "size",
+         "hint": f"코크란-아미티지 · z {t['trendZ']:+.2f}" if t["trendZ"] is not None else "코크란-아미티지",
          "definition": "인원 구간을 작은 쪽에서 큰 쪽으로 세웠을 때 성공 비율이 한 방향으로 움직이는지 보는 검정."},
-        {"label": "카이제곱 p", "value": round(t["pChi2"], 3), "section": "size",
+        {"label": "카이제곱 p", "value": _pv(t["pChi2"]), "section": "size",
          "hint": f"기대 빈도 5 미만 칸 {t['lowExpected']}/{t['cells']}",
          "definition": "피어슨 카이제곱 독립성 검정. 기대 빈도가 5 미만인 칸이 있으면 근사가 흔들려 정확검정을 함께 본다."},
         {"label": "성공한 팀 중앙 인원", "value": d["success"]["median"], "unit": "명", "section": "who",
@@ -314,25 +336,74 @@ def _metrics(a: dict[str, Any]) -> list[dict[str, Any]]:
     return m
 
 
+CONFOUNDERS = ("기획사 규모와 데뷔 예산은 통제하지 않았다. Kpop Wiki 수록 기준이 확인되지 않아 생존 편향이 "
+               "있을 수 있다. 데뷔 인원을 판정하지 못한 팀은 기본 표본에서 빠졌다. 함께 나타나는 것이며 인원이 "
+               "성공을 만든다는 뜻이 아니다.")
+
+
+def _rates(rows: list[dict[str, Any]]) -> str:
+    return ", ".join(f"{r['label']} {r['k']}/{r['n']}" for r in rows if r["n"])
+
+
+def _flagged_eras(a: dict[str, Any], alpha: float) -> list[dict[str, Any]]:
+    return [e for e in a["eras"] if e["complete"] and e["measures"]["any"]["test"].get("pHolm", 1.0) < alpha]
+
+
+def _strongest_measure(e: dict[str, Any]) -> tuple[str, dict[str, Any]] | None:
+    """The single measure with the lowest exact p in an era (composite excluded)."""
+    tested = [(m, e["measures"][m]["test"]) for m in ("win", "melon", "circle") if "pExact" in e["measures"][m]["test"]]
+    return min(tested, key=lambda x: x[1]["pExact"]) if tested else None
+
+
+def era_note(a: dict[str, Any]) -> str:
+    alpha = float(a["config"]["alpha"])
+    parts = []
+    for e in _flagged_eras(a, alpha):
+        top = _strongest_measure(e)
+        if not top:
+            continue
+        m, _t = top
+        each = ", ".join(
+            f"{MEASURE_LABEL[x]} {_p(e['measures'][x]['test'].get('pHolm'))}" for x in ("win", "melon", "circle"))
+        parts.append(f"{e['label']} 종합 신호의 척도별 홀름 p는 {each}로, {MEASURE_LABEL[m]} 쪽 신호가 가장 강하다.")
+    return " ".join(parts)
+
+
 def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
     alpha = float(a["config"]["alpha"])
     out: list[dict[str, Any]] = []
-    t = a["pooled"]["default"]["measures"]["any"]["test"]
-    limits = (f"회사 규모·예산·데뷔 경쟁은 통제하지 않았다. 표본이 {t['n']}팀이라 약한 관계는 가려지지 않는다. "
-              "관계를 찾지 못한 것과 관계가 없는 것은 다르다.")
-    basis = (f"정확검정 p {_p(t.get('pExact'))} · 카이제곱 p {_p(t.get('pChi2'))} · 추세 p {_p(t.get('pTrend'))} · "
-             f"V {t.get('v', 0):.2f} ({t.get('vLo', 0):.2f}~{t.get('vHi', 0):.2f})")
+    b = a["pooled"]["default"]["measures"]["any"]
+    t = b["test"]
     if "reason" not in t:
-        if t["pExact"] >= alpha and (t["pTrend"] is None or t["pTrend"] >= alpha):
-            text = (f"이 표본에서 데뷔 인원 구간과 종합 성공 사이 관계를 찾지 못한 결과로 읽힌다. 있더라도 크라메르 V "
-                    f"{t['vHi']:.2f} 이하 수준과 정합한다.")
+        basis = (f"정확검정 p {_p(t['pExact'])} · 추세 p {_p(t['pTrend'])}(z {t['trendZ']:+.2f}) · 카이제곱 p "
+                 f"{_p(t['pChi2'])} · 보정 V {t['vbc']:.2f}, 관계 없을 때 95% {t['vbcNull95']:.2f} · "
+                 f"구간별 {_rates(b['rows'])}")
+        if t["pExact"] < alpha or (t["pTrend"] is not None and t["pTrend"] < alpha):
+            text = (f"이 표본에서 데뷔 인원 구간과 종합 성공 사이에 연관 신호가 있다. {_direction(t)}으로 읽힌다. "
+                    f"보정 V는 {t['vbc']:.2f}로 관계가 없을 때의 95% 기준 {t['vbcNull95']:.2f}보다 크다.")
         else:
-            text = (f"이 표본에서 데뷔 인원 구간과 종합 성공 사이에 관계 신호가 있다. 크라메르 V {t['v']:.2f} "
-                    f"({t['vLo']:.2f}~{t['vHi']:.2f}) 수준으로 읽힌다.")
+            text = (f"이 표본에서 데뷔 인원 구간과 종합 성공 사이 연관을 찾지 못한 결과로 읽힌다. 보정 V "
+                    f"{t['vbc']:.2f}는 관계가 없을 때의 95% 기준 {t['vbcNull95']:.2f} 안쪽이다.")
         out.append({"text": text, "basis": basis, "sample": f"{t['n']}팀 중 성공 {t['k']}팀",
-                    "confidence": "medium", "limits": limits, "chartId": SUMMARY_ID})
+                    "confidence": "medium", "limits": CONFOUNDERS, "chartId": SUMMARY_ID})
 
-    # Does the reading move when the population changes? Compare the alpha calls on both tests.
+    d = a["determination"]
+    if d["undetermined"]["n"]:
+        de, un = d["determined"], d["undetermined"]
+        out.append({
+            "text": (f"데뷔 인원을 판정하지 못한 팀의 성공 비율({un['k']}/{un['n']})이 판정한 팀({de['k']}/{de['n']})과 "
+                     "다른 것으로 읽힌다. 기본 표본은 판정이 된 팀만 고른 표본이다."),
+            "basis": (f"판정 {de['k']}/{de['n']}(구간 {de['lo'] * 100:.0f}~{de['hi'] * 100:.0f}%) · 미판정 "
+                      f"{un['k']}/{un['n']}(구간 {un['lo'] * 100:.0f}~{un['hi'] * 100:.0f}%) · 판정 근거별 "
+                      + ", ".join(f"{SOURCE_LABEL.get(k, k)} {v['k']}/{v['n']}" for k, v in d["bySource"].items())),
+            "sample": f"{_tested_span(a)} 데뷔 유닛 제외 {de['n'] + un['n']}팀",
+            "confidence": "medium",
+            "limits": "미판정 팀은 멤버가 바뀌었는데 데뷔 문장이 없는 팀이다. 이들을 상한 인원으로 넣은 결과가 범위 포함 "
+            "변형이고, 하한이나 실제 인원으로 넣었을 때의 결과는 계산하지 않았다. 손으로 확인한 팀은 검토자가 이미 "
+            "알던 팀이라 성공한 팀에 몰려 있다.",
+            "chartId": "tests-by-population",
+        })
+
     calls = {}
     for v in ("default", "range", "units"):
         tv = a["pooled"][v]["measures"]["any"]["test"]
@@ -341,8 +412,8 @@ def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
     if len(calls) == 3:
         moved = [v for v in ("range", "units") if calls[v][:2] != calls["default"][:2]]
         detail = " · ".join(
-            f"{VARIANT_LABEL[v]} 정확 p {_p(calls[v][2]['pExact'])}, 추세 p {_p(calls[v][2]['pTrend'])}"
-            for v in ("default", "range", "units"))
+            f"{VARIANT_LABEL[v]} 정확 p {_p(calls[v][2]['pExact'])}, 추세 p {_p(calls[v][2]['pTrend'])}, "
+            f"보정 V {calls[v][2]['vbc']:.2f}" for v in ("default", "range", "units"))
         if moved:
             text = (f"모집단 정의에 따라 읽기가 바뀌는 것으로 읽힌다. {', '.join(VARIANT_LABEL[v] for v in moved)}에서 "
                     f"p {alpha:g} 기준의 판단이 기본과 다르다.")
@@ -351,23 +422,24 @@ def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
         out.append({"text": text, "basis": detail,
                     "sample": " · ".join(f"{VARIANT_LABEL[v]} {calls[v][2]['n']}팀" for v in calls),
                     "confidence": "medium",
-                    "limits": "범위 포함은 인원을 상한으로 넣어 큰 구간이 부풀 수 있다. 유닛 포함은 기존 팀의 인기를 "
-                    "물려받은 팀이 섞인다.",
+                    "limits": "범위 포함은 미판정 팀을 상한 인원으로 넣어 큰 구간에 성공 없는 팀이 몰린다. 유닛 포함은 기존 "
+                    "팀의 인기를 물려받은 팀이 섞인다.",
                     "chartId": "tests-by-population"})
 
-    flagged = [e for e in a["eras"] if e["complete"] and e["measures"]["any"]["test"].get("pHolm", 1.0) < alpha]
+    flagged = _flagged_eras(a, alpha)
     if flagged:
         names = ", ".join(e["label"] for e in flagged)
-        e0 = flagged[0]["measures"]["any"]["test"]
         out.append({
-            "text": f"{names} 데뷔 팀에서는 인원 구간에 따라 종합 성공 비율이 다른 신호가 있다. 보정 뒤에도 p {alpha:g} 아래다.",
+            "text": f"{names} 데뷔 팀에서는 인원 구간에 따라 종합 성공 비율이 다른 신호가 있다. 시기 보정 뒤에도 p "
+            f"{alpha:g} 아래다. {era_note(a)}",
             "basis": " · ".join(
-                f"{e['label']} {_test_line(e['measures']['any']['test'])} · 보정 p "
-                f"{_p(e['measures']['any']['test']['pHolm'])}" for e in flagged),
+                f"{e['label']} 종합 {_test_line(e['measures']['any']['test'])} · 홀름 p "
+                f"{_p(e['measures']['any']['test']['pHolm'])} · 구간별 {_rates(e['measures']['any']['rows'])}"
+                for e in flagged),
             "sample": " · ".join(f"{e['label']} {e['n']}팀 중 성공 {e['measures']['any']['test']['k']}팀" for e in flagged),
             "confidence": "low",
-            "limits": f"한 시기 안의 팀 수가 적어 V 구간이 넓다(첫 시기 {e0['vLo']:.2f}~{e0['vHi']:.2f}). 같은 시기의 "
-            "회사·장르 구성이 함께 움직였을 수 있다. 결과를 본 뒤 시기를 다시 나누면 이 신호는 판단 근거가 되지 못한다.",
+            "limits": "한 시기 안의 팀 수가 적어 몇 팀이 결과를 움직인다. 같은 시기의 기획사·장르 구성이 함께 움직였을 수 "
+            "있다. 척도끼리는 보정하지 않았다. 결과를 본 뒤 시기를 다시 나누면 이 신호는 판단 근거가 되지 못한다.",
             "chartId": "era-tests",
         })
     return out
@@ -376,14 +448,16 @@ def _inferences(a: dict[str, Any]) -> list[dict[str, Any]]:
 def _reliability(a: dict[str, Any]) -> dict[str, Any]:
     c = a["config"]
     ex = a["excludedDefault"]
+    d = a["determination"]
     return {
         "sample": f"기본 {a['counts']['default']['tested']}팀({_tested_span(a)} 데뷔, 데뷔 인원 판정) · "
-        f"인원 미판정 {ex['undetermined']}팀과 유닛·프로젝트 {ex['units']}팀은 기본에서 제외",
+        f"인원 미판정 {ex['undetermined']}팀과 유닛·프로젝트 {ex['units']}팀은 기본에서 제외 · 검정 연도의 종합 성공은 "
+        f"판정 {d['determined']['k']}/{d['determined']['n']}, 미판정 {d['undetermined']['k']}/{d['undetermined']['n']}",
         "accuracy": "성공은 이름 대조로 셌다. 오탐은 규칙과 검토 목록으로 걸렀고 놓친 비율은 재지 않았다(정확도 미측정)",
-        "missing": f"음방 1위 목록이 없는 프로그램·연도 {len(a['coverage']['gaps'])}건({_gaps(a)})은 "
+        "missing": f"음방 1위 캡처가 없는 프로그램·연도 {len(a['coverage']['gaps'])}건({_gaps(a)})은 "
         f"0승이 아니라 결측이다. {_inc(a)} 데뷔는 관측 창이 닫히지 않아 검정에서 뺐다",
         "engine": f"cohort-size v{MODULE_VERSION} · 창 {c['window']}년 · 구간 {', '.join(c['buckets'])} · "
-        f"정확검정 {c['exactB']:,}회 · 부트스트랩 {c['bootB']:,}회 · 시드 {c['seed']} · 추세 점수 {TREND_LABEL[c['trendScores']]}",
+        f"순열 {c['exactB']:,}회 · 시드 {c['seed']} · 추세 점수 {TREND_LABEL[c['trendScores']]}",
     }
 
 
@@ -394,18 +468,21 @@ def _gaps(a: dict[str, Any]) -> str:
 def _insights(a: dict[str, Any]) -> list[str]:
     gaps = _gaps(a)
     sp = a["sources"]["spotify"]
+    ex = a["excludedDefault"]
     return [
         "그룹 목록과 데뷔 인원은 Kpop Wiki(팬 위키), 음방 1위는 위키백과 목록에서 읽었다. 둘 다 3차 출처다.",
         "Kpop Wiki가 어떤 그룹을 싣는지 기준이 확인되지 않았다. 실린 팀만 분모가 되어 아주 작은 팀이 빠졌을 수 있다.",
         (
-            "데뷔 인원은 문서 첫머리의 데뷔 문장에서 읽고, 없으면 전 멤버가 없는 팀만 현재 인원으로 판정했다. "
-            "멤버가 바뀐 팀 대부분은 판정되지 않아 기본 분석에서 빠졌고, 범위 포함 변형에서만 상한으로 들어간다."
+            "데뷔 인원은 문서 첫머리의 데뷔 문장, 전 멤버가 없으면 현재 인원, 현재 멤버가 없으면 「N인조였다」 문장과 "
+            "전 멤버 수가 맞을 때 그 수로 정했다. 문장이 다른 해의 데뷔나 재데뷔를 말하면 쓰지 않았다. 규칙으로 못 읽은 "
+            f"3팀은 손으로 확인했다. 그래도 정하지 못한 {ex['undetermined']}팀(멤버가 바뀌었고 데뷔 문장이 없는 팀)은 "
+            "기본 분석에서 빠지고 범위 포함 변형에서만 상한으로 들어간다."
         ),
-        f"음방 1위 목록이 없는 프로그램·연도: {gaps}. 위키백과에 해당 연도 목록이 없다.",
+        f"음방 1위 캡처가 없는 프로그램·연도: {gaps}. 이 수집에 해당 연도 목록 페이지가 없고, 0승으로 세지 않았다.",
         (
             "음방 1위는 표의 아티스트 칸만 읽고 각주·날짜·곡명은 지운 뒤 이름을 대조했다. 흔한 낱말과 같은 이름은 "
-            "그룹 문서로 가는 링크일 때만 센다. 멜론은 아티스트 표기에 이름이 들어 있으면, 써클은 괄호로 나눈 "
-            "이름 조각이 영문 이름이나 한글 이름과 같으면 센다."
+            "그룹 문서로 가는 링크일 때만 센다. 멜론과 써클은 아티스트 표기를 괄호로 나눈 조각이 영문 이름이나 "
+            "한글 이름과 같으면 센다."
         ),
         f"Spotify 월간 청취자는 {sp['retrieved'][:10]} 하루의 스냅샷이라 관측 창이 없다. 종합 성공과 검정에서 뺐다.",
         "데뷔 연도의 1월에 데뷔한 팀과 12월에 데뷔한 팀은 같은 3년 창을 받는다. 늦게 데뷔한 팀의 실제 관측 기간이 짧다.",
@@ -425,7 +502,7 @@ def _not_answered() -> list[str]:
 def build_report(a: dict[str, Any]) -> dict[str, Any]:
     w = _w(a)
     sections = [
-        {**s, "note": s["note"].format(w=w, inc=_inc(a))} for s in _SECTIONS
+        {**s, "note": s["note"].format(w=w, inc=_inc(a), era=era_note(a)).strip()} for s in _SECTIONS
     ]
     charts = [
         _measure_chart(a), _tests_chart(a), _spotify_chart(a),

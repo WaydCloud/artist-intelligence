@@ -64,7 +64,7 @@ def config_from(args: argparse.Namespace) -> an.Config:
     return an.Config(
         window=args.window, cuts=cuts, eras=_eras(args.eras), first_year=args.first_year,
         last_year=args.last_year, include_incomplete=args.include_incomplete, exact_b=args.exact_b,
-        boot_b=args.boot_b, seed=args.seed, alpha=args.alpha, trend_scores=args.trend_scores,
+        seed=args.seed, alpha=args.alpha, trend_scores=args.trend_scores,
         focus_size=args.focus_size,
     )
 
@@ -142,7 +142,6 @@ def main(argv: list[str] | None = None) -> int:
     p_a.add_argument("--include-incomplete", action="store_true",
                      help="also test cohorts whose window is not closed yet")
     p_a.add_argument("--exact-b", type=int, default=20000, help="Monte Carlo permutations for the exact test")
-    p_a.add_argument("--boot-b", type=int, default=2000, help="bootstrap resamples for the Cramer's V interval")
     p_a.add_argument("--seed", type=int, default=20261020)
     p_a.add_argument("--alpha", type=float, default=0.05, help="level that switches the inference wording")
     p_a.add_argument("--trend-scores", choices=("ordinal", "median"), default="ordinal")

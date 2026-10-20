@@ -1,7 +1,7 @@
 """Small-sample statistics for a size-bucket by success table, in the standard library only.
 
-Purpose    Wilson intervals, Pearson chi-square with its p value, a Monte Carlo exact test,
-           Cramer's V with a bootstrap interval, and the Cochran-Armitage trend test.
+Purpose    Wilson intervals, Pearson chi-square with its p value, a Monte Carlo exact test with a
+           permutation null for V, bias-corrected Cramer's V, Cochran-Armitage trend, Holm.
 Boundary   Works on an r x 2 table given as (successes, totals) per row. No other table shapes.
 Invariant  Every random step takes an explicit random.Random. Same seed, same numbers.
            If a caller passes the global random module instead, reports stop being reproducible.
@@ -124,12 +124,32 @@ def _log_weight(rows: list[tuple[int, int]], lg: list[float]) -> float:
     return sum(lg[k] + lg[n - k] for k, n in rows)
 
 
-def exact_mc(table: Table, rng: random.Random, b: int) -> tuple[float, float] | None:
-    """Fisher-Freeman-Halton exact test by Monte Carlo permutation.
+def cramers_v_bc(table: Table) -> float | None:
+    """Bias-corrected Cramer's V (Bergsma 2013) for an r x 2 table.
+
+    Plain V is positive even with no association, and more so when N is small and r is large.
+    The correction subtracts the expected chi2 / N under independence and shrinks r and c.
+    """
+    cs = chi_square(table)
+    if cs is None:
+        return None
+    rows = _rows(table)
+    big_n = sum(n for _, n in rows)
+    r, c = len(rows), 2
+    phi2 = max(0.0, cs[0] / big_n - (r - 1) * (c - 1) / (big_n - 1))
+    r_t = r - (r - 1) ** 2 / (big_n - 1)
+    c_t = c - (c - 1) ** 2 / (big_n - 1)
+    den = min(r_t - 1, c_t - 1)
+    return math.sqrt(phi2 / den) if den > 0 else None
+
+
+def exact_mc(table: Table, rng: random.Random, b: int, level: float = 0.95) -> tuple[float, float, float] | None:
+    """Fisher-Freeman-Halton exact test by Monte Carlo permutation, plus a null reference for V.
 
     Margins are fixed: the successes are dealt at random among all groups b times. A table is at
     least as extreme as the observed one when its hypergeometric probability is not larger.
-    Returns (p, Monte Carlo standard error). p uses the (1 + hits) / (b + 1) form so it is never 0.
+    Returns (p, Monte Carlo standard error, the `level` quantile of bias-corrected V under the
+    permutation null). p uses the (1 + hits) / (b + 1) form so it is never 0.
     """
     if testable(table):
         return None
@@ -142,35 +162,17 @@ def exact_mc(table: Table, rng: random.Random, b: int) -> tuple[float, float] | 
     sizes = [n for _, n in rows]
     hits = 0
     eps = 1e-9 * max(1.0, abs(obs))
+    null_v: list[float] = []
     for _ in range(b):
         c = Counter(rng.sample(labels, big_k))
         w = sum(lg[c[i]] + lg[sizes[i] - c[i]] for i in range(len(rows)))
         if w >= obs - eps:
             hits += 1
+        v = cramers_v_bc([(c[i], sizes[i]) for i in range(len(rows))])
+        null_v.append(0.0 if v is None else v)
+    null_v.sort()
     p = (1 + hits) / (b + 1)
-    return p, math.sqrt(p * (1 - p) / b)
-
-
-def bootstrap_v(table: Table, rng: random.Random, b: int, level: float = 0.95) -> tuple[float, float] | None:
-    """Percentile interval of Cramer's V from b resamples of the groups with replacement.
-
-    A resample with no successes (or all successes) has V = 0 by convention: no association can show.
-    """
-    if testable(table):
-        return None
-    rows = list(table)
-    codes = [(i, s) for i, (k, n) in enumerate(rows) for s in (1, 0) for _ in range(k if s else n - k)]
-    big_n = len(codes)
-    vs: list[float] = []
-    for _ in range(b):
-        c = Counter(rng.choices(codes, k=big_n))
-        t = [(c[(i, 1)], c[(i, 1)] + c[(i, 0)]) for i in range(len(rows))]
-        v = cramers_v(t)
-        vs.append(0.0 if v is None else v)
-    vs.sort()
-    lo_i = math.floor((1 - level) / 2 * (b - 1))
-    hi_i = math.ceil((1 + level) / 2 * (b - 1))
-    return vs[lo_i], vs[hi_i]
+    return p, math.sqrt(p * (1 - p) / b), null_v[min(b - 1, math.ceil(level * b) - 1)]
 
 
 def cochran_armitage(table: Table, scores: Sequence[float]) -> tuple[float, float] | None:

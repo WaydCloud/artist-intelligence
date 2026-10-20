@@ -190,12 +190,18 @@ def melon_entries(raw_md: str) -> list[tuple[int, str]]:
     return out
 
 
-def match_melon(title: str, entries: list[tuple[int, str]]) -> tuple[int, str] | None:
-    """Best (lowest) rank whose artist text contains the group name with boundaries."""
+def match_melon(title: str, hangul: str, entries: list[tuple[int, str]]) -> tuple[int, str] | None:
+    """Best (lowest) rank whose artist text has a part equal to the English or hangul name.
+
+    Same key rule as Circle. Melon often prints only the hangul name (Ladies' Code as
+    '레이디스 코드', Lovelyz as '러블리즈'), so an English-only match misses real entries.
+    A unit credit such as "Red Velvet - IRENE & SEULGI" is one part and does not count for the group.
+    A common-word English name (see is_link_only) is not used here: Melon has no links to tell it apart.
+    """
+    keys = circle_keys(title, hangul)
     if is_link_only(match_name(title)):
-        return None  # no wikilinks on Melon, so a common-word name cannot be told apart
-    pat = name_pattern(title)
-    hits = [(r, a) for r, a in entries if pat.search(norm(a))]
+        keys.discard(re.sub(r"\s+", "", match_name(title).lower()))
+    hits = [(r, a) for r, a in entries if _parts(a) & keys]
     return min(hits) if hits else None
 
 

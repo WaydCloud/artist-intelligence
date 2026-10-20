@@ -31,6 +31,15 @@ PLANNING_2022_2024 = {
     "CSR", "FIFTY FIFTY", "LE SSERAFIM", "NMIXX", "NewJeans", "VIVIZ", "KISS OF LIFE", "TripleS",
     "BABYMONSTER", "ILLIT", "Izna", "KATSEYE", "MEOVV", "RESCENE", "SAY MY NAME (group)",
 }
+# H1-KEY had no size in the planning count (four now, one former). Its size is now reviewed (4),
+# so it joins the default population with its 2023 win.
+SANITY_2022_2024 = PLANNING_2022_2024 | {"H1-KEY"}
+
+# Planning rows 2022-2024 that the corrected rules change on purpose.
+# Kandis: the lead says "Originally as a duo, they made their debut on August 27, 2023".
+SIZES_CORRECTED = {("2023", "Kandis"): "2"}
+# LA FLOR is listed in 2022 and 2023. One entry per title keeps 2022.
+SIZES_REMOVED = {("2023", "LA FLOR")}
 
 
 class _Run:
@@ -62,6 +71,17 @@ def _stats(r: _Run) -> None:
             and lo0 == 0.0 and _close(hi0, 0.2775, 1e-4), f"{lo, hi, lo0, hi0}")
     r.check("3 Cramer's V crafted tables",
             stats.cramers_v([(10, 10), (0, 10)]) == 1.0 and stats.cramers_v([(5, 10), (5, 10)]) == 0.0)
+    vbc_full = stats.cramers_v_bc([(10, 10), (0, 10)])
+    vbc_none = stats.cramers_v_bc([(5, 10), (5, 10)])
+    t3 = [(1, 11), (5, 35), (3, 51), (7, 29), (10, 58)]
+    vbc3, v3 = stats.cramers_v_bc(t3), stats.cramers_v(t3)
+    r.check("3b bias-corrected V: 1 on full separation, 0 on equal rates, below plain V",
+            vbc_full is not None and _close(vbc_full, 1.0, 1e-12) and vbc_none == 0.0
+            and vbc3 is not None and v3 is not None and vbc3 < v3, f"{vbc_full} {vbc_none} {vbc3} {v3}")
+    null_mc = stats.exact_mc([(5, 40), (5, 40), (5, 40)], random.Random(3), 2000)
+    r.check("3c permutation null of corrected V is above an equal-rate table's V",
+            null_mc is not None and 0.0 < null_mc[2] < 1.0 and stats.cramers_v_bc([(5, 40), (5, 40), (5, 40)]) == 0.0,
+            str(null_mc))
     exact = stats.fisher_exact_2x2(8, 2, 1, 5)
     mc = stats.exact_mc([(8, 10), (1, 6)], random.Random(7), 20000)
     r.check("4 Monte Carlo exact p within 4 SE of Fisher by enumeration",
@@ -96,12 +116,67 @@ def _sizes(r: _Run) -> None:
             sizes.is_unit(["Category:Female subunits", "Category:Sub-units"])
             and sizes.is_girl_group(["Category:Female groups"], "{{infobox musical artist\n}}")
             and not sizes.is_girl_group(["Category:Male groups"], "{{Infobox group}}"))
+    # Rule shapes found by the review, each in a minimal page.
+    cases = [
+        ("37 'debuted as four' after an infobox holding '''KR:'''",
+         ("{{infobox musical artist\n| website = '''KR:''' x\n| current =\n* A\n* B\n* C\n* D\n* E\n}}\n"
+         "'''X''' is a five-member girl group. They debuted as four on August 1, 2014 with a single."), 2014, 4),
+        ("38 'originally consisted of eight members'",
+         ("{{Infobox group\n| current = A\n| former = B\n}}\n'''X''' is a girl group. They debuted on August 9, 2012."
+         "\n\nThe group originally consisted of eight members; A, B."), 2012, 8),
+        ("39 one-line infobox members (|former=|inactive=* ...}})",
+         ("{{Infobox group\n| name = X\n|associated=[[Y]]|former=|inactive=* [[A]]\n* [[B|b]]\n* [[C]]}}\n"
+         "'''X''' is a three-member group."), 2015, 3),
+        ("40 disbanded group: 'was a 10-member' equals former count",
+         "{{Infobox group\n| former =\n" + "".join(f"* M{i}\n" for i in range(10)) + "}}\n"
+         "'''X''' was a 10-member girl group. They officially debuted on March 21, 2017.", 2017, 10),
+        ("41 'was a N-member' that disagrees with the former count stays undetermined",
+         "{{Infobox group\n| former =\n* A\n* B\n* C\n* D\n}}\n'''X''' was a three-member group.", 2013, None),
+        ("42 re-debut sentence is not read",
+         ("{{Infobox group\n| former =\n* A\n* B\n* C\n}}\n'''X''' was a girl group. In 2016 they re-debuted as a "
+         "five-member group."), 2013, None),
+        ("43 a debut sentence naming another year is not read",
+         ("{{Infobox group\n| current =\n* A\n* B\n* C\n* D\n* E\n* F\n* G\n}}\n'''X''' is a seven-member group. "
+         "They made their debut with complete members on April 1, 2024 with an album. Previously, they debuted as "
+         "six members on November 27, 2023 with a single."), 2024, 7),
+        ("44 'Originally as a duo'",
+         ("{{Infobox group\n| current =\n* A\n* B\n* C\n}}\n'''X''' is a three-member group. Originally as a duo, "
+         "they made their debut on August 27, 2023."), 2023, 2),
+    ]
+    for name, text, year, want in cases:
+        got = sizes.debut_size(text, year)["n"]
+        r.check(name, got == want, f"got {got}, want {want}")
+
     fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
+    by_title = {g["title"]: g for g in fixture["groups"]}
+    expect = {"Red Velvet": 4, "AOA": 8, "GFRIEND": 6, "Crayon Pop": 5, "Weki Meki": 8, "PRISTIN": 10,
+              "LOONA": 12, "H1-KEY": 4, "LIVE HIGH": 4, "BADKIZ": 5, "PRITTI-G": None, "BABYMONSTER": 7}
+    wrong = {t: (by_title.get(t, {}).get("n"), n) for t, n in expect.items() if by_title.get(t, {}).get("n") != n}
+    r.check("45 reviewed groups have the expected debut size in the fixture", not wrong, str(wrong))
+    titles = [g["title"] for g in fixture["groups"]]
+    r.check("46 one entry per Kpop Wiki title", len(titles) == len(set(titles)))
+    r.check("47 duplicate titles keep the earliest year",
+            by_title["BADKIZ"]["year"] == 2014 and by_title["PRITTI-G"]["year"] == 2015
+            and by_title["LIVE HIGH"]["year"] == 2013)
+
+    # The planning rows are now a historical fixture. Rows that had a size must keep it, except the
+    # documented corrections. Undetermined rows may gain a size. Only the duplicate LA FLOR 2023 row goes.
     with SIZES_ROWS.open(encoding="utf-8") as f:
         ref = list(csv.DictReader(f))
-    mine = bd.sizes_rows(fixture, (2022, 2023, 2024))
-    r.check("14 fixture reproduces the planning size rows 2022-2024 exactly", mine == ref,
-            f"{len(mine)} vs {len(ref)} rows")
+    mine = {(r_["year"], r_["group"]): r_ for r_ in bd.sizes_rows(fixture, (2022, 2023, 2024))}
+    problems = []
+    for old in ref:
+        key = (old["year"], old["group"])
+        if key not in mine:
+            if key not in SIZES_REMOVED:
+                problems.append(f"missing {key}")
+            continue
+        new = mine[key]
+        if old["n"] and new["n"] != old["n"] and key not in SIZES_CORRECTED:
+            problems.append(f"changed {key} {old['n']} -> {new['n']}")
+    corrected_ok = all(mine.get(k, {}).get("n") == v for k, v in SIZES_CORRECTED.items())
+    r.check("14 planning size rows 2022-2024 kept, except documented corrections", not problems and corrected_ok,
+            "; ".join(problems[:5]))
 
 
 def _lines(rows: tuple[str, ...]) -> str:
@@ -155,8 +230,13 @@ def _matching(r: _Run) -> None:
              "\n\n2\n\n[![b](x)](/album/detail.htm?albumId=2)\n\n[Wanna One (워너원)](/artist/detail.htm?artistId=2)")
     ent = match.melon_entries(melon)
     r.check("19 Melon rank and artist parsed, boundary match",
-            ent == [(1, "TWS (투어스)"), (2, "Wanna One (워너원)")] and match.match_melon("TWS", ent) == (1, "TWS (투어스)")
-            and match.match_melon("ONE (group)", ent) is None, str(ent))
+            ent == [(1, "TWS (투어스)"), (2, "Wanna One (워너원)")] and match.match_melon("TWS", "", ent) == (1, "TWS (투어스)")
+            and match.match_melon("ONE (group)", "", ent) is None, str(ent))
+    kr = [(82, "레이디스 코드"), (68, "러블리즈"), (5, "Red Velvet - IRENE & SEULGI")]
+    r.check("19b Melon hangul-only names match through the infobox hangul (spaces ignored)",
+            match.match_melon("LADIES' CODE", "레이디스코드", kr) == (82, "레이디스 코드")
+            and match.match_melon("Lovelyz", "러블리즈", kr) == (68, "러블리즈")
+            and match.match_melon("Red Velvet", "레드벨벳", kr) is None)
     circ = [(3, "트와이스 (TWICE)"), (9, "스테이씨(STAYC)"), (12, "아이브 (IVE)")]
     r.check("20 Circle exact name parts, hangul without spaces",
             match.match_circle("TWICE", "", circ) == (3, "트와이스 (TWICE)")
@@ -194,7 +274,7 @@ def _toy_fixture() -> dict[str, Any]:
 
 def _analysis(r: _Run) -> None:
     fx = _toy_fixture()
-    cfg = an.Config(first_year=2012, last_year=2024, eras=((2015, 2016),), exact_b=200, boot_b=50)
+    cfg = an.Config(first_year=2012, last_year=2024, eras=((2015, 2016),), exact_b=200)
     a = an.analyze(fx, cfg)
     succ = {g["title"] for g in a["successes"]}
     r.check("22 window: Y+3 and pre-debut hits do not count, Y+2 does",
@@ -205,7 +285,7 @@ def _analysis(r: _Run) -> None:
             sum(x["k"] for x in pooled["any"]["rows"]) == 1 and "test" not in pooled["spotify"])
     r.check("24 incomplete cohort kept out of tests by default",
             a["incompleteYears"] == [2024] and a["counts"]["default"]["tested"] == a["counts"]["default"]["all"] - 1)
-    a2 = an.analyze(fx, an.Config(first_year=2012, last_year=2024, eras=((2015, 2016),), exact_b=200, boot_b=50,
+    a2 = an.analyze(fx, an.Config(first_year=2012, last_year=2024, eras=((2015, 2016),), exact_b=200,
                                   include_incomplete=True))
     r.check("25 --include-incomplete adds it", a2["counts"]["default"]["tested"] == a2["counts"]["default"]["all"])
     r.check("26 range variant uses current + former, units variant adds units",
@@ -233,7 +313,7 @@ def _report(r: _Run) -> None:
     import jsonschema
 
     fixture = json.loads(FIXTURE.read_text(encoding="utf-8"))
-    cfg = an.Config(exact_b=2000, boot_b=200)
+    cfg = an.Config(exact_b=2000)
     a = an.analyze(fixture, cfg)
     rep = build_report(a)
     schema = json.loads((ROOT / "packages/report-schema/report.schema.json").read_text(encoding="utf-8"))
@@ -262,8 +342,18 @@ def _report(r: _Run) -> None:
     titles = {g["title"] for g in fixture["groups"]
               if 2022 <= g["year"] <= 2024 and not g["unit"] and g["n"]
               and (g["hits"]["win"] or g["hits"]["melon"] or g["hits"]["circle"])}
-    r.check("36 2022-2024 matches equal the planning count", titles == PLANNING_2022_2024,
-            f"extra {sorted(titles - PLANNING_2022_2024)} missing {sorted(PLANNING_2022_2024 - titles)}")
+    r.check("36 2022-2024 matches equal the planning count plus H1-KEY", titles == SANITY_2022_2024,
+            f"extra {sorted(titles - SANITY_2022_2024)} missing {sorted(SANITY_2022_2024 - titles)}")
+    by_title = {g["title"]: g for g in fixture["groups"]}
+    r.check("36b Melon hangul matches reach the fixture (Ladies' Code 2013 #82, Lovelyz 2016 #68)",
+            {(x["year"], x["rank"]) for x in by_title["LADIES' CODE"]["hits"]["melon"]} >= {(2013, 82)}
+            and {(x["year"], x["rank"]) for x in by_title["Lovelyz"]["hits"]["melon"]} >= {(2016, 68)})
+    d = a["determination"]
+    r.check("36c determined and undetermined split adds up to the tested non-unit groups",
+            d["determined"]["n"] == a["counts"]["default"]["tested"]
+            and d["determined"]["n"] + d["undetermined"]["n"]
+            == sum(1 for g in fixture["groups"] if g["year"] in set(a["completeYears"]) and not g["unit"]))
+    r.check("33b the V upper-bound wording is gone", "이하 수준" not in blob)
 
 
 def run() -> int:

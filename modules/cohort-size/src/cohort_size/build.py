@@ -29,7 +29,16 @@ PROGRAMS = ("Music Bank", "Inkigayo", "M Countdown", "Show! Music Core", "Show C
 WIN_YEARS = range(2012, 2027)
 CHART_YEARS = range(2012, 2026)
 _WIN_TITLE = re.compile(r"^List of (.+?) Chart winners \((\d{4})\)$")
-_FIXTURE_VERSION = 1
+_FIXTURE_VERSION = 2
+
+# Hand-checked debut sizes for pages the rules cannot read: the current lead describes today's
+# lineup and the infobox lists both current and former members. Applied only when the rules give
+# no size. Each entry names the lead evidence so a reader can re-check it.
+REVIEWED_SIZES: dict[str, tuple[int, str]] = {
+    "Crayon Pop": (5, "four-member now; Soyul (former) left in May 2017, after the 2012 debut"),
+    "LOONA": (12, "twelve members revealed 2016 to 2018 before the August 2018 group debut; Chuu left later"),
+    "H1-KEY": (4, "debuted January 2022 as four; Sitala left and Yel joined later"),
+}
 
 
 def _dir(root: Path, slice_dir: str, rid: int) -> Path:
@@ -48,17 +57,27 @@ def _meta(d: Path) -> dict[str, Any]:
 
 
 def load_groups(root: Path) -> list[dict[str, Any]]:
+    """One entry per Kpop Wiki title, from its earliest debut-year category.
+
+    A group listed in two years (re-debut, rename) would otherwise count twice and
+    the later entry would get the later lineup.
+    """
     out: list[dict[str, Any]] = []
-    for year, rid in KPOPWIKI_IDS.items():
+    seen: set[str] = set()
+    for year, rid in sorted(KPOPWIKI_IDS.items()):
         doc = json.loads(_read(_dir(root, "R04-cases", rid) / "source.json"))
         for batch in doc["batches"]:
             for page in batch["query"]["pages"]:
                 cats = [c["title"] for c in page.get("categories", [])]
                 revs = page.get("revisions") or []
                 text = revs[0]["slots"]["main"]["content"] if revs else ""
-                if not sizes.is_girl_group(cats, text):
+                if not sizes.is_girl_group(cats, text) or page["title"] in seen:
                     continue
-                s = sizes.debut_size(text)
+                seen.add(page["title"])
+                s = sizes.debut_size(text, year)
+                review = REVIEWED_SIZES.get(page["title"])
+                if review and s["n"] is None:
+                    s["n"], s["src"] = review[0], "reviewed"
                 out.append({
                     "year": year,
                     "title": page["title"],
@@ -69,6 +88,7 @@ def load_groups(root: Path) -> list[dict[str, Any]]:
                     "current": s["current"],
                     "former": s["former"],
                     "unit": sizes.is_unit(cats),
+                    "redebut": s["redebut"],
                     "source": f"R04-{rid:03d}",
                 })
     return out
@@ -128,7 +148,7 @@ def build(root: Path) -> dict[str, Any]:
             if t:
                 h["win"].append({"year": p["year"], "program": p["program"], "text": t})
         for page in melon:
-            r = match.match_melon(g["title"], page["entries"])
+            r = match.match_melon(g["title"], g["hangul"], page["entries"])
             if r:
                 h["melon"].append({"year": page["year"], "rank": r[0], "text": r[1]})
         for page in circle:

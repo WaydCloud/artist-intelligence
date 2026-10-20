@@ -35,7 +35,6 @@ class Config:
     last_year: int = 2024
     include_incomplete: bool = False
     exact_b: int = 20000
-    boot_b: int = 2000
     seed: int = 20261020
     alpha: float = 0.05
     trend_scores: str = "ordinal"
@@ -141,13 +140,12 @@ def run_test(rows: list[dict[str, Any]], groups: list[dict[str, Any]], cfg: Conf
     assert cs is not None
     chi, df, expected = cs
     exact = stats.exact_mc(table, random.Random(_seed(cfg, "exact|" + label)), cfg.exact_b)
-    boot = stats.bootstrap_v(table, random.Random(_seed(cfg, "boot|" + label)), cfg.boot_b)
     trend = stats.cochran_armitage(table, _scores(rows, groups, cfg))
-    assert exact is not None and boot is not None
+    assert exact is not None
     out.update({
         "chi2": chi, "df": df, "pChi2": stats.chi2_sf(chi, df),
         "pExact": exact[0], "mcSe": exact[1], "exactB": cfg.exact_b,
-        "v": stats.cramers_v(table), "vLo": boot[0], "vHi": boot[1], "bootB": cfg.boot_b,
+        "v": stats.cramers_v(table), "vbc": stats.cramers_v_bc(table), "vbcNull95": exact[2],
         "trendZ": trend[0] if trend else None, "pTrend": trend[1] if trend else None,
         "lowExpected": sum(1 for e in expected if e < 5), "cells": len(expected),
     })
@@ -179,6 +177,28 @@ def block(groups: list[dict[str, Any]], cfg: Config, label: str) -> dict[str, An
         measures[m] = {"rows": rows, "test": run_test(rows, groups, cfg, f"{label}|{m}")}
     measures["spotify"] = {"rows": table_rows(groups, "spotify", cfg)}
     return {"n": len(groups), "measures": measures, "dist": _dist(groups, cfg)}
+
+
+def _determination(fixture: dict[str, Any], cfg: Config, years: set[int]) -> dict[str, Any]:
+    """Composite success among tested-year non-unit groups, split by whether the debut size was read.
+
+    If undetermined groups succeed at a different rate, the default population is a selected
+    sample and its rates are not the rates of all debuting groups.
+    """
+    gs = [dict(g, size=1) for g in fixture["groups"] if g["year"] in years and not g["unit"]]
+    mark(gs, cfg)
+    det = [g for g in gs if g["n"]]
+    und = [g for g in gs if not g["n"]]
+    no_info = [g for g in und if g["current"] + g["former"] == 0]
+
+    def kn(xs: list[dict[str, Any]]) -> dict[str, Any]:
+        k = sum(1 for g in xs if g["any"])
+        lo, hi = stats.wilson(k, len(xs))
+        return {"k": k, "n": len(xs), "lo": lo, "hi": hi}
+
+    return {"determined": kn(det), "undetermined": kn(und), "noMemberInfo": kn(no_info),
+            "bySource": {src: kn([g for g in det if g["sizeSource"] == src])
+                         for src in sorted({str(g["sizeSource"]) for g in det})}}
 
 
 def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
@@ -236,7 +256,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
         "config": {
             "window": cfg.window, "cuts": list(cfg.cuts), "buckets": bucket_labels(cfg.cuts),
             "eras": [list(e) for e in cfg.eras], "firstYear": cfg.first_year, "lastYear": cfg.last_year,
-            "includeIncomplete": cfg.include_incomplete, "exactB": cfg.exact_b, "bootB": cfg.boot_b,
+            "includeIncomplete": cfg.include_incomplete, "exactB": cfg.exact_b,
             "seed": cfg.seed, "alpha": cfg.alpha, "trendScores": cfg.trend_scores, "focusSize": cfg.focus_size,
         },
         "lastCompleteYear": last_full,
@@ -249,6 +269,7 @@ def analyze(fixture: dict[str, Any], cfg: Config) -> dict[str, Any]:
         "counts": {
             v: {"all": len(variants[v]["all"]), "tested": len(variants[v]["tested"])} for v in VARIANTS
         },
+        "determination": _determination(fixture, cfg, tested_years),
         "excludedDefault": {
             "undetermined": sum(1 for g in fixture["groups"]
                                 if cfg.first_year <= g["year"] <= cfg.last_year and not g["unit"] and not g["n"]),

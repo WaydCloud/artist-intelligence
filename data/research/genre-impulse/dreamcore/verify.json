@@ -1,0 +1,3241 @@
+{
+ "summary": {
+  "low_pct": 20.0,
+  "positives": {
+   "matched": 10,
+   "measured": 18,
+   "rate": 0.556
+  },
+  "negatives": {
+   "matched": 0,
+   "measured": 11,
+   "rate": 0.0
+  },
+  "positives_grade_mid_or_above": {
+   "matched": 0,
+   "measured": 4,
+   "rate": 0.0
+  },
+  "positives_release_lt_2015": {
+   "matched": 5,
+   "measured": 5,
+   "rate": 1.0
+  },
+  "positives_release_ge_2015": {
+   "matched": 5,
+   "measured": 11,
+   "rate": 0.455
+  },
+  "positives_release_unknown": {
+   "matched": 0,
+   "measured": 2,
+   "rate": 0.0
+  },
+  "reference_pool": {
+   "window": [
+    "2026-07-28",
+    "2026-10-23"
+   ],
+   "snapshots": 86,
+   "unique_chart_recordings": 239,
+   "n_per_axis": {
+    "percussive_ratio": 239,
+    "brightness_hz": 239,
+    "onset_rate": 239,
+    "spectral_flux": 237,
+    "tempo_bpm": 239,
+    "high_energy_ratio": 237
+   }
+  },
+  "explore_median_pct": {
+   "positive": {
+    "percussive_ratio": 7.1,
+    "brightness_hz": 1.5,
+    "onset_rate": 20.5,
+    "spectral_flux": 44.5,
+    "tempo_bpm": 26.75,
+    "high_energy_ratio": 11.4
+   },
+   "negative": {
+    "percussive_ratio": 62.3,
+    "brightness_hz": 56.5,
+    "onset_rate": 61.5,
+    "spectral_flux": 74.3,
+    "tempo_bpm": 58.6,
+    "high_energy_ratio": 53.2
+   }
+  },
+  "cohort_share_chart": {
+   "days_used": 64,
+   "days_skipped": 22,
+   "track_days_matched": 464,
+   "track_days_evaluable": 4477,
+   "share": 0.1036,
+   "daily_share_min": 0.0658,
+   "daily_share_median": 0.1,
+   "daily_share_max": 0.1455,
+   "unique_recordings_matched": 35,
+   "unique_recordings_seen": 239
+  },
+  "cohort_share_module": {
+   "days_used": 64,
+   "days_skipped": 22,
+   "track_days_matched": 512,
+   "track_days_evaluable": 4938,
+   "share": 0.1037,
+   "daily_share_min": 0.0714,
+   "daily_share_median": 0.1008,
+   "daily_share_max": 0.1429,
+   "unique_recordings_matched": 37,
+   "unique_recordings_seen": 279
+  }
+ },
+ "sheet": [
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Atena",
+   "sheet_title": "どりーむもーど",
+   "artist": "Atena",
+   "title": "Dreammode",
+   "release_date": "2025-11-03",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 87.4,
+    "brightness_hz": 71.1,
+    "onset_rate": 97.1,
+    "spectral_flux": 64.6,
+    "tempo_bpm": 87.4,
+    "high_energy_ratio": 74.3
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "r-906",
+   "sheet_title": "ワンダー",
+   "artist": "r-906",
+   "title": "wonder (feat. Hatsune Miku)",
+   "release_date": "2026-07-30",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 94.1,
+    "brightness_hz": 65.7,
+    "onset_rate": 47.3,
+    "spectral_flux": 59.1,
+    "tempo_bpm": 96.2,
+    "high_energy_ratio": 32.1
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "FLAVOR FOLEY",
+   "sheet_title": "Static",
+   "artist": "FLAVOR FOLEY",
+   "title": "Static",
+   "release_date": "2025-05-23",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 61.5,
+    "brightness_hz": 72.8,
+    "onset_rate": 34.3,
+    "spectral_flux": 6.3,
+    "tempo_bpm": 55.6,
+    "high_energy_ratio": 89.0
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "john",
+   "sheet_title": "ドリームコア",
+   "artist": "John",
+   "title": "Dreamcore",
+   "release_date": "",
+   "preview_source": "deezer",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 44.4,
+    "brightness_hz": 85.8,
+    "onset_rate": 19.2,
+    "spectral_flux": 56.1,
+    "tempo_bpm": 90.0,
+    "high_energy_ratio": 84.0
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Hisohkah",
+   "sheet_title": "School Rooftop (feat. WMD)",
+   "artist": "Hisohkah",
+   "title": "School Rooftop",
+   "release_date": "",
+   "preview_source": "deezer",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 98.3,
+    "brightness_hz": 0.8,
+    "onset_rate": 2.1,
+    "spectral_flux": 3.8,
+    "tempo_bpm": 20.1,
+    "high_energy_ratio": 29.5
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Toby Fox",
+   "sheet_title": "Uwa!! So Temperate♫",
+   "artist": "Toby Fox",
+   "title": "Uwa!! so Temperate♫",
+   "release_date": "2015-09-15",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.4,
+    "brightness_hz": 0.0,
+    "onset_rate": 25.5,
+    "spectral_flux": 100.0,
+    "tempo_bpm": 89.5,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Toby Fox",
+   "sheet_title": "Fallen Down",
+   "artist": "Toby Fox",
+   "title": "Fallen Down",
+   "release_date": "2015-09-15",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.4,
+    "brightness_hz": 1.3,
+    "onset_rate": 44.4,
+    "spectral_flux": 3.8,
+    "tempo_bpm": 1.7,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Adventure Time",
+   "sheet_title": "Everything Stays (Marcy and Mom) [feat. Rebecca Sugar & Ava Acres]",
+   "artist": "Adventure Time",
+   "title": "Everything Stays (Marcy and Mom) [feat. Rebecca Sugar & Ava Acres]",
+   "release_date": "2019-05-01",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 1.7,
+    "brightness_hz": 1.7,
+    "onset_rate": 7.9,
+    "spectral_flux": 94.5,
+    "tempo_bpm": 29.7,
+    "high_energy_ratio": 11.4
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Molina",
+   "sheet_title": "Hey Kids (feat. Late Verlane)",
+   "artist": "Molina",
+   "title": "Hey Kids (feat. Late Verlane)",
+   "release_date": "2020-01-24",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 33.5,
+    "brightness_hz": 26.8,
+    "onset_rate": 20.5,
+    "spectral_flux": 5.5,
+    "tempo_bpm": 23.8,
+    "high_energy_ratio": 89.5
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Cuco",
+   "sheet_title": "Lo Que Siento",
+   "artist": "Cuco",
+   "title": "Lo Que Siento",
+   "release_date": "2017-05-25",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 61.5,
+    "brightness_hz": 1.3,
+    "onset_rate": 10.9,
+    "spectral_flux": 93.2,
+    "tempo_bpm": 1.7,
+    "high_energy_ratio": 16.5
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Mild High Club",
+   "sheet_title": "Homage",
+   "artist": "Mild High Club",
+   "title": "Homage",
+   "release_date": "2016-07-06",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 28.0,
+    "brightness_hz": 18.8,
+    "onset_rate": 20.5,
+    "spectral_flux": 14.8,
+    "tempo_bpm": 10.5,
+    "high_energy_ratio": 25.3
+   },
+   "match": false
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "The Pied Pipers",
+   "sheet_title": "Dream",
+   "artist": "The Pied Pipers",
+   "title": "Dream",
+   "release_date": "1992-01-01",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 3.8,
+    "brightness_hz": 3.3,
+    "onset_rate": 20.1,
+    "spectral_flux": 64.6,
+    "tempo_bpm": 6.7,
+    "high_energy_ratio": 1.7
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Em Eff",
+   "sheet_title": "Sunrise In Minecraft",
+   "artist": "Em Eff",
+   "title": "Sunrise in Minecraft",
+   "release_date": "2006-11-10",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.4,
+    "brightness_hz": 0.0,
+    "onset_rate": 20.5,
+    "spectral_flux": 100.0,
+    "tempo_bpm": 85.8,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Duster",
+   "sheet_title": "Stars Will Fall",
+   "artist": "Duster",
+   "title": "Stars Will Fall",
+   "release_date": "1997-01-01",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 9.2,
+    "brightness_hz": 0.0,
+    "onset_rate": 0.4,
+    "spectral_flux": 9.3,
+    "tempo_bpm": 36.0,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Aphex Twin",
+   "sheet_title": "QKThr",
+   "artist": "Aphex Twin",
+   "title": "QKThr",
+   "release_date": "2001-10-22",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.0,
+    "brightness_hz": 0.0,
+    "onset_rate": 4.6,
+    "spectral_flux": 32.9,
+    "tempo_bpm": 0.0,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Xori",
+   "sheet_title": "Dreamin",
+   "artist": "Xori",
+   "title": "Dreamin",
+   "release_date": "2018-03-19",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.0,
+    "brightness_hz": 0.0,
+    "onset_rate": 61.5,
+    "spectral_flux": 2.5,
+    "tempo_bpm": 3.3,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Megami",
+   "sheet_title": "Star Shopping (Slowed + Reverb)",
+   "artist": "Megami",
+   "title": "Star Shopping (Slowed + Reverb)",
+   "release_date": "2022-07-21",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 5.0,
+    "brightness_hz": 0.0,
+    "onset_rate": 12.1,
+    "spectral_flux": 85.7,
+    "tempo_bpm": 10.9,
+    "high_energy_ratio": 0.0
+   },
+   "match": true
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Porter Robinson",
+   "sheet_title": "Goodbye To A World",
+   "artist": "Porter Robinson",
+   "title": "Goodbye To a World",
+   "release_date": "2014-01-01",
+   "preview_source": "apple",
+   "grade": "낮음",
+   "pcts": {
+    "percussive_ratio": 0.8,
+    "brightness_hz": 7.9,
+    "onset_rate": 98.3,
+    "spectral_flux": 19.8,
+    "tempo_bpm": 100.0,
+    "high_energy_ratio": 11.4
+   },
+   "match": true
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "Stray Kids",
+   "sheet_title": "CEREMONY",
+   "artist": "Stray Kids",
+   "title": "CEREMONY",
+   "release_date": "2025-08-22",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 53.6,
+    "brightness_hz": 56.9,
+    "onset_rate": 36.4,
+    "spectral_flux": 50.2,
+    "tempo_bpm": 59.4,
+    "high_energy_ratio": 56.5
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "BLACKPINK",
+   "sheet_title": "JUMP",
+   "artist": "BLACKPINK",
+   "title": "JUMP",
+   "release_date": "2025-07-11",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 50.2,
+    "brightness_hz": 36.8,
+    "onset_rate": 61.5,
+    "spectral_flux": 91.1,
+    "tempo_bpm": 91.6,
+    "high_energy_ratio": 54.9
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "JENNIE",
+   "sheet_title": "like JENNIE",
+   "artist": "JENNIE",
+   "title": "like JENNIE",
+   "release_date": "2025-03-05",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 75.3,
+    "brightness_hz": 56.5,
+    "onset_rate": 97.1,
+    "spectral_flux": 74.3,
+    "tempo_bpm": 82.0,
+    "high_energy_ratio": 53.2
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "BABYMONSTER",
+   "sheet_title": "DRIP",
+   "artist": "BABYMONSTER",
+   "title": "DRIP",
+   "release_date": "2024-11-01",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 62.3,
+    "brightness_hz": 49.4,
+    "onset_rate": 38.5,
+    "spectral_flux": 66.7,
+    "tempo_bpm": 58.6,
+    "high_energy_ratio": 43.5
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "LE SSERAFIM",
+   "sheet_title": "CRAZY",
+   "artist": "LE SSERAFIM",
+   "title": "CRAZY",
+   "release_date": "2024-08-30",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 90.0,
+    "brightness_hz": 89.1,
+    "onset_rate": 65.3,
+    "spectral_flux": 82.3,
+    "tempo_bpm": 79.1,
+    "high_energy_ratio": 89.5
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "ILLIT",
+   "sheet_title": "Magnetic",
+   "artist": "ILLIT",
+   "title": "Magnetic",
+   "release_date": "2024-03-25",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 25.1,
+    "brightness_hz": 41.4,
+    "onset_rate": 74.1,
+    "spectral_flux": 78.9,
+    "tempo_bpm": 84.1,
+    "high_energy_ratio": 46.4
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "ATEEZ",
+   "sheet_title": "Ice on my Teeth",
+   "artist": "ATEEZ",
+   "title": "Ice On My Teeth",
+   "release_date": "2024-11-15",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 15.9,
+    "brightness_hz": 46.9,
+    "onset_rate": 40.2,
+    "spectral_flux": 61.2,
+    "tempo_bpm": 41.4,
+    "high_energy_ratio": 39.7
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "Stray Kids",
+   "sheet_title": "Chk Chk Boom",
+   "artist": "Stray Kids",
+   "title": "Chk Chk Boom",
+   "release_date": "2024-07-19",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 93.3,
+    "brightness_hz": 71.1,
+    "onset_rate": 46.4,
+    "spectral_flux": 56.1,
+    "tempo_bpm": 41.4,
+    "high_energy_ratio": 79.3
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "ZICO",
+   "sheet_title": "SPOT! (feat. JENNIE)",
+   "artist": "ZICO",
+   "title": "SPOT! (feat. JENNIE)",
+   "release_date": "2024-04-26",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 93.3,
+    "brightness_hz": 57.3,
+    "onset_rate": 69.9,
+    "spectral_flux": 86.9,
+    "tempo_bpm": 46.4,
+    "high_energy_ratio": 39.7
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "JENNIE",
+   "sheet_title": "ExtraL (feat. Doechii)",
+   "artist": "JENNIE & Doechii",
+   "title": "ExtraL",
+   "release_date": "2025-02-21",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 59.0,
+    "brightness_hz": 81.2,
+    "onset_rate": 68.2,
+    "spectral_flux": 17.3,
+    "tempo_bpm": 5.9,
+    "high_energy_ratio": 54.9
+   },
+   "match": false
+  },
+  {
+   "role": "negative",
+   "sheet_source": "S3",
+   "sheet_artist": "aespa",
+   "sheet_title": "Supernova",
+   "artist": "aespa",
+   "title": "Supernova",
+   "release_date": "2024-05-13",
+   "preview_source": "apple",
+   "grade": "중간",
+   "pcts": {
+    "percussive_ratio": 66.5,
+    "brightness_hz": 40.2,
+    "onset_rate": 21.8,
+    "spectral_flux": 82.7,
+    "tempo_bpm": 58.6,
+    "high_energy_ratio": 51.5
+   },
+   "match": false
+  }
+ ],
+ "daily": [
+  {
+   "date": "2026-07-28",
+   "frame": "chart",
+   "n": 96,
+   "n_chart": 96,
+   "evaluable": 96,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-28",
+   "frame": "module",
+   "n": 101,
+   "n_chart": 96,
+   "evaluable": 101,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-29",
+   "frame": "chart",
+   "n": 97,
+   "n_chart": 97,
+   "evaluable": 97,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-29",
+   "frame": "module",
+   "n": 102,
+   "n_chart": 97,
+   "evaluable": 102,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-30",
+   "frame": "chart",
+   "n": 97,
+   "n_chart": 97,
+   "evaluable": 97,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-30",
+   "frame": "module",
+   "n": 102,
+   "n_chart": 97,
+   "evaluable": 102,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-31",
+   "frame": "chart",
+   "n": 96,
+   "n_chart": 96,
+   "evaluable": 96,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-07-31",
+   "frame": "module",
+   "n": 101,
+   "n_chart": 96,
+   "evaluable": 101,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-08-01",
+   "frame": "chart",
+   "n": 94,
+   "n_chart": 94,
+   "evaluable": 94,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-08-01",
+   "frame": "module",
+   "n": 99,
+   "n_chart": 94,
+   "evaluable": 99,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1738889871|Nerd Connection - 좋은 밤 좋은 꿈"
+   ]
+  },
+  {
+   "date": "2026-08-02",
+   "frame": "chart",
+   "n": 60,
+   "n_chart": 60,
+   "evaluable": 60,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면"
+   ]
+  },
+  {
+   "date": "2026-08-02",
+   "frame": "module",
+   "n": 69,
+   "n_chart": 60,
+   "evaluable": 69,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면"
+   ]
+  },
+  {
+   "date": "2026-08-03",
+   "frame": "chart",
+   "n": 77,
+   "n_chart": 77,
+   "evaluable": 77,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해"
+   ]
+  },
+  {
+   "date": "2026-08-03",
+   "frame": "module",
+   "n": 87,
+   "n_chart": 77,
+   "evaluable": 87,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해"
+   ]
+  },
+  {
+   "date": "2026-08-04",
+   "frame": "chart",
+   "n": 69,
+   "n_chart": 69,
+   "evaluable": 69,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1705678978|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-04",
+   "frame": "module",
+   "n": 77,
+   "n_chart": 69,
+   "evaluable": 77,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1705678978|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-05",
+   "frame": "chart",
+   "n": 76,
+   "n_chart": 76,
+   "evaluable": 76,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1705678978|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-05",
+   "frame": "module",
+   "n": 84,
+   "n_chart": 76,
+   "evaluable": 84,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1705678978|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-06",
+   "frame": "chart",
+   "n": 74,
+   "n_chart": 74,
+   "evaluable": 74,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING"
+   ]
+  },
+  {
+   "date": "2026-08-06",
+   "frame": "module",
+   "n": 82,
+   "n_chart": 74,
+   "evaluable": 82,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:6763656726|Ariana Grande - petal",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1832031349|코르티스 - JoyRide"
+   ]
+  },
+  {
+   "date": "2026-08-07",
+   "frame": "chart",
+   "n": 76,
+   "n_chart": 76,
+   "evaluable": 76,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-07",
+   "frame": "module",
+   "n": 84,
+   "n_chart": 76,
+   "evaluable": 84,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-08",
+   "frame": "chart",
+   "n": 76,
+   "n_chart": 76,
+   "evaluable": 76,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-08",
+   "frame": "module",
+   "n": 83,
+   "n_chart": 76,
+   "evaluable": 83,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-09",
+   "frame": "chart",
+   "n": 69,
+   "n_chart": 69,
+   "evaluable": 69,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해"
+   ]
+  },
+  {
+   "date": "2026-08-09",
+   "frame": "module",
+   "n": 77,
+   "n_chart": 69,
+   "evaluable": 77,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해"
+   ]
+  },
+  {
+   "date": "2026-08-10",
+   "frame": "chart",
+   "n": 78,
+   "n_chart": 78,
+   "evaluable": 78,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1781856632|wave to earth - seasons"
+   ]
+  },
+  {
+   "date": "2026-08-10",
+   "frame": "module",
+   "n": 86,
+   "n_chart": 78,
+   "evaluable": 86,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1781856632|wave to earth - seasons"
+   ]
+  },
+  {
+   "date": "2026-08-11",
+   "frame": "chart",
+   "n": 70,
+   "n_chart": 70,
+   "evaluable": 70,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-11",
+   "frame": "module",
+   "n": 78,
+   "n_chart": 70,
+   "evaluable": 78,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-12",
+   "frame": "chart",
+   "n": 76,
+   "n_chart": 76,
+   "evaluable": 76,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-12",
+   "frame": "module",
+   "n": 84,
+   "n_chart": 76,
+   "evaluable": 84,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-13",
+   "frame": "chart",
+   "n": 54,
+   "n_chart": 54,
+   "evaluable": 54,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-13",
+   "frame": "module",
+   "n": 62,
+   "n_chart": 54,
+   "evaluable": 62,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-14",
+   "frame": "chart",
+   "n": 66,
+   "n_chart": 66,
+   "evaluable": 66,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지"
+   ]
+  },
+  {
+   "date": "2026-08-14",
+   "frame": "module",
+   "n": 74,
+   "n_chart": 66,
+   "evaluable": 74,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지"
+   ]
+  },
+  {
+   "date": "2026-08-15",
+   "frame": "chart",
+   "n": 99,
+   "n_chart": 99,
+   "evaluable": 99,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-15",
+   "frame": "module",
+   "n": 104,
+   "n_chart": 99,
+   "evaluable": 104,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6773775299|Steve Lacy - show you me",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-16",
+   "frame": "chart",
+   "n": 82,
+   "n_chart": 82,
+   "evaluable": 82,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1781833058|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-16",
+   "frame": "module",
+   "n": 87,
+   "n_chart": 82,
+   "evaluable": 87,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')",
+    "apple:1717383449|최유리 - 생각을 멈추다 보면",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1781833058|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-17",
+   "frame": "chart",
+   "n": 69,
+   "n_chart": 69,
+   "evaluable": 69,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-17",
+   "frame": "module",
+   "n": 77,
+   "n_chart": 69,
+   "evaluable": 77,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1806264606|데이먼스 이어 - yours",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-18",
+   "frame": "chart",
+   "n": 64,
+   "n_chart": 64,
+   "evaluable": 64,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-18",
+   "frame": "module",
+   "n": 72,
+   "n_chart": 64,
+   "evaluable": 72,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-19",
+   "frame": "chart",
+   "n": 72,
+   "n_chart": 72,
+   "evaluable": 72,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-19",
+   "frame": "module",
+   "n": 80,
+   "n_chart": 72,
+   "evaluable": 80,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-20",
+   "frame": "chart",
+   "n": 75,
+   "n_chart": 75,
+   "evaluable": 75,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-20",
+   "frame": "module",
+   "n": 83,
+   "n_chart": 75,
+   "evaluable": 83,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-21",
+   "frame": "chart",
+   "n": 75,
+   "n_chart": 75,
+   "evaluable": 75,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-21",
+   "frame": "module",
+   "n": 83,
+   "n_chart": 75,
+   "evaluable": 83,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-22",
+   "frame": "chart",
+   "n": 66,
+   "n_chart": 66,
+   "evaluable": 66,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-22",
+   "frame": "module",
+   "n": 74,
+   "n_chart": 66,
+   "evaluable": 74,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-23",
+   "frame": "chart",
+   "n": 72,
+   "n_chart": 72,
+   "evaluable": 72,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-23",
+   "frame": "module",
+   "n": 80,
+   "n_chart": 72,
+   "evaluable": 80,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1456103133|잔나비 - 주저하는 연인들을 위해",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-24",
+   "frame": "chart",
+   "n": 54,
+   "n_chart": 54,
+   "evaluable": 54,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지"
+   ]
+  },
+  {
+   "date": "2026-08-24",
+   "frame": "module",
+   "n": 62,
+   "n_chart": 54,
+   "evaluable": 62,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지"
+   ]
+  },
+  {
+   "date": "2026-08-25",
+   "frame": "chart",
+   "n": 80,
+   "n_chart": 80,
+   "evaluable": 80,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1781833058|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-25",
+   "frame": "module",
+   "n": 87,
+   "n_chart": 80,
+   "evaluable": 87,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1480802550|악뮤 - 어떻게 이별까지 사랑하겠어, 널 사랑하는 거지",
+    "apple:1781833058|tuki. - 晩餐歌 - Bansanka"
+   ]
+  },
+  {
+   "date": "2026-08-26",
+   "frame": "chart",
+   "n": 82,
+   "n_chart": 82,
+   "evaluable": 82,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-26",
+   "frame": "module",
+   "n": 90,
+   "n_chart": 82,
+   "evaluable": 90,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "frame": "chart",
+   "n": 72,
+   "n_chart": 72,
+   "evaluable": 72,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-27",
+   "frame": "module",
+   "n": 80,
+   "n_chart": 72,
+   "evaluable": 80,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로"
+   ]
+  },
+  {
+   "date": "2026-08-28",
+   "frame": "chart",
+   "n": 68,
+   "n_chart": 68,
+   "evaluable": 68,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-28",
+   "frame": "module",
+   "n": 76,
+   "n_chart": 68,
+   "evaluable": 76,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:6773775304|Steve Lacy - nothing",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1702792482|Nerd Connection - 그대만 있다면 (영화 '여름날 우리')"
+   ]
+  },
+  {
+   "date": "2026-08-29",
+   "frame": "chart",
+   "n": 70,
+   "n_chart": 70,
+   "evaluable": 70,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-29",
+   "frame": "module",
+   "n": 78,
+   "n_chart": 70,
+   "evaluable": 78,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-30",
+   "frame": "chart",
+   "n": 78,
+   "n_chart": 78,
+   "evaluable": 78,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-30",
+   "frame": "module",
+   "n": 86,
+   "n_chart": 78,
+   "evaluable": 86,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6782894409|Ariana Grande - hate that i made you love me (ari lyric draft from bed)",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1839131590|She & Him - I Thought I Saw Your Face Today",
+    "apple:1806264606|데이먼스 이어 - yours"
+   ]
+  },
+  {
+   "date": "2026-08-31",
+   "frame": "chart",
+   "n": 54,
+   "n_chart": 54,
+   "evaluable": 54,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-08-31",
+   "frame": "module",
+   "n": 61,
+   "n_chart": 54,
+   "evaluable": 61,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-09-01",
+   "frame": "chart",
+   "n": 51,
+   "n_chart": 51,
+   "evaluable": 51,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING"
+   ]
+  },
+  {
+   "date": "2026-09-01",
+   "frame": "module",
+   "n": 59,
+   "n_chart": 51,
+   "evaluable": 59,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender"
+   ]
+  },
+  {
+   "date": "2026-09-02",
+   "frame": "chart",
+   "n": 62,
+   "n_chart": 62,
+   "evaluable": 62,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-09-02",
+   "frame": "module",
+   "n": 70,
+   "n_chart": 62,
+   "evaluable": 70,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1314787835|검정치마 - EVERYTHING",
+    "apple:1770274550|wave to earth - 사랑으로",
+    "apple:1567879852|엠씨 더 맥스 - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-09-03",
+   "frame": "chart",
+   "n": 58,
+   "n_chart": 58,
+   "evaluable": 58,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1453379466|양홍원 - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-09-03",
+   "frame": "module",
+   "n": 66,
+   "n_chart": 58,
+   "evaluable": 66,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1453379466|양홍원 - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-09-04",
+   "frame": "chart",
+   "n": 58,
+   "n_chart": 58,
+   "evaluable": 58,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1453379466|양홍원 - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-09-04",
+   "frame": "module",
+   "n": 65,
+   "n_chart": 58,
+   "evaluable": 65,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6805292681|제니 - FALLEN ANGEL",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|한로로 - 0+0",
+    "apple:1703196825|한로로 - 사랑하게 될 거야",
+    "apple:1733432325|리도어 - 영원은 그렇듯",
+    "apple:1453379466|양홍원 - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-09-05",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-05",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-06",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-06",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-07",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-07",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-08",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-08",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-09",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-09",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-10",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-10",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-11",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-11",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-12",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-12",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-13",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-13",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-14",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-14",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-15",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-15",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-16",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-16",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-17",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-17",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-18",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-18",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-19",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-19",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-20",
+   "frame": "chart",
+   "n": 0,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-20",
+   "frame": "module",
+   "n": 8,
+   "n_chart": 0,
+   "skipped": "resolved chart tracks 0 < 30"
+  },
+  {
+   "date": "2026-09-21",
+   "frame": "chart",
+   "n": 84,
+   "n_chart": 84,
+   "evaluable": 84,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1313176085|BIGBANG - IF YOU"
+   ]
+  },
+  {
+   "date": "2026-09-21",
+   "frame": "module",
+   "n": 90,
+   "n_chart": 84,
+   "evaluable": 90,
+   "matched": 12,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1313176085|BIGBANG - IF YOU"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "frame": "chart",
+   "n": 80,
+   "n_chart": 80,
+   "evaluable": 80,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons"
+   ]
+  },
+  {
+   "date": "2026-09-23",
+   "frame": "module",
+   "n": 85,
+   "n_chart": 80,
+   "evaluable": 85,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "frame": "chart",
+   "n": 66,
+   "n_chart": 66,
+   "evaluable": 66,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-09-24",
+   "frame": "module",
+   "n": 74,
+   "n_chart": 66,
+   "evaluable": 74,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "frame": "chart",
+   "n": 82,
+   "n_chart": 82,
+   "evaluable": 82,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1552662544|JANNABI - 뜨거운 여름밤은 가고 남은건 볼품 없지만"
+   ]
+  },
+  {
+   "date": "2026-09-25",
+   "frame": "module",
+   "n": 87,
+   "n_chart": 82,
+   "evaluable": 87,
+   "matched": 12,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1453595616|Clairo - Bubble Gum",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1552662544|JANNABI - 뜨거운 여름밤은 가고 남은건 볼품 없지만"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "frame": "chart",
+   "n": 80,
+   "n_chart": 80,
+   "evaluable": 80,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1552662544|JANNABI - 뜨거운 여름밤은 가고 남은건 볼품 없지만",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-09-26",
+   "frame": "module",
+   "n": 85,
+   "n_chart": 80,
+   "evaluable": 85,
+   "matched": 12,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1781856632|wave to earth - seasons",
+    "apple:1552662544|JANNABI - 뜨거운 여름밤은 가고 남은건 볼품 없지만",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-09-27",
+   "frame": "chart",
+   "n": 25,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-09-27",
+   "frame": "module",
+   "n": 33,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-09-28",
+   "frame": "chart",
+   "n": 26,
+   "n_chart": 26,
+   "skipped": "resolved chart tracks 26 < 30"
+  },
+  {
+   "date": "2026-09-28",
+   "frame": "module",
+   "n": 34,
+   "n_chart": 26,
+   "skipped": "resolved chart tracks 26 < 30"
+  },
+  {
+   "date": "2026-09-29",
+   "frame": "chart",
+   "n": 59,
+   "n_chart": 59,
+   "evaluable": 59,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1806264606|Damons year - yours",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1451566361|back number - Heroine"
+   ]
+  },
+  {
+   "date": "2026-09-29",
+   "frame": "module",
+   "n": 65,
+   "n_chart": 59,
+   "evaluable": 65,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1806264606|Damons year - yours",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1459216694|OFFICIAL HIGE DANDISM - Pretender",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1451566361|back number - Heroine"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "frame": "chart",
+   "n": 85,
+   "n_chart": 85,
+   "evaluable": 85,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-09-30",
+   "frame": "module",
+   "n": 90,
+   "n_chart": 85,
+   "evaluable": 90,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "frame": "chart",
+   "n": 36,
+   "n_chart": 36,
+   "evaluable": 36,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|HANRORO - 0+0"
+   ]
+  },
+  {
+   "date": "2026-10-01",
+   "frame": "module",
+   "n": 44,
+   "n_chart": 36,
+   "evaluable": 44,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1828393595|HANRORO - 0+0"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "frame": "chart",
+   "n": 81,
+   "n_chart": 81,
+   "evaluable": 81,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-10-03",
+   "frame": "module",
+   "n": 86,
+   "n_chart": 81,
+   "evaluable": 86,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "frame": "chart",
+   "n": 80,
+   "n_chart": 80,
+   "evaluable": 80,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-10-04",
+   "frame": "module",
+   "n": 85,
+   "n_chart": 80,
+   "evaluable": 85,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요",
+    "apple:1453595616|Clairo - Bubble Gum"
+   ]
+  },
+  {
+   "date": "2026-10-05",
+   "frame": "chart",
+   "n": 24,
+   "n_chart": 24,
+   "skipped": "resolved chart tracks 24 < 30"
+  },
+  {
+   "date": "2026-10-05",
+   "frame": "module",
+   "n": 32,
+   "n_chart": 24,
+   "skipped": "resolved chart tracks 24 < 30"
+  },
+  {
+   "date": "2026-10-06",
+   "frame": "chart",
+   "n": 59,
+   "n_chart": 59,
+   "evaluable": 59,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream"
+   ]
+  },
+  {
+   "date": "2026-10-06",
+   "frame": "module",
+   "n": 67,
+   "n_chart": 59,
+   "evaluable": 67,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6763656876|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "frame": "chart",
+   "n": 59,
+   "n_chart": 59,
+   "evaluable": 59,
+   "matched": 7,
+   "matched_tracks": [
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)"
+   ]
+  },
+  {
+   "date": "2026-10-07",
+   "frame": "module",
+   "n": 67,
+   "n_chart": 59,
+   "evaluable": 67,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "frame": "chart",
+   "n": 25,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-10-08",
+   "frame": "module",
+   "n": 33,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-10-09",
+   "frame": "chart",
+   "n": 79,
+   "n_chart": 79,
+   "evaluable": 79,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "frame": "module",
+   "n": 87,
+   "n_chart": 79,
+   "evaluable": 87,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "frame": "chart",
+   "n": 78,
+   "n_chart": 78,
+   "evaluable": 78,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-10",
+   "frame": "module",
+   "n": 86,
+   "n_chart": 78,
+   "evaluable": 86,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1806264606|Damons year - yours",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-11",
+   "frame": "chart",
+   "n": 29,
+   "n_chart": 29,
+   "skipped": "resolved chart tracks 29 < 30"
+  },
+  {
+   "date": "2026-10-11",
+   "frame": "module",
+   "n": 37,
+   "n_chart": 29,
+   "skipped": "resolved chart tracks 29 < 30"
+  },
+  {
+   "date": "2026-10-12",
+   "frame": "chart",
+   "n": 55,
+   "n_chart": 55,
+   "evaluable": 55,
+   "matched": 8,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1806264606|Damons year - yours",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1499378615|The Weeknd - After Hours"
+   ]
+  },
+  {
+   "date": "2026-10-12",
+   "frame": "module",
+   "n": 63,
+   "n_chart": 55,
+   "evaluable": 63,
+   "matched": 9,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1806264606|Damons year - yours",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1499378615|The Weeknd - After Hours"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "frame": "chart",
+   "n": 84,
+   "n_chart": 84,
+   "evaluable": 84,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1776719937|The Weeknd & Anitta - São Paulo"
+   ]
+  },
+  {
+   "date": "2026-10-13",
+   "frame": "module",
+   "n": 89,
+   "n_chart": 84,
+   "evaluable": 89,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1776719937|The Weeknd & Anitta - São Paulo"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "frame": "chart",
+   "n": 86,
+   "n_chart": 86,
+   "evaluable": 86,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1776719937|The Weeknd & Anitta - São Paulo"
+   ]
+  },
+  {
+   "date": "2026-10-14",
+   "frame": "module",
+   "n": 91,
+   "n_chart": 86,
+   "evaluable": 91,
+   "matched": 11,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1499378615|The Weeknd - After Hours",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1776719937|The Weeknd & Anitta - São Paulo"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "frame": "chart",
+   "n": 80,
+   "n_chart": 80,
+   "evaluable": 80,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-15",
+   "frame": "module",
+   "n": 85,
+   "n_chart": 80,
+   "evaluable": 85,
+   "matched": 10,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1770274550|wave to earth - love.",
+    "apple:1806264606|Damons year - yours",
+    "apple:6804046959|JENNIE - FALLEN ANGEL",
+    "apple:1738889871|Nerd Connection - ‎Good Night Good Dream",
+    "apple:1702792482|Nerd Connection - If I have you only (My love)",
+    "apple:1543850531|Sung Si Kyung - 두 사람",
+    "apple:1567879852|M.C the MAX - 행복하지 말아요"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "frame": "chart",
+   "n": 43,
+   "n_chart": 43,
+   "evaluable": 43,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-10-16",
+   "frame": "module",
+   "n": 51,
+   "n_chart": 43,
+   "evaluable": 51,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "frame": "chart",
+   "n": 40,
+   "n_chart": 40,
+   "evaluable": 40,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:6763656725|Ariana Grande - hate that i made you love me"
+   ]
+  },
+  {
+   "date": "2026-10-17",
+   "frame": "module",
+   "n": 49,
+   "n_chart": 40,
+   "evaluable": 49,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:6763656725|Ariana Grande - hate that i made you love me"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "frame": "chart",
+   "n": 42,
+   "n_chart": 42,
+   "evaluable": 42,
+   "matched": 3,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-10-18",
+   "frame": "module",
+   "n": 50,
+   "n_chart": 42,
+   "evaluable": 50,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:6763656725|Ariana Grande - hate that i made you love me"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "frame": "chart",
+   "n": 41,
+   "n_chart": 41,
+   "evaluable": 41,
+   "matched": 3,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase"
+   ]
+  },
+  {
+   "date": "2026-10-19",
+   "frame": "module",
+   "n": 50,
+   "n_chart": 41,
+   "evaluable": 50,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1453379466|Young B - Rose (feat. Skinny Brown & Homeboy)",
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:6763656725|Ariana Grande - hate that i made you love me"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "frame": "chart",
+   "n": 43,
+   "n_chart": 43,
+   "evaluable": 43,
+   "matched": 3,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours"
+   ]
+  },
+  {
+   "date": "2026-10-20",
+   "frame": "module",
+   "n": 51,
+   "n_chart": 43,
+   "evaluable": 51,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:6763656725|Ariana Grande - hate that i made you love me",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "frame": "chart",
+   "n": 45,
+   "n_chart": 45,
+   "evaluable": 45,
+   "matched": 3,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours"
+   ]
+  },
+  {
+   "date": "2026-10-21",
+   "frame": "module",
+   "n": 53,
+   "n_chart": 45,
+   "evaluable": 53,
+   "matched": 4,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours"
+   ]
+  },
+  {
+   "date": "2026-10-22",
+   "frame": "chart",
+   "n": 25,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-10-22",
+   "frame": "module",
+   "n": 33,
+   "n_chart": 25,
+   "skipped": "resolved chart tracks 25 < 30"
+  },
+  {
+   "date": "2026-10-23",
+   "frame": "chart",
+   "n": 48,
+   "n_chart": 48,
+   "evaluable": 48,
+   "matched": 5,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours",
+    "apple:1770274550|wave to earth - love."
+   ]
+  },
+  {
+   "date": "2026-10-23",
+   "frame": "module",
+   "n": 56,
+   "n_chart": 48,
+   "evaluable": 56,
+   "matched": 6,
+   "matched_tracks": [
+    "apple:1543850904|Sung Si Kyung - 거리에서",
+    "apple:1828393595|HANRORO - 0+0",
+    "apple:1796402200|Hearts2Hearts - The Chase",
+    "apple:1242155576|The Black Skirts - EVERYTHING",
+    "apple:1806264606|Damons year - yours",
+    "apple:1770274550|wave to earth - love."
+   ]
+  }
+ ]
+}

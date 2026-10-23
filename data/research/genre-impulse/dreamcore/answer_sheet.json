@@ -1,0 +1,61 @@
+{
+  "note": "dreamcore answer sheet (D-064). Written 2026-10-23 before any measurement of these recordings. role = positive | negative. Each track carries the verbatim source line, URL, retrieval date and certainty grade on the CASEBOOK 6-grade scale (D-033 supplement 6). aliases are identity facts for preview verification (sonic-profile RULES 1), not tuning. scope: global = non-Korean release, kr = Korean release.",
+  "sense": "dreamcore as the internet aesthetic (Namu 드림코어 · Wikipedia Dreamcore (aesthetic)). Homonyms excluded before measurement: melodic-hardcore 'dreamcore' (Dreambound scene, PopMatters) and atmospheric drum and bass 'dreamcore' (Last.fm wiki, per search snippet).",
+  "sources": {
+    "S1": {
+      "what": "Namu Wiki, 드림코어, section 3 대중매체에서 > 음악 (list of four songs) and section 2 상세",
+      "url": "https://namu.wiki/w/%EB%93%9C%EB%A6%BC%EC%BD%94%EC%96%B4",
+      "retrieved": "2026-10-23",
+      "grade": "중간",
+      "grade_basis": "general wiki, single source, the list has no footnotes. DRAFT-answer-sheet-corpus §2 puts a wiki list at 중간; CASEBOOK puts fan wikis at 낮음. Namu is a general wiki, so 중간 with the no-footnote caveat.",
+      "line": "음악의 경우 앰비언트나 Lo-Fi, 베이퍼웨이브 등 몽환적이거나 레트로한 분위기의 음악이 주로 사용된다."
+    },
+    "S2": {
+      "what": "Bugs 뮤직PD 앨범 '우리가 잊은 시간들 #드림코어플리' (user-curated, registered 2024.02.13, 14 tracks)",
+      "url": "https://music.bugs.co.kr/musicpd/albumview/63425",
+      "retrieved": "2026-10-23",
+      "grade": "낮음",
+      "grade_basis": "one user curator (뮤직PD is an open application program). Not an algorithmic playlist, so not excluded by DRAFT-answer-sheet-corpus §2, but a single unvetted list = 낮음.",
+      "line": "우리가 잊은 시간들 #드림코어플리 · [#해외] [#잔잔한] [#몽환적인] [#밤/새벽] [#드림코어]"
+    },
+    "S3": {
+      "what": "Wikipedia song articles (genre infobox and prose), one per negative",
+      "retrieved": "2026-10-23",
+      "grade": "중간",
+      "grade_basis": "encyclopedia, cited genre line"
+    }
+  },
+  "negative_selection_rule": "Recorded before the pages were read: a 2024~2026 K-pop recording is a negative when its English Wikipedia article names at least one of trap, hip hop, house, EDM, hardstyle, techno, phonk, Brazilian/baile funk, reggaeton in the genre infobox or prose, and the article uses no musical descriptor dream, dreamy, ambient or ethereal. 18 pages fetched, 11 pass, 7 fail (Go!/redirected to album, Too Bad: K-pop only, Dirty Work: dance only, Rich Man: dance only, Style: dance and bubblegum pop, Hot: pop disco rock, Tunnel Vision: no genre line).",
+  "tracks": [
+    {"role": "positive", "scope": "global", "artist": "Atena", "aliases": ["Atena", "アテナ"], "title": "どりーむもーど", "title_aliases": ["Dream Mode", "드림 모드"], "source": "S1", "url": "https://namu.wiki/w/%EB%93%9C%EB%A6%BC%20%EB%AA%A8%EB%93%9C", "line": "곳곳에 드림코어(+ 위어드코어)의 감성이 보인다.", "note": "VOCALOID original, posted 2025-11-01"},
+    {"role": "positive", "scope": "global", "artist": "r-906", "aliases": ["r-906"], "title": "ワンダー", "title_aliases": ["Wonder", "원더"], "source": "S1", "url": "https://namu.wiki/w/%EC%9B%90%EB%8D%94(VOCALOID%20%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90%20%EA%B3%A1)", "line": "드림코어, 베이퍼웨이브, 초현실주의 세계관에서 힌트를 얻어 1970~90년대 디스코나 시티팝 느낌을 내려 했다.", "note": "composer behind-the-scenes note as relayed by Namu; VOCALOID original, posted 2026-07-30"},
+    {"role": "positive", "scope": "global", "artist": "FLAVOR FOLEY", "aliases": ["FLAVOR FOLEY", "Flavor Foley"], "title": "Static", "title_aliases": [], "source": "S1", "url": "https://namu.wiki/w/%EB%93%9C%EB%A6%BC%EC%BD%94%EC%96%B4", "line": "드림코어 > 3. 대중매체에서 > 음악: Static(VOCALOID 오리지널 곡)", "note": "listed only; its own Namu page does not use the word"},
+    {"role": "positive", "scope": "global", "artist": "john", "aliases": ["john", "ジョン"], "title": "ドリームコア", "title_aliases": ["Dreamcore", "드림 코어"], "source": "S1", "url": "https://namu.wiki/w/%EB%93%9C%EB%A6%BC%20%EC%BD%94%EC%96%B4(VOCALOID%20%EC%98%A4%EB%A6%AC%EC%A7%80%EB%84%90%20%EA%B3%A1)", "line": "드림 코어(ドリームコア)는 john가 작사·작곡하고 2026년 9월 17일에 유튜브와 니코니코 동화에 투고한, 하츠네 미쿠를 사용한 VOCALOID 오리지널 곡이다.", "note": "the title names the aesthetic; listed under 드림코어 > 음악"},
+    {"role": "positive", "scope": "global", "artist": "Hisohkah", "aliases": ["Hisohkah"], "title": "School Rooftop (feat. WMD)", "title_aliases": ["School Rooftop"], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 1"},
+    {"role": "positive", "scope": "global", "artist": "Toby Fox", "aliases": ["Toby Fox"], "title": "Uwa!! So Temperate♫", "title_aliases": ["Uwa!! So Temperate"], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 2"},
+    {"role": "positive", "scope": "global", "artist": "Toby Fox", "aliases": ["Toby Fox"], "title": "Fallen Down", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 3"},
+    {"role": "positive", "scope": "global", "artist": "Adventure Time", "aliases": ["Adventure Time", "Rebecca Sugar"], "title": "Everything Stays (Marcy and Mom) [feat. Rebecca Sugar & Ava Acres]", "title_aliases": ["Everything Stays"], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 4"},
+    {"role": "positive", "scope": "global", "artist": "Molina", "aliases": ["Molina"], "title": "Hey Kids (feat. Late Verlane)", "title_aliases": ["Hey Kids"], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 5"},
+    {"role": "positive", "scope": "global", "artist": "Cuco", "aliases": ["Cuco"], "title": "Lo Que Siento", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 6"},
+    {"role": "positive", "scope": "global", "artist": "Mild High Club", "aliases": ["Mild High Club"], "title": "Homage", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 7"},
+    {"role": "positive", "scope": "global", "artist": "The Pied Pipers", "aliases": ["The Pied Pipers", "Pied Pipers"], "title": "Dream", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 8"},
+    {"role": "positive", "scope": "global", "artist": "Em Eff", "aliases": ["Em Eff"], "title": "Sunrise In Minecraft", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 9"},
+    {"role": "positive", "scope": "global", "artist": "Duster", "aliases": ["Duster"], "title": "Stars Will Fall", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 10"},
+    {"role": "positive", "scope": "global", "artist": "Aphex Twin", "aliases": ["Aphex Twin", "에이펙스 트윈"], "title": "QKThr", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 11"},
+    {"role": "positive", "scope": "global", "artist": "Xori", "aliases": ["Xori"], "title": "Dreamin", "title_aliases": ["Dreamin'"], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 12"},
+    {"role": "positive", "scope": "global", "artist": "Megami", "aliases": ["Megami"], "title": "Star Shopping (Slowed + Reverb)", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 13", "note": "slowed version; per DRAFT-answer-sheet-corpus §4 a version is a different recording, so only this version counts"},
+    {"role": "positive", "scope": "global", "artist": "Porter Robinson", "aliases": ["Porter Robinson", "포터 로빈슨"], "title": "Goodbye To A World", "title_aliases": [], "source": "S2", "url": "https://music.bugs.co.kr/musicpd/albumview/63425", "line": "#드림코어플리 track 14"},
+
+    {"role": "negative", "scope": "kr", "artist": "Stray Kids", "aliases": ["Stray Kids", "스트레이 키즈"], "title": "CEREMONY", "title_aliases": ["Ceremony"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Ceremony_(Stray_Kids_song)", "line": "Musically, an EDM trap and baile funk track"},
+    {"role": "negative", "scope": "kr", "artist": "BLACKPINK", "aliases": ["BLACKPINK", "블랙핑크"], "title": "JUMP", "title_aliases": ["Jump"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Jump_(Blackpink_song)", "line": "A hardstyle, and dance-pop anthem incorporating club music, techno and EDM"},
+    {"role": "negative", "scope": "kr", "artist": "JENNIE", "aliases": ["JENNIE", "Jennie", "제니"], "title": "like JENNIE", "title_aliases": ["Like Jennie"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Like_Jennie", "line": "Described as a hip-hop song incorporating Brazilian funk and phonk"},
+    {"role": "negative", "scope": "kr", "artist": "BABYMONSTER", "aliases": ["BABYMONSTER", "베이비몬스터"], "title": "DRIP", "title_aliases": ["Drip"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Drip_(Babymonster_song)", "line": "Genre: K-pop · dance · hip hop · EDM"},
+    {"role": "negative", "scope": "kr", "artist": "LE SSERAFIM", "aliases": ["LE SSERAFIM", "르세라핌"], "title": "CRAZY", "title_aliases": ["Crazy"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Crazy_(Le_Sserafim_song)", "line": "Genre: EDM · house"},
+    {"role": "negative", "scope": "kr", "artist": "ILLIT", "aliases": ["ILLIT", "아일릿"], "title": "Magnetic", "title_aliases": [], "source": "S3", "url": "https://en.wikipedia.org/wiki/Magnetic_(Illit_song)", "line": "Genre: Dance · pluggnB · house"},
+    {"role": "negative", "scope": "kr", "artist": "ATEEZ", "aliases": ["ATEEZ", "에이티즈"], "title": "Ice on my Teeth", "title_aliases": ["Ice on My Teeth"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Ice_on_My_Teeth", "line": "Genre: K-pop · hip-hop"},
+    {"role": "negative", "scope": "kr", "artist": "Stray Kids", "aliases": ["Stray Kids", "스트레이 키즈"], "title": "Chk Chk Boom", "title_aliases": [], "source": "S3", "url": "https://en.wikipedia.org/wiki/Chk_Chk_Boom", "line": "A Latin-influenced hip-hop and reggaeton track"},
+    {"role": "negative", "scope": "kr", "artist": "ZICO", "aliases": ["ZICO", "지코"], "title": "SPOT! (feat. JENNIE)", "title_aliases": ["SPOT!", "Spot!"], "source": "S3", "url": "https://en.wikipedia.org/wiki/Spot!", "line": "\"Spot!\" is a hip-hop song written and produced by Zico, Eun Hee-young and No Identity"},
+    {"role": "negative", "scope": "kr", "artist": "JENNIE", "aliases": ["JENNIE", "Jennie", "제니", "JENNIE & Doechii"], "title": "ExtraL (feat. Doechii)", "title_aliases": ["ExtraL"], "source": "S3", "url": "https://en.wikipedia.org/wiki/ExtraL", "line": "the hip-hop track features rapid-fire raps from the duo"},
+    {"role": "negative", "scope": "kr", "artist": "aespa", "aliases": ["aespa", "에스파"], "title": "Supernova", "title_aliases": [], "source": "S3", "url": "https://en.wikipedia.org/wiki/Supernova_(Aespa_song)", "line": "it is a dance and hyperpop song that incorporates hip-hop and EDM"}
+  ]
+}

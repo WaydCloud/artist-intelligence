@@ -1,0 +1,102 @@
+{
+ "id": "alt-z",
+ "name_ko": "알트 Z",
+ "name_en": "Alt Z (Spotify genre tag)",
+ "version": "1.0.0",
+ "updated": "2026-10-24",
+ "case_type": "import",
+ "origin": {
+  "region": "Spotify 분류 체계 (발원 지역은 출처에 없음)",
+  "scene": "씬이 아니라 분류 라벨이다. Glenn McDonald(당시 Spotify)가 indie pop 범주의 청취자 공유 클러스터에 붙인 이름이고, 분류 단위는 아티스트다(인터뷰 2024-05-26, 매우 높음). case_type import는 한국 밖에서 만들어진 라벨이라는 뜻만 담는다. 해외 씬이 한국으로 들어오는 경로를 관측한 것은 아니다"
+ },
+ "adoption_mode": {
+  "mode": "blocked",
+  "notes": "관측된 것은 부재뿐이다. alt z 지도 248명 중 한국 아티스트 0명, k-pop 382명 · k-indie 295명 · korean singer-songwriter 63명과 겹침 0(부재 확실성 중간). 수용 시도나 차단 요인을 관측한 것이 아니라 분류 체계 안에 한국 아티스트가 없다는 사실을 blocked로 적는다. in-progress로 적지 않은 이유: 한국 쪽 움직임을 보여 주는 출처가 하나도 없다. Every Noise 데이터가 2023-11-19에 멈춰 그 뒤는 관측할 수 없다",
+  "mode_transitions": []
+ },
+ "trajectory": [
+  {
+   "cell": "global-platform-codification",
+   "date": "2021-03",
+   "date_precision": "month",
+   "evidence": "Every Noise 전체 지도에 alt z 등장: Wayback 2021-03-14 22:54 UTC 캡처에 없고 2021-03-16 01:19 UTC 캡처에 있다",
+   "sources": [
+    "https://everynoise.com/engenremap-altz.html",
+    "archive.org CDX (조사 노트 2026-10-24)"
+   ],
+   "certainty": "높음"
+  },
+  {
+   "cell": "global-platform-playlist",
+   "date": "2021-07",
+   "date_precision": "month",
+   "evidence": "자동 플레이리스트 「The Sound of Alt Z」(소유자 The Sounds of Spotify) 첫 Wayback 캡처 2021-07-21: 640곡 · 좋아요 906. 장르 페이지 첫 캡처는 2021-04-29",
+   "sources": [
+    "archive.org CDX (조사 노트 2026-10-24)"
+   ],
+   "certainty": "중간",
+   "certainty_note": "조사 노트가 이 캡처 사실에 등급을 달지 않았다. 첫 캡처일이지 생성일이 아니다"
+  },
+  {
+   "cell": "origin-data-freeze",
+   "date": "2023-11",
+   "date_precision": "month",
+   "evidence": "Every Noise 장르 데이터가 2023-11-19에서 멈췄다. 2023-12 이후 플레이리스트 캡처는 빈 셸이다",
+   "sources": [
+    "https://everynoise.com/engenremap-altz.html"
+   ],
+   "certainty": "중간",
+   "certainty_note": "날짜는 페이지 표기. 조사 노트가 등급을 달지 않았다"
+  },
+  {
+   "cell": "kr-classification",
+   "date": "미도달",
+   "date_precision": "unreached",
+   "evidence": "alt z 지도 248명 중 한국 아티스트 0명. k-pop 382 · k-indie 295 · korean singer-songwriter 63과 겹침 0",
+   "sources": [
+    "https://everynoise.com/engenremap-altz.html"
+   ],
+   "certainty": "중간",
+   "certainty_note": "부재 확인이다. 겹침 수는 조사자 계산이고 데이터는 2023-11-19에서 멈췄다"
+  }
+ ],
+ "leadtimes": [
+  {
+   "from_cell": "global-platform-codification",
+   "to_cell": "kr-mainstream",
+   "months": null,
+   "note": "미도달. 차트 경로의 1차 출처도 찾지 못했다"
+  }
+ ],
+ "early_signals": [],
+ "element_borrowing": null,
+ "identity_formation": null,
+ "signature": {
+  "status": "measured",
+  "predicted_axes": [
+   "silence_ratio 상위(≥ P_high): 사전 등록한 탐색 규칙이 9축 중에서 고른 축 (탐색 14/14, 2026-10-24 홀드아웃 전 고정, 커밋 39761a2)",
+   "H-map: organic_ratio 중앙값이 pop · k-pop · dance pop · trap · hyperpop 음성보다 높고 bedroom pop · indie pop 음성보다 낮다. Every Noise 지도 세로축 문구 \"down is more organic, up is more mechanical and electric\", 명명자 단서 \"The calibration is fuzzy\" (중간, 규칙에 쓰지 않음)"
+  ],
+  "measured": {
+   "date": "2026-10-24",
+   "cohorts": "KR 일일 차트 코호트 2026-07-28 ~ 2026-10-23 스냅샷 86개의 녹음 239개(중복 제거) · 정답지 40곡 중 38곡 해석(Apple US 33 · Deezer 5)",
+   "source": "data/research/genre-impulse/altz/discover.json · verify.json · docs/DRAFT-altz-answer-sheet.md §6 ~ 7",
+   "discovery": "자격 축 1개: silence_ratio 상위 14/14. 나머지 8축은 같은 꼬리 9곡 이하(spectral_flatness 하위 9 · brightness_hz 하위 9가 최대)",
+   "holdout": "적중률 13/13 = 100%(통과) · 오탐률 11/11 = 100%(실패) · KR 코호트 베이스라인 4,381/4,381 곡-일 = 100%(실패) · 중간 이상 측정 홀드아웃 양성 13곡(통과)",
+   "hmap": "organic_ratio 중앙값: 음성 아래 묶음 0.470(n=5) < 양성 0.578(n=27) < 음성 위 묶음 0.781(n=3). 예측 지지. 규칙 자격 없음",
+   "verdict": "기각. 탐색이 고른 silence_ratio는 기준 분포 237곡의 95.4%가 0인 동값 축이라, 이하 비율 백분위에서 무음이 없는 곡이 전부 P95.4 이상을 받는다. 양성 · 음성 · 코호트가 모두 매치됐다",
+   "rule": "규칙 기각(D-065). 탐색이 고른 무음 비율 축은 코호트 전체가 걸리는 동값이었다. 유기음 비율 순서 예측은 맞았으나 곡을 가르는 규칙은 아니다"
+  }
+ },
+ "limits": [
+  "분류 단위가 아티스트이고 기준이 청취자 클러스터다. 곡 단위로 alt z라고 부른 출처는 없고, 소리 요소를 정의한 1차 출처도 없다",
+  "인터뷰 페이지의 굵은 글씨 두 줄(\"I guess I picked well [laughs].\" · \"When you listen to the artists..., the name makes sense.\")은 질문자의 말이다. McDonald 인용으로 쓰지 않는다",
+  "음성 12곡의 「alt z 아님」은 아티스트 집합 겹침에서 추론했다(중간). Conan Gray는 2021-05 캡처에서 alt z였다",
+  "측정 실패 2곡(Sasha Sloan 「Dancing With Your Ghost」 · Jung Kook 「Seven」). Ashe 「Moral of the Story」는 feat. Niall Horan 녹음으로 풀렸다",
+  "탐색 14곡으로 9축을 골랐다. 기준 분포가 한 값에 몰린 축을 거르는 장치가 사전 등록에 없었다",
+  "Billboard(robots) · Pitchfork · Guardian · NYT · Vulture · Rolling Stone · MBW는 읽지 못했다. 트레이드 프레스 정의와 차트 경로 1차 출처는 확인 실패",
+  "Every Noise 데이터는 2023-11-19에서 멈췄다. 그 뒤의 분류 변화와 한국 아티스트 편입은 관측할 수 없다",
+  "30초 프리뷰 발췌"
+ ],
+ "casebook_ref": "CASE 11"
+}

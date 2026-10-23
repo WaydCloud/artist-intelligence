@@ -29,6 +29,7 @@
 | 8 | 이지리스닝 | **혼성 내생** — 재료 수입+국내 조립·명명 | **1차 완료** |
 | 9 | 하이퍼팝 | 🔄 **요소 차용 모드**(재분류, D-033 보완⑤) — 장르 차단·요소는 가온 2위(Savage)→정체성화('쇠맛') | **요소 차용 조사 완료** |
 | 10 | 드릴 | 🔄 **요소 차용 모드**(재분류, D-033 보완⑤) — 드릴 타이틀 실존 확인(Future Perfect), 정체성화는 미발생 | **요소 차용 조사 완료** |
+| 11 | 알트 Z (Spotify 장르 태그) | **분류 라벨** · 한국 미도달(지도 248명 중 한국 0명). 정답지 실측 규칙 기각(D-065) | **1차 조사 · 정답지 판정 완료** (2026-10-24) |
 
 ---
 
@@ -913,6 +914,58 @@
 - **기준 분포**: 이 케이스북 A2와 달리 동시대 코호트가 아니라 **2026-07-28 ~ 10-23 KR 일일 코호트의 녹음 239개**다.
 - **판정: 기각.** 적중률 10/18 = 55.6%(기준 60%) · 오탐 0/11 · 베이스라인 10.4%(464/4,477 곡-일) · `중간` 이상 양성 4곡 중 매치 0.
 - **기록할 것**: 규칙이 잡은 것은 등급 `낮음` 목록의 앰비언트 · OST · Lo-Fi 곡이었고, 등급 `중간` 출처의 2025~2026 VOCALOID 곡은 두 축 모두 상위 절반이었다. 출처가 같은 낱말로 부르는 곡들이 소리로는 한 덩어리가 아니다. A2.1의 「brightness 판별력 없음」과 달리 이번에는 명도가 갈렸으나, 2015년 이전 발매 5/5 매치라 녹음 시대와 분리되지 않는다.
+
+---
+
+# CASE 11: 알트 Z (Spotify 장르 태그) (1차 조사 2026-10-24 · D-065)
+
+> 정답지 · 사전 등록 · 실측 전문은 [`DRAFT-altz-answer-sheet.md`](DRAFT-altz-answer-sheet.md). 기계용 레코드 `data/research/genre-impulse/impulses/alt-z.json`. 수치 원본 `data/research/genre-impulse/altz/`.
+
+## 메타
+
+- **무엇인가**: Spotify 장르 분류 체계의 태그. 이름을 붙인 사람은 Glenn McDonald(당시 Spotify)다. 분류 단위는 **아티스트**, 기준은 **청취자 공유 클러스터**다. 도구로 클러스터를 찾고 사람이 들어 본 뒤 인정했다(`매우 높음`).
+- **명명자 발언** (Chris Dalla Riva 인터뷰, 2024-05-26): "That's one I actually did name." · "For “Alt Z”, it was artists that fell into the “Indie Pop” category. But “Indie Pop” is way too broad, so I had to make something up. I could have called the genre “Generation Z” because most of the listeners were young. That felt boring, though. What struck me is that the music felt alternative and Gen Z-ish. I also liked the idea that the keyboard shortcut for undo was Control + Z." ⚠ 같은 페이지의 굵은 글씨 두 줄은 질문자의 말이라 인용하지 않는다.
+- **사례 유형**: 씬이 아니라 **분류 라벨**이다. 원장 enum에서는 `import`(한국 밖에서 만들어진 라벨)로 적되, 해외 씬의 유입 경로를 관측한 것은 아니다. 발원 지역은 출처에 없다.
+
+## 매트릭스 궤적
+
+| 셀 | 첫 도달 | 근거 | 확실성 |
+|---|---|---|---|
+| 플랫폼 분류 등장 | 2021-03 | Every Noise 전체 지도: 2021-03-14 22:54 UTC 캡처에 없고 2021-03-16 01:19 UTC 캡처에 있다 | 높음 |
+| 장르 페이지 · 플레이리스트 | 2021-04 · 2021-07 | 장르 페이지 첫 캡처 2021-04-29 · 「The Sound of Alt Z」 첫 캡처 2021-07-21(640곡 · 좋아요 906) | 중간(첫 캡처일, 생성일 아님) |
+| 데이터 정지 | 2023-11 | Every Noise 데이터 2023-11-19. 2023-12 이후 플레이리스트 캡처는 빈 셸 | 중간 |
+| 한국 | **미도달** | 지도 248명 중 한국 0명 · k-pop 382 · k-indie 295 · korean singer-songwriter 63과 겹침 0 | 중간(부재 확인) |
+
+- 차트 경로의 1차 출처: 확인 실패. 명명자 발언 "It got a lot of attention because some big artists fell into that category"가 있으나 어느 차트인지는 말하지 않는다.
+- 이웃 겹침(`높음`): indie pop 9/110(상위 범주) · gen z singer-songwriter 20/118 · pop 18 · indie poptimism 14 · electropop 12 · modern indie pop 11 · dark pop 8 · bedroom pop 4/142 · hyperpop 1/211 · emo rap 0 · pop punk 0. 「alt pop」 장르 페이지는 없다(404).
+
+## 대표곡
+
+정답지 양성 28곡(Every Noise 예시곡 · 2021-07-21 플레이리스트 항목, 아티스트 단위 분류라 `높음`). 목록은 DRAFT §2.1. 한국 곡은 0곡이다.
+
+## 리드타임 · 조기 신호 · 한국화 변형
+
+- 리드타임: 한국 미도달이라 없다.
+- 조기 신호: 출처가 있는 것이 없다.
+- 한국화 변형: 관측 없음.
+
+## 사운드 서명 실측 (2026-10-24 · D-065)
+
+- **방법**: 소리를 정의한 1차 출처가 없어 축을 번역하지 않았다. 양성 28곡을 정렬 순서로 탐색 14 · 홀드아웃 14로 나누고, 탐색에서 9축 중 같은 꼬리 10곡 이상인 축을 고르는 규칙을 측정 전에 고정했다(커밋 `beeb7a9`).
+- **탐색**: `silence_ratio` 상위 14/14 한 축만 자격. 홀드아웃 전에 고정(커밋 `39761a2`).
+- **판정: 기각.** 홀드아웃 적중률 13/13 · 오탐률 11/11 · 코호트 베이스라인 4,381/4,381 곡-일 = 100% · `중간` 이상 측정 양성 13곡. 기준 분포 237곡의 95.4%가 `silence_ratio` 0이고, 이하 비율 백분위에서 0은 P95.4다. 탐색은 alt z가 아니라 이 동값을 잡았다.
+- **H-map(보고만)**: `organic_ratio` 중앙값이 음성 「아래」(pop · k-pop · dance pop · trap · hyperpop 예시곡, n=5) 0.470 < 양성(n=27) 0.578 < 음성 「위」(bedroom pop · indie pop 예시곡, n=3) 0.781. Every Noise 지도의 세로 순서와 같다. 묶음 수준 관측이고 곡을 가르는 규칙이 아니다.
+
+## 정점과 쇠퇴
+
+출처 없음. 데이터가 2023-11-19에서 멈춰 이후는 관측할 수 없다.
+
+## 한계·불확실성
+
+- 곡 단위 출처가 아니다. 소리 요소의 1차 출처가 없고, 지도 좌표는 조사자 계산이며 명명자는 "The calibration is fuzzy"라고 했다.
+- 음성의 「alt z 아님」은 아티스트 집합에서 추론했다(`중간`). Conan Gray는 2021-05 캡처에서 alt z였다.
+- Billboard(robots) · Pitchfork · Guardian · NYT · Vulture · Rolling Stone · MBW 미확인. McDonald 책 원문 미확인. Wrapped 노출은 인터뷰어 증언 1건(`중간`).
+- 측정 실패 2곡, Ashe는 feat. Niall Horan 녹음으로 풀렸다. 30초 프리뷰 발췌.
 
 ---
 

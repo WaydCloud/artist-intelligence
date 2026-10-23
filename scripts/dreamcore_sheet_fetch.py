@@ -1,8 +1,8 @@
-"""Answer-sheet preview features for the dreamcore pre-registration (D-064).
+"""Answer-sheet preview features for genre-impulse pre-registrations (D-064 dreamcore, D-065 alt z).
 
 Purpose    Measure the answer-sheet recordings with the sonic-profile engine, unchanged.
 Boundary   No new metric code. Search, verification helpers and features_from_preview are
-           imported from sonic-profile. Writes only the research path given by -o.
+           imported from sonic-profile. Writes only the research path it is given.
 Invariant  A record is resolved only when BOTH the artist alias and the title (or a title
            alias) match after normalisation. The chart path accepts a title-only match,
            which can land on a cover or another recording.
@@ -12,9 +12,11 @@ Note       Apple first, storefront KR then US then GB, then Deezer. Audio stays 
 
 Usage:
 
-    PYTHONPATH=modules/sonic-profile/src python scripts/dreamcore_sheet_fetch.py \
-        data/research/genre-impulse/dreamcore/answer_sheet.json \
-        -o data/research/genre-impulse/dreamcore/sheet_features.json
+    python scripts/dreamcore_sheet_fetch.py data/research/genre-impulse/altz
+
+A directory reads answer_sheet.json and writes sheet_features.json in it. A file path still
+works and then needs -o (the D-064 form). Run it from the repository root: the tagger reads
+its models from data/models there.
 """
 
 from __future__ import annotations
@@ -96,14 +98,20 @@ def _verified(track: dict[str, Any], delay: float) -> list[dict[str, Any]]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
-    ap.add_argument("sheet")
-    ap.add_argument("-o", "--output", required=True)
+    ap = argparse.ArgumentParser(description=(__doc__ or "").splitlines()[0])
+    ap.add_argument("sheet", help="sheet directory, or answer_sheet.json together with -o")
+    ap.add_argument("-o", "--output", help="defaults to sheet_features.json in the sheet directory")
     ap.add_argument("--delay", type=float, default=1.0, help="seconds between requests (low frequency)")
     ap.add_argument("--max-tracks", type=int, default=40, help="hard cap on recordings measured")
     args = ap.parse_args(argv)
 
-    sheet = json.loads(Path(args.sheet).read_text(encoding="utf-8"))
+    sheet_path = Path(args.sheet)
+    if sheet_path.is_dir():
+        args.output = args.output or str(sheet_path / "sheet_features.json")
+        sheet_path = sheet_path / "answer_sheet.json"
+    elif not args.output:
+        ap.error("-o is required when the sheet is a file")
+    sheet = json.loads(sheet_path.read_text(encoding="utf-8"))
     tracks = list(sheet.get("tracks") or [])
     if len(tracks) > args.max_tracks:
         print(f"sheet has {len(tracks)} tracks, cap is {args.max_tracks}", file=sys.stderr)
@@ -140,7 +148,7 @@ def main(argv: list[str] | None = None) -> int:
     payload = {
         "records": records,
         "provenance": {
-            "script": "scripts/dreamcore_sheet_fetch.py", "collected": today, "sheet": args.sheet,
+            "script": "scripts/dreamcore_sheet_fetch.py", "collected": today, "sheet": sheet_path.as_posix(),
             "engine_provenance": eng, "audio_retained": False,
             "verification": "artist alias AND title core match; Apple KR>US>GB then Deezer",
         },

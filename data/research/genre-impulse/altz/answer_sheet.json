@@ -1,0 +1,121 @@
+{
+  "note": "alt z answer sheet (D-065). Written 2026-10-24 before any measurement of these recordings. role = positive | negative. split = discovery | holdout, fixed here (see split_rule). Each track carries its source key and certainty grade on the CASEBOOK 6-grade scale (D-033 supplement 6). aliases are identity facts for preview verification (sonic-profile RULES 1), not tuning: only names written in the sheet line itself, plus Hangul names for the two K-pop acts. scope: global = non-Korean release, kr = Korean release.",
+  "sense": "alt z as a Spotify genre tag named by Glenn McDonald (then at Spotify). It is artist-level and based on shared listener clusters. No primary source defines sonic elements for it.",
+  "definition_lines": {
+    "url": "https://www.cantgetmuchhigher.com/p/spotifys-former-data-guru-sets-the",
+    "interview": "Chris Dalla Riva with Glenn McDonald, 2024-05-26",
+    "grade": "매우 높음",
+    "verbatim_mcdonald": [
+      "That's one I actually did name.",
+      "For “Alt Z”, it was artists that fell into the “Indie Pop” category. But “Indie Pop” is way too broad, so I had to make something up. I could have called the genre “Generation Z” because most of the listeners were young. That felt boring, though. What struck me is that the music felt alternative and Gen Z-ish. I also liked the idea that the keyboard shortcut for undo was Control + Z."
+    ],
+    "not_mcdonald": "Two bold lines in the same page are the interviewer's, not McDonald's, and must not be quoted as his: \"I guess I picked well [laughs].\" and \"When you listen to the artists..., the name makes sense.\""
+  },
+  "sources": {
+    "S1": {
+      "what": "Every Noise at Once, alt z genre page, per-artist example song (\"e.g.\"), page data frozen 2023-11-19",
+      "url": "https://everynoise.com/engenremap-altz.html",
+      "retrieved": "2026-10-24",
+      "grade": "높음",
+      "grade_basis": "the namer's own system, which classifies at artist level; the track is that system's example for an artist it put in alt z"
+    },
+    "S2": {
+      "what": "Spotify playlist \"The Sound of Alt Z\" (owner The Sounds of Spotify), Wayback capture 2021-07-21 (640 tracks, 906 likes); PL #n is the track's position in that capture",
+      "url": null,
+      "url_note": "the capture URL is not recorded in the research note; the capture date and positions are",
+      "retrieved": "2026-10-24",
+      "grade": "높음",
+      "grade_basis": "automatic playlist of the namer's system, artist-level classification; the track is an entry of that playlist"
+    },
+    "S3": {
+      "what": "Every Noise neighbour genre maps, example songs, chosen by overlap with the 248 artists on the alt z map",
+      "url": null,
+      "url_note": "per-genre page URLs are not recorded in the research note; overlap counts are the researcher's computation",
+      "retrieved": "2026-10-24",
+      "grade": "중간",
+      "grade_basis": "the artist is not in the alt z artist set (or its genre set overlaps alt z by 0), but that a track is not alt z is inferred, not stated by a source"
+    }
+  },
+  "split_rule": "Sort the 28 positives by (artist casefold, title casefold) as written in this file. Odd positions (1st, 3rd, ...) are discovery, even positions are holdout. All negatives are holdout only. Fixed before measurement.",
+  "split": {
+    "discovery": [
+      "Alec Benjamin - Let Me Down Slowly",
+      "Ashnikko - Daisy",
+      "Bea Miller - feel something",
+      "Charlotte Lawrence - Joke's On You",
+      "FINNEAS - Let's Fall in Love for the Night",
+      "gnash - i hate u, i love u",
+      "Holly Humberstone - Paint My Bedroom Black",
+      "Lauren Spencer Smith - Fingers Crossed",
+      "Maggie Lindemann - Pretty Girl (Cheat Codes X CADE Remix)",
+      "Melanie Martinez - Pacify Her",
+      "Olivia O'Brien - hate u love u",
+      "Rosa Linn - SNAP",
+      "Sody, Cavetown - is your bedroom ceiling bored?",
+      "UPSAHL - Drugs"
+    ],
+    "holdout": [
+      "Ashe - Moral of the Story",
+      "Au/Ra - Panic Room",
+      "BENEE - Supalonely",
+      "Em Beihold - Numb Little Bug",
+      "FLETCHER - Bitter",
+      "Gracie Abrams - I miss you, I'm sorry",
+      "Jeremy Zucker - comethru",
+      "Lizzy McAlpine - ceilings",
+      "Maisie Peters - Psycho",
+      "mxmtoon - prom dress",
+      "Penelope Scott - Rät",
+      "Sasha Sloan - Dancing With Your Ghost",
+      "Tate McRae - greedy",
+      "Zolita - Shut Up and Cry"
+    ]
+  },
+  "hmap_groups": {
+    "below": ["NewJeans - Super Shy", "Jung Kook - Seven", "Dua Lipa - Dance The Night", "Doja Cat - Paint The Town Red", "Future - WAIT FOR U", "Isabel LaRosa - older"],
+    "above": ["girl in red - we fell in love in october", "Clairo - Sofia", "Conan Gray - Heather"]
+  },
+  "tracks": [
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Alec Benjamin", "aliases": ["Alec Benjamin"], "title": "Let Me Down Slowly", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Ashe", "aliases": ["Ashe"], "title": "Moral of the Story", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Ashnikko", "aliases": ["Ashnikko"], "title": "Daisy", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Au/Ra", "aliases": ["Au/Ra"], "title": "Panic Room", "title_aliases": [], "source": "S1", "also": "S2", "line": "e.g. on the alt z page; PL #21"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Bea Miller", "aliases": ["Bea Miller"], "title": "feel something", "title_aliases": [], "source": "S2", "line": "PL #5"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "BENEE", "aliases": ["BENEE"], "title": "Supalonely", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Charlotte Lawrence", "aliases": ["Charlotte Lawrence"], "title": "Joke's On You", "title_aliases": [], "source": "S2", "line": "PL #4"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Em Beihold", "aliases": ["Em Beihold"], "title": "Numb Little Bug", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "FINNEAS", "aliases": ["FINNEAS"], "title": "Let's Fall in Love for the Night", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "FLETCHER", "aliases": ["FLETCHER"], "title": "Bitter", "title_aliases": [], "source": "S1", "also": "S2", "line": "e.g. on the alt z page; PL #2"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "gnash", "aliases": ["gnash"], "title": "i hate u, i love u", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Gracie Abrams", "aliases": ["Gracie Abrams"], "title": "I miss you, I'm sorry", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Holly Humberstone", "aliases": ["Holly Humberstone"], "title": "Paint My Bedroom Black", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Jeremy Zucker", "aliases": ["Jeremy Zucker"], "title": "comethru", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Lauren Spencer Smith", "aliases": ["Lauren Spencer Smith"], "title": "Fingers Crossed", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Lizzy McAlpine", "aliases": ["Lizzy McAlpine"], "title": "ceilings", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Maggie Lindemann", "aliases": ["Maggie Lindemann", "Maggie Lindemann, Cheat Codes & CADE"], "title": "Pretty Girl (Cheat Codes X CADE Remix)", "title_aliases": [], "source": "S1", "also": "S2", "line": "e.g. on the alt z page; PL #6", "note": "remix; per DRAFT-answer-sheet-corpus §4 a version is a different recording, so only this remix counts"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Maisie Peters", "aliases": ["Maisie Peters"], "title": "Psycho", "title_aliases": [], "source": "S2", "line": "PL #26"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Melanie Martinez", "aliases": ["Melanie Martinez"], "title": "Pacify Her", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "mxmtoon", "aliases": ["mxmtoon"], "title": "prom dress", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Olivia O'Brien", "aliases": ["Olivia O'Brien"], "title": "hate u love u", "title_aliases": [], "source": "S2", "line": "PL #1"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Penelope Scott", "aliases": ["Penelope Scott"], "title": "Rät", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Rosa Linn", "aliases": ["Rosa Linn"], "title": "SNAP", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Sasha Sloan", "aliases": ["Sasha Sloan"], "title": "Dancing With Your Ghost", "title_aliases": [], "source": "S1", "also": "S2", "line": "e.g. on the alt z page; PL #29"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "Sody, Cavetown", "aliases": ["Sody, Cavetown", "Sody & Cavetown"], "title": "is your bedroom ceiling bored?", "title_aliases": [], "source": "S2", "line": "PL #13"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Tate McRae", "aliases": ["Tate McRae"], "title": "greedy", "title_aliases": [], "source": "S1", "line": "e.g. on the alt z page"},
+    {"role": "positive", "split": "discovery", "scope": "global", "artist": "UPSAHL", "aliases": ["UPSAHL"], "title": "Drugs", "title_aliases": [], "source": "S2", "line": "PL #11"},
+    {"role": "positive", "split": "holdout", "scope": "global", "artist": "Zolita", "aliases": ["Zolita"], "title": "Shut Up and Cry", "title_aliases": [], "source": "S2", "line": "PL #24"},
+
+    {"role": "negative", "split": "holdout", "scope": "kr", "artist": "NewJeans", "aliases": ["NewJeans", "뉴진스"], "title": "Super Shy", "title_aliases": [], "source": "S3", "neighbour": "k-pop", "line": "k-pop map example; k-pop artist set overlaps the alt z 248 by 0 of 382", "hmap": "below"},
+    {"role": "negative", "split": "holdout", "scope": "kr", "artist": "Jung Kook", "aliases": ["Jung Kook", "정국"], "title": "Seven", "title_aliases": [], "source": "S3", "neighbour": "k-pop", "line": "k-pop map example; overlap 0 of 382", "hmap": "below"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Dua Lipa", "aliases": ["Dua Lipa"], "title": "Dance The Night", "title_aliases": [], "source": "S3", "neighbour": "dance pop", "line": "dance pop map example; overlap 0", "hmap": "below"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Doja Cat", "aliases": ["Doja Cat"], "title": "Paint The Town Red", "title_aliases": [], "source": "S3", "neighbour": "dance pop", "line": "dance pop map example; overlap 0", "hmap": "below"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Future", "aliases": ["Future"], "title": "WAIT FOR U", "title_aliases": [], "source": "S3", "neighbour": "trap", "line": "trap map example; overlap 0", "hmap": "below"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Lil Peep", "aliases": ["Lil Peep"], "title": "Star Shopping", "title_aliases": [], "source": "S3", "neighbour": "emo rap", "line": "emo rap map example; overlap 0"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "blink-182", "aliases": ["blink-182"], "title": "All The Small Things", "title_aliases": [], "source": "S3", "neighbour": "pop punk", "line": "pop punk map example; overlap 0"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Olivia Rodrigo", "aliases": ["Olivia Rodrigo"], "title": "vampire", "title_aliases": [], "source": "S3", "neighbour": "pop", "line": "pop map example; the artist is not among the alt z 248"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Conan Gray", "aliases": ["Conan Gray"], "title": "Heather", "title_aliases": [], "source": "S3", "neighbour": "bedroom pop (boundary)", "line": "bedroom pop boundary; in alt z in a 2021-05 capture, not in the 2023 data", "hmap": "above", "note": "boundary case: the namer's system once put this artist in alt z"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "girl in red", "aliases": ["girl in red"], "title": "we fell in love in october", "title_aliases": [], "source": "S3", "neighbour": "bedroom pop / indie pop", "line": "bedroom pop / indie pop map example; bedroom pop overlaps alt z 4 of 142, indie pop 9 of 110", "hmap": "above"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Clairo", "aliases": ["Clairo"], "title": "Sofia", "title_aliases": [], "source": "S3", "neighbour": "bedroom pop / indie pop", "line": "bedroom pop / indie pop map example; bedroom pop overlaps alt z 4 of 142, indie pop 9 of 110", "hmap": "above"},
+    {"role": "negative", "split": "holdout", "scope": "global", "artist": "Isabel LaRosa", "aliases": ["Isabel LaRosa"], "title": "older", "title_aliases": [], "source": "S3", "neighbour": "hyperpop", "line": "hyperpop map example; hyperpop overlaps alt z 1 of 211", "hmap": "below"}
+  ]
+}

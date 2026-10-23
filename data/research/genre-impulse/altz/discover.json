@@ -1,0 +1,494 @@
+{
+ "protocol": {
+  "low_pct": 20.0,
+  "high_pct": 80.0,
+  "min_same_tail": 10,
+  "max_axes": 3,
+  "candidate_axes": [
+   "organic_ratio",
+   "spectral_flatness",
+   "over_unity_ratio",
+   "onset_rate_high",
+   "silence_ratio",
+   "swing_ratio",
+   "tempo_bpm",
+   "brightness_hz",
+   "spectral_contrast_mean"
+  ],
+  "source": "docs/DRAFT-altz-answer-sheet.md section 3.3"
+ },
+ "reference_pool": {
+  "window": [
+   "2026-07-28",
+   "2026-10-23"
+  ],
+  "snapshots": 86,
+  "unique_chart_recordings": 239,
+  "n_per_axis": {
+   "organic_ratio": 237,
+   "spectral_flatness": 237,
+   "over_unity_ratio": 237,
+   "onset_rate_high": 237,
+   "silence_ratio": 237,
+   "swing_ratio": 235,
+   "tempo_bpm": 239,
+   "brightness_hz": 239,
+   "spectral_contrast_mean": 237
+  }
+ },
+ "discovery": {
+  "positives": 14,
+  "measured": 14,
+  "unresolved": []
+ },
+ "axes": [
+  {
+   "axis": "organic_ratio",
+   "order": 0,
+   "measured": 14,
+   "low_tail": 0,
+   "high_tail": 3,
+   "median_pct": 63.75,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "spectral_flatness",
+   "order": 1,
+   "measured": 14,
+   "low_tail": 9,
+   "high_tail": 1,
+   "median_pct": 12.65,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "over_unity_ratio",
+   "order": 2,
+   "measured": 14,
+   "low_tail": 7,
+   "high_tail": 0,
+   "median_pct": 20.700000000000003,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "onset_rate_high",
+   "order": 3,
+   "measured": 14,
+   "low_tail": 7,
+   "high_tail": 1,
+   "median_pct": 19.85,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "silence_ratio",
+   "order": 4,
+   "measured": 14,
+   "low_tail": 0,
+   "high_tail": 14,
+   "median_pct": 95.4,
+   "qualified": true,
+   "direction": "high",
+   "count": 14
+  },
+  {
+   "axis": "swing_ratio",
+   "order": 5,
+   "measured": 14,
+   "low_tail": 1,
+   "high_tail": 5,
+   "median_pct": 51.7,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "tempo_bpm",
+   "order": 6,
+   "measured": 14,
+   "low_tail": 3,
+   "high_tail": 2,
+   "median_pct": 39.75,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "brightness_hz",
+   "order": 7,
+   "measured": 14,
+   "low_tail": 9,
+   "high_tail": 1,
+   "median_pct": 14.6,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  },
+  {
+   "axis": "spectral_contrast_mean",
+   "order": 8,
+   "measured": 14,
+   "low_tail": 1,
+   "high_tail": 4,
+   "median_pct": 70.05000000000001,
+   "qualified": false,
+   "direction": null,
+   "count": null
+  }
+ ],
+ "qualified": [
+  "silence_ratio"
+ ],
+ "chosen": [
+  {
+   "axis": "silence_ratio",
+   "direction": "high",
+   "count": 14
+  }
+ ],
+ "verdict": "axes chosen",
+ "rows": [
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Alec Benjamin",
+   "sheet_title": "Let Me Down Slowly",
+   "artist": "Alec Benjamin",
+   "title": "Let Me Down Slowly",
+   "release_date": "2018-05-25",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 62.9,
+    "spectral_flatness": 10.5,
+    "over_unity_ratio": 28.7,
+    "onset_rate_high": 19.4,
+    "silence_ratio": 95.4,
+    "swing_ratio": 91.1,
+    "tempo_bpm": 93.7,
+    "brightness_hz": 5.0,
+    "spectral_contrast_mean": 66.7
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Ashnikko",
+   "sheet_title": "Daisy",
+   "artist": "Ashnikko",
+   "title": "Daisy",
+   "release_date": "",
+   "preview_source": "deezer",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 35.0,
+    "spectral_flatness": 15.6,
+    "over_unity_ratio": 22.8,
+    "onset_rate_high": 62.0,
+    "silence_ratio": 96.6,
+    "swing_ratio": 94.5,
+    "tempo_bpm": 59.8,
+    "brightness_hz": 14.6,
+    "spectral_contrast_mean": 58.6
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Bea Miller",
+   "sheet_title": "feel something",
+   "artist": "Bea Miller",
+   "title": "feel something",
+   "release_date": "2019-06-21",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 37.1,
+    "spectral_flatness": 6.3,
+    "over_unity_ratio": 30.4,
+    "onset_rate_high": 18.6,
+    "silence_ratio": 95.4,
+    "swing_ratio": 13.6,
+    "tempo_bpm": 4.6,
+    "brightness_hz": 3.8,
+    "spectral_contrast_mean": 34.2
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Charlotte Lawrence",
+   "sheet_title": "Joke's On You",
+   "artist": "Charlotte Lawrence",
+   "title": "Joke's On You",
+   "release_date": "2020-01-17",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 64.6,
+    "spectral_flatness": 63.7,
+    "over_unity_ratio": 75.9,
+    "onset_rate_high": 20.3,
+    "silence_ratio": 95.4,
+    "swing_ratio": 88.1,
+    "tempo_bpm": 100.0,
+    "brightness_hz": 49.4,
+    "spectral_contrast_mean": 42.6
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "FINNEAS",
+   "sheet_title": "Let's Fall in Love for the Night",
+   "artist": "FINNEAS",
+   "title": "Let's Fall in Love for the Night",
+   "release_date": "",
+   "preview_source": "deezer",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 69.2,
+    "spectral_flatness": 7.6,
+    "over_unity_ratio": 48.5,
+    "onset_rate_high": 17.3,
+    "silence_ratio": 96.2,
+    "swing_ratio": 50.6,
+    "tempo_bpm": 74.1,
+    "brightness_hz": 6.7,
+    "spectral_contrast_mean": 75.5
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "gnash",
+   "sheet_title": "i hate u, i love u",
+   "artist": "gnash",
+   "title": "i hate u, i love u (feat. Olivia O'Brien)",
+   "release_date": "2016-03-25",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 93.7,
+    "spectral_flatness": 3.0,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 0.8,
+    "silence_ratio": 95.4,
+    "swing_ratio": 46.8,
+    "tempo_bpm": 28.9,
+    "brightness_hz": 3.3,
+    "spectral_contrast_mean": 85.2
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Holly Humberstone",
+   "sheet_title": "Paint My Bedroom Black",
+   "artist": "Holly Humberstone",
+   "title": "Paint My Bedroom Black",
+   "release_date": "2023-09-15",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 55.7,
+    "spectral_flatness": 47.7,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 41.4,
+    "silence_ratio": 95.4,
+    "swing_ratio": 20.9,
+    "tempo_bpm": 28.9,
+    "brightness_hz": 56.5,
+    "spectral_contrast_mean": 8.4
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Lauren Spencer Smith",
+   "sheet_title": "Fingers Crossed",
+   "artist": "Lauren Spencer Smith",
+   "title": "Fingers Crossed",
+   "release_date": "2022-01-05",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 75.9,
+    "spectral_flatness": 11.4,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 10.5,
+    "silence_ratio": 95.4,
+    "swing_ratio": 94.5,
+    "tempo_bpm": 49.8,
+    "brightness_hz": 18.4,
+    "spectral_contrast_mean": 91.1
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Maggie Lindemann",
+   "sheet_title": "Pretty Girl (Cheat Codes X CADE Remix)",
+   "artist": "Maggie Lindemann",
+   "title": "Pretty Girl (Cheat Codes X CADE Remix)",
+   "release_date": "2016-09-30",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 59.9,
+    "spectral_flatness": 87.8,
+    "over_unity_ratio": 22.8,
+    "onset_rate_high": 51.1,
+    "silence_ratio": 95.4,
+    "swing_ratio": 28.9,
+    "tempo_bpm": 59.8,
+    "brightness_hz": 81.6,
+    "spectral_contrast_mean": 28.7
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Melanie Martinez",
+   "sheet_title": "Pacify Her",
+   "artist": "Melanie Martinez",
+   "title": "Pacify Her",
+   "release_date": "2015-08-14",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 65.8,
+    "spectral_flatness": 65.8,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 89.5,
+    "silence_ratio": 95.4,
+    "swing_ratio": 50.6,
+    "tempo_bpm": 15.9,
+    "brightness_hz": 65.7,
+    "spectral_contrast_mean": 44.7
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Olivia O'Brien",
+   "sheet_title": "hate u love u",
+   "artist": "Olivia O'Brien",
+   "title": "hate u love u",
+   "release_date": "2016-12-09",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 82.3,
+    "spectral_flatness": 7.6,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 49.8,
+    "silence_ratio": 95.4,
+    "swing_ratio": 52.8,
+    "tempo_bpm": 29.7,
+    "brightness_hz": 6.3,
+    "spectral_contrast_mean": 94.1
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S1",
+   "sheet_artist": "Rosa Linn",
+   "sheet_title": "SNAP",
+   "artist": "Rosa Linn",
+   "title": "SNAP",
+   "release_date": "2022-03-19",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 96.6,
+    "spectral_flatness": 11.0,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 76.8,
+    "silence_ratio": 97.9,
+    "swing_ratio": 64.7,
+    "tempo_bpm": 21.8,
+    "brightness_hz": 6.7,
+    "spectral_contrast_mean": 77.6
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "Sody, Cavetown",
+   "sheet_title": "is your bedroom ceiling bored?",
+   "artist": "Sody & Cavetown",
+   "title": "is your bedroom ceiling bored?",
+   "release_date": "2020-07-29",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 62.4,
+    "spectral_flatness": 13.9,
+    "over_unity_ratio": 18.6,
+    "onset_rate_high": 7.2,
+    "silence_ratio": 95.4,
+    "swing_ratio": 97.9,
+    "tempo_bpm": 59.4,
+    "brightness_hz": 14.6,
+    "spectral_contrast_mean": 85.2
+   },
+   "split": "discovery",
+   "hmap": null
+  },
+  {
+   "role": "positive",
+   "sheet_source": "S2",
+   "sheet_artist": "UPSAHL",
+   "sheet_title": "Drugs",
+   "artist": "UPSAHL",
+   "title": "Drugs",
+   "release_date": "2019-01-18",
+   "preview_source": "apple",
+   "grade": "높음",
+   "pcts": {
+    "organic_ratio": 62.4,
+    "spectral_flatness": 26.2,
+    "over_unity_ratio": 26.6,
+    "onset_rate_high": 13.1,
+    "silence_ratio": 95.4,
+    "swing_ratio": 23.8,
+    "tempo_bpm": 14.2,
+    "brightness_hz": 51.0,
+    "spectral_contrast_mean": 73.4
+   },
+   "split": "discovery",
+   "hmap": null
+  }
+ ]
+}
